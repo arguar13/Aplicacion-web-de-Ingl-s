@@ -4,8 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aprende vocabulario en inglés: escucha la palabra y pulsa la tecla con su traducción." />
-    <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <script>
+      // Aplica el tema antes de pintar para evitar un destello del tema equivocado.
+      try {
+        var theme = (JSON.parse(localStorage.getItem('tecla:settings:v1')) || {}).theme
+      } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      }
+      document.documentElement.dataset.theme = theme
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Tecla · Vocabulario en inglés</title>
   </head>

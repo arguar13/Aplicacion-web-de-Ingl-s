@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { playPronunciation, preloadPronunciation } from '@/lib/audio'
 import type { Deck } from '@/lib/decks'
-import { cardLookup, type Direction, getProgress, recordAnswer, recordStreak } from '@/lib/progress'
+import { cardLookup, getProgress, recordAnswer, recordStreak } from '@/lib/progress'
 import { buildOptions } from '@/lib/quiz'
 import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
-import type { Round } from '@/lib/types'
+import { getSettings } from '@/lib/settings'
+import type { Direction, Round } from '@/lib/types'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
 const ADVANCE_DELAY_MS = 850
+/** En español → inglés la pronunciación suena al acertar: se deja un poco más para oírla. */
+const ADVANCE_DELAY_WITH_AUDIO_MS = 1300
 
 export interface QuizStats {
   /** Palabras resueltas en esta sesión. */
@@ -45,11 +48,19 @@ export function useQuiz(deck: Deck, direction: Direction) {
   }))
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
   const resolving = useRef(false)
+  // Inglés → español: suena al aparecer. Español → inglés: sonar antes delataría la respuesta,
+  // así que suena al acertar.
+  const promptIsEnglish = direction === 'en-es'
+  const canReplay = promptIsEnglish || state.solved
 
-  // La pronunciación suena en cuanto aparece la palabra.
   useEffect(() => {
-    playPronunciation(state.round.word.id)
-  }, [state.round])
+    if (promptIsEnglish && getSettings().autoplay) playPronunciation(state.round.word.id)
+    else preloadPronunciation(state.round.word.id)
+  }, [state.round, promptIsEnglish])
+
+  useEffect(() => {
+    if (state.solved && !promptIsEnglish && getSettings().autoplay) playPronunciation(state.round.word.id)
+  }, [state.solved, state.round, promptIsEnglish])
 
   useEffect(() => {
     if (state.next) preloadPronunciation(state.next.word.id)
@@ -60,9 +71,9 @@ export function useQuiz(deck: Deck, direction: Direction) {
     const timer = setTimeout(() => {
       resolving.current = false
       setState((s) => (s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false } : s))
-    }, ADVANCE_DELAY_MS)
+    }, promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
     return () => clearTimeout(timer)
-  }, [state.solved])
+  }, [state.solved, promptIsEnglish])
 
   function answer(id: string) {
     const { round, wrong, solved, stats } = state
@@ -87,7 +98,9 @@ export function useQuiz(deck: Deck, direction: Direction) {
     })
   }
 
-  const replay = () => playPronunciation(state.round.word.id)
+  function replay() {
+    if (canReplay) void playPronunciation(state.round.word.id)
+  }
 
-  return { ...state, answer, replay }
+  return { ...state, canReplay, answer, replay }
 }

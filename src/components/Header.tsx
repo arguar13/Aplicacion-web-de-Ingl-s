@@ -1,14 +1,17 @@
 import type { ReactNode } from 'react'
 import { LogoMark } from './icons'
 
-export function Header({ children }: { children?: ReactNode }) {
+export function Header({ children, action }: { children?: ReactNode; action?: ReactNode }) {
   return (
     <header className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-4 pt-5 sm:px-6 sm:pt-7 short:max-w-4xl short:pt-3">
       <div className="flex items-center gap-2.5">
         <LogoMark />
         <span className="font-display text-[26px] leading-none tracking-tight">Tecla</span>
       </div>
-      {children && <dl className="flex items-center gap-5 sm:gap-7">{children}</dl>}
+      <div className="flex items-center gap-3 sm:gap-5">
+        {children && <dl className="flex items-center gap-5 sm:gap-7">{children}</dl>}
+        {action}
+      </div>
     </header>
   )
 }

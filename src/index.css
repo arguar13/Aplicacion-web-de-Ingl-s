@@ -23,25 +23,24 @@
   --bad-soft: #fbe7e4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #0f1013;
-    --surface: #16181d;
-    --raised: #1e2127;
-    --ink: #eeebe4;
-    --muted: #9b958a;
-    --line: #2a2d34;
-    --line-strong: #353943;
-    --accent: #a5b0ff;
-    --accent-ink: #14163a;
-    --accent-soft: #1f2245;
-    --ok: #3ecf8e;
-    --ok-ink: #06291a;
-    --ok-soft: #12291d;
-    --bad: #ff8078;
-    --bad-soft: #35191a;
-  }
+/* data-theme lo fija index.html antes de pintar y luego src/lib/theme.ts según los ajustes. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f1013;
+  --surface: #16181d;
+  --raised: #1e2127;
+  --ink: #eeebe4;
+  --muted: #9b958a;
+  --line: #2a2d34;
+  --line-strong: #353943;
+  --accent: #a5b0ff;
+  --accent-ink: #14163a;
+  --accent-soft: #1f2245;
+  --ok: #3ecf8e;
+  --ok-ink: #06291a;
+  --ok-soft: #12291d;
+  --bad: #ff8078;
+  --bad-soft: #35191a;
 }
 
 @theme inline {

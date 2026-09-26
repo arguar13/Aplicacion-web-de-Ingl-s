@@ -15,3 +15,6 @@ export interface Round {
 }
 
 export type Rng = () => number
+
+/** Sentido de la pregunta: palabra en inglés → traducción, o al revés. */
+export type Direction = 'en-es' | 'es-en'

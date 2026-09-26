@@ -1,22 +1,29 @@
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
-import { cardLookup, type Direction, useProgress } from '@/lib/progress'
+import { cardLookup, useProgress } from '@/lib/progress'
 import { summarize } from '@/lib/scheduler'
+import type { Direction } from '@/lib/types'
+import { IconButton } from './controls'
 import { Header, Stat } from './Header'
-import { ArrowLeftIcon } from './icons'
+import { ArrowLeftIcon, SettingsIcon } from './icons'
 import { Kbd } from './Kbd'
 import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
 
-const DIRECTION: Direction = 'en-es'
+interface Props {
+  deck: Deck
+  direction: Direction
+  onExit: () => void
+  onOpenSettings: () => void
+}
 
-export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
-  const quiz = useQuiz(deck, DIRECTION)
+export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
+  const quiz = useQuiz(deck, direction)
   const { round, stats, answer, replay } = quiz
   const progress = useProgress()
-  const summary = summarize(deck.words, cardLookup(progress, DIRECTION), Date.now())
+  const summary = summarize(deck.words, cardLookup(progress, direction), Date.now())
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
 
   useKeyDown((event) => {
@@ -49,10 +56,15 @@ export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
                 <ArrowLeftIcon width={16} height={16} />
                 Niveles
               </button>
-              <span className="truncate text-sm text-muted">
-                {deck.level !== null && <span className="font-semibold text-accent">Nivel {deck.level} · </span>}
-                {deck.name}
-              </span>
+              <div className="flex min-w-0 items-center gap-1">
+                <span className="truncate text-sm text-muted">
+                  {deck.level !== null && <span className="font-semibold text-accent">Nivel {deck.level} · </span>}
+                  {deck.name}
+                </span>
+                <IconButton label="Ajustes" onClick={onOpenSettings} className="-mr-2">
+                  <SettingsIcon width={18} height={18} />
+                </IconButton>
+              </div>
             </div>
             <div className="mt-2 flex items-center gap-3">
               <ProgressBar summary={summary} className="flex-1" />
@@ -63,13 +75,16 @@ export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
           <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
             <WordScreen
               word={round.word}
+              direction={direction}
               reason={round.reason}
               solved={quiz.solved}
               mistakes={quiz.wrong.length}
+              canReplay={quiz.canReplay}
               onReplay={replay}
             />
             <Keypad
               options={round.options}
+              direction={direction}
               answerId={round.word.id}
               wrong={quiz.wrong}
               solved={quiz.solved}
@@ -83,9 +98,11 @@ export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
         <span className="flex items-center gap-2">
           <Kbd>1</Kbd>–<Kbd>4</Kbd> responder
         </span>
-        <span className="flex items-center gap-2">
-          <Kbd>Espacio</Kbd> escuchar
-        </span>
+        {quiz.canReplay && (
+          <span className="flex items-center gap-2">
+            <Kbd>Espacio</Kbd> escuchar
+          </span>
+        )}
         <span className="flex items-center gap-2">
           <Kbd>Esc</Kbd> niveles
         </span>

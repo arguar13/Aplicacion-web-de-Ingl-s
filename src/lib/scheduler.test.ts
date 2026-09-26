@@ -64,8 +64,11 @@ describe('pickNext', () => {
   it('evita repetir las últimas palabras mostradas', () => {
     const session = createSession()
     for (const id of ['w0', 'w1', 'w2']) advanceSession(session, id, true)
-    const cards = Object.fromEntries(['w0', 'w1', 'w2'].map((id) => [id, card(2, NOW + DAY)]))
-    expect(pickNext(words, lookup(cards), session, NOW, FREQ).word.id).toBe('w3')
+    const cards = Object.fromEntries(['w0', 'w1', 'w2'].map((id) => [id, card(2, NOW - 1)]))
+    for (let i = 0; i < 50; i++) {
+      // Aunque w0–w2 tienen el repaso vencido, se acaban de ver: sale una nueva.
+      expect(['w3', 'w4', 'w5']).toContain(pickNext(words, lookup(cards), session, NOW, FREQ).word.id)
+    }
   })
 
   it('con todo visto y al día, practica favoreciendo las cajas bajas', () => {

@@ -7,6 +7,10 @@ Las 3.889 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 
 El repaso espaciado decide qué palabra sale: lo que fallas vuelve a las pocas rondas, lo que aciertas
 se aleja en el tiempo (10 min → 1 día → 3 → 7 → 21 → 60 días). El progreso se guarda en el dispositivo.
 
+Dos sentidos, cada uno con su propio progreso: inglés → español (la pronunciación suena al aparecer) y
+español → inglés (suena al acertar, para no delatar la respuesta). Ajustes: pronunciación automática,
+tema claro/oscuro/automático y borrar el progreso.
+
 ## Desarrollo
 
 ```bash
@@ -41,7 +45,10 @@ public/.htaccess        Configuración del servidor (Hostinger)
 src/data/words.json     Vocabulario { id, en, es }, ordenado por frecuencia. El id es el nombre del audio.
 src/lib/decks.ts        Niveles: bloques de 500 palabras sobre ese orden
 src/lib/scheduler.ts    Repaso espaciado: cajas, intervalos y elección de la siguiente palabra
-src/lib/progress.ts     Progreso guardado en localStorage (tarjetas, racha de días, récord)
+src/lib/store.ts        Almacén genérico en localStorage con suscripción para React
+src/lib/progress.ts     Progreso (tarjetas por sentido, racha de días, récord)
+src/lib/settings.ts     Ajustes (sentido, pronunciación automática, tema)
+src/lib/theme.ts        Aplica el tema; index.html lo fija antes de pintar para evitar destellos
 src/lib/quiz.ts         Opciones de cada ronda (distractores sin traducciones repetidas)
 src/lib/audio.ts        Reproducción con Web Audio (funciona en iPhone/iPad sin tocar cada vez)
 src/hooks/              Estado de la partida y teclado

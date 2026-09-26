@@ -2,27 +2,40 @@ import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
-import { cardLookup, dailyStreak, type Direction, useProgress } from '@/lib/progress'
+import { cardLookup, dailyStreak, useProgress } from '@/lib/progress'
 import { type DeckSummary, summarize } from '@/lib/scheduler'
+import { updateSettings, useSettings } from '@/lib/settings'
+import type { Direction } from '@/lib/types'
+import { IconButton, Segmented } from './controls'
 import { Header, Stat } from './Header'
-import { ArrowRightIcon, ShuffleIcon } from './icons'
+import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './Kbd'
 import { ProgressBar } from './ProgressBar'
 
-const DIRECTION: Direction = 'en-es'
+const DIRECTIONS: Array<{ value: Direction; label: string }> = [
+  { value: 'en-es', label: 'Inglés → Español' },
+  { value: 'es-en', label: 'Español → Inglés' },
+]
 const DECKS = [...LEVELS, ALL_DECK]
 
 /** Tecla para elegir cada mazo: 1–9 para los niveles, 0 para todas las palabras. */
 const shortcutOf = (deck: Deck) => (deck.level === null ? '0' : deck.level <= 9 ? String(deck.level) : null)
 
-export function DeckPicker({ onPick }: { onPick: (deck: Deck) => void }) {
+interface Props {
+  onPick: (deck: Deck) => void
+  onOpenSettings: () => void
+}
+
+export function DeckPicker({ onPick, onOpenSettings }: Props) {
   const progress = useProgress()
+  const { direction } = useSettings()
   const now = useNow()
-  const lookup = cardLookup(progress, DIRECTION)
+  const lookup = cardLookup(progress, direction)
   const summaries = new Map(DECKS.map((deck) => [deck.id, summarize(deck.words, lookup, now)]))
   const total = summaries.get(ALL_DECK.id)!
   const suggested = DECKS.find((d) => d.id === progress.lastDeckId) ?? LEVELS[0]
   const hasProgress = total.fresh < total.total
+  const anyProgress = Object.keys(progress.cards).length > 0
 
   useKeyDown((event) => {
     if (event.key === 'Enter') return onPick(suggested)
@@ -32,8 +45,14 @@ export function DeckPicker({ onPick }: { onPick: (deck: Deck) => void }) {
 
   return (
     <>
-      <Header>
-        {hasProgress && (
+      <Header
+        action={
+          <IconButton label="Ajustes" onClick={onOpenSettings} className="-mr-2">
+            <SettingsIcon />
+          </IconButton>
+        }
+      >
+        {anyProgress && (
           <>
             <Stat label="Días" value={dailyStreak(progress.days, now)} />
             <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} />
@@ -52,6 +71,13 @@ export function DeckPicker({ onPick }: { onPick: (deck: Deck) => void }) {
             {total.total.toLocaleString('es')} palabras ordenadas por lo mucho que se usan. Lo que falles volverá justo
             antes de que lo olvides.
           </p>
+          <Segmented
+            label="Sentido de las preguntas"
+            value={direction}
+            options={DIRECTIONS}
+            onChange={(value) => updateSettings({ direction: value })}
+            className="mt-7"
+          />
         </div>
 
         <ContinueCard

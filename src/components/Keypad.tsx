@@ -1,17 +1,18 @@
 import { cn } from '@/lib/cn'
-import type { Word } from '@/lib/types'
+import type { Direction, Word } from '@/lib/types'
 
 type KeyState = 'idle' | 'correct' | 'wrong' | 'dimmed'
 
 interface Props {
   options: Word[]
+  direction: Direction
   answerId: string
   wrong: string[]
   solved: boolean
   onAnswer: (id: string) => void
 }
 
-export function Keypad({ options, answerId, wrong, solved, onAnswer }: Props) {
+export function Keypad({ options, direction, answerId, wrong, solved, onAnswer }: Props) {
   const stateOf = (id: string): KeyState => {
     if (solved) return id === answerId ? 'correct' : 'dimmed'
     return wrong.includes(id) ? 'wrong' : 'idle'
@@ -22,7 +23,8 @@ export function Keypad({ options, answerId, wrong, solved, onAnswer }: Props) {
       {options.map((option, index) => (
         <OptionKey
           key={`${answerId}-${option.id}`}
-          label={option.es}
+          label={direction === 'en-es' ? option.es : option.en}
+          lang={direction === 'en-es' ? 'es' : 'en'}
           shortcut={index + 1}
           state={stateOf(option.id)}
           onPress={() => onAnswer(option.id)}
@@ -45,12 +47,13 @@ const stateStyles: Record<KeyState, string> = {
 
 interface KeyProps {
   label: string
+  lang: string
   shortcut: number
   state: KeyState
   onPress: () => void
 }
 
-function OptionKey({ label, shortcut, state, onPress }: KeyProps) {
+function OptionKey({ label, lang, shortcut, state, onPress }: KeyProps) {
   return (
     <button
       type="button"
@@ -65,7 +68,7 @@ function OptionKey({ label, shortcut, state, onPress }: KeyProps) {
       )}
     >
       <span className="absolute top-2.5 left-3.5 text-[11px] font-semibold tabular-nums opacity-50">{shortcut}</span>
-      {label}
+      <span lang={lang}>{label}</span>
     </button>
   )
 }
