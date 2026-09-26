@@ -1,0 +1,52 @@
+# Tecla: configuración para el hosting web de Hostinger (Apache / LiteSpeed).
+# Se copia tal cual a dist/ al hacer el build.
+
+Options -Indexes
+DirectoryIndex index.html
+
+# --- HTTPS --------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Tipos MIME ---------------------------------------------------------------
+AddType application/javascript .js
+AddType font/woff2 .woff2
+AddType font/woff .woff
+AddType audio/mpeg .mp3
+AddType image/svg+xml .svg
+
+# --- Compresión (los MP3 y las fuentes ya vienen comprimidos) -----------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Caché --------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # JS, CSS y fuentes llevan un hash en el nombre: si cambian, cambia el nombre.
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.mp3$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.(svg|png|ico|webmanifest)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # El HTML siempre se revalida para que cada despliegue llegue al instante.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # --- Seguridad --------------------------------------------------------------
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/* Celular en horizontal: poca altura, así que la palabra y el teclado van lado a lado. */
+@custom-variant short (@media (orientation: landscape) and (max-height: 540px));
+
+/* Paleta: papel cálido de día, tinta profunda de noche. Todos los colores de la app salen de aquí. */
+:root {
+  color-scheme: light;
+  --bg: #f4f1ea;
+  --surface: #fffdf8;
+  --raised: #ffffff;
+  --ink: #1c1a17;
+  --muted: #7a7368;
+  --line: #e4ded2;
+  --line-strong: #d3cbbc;
+  --accent: #4338ca;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6e3fa;
+  --ok: #17845a;
+  --ok-ink: #ffffff;
+  --ok-soft: #dff3e9;
+  --bad: #c2413a;
+  --bad-soft: #fbe7e4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0f1013;
+    --surface: #16181d;
+    --raised: #1e2127;
+    --ink: #eeebe4;
+    --muted: #9b958a;
+    --line: #2a2d34;
+    --line-strong: #353943;
+    --accent: #a5b0ff;
+    --accent-ink: #14163a;
+    --accent-soft: #1f2245;
+    --ok: #3ecf8e;
+    --ok-ink: #06291a;
+    --ok-soft: #12291d;
+    --bad: #ff8078;
+    --bad-soft: #35191a;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-ink: var(--ok-ink);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+
+  --animate-rise: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-pop: pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-shake: shake 380ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+      filter: blur(4px);
+    }
+  }
+  @keyframes pop {
+    50% {
+      transform: scale(1.04);
+    }
+  }
+  @keyframes shake {
+    20%,
+    60% {
+      transform: translateX(-6px);
+    }
+    40%,
+    80% {
+      transform: translateX(6px);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    background-image: radial-gradient(1100px 520px at 50% -12%, var(--accent-soft), transparent 70%);
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
