@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import words from '@/data/words.json'
-import { buildOptions, normalize } from './quiz'
+import { buildOptions, normalize, senses } from './quiz'
 import type { Word } from './types'
 
 const WORDS = words as Word[]
@@ -20,7 +20,22 @@ describe('buildOptions', () => {
       const options = buildOptions(word, WORDS)
       expect(options).toHaveLength(4)
       expect(options).toContain(word)
-      expect(new Set(options.map((o) => normalize(o.es))).size).toBe(4)
+      const all = options.flatMap((o) => senses(o.es))
+      expect(new Set(all).size).toBe(all.length)
+    }
+  })
+
+  it('separa los sentidos ignorando paréntesis', () => {
+    expect(senses('a, para')).toEqual(['a', 'para'])
+    expect(senses('fue (de ir)')).toEqual(['fue'])
+    expect(senses('padre o madre')).toEqual(['padre', 'madre'])
+  })
+
+  it('no junta palabras que comparten un sentido', () => {
+    const to = WORDS.find((w) => w.id === 'to')!
+    const pool = WORDS.filter((w) => ['to', 'for', 'water', 'tree', 'zoo'].includes(w.id))
+    for (let i = 0; i < 50; i++) {
+      expect(buildOptions(to, pool).map((o) => o.id)).not.toContain('for')
     }
   })
 

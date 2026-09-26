@@ -3,7 +3,7 @@
 Aprende vocabulario en inglés con una idea simple: aparece una palabra en inglés, suena su pronunciación
 y pulsas la tecla con su traducción al español.
 
-Las 3.889 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 niveles de 500.
+Las 3.978 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 niveles de 500.
 El repaso espaciado decide qué palabra sale: lo que fallas vuelve a las pocas rondas, lo que aciertas
 se aleja en el tiempo (10 min → 1 día → 3 → 7 → 21 → 60 días). El progreso se guarda en el dispositivo.
 
@@ -55,12 +55,18 @@ src/hooks/              Estado de la partida y teclado
 src/components/         Interfaz
 src/index.css           Sistema visual: paleta clara/oscura, tipografías, animaciones
 scripts/rank_words.py   Reordena words.json por frecuencia (pip install wordfreq)
+scripts/generate_audio.py  Genera el audio de las palabras que no lo tengan (pip install gtts)
 ```
 
 Stack: Vite, React 19, TypeScript, Tailwind CSS 4.
 
 ## Agregar palabras
 
-1. Añade `{ "id", "en", "es" }` a `src/data/words.json` y su audio en `public/audio/<id>.mp3`.
-2. `python scripts/rank_words.py` para recolocarlas por frecuencia.
-3. `npm test` comprueba que los ids sean únicos y válidos.
+1. Añade `{ "id", "en", "es" }` a `src/data/words.json` (el id en minúsculas, con guiones).
+2. `python scripts/generate_audio.py` crea su audio con la misma voz que el resto.
+3. `python scripts/rank_words.py` las recoloca por frecuencia.
+4. `npm test` comprueba que los ids sean únicos y que cada palabra tenga audio.
+
+Las traducciones siguen estas reglas: español latinoamericano neutro, el sentido más común primero,
+como mucho dos sentidos separados por coma y en minúscula salvo nombres propios. Dos palabras que
+comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`).
