@@ -11,6 +11,10 @@ Dos sentidos, cada uno con su propio progreso: inglés → español (la pronunci
 español → inglés (suena al acertar, para no delatar la respuesta). Ajustes: pronunciación automática,
 tema claro/oscuro/automático y borrar el progreso.
 
+Es una PWA: se instala en Android, iPhone y escritorio y funciona sin conexión. La app se guarda
+entera al primer uso; cada pronunciación se guarda al sonar, y desde Ajustes se pueden descargar
+todas (~22 MB). Cuando hay una versión nueva, un aviso deja actualizar sin cortar la sesión.
+
 ## Desarrollo
 
 ```bash
@@ -34,8 +38,9 @@ El build es un sitio estático: no necesita Node en el servidor.
 3. Listo. Las rutas son relativas, así que también funciona dentro de una subcarpeta
    (p. ej. `public_html/ingles/`).
 
-`public/.htaccess` configura HTTPS, compresión, caché larga para los archivos con hash y cabeceras de
-seguridad. Los MP3 se cachean 30 días: si se regenera un audio, cámbiale el nombre o espera ese plazo.
+`public/.htaccess` configura HTTPS, compresión, caché larga para los archivos con hash, revalidación
+del HTML, `sw.js` y el manifiesto (para que cada despliegue llegue al instante) y cabeceras de
+seguridad. El service worker necesita HTTPS, que Hostinger incluye con su certificado SSL gratuito. Los MP3 se cachean 30 días: si se regenera un audio, cámbiale el nombre o espera ese plazo.
 
 ## Estructura
 
@@ -51,6 +56,8 @@ src/lib/settings.ts     Ajustes (sentido, pronunciación automática, tema)
 src/lib/theme.ts        Aplica el tema; index.html lo fija antes de pintar para evitar destellos
 src/lib/quiz.ts         Opciones de cada ronda (distractores sin traducciones repetidas)
 src/lib/audio.ts        Reproducción con Web Audio (funciona en iPhone/iPad sin tocar cada vez)
+src/lib/pwa.ts          Instalación como app y descarga del audio para usarlo sin conexión
+public/icons/           Iconos de la app (normal, maskable para Android y apple-touch-icon)
 src/hooks/              Estado de la partida y teclado
 src/components/         Interfaz
 src/index.css           Sistema visual: paleta clara/oscura, tipografías, animaciones
@@ -58,7 +65,7 @@ scripts/rank_words.py   Reordena words.json por frecuencia (pip install wordfreq
 scripts/generate_audio.py  Genera el audio de las palabras que no lo tengan (pip install gtts)
 ```
 
-Stack: Vite, React 19, TypeScript, Tailwind CSS 4.
+Stack: Vite, React 19, TypeScript, Tailwind CSS 4, vite-plugin-pwa (Workbox).
 
 ## Agregar palabras
 

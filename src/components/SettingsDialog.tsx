@@ -1,6 +1,7 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { resetProgress } from '@/lib/progress'
 import { type ThemePreference, updateSettings, useSettings } from '@/lib/settings'
+import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
 import { Segmented, Switch } from './controls'
 import { CloseIcon } from './icons'
 
@@ -34,7 +35,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
       onClick={(event) => event.target === ref.current && close()}
       aria-labelledby="settings-title"
       className={[
-        'm-0 mt-auto w-full max-w-none rounded-t-[28px] border border-line bg-surface p-0 text-ink',
+        'm-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-t-[28px] border border-line bg-surface p-0 text-ink',
         'shadow-[0_-12px_40px_-12px_rgb(0_0_0/0.25)] backdrop:bg-black/40 backdrop:backdrop-blur-[2px]',
         'open:animate-rise sm:m-auto sm:max-w-md sm:rounded-[28px]',
       ].join(' ')}
@@ -56,7 +57,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
         </div>
 
         <div className="mt-5 divide-y divide-line">
-          <Row
+          <SettingRow
             title="Pronunciación automática"
             description="Suena al aparecer cada palabra. En modo español → inglés, al acertar."
           >
@@ -65,7 +66,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
               checked={settings.autoplay}
               onChange={(autoplay) => updateSettings({ autoplay })}
             />
-          </Row>
+          </SettingRow>
 
           <div className="py-4">
             <p className="text-[15px] font-medium">Tema</p>
@@ -78,7 +79,10 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
             />
           </div>
 
-          <Row title="Borrar progreso" description="Vuelve a empezar desde cero en este dispositivo.">
+          <InstallRow />
+          <OfflineAudioRow />
+
+          <SettingRow title="Borrar progreso" description="Vuelve a empezar desde cero en este dispositivo.">
             {confirmReset ? (
               <button
                 type="button"
@@ -99,7 +103,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
                 Borrar
               </button>
             )}
-          </Row>
+          </SettingRow>
         </div>
 
         <p className="mt-2 text-xs leading-relaxed text-muted">
@@ -107,17 +111,5 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
         </p>
       </div>
     </dialog>
-  )
-}
-
-function Row({ title, description, children }: { title: string; description: string; children: ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-4 py-4">
-      <div>
-        <p className="text-[15px] font-medium">{title}</p>
-        <p className="mt-0.5 text-[13px] leading-snug text-muted">{description}</p>
-      </div>
-      {children}
-    </div>
   )
 }

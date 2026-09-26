@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { DeckPicker } from '@/components/DeckPicker'
 import { Game } from '@/components/Game'
 import { SettingsDialog } from '@/components/SettingsDialog'
+import { UpdateToast } from '@/components/UpdateToast'
 import type { Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
 import { useSettings } from '@/lib/settings'
@@ -31,6 +32,7 @@ export default function App() {
         <DeckPicker onPick={pick} onOpenSettings={openSettings} />
       )}
       <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <UpdateToast />
     </div>
   )
 }
