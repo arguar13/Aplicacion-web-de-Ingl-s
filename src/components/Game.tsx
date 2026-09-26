@@ -1,15 +1,23 @@
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
-import { Header } from './Header'
+import { cardLookup, type Direction, useProgress } from '@/lib/progress'
+import { summarize } from '@/lib/scheduler'
+import { Header, Stat } from './Header'
 import { ArrowLeftIcon } from './icons'
 import { Kbd } from './Kbd'
 import { Keypad } from './Keypad'
+import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
 
+const DIRECTION: Direction = 'en-es'
+
 export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
-  const quiz = useQuiz(deck.words)
-  const { round, answer, replay } = quiz
+  const quiz = useQuiz(deck, DIRECTION)
+  const { round, stats, answer, replay } = quiz
+  const progress = useProgress()
+  const summary = summarize(deck.words, cardLookup(progress, DIRECTION), Date.now())
+  const masteredPct = Math.round((summary.mastered / summary.total) * 100)
 
   useKeyDown((event) => {
     if (event.key === 'Escape') return onExit()
@@ -23,27 +31,43 @@ export function Game({ deck, onExit }: { deck: Deck; onExit: () => void }) {
 
   return (
     <>
-      <Header stats={quiz.stats} />
+      <Header>
+        <Stat label="Racha" value={stats.streak} />
+        <Stat label="Precisión" value={stats.solved ? `${Math.round((stats.firstTry / stats.solved) * 100)}%` : '—'} />
+        <Stat label="Palabras" value={stats.solved} />
+      </Header>
 
       <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12 short:py-3">
         <div className="w-full max-w-md sm:max-w-lg md:max-w-xl short:max-w-4xl">
-          <div className="mb-4 flex items-center justify-between gap-3 short:mb-2">
-            <button
-              type="button"
-              onClick={onExit}
-              className="-ml-2 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
-            >
-              <ArrowLeftIcon width={16} height={16} />
-              Niveles
-            </button>
-            <span className="truncate text-sm text-muted">
-              {deck.level !== null && <span className="font-semibold text-accent">Nivel {deck.level} · </span>}
-              {deck.name}
-            </span>
+          <div className="mb-4 short:mb-2">
+            <div className="flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={onExit}
+                className="-ml-2 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                <ArrowLeftIcon width={16} height={16} />
+                Niveles
+              </button>
+              <span className="truncate text-sm text-muted">
+                {deck.level !== null && <span className="font-semibold text-accent">Nivel {deck.level} · </span>}
+                {deck.name}
+              </span>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <ProgressBar summary={summary} className="flex-1" />
+              <span className="text-xs text-muted tabular-nums">{masteredPct}% dominado</span>
+            </div>
           </div>
 
           <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
-            <WordScreen word={round.word} solved={quiz.solved} mistakes={quiz.wrong.length} onReplay={replay} />
+            <WordScreen
+              word={round.word}
+              reason={round.reason}
+              solved={quiz.solved}
+              mistakes={quiz.wrong.length}
+              onReplay={replay}
+            />
             <Keypad
               options={round.options}
               answerId={round.word.id}

@@ -31,6 +31,15 @@ export function ArrowLeftIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  )
+}
+
 export function ShuffleIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg {...base} {...props}>

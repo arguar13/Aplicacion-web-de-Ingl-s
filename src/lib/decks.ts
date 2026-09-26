@@ -13,6 +13,8 @@ export interface Deck {
   name: string
   description: string
   words: readonly Word[]
+  /** Orden en que se introducen las palabras nuevas. */
+  newOrder: 'frequency' | 'random'
   /** Posición de la primera y la última palabra en el ranking de frecuencia (desde 1). */
   from: number
   to: number
@@ -33,7 +35,16 @@ export const LEVELS: readonly Deck[] = Array.from({ length: Math.ceil(ALL_WORDS.
   const [name, description] = LEVEL_INFO[i] ?? [`Nivel ${i + 1}`, 'Más vocabulario.']
   const from = i * LEVEL_SIZE
   const deckWords = ALL_WORDS.slice(from, from + LEVEL_SIZE)
-  return { id: `level-${i + 1}`, level: i + 1, name, description, words: deckWords, from: from + 1, to: from + deckWords.length }
+  return {
+    id: `level-${i + 1}`,
+    level: i + 1,
+    name,
+    description,
+    words: deckWords,
+    newOrder: 'frequency' as const,
+    from: from + 1,
+    to: from + deckWords.length,
+  }
 })
 
 export const ALL_DECK: Deck = {
@@ -42,6 +53,7 @@ export const ALL_DECK: Deck = {
   name: 'Todas las palabras',
   description: 'Mezcladas, de todos los niveles.',
   words: ALL_WORDS,
+  newOrder: 'random',
   from: 1,
   to: ALL_WORDS.length,
 }

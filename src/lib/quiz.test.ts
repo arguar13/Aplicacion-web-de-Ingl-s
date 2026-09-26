@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import words from '@/data/words.json'
-import { buildOptions, createRound, normalize, pickWord } from './quiz'
+import { buildOptions, normalize } from './quiz'
 import type { Word } from './types'
 
 const WORDS = words as Word[]
@@ -16,7 +16,8 @@ describe('normalize', () => {
 describe('buildOptions', () => {
   it('incluye la respuesta y traducciones distintas entre sí', () => {
     for (let i = 0; i < 500; i++) {
-      const { word, options } = createRound(WORDS)
+      const word = WORDS[Math.floor(Math.random() * WORDS.length)]
+      const options = buildOptions(word, WORDS)
       expect(options).toHaveLength(4)
       expect(options).toContain(word)
       expect(new Set(options.map((o) => normalize(o.es))).size).toBe(4)
@@ -28,15 +29,6 @@ describe('buildOptions', () => {
     const pool = WORDS.filter((w) => w.es === 'lograr' || w.id === 'water' || w.id === 'tree' || w.id === 'zoo')
     const options = buildOptions(achieve, pool)
     expect(options.filter((o) => o.es === 'lograr')).toEqual([achieve])
-  })
-})
-
-describe('pickWord', () => {
-  it('evita las palabras indicadas', () => {
-    const pool = WORDS.slice(0, 2)
-    for (let i = 0; i < 50; i++) {
-      expect(pickWord(pool, new Set([pool[0].id])).id).toBe(pool[1].id)
-    }
   })
 })
 

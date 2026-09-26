@@ -4,6 +4,8 @@ Aprende vocabulario en inglés con una idea simple: aparece una palabra en ingl�
 y pulsas la tecla con su traducción al español.
 
 Las 3.889 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 niveles de 500.
+El repaso espaciado decide qué palabra sale: lo que fallas vuelve a las pocas rondas, lo que aciertas
+se aleja en el tiempo (10 min → 1 día → 3 → 7 → 21 → 60 días). El progreso se guarda en el dispositivo.
 
 ## Desarrollo
 
@@ -38,7 +40,9 @@ public/audio/           Pronunciaciones, una por palabra: <id>.mp3
 public/.htaccess        Configuración del servidor (Hostinger)
 src/data/words.json     Vocabulario { id, en, es }, ordenado por frecuencia. El id es el nombre del audio.
 src/lib/decks.ts        Niveles: bloques de 500 palabras sobre ese orden
-src/lib/quiz.ts         Lógica pura de las rondas (sin React)
+src/lib/scheduler.ts    Repaso espaciado: cajas, intervalos y elección de la siguiente palabra
+src/lib/progress.ts     Progreso guardado en localStorage (tarjetas, racha de días, récord)
+src/lib/quiz.ts         Opciones de cada ronda (distractores sin traducciones repetidas)
 src/lib/audio.ts        Reproducción con Web Audio (funciona en iPhone/iPad sin tocar cada vez)
 src/hooks/              Estado de la partida y teclado
 src/components/         Interfaz

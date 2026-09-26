@@ -1,4 +1,4 @@
-import type { Rng, Round, Word } from './types'
+import type { Rng, Word } from './types'
 
 export const OPTIONS_PER_ROUND = 4
 
@@ -18,16 +18,6 @@ export function shuffle<T>(items: readonly T[], rng: Rng = Math.random): T[] {
     ;[out[i], out[j]] = [out[j], out[i]]
   }
   return out
-}
-
-/** Elige una palabra al azar evitando las de `avoid` (p. ej. la actual y la siguiente). */
-export function pickWord(pool: readonly Word[], avoid: ReadonlySet<string> = new Set(), rng: Rng = Math.random): Word {
-  if (pool.length === 0) throw new Error('El conjunto de palabras está vacío')
-  for (let attempt = 0; attempt < 20; attempt++) {
-    const word = pool[Math.floor(rng() * pool.length)]
-    if (!avoid.has(word.id)) return word
-  }
-  return pool.find((w) => !avoid.has(w.id)) ?? pool[0]
 }
 
 /**
@@ -53,9 +43,4 @@ export function buildOptions(answer: Word, pool: readonly Word[], count = OPTION
   }
 
   return shuffle([answer, ...distractors], rng)
-}
-
-export function createRound(pool: readonly Word[], avoid?: ReadonlySet<string>, rng: Rng = Math.random): Round {
-  const word = pickWord(pool, avoid, rng)
-  return { word, options: buildOptions(word, pool, OPTIONS_PER_ROUND, rng) }
 }

@@ -1,95 +1,93 @@
-import { useCallback, useEffect, useReducer } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { playPronunciation, preloadPronunciation } from '@/lib/audio'
-import { createRound } from '@/lib/quiz'
-import type { Round, Word } from '@/lib/types'
+import type { Deck } from '@/lib/decks'
+import { cardLookup, type Direction, getProgress, recordAnswer, recordStreak } from '@/lib/progress'
+import { buildOptions } from '@/lib/quiz'
+import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
+import type { Round } from '@/lib/types'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
 const ADVANCE_DELAY_MS = 850
 
 export interface QuizStats {
-  /** Palabras resueltas. */
+  /** Palabras resueltas en esta sesión. */
   solved: number
   /** Palabras resueltas sin fallar. */
   firstTry: number
   streak: number
-  bestStreak: number
 }
 
 interface State {
   round: Round
-  upcoming: Round
+  /** Siguiente ronda, ya calculada mientras se muestra el acierto. */
+  next: Round | null
   /** Ids de las teclas que el usuario ya pulsó mal en esta ronda. */
   wrong: string[]
   solved: boolean
   stats: QuizStats
 }
 
-type Action =
-  | { type: 'answer'; id: string }
-  | { type: 'advance'; upcoming: Round }
-
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case 'answer': {
-      if (state.solved || state.wrong.includes(action.id)) return state
-      if (action.id !== state.round.word.id) {
-        return { ...state, wrong: [...state.wrong, action.id], stats: { ...state.stats, streak: 0 } }
-      }
-      const clean = state.wrong.length === 0
-      const streak = clean ? state.stats.streak + 1 : 0
-      return {
-        ...state,
-        solved: true,
-        stats: {
-          solved: state.stats.solved + 1,
-          firstTry: state.stats.firstTry + (clean ? 1 : 0),
-          streak,
-          bestStreak: Math.max(state.stats.bestStreak, streak),
-        },
-      }
-    }
-
-    case 'advance':
-      return { ...state, round: state.upcoming, upcoming: action.upcoming, wrong: [], solved: false }
-  }
+function nextRound(deck: Deck, direction: Direction, session: Session): Round {
+  const lookup = cardLookup(getProgress(), direction)
+  const pick = pickNext(deck.words, lookup, session, Date.now(), { newOrder: deck.newOrder })
+  return { ...pick, options: buildOptions(pick.word, deck.words) }
 }
 
-function init(words: readonly Word[]): State {
-  const round = createRound(words)
-  const upcoming = createRound(words, new Set([round.word.id]))
-  return {
-    round,
-    upcoming,
+export function useQuiz(deck: Deck, direction: Direction) {
+  // Objeto mutable de la sesión: no se pinta, solo alimenta al planificador.
+  const [session] = useState(createSession)
+  const [state, setState] = useState<State>(() => ({
+    round: nextRound(deck, direction, session),
+    next: null,
     wrong: [],
     solved: false,
-    stats: { solved: 0, firstTry: 0, streak: 0, bestStreak: 0 },
-  }
-}
-
-export function useQuiz(words: readonly Word[]) {
-  const [state, dispatch] = useReducer(reducer, words, init)
-  const { round, upcoming, solved } = state
+    stats: { solved: 0, firstTry: 0, streak: 0 },
+  }))
+  // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
+  const resolving = useRef(false)
 
   // La pronunciación suena en cuanto aparece la palabra.
   useEffect(() => {
-    playPronunciation(round.word.id)
-  }, [round.word.id])
+    playPronunciation(state.round.word.id)
+  }, [state.round])
 
   useEffect(() => {
-    preloadPronunciation(upcoming.word.id)
-  }, [upcoming.word.id])
+    if (state.next) preloadPronunciation(state.next.word.id)
+  }, [state.next])
 
   useEffect(() => {
-    if (!solved) return
+    if (!state.solved) return
     const timer = setTimeout(() => {
-      const avoid = new Set([round.word.id, upcoming.word.id])
-      dispatch({ type: 'advance', upcoming: createRound(words, avoid) })
+      resolving.current = false
+      setState((s) => (s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false } : s))
     }, ADVANCE_DELAY_MS)
     return () => clearTimeout(timer)
-  }, [solved, words, round.word.id, upcoming.word.id])
+  }, [state.solved])
 
-  const answer = useCallback((id: string) => dispatch({ type: 'answer', id }), [])
-  const replay = useCallback(() => playPronunciation(round.word.id), [round.word.id])
+  function answer(id: string) {
+    const { round, wrong, solved, stats } = state
+    if (resolving.current || solved || wrong.includes(id)) return
+
+    if (id !== round.word.id) {
+      setState({ ...state, wrong: [...wrong, id], stats: { ...stats, streak: 0 } })
+      return
+    }
+
+    resolving.current = true
+    const clean = wrong.length === 0
+    recordAnswer(direction, round.word.id, clean)
+    advanceSession(session, round.word.id, clean)
+    const streak = clean ? stats.streak + 1 : 0
+    recordStreak(streak)
+    setState({
+      ...state,
+      solved: true,
+      next: nextRound(deck, direction, session),
+      stats: { solved: stats.solved + 1, firstTry: stats.firstTry + (clean ? 1 : 0), streak },
+    })
+  }
+
+  const replay = () => playPronunciation(state.round.word.id)
 
   return { ...state, answer, replay }
 }
