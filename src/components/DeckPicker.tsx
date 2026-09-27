@@ -7,11 +7,13 @@ import { dailyStreak, useProgress } from '@/lib/progress'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import type { Direction } from '@/lib/types'
-import { IconButton, Segmented } from './controls'
+import { Badge } from './ui/Badge'
+import { Segmented } from './ui/controls'
+import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
 import { Header, Stat } from './Header'
 import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
-import { Kbd } from './Kbd'
+import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
 const DIRECTIONS: Array<{ value: Direction; label: string }> = [
@@ -118,11 +120,7 @@ const cardBase = cn(
 
 function DueBadge({ count }: { count: number }) {
   if (count === 0) return null
-  return (
-    <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-accent-ink tabular-nums">
-      {count.toLocaleString('es')} por repasar
-    </span>
-  )
+  return <Badge tone="accent">{count.toLocaleString('es')} por repasar</Badge>
 }
 
 function deckLabel(deck: Deck) {

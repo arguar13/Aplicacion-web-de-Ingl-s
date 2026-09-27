@@ -8,6 +8,7 @@ import {
   useInstallPrompt,
   useOfflineAudioSupported,
 } from '@/lib/pwa'
+import { Button } from './ui/Button'
 
 /** Fila de ajustes: título y descripción a la izquierda, control a la derecha. */
 export function SettingRow({
@@ -30,9 +31,6 @@ export function SettingRow({
   )
 }
 
-const pillButton =
-  'h-9 shrink-0 cursor-pointer rounded-full border border-line-strong px-4 text-sm font-semibold text-ink transition-colors hover:border-accent/50 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-default disabled:opacity-60'
-
 export function InstallRow() {
   const { available, install } = useInstallPrompt()
   if (typeof window === 'undefined' || isStandalone()) return null
@@ -40,9 +38,7 @@ export function InstallRow() {
   if (available) {
     return (
       <SettingRow title="Instalar la app" description="Ábrela desde tu pantalla de inicio, a pantalla completa.">
-        <button type="button" onClick={() => void install()} className={pillButton}>
-          Instalar
-        </button>
+        <Button onClick={() => void install()}>Instalar</Button>
       </SettingRow>
     )
   }
@@ -109,13 +105,9 @@ export function OfflineAudioRow() {
         {complete ? (
           <span className="shrink-0 text-sm font-semibold text-ok">Listo</span>
         ) : downloading ? (
-          <button type="button" onClick={() => controller.current?.abort()} className={pillButton}>
-            Cancelar
-          </button>
+          <Button onClick={() => controller.current?.abort()}>Cancelar</Button>
         ) : (
-          <button type="button" onClick={() => void start()} className={pillButton}>
-            Descargar
-          </button>
+          <Button onClick={() => void start()}>Descargar</Button>
         )}
       </SettingRow>
       {downloading && (

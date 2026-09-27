@@ -74,31 +74,3 @@ export function Switch({
     </button>
   )
 }
-
-export function IconButton({
-  label,
-  onClick,
-  children,
-  className,
-}: {
-  label: string
-  onClick: () => void
-  children: ReactNode
-  className?: string
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      title={label}
-      className={cn(
-        'grid size-9 cursor-pointer place-items-center rounded-full text-muted transition-colors hover:bg-surface hover:text-ink',
-        'focus-visible:outline-2 focus-visible:outline-accent',
-        className,
-      )}
-    >
-      {children}
-    </button>
-  )
-}

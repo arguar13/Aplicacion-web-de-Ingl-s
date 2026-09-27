@@ -4,6 +4,7 @@ import { needsBackupReminder, snoozeBackupReminder, storageAtRisk, useSafekeepin
 import { saveBackup } from './BackupSection'
 import { CloseIcon, ShieldIcon } from './icons'
 import { Button } from './ui/Button'
+import { IconButton } from './ui/IconButton'
 
 /**
  * Aviso en el inicio para Safari sin instalar, donde el progreso se borra tras 7 días sin visitas:
@@ -48,15 +49,14 @@ export function BackupReminder({ onOpenSettings }: { onOpenSettings: () => void 
           Guardar copia
         </Button>
       </div>
-      <button
-        type="button"
+      <IconButton
+        label="Recordármelo más tarde"
+        hover="bg"
         onClick={() => snoozeBackupReminder()}
-        aria-label="Recordármelo más tarde"
-        title="Recordármelo más tarde"
-        className="absolute top-2.5 right-2.5 grid size-9 cursor-pointer place-items-center rounded-full text-muted transition-colors hover:bg-bg hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
+        className="absolute top-2.5 right-2.5"
       >
         <CloseIcon width={18} height={18} />
-      </button>
+      </IconButton>
     </aside>
   )
 }

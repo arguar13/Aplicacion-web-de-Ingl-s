@@ -2,6 +2,9 @@ import { cn } from '@/lib/cn'
 import type { PickReason } from '@/lib/scheduler'
 import type { Direction, Word } from '@/lib/types'
 import { SpeakerIcon } from './icons'
+import { Badge, type BadgeTone } from './ui/Badge'
+import { IconButton } from './ui/IconButton'
+import { Surface } from './ui/Surface'
 
 interface Props {
   word: Word
@@ -13,10 +16,10 @@ interface Props {
   onReplay: () => void
 }
 
-const REASON_BADGE: Partial<Record<PickReason, { label: string; tone: string }>> = {
-  new: { label: 'Nueva', tone: 'bg-accent-soft text-accent' },
-  review: { label: 'Repaso', tone: 'bg-ok-soft text-ok' },
-  relearn: { label: 'Otra vez', tone: 'bg-bad-soft text-bad' },
+const REASON_BADGE: Partial<Record<PickReason, { label: string; tone: BadgeTone }>> = {
+  new: { label: 'Nueva', tone: 'accent-soft' },
+  review: { label: 'Repaso', tone: 'ok-soft' },
+  relearn: { label: 'Otra vez', tone: 'bad-soft' },
 }
 
 /** Tamaño de letra según la longitud, para que "straightforward" o "encogimiento de hombros" quepan en un móvil. */
@@ -38,37 +41,29 @@ export function WordScreen({ word, direction, reason, solved, mistakes, canRepla
       : { text: english ? 'Elige su traducción' : 'Elige la palabra en inglés', tone: 'text-muted' }
 
   return (
-    <section className="rounded-[28px] border border-line bg-surface px-5 pt-4 pb-6 shadow-[0_1px_2px_rgb(0_0_0/0.04),0_18px_40px_-20px_rgb(0_0_0/0.18)] sm:px-7 md:px-8 md:pb-8 short:pb-5">
+    <Surface as="section" className="px-5 pt-4 pb-6 sm:px-7 md:px-8 md:pb-8 short:pb-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <span className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">
             {english ? 'Inglés' : 'Español'}
           </span>
           {badge && (
-            <span
-              key={word.id}
-              className={cn(
-                'animate-rise rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
-                badge.tone,
-              )}
-            >
+            <Badge key={word.id} tone={badge.tone} caps className="animate-rise">
               {badge.label}
-            </span>
+            </Badge>
           )}
         </div>
-        <button
-          type="button"
+        <IconButton
+          label="Escuchar la pronunciación"
+          title="Escuchar la pronunciación (Espacio)"
+          size="md"
+          hover="accent"
           onClick={onReplay}
           disabled={!canReplay}
-          aria-label="Escuchar la pronunciación"
-          title="Escuchar la pronunciación (Espacio)"
-          className={cn(
-            '-mr-2 grid size-10 cursor-pointer place-items-center rounded-full text-muted transition-[color,background-color,opacity] hover:bg-accent-soft hover:text-accent focus-visible:outline-2 focus-visible:outline-accent',
-            !canReplay && 'pointer-events-none opacity-0',
-          )}
+          className={cn('-mr-2', !canReplay && 'pointer-events-none opacity-0')}
         >
           <SpeakerIcon />
-        </button>
+        </IconButton>
       </div>
 
       <p
@@ -85,6 +80,6 @@ export function WordScreen({ word, direction, reason, solved, mistakes, canRepla
       <p aria-live="polite" className={cn('mt-6 h-5 text-center text-sm font-medium transition-colors', status.tone)}>
         {status.text}
       </p>
-    </section>
+    </Surface>
   )
 }

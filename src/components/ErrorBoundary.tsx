@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 import { LogoMark } from './icons'
 import { Button } from './ui/Button'
+import { Surface } from './ui/Surface'
 
 interface Props {
   children: ReactNode
@@ -58,7 +59,7 @@ export function ErrorScreen({
 }) {
   return (
     <main role="alert" className="grid flex-1 place-items-center px-4 py-16 sm:px-6">
-      <div className="w-full max-w-md animate-rise rounded-[28px] border border-line bg-surface px-6 py-9 text-center shadow-[0_1px_2px_rgb(0_0_0/0.04),0_18px_40px_-20px_rgb(0_0_0/0.18)] sm:px-9">
+      <Surface className="w-full max-w-md animate-rise px-6 py-9 text-center sm:px-9">
         <LogoMark width={44} height={44} className="mx-auto -rotate-6" />
         <h1 className="mt-5 font-display text-4xl leading-tight">Algo se trabó</h1>
         <p className="mx-auto mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
@@ -87,7 +88,7 @@ export function ErrorScreen({
             {error.message || error.name}
           </pre>
         </details>
-      </div>
+      </Surface>
     </main>
   )
 }
