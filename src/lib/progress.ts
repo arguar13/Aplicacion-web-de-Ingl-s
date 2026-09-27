@@ -7,16 +7,42 @@ import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
 /** Días de práctica que se conservan para calcular la racha. */
 const MAX_DAYS = 400
 
+/** Lo estudiado en un día (todos los sentidos). */
+export interface DayStats {
+  /** Palabras respondidas. */
+  answers: number
+  /** Acertadas a la primera. */
+  clean: number
+  /** Palabras nuevas vistas por primera vez. */
+  fresh: number
+  /** Tiempo de estudio aproximado (ms): suma de lo que tardó cada respuesta, con tope. */
+  ms: number
+}
+
 export interface ProgressData {
   /** Estado de cada palabra, con clave `${direction}:${wordId}`. */
   cards: Record<string, CardState>
   /** Días con práctica, en formato AAAA-MM-DD y hora local, de más antiguo a más reciente. */
   days: string[]
+  /** Resumen de cada día estudiado (desde la Fase 8), con clave AAAA-MM-DD. */
+  history: Record<string, DayStats>
   bestStreak: number
   lastDeckId: string | null
 }
 
-export const EMPTY_PROGRESS: ProgressData = { cards: {}, days: [], bestStreak: 0, lastDeckId: null }
+/** Una respuesta cuenta como mucho esto en el tiempo de estudio: una pausa no infla el total. */
+const MAX_ANSWER_MS = 30_000
+export const EMPTY_DAY: DayStats = { answers: 0, clean: 0, fresh: 0, ms: 0 }
+
+function parseDayStats(raw: unknown): DayStats | null {
+  if (!isRecord(raw)) return null
+  const { answers, clean, fresh, ms } = raw
+  if (!isInteger(answers, 0) || !isInteger(clean, 0) || !isInteger(fresh, 0) || !isFiniteNumber(ms) || ms < 0)
+    return null
+  return { answers, clean: Math.min(clean, answers), fresh: Math.min(fresh, answers), ms }
+}
+
+export const EMPTY_PROGRESS: ProgressData = { cards: {}, days: [], history: {}, bestStreak: 0, lastDeckId: null }
 const EMPTY = EMPTY_PROGRESS
 
 /** El "v1" de la clave es histórico: la versión del esquema va en el campo `version`. */
@@ -38,9 +64,18 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
     }
   }
   const days = Array.isArray(raw.days) ? [...new Set(raw.days.filter(isDayKey))].toSorted().slice(-MAX_DAYS) : []
+  // Campo añadido en la Fase 8: lo guardado antes no lo tiene y empieza vacío.
+  const history: Record<string, DayStats> = {}
+  if (isRecord(raw.history)) {
+    for (const key of Object.keys(raw.history).filter(isDayKey).toSorted().slice(-MAX_DAYS)) {
+      const stats = parseDayStats(raw.history[key])
+      if (stats) history[key] = stats
+    }
+  }
   return {
     cards,
     days,
+    history,
     bestStreak: isInteger(raw.bestStreak, 0) ? raw.bestStreak : 0,
     lastDeckId: typeof raw.lastDeckId === 'string' ? raw.lastDeckId : null,
   }
@@ -114,9 +149,34 @@ export function recordAnswer(direction: Direction, id: string, answer: Answer, n
   const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now)
   const today = dayKey(now)
   const days = data.days.at(-1) === today ? data.days : [...data.days, today].slice(-MAX_DAYS)
-  store.set({ ...data, cards: { ...data.cards, [key]: card }, days })
+  const stats = data.history[today] ?? EMPTY_DAY
+  const history = {
+    ...data.history,
+    [today]: {
+      answers: stats.answers + 1,
+      clean: stats.clean + (answer.clean ? 1 : 0),
+      fresh: stats.fresh + (previous ? 0 : 1),
+      ms: stats.ms + Math.min(Math.max(answer.ms, 0), MAX_ANSWER_MS),
+    },
+  }
+  store.set({ ...data, cards: { ...data.cards, [key]: card }, days, history: trimHistory(history) })
   return card
 }
+
+/** Conserva los últimos MAX_DAYS días de historial. */
+function trimHistory(history: Record<string, DayStats>): Record<string, DayStats> {
+  const keys = Object.keys(history)
+  if (keys.length <= MAX_DAYS) return history
+  return Object.fromEntries(
+    keys
+      .toSorted()
+      .slice(-MAX_DAYS)
+      .map((key) => [key, history[key]]),
+  )
+}
+
+/** Lo estudiado hoy (o el día de `now`). */
+export const todayStats = (progress: ProgressData, now = Date.now()) => progress.history[dayKey(now)] ?? EMPTY_DAY
 
 export function recordStreak(streak: number) {
   const data = store.get()
@@ -147,9 +207,22 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     const mine = cards[key]
     if (!mine || card.reps > mine.reps || (card.reps === mine.reps && card.due > mine.due)) cards[key] = card
   }
+  // El mismo día en dos dispositivos: se queda el máximo de cada dato (sumar contaría doble si una
+  // copia se restaura sobre el dispositivo del que salió).
+  const history = { ...current.history }
+  for (const [day, stats] of Object.entries(incoming.history)) {
+    const mine = history[day] ?? EMPTY_DAY
+    history[day] = {
+      answers: Math.max(mine.answers, stats.answers),
+      clean: Math.max(mine.clean, stats.clean),
+      fresh: Math.max(mine.fresh, stats.fresh),
+      ms: Math.max(mine.ms, stats.ms),
+    }
+  }
   return {
     cards,
     days: [...new Set([...current.days, ...incoming.days])].toSorted().slice(-MAX_DAYS),
+    history: trimHistory(history),
     bestStreak: Math.max(current.bestStreak, incoming.bestStreak),
     lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
   }

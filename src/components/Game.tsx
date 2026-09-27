@@ -3,9 +3,11 @@ import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
 import { useWordDetails } from '@/lib/details'
+import { todayStats, useProgress } from '@/lib/progress'
+import { useSettings } from '@/lib/settings'
 import type { Direction } from '@/lib/types'
 import { IconButton } from './ui/IconButton'
-import { Header, Stat } from './Header'
+import { GoalStat, Header, Stat } from './Header'
 import { ArrowLeftIcon, SettingsIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { Keypad } from './Keypad'
@@ -26,6 +28,8 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
   const summary = useDeckSummaries(direction)(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
   const details = useWordDetails(round.word.id)
+  const today = todayStats(useProgress())
+  const { dailyGoal } = useSettings()
   const showDetail = quiz.solved && quiz.expanded
   const listenSlowly = () => replay({ slow: true })
 
@@ -55,7 +59,7 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
       <Header>
         <Stat label="Racha" value={stats.streak} />
         <Stat label="Precisión" value={stats.solved ? `${Math.round((stats.firstTry / stats.solved) * 100)}%` : '—'} />
-        <Stat label="Palabras" value={stats.solved} />
+        <GoalStat done={today.answers} goal={dailyGoal} />
       </Header>
 
       <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12 short:py-3">

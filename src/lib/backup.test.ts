@@ -11,6 +11,7 @@ const card = (box: number, seen: number, due = NOW) => fromLeitner(box, due, see
 const PROGRESS: ProgressData = {
   cards: { 'en-es:the': card(4, 5), 'es-en:the': card(2, 2), 'en-es:water': card(1, 1) },
   days: ['2026-09-25', '2026-09-26'],
+  history: { '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 60_000 } },
   bestStreak: 9,
   lastDeckId: 'level-1',
 }
@@ -61,6 +62,10 @@ describe('combinar progresos', () => {
     const incoming: ProgressData = {
       cards: { 'en-es:the': card(2, 3), 'en-es:water': card(3, 4), 'en-es:tree': card(2, 1) },
       days: ['2026-09-20', '2026-09-26'],
+      history: {
+        '2026-09-20': { answers: 5, clean: 5, fresh: 5, ms: 20_000 },
+        '2026-09-26': { answers: 8, clean: 8, fresh: 1, ms: 90_000 },
+      },
       bestStreak: 15,
       lastDeckId: 'level-3',
     }
@@ -72,6 +77,10 @@ describe('combinar progresos', () => {
         'en-es:tree': card(2, 1),
       },
       days: ['2026-09-20', '2026-09-25', '2026-09-26'],
+      history: {
+        '2026-09-20': { answers: 5, clean: 5, fresh: 5, ms: 20_000 },
+        '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 90_000 },
+      },
       bestStreak: 15,
       lastDeckId: 'level-1',
     })

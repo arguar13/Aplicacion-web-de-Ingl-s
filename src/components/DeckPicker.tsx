@@ -3,7 +3,7 @@ import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
-import { dailyStreak, useProgress } from '@/lib/progress'
+import { dailyStreak, todayStats, useProgress } from '@/lib/progress'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import type { Direction } from '@/lib/types'
@@ -11,7 +11,7 @@ import { Badge } from './ui/Badge'
 import { Segmented } from './ui/controls'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
-import { Header, Stat } from './Header'
+import { GoalStat, Header, Stat } from './Header'
 import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
@@ -32,7 +32,7 @@ interface Props {
 
 export function DeckPicker({ onPick, onOpenSettings }: Props) {
   const progress = useProgress()
-  const { direction } = useSettings()
+  const { direction, dailyGoal } = useSettings()
   const now = useNow()
   const summaryOf = useDeckSummaries(direction)
   const total = summaryOf(ALL_DECK)
@@ -59,7 +59,7 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
           <>
             <Stat label="Días" value={dailyStreak(progress.days, now)} />
             <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} />
-            <Stat label="Récord" value={progress.bestStreak} />
+            <GoalStat done={todayStats(progress, now).answers} goal={dailyGoal} />
           </>
         )}
       </Header>

@@ -26,6 +26,7 @@ const PHASE_5_PROGRESS = {
 /** El mismo progreso tras la migración v1 → v2 (Fase 8): cada caja Leitner pasa a FSRS. */
 const PHASE_5_MIGRATED = {
   ...PHASE_5_PROGRESS,
+  history: {},
   cards: {
     'en-es:the': fromLeitner(4, 1790000000000, 5, 1),
     'es-en:water': fromLeitner(1, 1790000600000, 2, 2),
@@ -47,8 +48,8 @@ describe('almacén persistido', () => {
     const phase5 = { direction: 'es-en', autoplay: false, theme: 'dark' }
     storage.setItem(SETTINGS_KEY, JSON.stringify(phase5))
     const store = settingsStore(storage)
-    // Los campos añadidos después (detailsPause, Fase 7) toman su valor por defecto.
-    expect(store.get()).toEqual({ ...phase5, detailsPause: 'mistakes' })
+    // Los campos añadidos después (Fases 7 y 8) toman su valor por defecto.
+    expect(store.get()).toEqual({ ...phase5, detailsPause: 'mistakes', dailyGoal: 20, newPerDay: 20 })
   })
 
   it('guarda con número de versión y conserva el tema en la raíz (index.html lo lee antes de pintar)', () => {
@@ -89,6 +90,7 @@ describe('almacén persistido', () => {
     expect(progressStore(storage).get()).toEqual({
       cards: PHASE_5_MIGRATED.cards,
       days: ['2026-09-24', '2026-09-26'],
+      history: {},
       bestStreak: 0,
       lastDeckId: null,
     })

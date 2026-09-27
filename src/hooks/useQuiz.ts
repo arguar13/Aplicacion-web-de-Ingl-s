@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { playPronunciation, preloadPronunciation } from '@/lib/audio'
 import { type Deck, distractorPool } from '@/lib/decks'
-import { cardLookup, getProgress, recordAnswer, recordStreak } from '@/lib/progress'
+import { cardLookup, getProgress, recordAnswer, recordStreak, todayStats } from '@/lib/progress'
 import { buildOptions } from '@/lib/quiz'
 import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
 import { getSettings } from '@/lib/settings'
@@ -33,8 +33,14 @@ interface State {
 }
 
 function nextRound(deck: Deck, direction: Direction, session: Session): Round {
-  const lookup = cardLookup(getProgress(), direction)
-  const pick = pickNext(deck.words, lookup, session, Date.now(), { newOrder: deck.newOrder })
+  const progress = getProgress()
+  const now = Date.now()
+  const { newPerDay } = getSettings()
+  const allowNew = newPerDay === 0 || todayStats(progress, now).fresh < newPerDay
+  const pick = pickNext(deck.words, cardLookup(progress, direction), session, now, {
+    newOrder: deck.newOrder,
+    allowNew,
+  })
   return { ...pick, options: buildOptions(pick.word, distractorPool(deck, pick.word)) }
 }
 

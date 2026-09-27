@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { resetProgress } from '@/lib/progress'
-import { type DetailsPause, type ThemePreference, updateSettings, useSettings } from '@/lib/settings'
+import {
+  DAILY_GOALS,
+  type DetailsPause,
+  NEW_PER_DAY,
+  parseSettings,
+  type ThemePreference,
+  updateSettings,
+  useSettings,
+} from '@/lib/settings'
 import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
 import { BackupSection, ProtectionRow } from './BackupSection'
 import { Button } from './ui/Button'
@@ -12,6 +20,12 @@ const DETAILS_PAUSES: Array<{ value: DetailsPause; label: string }> = [
   { value: 'always', label: 'Siempre' },
   { value: 'never', label: 'Nunca' },
 ]
+
+const GOALS = DAILY_GOALS.map((goal) => ({ value: String(goal), label: String(goal) }))
+const NEW_LIMITS = NEW_PER_DAY.map((limit) => ({
+  value: String(limit),
+  label: limit === 0 ? 'Sin límite' : String(limit),
+}))
 
 const THEMES: Array<{ value: ThemePreference; label: string }> = [
   { value: 'system', label: 'Automático' },
@@ -45,6 +59,32 @@ function SettingsContent() {
           onChange={(autoplay) => updateSettings({ autoplay })}
         />
       </SettingRow>
+
+      <div className="py-4">
+        <p className="text-[15px] font-medium">Meta diaria</p>
+        <p className="mt-0.5 text-[13px] leading-snug text-muted">Palabras que quieres responder cada día.</p>
+        <Segmented
+          label="Meta diaria"
+          value={String(settings.dailyGoal)}
+          options={GOALS}
+          onChange={(value) => updateSettings({ dailyGoal: parseSettings({ dailyGoal: Number(value) }).dailyGoal })}
+          className="mt-3 flex w-full"
+        />
+      </div>
+
+      <div className="py-4">
+        <p className="text-[15px] font-medium">Palabras nuevas por día</p>
+        <p className="mt-0.5 text-[13px] leading-snug text-muted">
+          Al llegar al límite, la práctica sigue con lo que ya estás aprendiendo.
+        </p>
+        <Segmented
+          label="Palabras nuevas por día"
+          value={String(settings.newPerDay)}
+          options={NEW_LIMITS}
+          onChange={(value) => updateSettings({ newPerDay: parseSettings({ newPerDay: Number(value) }).newPerDay })}
+          className="mt-3 flex w-full"
+        />
+      </div>
 
       <div className="py-4">
         <p className="text-[15px] font-medium">Detenerse a ver el ejemplo</p>
