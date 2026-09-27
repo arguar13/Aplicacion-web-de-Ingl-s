@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest'
-import { backupFileName, describeProgress, parseBackup, serializeBackup } from './backup'
-import { EMPTY_PROGRESS, mergeProgress, type ProgressData } from './progress'
-import type { StudyEvent } from './events'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { evaluateAchievements, getUnlocks, mergeUnlocks, recordUnlocks, resetAchievements } from './achievements'
+import { type Backup, backupFileName, describeProgress, parseBackup, restoreBackup, serializeBackup } from './backup'
+import { getEvents, replaceEvents, type StudyEvent } from './events'
+import { EMPTY_PROGRESS, getProgress, mergeProgress, type ProgressData, replaceProgress } from './progress'
 import { fromLeitner } from './scheduler'
-import { parseSettings } from './settings'
+import { getSettings, parseSettings, replaceSettings } from './settings'
 
 const NOW = new Date(2026, 8, 27, 10).getTime()
 /** Tarjeta equivalente a una caja Leitner (misma semántica que en la versión 1). */
@@ -22,14 +23,34 @@ const PROGRESS: ProgressData = {
 }
 const SETTINGS = { ...parseSettings({}), theme: 'dark' as const }
 const EVENTS: StudyEvent[] = [{ t: NOW - 1000, id: 'the', track: 'en-es', r: 'clean', ms: 1200 }]
+/** Los logros que da PROGRESS, conseguidos hace un día. */
+const UNLOCKS = Object.fromEntries(
+  evaluateAchievements({ progress: PROGRESS, dailyGoal: SETTINGS.dailyGoal, now: NOW }, {})
+    .filter((status) => status.unlocked)
+    .map((status) => [status.achievement.id, NOW - 86_400_000]),
+)
+const BACKUP: Backup = {
+  exportedAt: NOW,
+  progress: PROGRESS,
+  settings: SETTINGS,
+  events: EVENTS,
+  achievements: UNLOCKS,
+}
 
 describe('copias de seguridad', () => {
-  it('exportar e importar devuelve exactamente el mismo progreso y ajustes', () => {
-    const parsed = parseBackup(serializeBackup(PROGRESS, SETTINGS, EVENTS, NOW))
-    expect(parsed).toEqual({
-      ok: true,
-      backup: { exportedAt: NOW, progress: PROGRESS, settings: SETTINGS, events: EVENTS },
-    })
+  it('exportar e importar devuelve exactamente el mismo progreso, ajustes, historial y logros', () => {
+    expect(Object.keys(UNLOCKS).length).toBeGreaterThan(0)
+    expect(parseBackup(serializeBackup(BACKUP, NOW))).toEqual({ ok: true, backup: BACKUP })
+  })
+
+  it('una copia anterior a los logros se lee sin ellos, y los logros dañados se descartan', () => {
+    const old = serializeBackup({ ...BACKUP, achievements: null }, NOW)
+    expect(old).not.toContain('"achievements"')
+    const parsed = parseBackup(old)
+    expect(parsed.ok && parsed.backup.achievements).toBeNull()
+
+    const damaged = parseBackup(old.replace(/\}\s*$/, ',"achievements":{"bueno":5,"malo":"x"}}'))
+    expect(damaged.ok && damaged.backup.achievements).toEqual({ bueno: 5 })
   })
 
   it('nombra el archivo con la fecha local', () => {
@@ -121,5 +142,40 @@ describe('copias de versiones anteriores', () => {
     })
     const parsed = parseBackup(text)
     expect(parsed.ok && parsed.backup.progress.cards['en-es:the']).toEqual(fromLeitner(4, NOW, 5, 0))
+  })
+})
+
+/** Los logros que el vigilante anunciaría ahora mismo. */
+const pendingAnnouncements = () =>
+  recordUnlocks({ progress: getProgress(), dailyGoal: getSettings().dailyGoal, now: NOW })
+
+describe('restaurar una copia', () => {
+  beforeEach(() => {
+    replaceProgress(EMPTY_PROGRESS)
+    replaceEvents([])
+    replaceSettings(parseSettings({}))
+    resetAchievements()
+  })
+
+  it('reemplazar deja el dispositivo idéntico a la copia, con los logros en su fecha y sin anunciarlos', () => {
+    restoreBackup(BACKUP, 'replace')
+    expect(getProgress()).toEqual(PROGRESS)
+    expect(getEvents()).toEqual(EVENTS)
+    expect(getSettings()).toEqual(SETTINGS)
+    expect(pendingAnnouncements()).toEqual([])
+    expect(getUnlocks()).toEqual(UNLOCKS)
+  })
+
+  it('una copia sin logros los anota en silencio en vez de celebrarlos otra vez', () => {
+    restoreBackup({ ...BACKUP, achievements: null }, 'replace')
+    expect(pendingAnnouncements()).toEqual([])
+    expect(Object.keys(getUnlocks()).toSorted()).toEqual(Object.keys(UNLOCKS).toSorted())
+  })
+
+  it('combinar conserva la fecha más antigua de cada logro', () => {
+    expect(mergeUnlocks({ a: 5, b: 1 }, { a: 2, c: 9 })).toEqual({ a: 2, b: 1, c: 9 })
+    restoreBackup(BACKUP, 'merge')
+    expect(getUnlocks()).toEqual(UNLOCKS)
+    expect(pendingAnnouncements()).toEqual([])
   })
 })

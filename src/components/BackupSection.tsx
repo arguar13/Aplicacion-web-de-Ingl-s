@@ -2,23 +2,21 @@ import { type ChangeEvent, useId, useRef, useState } from 'react'
 import {
   type Backup,
   backupFileName,
+  currentBackup,
   describeProgress,
-  MAX_BACKUP_BYTES,
-  parseBackup,
-  serializeBackup,
+  readBackupFile,
+  type RestoreMode,
+  restoreBackup,
 } from '@/lib/backup'
 import { saveTextFile } from '@/lib/download'
-import { getEvents, mergeEvents, replaceEvents } from '@/lib/events'
 import { formatLongDate, plural, relativeDay } from '@/lib/format'
-import { getProgress, mergeProgress, replaceProgress } from '@/lib/progress'
 import { markBackupSaved, requestProtection, useProtection, useSafekeeping } from '@/lib/safekeeping'
-import { getSettings, replaceSettings } from '@/lib/settings'
 import { SettingRow } from './AppSettings'
 import { Button } from './ui/Button'
 
 export function saveBackup() {
   const now = Date.now()
-  saveTextFile(backupFileName(now), serializeBackup(getProgress(), getSettings(), getEvents(), now))
+  saveTextFile(backupFileName(now), currentBackup(now))
   markBackupSaved(now)
 }
 
@@ -40,23 +38,12 @@ export function BackupSection() {
     // Vaciar el campo permite volver a elegir el mismo archivo.
     event.target.value = ''
     if (!file) return
-    if (file.size > MAX_BACKUP_BYTES) {
-      setRestore({ step: 'error', message: 'Ese archivo es demasiado grande para ser una copia de Tecla.' })
-      return
-    }
-    const parsed = parseBackup(await file.text())
+    const parsed = await readBackupFile(file)
     setRestore(parsed.ok ? { step: 'preview', backup: parsed.backup } : { step: 'error', message: parsed.error })
   }
 
-  function apply(backup: Backup, mode: 'merge' | 'replace') {
-    if (mode === 'merge') {
-      replaceProgress(mergeProgress(getProgress(), backup.progress))
-      replaceEvents(mergeEvents(getEvents(), backup.events))
-    } else {
-      replaceProgress(backup.progress)
-      replaceSettings(backup.settings)
-      replaceEvents(backup.events)
-    }
+  function apply(backup: Backup, mode: RestoreMode) {
+    restoreBackup(backup, mode)
     setRestore({
       step: 'done',
       message:
@@ -118,21 +105,12 @@ function RestorePreview({
   onCancel,
 }: {
   backup: Backup
-  onApply: (mode: 'merge' | 'replace') => void
+  onApply: (mode: RestoreMode) => void
   onCancel: () => void
 }) {
-  const overview = describeProgress(backup.progress)
-  const facts = [
-    `${plural(overview.words, 'palabra')} ${overview.words === 1 ? 'practicada' : 'practicadas'}`,
-    plural(overview.mastered, 'dominada'),
-    `${plural(overview.days, 'día')} de estudio`,
-  ]
   return (
     <div className="mt-3 animate-rise rounded-2xl border border-line bg-bg p-4">
-      <p className="text-sm font-semibold">
-        {backup.exportedAt ? `Copia del ${formatLongDate(backup.exportedAt)}` : 'Copia de Tecla'}
-      </p>
-      <p className="mt-1 text-[13px] text-muted">{facts.join(' · ')}</p>
+      <BackupSummary backup={backup} />
       <p className="mt-3 text-[13px] leading-snug text-muted">
         <strong className="font-semibold text-ink">Combinar</strong> conserva lo más avanzado de cada palabra.{' '}
         <strong className="font-semibold text-ink">Reemplazar</strong> deja solo lo que hay en la copia.
@@ -149,6 +127,24 @@ function RestorePreview({
         </Button>
       </div>
     </div>
+  )
+}
+
+/** Fecha de la copia y lo que contiene, para decidir antes de restaurarla. */
+export function BackupSummary({ backup }: { backup: Backup }) {
+  const overview = describeProgress(backup.progress)
+  const facts = [
+    `${plural(overview.words, 'palabra')} ${overview.words === 1 ? 'practicada' : 'practicadas'}`,
+    plural(overview.mastered, 'dominada'),
+    `${plural(overview.days, 'día')} de estudio`,
+  ]
+  return (
+    <>
+      <p className="text-sm font-semibold">
+        {backup.exportedAt ? `Copia del ${formatLongDate(backup.exportedAt)}` : 'Copia de Tecla'}
+      </p>
+      <p className="mt-1 text-[13px] text-balance text-muted">{facts.join(' · ')}</p>
+    </>
   )
 }
 

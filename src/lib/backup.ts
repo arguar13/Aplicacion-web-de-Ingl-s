@@ -2,10 +2,12 @@
  * Copias de seguridad del progreso en un archivo JSON: para no perderlo (Safari borra los datos de
  * las webs no instaladas tras 7 días sin visitarlas) y para pasarlo a otro dispositivo.
  */
-import { parseEvents, type StudyEvent } from './events'
-import { dayKey, PROGRESS_SCHEMA, type ProgressData } from './progress'
+import { getUnlocks, mergeUnlocks, parseUnlocks, replaceUnlocks, type Unlocks } from './achievements'
+import { getEvents, mergeEvents, parseEvents, replaceEvents, type StudyEvent } from './events'
+import { finishOnboarding } from './onboarding'
+import { dayKey, getProgress, mergeProgress, PROGRESS_SCHEMA, type ProgressData, replaceProgress } from './progress'
 import { isMastered } from './scheduler'
-import { SETTINGS_SCHEMA, type Settings } from './settings'
+import { getSettings, replaceSettings, SETTINGS_SCHEMA, type Settings } from './settings'
 import { readVersioned } from './store'
 import { isRecord } from './validate'
 
@@ -20,14 +22,14 @@ export interface Backup {
   settings: Settings
   /** Historial de respuestas (desde la Fase 10; las copias anteriores no lo traen). */
   events: StudyEvent[]
+  /** Cuándo se consiguió cada logro (desde la Fase 12; `null` en las copias anteriores). */
+  achievements: Unlocks | null
 }
 
 export type ParsedBackup = { ok: true; backup: Backup } | { ok: false; error: string }
 
 export function serializeBackup(
-  progress: ProgressData,
-  settings: Settings,
-  events: readonly StudyEvent[],
+  { progress, settings, events, achievements }: Omit<Backup, 'exportedAt'>,
   now = Date.now(),
 ): string {
   return JSON.stringify(
@@ -38,11 +40,20 @@ export function serializeBackup(
       progress: { version: PROGRESS_SCHEMA.version, ...progress },
       settings: { version: SETTINGS_SCHEMA.version, ...settings },
       events,
+      // Campo añadido sin cambiar de versión: las versiones anteriores de la app lo ignoran.
+      ...(achievements ? { achievements } : {}),
     },
     null,
     1,
   )
 }
+
+/** Copia de lo que hay ahora en este dispositivo. */
+export const currentBackup = (now = Date.now()): string =>
+  serializeBackup(
+    { progress: getProgress(), settings: getSettings(), events: getEvents(), achievements: getUnlocks() },
+    now,
+  )
 
 export const backupFileName = (now = Date.now()) => `tecla-copia-${dayKey(now)}.json`
 
@@ -71,8 +82,39 @@ export function parseBackup(text: string): ParsedBackup {
       progress: progress.value,
       settings: settings.status === 'ok' ? settings.value : SETTINGS_SCHEMA.parse({}),
       events: parseEvents(data.events),
+      achievements: 'achievements' in data ? parseUnlocks(data.achievements) : null,
     },
   }
+}
+
+/** Lee el archivo que eligió el usuario (descarta de entrada lo que no puede ser una copia). */
+export async function readBackupFile(file: Blob): Promise<ParsedBackup> {
+  if (file.size > MAX_BACKUP_BYTES) {
+    return { ok: false, error: 'Ese archivo es demasiado grande para ser una copia de Tecla.' }
+  }
+  return parseBackup(await file.text())
+}
+
+export type RestoreMode = 'merge' | 'replace'
+
+/**
+ * Aplica una copia. **Combinar** conserva lo más avanzado de cada lado; **reemplazar** deja solo la
+ * copia, ajustes incluidos. Los logros van antes que el progreso: así el vigilante de logros ya los
+ * encuentra anotados con su fecha y solo anuncia lo que de verdad es nuevo.
+ */
+export function restoreBackup(backup: Backup, mode: RestoreMode) {
+  if (mode === 'merge') {
+    if (backup.achievements) replaceUnlocks(mergeUnlocks(getUnlocks(), backup.achievements))
+    replaceProgress(mergeProgress(getProgress(), backup.progress))
+    replaceEvents(mergeEvents(getEvents(), backup.events))
+  } else {
+    replaceUnlocks(backup.achievements)
+    replaceSettings(backup.settings)
+    replaceProgress(backup.progress)
+    replaceEvents(backup.events)
+  }
+  // Quien restaura una copia ya conoce Tecla: la bienvenida no vuelve a aparecer.
+  finishOnboarding()
 }
 
 export interface ProgressOverview {

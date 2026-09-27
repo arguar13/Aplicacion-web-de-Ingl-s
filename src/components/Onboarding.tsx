@@ -1,18 +1,20 @@
-import { type ReactNode, useId, useState } from 'react'
+import { type ChangeEvent, type ReactNode, useId, useRef, useState } from 'react'
 import { useKeyDown } from '@/hooks/useKeyDown'
+import { type Backup, readBackupFile, restoreBackup } from '@/lib/backup'
 import { type Deck, LEVELS } from '@/lib/decks'
 import { plural } from '@/lib/format'
 import { finishOnboarding } from '@/lib/onboarding'
 import { answerPlacement, placementProgress, type PlacementState, startPlacement } from '@/lib/placement'
 import { markKnown } from '@/lib/progress'
 import { DAILY_GOALS, type DailyGoal, updateSettings, useSettings } from '@/lib/settings'
+import { BackupSummary } from './BackupSection'
 import { LogoMark } from './icons'
 import { Keypad } from './Keypad'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Surface } from './ui/Surface'
 
-type Step = 'welcome' | 'goal' | 'level' | 'test'
+type Step = 'welcome' | 'goal' | 'level' | 'test' | 'restore'
 
 const GOAL_INFO: Record<DailyGoal, { name: string; time: string }> = {
   10: { name: 'Tranquilo', time: 'unos 3 min' },
@@ -28,6 +30,7 @@ const GOAL_INFO: Record<DailyGoal, { name: string; time: string }> = {
 export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
   const [step, setStep] = useState<Step>('welcome')
   const [placement, setPlacement] = useState<PlacementState | null>(null)
+  const [backup, setBackup] = useState<Backup | null>(null)
   const { dailyGoal } = useSettings()
   const goalName = useId()
 
@@ -51,7 +54,9 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-10 sm:px-6">
       <div className="w-full max-w-lg">
-        {step !== 'test' && <StepDots current={step === 'welcome' ? 0 : step === 'goal' ? 1 : 2} />}
+        {(step === 'welcome' || step === 'goal' || step === 'level') && (
+          <StepDots current={step === 'welcome' ? 0 : step === 'goal' ? 1 : 2} />
+        )}
 
         {step === 'welcome' && (
           <Panel>
@@ -69,6 +74,33 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
               </Button>
               <Button variant="primary" size="lg" onClick={() => setStep('goal')}>
                 Empezar
+              </Button>
+            </Actions>
+            <RestoreLink
+              onBackup={(parsed) => {
+                setBackup(parsed)
+                setStep('restore')
+              }}
+            />
+          </Panel>
+        )}
+
+        {step === 'restore' && backup && (
+          <Panel>
+            <p className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Tu copia</p>
+            <h1 className="mt-3 font-display text-4xl leading-tight">Sigue donde lo dejaste</h1>
+            <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-line bg-bg px-5 py-4">
+              <BackupSummary backup={backup} />
+            </div>
+            <p className="mx-auto mt-4 max-w-sm text-[13px] leading-snug text-muted">
+              Se restauran tu progreso, tus logros y tus ajustes en este dispositivo.
+            </p>
+            <Actions>
+              <Button variant="ghost" size="lg" onClick={() => setStep('welcome')}>
+                Volver
+              </Button>
+              <Button variant="primary" size="lg" onClick={() => restoreBackup(backup, 'replace')}>
+                Restaurar
               </Button>
             </Actions>
           </Panel>
@@ -216,6 +248,48 @@ function PlacementTest({
         No la sé
         <Kbd className="hidden h-5 min-w-5 pointer-fine:inline-flex">0</Kbd>
       </Button>
+    </div>
+  )
+}
+
+/** Para quien ya usa Tecla en otro dispositivo: elegir su copia sin pasar por la bienvenida. */
+function RestoreLink({ onBackup }: { onBackup: (backup: Backup) => void }) {
+  const input = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  async function onFile(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    const parsed = await readBackupFile(file)
+    if (parsed.ok) onBackup(parsed.backup)
+    else setError(parsed.error)
+  }
+
+  return (
+    <div className="mt-6 border-t border-line pt-5 text-sm text-muted">
+      ¿Ya usas Tecla en otro dispositivo?{' '}
+      <button
+        type="button"
+        onClick={() => input.current?.click()}
+        className="cursor-pointer font-semibold text-accent underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Restaura tu copia
+      </button>
+      <input
+        ref={input}
+        type="file"
+        accept="application/json,.json"
+        onChange={(event) => void onFile(event)}
+        className="sr-only"
+        tabIndex={-1}
+        aria-label="Archivo de copia de Tecla"
+      />
+      {error && (
+        <p role="alert" className="mt-3 font-medium text-bad">
+          {error}
+        </p>
+      )}
     </div>
   )
 }

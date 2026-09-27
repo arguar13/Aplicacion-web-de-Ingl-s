@@ -153,23 +153,28 @@ export function evaluateAchievements(input: AchievementInput, unlockedAt: Record
 
 // --- Registro de desbloqueos -----------------------------------------------------------------------
 
+/** id → momento del desbloqueo. */
+export type Unlocks = Record<string, number>
+
 interface UnlockLog {
-  /** id → momento del desbloqueo. */
-  unlocked: Record<string, number>
+  unlocked: Unlocks
   /** Ya se hizo la primera evaluación (para no anunciar de golpe lo que se tenía de antes). */
   initialized: boolean
+}
+
+/** Valida un registro de desbloqueos: descarta lo que no sea un momento válido. */
+export function parseUnlocks(raw: unknown): Unlocks {
+  const unlocked: Unlocks = {}
+  if (isRecord(raw)) {
+    for (const [id, at] of Object.entries(raw)) if (isFiniteNumber(at)) unlocked[id] = at
+  }
+  return unlocked
 }
 
 const SCHEMA: VersionedSchema<UnlockLog> = {
   version: 1,
   migrations: {},
-  parse: (raw) => {
-    const unlocked: Record<string, number> = {}
-    if (isRecord(raw.unlocked)) {
-      for (const [id, at] of Object.entries(raw.unlocked)) if (isFiniteNumber(at)) unlocked[id] = at
-    }
-    return { unlocked, initialized: raw.initialized === true }
-  },
+  parse: (raw) => ({ unlocked: parseUnlocks(raw.unlocked), initialized: raw.initialized === true }),
 }
 
 const store = createPersistedStore<UnlockLog>({
@@ -196,6 +201,23 @@ export function recordUnlocks(input: AchievementInput): Achievement[] {
 
 export function resetAchievements() {
   store.set({ unlocked: {}, initialized: true })
+}
+
+export const getUnlocks = (): Unlocks => store.get().unlocked
+
+/** Dos registros en uno: de cada logro, la fecha más antigua (cuando se consiguió de verdad). */
+export function mergeUnlocks(current: Unlocks, incoming: Unlocks): Unlocks {
+  const merged = { ...current }
+  for (const [id, at] of Object.entries(incoming)) merged[id] = Math.min(merged[id] ?? at, at)
+  return merged
+}
+
+/**
+ * Reemplaza el registro (al restaurar una copia). Sin registro (copias anteriores a los logros), los
+ * que ya se tengan se vuelven a anotar en silencio, como al actualizar la app.
+ */
+export function replaceUnlocks(unlocked: Unlocks | null) {
+  store.set(unlocked ? { unlocked, initialized: true } : { unlocked: {}, initialized: false })
 }
 
 // --- Anuncios -------------------------------------------------------------------------------------
