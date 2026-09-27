@@ -226,7 +226,8 @@ ningún cambio visual no intencionado.
 
 **Objetivo:** que cada palabra enseñe más que una traducción.
 
-- Amplía el modelo de datos: **categoría gramatical** (sustantivo, verbo, adjetivo…), **IPA**
+- Amplía el modelo de datos: **categoría gramatical** (✅ hecho: campo `pos` y
+  `scripts/tag_pos.py`), **IPA**
   (transcripción fonética), **oración de ejemplo en inglés con su traducción** y, cuando aplique,
   formas irregulares (plural, pasado, participio).
 - Script reproducible en `scripts/` para generar o enriquecer los datos, con fuentes de licencia
@@ -237,17 +238,17 @@ ningún cambio visual no intencionado.
 - **Separa los datos**: lo que necesita la ronda (`id`, `en`, `es`, categoría) en el bundle; los
   detalles (IPA, ejemplos) en archivos por nivel que se cargan de forma diferida y quedan cacheados
   para uso offline. Mide el tamaño del bundle antes y después.
-- **Distractores inteligentes** (diagnóstico 5): mismas categorías gramaticales y dificultad
-  similar, manteniendo la regla actual de no compartir sentidos. Tests que lo garanticen.
+- ✅ **Distractores inteligentes** (diagnóstico 5): hecho, misma categoría gramatical con
+  respaldo por familia. Pendiente: afinar por dificultad similar en el mazo "Todas las palabras".
 - **Tarjeta de detalle tras responder:** al acertar o al fallar, una revelación elegante con IPA,
   categoría y ejemplo (con la palabra resaltada), sin frenar el ritmo del usuario experto: el
   avance automático sigue existiendo y la tarjeta puede expandirse con un toque o una tecla.
 - **Pronunciación lenta**: botón o pulsación larga para oír la palabra más despacio
   (`playbackRate` en Web Audio, sin archivos nuevos).
-- **Caché de audio versionada** (diagnóstico 9): nombres con hash de contenido o manifiesto de
-  versión, para que un audio regenerado llegue a todos sin esperar 30 días.
+- ✅ **Caché de audio versionada** (diagnóstico 9): hecho (`vite/audio-versions.ts`). Los audios de
+  ejemplos que se añadan deben usar el mismo mecanismo.
 
-**Criterios de aceptación:** 100 % de las palabras con categoría e IPA; ejemplos revisados en
+**Criterios de aceptación:** 100 % de las palabras con IPA; ejemplos revisados en
 todos los niveles; tests de datos en verde; el bundle inicial no crece más de lo justificado.
 
 ### Fase 8 · Motor de aprendizaje de nueva generación
@@ -336,14 +337,10 @@ juego más de lo necesario.
 
 **Objetivo:** que nadie pierda nunca su progreso (diagnóstico 4).
 
-- **Exportar e importar el progreso** como archivo JSON con versión, validación estricta al
-  importar, vista previa de lo que se va a importar y opción de fusionar o reemplazar.
-- `navigator.storage.persist()` en el momento oportuno (p. ej. tras la primera sesión o al
-  instalar), explicando al usuario por qué.
-- Aviso elegante y no intrusivo, cuando corresponda, recomendando instalar la app o exportar una
-  copia (especialmente en Safari de iOS).
-- Corrige el diagnóstico 10: la descarga de audio offline debe estar disponible desde la primera
-  visita en cuanto el service worker esté activo, sin recargar.
+- ✅ Hecho en la Fase 6: exportar e importar el progreso (con versión, validación, vista previa,
+  combinar o reemplazar), `navigator.storage.persist()`, aviso en Safari sin instalar y audio
+  offline desde la primera visita (diagnóstico 10). Queda por revisar si los datos nuevos de las
+  Fases 8–11 (historial, logros, metas) entran en la copia: deben entrar, con su migración.
 - **Sincronización entre dispositivos: solo como propuesta.** Presenta al dueño opciones con costos
   y compromisos (p. ej. PHP + MySQL en el mismo Hostinger, un servicio gestionado, o sincronización
   por archivo/código QR sin servidor) y **no implementes ninguna sin su aprobación**.
@@ -386,3 +383,30 @@ idéntico (test e2e); importar un archivo inválido muestra un error claro y no 
       `https://github.com/arguar13/Aplicacion-web-de-Ingl-s.git`**, con `main` al día con
       `origin/main`.
 - [ ] Resumen final entregado con decisiones, riesgos y propuesta para la siguiente fase.
+
+---
+
+## 7. Registro de avance
+
+Actualiza esta sección al cerrar cada fase.
+
+### Fase 6 · cerrada el 27-09-2026
+
+- Diagnóstico 1 (atrás), 2 (calidad), 3 (persistencia), 4 (riesgo de perder el progreso),
+  5 (distractores), 8 (cálculos repetidos), 9 (caché de audio) y 10 (audio en primera visita):
+  **resueltos**. Quedan 6 (datos pobres, Fase 7), 7 (planificador, Fase 8) y 11 (sesiones, Fase 8).
+- Decisiones que cambian lo escrito arriba:
+  - **oxlint en lugar de ESLint**: typescript-eslint no soporta TypeScript 7. oxlint incluye las
+    reglas de React Hooks, jsx-a11y, import y Vitest, y el análisis con tipos.
+  - **Sin View Transitions**: WebKit con emulación de iPhone se colgaba al salir de la partida
+    (5 de cada 8 veces). Cada pantalla entra con una animación CSS (`animate-screen`).
+  - **Rutas en el hash** (`#/nivel/3`), no History API: el build usa rutas relativas para poder
+    desplegarse en una subcarpeta.
+- Reglas de trabajo nuevas: un **hook de pre-commit** ejecuta `npm run check` (no se puede
+  commitear con tipos, lint, formato o tests en rojo; nunca uses `--no-verify`). Los tests e2e
+  (`npm run test:e2e`) corren contra el build en Chromium móvil, Chromium escritorio y WebKit.
+  Contraste: los tokens del tema claro se ajustaron a WCAG AA; axe lo comprueba en los e2e.
+- Herramientas locales que no deben entrar al repo: nómbralas `*.local.*` (están en `.gitignore`).
+- **Bloqueo externo:** la CI de GitHub Actions termina en `startup_failure` sin crear jobs,
+  aunque el workflow es válido. Parece un problema de la cuenta (facturación o minutos de Actions en
+  un repo privado). Lo tiene que revisar el dueño en GitHub → Settings → Billing / Actions.
