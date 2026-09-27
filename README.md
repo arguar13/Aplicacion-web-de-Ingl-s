@@ -13,10 +13,14 @@ o al salir de una partida, un resumen muestra palabras, precisión, nuevas, mejo
 falladas. En el inicio, el **repaso del día** reúne lo que toca repasar de todos los niveles (con la
 previsión de la semana) y **Mis difíciles** junta las palabras que más se olvidan.
 
-Dos sentidos, cada uno con su propio progreso: inglés → español (la pronunciación suena al aparecer) y
-español → inglés (suena al acertar, para no delatar la respuesta). Las otras tres opciones de cada
-ronda son de la misma categoría gramatical que la respuesta, para que no se puedan descartar sin
-saber la palabra.
+Cinco formas de practicar, elegidas en el inicio: **traducir** (inglés → español; la pronunciación
+suena al aparecer), **inverso** (español → inglés; suena al acertar para no delatar la respuesta),
+**escuchar** (solo el audio), **escribir** (la palabra inglesa con el teclado; un error de tecleo es
+"¡casi!" con la corrección letra por letra) y **completar** (la frase de ejemplo con un hueco).
+Escuchar y escribir tienen progreso propio; completar refuerza el de traducir. Las otras opciones de
+cada ronda son de la misma categoría gramatical que la respuesta, para que no se puedan descartar sin
+saber la palabra. **Relámpago** es un juego aparte: 60 segundos con palabras ya vistas y récord
+personal.
 
 Tras responder aparece la pronunciación en IPA, y la partida puede detenerse para mostrar el detalle
 de la palabra: categoría, formas irregulares y una frase de ejemplo con su traducción. Se detiene sola
@@ -88,6 +92,8 @@ src/lib/details.ts        Detalles de cada palabra: carga diferida, validación 
 src/lib/scheduler.ts      Repaso espaciado (FSRS): notas, calendario, migración desde Leitner y siguiente palabra
 src/lib/smartDecks.ts     Repaso del día, "Mis difíciles" y previsión de repasos
 src/lib/quiz.ts           Opciones de cada ronda (misma categoría, sin sentidos repetidos)
+src/lib/typing.ts         Respuestas escritas: comparación tolerante y corrección letra por letra
+src/lib/blitz.ts          Relámpago: palabras vistas y baraja sin repetir
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
 src/lib/progress.ts       Progreso (tarjetas por sentido, historial diario, récord) y cómo combinar dos
 src/lib/settings.ts       Ajustes (sentido, pronunciación automática, tema)

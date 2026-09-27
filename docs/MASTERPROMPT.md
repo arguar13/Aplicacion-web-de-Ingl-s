@@ -433,3 +433,16 @@ Actualiza esta sección al cerrar cada fase.
   repaso del día, "Mis difíciles" y previsión de 7 días.
 - Regla aprendida: **los e2e se encadenan al commit** (`npm run check && npx playwright test && git
 commit`); un resumen de Playwright se lee entero, no solo la última línea.
+
+### Fase 9 · cerrada el 27-09-2026
+
+- Modos: traducir, inverso, escuchar, escribir y completar (selector en el inicio) y Relámpago como
+  juego aparte (no cambia el repaso espaciado; cuenta para la meta del día).
+- `Direction` pasó a `Mode` (cómo se practica) y `Track` (habilidad con tarjetas propias:
+  en-es, es-en, listen, type; completar comparte con en-es). El ajuste guardado `direction` se lee
+  como `mode`.
+- Escribir: Damerau-Levenshtein 1 en palabras de 4+ letras = "casi" (nota FSRS "difícil").
+- Los atajos globales ignoran los campos de texto; axe mide con movimiento reducido (evita falsos
+  fallos intermitentes de contraste durante animaciones).
+- Limitación conocida del entorno: el WebKit de Playwright en Windows no tiene audio (el e2e de
+  escuchar se omite ahí; en la CI de Linux corre).
