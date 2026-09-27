@@ -25,9 +25,9 @@ export function Header({ children, action }: { children?: ReactNode; action?: Re
   )
 }
 
-export function Stat({ label, value }: { label: string; value: ReactNode }) {
+export function Stat({ label, value, className }: { label: string; value: ReactNode; className?: string }) {
   return (
-    <div className="text-right">
+    <div className={cn('text-right', className)}>
       <dt className="text-[10px] font-medium tracking-[0.14em] text-muted uppercase">{label}</dt>
       <dd className="text-[15px] font-semibold tabular-nums">{value}</dd>
     </div>

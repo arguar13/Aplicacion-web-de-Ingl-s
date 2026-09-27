@@ -7,6 +7,8 @@ interface SheetProps {
   /** Se llama cuando el panel se cierra por cualquier vía: botón, Esc o tocar fuera. */
   onClose: () => void
   title: string
+  /** Idioma del título si no es el de la página (la ficha de una palabra inglesa). */
+  titleLang?: string
   children: ReactNode
 }
 
@@ -14,7 +16,7 @@ interface SheetProps {
  * Panel modal: hoja que sube desde abajo en el móvil y ventana centrada en pantallas grandes.
  * Usa <dialog> nativo: foco atrapado, Esc y fondo inerte los pone el navegador.
  */
-export function Sheet({ open, onClose, title, children }: SheetProps) {
+export function Sheet({ open, onClose, title, titleLang, children }: SheetProps) {
   const ref = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const titleId = useId()
@@ -48,7 +50,7 @@ export function Sheet({ open, onClose, title, children }: SheetProps) {
       <div className="px-6 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-7 sm:pb-7">
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-line-strong sm:hidden" aria-hidden />
         <div className="flex items-center justify-between">
-          <h2 ref={heading} id={titleId} tabIndex={-1} className="font-display text-3xl outline-none">
+          <h2 ref={heading} id={titleId} lang={titleLang} tabIndex={-1} className="font-display text-3xl outline-none">
             {title}
           </h2>
           <IconButton label="Cerrar" size="md" hover="bg" onClick={() => ref.current?.close()} className="-mr-2">

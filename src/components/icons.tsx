@@ -202,3 +202,25 @@ export function ChartIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Favorita. `filled` la rellena. */
+export function StarIcon({ filled = false, ...props }: SVGProps<SVGSVGElement> & { filled?: boolean }) {
+  return (
+    <svg {...base} {...props}>
+      <path
+        d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.5Z"
+        fill={filled ? 'currentColor' : 'none'}
+      />
+    </svg>
+  )
+}
+
+/** Diccionario: un libro abierto. */
+export function BookIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5Z" />
+      <path d="M12 6.5v13" />
+    </svg>
+  )
+}

@@ -1,5 +1,17 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { getProgress, parseProgress, recordAnswer, resetProgress, todayStats } from './progress'
+import {
+  cardLookup,
+  getProgress,
+  KNOWN_STABILITY_DAYS,
+  markKnown,
+  parseProgress,
+  recordAnswer,
+  resetProgress,
+  restoreCard,
+  todayStats,
+  toggleFavorite,
+} from './progress'
+import { isMastered } from './scheduler'
 
 const NOW = new Date(2026, 8, 27, 10).getTime()
 
@@ -35,5 +47,24 @@ describe('historial diario', () => {
       },
     })
     expect(parsed.history).toEqual({ '2026-09-26': { answers: 4, clean: 4, fresh: 1, ms: 1000 } })
+  })
+})
+
+describe('favoritas y "ya la sé"', () => {
+  it('marca y desmarca favoritas', () => {
+    toggleFavorite('the')
+    toggleFavorite('water')
+    toggleFavorite('the')
+    expect(getProgress().favorites).toEqual(['water'])
+  })
+
+  it('"ya la sé" la deja dominada con repaso en un mes, y se puede deshacer', () => {
+    const previous = markKnown('en-es', 'the', NOW)
+    expect(previous).toBeUndefined()
+    const card = cardLookup(getProgress(), 'en-es')('the')
+    expect(card && isMastered(card)).toBe(true)
+    expect(card?.due).toBe(NOW + KNOWN_STABILITY_DAYS * 86_400_000)
+    restoreCard('en-es', 'the', previous)
+    expect(cardLookup(getProgress(), 'en-es')('the')).toBeUndefined()
   })
 })

@@ -32,6 +32,8 @@ export interface ProgressData {
   bestStreak: number
   /** Récord de Relámpago (palabras acertadas en 60 s). */
   blitzBest: number
+  /** Palabras marcadas como favoritas (ids). Desde la Fase 10. */
+  favorites: string[]
   lastDeckId: string | null
 }
 
@@ -55,6 +57,7 @@ export const EMPTY_PROGRESS: ProgressData = {
   history: {},
   bestStreak: 0,
   blitzBest: 0,
+  favorites: [],
   lastDeckId: null,
 }
 const EMPTY = EMPTY_PROGRESS
@@ -93,6 +96,10 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
     bestStreak: isInteger(raw.bestStreak, 0) ? raw.bestStreak : 0,
     // Campo añadido en la Fase 9.
     blitzBest: isInteger(raw.blitzBest, 0) ? raw.blitzBest : 0,
+    // Campo añadido en la Fase 10.
+    favorites: Array.isArray(raw.favorites)
+      ? [...new Set(raw.favorites.filter((id): id is string => typeof id === 'string'))]
+      : [],
     lastDeckId: typeof raw.lastDeckId === 'string' ? raw.lastDeckId : null,
   }
 }
@@ -233,6 +240,48 @@ export function recordPractice(practice: { answers: number; clean: number; ms: n
   store.set({ ...data, days, history: trimHistory(history) })
 }
 
+/** Marca o desmarca una palabra como favorita. */
+export function toggleFavorite(id: string) {
+  const data = store.get()
+  const favorites = data.favorites.includes(id) ? data.favorites.filter((f) => f !== id) : [...data.favorites, id]
+  store.set({ ...data, favorites })
+}
+
+/** Días que se aleja el repaso de una palabra marcada como "ya la sé". */
+export const KNOWN_STABILITY_DAYS = 30
+
+/**
+ * "Ya la sé": la palabra pasa a dominada en esa habilidad, con el próximo repaso en un mes (el repaso
+ * espaciado confirmará si de verdad se sabe). Devuelve el estado anterior para poder deshacerlo.
+ */
+export function markKnown(track: Track, id: string, now = Date.now()): CardState | undefined {
+  const data = store.get()
+  const key = cardKey(track, id)
+  const previous = data.cards[key]
+  const card: CardState = {
+    due: now + KNOWN_STABILITY_DAYS * 24 * 60 * 60 * 1000,
+    stability: KNOWN_STABILITY_DAYS,
+    difficulty: previous?.difficulty ?? 3,
+    phase: 'review',
+    step: 0,
+    reps: (previous?.reps ?? 0) + 1,
+    lapses: previous?.lapses ?? 0,
+    last: now,
+  }
+  store.set({ ...data, cards: { ...data.cards, [key]: card } })
+  return previous
+}
+
+/** Deshace "ya la sé": devuelve la tarjeta a su estado anterior (o a nueva si no existía). */
+export function restoreCard(track: Track, id: string, previous: CardState | undefined) {
+  const data = store.get()
+  const key = cardKey(track, id)
+  const cards = { ...data.cards }
+  if (previous) cards[key] = previous
+  else delete cards[key]
+  store.set({ ...data, cards })
+}
+
 /** Guarda la puntuación de Relámpago si es récord; devuelve si lo fue. */
 export function recordBlitzScore(score: number): boolean {
   const data = store.get()
@@ -292,6 +341,7 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     history: trimHistory(history),
     bestStreak: Math.max(current.bestStreak, incoming.bestStreak),
     blitzBest: Math.max(current.blitzBest, incoming.blitzBest),
+    favorites: [...new Set([...current.favorites, ...incoming.favorites])],
     lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
   }
 }

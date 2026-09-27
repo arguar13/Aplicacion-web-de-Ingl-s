@@ -37,7 +37,7 @@ export function ModePicker({
             key={mode}
             className={cn(
               // Tres por fila en el móvil (la segunda, centrada) y las cinco en una fila desde sm.
-              'group flex basis-[calc((100%-1rem)/3)] cursor-pointer flex-col items-center gap-1 rounded-2xl border border-line bg-surface/70 px-2 pt-3 pb-2.5 text-center sm:flex-1 sm:basis-0',
+              'group relative flex basis-[calc((100%-1rem)/3)] cursor-pointer flex-col items-center gap-1 rounded-2xl border border-line bg-surface/70 px-2 pt-3 pb-2.5 text-center sm:flex-1 sm:basis-0',
               'transition-[background-color,border-color,box-shadow,color] duration-200 hover:border-accent/40',
               'has-checked:border-accent has-checked:bg-raised has-checked:shadow-[0_2px_0_0_color-mix(in_oklab,var(--accent)_40%,var(--line))]',
               'has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent',

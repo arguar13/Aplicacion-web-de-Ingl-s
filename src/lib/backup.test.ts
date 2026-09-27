@@ -15,6 +15,7 @@ const PROGRESS: ProgressData = {
   history: { '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 60_000 } },
   bestStreak: 9,
   blitzBest: 7,
+  favorites: ['the'],
   lastDeckId: 'level-1',
 }
 const SETTINGS = { ...parseSettings({}), theme: 'dark' as const }
@@ -74,6 +75,7 @@ describe('combinar progresos', () => {
       },
       bestStreak: 15,
       blitzBest: 11,
+      favorites: ['the', 'tree'],
       lastDeckId: 'level-3',
     }
     expect(mergeProgress(PROGRESS, incoming)).toEqual({
@@ -90,6 +92,7 @@ describe('combinar progresos', () => {
       },
       bestStreak: 15,
       blitzBest: 11,
+      favorites: ['the', 'tree'],
       lastDeckId: 'level-1',
     })
   })

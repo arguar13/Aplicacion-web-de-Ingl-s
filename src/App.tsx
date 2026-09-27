@@ -1,41 +1,76 @@
 import { useEffect } from 'react'
-import { DeckPicker } from '@/components/DeckPicker'
 import { BlitzScreen } from '@/components/BlitzScreen'
+import { DeckPicker } from '@/components/DeckPicker'
+import { DictionaryScreen } from '@/components/DictionaryScreen'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { StatsScreen } from '@/components/stats/StatsScreen'
-import { SmartDeckScreen } from '@/components/SmartDeckScreen'
 import { Game } from '@/components/Game'
 import { SettingsDialog } from '@/components/SettingsDialog'
+import { SmartDeckScreen } from '@/components/SmartDeckScreen'
+import { StatsScreen } from '@/components/stats/StatsScreen'
 import { UpdateToast } from '@/components/UpdateToast'
+import { WordSheet } from '@/components/WordSheet'
+import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, type Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
-import { formatHash, HOME, titleOf } from '@/lib/routes'
-import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
+import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
 import { useSettings } from '@/lib/settings'
 import type { SmartDeckKind } from '@/lib/smartDecks'
+import type { Mode } from '@/lib/types'
 
+const go = (screen: Screen) => navigate({ screen, panel: null })
 const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
+const openWord = (word: string) => navigate({ ...getRoute(), panel: { word } })
 
-/** El diálogo también se cierra solo (Esc, tocar fuera): solo se navega si la ruta aún lo tiene abierto. */
-function closeSettings() {
+/** Los paneles también se cierran solos (Esc, tocar fuera): solo se navega si la ruta aún tiene uno. */
+function closePanel() {
   const route = getRoute()
   if (route.panel) goBack({ ...route, panel: null })
 }
 
 function openDeck(deck: Deck) {
   setLastDeck(deck.id)
-  navigate({ screen: { name: 'deck', deck }, panel: null })
+  go({ name: 'deck', deck })
 }
 
-const openSmart = (kind: SmartDeckKind) => navigate({ screen: { name: 'smart', kind }, panel: null })
-
-const openBlitz = () => navigate({ screen: { name: 'blitz' }, panel: null })
-const openStats = () => navigate({ screen: { name: 'stats' }, panel: null })
-
+const openSmart = (kind: SmartDeckKind) => go({ name: 'smart', kind })
 const exitToHome = () => goBack(HOME)
 const recoverToHome = () => navigate(HOME, { replace: true })
+
+function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
+  switch (screen.name) {
+    case 'home':
+      return (
+        <DeckPicker
+          onPick={openDeck}
+          onOpenSmart={openSmart}
+          onOpenBlitz={() => go({ name: 'blitz' })}
+          onOpenStats={() => go({ name: 'stats' })}
+          onOpenDictionary={() => go({ name: 'dictionary' })}
+          onOpenSettings={openSettings}
+        />
+      )
+    case 'deck':
+      return (
+        <Game
+          key={`${screen.deck.id}:${mode}`}
+          deck={screen.deck}
+          mode={mode}
+          onExit={exitToHome}
+          onOpenSettings={openSettings}
+        />
+      )
+    case 'smart':
+      return <SmartDeckScreen kind={screen.kind} onExit={exitToHome} onOpenSettings={openSettings} />
+    case 'blitz':
+      return <BlitzScreen onExit={exitToHome} />
+    case 'stats':
+      return <StatsScreen onExit={exitToHome} />
+    case 'dictionary':
+      return <DictionaryScreen onExit={exitToHome} onOpenWord={openWord} />
+  }
+}
 
 export default function App() {
   const route = useRoute()
@@ -52,37 +87,17 @@ export default function App() {
     void pruneStaleAudio(ALL_WORDS.map((word) => word.id))
   }, [])
 
+  const { panel } = route
   return (
     <div className="flex min-h-dvh flex-col">
       <ErrorBoundary resetKey={screenKey} onGoHome={recoverToHome}>
         {/* La clave vuelve a montar el contenedor en cada pantalla y con él su animación de entrada. */}
         <div key={screenKey} className="flex flex-1 animate-screen flex-col">
-          {route.screen.name === 'stats' ? (
-            <StatsScreen onExit={exitToHome} />
-          ) : route.screen.name === 'blitz' ? (
-            <BlitzScreen onExit={exitToHome} />
-          ) : route.screen.name === 'smart' ? (
-            <SmartDeckScreen kind={route.screen.kind} onExit={exitToHome} onOpenSettings={openSettings} />
-          ) : route.screen.name === 'deck' ? (
-            <Game
-              key={`${route.screen.deck.id}:${mode}`}
-              deck={route.screen.deck}
-              mode={mode}
-              onExit={exitToHome}
-              onOpenSettings={openSettings}
-            />
-          ) : (
-            <DeckPicker
-              onPick={openDeck}
-              onOpenSmart={openSmart}
-              onOpenBlitz={openBlitz}
-              onOpenStats={openStats}
-              onOpenSettings={openSettings}
-            />
-          )}
+          <ScreenView screen={route.screen} mode={mode} />
         </div>
       </ErrorBoundary>
-      <SettingsDialog open={route.panel === 'settings'} onClose={closeSettings} />
+      <SettingsDialog open={panel === 'settings'} onClose={closePanel} />
+      <WordSheet id={panel !== null && panel !== 'settings' ? panel.word : null} onClose={closePanel} />
       <UpdateToast />
     </div>
   )

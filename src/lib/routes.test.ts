@@ -20,6 +20,11 @@ describe('rutas', () => {
     expect(parseHash('#/nivel/2?panel=otro').panel).toBeNull()
   })
 
+  it('la ficha de una palabra solo se abre si la palabra existe', () => {
+    expect(parseHash('#/diccionario?palabra=water').panel).toEqual({ word: 'water' })
+    expect(parseHash('#/diccionario?palabra=no-existe').panel).toBeNull()
+  })
+
   it('lo desconocido lleva al inicio', () => {
     for (const hash of ['#/nivel/99', '#/nivel/abc', '#/cualquier-cosa', '#nivel/1'])
       expect(parseHash(hash)).toEqual(HOME)
@@ -35,6 +40,9 @@ describe('rutas', () => {
       { screen: { name: 'smart', kind: 'hard' }, panel: 'settings' },
       { screen: { name: 'blitz' }, panel: null },
       { screen: { name: 'stats' }, panel: 'settings' },
+      { screen: { name: 'dictionary' }, panel: null },
+      { screen: { name: 'dictionary' }, panel: { word: 'water' } },
+      { screen: { name: 'deck', deck: LEVELS[0] }, panel: { word: 'the' } },
     ]
     for (const route of routes) expect(parseHash(formatHash(route))).toEqual(route)
   })

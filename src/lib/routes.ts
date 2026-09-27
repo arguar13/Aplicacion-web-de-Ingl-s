@@ -1,23 +1,29 @@
 /**
- * Rutas de la app, en el hash de la URL: `#/`, `#/nivel/3`, `#/todas`, con `?panel=ajustes` para
- * abrir un panel sobre la pantalla actual.
+ * Rutas de la app, en el hash de la URL: `#/`, `#/nivel/3`, `#/todas`, `#/repaso`… con
+ * `?panel=ajustes` o `?palabra=<id>` para abrir un panel sobre la pantalla actual.
  *
  * Se usa el hash y no la History API porque el build usa rutas relativas (`base: './'`) para poder
  * desplegarse en la raíz o en una subcarpeta de Hostinger: con `/nivel/3` en la ruta, los archivos
  * relativos se buscarían en `/nivel/assets/…`. Con el hash, el servidor siempre sirve index.html, el
  * service worker no necesita reglas extra y los enlaces directos funcionan sin conexión.
  */
-import { ALL_DECK, type Deck, LEVELS } from './decks'
+import { ALL_DECK, ALL_WORDS, type Deck, LEVELS } from './decks'
 import type { SmartDeckKind } from './smartDecks'
 
-const PANELS = ['settings'] as const
-export type Panel = (typeof PANELS)[number]
+/** Panel sobre la pantalla: los ajustes o la ficha de una palabra. */
+export type Panel = 'settings' | { word: string }
+
+/** Pantallas sin parámetros: su ruta y el título de la pestaña. */
+const SIMPLE_SCREENS = {
+  blitz: { path: '/relampago', title: 'Relámpago' },
+  stats: { path: '/estadisticas', title: 'Tu progreso' },
+  dictionary: { path: '/diccionario', title: 'Diccionario' },
+} as const
+type SimpleScreen = keyof typeof SIMPLE_SCREENS
+const SIMPLE_NAMES = Object.keys(SIMPLE_SCREENS).filter((name): name is SimpleScreen => name in SIMPLE_SCREENS)
+
 export type Screen =
-  | { name: 'home' }
-  | { name: 'deck'; deck: Deck }
-  | { name: 'smart'; kind: SmartDeckKind }
-  | { name: 'blitz' }
-  | { name: 'stats' }
+  { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind } | { name: SimpleScreen }
 
 export interface Route {
   screen: Screen
@@ -26,12 +32,12 @@ export interface Route {
 
 export const HOME: Route = { screen: { name: 'home' }, panel: null }
 
-const PANEL_SLUGS: Record<Panel, string> = { settings: 'ajustes' }
-const BLITZ_PATH = '/relampago'
-const STATS_PATH = '/estadisticas'
+const SMART: Record<SmartDeckKind, { path: string; title: string }> = {
+  review: { path: '/repaso', title: 'Repaso del día' },
+  hard: { path: '/dificiles', title: 'Mis difíciles' },
+}
 const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard']
-const SMART_PATHS: Record<SmartDeckKind, string> = { review: '/repaso', hard: '/dificiles' }
-const SMART_TITLES: Record<SmartDeckKind, string> = { review: 'Repaso del día', hard: 'Mis difíciles' }
+const WORD_IDS = new Set(ALL_WORDS.map((word) => word.id))
 
 function deckPath(deck: Deck): string {
   return deck.level === null ? '/todas' : `/nivel/${deck.level}`
@@ -43,47 +49,70 @@ function deckFromPath(path: string): Deck | undefined {
   return match ? LEVELS.find((deck) => deck.level === Number(match[1])) : undefined
 }
 
+function parsePanel(query: string): Panel | null {
+  const params = new URLSearchParams(query)
+  if (params.get('panel') === 'ajustes') return 'settings'
+  const word = params.get('palabra')
+  return word && WORD_IDS.has(word) ? { word } : null
+}
+
+function parseScreen(path: string): Screen | null {
+  if (path === '/') return { name: 'home' }
+  const simple = SIMPLE_NAMES.find((name) => SIMPLE_SCREENS[name].path === path)
+  if (simple) return { name: simple }
+  const smart = SMART_KINDS.find((kind) => SMART[kind].path === path)
+  if (smart) return { name: 'smart', kind: smart }
+  const deck = deckFromPath(path)
+  return deck ? { name: 'deck', deck } : null
+}
+
 /** Convierte el hash de la URL en una ruta. Lo que no se reconoce lleva al inicio. */
 export function parseHash(hash: string): Route {
   const [rawPath = '', query = ''] = hash.replace(/^#/, '').split('?')
   const path = rawPath.replace(/\/+$/, '') || '/'
-  const panelSlug = new URLSearchParams(query).get('panel')
-  const panel = PANELS.find((p) => PANEL_SLUGS[p] === panelSlug) ?? null
+  const screen = parseScreen(path)
+  return screen ? { screen, panel: parsePanel(query) } : HOME
+}
 
-  if (path === '/') return { screen: { name: 'home' }, panel }
-  if (path === BLITZ_PATH) return { screen: { name: 'blitz' }, panel }
-  if (path === STATS_PATH) return { screen: { name: 'stats' }, panel }
-  const smart = SMART_KINDS.find((kind) => SMART_PATHS[kind] === path)
-  if (smart) return { screen: { name: 'smart', kind: smart }, panel }
-  const deck = deckFromPath(path)
-  return deck ? { screen: { name: 'deck', deck }, panel } : HOME
+function screenPath(screen: Screen): string {
+  switch (screen.name) {
+    case 'home':
+      return '/'
+    case 'deck':
+      return deckPath(screen.deck)
+    case 'smart':
+      return SMART[screen.kind].path
+    case 'blitz':
+    case 'stats':
+    case 'dictionary':
+      return SIMPLE_SCREENS[screen.name].path
+  }
+}
+
+function panelQuery(panel: Panel | null): string {
+  if (panel === null) return ''
+  return panel === 'settings' ? '?panel=ajustes' : `?palabra=${panel.word}`
 }
 
 export function formatHash(route: Route): string {
-  const { screen } = route
-  const path =
-    screen.name === 'deck'
-      ? deckPath(screen.deck)
-      : screen.name === 'smart'
-        ? SMART_PATHS[screen.kind]
-        : screen.name === 'blitz'
-          ? BLITZ_PATH
-          : screen.name === 'stats'
-            ? STATS_PATH
-            : '/'
-  return `#${path}${route.panel ? `?panel=${PANEL_SLUGS[route.panel]}` : ''}`
+  return `#${screenPath(route.screen)}${panelQuery(route.panel)}`
 }
 
 /** Título de la pestaña para cada pantalla. */
 export function titleOf(route: Route): string {
-  const base = 'Tecla · Vocabulario en inglés'
-  if (route.screen.name === 'home') return base
-  if (route.screen.name === 'smart') return `${SMART_TITLES[route.screen.kind]} — Tecla`
-  if (route.screen.name === 'blitz') return 'Relámpago — Tecla'
-  if (route.screen.name === 'stats') return 'Tu progreso — Tecla'
-  const { deck } = route.screen
-  return `${deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`} — Tecla`
+  const { screen } = route
+  switch (screen.name) {
+    case 'home':
+      return 'Tecla · Vocabulario en inglés'
+    case 'deck':
+      return `${screen.deck.level === null ? screen.deck.name : `Nivel ${screen.deck.level} · ${screen.deck.name}`} — Tecla`
+    case 'smart':
+      return `${SMART[screen.kind].title} — Tecla`
+    case 'blitz':
+    case 'stats':
+    case 'dictionary':
+      return `${SIMPLE_SCREENS[screen.name].title} — Tecla`
+  }
 }
 
-export const sameScreen = (a: Screen, b: Screen) =>
-  formatHash({ screen: a, panel: null }) === formatHash({ screen: b, panel: null })
+export const sameScreen = (a: Screen, b: Screen) => screenPath(a) === screenPath(b)

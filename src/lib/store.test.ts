@@ -28,6 +28,7 @@ const PHASE_5_MIGRATED = {
   ...PHASE_5_PROGRESS,
   history: {},
   blitzBest: 0,
+  favorites: [],
   cards: {
     'en-es:the': fromLeitner(4, 1790000000000, 5, 1),
     'es-en:water': fromLeitner(1, 1790000600000, 2, 2),
@@ -102,6 +103,7 @@ describe('almacén persistido', () => {
       history: {},
       bestStreak: 0,
       blitzBest: 0,
+      favorites: [],
       lastDeckId: null,
     })
   })

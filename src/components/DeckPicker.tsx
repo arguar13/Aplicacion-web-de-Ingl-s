@@ -15,7 +15,7 @@ import { BackupReminder } from './BackupReminder'
 import { ForecastChart } from './ForecastChart'
 import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
-import { ArrowRightIcon, BoltIcon, ChartIcon, SettingsIcon, ShuffleIcon } from './icons'
+import { ArrowRightIcon, BoltIcon, BookIcon, ChartIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
@@ -29,10 +29,11 @@ interface Props {
   onOpenSmart: (kind: SmartDeckKind) => void
   onOpenBlitz: () => void
   onOpenStats: () => void
+  onOpenDictionary: () => void
   onOpenSettings: () => void
 }
 
-export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOpenSettings }: Props) {
+export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOpenDictionary, onOpenSettings }: Props) {
   const progress = useProgress()
   const { mode, dailyGoal } = useSettings()
   const track = trackOf(mode)
@@ -60,6 +61,9 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
       <Header
         action={
           <span className="-mr-2 flex items-center">
+            <IconButton label="Diccionario" onClick={onOpenDictionary}>
+              <BookIcon />
+            </IconButton>
             <IconButton label="Tu progreso" onClick={onOpenStats}>
               <ChartIcon />
             </IconButton>
@@ -71,8 +75,9 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
       >
         {anyProgress && (
           <>
-            <Stat label="Días" value={dailyStreak(progress.days, now)} />
-            <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} />
+            {/* En pantallas estrechas solo cabe la meta de hoy; el resto está en "Tu progreso". */}
+            <Stat label="Días" value={dailyStreak(progress.days, now)} className="max-[27.5rem]:hidden" />
+            <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} className="max-[27.5rem]:hidden" />
             <GoalStat done={todayStats(progress, now).answers} goal={dailyGoal} />
           </>
         )}
