@@ -4,7 +4,10 @@ import { IconButton } from './IconButton'
 
 interface SheetProps {
   open: boolean
-  /** Se llama cuando el panel se cierra por cualquier vía: botón, Esc o tocar fuera. */
+  /**
+   * El usuario cerró el panel (botón, Esc o tocar fuera). No se llama cuando lo cierra `open`: si
+   * la app ya pasó a otra ruta, avisar de un cierre la haría retroceder por error.
+   */
   onClose: () => void
   title: string
   /** Idioma del título si no es el de la página (la ficha de una palabra inglesa). */
@@ -20,6 +23,11 @@ export function Sheet({ open, onClose, title, titleLang, children }: SheetProps)
   const ref = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const titleId = useId()
+  const isOpen = useRef(open)
+
+  useEffect(() => {
+    isOpen.current = open
+  }, [open])
 
   useEffect(() => {
     const dialog = ref.current
@@ -38,7 +46,9 @@ export function Sheet({ open, onClose, title, titleLang, children }: SheetProps)
   return (
     <dialog
       ref={ref}
-      onClose={onClose}
+      onClose={() => {
+        if (isOpen.current) onClose()
+      }}
       closedby="any"
       aria-labelledby={titleId}
       className={[

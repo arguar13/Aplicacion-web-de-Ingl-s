@@ -105,10 +105,7 @@ function Blitz({ pool, onExit }: { pool: readonly Word[]; onExit: () => void }) 
   useKeyDown((event) => {
     if (event.key === 'Escape') return onExit()
     if (phase !== 'playing') {
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        start()
-      }
+      if (event.key === 'Enter') start()
       return
     }
     const option = round.options[Number(event.key) - 1]

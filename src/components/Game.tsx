@@ -55,11 +55,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
     if (key === 'l') return listenSlowly()
     if (quiz.solved) {
       if (key === 'e') return expand()
-      if (key === 'enter' || key === 'arrowright') {
-        // Enter sobre el botón enfocado ya lo pulsa el navegador: no avanzar dos veces.
-        event.preventDefault()
-        return advance()
-      }
+      if (key === 'enter' || key === 'arrowright') advance()
       return
     }
     const option = round.options[Number(event.key) - 1]
