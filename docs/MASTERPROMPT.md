@@ -458,3 +458,18 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
 - Lecciones de maquetación (con test): grillas con columnas explícitas en móvil (`grid-cols-1`),
   `min-w-0` en fieldsets desplazables y etiquetas `relative` con radios `sr-only`. Hay un e2e de
   desbordamiento a 360 px.
+
+### Fase 11 · cerrada el 27-09-2026
+
+- Bienvenida de primer uso (saltable, 3 pasos) con meta diaria y prueba de nivel; los usuarios que
+  ya tenían progreso no la ven. Los e2e la saltan con la opción `onboarded` del fixture.
+- 13 logros con medallas SVG propias, anuncio no bloqueante (agrupado si llegan varios, p. ej. al
+  restaurar una copia) y vitrina en estadísticas.
+- Protectores de racha (1 cada 7 días con meta cumplida, máximo 2) y aviso de racha en riesgo.
+- Sonidos sintetizados, vibración en Android y confeti proporcional; todo respeta
+  `prefers-reduced-motion` y se desactiva en Ajustes.
+- Recordatorio diario: evaluado; sin backend, lo único fiable en iOS, Android y escritorio es un
+  evento recurrente de calendario (.ics), que es lo que se ofrece. Ajustes agrupado por secciones.
+- Lección aprendida: una constante usada antes de declararse (TDZ) dejó la app en blanco. Raíz:
+  orden de declaración; prevención: regla `no-use-before-define` y un aviso de arranque fallido en
+  `index.html` para errores anteriores a React.

@@ -32,10 +32,22 @@ evolución de las palabras dominadas y el avance por nivel en cada habilidad. El
 (#/diccionario) busca en inglés y español entre las 3.978 palabras y abre la ficha de cada una:
 pronunciación, ejemplo, progreso por habilidad, últimas respuestas, favorita y "ya la sé".
 
-Ajustes: pronunciación automática, cuándo detenerse a ver el ejemplo, tema claro/oscuro/automático, copia de seguridad del progreso
-(guardar un archivo y restaurarlo, combinando o reemplazando), protección del almacenamiento y
-borrar el progreso. En Safari sin instalar, donde los datos se borran tras 7 días sin visitas, un
-aviso discreto recuerda guardar una copia.
+La primera vez, una bienvenida de tres pasos (saltable) explica la idea, pide una meta diaria y
+ofrece una **prueba de nivel** de un minuto: recomienda por dónde empezar y marca como sabidas las
+palabras acertadas. **Trece logros** con medallas propias (primera sesión, rachas de 7 y 30 días,
+100/500/1.000 dominadas, nivel completado, sesión perfecta…) se anuncian al conseguirlos y se
+exhiben en Tu progreso. Cada 7 días con la meta cumplida se gana un **protector de racha** (hasta 2)
+que cubre un día sin práctica, y un aviso en el inicio indica cuando la racha está en riesgo. Las
+celebraciones son proporcionales: un sonido suave al acertar, confeti al cumplir la meta, más al
+completar un nivel; nada se mueve si el sistema pide reducir movimiento.
+
+Ajustes, por secciones: **práctica** (meta diaria, palabras nuevas por día, cuándo detenerse a ver
+el ejemplo, pronunciación automática), **sonido** (efectos y vibración), **apariencia** (tema
+claro, oscuro o automático), **recordatorio** (un evento diario para el calendario del dispositivo,
+la única forma fiable de avisar a una hora sin servidor en iPhone, Android y escritorio) y **tus
+datos** (copia de seguridad para guardar y restaurar, combinando o reemplazando; protección del
+almacenamiento; instalación; audio sin conexión; borrar el progreso). En Safari sin instalar, donde
+los datos se borran tras 7 días sin visitas, un aviso discreto recuerda guardar una copia.
 
 Cada pantalla tiene su dirección (`#/`, `#/nivel/3`, `#/todas`, `?panel=ajustes`): el botón atrás
 del navegador o de Android recorre la app en vez de cerrarla, y los enlaces directos funcionan.
@@ -104,8 +116,13 @@ src/lib/typing.ts         Respuestas escritas: comparación tolerante y correcci
 src/lib/blitz.ts          Relámpago: palabras vistas y baraja sin repetir
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
 src/lib/progress.ts       Progreso (tarjetas por sentido, historial diario, récord) y cómo combinar dos
-src/lib/settings.ts       Ajustes (sentido, pronunciación automática, tema)
+src/lib/settings.ts       Ajustes (modo, meta, nuevas por día, sonido, tema…)
 src/lib/backup.ts         Copias de seguridad: exportar, validar e importar
+src/lib/onboarding.ts     Primer uso: si ya se completó la bienvenida
+src/lib/placement.ts      Prueba de nivel: palabras por nivel y recomendación
+src/lib/achievements.ts   Logros: condiciones, desbloqueo y anuncios agrupados
+src/lib/feedback.ts       Sonidos y vibración según ajustes y movimiento reducido
+src/lib/reminder.ts       Recordatorio diario como evento de calendario (.ics)
 src/lib/safekeeping.ts    Última copia, aviso en Safari y almacenamiento persistente
 src/lib/routes.ts         Rutas (hash) y su conversión a URL
 src/lib/router.ts         Historial del navegador: navegar, volver atrás, useRoute()
