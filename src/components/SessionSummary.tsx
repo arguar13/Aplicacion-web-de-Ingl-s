@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef } from 'react'
 import type { QuizStats, SummaryReason } from '@/hooks/useQuiz'
+import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
+import { Confetti } from './Confetti'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Surface } from './ui/Surface'
@@ -9,6 +11,9 @@ interface Props {
   reason: SummaryReason
   stats: QuizStats
   dailyGoal: number
+  /** Nombre del mazo ("Nivel 3 · Cotidiano"), para celebrar un nivel completo. */
+  deckLabel: string
+  wordCount: number
   onContinue: () => void
   onFinish: () => void
 }
@@ -17,17 +22,19 @@ interface Props {
 const MISSED_SHOWN = 8
 
 /** Resumen de la sesión: al cumplir la meta del día o al salir de la partida. */
-export function SessionSummary({ reason, stats, dailyGoal, onContinue, onFinish }: Props) {
+export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount, onContinue, onFinish }: Props) {
   const titleId = useId()
   const primary = useRef<HTMLButtonElement>(null)
-  const goal = reason === 'goal'
+  // La meta y el nivel completo se celebran; salir es un resumen tranquilo.
+  const goal = reason === 'goal' || reason === 'level'
   const accuracy = stats.solved ? Math.round((stats.firstTry / stats.solved) * 100) : 0
   const missed = stats.missed.slice(0, MISSED_SHOWN)
   const more = stats.missed.length - missed.length
 
   useEffect(() => {
     primary.current?.focus({ preventScroll: true })
-  }, [])
+    if (reason !== 'exit') feedback('goal')
+  }, [reason])
 
   const tiles = [
     { label: 'Palabras', value: formatCount(stats.solved) },
@@ -38,14 +45,17 @@ export function SessionSummary({ reason, stats, dailyGoal, onContinue, onFinish 
 
   return (
     <Surface as="section" aria-labelledby={titleId} className="animate-rise px-6 pt-8 pb-6 text-center sm:px-8">
+      {goal && <Confetti pieces={reason === 'level' ? 180 : 110} />}
       {goal && <GoalBadge />}
       <h1 id={titleId} className="font-display text-4xl leading-tight sm:text-5xl">
-        {goal ? '¡Meta cumplida!' : 'Buen trabajo'}
+        {reason === 'level' ? '¡Nivel completo!' : reason === 'goal' ? '¡Meta cumplida!' : 'Buen trabajo'}
       </h1>
       <p className="mx-auto mt-2 max-w-sm text-[15px] leading-relaxed text-muted">
-        {goal
-          ? `Respondiste ${plural(dailyGoal, 'palabra')} hoy. Lo que aprendiste vuelve justo antes de que lo olvides.`
-          : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
+        {reason === 'level'
+          ? `Dominas las ${plural(wordCount, 'palabra')} de ${deckLabel}. Un paso enorme.`
+          : reason === 'goal'
+            ? `Respondiste ${plural(dailyGoal, 'palabra')} hoy. Lo que aprendiste vuelve justo antes de que lo olvides.`
+            : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
       </p>
 
       <dl className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4">

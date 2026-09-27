@@ -107,6 +107,8 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
               reason={quiz.summary}
               stats={stats}
               dailyGoal={dailyGoal}
+              deckLabel={deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`}
+              wordCount={deck.words.length}
               onContinue={resume}
               onFinish={onExit}
             />

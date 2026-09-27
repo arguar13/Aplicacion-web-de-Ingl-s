@@ -57,6 +57,8 @@ describe('almacén persistido', () => {
       detailsPause: 'mistakes',
       dailyGoal: 20,
       newPerDay: 20,
+      sounds: true,
+      haptics: true,
     })
   })
 

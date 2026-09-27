@@ -16,7 +16,8 @@ export function AchievementToast() {
   }, [current])
 
   if (!current) return null
-  const [first] = current
+  // Los logros van de menor a mayor: si llegan varios, se destaca el más importante.
+  const first = current[current.length - 1]
   const more = current.length - 1
   return (
     <div

@@ -3,9 +3,10 @@ import { playPronunciation, preloadPronunciation } from '@/lib/audio'
 import { type Deck, distractorPool } from '@/lib/decks'
 import { cardLookup, getProgress, recordAnswer, recordStreak, todayStats } from '@/lib/progress'
 import { buildOptions } from '@/lib/quiz'
-import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
+import { advanceSession, createSession, isMastered, pickNext, type Session } from '@/lib/scheduler'
+import { feedback } from '@/lib/feedback'
 import { getSettings } from '@/lib/settings'
-import { type Mode, type Round, trackOf, type Word } from '@/lib/types'
+import { type Mode, type Round, type Track, trackOf, type Word } from '@/lib/types'
 import { judgeTyped, type TypedVerdict } from '@/lib/typing'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
@@ -27,8 +28,8 @@ export interface QuizStats {
   missed: Word[]
 }
 
-/** Por qué se muestra el resumen: se cumplió la meta del día o el usuario quiere salir. */
-export type SummaryReason = 'goal' | 'exit'
+/** Por qué se muestra el resumen: se completó el nivel, se cumplió la meta del día o se quiere salir. */
+export type SummaryReason = 'level' | 'goal' | 'exit'
 
 const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [] }
 
@@ -45,6 +46,8 @@ interface State {
   expanded: boolean
   /** Esta respuesta completó la meta del día: al avanzar se muestra el resumen. */
   goalReached: boolean
+  /** Esta respuesta dejó dominadas todas las palabras del nivel: al avanzar se celebra. */
+  levelDone: boolean
   /** Resumen de la sesión a la vista (la partida está detenida). */
   summary: SummaryReason | null
   stats: QuizStats
@@ -71,6 +74,15 @@ function nextRound(deck: Deck, mode: Mode, session: Session): Round {
 const missedWith = (stats: QuizStats, word: Word) =>
   stats.missed.some((w) => w.id === word.id) ? stats.missed : [...stats.missed, word]
 
+/** Todas las palabras del mazo dominadas en esa habilidad. */
+const deckMastered = (deck: Deck, track: Track) => {
+  const lookup = cardLookup(getProgress(), track)
+  return deck.words.every((word) => {
+    const card = lookup(word.id)
+    return card !== undefined && isMastered(card)
+  })
+}
+
 const withNext = (s: State): State =>
   s.next ? { ...s, round: s.next, next: null, wrong: [], typed: null, solved: false, expanded: false } : s
 
@@ -86,6 +98,7 @@ export function useQuiz(deck: Deck, mode: Mode) {
     solved: false,
     expanded: false,
     goalReached: false,
+    levelDone: false,
     summary: null,
     stats: EMPTY_STATS,
   }))
@@ -126,6 +139,8 @@ export function useQuiz(deck: Deck, mode: Mode) {
   function advance() {
     setState((s) => {
       if (!s.solved || !s.next) return s
+      // Completar un nivel es más raro (y más grande) que la meta del día: se celebra primero.
+      if (s.levelDone) return { ...s, levelDone: false, goalReached: false, expanded: false, summary: 'level' }
       if (s.goalReached) return { ...s, goalReached: false, expanded: false, summary: 'goal' }
       resolving.current = false
       return withNext(s)
@@ -163,7 +178,9 @@ export function useQuiz(deck: Deck, mode: Mode) {
     const isNew = !cardLookup(getProgress(), track)(round.word.id)
     const { dailyGoal, detailsPause } = getSettings()
     const answeredBefore = todayStats(getProgress()).answers
+    const levelWasDone = deck.kind === 'level' && deckMastered(deck, track)
     recordAnswer(track, round.word.id, { clean, almost, ms: performance.now() - shownAt.current })
+    feedback(clean ? 'correct' : 'wrong')
     advanceSession(session, round.word.id, clean)
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)
@@ -175,6 +192,7 @@ export function useQuiz(deck: Deck, mode: Mode) {
       expanded: detailsPause === 'always' || (detailsPause === 'mistakes' && !clean),
       next: nextRound(deck, mode, session),
       goalReached: answeredBefore < dailyGoal && answeredBefore + 1 >= dailyGoal,
+      levelDone: deck.kind === 'level' && !levelWasDone && deckMastered(deck, track),
       stats: {
         ...stats,
         solved: stats.solved + 1,
@@ -192,6 +210,7 @@ export function useQuiz(deck: Deck, mode: Mode) {
     const { round, wrong, solved, stats } = state
     if (resolving.current || solved || wrong.includes(id)) return
     if (id !== round.word.id) {
+      feedback('wrong')
       setState({
         ...state,
         wrong: [...wrong, id],

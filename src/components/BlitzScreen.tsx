@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { BLITZ_MIN_WORDS, BLITZ_SECONDS, type BlitzRound, blitzDeck, blitzPool } from '@/lib/blitz'
 import { cn } from '@/lib/cn'
+import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
 import { getProgress, recordBlitzScore, recordPractice, useProgress } from '@/lib/progress'
 import type { Word } from '@/lib/types'
@@ -94,6 +95,7 @@ function Blitz({ pool, onExit }: { pool: readonly Word[]; onExit: () => void }) 
   function answer(id: string) {
     if (phase !== 'playing' || flash) return
     const ok = id === round.word.id
+    feedback(ok ? 'correct' : 'wrong')
     result.current = { score: result.current.score + (ok ? 1 : 0), answered: result.current.answered + 1 }
     setAnswered(result.current.answered)
     setScore(result.current.score)

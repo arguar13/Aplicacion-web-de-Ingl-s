@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { resetAchievements } from '@/lib/achievements'
+import { canVibrate } from '@/lib/feedback'
 import { resetProgress } from '@/lib/progress'
 import {
   DAILY_GOALS,
@@ -60,6 +61,16 @@ function SettingsContent() {
           onChange={(autoplay) => updateSettings({ autoplay })}
         />
       </SettingRow>
+
+      <SettingRow title="Sonidos" description="Un aviso suave al acertar, al fallar y al cumplir la meta.">
+        <Switch label="Sonidos" checked={settings.sounds} onChange={(sounds) => updateSettings({ sounds })} />
+      </SettingRow>
+
+      {canVibrate() && (
+        <SettingRow title="Vibración" description="Un toque breve en los mismos momentos.">
+          <Switch label="Vibración" checked={settings.haptics} onChange={(haptics) => updateSettings({ haptics })} />
+        </SettingRow>
+      )}
 
       <div className="py-4">
         <p className="text-[15px] font-medium">Meta diaria</p>

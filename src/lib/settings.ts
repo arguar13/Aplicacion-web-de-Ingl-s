@@ -23,6 +23,10 @@ export interface Settings {
   dailyGoal: DailyGoal
   /** Palabras nuevas que introducir cada día como mucho (0 = sin límite). */
   newPerDay: NewPerDay
+  /** Efectos de sonido al acertar, fallar y cumplir la meta. */
+  sounds: boolean
+  /** Vibración breve en esos momentos (donde el dispositivo la tenga). */
+  haptics: boolean
 }
 
 /** Clave de almacenamiento; index.html la lee antes de pintar para aplicar el tema sin parpadeo. */
@@ -35,6 +39,8 @@ const DEFAULTS: Settings = {
   detailsPause: 'mistakes',
   dailyGoal: 20,
   newPerDay: 20,
+  sounds: true,
+  haptics: true,
 }
 
 const oneOf = <T extends number>(options: readonly T[], value: unknown, fallback: T): T =>
@@ -54,6 +60,9 @@ export function parseSettings(raw: Record<string, unknown>): Settings {
     // Campos nuevos en la Fase 8.
     dailyGoal: oneOf(DAILY_GOALS, raw.dailyGoal, DEFAULTS.dailyGoal),
     newPerDay: oneOf(NEW_PER_DAY, raw.newPerDay, DEFAULTS.newPerDay),
+    // Campos nuevos en la Fase 11.
+    sounds: typeof raw.sounds === 'boolean' ? raw.sounds : DEFAULTS.sounds,
+    haptics: typeof raw.haptics === 'boolean' ? raw.haptics : DEFAULTS.haptics,
   }
 }
 

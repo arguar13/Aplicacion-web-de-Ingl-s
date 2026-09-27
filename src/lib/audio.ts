@@ -136,3 +136,57 @@ async function playWithElement(id: string, token: number, rate: number): Promise
     }
   }
 }
+
+// --- Efectos de sonido ------------------------------------------------------------------------------
+
+export type SoundEffect = 'correct' | 'wrong' | 'goal'
+
+/** Notas de cada efecto: [frecuencia (Hz), inicio (s), duración (s)]. Sintetizadas, sin archivos. */
+const EFFECTS: Record<SoundEffect, { wave: OscillatorType; volume: number; notes: Array<[number, number, number]> }> = {
+  // Quinta ascendente, breve y suave.
+  correct: {
+    wave: 'sine',
+    volume: 0.12,
+    notes: [
+      [880, 0, 0.12],
+      [1318.5, 0.07, 0.18],
+    ],
+  },
+  // Un golpe grave y corto: avisa sin regañar.
+  wrong: { wave: 'triangle', volume: 0.14, notes: [[196, 0, 0.16]] },
+  // Arpegio mayor para la meta cumplida.
+  goal: {
+    wave: 'sine',
+    volume: 0.1,
+    notes: [
+      [523.25, 0, 0.18],
+      [659.25, 0.1, 0.18],
+      [783.99, 0.2, 0.18],
+      [1046.5, 0.3, 0.35],
+    ],
+  },
+}
+
+/** Toca un efecto con Web Audio. Sin Web Audio no suena (los efectos son un extra). */
+export function playEffect(effect: SoundEffect): void {
+  if (!AudioContextClass) return
+  const ctx = getContext(AudioContextClass)
+  if (ctx.state === 'suspended') void ctx.resume()
+  const { wave, volume, notes } = EFFECTS[effect]
+  const start = ctx.currentTime + 0.01
+  for (const [frequency, offset, duration] of notes) {
+    const oscillator = ctx.createOscillator()
+    const gain = ctx.createGain()
+    oscillator.type = wave
+    oscillator.frequency.setValueAtTime(frequency, start + offset)
+    if (effect === 'wrong')
+      oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.7, start + offset + duration)
+    // Entrada y salida suaves: sin chasquidos.
+    gain.gain.setValueAtTime(0.0001, start + offset)
+    gain.gain.exponentialRampToValueAtTime(volume, start + offset + 0.015)
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + offset + duration)
+    oscillator.connect(gain).connect(ctx.destination)
+    oscillator.start(start + offset)
+    oscillator.stop(start + offset + duration + 0.02)
+  }
+}
