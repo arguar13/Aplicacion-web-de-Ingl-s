@@ -59,3 +59,18 @@ test('un progreso guardado dañado no rompe la app', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
   expect(await page.evaluate(() => localStorage.getItem('tecla:progress:v1:respaldo'))).toBe('{"cards": {"en-es:the": ')
 })
+
+test('el recordatorio diario se añade al calendario con un evento recurrente', async ({ page }) => {
+  await page.goto('./#/?panel=ajustes')
+  const dialog = page.getByRole('dialog', { name: 'Ajustes' })
+  await dialog.getByLabel('Hora del recordatorio').fill('21:30')
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    dialog.getByRole('button', { name: 'Añadir al calendario' }).click(),
+  ])
+  expect(download.suggestedFilename()).toBe('tecla-recordatorio.ics')
+  const ics = await readFile(await download.path(), 'utf8')
+  expect(ics).toContain('RRULE:FREQ=DAILY')
+  expect(ics).toMatch(/DTSTART:\d{8}T213000/)
+  await expect(dialog.getByText(/aviso de las 21:30/)).toBeVisible()
+})

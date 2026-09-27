@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { type ReactNode, useId, useState } from 'react'
 import { resetAchievements } from '@/lib/achievements'
 import { canVibrate } from '@/lib/feedback'
 import { resetProgress } from '@/lib/progress'
@@ -13,6 +13,7 @@ import {
 } from '@/lib/settings'
 import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
 import { BackupSection, ProtectionRow } from './BackupSection'
+import { ReminderRow } from './ReminderRow'
 import { Button } from './ui/Button'
 import { Segmented, Switch } from './ui/controls'
 import { Sheet } from './ui/Sheet'
@@ -50,102 +51,125 @@ function SettingsContent() {
   const [confirmReset, setConfirmReset] = useState(false)
 
   return (
-    <div className="mt-5 divide-y divide-line">
-      <SettingRow
-        title="Pronunciación automática"
-        description="Suena al aparecer cada palabra. En modo español → inglés, al acertar."
-      >
-        <Switch
-          label="Pronunciación automática"
-          checked={settings.autoplay}
-          onChange={(autoplay) => updateSettings({ autoplay })}
-        />
-      </SettingRow>
-
-      <SettingRow title="Sonidos" description="Un aviso suave al acertar, al fallar y al cumplir la meta.">
-        <Switch label="Sonidos" checked={settings.sounds} onChange={(sounds) => updateSettings({ sounds })} />
-      </SettingRow>
-
-      {canVibrate() && (
-        <SettingRow title="Vibración" description="Un toque breve en los mismos momentos.">
-          <Switch label="Vibración" checked={settings.haptics} onChange={(haptics) => updateSettings({ haptics })} />
-        </SettingRow>
-      )}
-
-      <div className="py-4">
-        <p className="text-[15px] font-medium">Meta diaria</p>
-        <p className="mt-0.5 text-[13px] leading-snug text-muted">Palabras que quieres responder cada día.</p>
-        <Segmented
-          label="Meta diaria"
+    <div className="mt-2">
+      <Group title="Práctica">
+        <ChoiceRow
+          title="Meta diaria"
+          description="Palabras que quieres responder cada día."
           value={String(settings.dailyGoal)}
           options={GOALS}
           onChange={(value) => updateSettings({ dailyGoal: parseSettings({ dailyGoal: Number(value) }).dailyGoal })}
-          className="mt-3 flex w-full"
         />
-      </div>
-
-      <div className="py-4">
-        <p className="text-[15px] font-medium">Palabras nuevas por día</p>
-        <p className="mt-0.5 text-[13px] leading-snug text-muted">
-          Al llegar al límite, la práctica sigue con lo que ya estás aprendiendo.
-        </p>
-        <Segmented
-          label="Palabras nuevas por día"
+        <ChoiceRow
+          title="Palabras nuevas por día"
+          description="Al llegar al límite, la práctica sigue con lo que ya estás aprendiendo."
           value={String(settings.newPerDay)}
           options={NEW_LIMITS}
           onChange={(value) => updateSettings({ newPerDay: parseSettings({ newPerDay: Number(value) }).newPerDay })}
-          className="mt-3 flex w-full"
         />
-      </div>
-
-      <div className="py-4">
-        <p className="text-[15px] font-medium">Detenerse a ver el ejemplo</p>
-        <p className="mt-0.5 text-[13px] leading-snug text-muted">
-          Tras responder, muestra la frase de ejemplo y espera a que sigas. Siempre puedes verla con «Ver ejemplo».
-        </p>
-        <Segmented
-          label="Detenerse a ver el ejemplo"
+        <ChoiceRow
+          title="Detenerse a ver el ejemplo"
+          description="Tras responder, muestra la frase de ejemplo y espera a que sigas. Siempre puedes verla con «Ver ejemplo»."
           value={settings.detailsPause}
           options={DETAILS_PAUSES}
           onChange={(detailsPause) => updateSettings({ detailsPause })}
-          className="mt-3 flex w-full"
         />
-      </div>
+        <SettingRow
+          title="Pronunciación automática"
+          description="Suena al aparecer cada palabra. En modo español → inglés, al acertar."
+        >
+          <Switch
+            label="Pronunciación automática"
+            checked={settings.autoplay}
+            onChange={(autoplay) => updateSettings({ autoplay })}
+          />
+        </SettingRow>
+      </Group>
 
-      <div className="py-4">
-        <p className="text-[15px] font-medium">Tema</p>
-        <Segmented
-          label="Tema"
+      <Group title="Sonido">
+        <SettingRow title="Sonidos" description="Un aviso suave al acertar, al fallar y al cumplir la meta.">
+          <Switch label="Sonidos" checked={settings.sounds} onChange={(sounds) => updateSettings({ sounds })} />
+        </SettingRow>
+        {canVibrate() && (
+          <SettingRow title="Vibración" description="Un toque breve en los mismos momentos.">
+            <Switch label="Vibración" checked={settings.haptics} onChange={(haptics) => updateSettings({ haptics })} />
+          </SettingRow>
+        )}
+      </Group>
+
+      <Group title="Apariencia">
+        <ChoiceRow
+          title="Tema"
           value={settings.theme}
           options={THEMES}
           onChange={(theme) => updateSettings({ theme })}
-          className="mt-3 flex w-full"
         />
-      </div>
+      </Group>
 
-      <BackupSection />
-      <ProtectionRow />
-      <InstallRow />
-      <OfflineAudioRow />
+      <Group title="Recordatorio">
+        <ReminderRow />
+      </Group>
 
-      <SettingRow title="Borrar progreso" description="Vuelve a empezar desde cero en este dispositivo.">
-        {confirmReset ? (
-          <Button
-            variant="danger"
-            onClick={() => {
-              resetProgress()
-              resetAchievements()
-              setConfirmReset(false)
-            }}
-          >
-            Sí, borrar
-          </Button>
-        ) : (
-          <Button variant="danger-outline" onClick={() => setConfirmReset(true)}>
-            Borrar
-          </Button>
-        )}
-      </SettingRow>
+      <Group title="Tus datos">
+        <BackupSection />
+        <ProtectionRow />
+        <InstallRow />
+        <OfflineAudioRow />
+        <SettingRow title="Borrar progreso" description="Vuelve a empezar desde cero en este dispositivo.">
+          {confirmReset ? (
+            <Button
+              variant="danger"
+              onClick={() => {
+                resetProgress()
+                resetAchievements()
+                setConfirmReset(false)
+              }}
+            >
+              Sí, borrar
+            </Button>
+          ) : (
+            <Button variant="danger-outline" onClick={() => setConfirmReset(true)}>
+              Borrar
+            </Button>
+          )}
+        </SettingRow>
+      </Group>
+    </div>
+  )
+}
+
+/** Sección de ajustes con su título. */
+function Group({ title, children }: { title: string; children: ReactNode }) {
+  const id = useId()
+  return (
+    <section aria-labelledby={id} className="mt-5">
+      <h3 id={id} className="text-[11px] font-medium tracking-[0.18em] text-muted uppercase">
+        {title}
+      </h3>
+      <div className="divide-y divide-line">{children}</div>
+    </section>
+  )
+}
+
+/** Ajuste con opciones excluyentes: título, explicación y un selector segmentado a lo ancho. */
+function ChoiceRow<T extends string>({
+  title,
+  description,
+  value,
+  options,
+  onChange,
+}: {
+  title: string
+  description?: string
+  value: T
+  options: Array<{ value: T; label: string }>
+  onChange: (value: T) => void
+}) {
+  return (
+    <div className="py-4">
+      <p className="text-[15px] font-medium">{title}</p>
+      {description && <p className="mt-0.5 text-[13px] leading-snug text-muted">{description}</p>}
+      <Segmented label={title} value={value} options={options} onChange={onChange} className="mt-3 flex w-full" />
     </div>
   )
 }
