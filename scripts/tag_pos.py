@@ -68,6 +68,11 @@ POS_OVERRIDES: dict[str, str] = {
     "found": "verb", "saw": "verb", "felt": "verb", "fell": "verb", "bit": "noun",
     "fun": "adj", "homeless": "adj", "standing": "adj", "shopping": "noun",
     "sorry": "interj", "alright": "interj",
+    # Palabras funcionales cuya traducción es otra cosa ("may" = mayo, no el modal).
+    "may": "noun", "yet": "adv", "like": "verb", "off": "adj", "past": "noun",
+    # Revisadas al escribir los ejemplos: la traducción las usa con esta categoría.
+    "asian": "adj", "scottish": "adj", "mixed": "adj", "engineering": "noun", "cast": "noun",
+    "plus": "prep",
 }
 
 WN_POS = {"n": "noun", "v": "verb", "a": "adj", "s": "adj", "r": "adv"}
@@ -109,12 +114,10 @@ def spanish_categories(sense: str) -> set[str]:
 
 
 def tag(word: dict) -> tuple[str, str]:
-    """Devuelve (categoría, motivo)."""
+    """Devuelve (categoría, motivo). Manda la primera acepción de la traducción: es la que ve el usuario."""
     wid, en, es = word["id"], word["en"].lower(), word["es"]
     if wid in POS_OVERRIDES:
         return POS_OVERRIDES[wid], "manual"
-    if en in CLOSED_WORDS:
-        return CLOSED_WORDS[en], "lista cerrada"
 
     options = senses(es)
     english = english_counts(en)
@@ -125,27 +128,38 @@ def tag(word: dict) -> tuple[str, str]:
     if inflected_verb and CONJUGATED.search(first):
         return "verb", "forma conjugada"
 
-    # 1. El sentido exacto: synsets con la palabra inglesa y la traducción (la primera que alinee).
-    for sense in options:
+    # 1. Palabras funcionales ("the", "of", "and"…): WordNet no las recoge o las clasifica a su
+    # manera (los números como adjetivos). Las que traducen otra cosa van en POS_OVERRIDES.
+    if en in CLOSED_WORDS:
+        return CLOSED_WORDS[en], "lista cerrada"
+
+    # 2. El sentido exacto de la primera acepción: un synset con la palabra inglesa y su traducción.
+    aligned = aligned_counts(en, first)
+    if aligned:
+        return aligned.most_common(1)[0][0], "alineado"
+
+    # 3. Morfología de la primera acepción, confirmada con el inglés.
+    if INFINITIVE.match(first) and english["verb"]:
+        return "verb", "infinitivo"
+    if len(first) > 7 and first.endswith("mente") and english["adv"]:
+        return "adv", "-mente"
+
+    # 4. Las demás acepciones, en orden.
+    for sense in options[1:]:
         aligned = aligned_counts(en, sense)
         if aligned:
-            return aligned.most_common(1)[0][0], "alineado"
+            return aligned.most_common(1)[0][0], "alineado (otra acepción)"
 
-    # 2. Categorías posibles de la traducción en español que también existan en inglés.
+    # 5. Categorías posibles de la primera acepción en español que también existan en inglés.
     spanish = spanish_categories(first)
     shared = [pos for pos, _ in english.most_common() if pos in spanish]
     if shared:
         return shared[0], "español ∩ inglés"
 
-    # 3. Morfología de la traducción, confirmada con el inglés.
-    if INFINITIVE.match(first) and english["verb"]:
-        return "verb", "infinitivo"
-    if len(first) > 7 and first.endswith("mente") and english["adv"]:
-        return "adv", "-mente"
     if inflected_verb and english["verb"]:
         return "verb", "forma verbal (revisar)"
 
-    # 4. La categoría más usada en inglés (un verbo no encaja con una traducción que no lo es).
+    # 6. La categoría más usada en inglés (un verbo no encaja con una traducción que no lo es).
     ranked = [pos for pos, _ in english.most_common() if pos != "verb"]
     if ranked:
         return ranked[0], "inglés (revisar)"
