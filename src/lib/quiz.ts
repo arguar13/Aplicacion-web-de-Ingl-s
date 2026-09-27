@@ -1,4 +1,4 @@
-import type { Rng, Word } from './types'
+import type { PartOfSpeech, Rng, Word } from './types'
 
 export const OPTIONS_PER_ROUND = 4
 
@@ -45,20 +45,45 @@ export function buildOptions(
 ): Word[] {
   const used = new Set(senses(answer.es))
   const distractors: Word[] = []
+  const chosen = new Set([answer.id])
   const tryAdd = (word: Word) => {
     const keys = senses(word.es)
-    if (word.id === answer.id || keys.some((k) => used.has(k))) return
+    if (chosen.has(word.id) || keys.some((k) => used.has(k))) return
     for (const key of keys) used.add(key)
+    chosen.add(word.id)
     distractors.push(word)
   }
+  const full = () => distractors.length >= count - 1
 
-  for (let attempt = 0; attempt < count * 10 && distractors.length < count - 1; attempt++) {
-    tryAdd(pool[Math.floor(rng() * pool.length)])
-  }
-  for (const word of pool) {
-    if (distractors.length >= count - 1) break
-    tryAdd(word)
+  // De la misma categoría gramatical que la respuesta; si no alcanzan, de una parecida; y si
+  // tampoco, cualquiera. Un verbo entre tres sustantivos se adivinaría sin saber la palabra.
+  for (const accept of preferenceTiers(answer)) {
+    const candidates = pool.filter(accept)
+    for (let attempt = 0; attempt < count * 10 && !full() && candidates.length > 0; attempt++) {
+      tryAdd(candidates[Math.floor(rng() * candidates.length)])
+    }
+    const offset = Math.floor(rng() * candidates.length)
+    for (let i = 0; i < candidates.length && !full(); i++) tryAdd(candidates[(offset + i) % candidates.length])
+    if (full()) break
   }
 
   return shuffle([answer, ...distractors], rng)
+}
+
+/** Familias de categorías: si faltan distractores de la misma, se buscan en la misma familia. */
+const FAMILY: Record<PartOfSpeech, string> = {
+  noun: 'noun',
+  verb: 'verb',
+  adj: 'modifier',
+  adv: 'modifier',
+  pron: 'function',
+  det: 'function',
+  prep: 'function',
+  conj: 'function',
+  num: 'function',
+  interj: 'function',
+}
+
+function preferenceTiers(answer: Word): Array<(word: Word) => boolean> {
+  return [(w) => w.pos === answer.pos, (w) => FAMILY[w.pos] === FAMILY[answer.pos], () => true]
 }

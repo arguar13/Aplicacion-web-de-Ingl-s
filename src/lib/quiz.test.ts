@@ -1,10 +1,10 @@
 import { readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import words from '@/data/words.json'
 import { buildOptions, normalize, senses } from './quiz'
-import type { Word } from './types'
+import { ALL_WORDS, LEVELS } from './decks'
+import { PARTS_OF_SPEECH, type Word } from './types'
 
-const WORDS = words as Word[]
+const WORDS = ALL_WORDS
 
 describe('normalize', () => {
   it('ignora mayúsculas, tildes y espacios', () => {
@@ -47,7 +47,56 @@ describe('buildOptions', () => {
   })
 })
 
+const word = (id: string, pos: Word['pos']): Word => ({ id, en: id, es: `es-${id}`, pos })
+
+describe('distractores por categoría gramatical', () => {
+  it('elige distractores de la misma categoría cuando hay suficientes', () => {
+    const pool = [
+      ...['run', 'eat', 'sing', 'jump'].map((id) => word(id, 'verb')),
+      ...['dog', 'cat', 'tree', 'car', 'house'].map((id) => word(id, 'noun')),
+    ]
+    for (let i = 0; i < 100; i++) {
+      expect(buildOptions(pool[0], pool).every((o) => o.pos === 'verb')).toBe(true)
+    }
+  })
+
+  it('si no alcanzan, completa con la familia más cercana y luego con cualquiera', () => {
+    const pool = [
+      word('quick', 'adj'),
+      word('slowly', 'adv'),
+      word('often', 'adv'),
+      word('dog', 'noun'),
+      word('cat', 'noun'),
+    ]
+    for (let i = 0; i < 100; i++) {
+      const options = buildOptions(pool[0], pool)
+      expect(options).toHaveLength(4)
+      expect(options.filter((o) => o.pos === 'adv')).toHaveLength(2)
+    }
+  })
+
+  it('con el vocabulario real, casi todos los distractores comparten categoría con la respuesta', () => {
+    let same = 0
+    let total = 0
+    for (const deck of LEVELS) {
+      for (let i = 0; i < 200; i++) {
+        const answer = deck.words[Math.floor(Math.random() * deck.words.length)]
+        for (const option of buildOptions(answer, deck.words)) {
+          if (option.id === answer.id) continue
+          total++
+          if (option.pos === answer.pos) same++
+        }
+      }
+    }
+    expect(same / total).toBeGreaterThan(0.95)
+  })
+})
+
 describe('datos', () => {
+  it('cada palabra tiene una categoría gramatical conocida', () => {
+    expect(WORDS.filter((w) => !PARTS_OF_SPEECH.includes(w.pos)).map((w) => w.id)).toEqual([])
+  })
+
   it('cada palabra tiene id único y traducción', () => {
     expect(new Set(WORDS.map((w) => w.id)).size).toBe(WORDS.length)
     expect(WORDS.every((w) => w.en && w.es && /^[a-z0-9-]+$/.test(w.id))).toBe(true)

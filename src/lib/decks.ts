@@ -1,8 +1,9 @@
 import words from '@/data/words.json'
 import type { Word } from './types'
+import { parseWords } from './words'
 
 /** Todo el vocabulario, ordenado de la palabra más usada a la menos usada (ver scripts/rank_words.py). */
-export const ALL_WORDS: readonly Word[] = words
+export const ALL_WORDS = parseWords(words)
 
 export const LEVEL_SIZE = 500
 

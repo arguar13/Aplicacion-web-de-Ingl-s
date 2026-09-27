@@ -15,7 +15,7 @@ import {
 import type { Word } from './types'
 
 const NOW = new Date(2026, 8, 26, 12).getTime()
-const words: Word[] = Array.from({ length: 10 }, (_, i) => ({ id: `w${i}`, en: `en${i}`, es: `es${i}` }))
+const words: Word[] = Array.from({ length: 10 }, (_, i) => ({ id: `w${i}`, en: `en${i}`, es: `es${i}`, pos: 'noun' }))
 const lookup = (cards: Record<string, CardState>) => (id: string) => cards[id]
 const card = (box: number, due: number): CardState => ({ box, due, seen: 1, lapses: 0 })
 const FREQ = { newOrder: 'frequency' } as const

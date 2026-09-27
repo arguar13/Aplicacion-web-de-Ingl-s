@@ -71,9 +71,14 @@ Stack: Vite, React 19, TypeScript, Tailwind CSS 4, vite-plugin-pwa (Workbox).
 
 1. Añade `{ "id", "en", "es" }` a `src/data/words.json` (el id en minúsculas, con guiones).
 2. `python scripts/generate_audio.py` crea su audio con la misma voz que el resto.
-3. `python scripts/rank_words.py` las recoloca por frecuencia.
-4. `npm test` comprueba que los ids sean únicos y que cada palabra tenga audio.
+3. `python scripts/tag_pos.py --report` asigna la categoría gramatical (`pos`) y lista los casos
+   dudosos; las correcciones van en `POS_OVERRIDES` (pip install nltk; usa WordNet en inglés y
+   español).
+4. `python scripts/rank_words.py` las recoloca por frecuencia.
+5. `npm test` comprueba que los ids sean únicos, que cada palabra tenga audio y categoría.
 
 Las traducciones siguen estas reglas: español latinoamericano neutro, el sentido más común primero,
 como mucho dos sentidos separados por coma y en minúscula salvo nombres propios. Dos palabras que
-comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`).
+comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`), y los
+distractores son de la misma categoría gramatical que la respuesta: la traducción de un verbo
+compite con otros verbos, no con sustantivos que se descartarían sin saber la palabra.
