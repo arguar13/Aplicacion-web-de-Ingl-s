@@ -43,7 +43,7 @@ describe('ErrorBoundary', () => {
 
   it('ir al inicio ejecuta la salida y se recupera', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => undefined)
-    const onGoHome = vi.fn(() => {
+    const onGoHome = vi.fn<() => void>(() => {
       shouldThrow = false
     })
     render(
