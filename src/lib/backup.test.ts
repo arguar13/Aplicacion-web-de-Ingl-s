@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { backupFileName, describeProgress, parseBackup, serializeBackup } from './backup'
 import { EMPTY_PROGRESS, mergeProgress, type ProgressData } from './progress'
+import type { StudyEvent } from './events'
 import { fromLeitner } from './scheduler'
 import { parseSettings } from './settings'
 
@@ -17,11 +18,15 @@ const PROGRESS: ProgressData = {
   lastDeckId: 'level-1',
 }
 const SETTINGS = { ...parseSettings({}), theme: 'dark' as const }
+const EVENTS: StudyEvent[] = [{ t: NOW - 1000, id: 'the', track: 'en-es', r: 'clean', ms: 1200 }]
 
 describe('copias de seguridad', () => {
   it('exportar e importar devuelve exactamente el mismo progreso y ajustes', () => {
-    const parsed = parseBackup(serializeBackup(PROGRESS, SETTINGS, NOW))
-    expect(parsed).toEqual({ ok: true, backup: { exportedAt: NOW, progress: PROGRESS, settings: SETTINGS } })
+    const parsed = parseBackup(serializeBackup(PROGRESS, SETTINGS, EVENTS, NOW))
+    expect(parsed).toEqual({
+      ok: true,
+      backup: { exportedAt: NOW, progress: PROGRESS, settings: SETTINGS, events: EVENTS },
+    })
   })
 
   it('nombra el archivo con la fecha local', () => {

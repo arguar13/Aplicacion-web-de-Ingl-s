@@ -2,6 +2,7 @@
  * Copias de seguridad del progreso en un archivo JSON: para no perderlo (Safari borra los datos de
  * las webs no instaladas tras 7 días sin visitarlas) y para pasarlo a otro dispositivo.
  */
+import { parseEvents, type StudyEvent } from './events'
 import { dayKey, PROGRESS_SCHEMA, type ProgressData } from './progress'
 import { isMastered } from './scheduler'
 import { SETTINGS_SCHEMA, type Settings } from './settings'
@@ -17,11 +18,18 @@ export interface Backup {
   exportedAt: number
   progress: ProgressData
   settings: Settings
+  /** Historial de respuestas (desde la Fase 10; las copias anteriores no lo traen). */
+  events: StudyEvent[]
 }
 
 export type ParsedBackup = { ok: true; backup: Backup } | { ok: false; error: string }
 
-export function serializeBackup(progress: ProgressData, settings: Settings, now = Date.now()): string {
+export function serializeBackup(
+  progress: ProgressData,
+  settings: Settings,
+  events: readonly StudyEvent[],
+  now = Date.now(),
+): string {
   return JSON.stringify(
     {
       format: FORMAT,
@@ -29,6 +37,7 @@ export function serializeBackup(progress: ProgressData, settings: Settings, now 
       exportedAt: new Date(now).toISOString(),
       progress: { version: PROGRESS_SCHEMA.version, ...progress },
       settings: { version: SETTINGS_SCHEMA.version, ...settings },
+      events,
     },
     null,
     1,
@@ -61,6 +70,7 @@ export function parseBackup(text: string): ParsedBackup {
       exportedAt: Number.isNaN(exportedAt) ? 0 : exportedAt,
       progress: progress.value,
       settings: settings.status === 'ok' ? settings.value : SETTINGS_SCHEMA.parse({}),
+      events: parseEvents(data.events),
     },
   }
 }

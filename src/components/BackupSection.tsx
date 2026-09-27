@@ -8,6 +8,7 @@ import {
   serializeBackup,
 } from '@/lib/backup'
 import { saveTextFile } from '@/lib/download'
+import { getEvents, mergeEvents, replaceEvents } from '@/lib/events'
 import { formatLongDate, plural, relativeDay } from '@/lib/format'
 import { getProgress, mergeProgress, replaceProgress } from '@/lib/progress'
 import { markBackupSaved, requestProtection, useProtection, useSafekeeping } from '@/lib/safekeeping'
@@ -17,7 +18,7 @@ import { Button } from './ui/Button'
 
 export function saveBackup() {
   const now = Date.now()
-  saveTextFile(backupFileName(now), serializeBackup(getProgress(), getSettings(), now))
+  saveTextFile(backupFileName(now), serializeBackup(getProgress(), getSettings(), getEvents(), now))
   markBackupSaved(now)
 }
 
@@ -50,9 +51,11 @@ export function BackupSection() {
   function apply(backup: Backup, mode: 'merge' | 'replace') {
     if (mode === 'merge') {
       replaceProgress(mergeProgress(getProgress(), backup.progress))
+      replaceEvents(mergeEvents(getEvents(), backup.events))
     } else {
       replaceProgress(backup.progress)
       replaceSettings(backup.settings)
+      replaceEvents(backup.events)
     }
     setRestore({
       step: 'done',

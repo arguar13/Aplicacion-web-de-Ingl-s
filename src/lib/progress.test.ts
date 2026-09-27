@@ -10,7 +10,7 @@ describe('historial diario', () => {
     recordAnswer('en-es', 'the', { clean: true, ms: 2000 }, NOW)
     recordAnswer('en-es', 'water', { clean: false, ms: 5000 }, NOW + 60_000)
     recordAnswer('en-es', 'the', { clean: true, ms: 1000 }, NOW + 120_000)
-    expect(todayStats(getProgress(), NOW)).toEqual({ answers: 3, clean: 2, fresh: 2, ms: 8000 })
+    expect(todayStats(getProgress(), NOW)).toEqual({ answers: 3, clean: 2, fresh: 2, ms: 8000, mastered: 0 })
   })
 
   it('una respuesta tras una pausa larga no infla el tiempo de estudio', () => {

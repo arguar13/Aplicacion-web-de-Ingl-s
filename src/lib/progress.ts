@@ -1,5 +1,6 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
-import { type CardState, fromLeitner, gradeAnswer, parseCard, review } from './scheduler'
+import { appendEvent, clearEvents } from './events'
+import { type CardState, fromLeitner, gradeAnswer, isMastered, parseCard, review } from './scheduler'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { TRACKS, type Track } from './types'
 import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
@@ -17,6 +18,8 @@ export interface DayStats {
   fresh: number
   /** Tiempo de estudio aproximado (ms): suma de lo que tardó cada respuesta, con tope. */
   ms: number
+  /** Palabras dominadas (en alguna habilidad) al final del día. Desde la Fase 10. */
+  mastered?: number
 }
 
 export interface ProgressData {
@@ -41,7 +44,9 @@ function parseDayStats(raw: unknown): DayStats | null {
   const { answers, clean, fresh, ms } = raw
   if (!isInteger(answers, 0) || !isInteger(clean, 0) || !isInteger(fresh, 0) || !isFiniteNumber(ms) || ms < 0)
     return null
-  return { answers, clean: Math.min(clean, answers), fresh: Math.min(fresh, answers), ms }
+  const stats: DayStats = { answers, clean: Math.min(clean, answers), fresh: Math.min(fresh, answers), ms }
+  if (isInteger(raw.mastered, 0)) stats.mastered = raw.mastered
+  return stats
 }
 
 export const EMPTY_PROGRESS: ProgressData = {
@@ -160,6 +165,14 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
   const key = cardKey(track, id)
   const previous = data.cards[key]
   const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now)
+  appendEvent({
+    t: now,
+    id,
+    track,
+    r: !answer.clean ? 'miss' : answer.almost ? 'almost' : 'clean',
+    ms: Math.round(answer.ms),
+  })
+  const cards = { ...data.cards, [key]: card }
   const today = dayKey(now)
   const days = data.days.at(-1) === today ? data.days : [...data.days, today].slice(-MAX_DAYS)
   const stats = data.history[today] ?? EMPTY_DAY
@@ -170,10 +183,20 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
       clean: stats.clean + (answer.clean ? 1 : 0),
       fresh: stats.fresh + (previous ? 0 : 1),
       ms: stats.ms + Math.min(Math.max(answer.ms, 0), MAX_ANSWER_MS),
+      mastered: countMastered(cards),
     },
   }
-  store.set({ ...data, cards: { ...data.cards, [key]: card }, days, history: trimHistory(history) })
+  store.set({ ...data, cards, days, history: trimHistory(history) })
   return card
+}
+
+/** Palabras distintas dominadas en alguna habilidad. */
+export function countMastered(cards: Record<string, CardState>): number {
+  const words = new Set<string>()
+  for (const [key, card] of Object.entries(cards)) {
+    if (isMastered(card)) words.add(key.slice(key.indexOf(':') + 1))
+  }
+  return words.size
 }
 
 /** Conserva los últimos MAX_DAYS días de historial. */
@@ -230,6 +253,7 @@ export function setLastDeck(deckId: string) {
 
 export function resetProgress() {
   store.set(EMPTY)
+  clearEvents()
 }
 
 /** Sustituye todo el progreso (p. ej. al restaurar una copia). */
@@ -257,6 +281,9 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
       clean: Math.max(mine.clean, stats.clean),
       fresh: Math.max(mine.fresh, stats.fresh),
       ms: Math.max(mine.ms, stats.ms),
+      ...(mine.mastered !== undefined || stats.mastered !== undefined
+        ? { mastered: Math.max(mine.mastered ?? 0, stats.mastered ?? 0) }
+        : {}),
     }
   }
   return {
