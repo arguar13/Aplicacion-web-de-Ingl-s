@@ -10,16 +10,16 @@
   --surface: #fffdf8;
   --raised: #ffffff;
   --ink: #1c1a17;
-  --muted: #7a7368;
+  --muted: #6a645a;
   --line: #e4ded2;
   --line-strong: #d3cbbc;
   --accent: #4338ca;
   --accent-ink: #ffffff;
   --accent-soft: #e6e3fa;
-  --ok: #17845a;
+  --ok: #157a53;
   --ok-ink: #ffffff;
   --ok-soft: #dff3e9;
-  --bad: #c2413a;
+  --bad: #ba3e38;
   --bad-soft: #fbe7e4;
 }
 
@@ -68,12 +68,20 @@
   --animate-rise: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
   --animate-pop: pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
   --animate-shake: shake 380ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  /* Entrada de cada pantalla al navegar (no View Transitions: WebKit se colgaba al salir del juego). */
+  --animate-screen: screen 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   @keyframes rise {
     from {
       opacity: 0;
       transform: translateY(10px);
       filter: blur(4px);
+    }
+  }
+  @keyframes screen {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
     }
   }
   @keyframes pop {
@@ -108,18 +116,5 @@
       animation-duration: 1ms !important;
       transition-duration: 1ms !important;
     }
-  }
-}
-
-/* Transición entre pantallas (View Transitions API): la saliente se desvanece, la entrante sube. */
-::view-transition-old(root) {
-  animation: 160ms ease-in both fade-out;
-}
-::view-transition-new(root) {
-  animation: 360ms cubic-bezier(0.2, 0.8, 0.2, 1) 60ms both rise;
-}
-@keyframes fade-out {
-  to {
-    opacity: 0;
   }
 }

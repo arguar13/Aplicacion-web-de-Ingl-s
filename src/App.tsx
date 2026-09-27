@@ -30,6 +30,7 @@ const recoverToHome = () => navigate(HOME, { replace: true })
 
 export default function App() {
   const route = useRoute()
+  const screenKey = formatHash({ screen: route.screen, panel: null })
   const { direction } = useSettings()
 
   useEffect(() => {
@@ -44,18 +45,21 @@ export default function App() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <ErrorBoundary resetKey={formatHash({ screen: route.screen, panel: null })} onGoHome={recoverToHome}>
-        {route.screen.name === 'deck' ? (
-          <Game
-            key={`${route.screen.deck.id}:${direction}`}
-            deck={route.screen.deck}
-            direction={direction}
-            onExit={exitToHome}
-            onOpenSettings={openSettings}
-          />
-        ) : (
-          <DeckPicker onPick={openDeck} onOpenSettings={openSettings} />
-        )}
+      <ErrorBoundary resetKey={screenKey} onGoHome={recoverToHome}>
+        {/* La clave vuelve a montar el contenedor en cada pantalla y con él su animación de entrada. */}
+        <div key={screenKey} className="flex flex-1 animate-screen flex-col">
+          {route.screen.name === 'deck' ? (
+            <Game
+              key={`${route.screen.deck.id}:${direction}`}
+              deck={route.screen.deck}
+              direction={direction}
+              onExit={exitToHome}
+              onOpenSettings={openSettings}
+            />
+          ) : (
+            <DeckPicker onPick={openDeck} onOpenSettings={openSettings} />
+          )}
+        </div>
       </ErrorBoundary>
       <SettingsDialog open={route.panel === 'settings'} onClose={closeSettings} />
       <UpdateToast />

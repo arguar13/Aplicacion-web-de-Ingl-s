@@ -3,7 +3,6 @@
  * instalada) recorre las pantallas de Tecla en vez de salir de la app.
  */
 import { useSyncExternalStore } from 'react'
-import { flushSync } from 'react-dom'
 import { formatHash, parseHash, type Route, sameScreen } from './routes'
 
 /** Profundidad dentro de la app, guardada en cada entrada del historial. */
@@ -17,34 +16,18 @@ const isHistoryState = (value: unknown): value is HistoryState =>
 const depth = () => (isHistoryState(history.state) ? history.state.teclaDepth : 0)
 
 let current: Route = typeof window === 'undefined' ? parseHash('') : parseHash(location.hash)
-/**
- * Ruta a la que se está yendo. Con View Transitions, `current` cambia de forma asíncrona (dentro
- * del callback de la transición); `target` cambia al instante para descartar avisos duplicados:
- * al ir atrás, el navegador dispara `popstate` y `hashchange` por la misma navegación.
- */
-let target: Route = current
 const listeners = new Set<() => void>()
 
-const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-/** Aplica la ruta; los cambios de pantalla se animan con View Transitions donde existan. */
+/**
+ * Aplica la ruta. Al ir atrás el navegador dispara `popstate` y `hashchange` por la misma
+ * navegación: la segunda llega con la ruta ya aplicada y se descarta.
+ */
 function commit(next: Route) {
-  if (formatHash(next) === formatHash(target)) return
-  const screenChanged = !sameScreen(next.screen, target.screen)
-  target = next
-  const update = () => {
-    current = next
-    for (const listener of listeners) listener()
-    if (screenChanged) window.scrollTo({ top: 0 })
-  }
-  if (screenChanged && document.startViewTransition && !prefersReducedMotion()) {
-    const transition = document.startViewTransition(() => flushSync(update))
-    // Si otra navegación empieza antes de que acabe la animación, esta se salta (su `ready` se
-    // rechaza con AbortError). Es el comportamiento esperado: el cambio de pantalla sí se aplica.
-    transition.ready.catch(() => undefined)
-  } else {
-    update()
-  }
+  if (formatHash(next) === formatHash(current)) return
+  const screenChanged = !sameScreen(next.screen, current.screen)
+  current = next
+  for (const listener of listeners) listener()
+  if (screenChanged) window.scrollTo({ top: 0 })
 }
 
 const canonicalState = (): HistoryState => ({ teclaDepth: depth() })
