@@ -66,5 +66,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
+    // e2e/ lo ejecuta Playwright (npm run test:e2e).
+    include: ['src/**/*.test.{ts,tsx}', 'vite/**/*.test.ts'],
   },
 })

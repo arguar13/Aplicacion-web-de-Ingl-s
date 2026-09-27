@@ -18,5 +18,5 @@
     "types": ["vite/client", "node", "vite-plugin-pwa/react"],
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src", "vite", "vite.config.ts"]
+  "include": ["src", "vite", "e2e", "vite.config.ts", "playwright.config.ts"]
 }
