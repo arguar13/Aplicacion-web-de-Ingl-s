@@ -11,7 +11,7 @@ export function Header({ children, action }: { children?: ReactNode; action?: Re
         <span
           className={cn(
             'font-display text-[26px] leading-none tracking-tight',
-            children ? 'max-[27.5rem]:sr-only' : false,
+            children ? 'max-[23.5rem]:sr-only' : false,
           )}
         >
           Tecla
