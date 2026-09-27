@@ -74,8 +74,10 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
         <GoalStat done={today.answers} goal={dailyGoal} />
       </Header>
 
-      <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6 sm:py-12 short:py-3">
-        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl short:max-w-4xl">
+      {/* La barra de la partida queda bajo el encabezado; la palabra y el teclado, centrados en el
+          espacio que sobra (en un teléfono alto, más cerca del pulgar). */}
+      <main className="flex flex-1 flex-col items-center px-4 pt-3 pb-8 sm:px-6 sm:pt-6 sm:pb-12 short:py-3">
+        <div className="flex w-full max-w-md flex-1 flex-col sm:max-w-lg md:max-w-xl short:max-w-4xl">
           <div className="mb-4 short:mb-2">
             <div className="flex items-center justify-between gap-3">
               <button
@@ -102,63 +104,65 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
             </div>
           </div>
 
-          {quiz.summary ? (
-            <SessionSummary
-              reason={quiz.summary}
-              stats={stats}
-              dailyGoal={dailyGoal}
-              deckLabel={deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`}
-              wordCount={deck.words.length}
-              onContinue={resume}
-              onFinish={onExit}
-            />
-          ) : (
-            <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
-              <WordScreen
-                word={round.word}
-                mode={mode}
-                reason={round.reason}
-                ipa={details?.ipa}
-                example={details === null ? null : details.example}
-                typedVerdict={quiz.typed?.verdict}
-                solved={quiz.solved}
-                expanded={quiz.expanded}
-                mistakes={quiz.wrong.length}
-                canReplay={quiz.canReplay}
-                onReplay={() => replay()}
-                onListenSlowly={listenSlowly}
-                onExpand={expand}
+          <div className="flex flex-1 flex-col justify-center">
+            {quiz.summary ? (
+              <SessionSummary
+                reason={quiz.summary}
+                stats={stats}
+                dailyGoal={dailyGoal}
+                deckLabel={deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`}
+                wordCount={deck.words.length}
+                onContinue={resume}
+                onFinish={onExit}
               />
-              {showDetail ? (
-                <DetailCard
-                  key={round.word.id}
+            ) : (
+              <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
+                <WordScreen
                   word={round.word}
                   mode={mode}
-                  details={details}
-                  onContinue={advance}
+                  reason={round.reason}
+                  ipa={details?.ipa}
+                  example={details === null ? null : details.example}
+                  typedVerdict={quiz.typed?.verdict}
+                  solved={quiz.solved}
+                  expanded={quiz.expanded}
+                  mistakes={quiz.wrong.length}
+                  canReplay={quiz.canReplay}
+                  onReplay={() => replay()}
                   onListenSlowly={listenSlowly}
+                  onExpand={expand}
                 />
-              ) : mode === 'type' ? (
-                <TypeAnswer
-                  key={round.word.id}
-                  word={round.word}
-                  solved={quiz.solved}
-                  typed={quiz.typed}
-                  onSubmit={submitTyped}
-                  onContinue={advance}
-                />
-              ) : (
-                <Keypad
-                  options={round.options}
-                  language={answerLanguage(mode)}
-                  answerId={round.word.id}
-                  wrong={quiz.wrong}
-                  solved={quiz.solved}
-                  onAnswer={answer}
-                />
-              )}
-            </div>
-          )}
+                {showDetail ? (
+                  <DetailCard
+                    key={round.word.id}
+                    word={round.word}
+                    mode={mode}
+                    details={details}
+                    onContinue={advance}
+                    onListenSlowly={listenSlowly}
+                  />
+                ) : mode === 'type' ? (
+                  <TypeAnswer
+                    key={round.word.id}
+                    word={round.word}
+                    solved={quiz.solved}
+                    typed={quiz.typed}
+                    onSubmit={submitTyped}
+                    onContinue={advance}
+                  />
+                ) : (
+                  <Keypad
+                    options={round.options}
+                    language={answerLanguage(mode)}
+                    answerId={round.word.id}
+                    wrong={quiz.wrong}
+                    solved={quiz.solved}
+                    onAnswer={answer}
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </main>
 
