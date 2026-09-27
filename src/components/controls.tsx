@@ -12,7 +12,11 @@ interface SegmentedProps<T extends string> {
 /** Grupo de opciones excluyentes con aspecto de pastilla. */
 export function Segmented<T extends string>({ label, value, options, onChange, className }: SegmentedProps<T>) {
   return (
-    <div role="radiogroup" aria-label={label} className={cn('inline-flex rounded-full border border-line bg-bg p-1', className)}>
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className={cn('inline-flex rounded-full border border-line bg-bg p-1', className)}
+    >
       {options.map((option) => {
         const active = option.value === value
         return (
@@ -36,7 +40,15 @@ export function Segmented<T extends string>({ label, value, options, onChange, c
   )
 }
 
-export function Switch({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: string }) {
+export function Switch({
+  checked,
+  onChange,
+  label,
+}: {
+  checked: boolean
+  onChange: (v: boolean) => void
+  label: string
+}) {
   return (
     <button
       type="button"

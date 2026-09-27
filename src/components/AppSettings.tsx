@@ -1,9 +1,24 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { ALL_WORDS } from '@/lib/decks'
-import { countCachedAudio, downloadAudio, isIOS, isStandalone, offlineAudioSupported, useInstallPrompt } from '@/lib/pwa'
+import {
+  countCachedAudio,
+  downloadAudio,
+  isIOS,
+  isStandalone,
+  offlineAudioSupported,
+  useInstallPrompt,
+} from '@/lib/pwa'
 
 /** Fila de ajustes: título y descripción a la izquierda, control a la derecha. */
-export function SettingRow({ title, description, children }: { title: string; description: ReactNode; children?: ReactNode }) {
+export function SettingRow({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description: ReactNode
+  children?: ReactNode
+}) {
   return (
     <div className="flex items-center justify-between gap-4 py-4">
       <div className="min-w-0">
@@ -105,7 +120,10 @@ export function OfflineAudioRow() {
       </SettingRow>
       {downloading && (
         <div className="-mt-1 h-1.5 overflow-hidden rounded-full bg-line" aria-hidden>
-          <div className="h-full bg-accent transition-[width] duration-300" style={{ width: `${(progress / TOTAL) * 100}%` }} />
+          <div
+            className="h-full bg-accent transition-[width] duration-300"
+            style={{ width: `${(progress / TOTAL) * 100}%` }}
+          />
         </div>
       )}
     </div>

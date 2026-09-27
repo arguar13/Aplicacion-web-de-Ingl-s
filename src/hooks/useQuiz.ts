@@ -68,10 +68,13 @@ export function useQuiz(deck: Deck, direction: Direction) {
 
   useEffect(() => {
     if (!state.solved) return
-    const timer = setTimeout(() => {
-      resolving.current = false
-      setState((s) => (s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false } : s))
-    }, promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
+    const timer = setTimeout(
+      () => {
+        resolving.current = false
+        setState((s) => (s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false } : s))
+      },
+      promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS,
+    )
     return () => clearTimeout(timer)
   }, [state.solved, promptIsEnglish])
 

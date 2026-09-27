@@ -2,7 +2,7 @@
 
 > Copia este documento completo como instrucción para el agente de código. Está pensado para
 > ejecutarse **una fase por sesión**, en orden, empezando por la Fase 6. Al iniciar cada sesión
-> indica: *"Ejecuta la Fase N del masterprompt en `docs/MASTERPROMPT.md`"*.
+> indica: _"Ejecuta la Fase N del masterprompt en `docs/MASTERPROMPT.md`"_.
 
 ---
 
@@ -33,20 +33,20 @@ vite-plugin-pwa (Workbox), Vitest 5. Tipografías: Inter Variable e Instrument S
 
 **Qué hay hoy:**
 
-| Área | Archivos | Estado |
-|---|---|---|
-| Vocabulario | `src/data/words.json` | 3.978 palabras `{id, en, es}` ordenadas por frecuencia (wordfreq) |
-| Audio | `public/audio/<id>.mp3` | 3.978 MP3 generados con gTTS (~22 MB) |
-| Niveles | `src/lib/decks.ts` | 8 niveles de 500 + mazo "Todas las palabras" |
-| Repaso espaciado | `src/lib/scheduler.ts` | Leitner con 6 cajas (10 min → 60 días), recola de falladas en sesión |
-| Opciones | `src/lib/quiz.ts` | Distractores al azar que no comparten sentido con la respuesta |
-| Persistencia | `src/lib/store.ts`, `progress.ts`, `settings.ts` | `localStorage` (`tecla:progress:v1`, `tecla:settings:v1`), sincronizado entre pestañas |
-| Audio | `src/lib/audio.ts` | Web Audio API, desbloqueo en iOS, caché LRU de 40 buffers |
-| PWA | `src/lib/pwa.ts`, `vite.config.ts` | Instalable, offline, descarga de todo el audio, aviso de actualización |
-| UI | `src/components/*` | Selector de niveles, pantalla de juego, ajustes (sheet en móvil), tema claro/oscuro/auto |
-| Modos | `settings.direction` | Inglés → Español y Español → Inglés, con progreso separado |
-| Tests | `*.test.ts` | Datos, niveles, distractores, planificador, racha |
-| Despliegue | `public/.htaccess`, README | Sitio estático en Hostinger (`public_html`, también en subcarpeta) |
+| Área             | Archivos                                         | Estado                                                                                   |
+| ---------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Vocabulario      | `src/data/words.json`                            | 3.978 palabras `{id, en, es}` ordenadas por frecuencia (wordfreq)                        |
+| Audio            | `public/audio/<id>.mp3`                          | 3.978 MP3 generados con gTTS (~22 MB)                                                    |
+| Niveles          | `src/lib/decks.ts`                               | 8 niveles de 500 + mazo "Todas las palabras"                                             |
+| Repaso espaciado | `src/lib/scheduler.ts`                           | Leitner con 6 cajas (10 min → 60 días), recola de falladas en sesión                     |
+| Opciones         | `src/lib/quiz.ts`                                | Distractores al azar que no comparten sentido con la respuesta                           |
+| Persistencia     | `src/lib/store.ts`, `progress.ts`, `settings.ts` | `localStorage` (`tecla:progress:v1`, `tecla:settings:v1`), sincronizado entre pestañas   |
+| Audio            | `src/lib/audio.ts`                               | Web Audio API, desbloqueo en iOS, caché LRU de 40 buffers                                |
+| PWA              | `src/lib/pwa.ts`, `vite.config.ts`               | Instalable, offline, descarga de todo el audio, aviso de actualización                   |
+| UI               | `src/components/*`                               | Selector de niveles, pantalla de juego, ajustes (sheet en móvil), tema claro/oscuro/auto |
+| Modos            | `settings.direction`                             | Inglés → Español y Español → Inglés, con progreso separado                               |
+| Tests            | `*.test.ts`                                      | Datos, niveles, distractores, planificador, racha                                        |
+| Despliegue       | `public/.htaccess`, README                       | Sitio estático en Hostinger (`public_html`, también en subcarpeta)                       |
 
 **Navegación actual:** `App.tsx` alterna entre `DeckPicker` y `Game` con `useState`. No hay rutas.
 
@@ -64,7 +64,7 @@ vite-plugin-pwa (Workbox), Vitest 5. Tipografías: Inter Variable e Instrument S
 - Antes de cada commit, en verde y sin excepciones: `npm run typecheck`, `npm run lint` (desde la
   Fase 6), `npm test` y `npm run build`. **Nunca se commitea código roto**, ni "arreglo después".
 - Mensajes en español, en el estilo del historial: `Fase N: descripción concreta en imperativo o
-  resultado`. El cuerpo explica el porqué cuando no es obvio.
+resultado`. El cuerpo explica el porqué cuando no es obvio.
 - Tras el `git push`, comprueba que se completó (`git status -sb` debe mostrar la rama al día con
   `origin/main`). Si el push falla, diagnostica la causa real (autenticación, divergencia) y
   resuélvela. **Prohibido `git push --force`**, `--no-verify` y reescribir historia publicada.
@@ -180,7 +180,7 @@ alguno no es cierto, descártalo con una nota.
 3. **Implementar en pasos atómicos:** cada paso termina con typecheck, lint, tests y build en verde
    → **commit → push**.
 4. **Verificar visualmente:** levanta la app (`npm run dev` y también `npm run build && npm run
-   preview` para lo que toque la PWA) y revisa capturas en los 4 tamaños y los 2 temas. Corrige lo
+preview` para lo que toque la PWA) y revisa capturas en los 4 tamaños y los 2 temas. Corrige lo
    que no esté impecable antes de dar la fase por terminada.
 5. **Documentar:** actualiza el README (funciones, estructura, comandos) y los comentarios útiles.
 6. **Cerrar:** último commit y push; confirma que `main` está al día con `origin/main`. Entrega un

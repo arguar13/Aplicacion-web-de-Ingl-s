@@ -10,7 +10,9 @@ describe('niveles', () => {
 
   it('el nivel 1 empieza por las palabras más frecuentes', () => {
     const first = LEVELS[0].words.slice(0, 20).map((w) => w.id)
-    expect(first).toEqual(expect.arrayContaining(['the', 'and', 'of', 'to'].filter((id) => ALL_WORDS.some((w) => w.id === id))))
+    expect(first).toEqual(
+      expect.arrayContaining(['the', 'and', 'of', 'to'].filter((id) => ALL_WORDS.some((w) => w.id === id))),
+    )
   })
 
   it('el mazo completo tiene todo el vocabulario', () => {

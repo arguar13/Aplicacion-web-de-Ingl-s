@@ -41,7 +41,8 @@ const stateStyles: Record<KeyState, string> = {
     'active:translate-y-1 active:shadow-none',
   ),
   correct: 'animate-pop border-ok bg-ok text-ok-ink shadow-[0_4px_0_0_color-mix(in_oklab,var(--ok)_65%,black)]',
-  wrong: 'animate-shake border-bad/30 bg-bad-soft text-bad shadow-[0_4px_0_0_color-mix(in_oklab,var(--bad)_25%,transparent)]',
+  wrong:
+    'animate-shake border-bad/30 bg-bad-soft text-bad shadow-[0_4px_0_0_color-mix(in_oklab,var(--bad)_25%,transparent)]',
   dimmed: 'border-line bg-raised text-muted opacity-45 shadow-[0_4px_0_0_var(--line)]',
 }
 

@@ -37,7 +37,12 @@ export function senses(translation: string): string[] {
  * sentido con ella ni entre sí. Así nunca hay dos teclas "correctas", tampoco en el modo
  * español → inglés (p. ej. "to" = "a, para" y "for" = "para" no salen juntas).
  */
-export function buildOptions(answer: Word, pool: readonly Word[], count = OPTIONS_PER_ROUND, rng: Rng = Math.random): Word[] {
+export function buildOptions(
+  answer: Word,
+  pool: readonly Word[],
+  count = OPTIONS_PER_ROUND,
+  rng: Rng = Math.random,
+): Word[] {
   const used = new Set(senses(answer.es))
   const distractors: Word[] = []
   const tryAdd = (word: Word) => {

@@ -47,7 +47,10 @@ export function WordScreen({ word, direction, reason, solved, mistakes, canRepla
           {badge && (
             <span
               key={word.id}
-              className={cn('animate-rise rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase', badge.tone)}
+              className={cn(
+                'animate-rise rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
+                badge.tone,
+              )}
             >
               {badge.label}
             </span>
@@ -71,7 +74,10 @@ export function WordScreen({ word, direction, reason, solved, mistakes, canRepla
       <p
         key={word.id}
         lang={english ? 'en' : 'es'}
-        className={cn('mt-3 animate-rise text-center font-display leading-none break-words md:mt-5 short:mt-2', sizeFor(prompt))}
+        className={cn(
+          'mt-3 animate-rise text-center font-display leading-none break-words md:mt-5 short:mt-2',
+          sizeFor(prompt),
+        )}
       >
         {prompt}
       </p>

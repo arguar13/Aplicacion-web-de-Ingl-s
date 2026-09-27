@@ -80,19 +80,18 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
           />
         </div>
 
-        <ContinueCard
-          deck={suggested}
-          summary={summaries.get(suggested.id)!}
-          resuming={hasProgress}
-          onPick={onPick}
-        />
+        <ContinueCard deck={suggested} summary={summaries.get(suggested.id)!} resuming={hasProgress} onPick={onPick} />
 
         <h2 className="mt-12 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase sm:mt-14">
           Todos los niveles
         </h2>
         <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4">
           {LEVELS.map((deck, index) => (
-            <li key={deck.id} className="animate-rise" style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'both' }}>
+            <li
+              key={deck.id}
+              className="animate-rise"
+              style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'both' }}
+            >
               <LevelCard deck={deck} summary={summaries.get(deck.id)!} onPick={onPick} />
             </li>
           ))}
@@ -154,7 +153,7 @@ function ContinueCard({
       aria-keyshortcuts="Enter"
       className={cn(
         cardBase,
-        'animate-rise mt-9 flex items-center gap-4 border-accent bg-accent p-5 text-accent-ink sm:mt-10 sm:gap-5 sm:p-6',
+        'mt-9 flex animate-rise items-center gap-4 border-accent bg-accent p-5 text-accent-ink sm:mt-10 sm:gap-5 sm:p-6',
         'shadow-[0_4px_0_0_color-mix(in_oklab,var(--accent)_65%,black),0_18px_40px_-16px_var(--accent)]',
       )}
     >
@@ -180,7 +179,9 @@ function ContinueCard({
         <span className="grid size-12 place-items-center rounded-full bg-accent-ink text-accent transition-transform group-hover:translate-x-0.5">
           <ArrowRightIcon />
         </span>
-        <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">Enter</Kbd>
+        <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
+          Enter
+        </Kbd>
       </span>
     </button>
   )

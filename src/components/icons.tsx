@@ -77,7 +77,14 @@ export function ShuffleIcon(props: SVGProps<SVGSVGElement>) {
 export function LogoMark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg width={30} height={30} viewBox="0 0 64 64" aria-hidden {...props}>
-      <rect x="4" y="8" width="56" height="52" rx="14" style={{ fill: 'color-mix(in oklab, var(--accent) 70%, black)' }} />
+      <rect
+        x="4"
+        y="8"
+        width="56"
+        height="52"
+        rx="14"
+        style={{ fill: 'color-mix(in oklab, var(--accent) 70%, black)' }}
+      />
       <rect x="4" y="4" width="56" height="50" rx="14" style={{ fill: 'var(--accent)' }} />
       <text
         x="32"
