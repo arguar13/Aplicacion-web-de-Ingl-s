@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises'
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { answerCorrectly, expectAccessible, expectNoHorizontalScroll, storedProgress } from './helpers'
 
 test('el tema elegido se aplica y se recuerda', async ({ page }) => {

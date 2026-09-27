@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { answerCorrectly, expectNoHorizontalScroll } from './helpers'
 
 // El móvil Android más estrecho habitual: 360 px, con progreso (la cabecera muestra estadísticas).

@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { expectAccessible, expectNoHorizontalScroll } from './helpers'
 
 test('el diccionario busca en los dos idiomas y abre la ficha de cada palabra', async ({ page }) => {

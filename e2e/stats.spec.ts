@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { answerManyCorrectly, expectAccessible, expectNoHorizontalScroll } from './helpers'
 
 test('las estadísticas reflejan lo practicado y son accesibles', async ({ page }) => {

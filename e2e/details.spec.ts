@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { currentWord, escapeRegExp, expectAccessible, expectNoHorizontalScroll, optionKey } from './helpers'
 
 test('tras un fallo, la partida se detiene con el ejemplo de la palabra', async ({ page }) => {

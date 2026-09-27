@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 
 test('el botón atrás vuelve a los niveles en vez de salir de la app', async ({ page }) => {
   await page.goto('./')

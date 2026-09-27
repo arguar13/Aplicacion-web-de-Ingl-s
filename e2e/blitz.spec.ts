@@ -1,4 +1,5 @@
-import { expect, type Page, test } from '@playwright/test'
+import type { Page } from '@playwright/test'
+import { expect, test } from './fixtures'
 import words from '../src/data/words.json' with { type: 'json' }
 import { expectAccessible, optionKey } from './helpers'
 

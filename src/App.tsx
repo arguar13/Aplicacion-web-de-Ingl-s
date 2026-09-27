@@ -4,6 +4,7 @@ import { DeckPicker } from '@/components/DeckPicker'
 import { DictionaryScreen } from '@/components/DictionaryScreen'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Game } from '@/components/Game'
+import { Onboarding } from '@/components/Onboarding'
 import { SettingsDialog } from '@/components/SettingsDialog'
 import { SmartDeckScreen } from '@/components/SmartDeckScreen'
 import { StatsScreen } from '@/components/stats/StatsScreen'
@@ -11,7 +12,8 @@ import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, type Deck } from '@/lib/decks'
-import { setLastDeck } from '@/lib/progress'
+import { useOnboardingDone } from '@/lib/onboarding'
+import { setLastDeck, useProgress } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
@@ -38,19 +40,27 @@ const openSmart = (kind: SmartDeckKind) => go({ name: 'smart', kind })
 const exitToHome = () => goBack(HOME)
 const recoverToHome = () => navigate(HOME, { replace: true })
 
+/** Inicio: la bienvenida la primera vez (sin progreso), luego los niveles. */
+function Home() {
+  const onboarded = useOnboardingDone()
+  const hasProgress = Object.keys(useProgress().cards).length > 0
+  if (!onboarded && !hasProgress) return <Onboarding onStart={openDeck} />
+  return (
+    <DeckPicker
+      onPick={openDeck}
+      onOpenSmart={openSmart}
+      onOpenBlitz={() => go({ name: 'blitz' })}
+      onOpenStats={() => go({ name: 'stats' })}
+      onOpenDictionary={() => go({ name: 'dictionary' })}
+      onOpenSettings={openSettings}
+    />
+  )
+}
+
 function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
   switch (screen.name) {
     case 'home':
-      return (
-        <DeckPicker
-          onPick={openDeck}
-          onOpenSmart={openSmart}
-          onOpenBlitz={() => go({ name: 'blitz' })}
-          onOpenStats={() => go({ name: 'stats' })}
-          onOpenDictionary={() => go({ name: 'dictionary' })}
-          onOpenSettings={openSettings}
-        />
-      )
+      return <Home />
     case 'deck':
       return (
         <Game

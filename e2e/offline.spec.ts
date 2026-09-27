@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './fixtures'
 import { answerCorrectly } from './helpers'
 
 test('funciona sin conexión tras la primera visita', async ({ page, context, browserName }) => {
