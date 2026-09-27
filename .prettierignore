@@ -6,3 +6,5 @@ public/audio
 src/data/words.json
 playwright-report
 test-results
+lighthouse-report
+.lighthouseci

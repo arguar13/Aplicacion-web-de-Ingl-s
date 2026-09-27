@@ -9,3 +9,5 @@ test-results
 .vscode/*
 !.vscode/extensions.json
 __pycache__
+lighthouse-report
+.lighthouseci

@@ -1,14 +1,9 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { AchievementToast } from '@/components/achievements/AchievementToast'
-import { BlitzScreen } from '@/components/BlitzScreen'
 import { DeckPicker } from '@/components/DeckPicker'
-import { DictionaryScreen } from '@/components/DictionaryScreen'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-import { Game } from '@/components/Game'
 import { Onboarding } from '@/components/Onboarding'
-import { SettingsDialog } from '@/components/SettingsDialog'
-import { SmartDeckScreen } from '@/components/SmartDeckScreen'
-import { StatsScreen } from '@/components/stats/StatsScreen'
+import { loadSettingsContent, SettingsDialog } from '@/components/SettingsDialog'
 import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
 import { useNow } from '@/hooks/useNow'
@@ -23,6 +18,31 @@ import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
 import { useSettings } from '@/lib/settings'
 import type { SmartDeckKind } from '@/lib/smartDecks'
 import type { Mode } from '@/lib/types'
+
+/*
+ * El inicio (y la bienvenida) van en el paquete principal. Las demás pantallas se cargan al abrirlas:
+ * el primer pintado no las espera, y el service worker igualmente las guarda para usarlas sin
+ * conexión.
+ */
+const loadGame = () => import('@/components/Game')
+const Game = lazy(() => loadGame().then((module) => ({ default: module.Game })))
+const SmartDeckScreen = lazy(() =>
+  import('@/components/SmartDeckScreen').then((module) => ({ default: module.SmartDeckScreen })),
+)
+const BlitzScreen = lazy(() => import('@/components/BlitzScreen').then((module) => ({ default: module.BlitzScreen })))
+const StatsScreen = lazy(() =>
+  import('@/components/stats/StatsScreen').then((module) => ({ default: module.StatsScreen })),
+)
+const DictionaryScreen = lazy(() =>
+  import('@/components/DictionaryScreen').then((module) => ({ default: module.DictionaryScreen })),
+)
+
+/** Tras el primer pintado se adelanta lo que casi seguro se abre después: la partida y Ajustes. */
+const PREFETCH_DELAY_MS = 1500
+function prefetchLikelyScreens() {
+  void loadGame()
+  void loadSettingsContent()
+}
 
 const go = (screen: Screen) => navigate({ screen, panel: null })
 const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
@@ -102,6 +122,11 @@ export default function App() {
 
   useEffect(() => watchAchievements(), [])
 
+  useEffect(() => {
+    const timer = setTimeout(prefetchLikelyScreens, PREFETCH_DELAY_MS)
+    return () => clearTimeout(timer)
+  }, [])
+
   // Al abrir la app y al cambiar de día: los protectores cuidan los días sin práctica.
   const today = dayKey(useNow())
   useEffect(() => {
@@ -114,7 +139,9 @@ export default function App() {
       <ErrorBoundary resetKey={screenKey} onGoHome={recoverToHome}>
         {/* La clave vuelve a montar el contenedor en cada pantalla y con él su animación de entrada. */}
         <div key={screenKey} className="flex flex-1 animate-screen flex-col">
-          <ScreenView screen={route.screen} mode={mode} />
+          <Suspense fallback={null}>
+            <ScreenView screen={route.screen} mode={mode} />
+          </Suspense>
         </div>
       </ErrorBoundary>
       <SettingsDialog open={panel === 'settings'} onClose={closePanel} />

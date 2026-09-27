@@ -25,10 +25,34 @@ jobs:
       - run: npm run format:check
       - run: npm test
       - run: npm run build
+      - name: Presupuesto de tamaño
+        run: npm run budget
       - uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse (móvil)
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@v5
+        with:
+          name: dist
+          path: dist
+      # Rendimiento ≥ 90 y accesibilidad, buenas prácticas y SEO al 100 (lighthouserc.json).
+      - run: npx --yes @lhci/cli@0.15.1 autorun
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: lighthouse-report
+          path: lighthouse-report
           retention-days: 7
 
   e2e:
