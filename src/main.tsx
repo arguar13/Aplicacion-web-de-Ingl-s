@@ -5,6 +5,7 @@ import '@fontsource/instrument-serif/400.css'
 import '@fontsource/instrument-serif/400-italic.css'
 import './index.css'
 import App from './App'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { initTheme } from './lib/theme'
 
 initTheme()
@@ -14,6 +15,8 @@ if (!container) throw new Error('Falta el elemento #root en index.html')
 
 createRoot(container).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>,
 )

@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { DeckPicker } from '@/components/DeckPicker'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Game } from '@/components/Game'
 import { SettingsDialog } from '@/components/SettingsDialog'
 import { UpdateToast } from '@/components/UpdateToast'
 import type { Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
-import { HOME, titleOf } from '@/lib/routes'
+import { formatHash, HOME, titleOf } from '@/lib/routes'
 import { useSettings } from '@/lib/settings'
 
 const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
@@ -23,6 +24,7 @@ function openDeck(deck: Deck) {
 }
 
 const exitToHome = () => goBack(HOME)
+const recoverToHome = () => navigate(HOME, { replace: true })
 
 export default function App() {
   const route = useRoute()
@@ -34,17 +36,19 @@ export default function App() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      {route.screen.name === 'deck' ? (
-        <Game
-          key={`${route.screen.deck.id}:${direction}`}
-          deck={route.screen.deck}
-          direction={direction}
-          onExit={exitToHome}
-          onOpenSettings={openSettings}
-        />
-      ) : (
-        <DeckPicker onPick={openDeck} onOpenSettings={openSettings} />
-      )}
+      <ErrorBoundary resetKey={formatHash({ screen: route.screen, panel: null })} onGoHome={recoverToHome}>
+        {route.screen.name === 'deck' ? (
+          <Game
+            key={`${route.screen.deck.id}:${direction}`}
+            deck={route.screen.deck}
+            direction={direction}
+            onExit={exitToHome}
+            onOpenSettings={openSettings}
+          />
+        ) : (
+          <DeckPicker onPick={openDeck} onOpenSettings={openSettings} />
+        )}
+      </ErrorBoundary>
       <SettingsDialog open={route.panel === 'settings'} onClose={closeSettings} />
       <UpdateToast />
     </div>
