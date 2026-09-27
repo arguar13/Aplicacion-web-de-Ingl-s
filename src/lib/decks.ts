@@ -7,9 +7,13 @@ export const ALL_WORDS = parseWords(words)
 
 export const LEVEL_SIZE = 500
 
+export type DeckKind = 'level' | 'all' | 'review' | 'hard'
+
 export interface Deck {
   id: string
-  /** Número de nivel; `null` para el mazo con todas las palabras. */
+  /** Nivel, todas las palabras, o un mazo armado con el progreso (repaso del día, difíciles). */
+  kind: DeckKind
+  /** Número de nivel; `null` en los demás mazos. */
   level: number | null
   name: string
   description: string
@@ -38,6 +42,7 @@ export const LEVELS: readonly Deck[] = Array.from({ length: Math.ceil(ALL_WORDS.
   const deckWords = ALL_WORDS.slice(from, from + LEVEL_SIZE)
   return {
     id: `level-${i + 1}`,
+    kind: 'level' as const,
     level: i + 1,
     name,
     description,
@@ -50,6 +55,7 @@ export const LEVELS: readonly Deck[] = Array.from({ length: Math.ceil(ALL_WORDS.
 
 export const ALL_DECK: Deck = {
   id: 'all',
+  kind: 'all',
   level: null,
   name: 'Todas las palabras',
   description: 'Mezcladas, de todos los niveles.',
@@ -71,13 +77,13 @@ const rankOf = new Map(ALL_WORDS.map((word, index) => [word.id, index]))
 
 /**
  * Palabras de las que salen los distractores de `word`. En un nivel, el propio nivel (todas son de
- * frecuencia parecida). En un mazo mayor, las de frecuencia cercana a la respuesta: si no, una
- * palabra avanzada competiría con "the" y se adivinaría por descarte.
+ * frecuencia parecida). En los demás mazos (todas, repaso del día, difíciles), las del vocabulario
+ * de frecuencia cercana a la respuesta: si no, una palabra avanzada competiría con "the" y se
+ * adivinaría por descarte, y un mazo pequeño repetiría siempre las mismas opciones.
  */
 export function distractorPool(deck: Deck, word: Word): readonly Word[] {
-  if (deck.words.length <= LEVEL_SIZE) return deck.words
+  if (deck.kind === 'level') return deck.words
   const rank = rankOf.get(word.id) ?? 0
   const start = Math.max(0, Math.min(rank - DISTRACTOR_WINDOW / 2, ALL_WORDS.length - DISTRACTOR_WINDOW))
-  const nearby = new Set(ALL_WORDS.slice(start, start + DISTRACTOR_WINDOW).map((w) => w.id))
-  return deck.words.filter((w) => nearby.has(w.id))
+  return ALL_WORDS.slice(start, start + DISTRACTOR_WINDOW)
 }

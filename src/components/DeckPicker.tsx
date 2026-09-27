@@ -3,14 +3,17 @@ import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
+import { formatCount, plural } from '@/lib/format'
 import { dailyStreak, todayStats, useProgress } from '@/lib/progress'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
+import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
 import type { Direction } from '@/lib/types'
 import { Badge } from './ui/Badge'
 import { Segmented } from './ui/controls'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
+import { ForecastChart } from './ForecastChart'
 import { GoalStat, Header, Stat } from './Header'
 import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
@@ -27,10 +30,11 @@ const shortcutOf = (deck: Deck) => (deck.level === null ? '0' : deck.level <= 9 
 
 interface Props {
   onPick: (deck: Deck) => void
+  onOpenSmart: (kind: SmartDeckKind) => void
   onOpenSettings: () => void
 }
 
-export function DeckPicker({ onPick, onOpenSettings }: Props) {
+export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
   const progress = useProgress()
   const { direction, dailyGoal } = useSettings()
   const now = useNow()
@@ -40,8 +44,14 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
   const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
 
+  const due = anyProgress ? dueToday(progress, direction, now).length : 0
+  const hard = anyProgress ? hardWords(progress, direction).length : 0
+
   useKeyDown((event) => {
     if (event.key === 'Enter') return onPick(suggested)
+    const key = event.key.toLowerCase()
+    if (key === 'r' && due > 0) return onOpenSmart('review')
+    if (key === 'd' && hard > 0) return onOpenSmart('hard')
     const deck = DECKS.find((d) => shortcutOf(d) === event.key)
     if (deck) onPick(deck)
   })
@@ -85,6 +95,17 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
 
         <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
         <BackupReminder onOpenSettings={onOpenSettings} />
+        {anyProgress && (
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+            <ReviewCard
+              due={due}
+              forecast={forecast(progress, direction, now)}
+              now={now}
+              onOpen={() => onOpenSmart('review')}
+            />
+            <HardCard count={hard} onOpen={() => onOpenSmart('hard')} />
+          </div>
+        )}
 
         <h2 className="mt-12 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase sm:mt-14">
           Todos los niveles
@@ -117,6 +138,89 @@ const cardBase = cn(
   'hover:-translate-y-0.5 active:translate-y-1 active:shadow-none',
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
 )
+
+/** Repaso del día: cuántas palabras tocan hoy en todos los niveles y la previsión de la semana. */
+function ReviewCard({
+  due,
+  forecast: counts,
+  now,
+  onOpen,
+}: {
+  due: number
+  forecast: number[]
+  now: number
+  onOpen: () => void
+}) {
+  const upcoming = counts.slice(1).reduce((sum, n) => sum + n, 0)
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      disabled={due === 0}
+      aria-keyshortcuts={due > 0 ? 'R' : undefined}
+      className={cn(
+        cardBase,
+        'flex h-full flex-col border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)]',
+        'hover:border-accent/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--accent)_30%,var(--line))]',
+        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-[0_4px_0_0_var(--line)]',
+      )}
+    >
+      <span className="flex w-full items-start justify-between gap-3">
+        <span>
+          <span className="block text-[17px] font-semibold">Repaso del día</span>
+          <span className="mt-0.5 block text-sm text-muted">
+            {due > 0 ? `${plural(due, 'palabra')} te ${due === 1 ? 'espera' : 'esperan'} hoy` : 'Todo al día'}
+          </span>
+        </span>
+        {due > 0 && <Kbd className="hidden pointer-fine:inline-flex">R</Kbd>}
+      </span>
+      <ForecastChart counts={counts} now={now} className="mt-5 w-full" />
+      <span className="mt-2 block text-[11px] text-muted">
+        {upcoming > 0 ? `${plural(upcoming, 'repaso')} en los próximos 6 días` : 'Sin repasos en los próximos días'}
+      </span>
+    </button>
+  )
+}
+
+/** Mis difíciles: las palabras que más se olvidan, para practicarlas aparte. */
+function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      disabled={count === 0}
+      aria-keyshortcuts={count > 0 ? 'D' : undefined}
+      className={cn(
+        cardBase,
+        'flex h-full flex-col border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)]',
+        'hover:border-bad/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--bad)_25%,var(--line))]',
+        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-[0_4px_0_0_var(--line)]',
+      )}
+    >
+      <span className="flex w-full items-start justify-between gap-3">
+        <span>
+          <span className="block text-[17px] font-semibold">Mis difíciles</span>
+          <span className="mt-0.5 block text-sm text-muted">
+            {count > 0 ? 'Las que más se te olvidan' : 'Por ahora, ninguna'}
+          </span>
+        </span>
+        {count > 0 && <Kbd className="hidden pointer-fine:inline-flex">D</Kbd>}
+      </span>
+      <span className="mt-auto pt-5">
+        <span
+          className={cn('block font-display text-5xl leading-none tabular-nums', count > 0 ? 'text-bad' : 'text-muted')}
+        >
+          {formatCount(count)}
+        </span>
+        <span className="mt-2 block text-[11px] text-muted">
+          {count > 0
+            ? 'Olvidadas dos veces o más, o de dificultad alta'
+            : 'Aparecerán aquí las que olvides más de una vez'}
+        </span>
+      </span>
+    </button>
+  )
+}
 
 function DueBadge({ count }: { count: number }) {
   if (count === 0) return null

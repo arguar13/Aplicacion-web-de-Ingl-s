@@ -8,10 +8,11 @@
  * service worker no necesita reglas extra y los enlaces directos funcionan sin conexión.
  */
 import { ALL_DECK, type Deck, LEVELS } from './decks'
+import type { SmartDeckKind } from './smartDecks'
 
 const PANELS = ['settings'] as const
 export type Panel = (typeof PANELS)[number]
-export type Screen = { name: 'home' } | { name: 'deck'; deck: Deck }
+export type Screen = { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind }
 
 export interface Route {
   screen: Screen
@@ -21,6 +22,9 @@ export interface Route {
 export const HOME: Route = { screen: { name: 'home' }, panel: null }
 
 const PANEL_SLUGS: Record<Panel, string> = { settings: 'ajustes' }
+const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard']
+const SMART_PATHS: Record<SmartDeckKind, string> = { review: '/repaso', hard: '/dificiles' }
+const SMART_TITLES: Record<SmartDeckKind, string> = { review: 'Repaso del día', hard: 'Mis difíciles' }
 
 function deckPath(deck: Deck): string {
   return deck.level === null ? '/todas' : `/nivel/${deck.level}`
@@ -40,12 +44,15 @@ export function parseHash(hash: string): Route {
   const panel = PANELS.find((p) => PANEL_SLUGS[p] === panelSlug) ?? null
 
   if (path === '/') return { screen: { name: 'home' }, panel }
+  const smart = SMART_KINDS.find((kind) => SMART_PATHS[kind] === path)
+  if (smart) return { screen: { name: 'smart', kind: smart }, panel }
   const deck = deckFromPath(path)
   return deck ? { screen: { name: 'deck', deck }, panel } : HOME
 }
 
 export function formatHash(route: Route): string {
-  const path = route.screen.name === 'deck' ? deckPath(route.screen.deck) : '/'
+  const { screen } = route
+  const path = screen.name === 'deck' ? deckPath(screen.deck) : screen.name === 'smart' ? SMART_PATHS[screen.kind] : '/'
   return `#${path}${route.panel ? `?panel=${PANEL_SLUGS[route.panel]}` : ''}`
 }
 
@@ -53,9 +60,10 @@ export function formatHash(route: Route): string {
 export function titleOf(route: Route): string {
   const base = 'Tecla · Vocabulario en inglés'
   if (route.screen.name === 'home') return base
+  if (route.screen.name === 'smart') return `${SMART_TITLES[route.screen.kind]} — Tecla`
   const { deck } = route.screen
   return `${deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`} — Tecla`
 }
 
 export const sameScreen = (a: Screen, b: Screen) =>
-  a.name === b.name && (a.name !== 'deck' || (b.name === 'deck' && a.deck.id === b.deck.id))
+  formatHash({ screen: a, panel: null }) === formatHash({ screen: b, panel: null })

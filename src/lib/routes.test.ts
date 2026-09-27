@@ -31,6 +31,8 @@ describe('rutas', () => {
       { ...HOME, panel: 'settings' },
       ...[...LEVELS, ALL_DECK].map((deck): Route => ({ screen: { name: 'deck', deck }, panel: null })),
       { screen: { name: 'deck', deck: ALL_DECK }, panel: 'settings' },
+      { screen: { name: 'smart', kind: 'review' }, panel: null },
+      { screen: { name: 'smart', kind: 'hard' }, panel: 'settings' },
     ]
     for (const route of routes) expect(parseHash(formatHash(route))).toEqual(route)
   })
