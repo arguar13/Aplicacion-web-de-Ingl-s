@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef } from 'react'
 import type { QuizStats, SummaryReason } from '@/hooks/useQuiz'
 import { formatCount, plural } from '@/lib/format'
-import type { Direction } from '@/lib/types'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Surface } from './ui/Surface'
@@ -9,7 +8,6 @@ import { Surface } from './ui/Surface'
 interface Props {
   reason: SummaryReason
   stats: QuizStats
-  direction: Direction
   dailyGoal: number
   onContinue: () => void
   onFinish: () => void
@@ -19,7 +17,7 @@ interface Props {
 const MISSED_SHOWN = 8
 
 /** Resumen de la sesión: al cumplir la meta del día o al salir de la partida. */
-export function SessionSummary({ reason, stats, direction, dailyGoal, onContinue, onFinish }: Props) {
+export function SessionSummary({ reason, stats, dailyGoal, onContinue, onFinish }: Props) {
   const titleId = useId()
   const primary = useRef<HTMLButtonElement>(null)
   const goal = reason === 'goal'
@@ -65,12 +63,12 @@ export function SessionSummary({ reason, stats, direction, dailyGoal, onContinue
           <ul className="mt-2 flex flex-wrap gap-2">
             {missed.map((word) => (
               <li key={word.id} className="rounded-full border border-line bg-raised px-3 py-1 text-sm">
-                <span lang={direction === 'en-es' ? 'en' : 'es'} className="font-medium">
-                  {direction === 'en-es' ? word.en : word.es}
+                <span lang="en" className="font-medium">
+                  {word.en}
                 </span>
                 <span className="text-muted"> · </span>
-                <span lang={direction === 'en-es' ? 'es' : 'en'} className="text-muted">
-                  {direction === 'en-es' ? word.es : word.en}
+                <span lang="es" className="text-muted">
+                  {word.es}
                 </span>
               </li>
             ))}

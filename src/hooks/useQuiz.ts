@@ -5,11 +5,12 @@ import { cardLookup, getProgress, recordAnswer, recordStreak, todayStats } from 
 import { buildOptions } from '@/lib/quiz'
 import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
 import { getSettings } from '@/lib/settings'
-import type { Direction, Round, Word } from '@/lib/types'
+import { type Mode, type Round, trackOf, type Word } from '@/lib/types'
+import { judgeTyped, type TypedVerdict } from '@/lib/typing'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
 const ADVANCE_DELAY_MS = 850
-/** En español → inglés la pronunciación suena al acertar: se deja un poco más para oírla. */
+/** Cuando la pronunciación suena al acertar, se deja un poco más para oírla. */
 const ADVANCE_DELAY_WITH_AUDIO_MS = 1300
 
 export interface QuizStats {
@@ -37,6 +38,8 @@ interface State {
   next: Round | null
   /** Ids de las teclas que el usuario ya pulsó mal en esta ronda. */
   wrong: string[]
+  /** Modo escribir: lo que se escribió y cómo se juzgó. */
+  typed: { text: string; verdict: TypedVerdict } | null
   solved: boolean
   /** Tras responder, la partida se detiene con el detalle de la palabra a la vista. */
   expanded: boolean
@@ -47,25 +50,39 @@ interface State {
   stats: QuizStats
 }
 
-function nextRound(deck: Deck, direction: Direction, session: Session): Round {
+/** Modos en que la palabra suena al aparecer: la pregunta es la palabra inglesa, oída o leída. */
+const soundsOnShow = (mode: Mode) => mode === 'en-es' || mode === 'listen'
+
+function nextRound(deck: Deck, mode: Mode, session: Session): Round {
   const progress = getProgress()
   const now = Date.now()
   const { newPerDay } = getSettings()
   const allowNew = newPerDay === 0 || todayStats(progress, now).fresh < newPerDay
-  const pick = pickNext(deck.words, cardLookup(progress, direction), session, now, {
+  const pick = pickNext(deck.words, cardLookup(progress, trackOf(mode)), session, now, {
     newOrder: deck.newOrder,
     allowNew,
   })
-  return { ...pick, options: buildOptions(pick.word, distractorPool(deck, pick.word)) }
+  // En escribir no hay teclas: la respuesta se escribe.
+  const options = mode === 'type' ? [] : buildOptions(pick.word, distractorPool(deck, pick.word))
+  return { ...pick, options }
 }
 
-export function useQuiz(deck: Deck, direction: Direction) {
+/** Falladas de la sesión con `word` añadida (una sola vez). */
+const missedWith = (stats: QuizStats, word: Word) =>
+  stats.missed.some((w) => w.id === word.id) ? stats.missed : [...stats.missed, word]
+
+const withNext = (s: State): State =>
+  s.next ? { ...s, round: s.next, next: null, wrong: [], typed: null, solved: false, expanded: false } : s
+
+export function useQuiz(deck: Deck, mode: Mode) {
+  const track = trackOf(mode)
   // Objeto mutable de la sesión: no se pinta, solo alimenta al planificador.
   const [session] = useState(createSession)
   const [state, setState] = useState<State>(() => ({
-    round: nextRound(deck, direction, session),
+    round: nextRound(deck, mode, session),
     next: null,
     wrong: [],
+    typed: null,
     solved: false,
     expanded: false,
     goalReached: false,
@@ -76,23 +93,23 @@ export function useQuiz(deck: Deck, direction: Direction) {
   const resolving = useRef(false)
   // Momento en que apareció la palabra: lo que se tarda en acertar afina el repaso espaciado.
   const shownAt = useRef(0)
-  // Inglés → español: suena al aparecer. Español → inglés: sonar antes delataría la respuesta,
-  // así que suena al acertar.
-  const promptIsEnglish = direction === 'en-es'
-  const canReplay = promptIsEnglish || state.solved
+  const onShow = soundsOnShow(mode)
+  // Si la pregunta no es la palabra inglesa, sonar antes delataría la respuesta: suena al acertar.
+  const canReplay = onShow || state.solved
 
   useEffect(() => {
     shownAt.current = performance.now()
   }, [state.round])
 
   useEffect(() => {
-    if (promptIsEnglish && getSettings().autoplay) void playPronunciation(state.round.word.id)
+    // En escuchar, el audio es la pregunta: suena aunque la pronunciación automática esté apagada.
+    if (mode === 'listen' || (onShow && getSettings().autoplay)) void playPronunciation(state.round.word.id)
     else preloadPronunciation(state.round.word.id)
-  }, [state.round, promptIsEnglish])
+  }, [state.round, mode, onShow])
 
   useEffect(() => {
-    if (state.solved && !promptIsEnglish && getSettings().autoplay) void playPronunciation(state.round.word.id)
-  }, [state.solved, state.round, promptIsEnglish])
+    if (state.solved && !onShow && getSettings().autoplay) void playPronunciation(state.round.word.id)
+  }, [state.solved, state.round, onShow])
 
   useEffect(() => {
     if (state.next) preloadPronunciation(state.next.word.id)
@@ -101,29 +118,24 @@ export function useQuiz(deck: Deck, direction: Direction) {
   useEffect(() => {
     // Avance automático solo con la ronda resuelta y nada abierto (ni detalle ni resumen).
     if (!state.solved || state.expanded || state.summary) return
-    const timer = setTimeout(advance, promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
+    const timer = setTimeout(advance, onShow ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
     return () => clearTimeout(timer)
-  }, [state.solved, state.expanded, state.summary, promptIsEnglish])
+  }, [state.solved, state.expanded, state.summary, onShow])
 
-  /** Pasa a la siguiente palabra (ya calculada al acertar). */
   /** Pasa a la siguiente palabra, o al resumen si esta respuesta completó la meta del día. */
   function advance() {
     setState((s) => {
       if (!s.solved || !s.next) return s
       if (s.goalReached) return { ...s, goalReached: false, expanded: false, summary: 'goal' }
       resolving.current = false
-      return { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false }
+      return withNext(s)
     })
   }
 
   /** Sale del resumen y sigue con la siguiente palabra. */
   function resume() {
     resolving.current = false
-    setState((s) =>
-      s.next
-        ? { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false, summary: null }
-        : { ...s, summary: null },
-    )
+    setState((s) => ({ ...withNext(s), summary: null }))
   }
 
   /**
@@ -141,32 +153,27 @@ export function useQuiz(deck: Deck, direction: Direction) {
     setState((s) => (s.solved ? { ...s, expanded: true } : s))
   }
 
-  function answer(id: string) {
-    const { round, wrong, solved, stats } = state
-    if (resolving.current || solved || wrong.includes(id)) return
-
-    if (id !== round.word.id) {
-      const missed = stats.missed.some((w) => w.id === round.word.id) ? stats.missed : [...stats.missed, round.word]
-      setState({ ...state, wrong: [...wrong, id], stats: { ...stats, streak: 0, missed } })
-      return
-    }
-
+  /**
+   * Cierra la ronda: registra la respuesta, avanza la sesión, calcula la siguiente palabra y decide
+   * si la partida se detiene para mostrar el detalle.
+   */
+  function solve(clean: boolean, extra: Partial<State> = {}, { almost = false } = {}) {
+    const { round, stats } = state
     resolving.current = true
-    const clean = wrong.length === 0
-    const isNew = !cardLookup(getProgress(), direction)(round.word.id)
-    const { dailyGoal } = getSettings()
+    const isNew = !cardLookup(getProgress(), track)(round.word.id)
+    const { dailyGoal, detailsPause } = getSettings()
     const answeredBefore = todayStats(getProgress()).answers
-    recordAnswer(direction, round.word.id, { clean, ms: performance.now() - shownAt.current })
+    recordAnswer(track, round.word.id, { clean, almost, ms: performance.now() - shownAt.current })
     advanceSession(session, round.word.id, clean)
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)
-    const pause = getSettings().detailsPause
     setState({
       ...state,
+      ...extra,
       solved: true,
       // Tras un fallo es cuando más ayuda ver el ejemplo; quien va rápido no se detiene.
-      expanded: pause === 'always' || (pause === 'mistakes' && !clean),
-      next: nextRound(deck, direction, session),
+      expanded: detailsPause === 'always' || (detailsPause === 'mistakes' && !clean),
+      next: nextRound(deck, mode, session),
       goalReached: answeredBefore < dailyGoal && answeredBefore + 1 >= dailyGoal,
       stats: {
         ...stats,
@@ -175,13 +182,39 @@ export function useQuiz(deck: Deck, direction: Direction) {
         streak,
         bestStreak: Math.max(stats.bestStreak, streak),
         fresh: stats.fresh + (isNew ? 1 : 0),
+        missed: clean ? stats.missed : missedWith(stats, round.word),
       },
     })
+  }
+
+  /** Pulsar una tecla de respuesta. */
+  function answer(id: string) {
+    const { round, wrong, solved, stats } = state
+    if (resolving.current || solved || wrong.includes(id)) return
+    if (id !== round.word.id) {
+      setState({
+        ...state,
+        wrong: [...wrong, id],
+        stats: { ...stats, streak: 0, missed: missedWith(stats, round.word) },
+      })
+      return
+    }
+    solve(wrong.length === 0)
+  }
+
+  /**
+   * Modo escribir: exacta o "casi" (un error de tecleo) cuentan como acierto, "casi" con nota más
+   * baja; incorrecta muestra la respuesta y cuenta como fallo.
+   */
+  function submitTyped(text: string) {
+    if (resolving.current || state.solved || !text.trim()) return
+    const verdict = judgeTyped(text, state.round.word.en)
+    solve(verdict !== 'wrong', { typed: { text, verdict } }, { almost: verdict === 'almost' })
   }
 
   function replay({ slow = false }: { slow?: boolean } = {}) {
     if (canReplay) void playPronunciation(state.round.word.id, { slow })
   }
 
-  return { ...state, canReplay, answer, replay, expand, advance, resume, requestExit }
+  return { ...state, canReplay, answer, submitTyped, replay, expand, advance, resume, requestExit }
 }

@@ -22,5 +22,21 @@ export interface Round {
 
 export type Rng = () => number
 
-/** Sentido de la pregunta: palabra en inglés → traducción, o al revés. */
-export type Direction = 'en-es' | 'es-en'
+/**
+ * Cómo se practica: traducir (inglés → español), inverso (español → inglés), escuchar (suena la
+ * palabra sin mostrarla), escribir (se escribe la palabra inglesa) o completar una frase.
+ */
+export type Mode = 'en-es' | 'es-en' | 'listen' | 'type' | 'cloze'
+export const MODES: readonly Mode[] = ['en-es', 'es-en', 'listen', 'type', 'cloze']
+
+/**
+ * Habilidad con progreso propio: cada una tiene sus tarjetas (`${track}:${wordId}`). Completar una
+ * frase refuerza la comprensión del inglés, así que comparte progreso con traducir.
+ */
+export type Track = 'en-es' | 'es-en' | 'listen' | 'type'
+export const TRACKS: readonly Track[] = ['en-es', 'es-en', 'listen', 'type']
+
+export const trackOf = (mode: Mode): Track => (mode === 'cloze' ? 'en-es' : mode)
+
+/** Idioma de las teclas de respuesta (en escribir no hay teclas: se escribe en inglés). */
+export const answerLanguage = (mode: Mode): 'es' | 'en' => (mode === 'en-es' || mode === 'listen' ? 'es' : 'en')

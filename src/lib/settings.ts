@@ -1,6 +1,6 @@
 /** Preferencias del usuario, guardadas en el dispositivo. */
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
-import type { Direction } from './types'
+import { MODES, type Mode } from './types'
 
 export type ThemePreference = 'system' | 'light' | 'dark'
 /** Cuándo se detiene la partida tras responder para mostrar el detalle (ejemplo, IPA, formas). */
@@ -13,7 +13,8 @@ export const NEW_PER_DAY = [10, 20, 40, 0] as const
 export type NewPerDay = (typeof NEW_PER_DAY)[number]
 
 export interface Settings {
-  direction: Direction
+  /** Cómo se practica (antes `direction`: solo había traducir e inverso). */
+  mode: Mode
   /** Reproducir la pronunciación sin que el usuario la pida. */
   autoplay: boolean
   theme: ThemePreference
@@ -28,7 +29,7 @@ export interface Settings {
 export const SETTINGS_KEY = 'tecla:settings:v1'
 
 const DEFAULTS: Settings = {
-  direction: 'en-es',
+  mode: 'en-es',
   autoplay: true,
   theme: 'system',
   detailsPause: 'mistakes',
@@ -43,7 +44,8 @@ export const SETTINGS_VERSION = 1
 
 export function parseSettings(raw: Record<string, unknown>): Settings {
   return {
-    direction: raw.direction === 'es-en' ? 'es-en' : 'en-es',
+    // Hasta la Fase 8 se guardaba `direction` ('en-es' | 'es-en'): sigue valiendo como modo.
+    mode: MODES.find((mode) => mode === raw.mode) ?? (raw.direction === 'es-en' ? 'es-en' : DEFAULTS.mode),
     autoplay: typeof raw.autoplay === 'boolean' ? raw.autoplay : DEFAULTS.autoplay,
     theme: raw.theme === 'light' || raw.theme === 'dark' ? raw.theme : 'system',
     // Campo nuevo en la Fase 7: lo guardado antes no lo tiene y toma el valor por defecto.

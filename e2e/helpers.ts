@@ -53,7 +53,10 @@ export async function expectNoHorizontalScroll(page: Page) {
 
 /** Sin problemas de accesibilidad graves (WCAG 2.2 AA) en lo que se ve. */
 export async function expectAccessible(page: Page) {
-  // Se mide la interfaz ya asentada: durante las animaciones de entrada el texto está semitransparente.
+  // Se mide la interfaz asentada: durante una animación de entrada el texto está semitransparente, y
+  // algo puede aparecer en cualquier momento (el aviso de "lista sin conexión"). Con movimiento
+  // reducido la app termina sus animaciones al instante, así la medición no depende del momento.
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== 'running'))
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()
   const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')

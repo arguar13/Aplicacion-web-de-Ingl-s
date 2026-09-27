@@ -1,18 +1,19 @@
 import { cn } from '@/lib/cn'
-import type { Direction, Word } from '@/lib/types'
+import type { Word } from '@/lib/types'
 
 type KeyState = 'idle' | 'correct' | 'wrong' | 'dimmed'
 
 interface Props {
   options: Word[]
-  direction: Direction
+  /** Idioma de las respuestas. */
+  language: 'es' | 'en'
   answerId: string
   wrong: string[]
   solved: boolean
   onAnswer: (id: string) => void
 }
 
-export function Keypad({ options, direction, answerId, wrong, solved, onAnswer }: Props) {
+export function Keypad({ options, language, answerId, wrong, solved, onAnswer }: Props) {
   const stateOf = (id: string): KeyState => {
     if (solved) return id === answerId ? 'correct' : 'dimmed'
     return wrong.includes(id) ? 'wrong' : 'idle'
@@ -23,8 +24,8 @@ export function Keypad({ options, direction, answerId, wrong, solved, onAnswer }
       {options.map((option, index) => (
         <OptionKey
           key={`${answerId}-${option.id}`}
-          label={direction === 'en-es' ? option.es : option.en}
-          lang={direction === 'en-es' ? 'es' : 'en'}
+          label={language === 'es' ? option.es : option.en}
+          lang={language}
           shortcut={index + 1}
           state={stateOf(option.id)}
           onPress={() => onAnswer(option.id)}

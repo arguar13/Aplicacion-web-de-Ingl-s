@@ -131,3 +131,55 @@ export function SlowIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Traducir: de una palabra a otra. */
+export function TranslateIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 5h8M8 3v2M5.5 5c.8 3 2.7 5.3 5.5 6.5M10.5 5c-.8 3-2.7 5.3-5.5 6.5" />
+      <path d="m13 20 3.5-8 3.5 8M14.2 17.5h4.6" />
+    </svg>
+  )
+}
+
+/** Inverso: ida y vuelta. */
+export function ReverseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 8h14m-4-4 4 4-4 4" />
+      <path d="M20 16H6m4 4-4-4 4-4" />
+    </svg>
+  )
+}
+
+/** Escuchar: auriculares. */
+export function HeadphonesIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+      <rect x="3" y="14" width="5" height="7" rx="2" />
+      <rect x="16" y="14" width="5" height="7" rx="2" />
+    </svg>
+  )
+}
+
+/** Escribir: teclado. */
+export function KeyboardIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="2.5" y="6" width="19" height="12" rx="2.5" />
+      <path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8" />
+    </svg>
+  )
+}
+
+/** Completar: una línea de texto con un hueco. */
+export function ClozeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 7h6M15 7h6M3 12h4M17 12h4M3 17h10" />
+      <path d="M10 13.5h6" strokeDasharray="0" />
+      <rect x="9.5" y="9" width="7" height="5" rx="1.5" />
+    </svg>
+  )
+}

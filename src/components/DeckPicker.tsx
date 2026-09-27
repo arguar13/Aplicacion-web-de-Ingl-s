@@ -8,21 +8,17 @@ import { dailyStreak, todayStats, useProgress } from '@/lib/progress'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
-import type { Direction } from '@/lib/types'
+import { trackOf } from '@/lib/types'
 import { Badge } from './ui/Badge'
-import { Segmented } from './ui/controls'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
 import { ForecastChart } from './ForecastChart'
+import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
 import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
-const DIRECTIONS: Array<{ value: Direction; label: string }> = [
-  { value: 'en-es', label: 'Inglés → Español' },
-  { value: 'es-en', label: 'Español → Inglés' },
-]
 const DECKS = [...LEVELS, ALL_DECK]
 
 /** Tecla para elegir cada mazo: 1–9 para los niveles, 0 para todas las palabras. */
@@ -36,16 +32,17 @@ interface Props {
 
 export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
   const progress = useProgress()
-  const { direction, dailyGoal } = useSettings()
+  const { mode, dailyGoal } = useSettings()
+  const track = trackOf(mode)
   const now = useNow()
-  const summaryOf = useDeckSummaries(direction)
+  const summaryOf = useDeckSummaries(track)
   const total = summaryOf(ALL_DECK)
   const suggested = DECKS.find((d) => d.id === progress.lastDeckId) ?? LEVELS[0]
   const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
 
-  const due = anyProgress ? dueToday(progress, direction, now).length : 0
-  const hard = anyProgress ? hardWords(progress, direction).length : 0
+  const due = anyProgress ? dueToday(progress, track, now).length : 0
+  const hard = anyProgress ? hardWords(progress, track).length : 0
 
   useKeyDown((event) => {
     if (event.key === 'Enter') return onPick(suggested)
@@ -84,12 +81,10 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
             {total.total.toLocaleString('es')} palabras ordenadas por lo mucho que se usan. Lo que falles volverá justo
             antes de que lo olvides.
           </p>
-          <Segmented
-            label="Sentido de las preguntas"
-            value={direction}
-            options={DIRECTIONS}
-            onChange={(value) => updateSettings({ direction: value })}
-            className="mt-7"
+          <ModePicker
+            value={mode}
+            onChange={(next) => updateSettings({ mode: next })}
+            className="mx-auto mt-7 max-w-2xl"
           />
         </div>
 
@@ -99,7 +94,7 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <ReviewCard
               due={due}
-              forecast={forecast(progress, direction, now)}
+              forecast={forecast(progress, track, now)}
               now={now}
               onOpen={() => onOpenSmart('review')}
             />

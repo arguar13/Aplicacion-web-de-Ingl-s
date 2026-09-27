@@ -80,9 +80,20 @@ function fromFsrs(card: Card): CardState {
 }
 
 /** Nota de la respuesta para FSRS según si hubo fallos y lo que tardó. */
-export function gradeAnswer({ clean, ms, isNew }: { clean: boolean; ms: number; isNew: boolean }): Grade {
+export function gradeAnswer({
+  clean,
+  ms,
+  isNew,
+  almost = false,
+}: {
+  clean: boolean
+  ms: number
+  isNew: boolean
+  /** Escrita con un error de tecleo: se sabe, pero no del todo. */
+  almost?: boolean
+}): Grade {
   if (!clean) return Rating.Again
-  if (ms >= SLOW_ANSWER_MS) return Rating.Hard
+  if (almost || ms >= SLOW_ANSWER_MS) return Rating.Hard
   // Una palabra nueva acertada podría ser suerte (1 de 4): pasa por un paso de aprendizaje.
   if (!isNew && ms <= FAST_ANSWER_MS) return Rating.Easy
   return Rating.Good

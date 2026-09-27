@@ -1,7 +1,7 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
 import { type CardState, fromLeitner, gradeAnswer, parseCard, review } from './scheduler'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
-import type { Direction } from './types'
+import { TRACKS, type Track } from './types'
 import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
 
 /** Días de práctica que se conservan para calcular la racha. */
@@ -20,7 +20,7 @@ export interface DayStats {
 }
 
 export interface ProgressData {
-  /** Estado de cada palabra, con clave `${direction}:${wordId}`. */
+  /** Estado de cada palabra en cada habilidad, con clave `${track}:${wordId}`. */
   cards: Record<string, CardState>
   /** Días con práctica, en formato AAAA-MM-DD y hora local, de más antiguo a más reciente. */
   days: string[]
@@ -49,7 +49,7 @@ const EMPTY = EMPTY_PROGRESS
 export const PROGRESS_KEY = 'tecla:progress:v1'
 export const PROGRESS_VERSION = 2
 
-const CARD_KEY = /^(en-es|es-en):[a-z0-9-]+$/
+const CARD_KEY = new RegExp(`^(${TRACKS.join('|')}):[a-z0-9-]+$`)
 
 /**
  * Valida el progreso guardado. Cada tarjeta se valida por separado: una entrada dañada se descarta
@@ -110,11 +110,11 @@ const store = createPersistedStore<ProgressData>({ ...PROGRESS_SCHEMA, key: PROG
 export const useProgress = () => useStore(store)
 export const getProgress = () => store.get()
 
-export const cardKey = (direction: Direction, id: string) => `${direction}:${id}`
+export const cardKey = (track: Track, id: string) => `${track}:${id}`
 
 /** Función de consulta de tarjetas para un sentido concreto, lista para el planificador. */
-export function cardLookup(progress: ProgressData, direction: Direction) {
-  return (id: string) => progress.cards[cardKey(direction, id)]
+export function cardLookup(progress: ProgressData, track: Track) {
+  return (id: string) => progress.cards[cardKey(track, id)]
 }
 
 export function dayKey(time: number): string {
@@ -140,11 +140,13 @@ export interface Answer {
   clean: boolean
   /** Tiempo hasta acertar, en ms. */
   ms: number
+  /** Modo escribir: acertada con un error de tecleo. */
+  almost?: boolean
 }
 
-export function recordAnswer(direction: Direction, id: string, answer: Answer, now = Date.now()): CardState {
+export function recordAnswer(track: Track, id: string, answer: Answer, now = Date.now()): CardState {
   const data = store.get()
-  const key = cardKey(direction, id)
+  const key = cardKey(track, id)
   const previous = data.cards[key]
   const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now)
   const today = dayKey(now)

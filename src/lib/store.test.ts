@@ -49,7 +49,15 @@ describe('almacén persistido', () => {
     storage.setItem(SETTINGS_KEY, JSON.stringify(phase5))
     const store = settingsStore(storage)
     // Los campos añadidos después (Fases 7 y 8) toman su valor por defecto.
-    expect(store.get()).toEqual({ ...phase5, detailsPause: 'mistakes', dailyGoal: 20, newPerDay: 20 })
+    // `direction` (Fase 5) pasa a ser `mode` (Fase 9); los campos añadidos después toman su valor por defecto.
+    expect(store.get()).toEqual({
+      mode: 'es-en',
+      autoplay: false,
+      theme: 'dark',
+      detailsPause: 'mistakes',
+      dailyGoal: 20,
+      newPerDay: 20,
+    })
   })
 
   it('guarda con número de versión y conserva el tema en la raíz (index.html lo lee antes de pintar)', () => {

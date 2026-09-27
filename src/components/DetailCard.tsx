@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef } from 'react'
 import { formsText, POS_LABEL, splitAround, type WordDetails } from '@/lib/details'
-import type { Direction, Word } from '@/lib/types'
+import type { Mode, Word } from '@/lib/types'
 import { SlowIcon } from './icons'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
@@ -9,7 +9,7 @@ import { Surface } from './ui/Surface'
 
 interface Props {
   word: Word
-  direction: Direction
+  mode: Mode
   /** `null` mientras cargan los detalles. */
   details: WordDetails | null
   onContinue: () => void
@@ -20,7 +20,9 @@ interface Props {
  * Detalle de la palabra recién resuelta: pronunciación, categoría, formas y una frase de ejemplo.
  * Ocupa el lugar del teclado mientras la partida está detenida.
  */
-export function DetailCard({ word, direction, details, onContinue, onListenSlowly }: Props) {
+export function DetailCard({ word, mode, details, onContinue, onListenSlowly }: Props) {
+  // Si la pregunta estaba en español, lo que no está a la vista es la palabra inglesa.
+  const promptWasSpanish = mode === 'es-en' || mode === 'type'
   const titleId = useId()
   const continueButton = useRef<HTMLButtonElement>(null)
   const forms = details && formsText(details)
@@ -40,7 +42,7 @@ export function DetailCard({ word, direction, details, onContinue, onListenSlowl
           {POS_LABEL[word.pos]}
         </Badge>
         {/* Lo que no está ya a la vista: la traducción si se preguntó en inglés, y al revés. */}
-        {direction === 'en-es' ? (
+        {!promptWasSpanish ? (
           <>
             <span className="sr-only">
               <span lang="en">{word.en}</span>:

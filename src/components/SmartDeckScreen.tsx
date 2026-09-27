@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { getProgress } from '@/lib/progress'
 import { useSettings } from '@/lib/settings'
 import { buildSmartDeck, forecast, type SmartDeckKind } from '@/lib/smartDecks'
-import type { Direction } from '@/lib/types'
+import { type Mode, trackOf } from '@/lib/types'
 import { ForecastChart } from './ForecastChart'
 import { Game } from './Game'
 import { Header } from './Header'
@@ -20,24 +20,18 @@ interface Props {
  * cambiara con cada respuesta, las palabras recién repasadas desaparecerían de él.
  */
 export function SmartDeckScreen({ kind, onExit, onOpenSettings }: Props) {
-  const { direction } = useSettings()
+  const { mode } = useSettings()
   return (
-    <SmartDeckSession
-      key={`${kind}:${direction}`}
-      kind={kind}
-      direction={direction}
-      onExit={onExit}
-      onOpenSettings={onOpenSettings}
-    />
+    <SmartDeckSession key={`${kind}:${mode}`} kind={kind} mode={mode} onExit={onExit} onOpenSettings={onOpenSettings} />
   )
 }
 
-function SmartDeckSession({ kind, direction, onExit, onOpenSettings }: Props & { direction: Direction }) {
+function SmartDeckSession({ kind, mode, onExit, onOpenSettings }: Props & { mode: Mode }) {
   const [now] = useState(Date.now)
-  const [deck] = useState(() => buildSmartDeck(kind, getProgress(), direction, now))
+  const [deck] = useState(() => buildSmartDeck(kind, getProgress(), trackOf(mode), now))
 
   if (deck.words.length > 0) {
-    return <Game deck={deck} direction={direction} onExit={onExit} onOpenSettings={onOpenSettings} />
+    return <Game deck={deck} mode={mode} onExit={onExit} onOpenSettings={onOpenSettings} />
   }
 
   const review = kind === 'review'
@@ -54,7 +48,7 @@ function SmartDeckSession({ kind, direction, onExit, onOpenSettings }: Props & {
           </p>
           {review && (
             <ForecastChart
-              counts={forecast(getProgress(), direction, now)}
+              counts={forecast(getProgress(), trackOf(mode), now)}
               now={now}
               className="mx-auto mt-7 max-w-64"
             />

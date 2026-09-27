@@ -35,7 +35,7 @@ const recoverToHome = () => navigate(HOME, { replace: true })
 export default function App() {
   const route = useRoute()
   const screenKey = formatHash({ screen: route.screen, panel: null })
-  const { direction } = useSettings()
+  const { mode } = useSettings()
 
   useEffect(() => {
     document.title = titleOf(route)
@@ -56,9 +56,9 @@ export default function App() {
             <SmartDeckScreen kind={route.screen.kind} onExit={exitToHome} onOpenSettings={openSettings} />
           ) : route.screen.name === 'deck' ? (
             <Game
-              key={`${route.screen.deck.id}:${direction}`}
+              key={`${route.screen.deck.id}:${mode}`}
               deck={route.screen.deck}
-              direction={direction}
+              mode={mode}
               onExit={exitToHome}
               onOpenSettings={openSettings}
             />

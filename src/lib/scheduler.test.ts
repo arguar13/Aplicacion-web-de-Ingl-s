@@ -45,6 +45,10 @@ describe('nota de cada respuesta', () => {
     expect(gradeAnswer({ clean: true, ms: FAST_ANSWER_MS, isNew: false })).toBe(Rating.Easy)
   })
 
+  it('escrita con un error de tecleo es "difícil", aunque sea rápida', () => {
+    expect(gradeAnswer({ clean: true, almost: true, ms: 900, isNew: false })).toBe(Rating.Hard)
+  })
+
   it('una palabra nueva acertada rápido no salta a "fácil": podría ser suerte', () => {
     expect(gradeAnswer({ clean: true, ms: 800, isNew: true })).toBe(Rating.Good)
   })

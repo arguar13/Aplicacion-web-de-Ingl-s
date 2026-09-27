@@ -5,7 +5,7 @@ import type { Deck } from '@/lib/decks'
 import { useWordDetails } from '@/lib/details'
 import { todayStats, useProgress } from '@/lib/progress'
 import { useSettings } from '@/lib/settings'
-import type { Direction } from '@/lib/types'
+import { answerLanguage, type Mode, trackOf } from '@/lib/types'
 import { IconButton } from './ui/IconButton'
 import { GoalStat, Header, Stat } from './Header'
 import { ArrowLeftIcon, SettingsIcon } from './icons'
@@ -14,19 +14,20 @@ import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
 import { DetailCard } from './DetailCard'
+import { TypeAnswer } from './TypeAnswer'
 import { SessionSummary } from './SessionSummary'
 
 interface Props {
   deck: Deck
-  direction: Direction
+  mode: Mode
   onExit: () => void
   onOpenSettings: () => void
 }
 
-export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
-  const quiz = useQuiz(deck, direction)
-  const { round, stats, answer, replay, expand, advance, resume, requestExit } = quiz
-  const summary = useDeckSummaries(direction)(deck)
+export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
+  const quiz = useQuiz(deck, mode)
+  const { round, stats, answer, submitTyped, replay, expand, advance, resume, requestExit } = quiz
+  const summary = useDeckSummaries(trackOf(mode))(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
   const details = useWordDetails(round.word.id)
   const today = todayStats(useProgress())
@@ -105,7 +106,6 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
             <SessionSummary
               reason={quiz.summary}
               stats={stats}
-              direction={direction}
               dailyGoal={dailyGoal}
               onContinue={resume}
               onFinish={onExit}
@@ -114,9 +114,11 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
             <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
               <WordScreen
                 word={round.word}
-                direction={direction}
+                mode={mode}
                 reason={round.reason}
                 ipa={details?.ipa}
+                example={details === null ? null : details.example}
+                typedVerdict={quiz.typed?.verdict}
                 solved={quiz.solved}
                 expanded={quiz.expanded}
                 mistakes={quiz.wrong.length}
@@ -129,15 +131,24 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
                 <DetailCard
                   key={round.word.id}
                   word={round.word}
-                  direction={direction}
+                  mode={mode}
                   details={details}
                   onContinue={advance}
                   onListenSlowly={listenSlowly}
                 />
+              ) : mode === 'type' ? (
+                <TypeAnswer
+                  key={round.word.id}
+                  word={round.word}
+                  solved={quiz.solved}
+                  typed={quiz.typed}
+                  onSubmit={submitTyped}
+                  onContinue={advance}
+                />
               ) : (
                 <Keypad
                   options={round.options}
-                  direction={direction}
+                  language={answerLanguage(mode)}
                   answerId={round.word.id}
                   wrong={quiz.wrong}
                   solved={quiz.solved}
@@ -154,6 +165,10 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
           {quiz.solved ? (
             <span className="flex items-center gap-2">
               <Kbd>Enter</Kbd> seguir
+            </span>
+          ) : mode === 'type' ? (
+            <span className="flex items-center gap-2">
+              <Kbd>Enter</Kbd> comprobar
             </span>
           ) : (
             <span className="flex items-center gap-2">
