@@ -15,7 +15,7 @@ import { BackupReminder } from './BackupReminder'
 import { ForecastChart } from './ForecastChart'
 import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
-import { ArrowRightIcon, BoltIcon, SettingsIcon, ShuffleIcon } from './icons'
+import { ArrowRightIcon, BoltIcon, ChartIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
@@ -28,10 +28,11 @@ interface Props {
   onPick: (deck: Deck) => void
   onOpenSmart: (kind: SmartDeckKind) => void
   onOpenBlitz: () => void
+  onOpenStats: () => void
   onOpenSettings: () => void
 }
 
-export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenSettings }: Props) {
+export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOpenSettings }: Props) {
   const progress = useProgress()
   const { mode, dailyGoal } = useSettings()
   const track = trackOf(mode)
@@ -58,9 +59,14 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenSettings }:
     <>
       <Header
         action={
-          <IconButton label="Ajustes" onClick={onOpenSettings} className="-mr-2">
-            <SettingsIcon />
-          </IconButton>
+          <span className="-mr-2 flex items-center">
+            <IconButton label="Tu progreso" onClick={onOpenStats}>
+              <ChartIcon />
+            </IconButton>
+            <IconButton label="Ajustes" onClick={onOpenSettings}>
+              <SettingsIcon />
+            </IconButton>
+          </span>
         }
       >
         {anyProgress && (

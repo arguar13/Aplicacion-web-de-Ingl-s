@@ -13,7 +13,11 @@ import type { SmartDeckKind } from './smartDecks'
 const PANELS = ['settings'] as const
 export type Panel = (typeof PANELS)[number]
 export type Screen =
-  { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind } | { name: 'blitz' }
+  | { name: 'home' }
+  | { name: 'deck'; deck: Deck }
+  | { name: 'smart'; kind: SmartDeckKind }
+  | { name: 'blitz' }
+  | { name: 'stats' }
 
 export interface Route {
   screen: Screen
@@ -24,6 +28,7 @@ export const HOME: Route = { screen: { name: 'home' }, panel: null }
 
 const PANEL_SLUGS: Record<Panel, string> = { settings: 'ajustes' }
 const BLITZ_PATH = '/relampago'
+const STATS_PATH = '/estadisticas'
 const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard']
 const SMART_PATHS: Record<SmartDeckKind, string> = { review: '/repaso', hard: '/dificiles' }
 const SMART_TITLES: Record<SmartDeckKind, string> = { review: 'Repaso del día', hard: 'Mis difíciles' }
@@ -47,6 +52,7 @@ export function parseHash(hash: string): Route {
 
   if (path === '/') return { screen: { name: 'home' }, panel }
   if (path === BLITZ_PATH) return { screen: { name: 'blitz' }, panel }
+  if (path === STATS_PATH) return { screen: { name: 'stats' }, panel }
   const smart = SMART_KINDS.find((kind) => SMART_PATHS[kind] === path)
   if (smart) return { screen: { name: 'smart', kind: smart }, panel }
   const deck = deckFromPath(path)
@@ -62,7 +68,9 @@ export function formatHash(route: Route): string {
         ? SMART_PATHS[screen.kind]
         : screen.name === 'blitz'
           ? BLITZ_PATH
-          : '/'
+          : screen.name === 'stats'
+            ? STATS_PATH
+            : '/'
   return `#${path}${route.panel ? `?panel=${PANEL_SLUGS[route.panel]}` : ''}`
 }
 
@@ -72,6 +80,7 @@ export function titleOf(route: Route): string {
   if (route.screen.name === 'home') return base
   if (route.screen.name === 'smart') return `${SMART_TITLES[route.screen.kind]} — Tecla`
   if (route.screen.name === 'blitz') return 'Relámpago — Tecla'
+  if (route.screen.name === 'stats') return 'Tu progreso — Tecla'
   const { deck } = route.screen
   return `${deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`} — Tecla`
 }

@@ -34,6 +34,7 @@ describe('rutas', () => {
       { screen: { name: 'smart', kind: 'review' }, panel: null },
       { screen: { name: 'smart', kind: 'hard' }, panel: 'settings' },
       { screen: { name: 'blitz' }, panel: null },
+      { screen: { name: 'stats' }, panel: 'settings' },
     ]
     for (const route of routes) expect(parseHash(formatHash(route))).toEqual(route)
   })

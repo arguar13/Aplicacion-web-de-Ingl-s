@@ -192,3 +192,13 @@ export function BoltIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Estadísticas. */
+export function ChartIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 20h16" />
+      <path d="M7 16v-5M12 16V6M17 16v-8" />
+    </svg>
+  )
+}
