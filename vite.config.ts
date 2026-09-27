@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 import { audioVersions } from './vite/audio-versions.ts'
+import { siteMeta } from './vite/site-meta.ts'
 
 export default defineConfig({
   // Rutas relativas: el build funciona igual en la raíz del dominio que en una subcarpeta de public_html.
@@ -12,6 +13,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     audioVersions(fileURLToPath(new URL('./public/audio', import.meta.url))),
+    siteMeta(),
     VitePWA({
       // El usuario decide cuándo actualizar: recargar a mitad de una sesión sería molesto.
       registerType: 'prompt',
@@ -34,11 +36,36 @@ export default defineConfig({
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
           { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
+        // Instalación enriquecida (Chrome y Edge). Se regeneran con `npm run capture`.
+        screenshots: [
+          {
+            src: 'screenshots/partida-movil.png',
+            sizes: '824x1830',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'Una palabra en inglés y cuatro teclas con traducciones',
+          },
+          {
+            src: 'screenshots/inicio-movil.png',
+            sizes: '824x1830',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'Inicio: modos de práctica, nivel en curso y repaso del día',
+          },
+          {
+            src: 'screenshots/inicio-escritorio.png',
+            sizes: '1280x800',
+            type: 'image/png',
+            form_factor: 'wide',
+            label: 'Tecla en el escritorio',
+          },
+        ],
       },
       workbox: {
         // La app completa queda disponible sin conexión. De las fuentes, solo los alfabetos latinos.
         globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'assets/*latin*.woff2'],
-        globIgnores: ['audio/**'],
+        // Las capturas y la imagen para compartir no hacen falta para usar la app.
+        globIgnores: ['audio/**', 'screenshots/**', 'og.png'],
         navigateFallback: 'index.html',
         // Controla la página desde la primera visita (si no, hasta recargar no se guardaría ningún
         // audio ni se podría descargar para usar sin conexión). Las actualizaciones siguen esperando
