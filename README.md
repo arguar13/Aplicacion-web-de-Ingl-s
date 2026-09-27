@@ -12,7 +12,12 @@ español → inglés (suena al acertar, para no delatar la respuesta). Las otras
 ronda son de la misma categoría gramatical que la respuesta, para que no se puedan descartar sin
 saber la palabra.
 
-Ajustes: pronunciación automática, tema claro/oscuro/automático, copia de seguridad del progreso
+Tras responder aparece la pronunciación en IPA, y la partida puede detenerse para mostrar el detalle
+de la palabra: categoría, formas irregulares y una frase de ejemplo con su traducción. Se detiene sola
+tras un fallo (configurable: al fallar, siempre o nunca) y con «Ver ejemplo» tras un acierto. Cada
+palabra se puede escuchar despacio, sin que cambie el tono de la voz.
+
+Ajustes: pronunciación automática, cuándo detenerse a ver el ejemplo, tema claro/oscuro/automático, copia de seguridad del progreso
 (guardar un archivo y restaurarlo, combinando o reemplazando), protección del almacenamiento y
 borrar el progreso. En Safari sin instalar, donde los datos se borran tras 7 días sin visitas, un
 aviso discreto recuerda guardar una copia.
@@ -46,7 +51,8 @@ por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build y l
 y WebKit. El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
 Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espacio` para volver a escuchar ·
-`Esc` para volver a los niveles.
+`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para seguir · `Esc` para volver a los
+niveles.
 
 ## Despliegue en Hostinger
 
@@ -69,8 +75,10 @@ public/audio/             Pronunciaciones, una por palabra: <id>.mp3
 public/.htaccess          Configuración del servidor (Hostinger)
 public/icons/             Iconos de la app (normal, maskable para Android y apple-touch-icon)
 src/data/words.json       Vocabulario { id, en, es, pos }, ordenado por frecuencia. El id es el nombre del audio.
+src/data/details.json     IPA, formas y ejemplo de cada palabra (se carga aparte, en segundo plano)
 src/lib/words.ts          Valida el vocabulario al cargarlo
-src/lib/decks.ts          Niveles: bloques de 500 palabras sobre ese orden
+src/lib/decks.ts          Niveles (bloques de 500 palabras) y de dónde salen los distractores
+src/lib/details.ts        Detalles de cada palabra: carga diferida, validación y textos
 src/lib/scheduler.ts      Repaso espaciado: cajas, intervalos y elección de la siguiente palabra
 src/lib/quiz.ts           Opciones de cada ronda (misma categoría, sin sentidos repetidos)
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
@@ -92,6 +100,8 @@ vite/audio-versions.ts    Plugin de Vite: hash de cada MP3 para versionar sus UR
 e2e/                      Tests de extremo a extremo (Playwright)
 scripts/rank_words.py     Reordena words.json por frecuencia (pip install wordfreq)
 scripts/tag_pos.py        Categoría gramatical de cada palabra (pip install nltk)
+scripts/enrich_words.py   Genera details.json: IPA, formas irregulares y ejemplos
+scripts/data/examples/    Frases de ejemplo por nivel (fuente de details.json)
 scripts/generate_audio.py Genera el audio de las palabras que no lo tengan (pip install gtts)
 ```
 
@@ -113,3 +123,17 @@ como mucho dos sentidos separados por coma y en minúscula salvo nombres propios
 comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`), y los
 distractores son de la misma categoría gramatical que la respuesta: la traducción de un verbo
 compite con otros verbos, no con sustantivos que se descartarían sin saber la palabra.
+
+## Datos y licencias
+
+- Frecuencias: [wordfreq](https://github.com/rspeer/wordfreq) (Apache 2.0; datos CC BY-SA 4.0).
+- Pronunciación: [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
+  (BSD de 2 cláusulas), convertido a IPA por `scripts/enrich_words.py`.
+- Categorías y plurales irregulares: [WordNet](https://wordnet.princeton.edu/) (licencia WordNet 3.0)
+  y [Open Multilingual Wordnet](https://omwn.org/) para el español.
+- Traducciones, frases de ejemplo y verbos irregulares: propios del proyecto.
+- Audio: gTTS (voz de Google Translate).
+
+Para regenerar los detalles tras cambiar el vocabulario: `python scripts/enrich_words.py` (las
+palabras nuevas necesitan antes su frase en `scripts/data/examples/level-N.json`; `npm test`
+comprueba que ninguna falte y que cada frase contenga su palabra).

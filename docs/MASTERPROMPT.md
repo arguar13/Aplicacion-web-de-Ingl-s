@@ -410,3 +410,16 @@ Actualiza esta sección al cerrar cada fase.
 - **Bloqueo externo:** la CI de GitHub Actions termina en `startup_failure` sin crear jobs,
   aunque el workflow es válido. Parece un problema de la cuenta (facturación o minutos de Actions en
   un repo privado). Lo tiene que revisar el dueño en GitHub → Settings → Billing / Actions.
+
+### Fase 7 · cerrada el 27-09-2026
+
+- Diagnóstico 6 (datos pobres): **resuelto**. Las 3978 palabras tienen IPA (CMUdict → IPA con
+  acento silábico), categoría, formas irregulares y frase de ejemplo con traducción; los detalles
+  van en su propio chunk (189 KB gzip) cargado en segundo plano.
+- Tarjeta de detalle tras responder (se detiene sola al fallar; configurable), pronunciación lenta
+  con `preservesPitch`, distractores de frecuencia cercana en el mazo completo.
+- El etiquetador de categorías prioriza la primera acepción de la traducción (la que ve el usuario);
+  las excepciones van en `POS_OVERRIDES` de `scripts/tag_pos.py`.
+- La palabra en juego es el `<h1>` y el teclado el grupo "Respuestas": los e2e seleccionan por rol.
+- Pendiente para más adelante: audio de las frases de ejemplo (no se generó para no inflar la
+  descarga offline; si se añade, con el mismo versionado de `vite/audio-versions.ts`).
