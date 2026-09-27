@@ -21,7 +21,8 @@ def main() -> None:
     words = json.loads(WORDS.read_text(encoding="utf-8"))
     words.sort(key=lambda w: (-zipf_frequency(w["en"], "en"), w["en"].lower()))
     lines = ",\n".join(json.dumps(w, ensure_ascii=False) for w in words)
-    WORDS.write_text(f"[\n{lines}\n]\n", encoding="utf-8")
+    # newline="\n": en Windows, write_text convertiría los saltos de línea en CRLF.
+    WORDS.write_text(f"[\n{lines}\n]\n", encoding="utf-8", newline="\n")
     print(f"{len(words)} palabras ordenadas. Primeras: {', '.join(w['en'] for w in words[:12])}")
 
 

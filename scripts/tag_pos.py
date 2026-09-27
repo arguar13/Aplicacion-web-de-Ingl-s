@@ -165,7 +165,8 @@ def main() -> None:
 
     ordered = [{"id": w["id"], "en": w["en"], "es": w["es"], "pos": w["pos"]} for w in words]
     lines = ",\n".join(json.dumps(w, ensure_ascii=False) for w in ordered)
-    WORDS.write_text(f"[\n{lines}\n]\n", encoding="utf-8")
+    # newline="\n": en Windows, write_text convertiría los saltos de línea en CRLF.
+    WORDS.write_text(f"[\n{lines}\n]\n", encoding="utf-8", newline="\n")
 
     print(Counter(w["pos"] for w in words).most_common())
     print(Counter(tag(w)[1].split(" (")[0] for w in words).most_common())
