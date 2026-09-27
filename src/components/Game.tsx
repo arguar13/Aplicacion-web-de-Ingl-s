@@ -166,7 +166,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
         <footer className="hidden flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 pb-6 text-xs text-muted pointer-fine:flex">
           {quiz.solved ? (
             <span className="flex items-center gap-2">
-              <Kbd>Enter</Kbd> seguir
+              <Kbd>Enter</Kbd> continuar
             </span>
           ) : mode === 'type' ? (
             <span className="flex items-center gap-2">

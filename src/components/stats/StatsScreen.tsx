@@ -59,8 +59,9 @@ export function StatsScreen({ onExit }: { onExit: () => void }) {
         </button>
         <h1 className="mt-4 font-display text-5xl leading-none">Tu progreso</h1>
 
-        {/* Cinco datos: en el móvil, dos por fila y el último a lo ancho. */}
-        <dl className="mt-7 grid grid-cols-2 gap-2.5 sm:grid-cols-5 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
+        {/* Cinco datos: en el móvil, dos por fila y el último a lo ancho; desde tableta, tres y dos
+            (en una sola fila no caben valores como "menos de 1 min"). */}
+        <dl className="mt-7 grid grid-cols-2 gap-2.5 sm:grid-cols-6 sm:[&>*]:col-span-2 [&>*:last-child]:col-span-2 sm:[&>*:nth-last-child(-n+2)]:col-span-3">
           {tiles.map((tile) => (
             <div key={tile.label} className="rounded-2xl border border-line bg-surface px-4 py-3">
               <dt className="text-[10px] font-medium tracking-[0.14em] whitespace-nowrap text-muted uppercase">

@@ -14,7 +14,15 @@ const VIBRATION: Record<SoundEffect, number | number[]> = {
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-export const canVibrate = () => typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function'
+/**
+ * Hay vibración de verdad: la API existe y el dispositivo es táctil (Chrome de escritorio tiene
+ * `navigator.vibrate`, pero no vibra nada: el ajuste sería una promesa vacía).
+ */
+export const canVibrate = () =>
+  typeof navigator !== 'undefined' &&
+  typeof navigator.vibrate === 'function' &&
+  typeof matchMedia === 'function' &&
+  matchMedia('(pointer: coarse)').matches
 
 export function feedback(effect: SoundEffect): void {
   const { sounds, haptics } = getSettings()
