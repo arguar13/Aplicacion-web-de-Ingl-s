@@ -1,37 +1,51 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { DeckPicker } from '@/components/DeckPicker'
 import { Game } from '@/components/Game'
 import { SettingsDialog } from '@/components/SettingsDialog'
 import { UpdateToast } from '@/components/UpdateToast'
 import type { Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
+import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
+import { HOME, titleOf } from '@/lib/routes'
 import { useSettings } from '@/lib/settings'
 
-export default function App() {
-  const [deck, setDeck] = useState<Deck | null>(null)
-  const [settingsOpen, setSettingsOpen] = useState(false)
-  const { direction } = useSettings()
-  const openSettings = () => setSettingsOpen(true)
+const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
 
-  function pick(next: Deck) {
-    setLastDeck(next.id)
-    setDeck(next)
-  }
+/** El diálogo también se cierra solo (Esc, tocar fuera): solo se navega si la ruta aún lo tiene abierto. */
+function closeSettings() {
+  const route = getRoute()
+  if (route.panel) goBack({ ...route, panel: null })
+}
+
+function openDeck(deck: Deck) {
+  setLastDeck(deck.id)
+  navigate({ screen: { name: 'deck', deck }, panel: null })
+}
+
+const exitToHome = () => goBack(HOME)
+
+export default function App() {
+  const route = useRoute()
+  const { direction } = useSettings()
+
+  useEffect(() => {
+    document.title = titleOf(route)
+  }, [route])
 
   return (
     <div className="flex min-h-dvh flex-col">
-      {deck ? (
+      {route.screen.name === 'deck' ? (
         <Game
-          key={`${deck.id}:${direction}`}
-          deck={deck}
+          key={`${route.screen.deck.id}:${direction}`}
+          deck={route.screen.deck}
           direction={direction}
-          onExit={() => setDeck(null)}
+          onExit={exitToHome}
           onOpenSettings={openSettings}
         />
       ) : (
-        <DeckPicker onPick={pick} onOpenSettings={openSettings} />
+        <DeckPicker onPick={openDeck} onOpenSettings={openSettings} />
       )}
-      <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <SettingsDialog open={route.panel === 'settings'} onClose={closeSettings} />
       <UpdateToast />
     </div>
   )
