@@ -22,6 +22,8 @@ async function takeTest(page: Page, upTo: number): Promise<void> {
 }
 
 test('primer uso: meta diaria y prueba de nivel que recomienda por dónde empezar', async ({ page }) => {
+  // Recorre la prueba de nivel entera (una docena de respuestas y un análisis de axe): más margen.
+  test.slow()
   await page.goto('./')
   await expect(page.getByRole('heading', { name: /Inglés, tecla a tecla/ })).toBeVisible()
   await expectNoHorizontalScroll(page)

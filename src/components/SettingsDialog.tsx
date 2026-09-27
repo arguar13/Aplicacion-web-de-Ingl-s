@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { resetAchievements } from '@/lib/achievements'
 import { resetProgress } from '@/lib/progress'
 import {
   DAILY_GOALS,
@@ -122,6 +123,7 @@ function SettingsContent() {
             variant="danger"
             onClick={() => {
               resetProgress()
+              resetAchievements()
               setConfirmReset(false)
             }}
           >

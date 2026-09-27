@@ -132,6 +132,7 @@ const store = createPersistedStore<ProgressData>({ ...PROGRESS_SCHEMA, key: PROG
 
 export const useProgress = () => useStore(store)
 export const getProgress = () => store.get()
+export const subscribeProgress = store.subscribe
 
 export const cardKey = (track: Track, id: string) => `${track}:${id}`
 

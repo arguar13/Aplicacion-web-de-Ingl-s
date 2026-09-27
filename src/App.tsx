@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { AchievementToast } from '@/components/achievements/AchievementToast'
 import { BlitzScreen } from '@/components/BlitzScreen'
 import { DeckPicker } from '@/components/DeckPicker'
 import { DictionaryScreen } from '@/components/DictionaryScreen'
@@ -12,6 +13,7 @@ import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, type Deck } from '@/lib/decks'
+import { watchAchievements } from '@/lib/achievements'
 import { useOnboardingDone } from '@/lib/onboarding'
 import { setLastDeck, useProgress } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
@@ -97,6 +99,8 @@ export default function App() {
     void pruneStaleAudio(ALL_WORDS.map((word) => word.id))
   }, [])
 
+  useEffect(() => watchAchievements(), [])
+
   const { panel } = route
   return (
     <div className="flex min-h-dvh flex-col">
@@ -109,6 +113,7 @@ export default function App() {
       <SettingsDialog open={panel === 'settings'} onClose={closePanel} />
       <WordSheet id={panel !== null && panel !== 'settings' ? panel.word : null} onClose={closePanel} />
       <UpdateToast />
+      <AchievementToast />
     </div>
   )
 }

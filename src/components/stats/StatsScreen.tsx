@@ -9,6 +9,7 @@ import { useSettings } from '@/lib/settings'
 import { forecast } from '@/lib/smartDecks'
 import { activityWeeks, formatDuration, masteredSeries, totals, weeklyAccuracy } from '@/lib/stats'
 import { type Track, trackOf } from '@/lib/types'
+import { AchievementShelf } from '../achievements/AchievementShelf'
 import { ForecastChart } from '../ForecastChart'
 import { Header } from '../Header'
 import { ArrowLeftIcon } from '../icons'
@@ -82,6 +83,10 @@ export function StatsScreen({ onExit }: { onExit: () => void }) {
             <AccuracyChart weeks={weeklyAccuracy(progress.history, now, 8)} />
           </Section>
         </div>
+
+        <Section title="Logros">
+          <AchievementShelf now={now} />
+        </Section>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Por habilidad</h2>
