@@ -473,3 +473,18 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
 - Lección aprendida: una constante usada antes de declararse (TDZ) dejó la app en blanco. Raíz:
   orden de declaración; prevención: regla `no-use-before-define` y un aviso de arranque fallido en
   `index.html` para errores anteriores a React.
+
+### Fase 12 · cerrada el 27-09-2026
+
+- Revisión de la copia: historial, favoritas, protectores y días cubiertos ya viajaban dentro del
+  progreso. Los logros **no** viajaban: al restaurar se volvían a ganar con fecha de hoy y se
+  anunciaban otra vez. Ahora la copia lleva su registro (campo opcional, compatible en ambos
+  sentidos), combinar conserva la fecha más antigua y restaurar anota los logros antes que el
+  progreso.
+- Una sola lógica de restauración (`restoreBackup` en `lib/backup.ts`) para Ajustes y bienvenida.
+  En un dispositivo nuevo se restaura desde la bienvenida, con vista previa.
+- "Enviar copia" con la hoja de compartir del sistema (con descarga como alternativa).
+- e2e del criterio de aceptación: dos contextos del navegador; el dispositivo nuevo queda con
+  progreso, historial y logros idénticos, sin avisos de logros repetidos.
+- Sincronización: **solo propuesta**, en `docs/SINCRONIZACION.md` (recomendación: código de
+  sincronización cifrado con PHP en el mismo Hostinger). **Pendiente de la decisión del dueño.**

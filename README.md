@@ -45,8 +45,11 @@ Ajustes, por secciones: **práctica** (meta diaria, palabras nuevas por día, cu
 el ejemplo, pronunciación automática), **sonido** (efectos y vibración), **apariencia** (tema
 claro, oscuro o automático), **recordatorio** (un evento diario para el calendario del dispositivo,
 la única forma fiable de avisar a una hora sin servidor en iPhone, Android y escritorio) y **tus
-datos** (copia de seguridad para guardar y restaurar, combinando o reemplazando; protección del
-almacenamiento; instalación; audio sin conexión; borrar el progreso). En Safari sin instalar, donde
+datos** (copia de seguridad para guardar, enviar y restaurar, combinando o reemplazando;
+protección del almacenamiento; instalación; audio sin conexión; borrar el progreso). La copia lleva
+el progreso, el historial, los logros con su fecha y los ajustes. En un dispositivo nuevo se
+restaura desde la misma bienvenida. La sincronización automática entre dispositivos está
+propuesta, pendiente de decisión, en [docs/SINCRONIZACION.md](docs/SINCRONIZACION.md). En Safari sin instalar, donde
 los datos se borran tras 7 días sin visitas, un aviso discreto recuerda guardar una copia.
 
 Cada pantalla tiene su dirección (`#/`, `#/nivel/3`, `#/todas`, `?panel=ajustes`): el botón atrás
@@ -117,7 +120,7 @@ src/lib/blitz.ts          Relámpago: palabras vistas y baraja sin repetir
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
 src/lib/progress.ts       Progreso (tarjetas por sentido, historial diario, récord) y cómo combinar dos
 src/lib/settings.ts       Ajustes (modo, meta, nuevas por día, sonido, tema…)
-src/lib/backup.ts         Copias de seguridad: exportar, validar e importar
+src/lib/backup.ts         Copias de seguridad: exportar, validar, combinar y restaurar
 src/lib/onboarding.ts     Primer uso: si ya se completó la bienvenida
 src/lib/placement.ts      Prueba de nivel: palabras por nivel y recomendación
 src/lib/achievements.ts   Logros: condiciones, desbloqueo y anuncios agrupados

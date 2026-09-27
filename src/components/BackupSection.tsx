@@ -8,7 +8,7 @@ import {
   type RestoreMode,
   restoreBackup,
 } from '@/lib/backup'
-import { saveTextFile } from '@/lib/download'
+import { canShareFiles, saveTextFile, shareTextFile } from '@/lib/download'
 import { formatLongDate, plural, relativeDay } from '@/lib/format'
 import { markBackupSaved, requestProtection, useProtection, useSafekeeping } from '@/lib/safekeeping'
 import { SettingRow } from './AppSettings'
@@ -20,6 +20,17 @@ export function saveBackup() {
   markBackupSaved(now)
 }
 
+/**
+ * Envía la copia con la hoja de compartir del sistema (a otro dispositivo, a la nube, a un chat).
+ * Si el sistema no pudo compartirla, se descarga: la copia nunca se queda sin hacer.
+ */
+async function sendBackup() {
+  const now = Date.now()
+  const result = await shareTextFile(backupFileName(now), currentBackup(now))
+  if (result === 'shared') markBackupSaved(now)
+  else if (result === 'failed') saveBackup()
+}
+
 type RestoreState =
   | { step: 'idle' }
   | { step: 'preview'; backup: Backup }
@@ -29,6 +40,7 @@ type RestoreState =
 /** Copias de seguridad del progreso y protección del almacenamiento, dentro de Ajustes. */
 export function BackupSection() {
   const { lastBackupAt } = useSafekeeping()
+  const [canShare] = useState(canShareFiles)
   const [restore, setRestore] = useState<RestoreState>({ step: 'idle' })
   const input = useRef<HTMLInputElement>(null)
   const inputId = useId()
@@ -62,6 +74,7 @@ export function BackupSection() {
         <Button variant="primary" onClick={saveBackup}>
           Guardar copia
         </Button>
+        {canShare && <Button onClick={() => void sendBackup()}>Enviar copia</Button>}
         <Button onClick={() => input.current?.click()} aria-controls={inputId}>
           Restaurar copia
         </Button>

@@ -44,6 +44,13 @@ test('guardar una copia, borrar el progreso y restaurarlo', async ({ page }) => 
   })
 })
 
+declare global {
+  interface Window {
+    /** Archivos que recibió la hoja de compartir simulada. */
+    sharedFiles?: Array<{ name: string; text: string }>
+  }
+}
+
 /** Todo lo que viaja en una copia, tal como está guardado. */
 const stored = (target: Page) =>
   target.evaluate(() =>
@@ -85,6 +92,34 @@ test('una copia pasa el progreso a otro dispositivo, desde su bienvenida y sin r
   expect(await stored(other)).toEqual(original)
   await expect(other.getByRole('status').filter({ hasText: 'Logro desbloqueado' })).toHaveCount(0)
   await context.close()
+})
+
+test('donde el sistema comparte archivos, la copia se envía con su hoja de compartir', async ({ page }) => {
+  // La hoja de compartir es del sistema operativo: se simula y se captura lo que recibe.
+  await page.addInitScript(() => {
+    window.sharedFiles = []
+    navigator.canShare = () => true
+    navigator.share = async (data) => {
+      const files = await Promise.all(
+        (data?.files ?? []).map(async (file) => ({ name: file.name, text: await file.text() })),
+      )
+      window.sharedFiles?.push(...files)
+    }
+  })
+  await page.goto('./#/nivel/1')
+  const word = await answerCorrectly(page)
+  await page.goto('./#/?panel=ajustes')
+  const dialog = page.getByRole('dialog', { name: 'Ajustes' })
+  await expect(dialog.getByText('Aún no guardaste ninguna copia.')).toBeVisible()
+  await dialog.getByRole('button', { name: 'Enviar copia' }).click()
+  await expect(dialog.getByText('Última copia: hoy.')).toBeVisible()
+
+  const [file] = await page.evaluate(() => window.sharedFiles ?? [])
+  expect(file.name).toMatch(/^tecla-copia-\d{4}-\d{2}-\d{2}\.json$/)
+  expect(JSON.parse(file.text)).toMatchObject({
+    format: 'tecla-copia',
+    progress: { cards: { [`en-es:${word.id}`]: {} } },
+  })
 })
 
 test('en la bienvenida, un archivo que no es una copia se explica y no avanza', async ({ browser }, testInfo) => {
