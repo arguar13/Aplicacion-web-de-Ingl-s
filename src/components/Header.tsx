@@ -31,45 +31,49 @@ export function GoalStat({ done, goal }: { done: number; goal: number }) {
   const complete = done >= goal
   const radius = 11
   const circumference = 2 * Math.PI * radius
+  // En un <dl>, cada grupo solo puede contener <dt> y <dd>: el anillo va dentro del <dd>.
   return (
-    <div className="flex items-center gap-2">
-      <svg
-        width="28"
-        height="28"
-        viewBox="0 0 28 28"
-        role="progressbar"
-        aria-label="Meta de hoy"
-        aria-valuemin={0}
-        aria-valuemax={goal}
-        aria-valuenow={Math.min(done, goal)}
-        className={complete ? 'text-ok' : 'text-accent'}
-      >
-        <circle cx="14" cy="14" r={radius} fill="none" strokeWidth="3" className="stroke-line" />
-        <circle
-          cx="14"
-          cy="14"
-          r={radius}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={circumference * (1 - ratio)}
-          transform="rotate(-90 14 14)"
-          className="transition-[stroke-dashoffset] duration-500"
-        />
-        {complete && (
-          <path
-            d="m9.5 14.2 3 3 6-6.2"
+    <div className="relative pl-9 text-right">
+      <dt className="text-[10px] font-medium tracking-[0.14em] text-muted uppercase">Hoy</dt>
+      <dd className="text-[15px] font-semibold tabular-nums">
+        {`${Math.min(done, 999)}/${goal}`}
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          role="progressbar"
+          aria-label="Meta de hoy"
+          aria-valuemin={0}
+          aria-valuemax={goal}
+          aria-valuenow={Math.min(done, goal)}
+          className={`absolute top-1/2 left-0 -translate-y-1/2 ${complete ? 'text-ok' : 'text-accent'}`}
+        >
+          <circle cx="14" cy="14" r={radius} fill="none" strokeWidth="3" className="stroke-line" />
+          <circle
+            cx="14"
+            cy="14"
+            r={radius}
             fill="none"
             stroke="currentColor"
-            strokeWidth="2.2"
+            strokeWidth="3"
             strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference * (1 - ratio)}
+            transform="rotate(-90 14 14)"
+            className="transition-[stroke-dashoffset] duration-500"
           />
-        )}
-      </svg>
-      <Stat label="Hoy" value={`${Math.min(done, 999)}/${goal}`} />
+          {complete && (
+            <path
+              d="m9.5 14.2 3 3 6-6.2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          )}
+        </svg>
+      </dd>
     </div>
   )
 }
