@@ -27,6 +27,11 @@ de la palabra: categoría, formas irregulares y una frase de ejemplo con su trad
 tras un fallo (configurable: al fallar, siempre o nunca) y con «Ver ejemplo» tras un acierto. Cada
 palabra se puede escuchar despacio, sin que cambie el tono de la voz.
 
+**Tu progreso** (#/estadisticas) muestra racha, tiempo, precisión, un mapa de calor de actividad, la
+evolución de las palabras dominadas y el avance por nivel en cada habilidad. El **diccionario**
+(#/diccionario) busca en inglés y español entre las 3.978 palabras y abre la ficha de cada una:
+pronunciación, ejemplo, progreso por habilidad, últimas respuestas, favorita y "ya la sé".
+
 Ajustes: pronunciación automática, cuándo detenerse a ver el ejemplo, tema claro/oscuro/automático, copia de seguridad del progreso
 (guardar un archivo y restaurarlo, combinando o reemplazando), protección del almacenamiento y
 borrar el progreso. En Safari sin instalar, donde los datos se borran tras 7 días sin visitas, un
@@ -91,6 +96,9 @@ src/lib/decks.ts          Niveles (bloques de 500 palabras) y de dónde salen lo
 src/lib/details.ts        Detalles de cada palabra: carga diferida, validación y textos
 src/lib/scheduler.ts      Repaso espaciado (FSRS): notas, calendario, migración desde Leitner y siguiente palabra
 src/lib/smartDecks.ts     Repaso del día, "Mis difíciles" y previsión de repasos
+src/lib/events.ts         Historial de respuestas (últimas 5000)
+src/lib/stats.ts          Cálculos de las estadísticas
+src/lib/dictionary.ts     Búsqueda y filtros del diccionario
 src/lib/quiz.ts           Opciones de cada ronda (misma categoría, sin sentidos repetidos)
 src/lib/typing.ts         Respuestas escritas: comparación tolerante y corrección letra por letra
 src/lib/blitz.ts          Relámpago: palabras vistas y baraja sin repetir

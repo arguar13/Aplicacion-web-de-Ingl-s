@@ -446,3 +446,15 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   fallos intermitentes de contraste durante animaciones).
 - Limitación conocida del entorno: el WebKit de Playwright en Windows no tiene audio (el e2e de
   escuchar se omite ahí; en la CI de Linux corre).
+
+### Fase 10 · cerrada el 27-09-2026
+
+- Historial de respuestas (`tecla:events`, 5000 como máximo, entra en las copias) y dominadas por
+  día en el historial diario.
+- Estadísticas: resumen, mapa de calor, dominadas en el tiempo, precisión por semana, avance por
+  nivel y previsión. Las gráficas recorribles son `role="slider"` con `aria-valuetext`.
+- Diccionario con búsqueda normalizada y lista virtualizada; ficha de palabra como panel de ruta
+  (`?palabra=<id>`), favoritas y "ya la sé" con deshacer.
+- Lecciones de maquetación (con test): grillas con columnas explícitas en móvil (`grid-cols-1`),
+  `min-w-0` en fieldsets desplazables y etiquetas `relative` con radios `sr-only`. Hay un e2e de
+  desbordamiento a 360 px.
