@@ -6,6 +6,11 @@ interface BeforeInstallPromptEvent extends Event {
   readonly userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
+interface Window {
+  /** Safari en iOS anterior a 14.5 solo expone Web Audio con prefijo. */
+  webkitAudioContext?: typeof AudioContext
+}
+
 interface WindowEventMap {
   beforeinstallprompt: BeforeInstallPromptEvent
 }
