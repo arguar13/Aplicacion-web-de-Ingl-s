@@ -41,12 +41,22 @@ test('elegir un nivel, acertar y fallar', async ({ page }) => {
   await optionKey(page, word.es).first().click()
   await expect(page.getByText('Eso es.')).toBeVisible()
 
-  // El progreso queda guardado con la versión del esquema.
+  // El progreso queda guardado (FSRS, esquema v2): lo acertado a la primera, más estable que lo fallado.
   const progress = await storedProgress(page)
   expect(progress).toMatchObject({
-    version: 1,
-    cards: { [`en-es:${first.id}`]: { box: 2 }, [`en-es:${word.id}`]: { box: 1 } },
+    version: 2,
+    cards: { [`en-es:${first.id}`]: { reps: 1, phase: 'learning' }, [`en-es:${word.id}`]: { reps: 1 } },
   })
+  const [clean, failed] = await page.evaluate(
+    (keys) => {
+      const saved: { cards: Record<string, { stability: number }> } = JSON.parse(
+        localStorage.getItem('tecla:progress:v1') ?? '{"cards":{}}',
+      )
+      return keys.map((key) => saved.cards[key].stability)
+    },
+    [`en-es:${first.id}`, `en-es:${word.id}`],
+  )
+  expect(clean).toBeGreaterThan(failed)
 })
 
 test('se juega con el teclado', async ({ page, isMobile }) => {

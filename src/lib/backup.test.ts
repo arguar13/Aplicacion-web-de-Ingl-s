@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { backupFileName, describeProgress, parseBackup, serializeBackup } from './backup'
 import { EMPTY_PROGRESS, mergeProgress, type ProgressData } from './progress'
+import { fromLeitner } from './scheduler'
 import { parseSettings } from './settings'
 
 const NOW = new Date(2026, 8, 27, 10).getTime()
-const card = (box: number, seen: number, due = NOW) => ({ box, due, seen, lapses: 0 })
+/** Tarjeta equivalente a una caja Leitner (misma semántica que en la versión 1). */
+const card = (box: number, seen: number, due = NOW) => fromLeitner(box, due, seen, 0)
 
 const PROGRESS: ProgressData = {
   cards: { 'en-es:the': card(4, 5), 'es-en:the': card(2, 2), 'en-es:water': card(1, 1) },
@@ -42,7 +44,7 @@ describe('copias de seguridad', () => {
     const text = JSON.stringify({
       format: 'tecla-copia',
       version: 1,
-      progress: { cards: { 'en-es:the': card(4, 5), 'en-es:mal': { box: 'x' } }, days: [], bestStreak: 0 },
+      progress: { version: 2, cards: { 'en-es:the': card(4, 5), 'en-es:mal': { box: 'x' } }, days: [], bestStreak: 0 },
     })
     const parsed = parseBackup(text)
     expect(parsed.ok && Object.keys(parsed.backup.progress.cards)).toEqual(['en-es:the'])
@@ -78,5 +80,22 @@ describe('combinar progresos', () => {
   it('combinar con un progreso vacío no cambia nada', () => {
     expect(mergeProgress(PROGRESS, EMPTY_PROGRESS)).toEqual(PROGRESS)
     expect(mergeProgress(EMPTY_PROGRESS, PROGRESS)).toEqual(PROGRESS)
+  })
+})
+
+describe('copias de versiones anteriores', () => {
+  it('una copia con progreso Leitner (v1) se migra al importarla', () => {
+    const text = JSON.stringify({
+      format: 'tecla-copia',
+      version: 1,
+      progress: {
+        version: 1,
+        cards: { 'en-es:the': { box: 4, due: NOW, seen: 5, lapses: 0 } },
+        days: [],
+        bestStreak: 3,
+      },
+    })
+    const parsed = parseBackup(text)
+    expect(parsed.ok && parsed.backup.progress.cards['en-es:the']).toEqual(fromLeitner(4, NOW, 5, 0))
   })
 })

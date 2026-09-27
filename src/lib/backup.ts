@@ -3,7 +3,7 @@
  * las webs no instaladas tras 7 días sin visitarlas) y para pasarlo a otro dispositivo.
  */
 import { dayKey, PROGRESS_SCHEMA, type ProgressData } from './progress'
-import { MASTERED_BOX } from './scheduler'
+import { isMastered } from './scheduler'
 import { SETTINGS_SCHEMA, type Settings } from './settings'
 import { readVersioned } from './store'
 import { isRecord } from './validate'
@@ -80,7 +80,7 @@ export function describeProgress(progress: ProgressData): ProgressOverview {
   for (const [key, card] of Object.entries(progress.cards)) {
     const id = key.slice(key.indexOf(':') + 1)
     words.add(id)
-    if (card.box >= MASTERED_BOX) mastered.add(id)
+    if (isMastered(card)) mastered.add(id)
   }
   return { words: words.size, mastered: mastered.size, days: progress.days.length, bestStreak: progress.bestStreak }
 }

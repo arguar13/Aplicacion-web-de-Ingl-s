@@ -1,8 +1,8 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
-import { type CardState, parseCard, review } from './scheduler'
+import { type CardState, fromLeitner, gradeAnswer, parseCard, review } from './scheduler'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import type { Direction } from './types'
-import { isDayKey, isInteger, isRecord } from './validate'
+import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
 
 /** Días de práctica que se conservan para calcular la racha. */
 const MAX_DAYS = 400
@@ -21,7 +21,7 @@ const EMPTY = EMPTY_PROGRESS
 
 /** El "v1" de la clave es histórico: la versión del esquema va en el campo `version`. */
 export const PROGRESS_KEY = 'tecla:progress:v1'
-export const PROGRESS_VERSION = 1
+export const PROGRESS_VERSION = 2
 
 const CARD_KEY = /^(en-es|es-en):[a-z0-9-]+$/
 
@@ -46,9 +46,27 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
   }
 }
 
+/**
+ * v1 → v2 (Fase 8): las tarjetas Leitner { box, due, seen, lapses } pasan a FSRS. Las que no
+ * tienen la forma esperada se descartan aquí, igual que las descartaría la validación.
+ */
+export function migrateLeitnerToFsrs(raw: Record<string, unknown>): Record<string, unknown> {
+  const cards: Record<string, CardState> = {}
+  if (isRecord(raw.cards)) {
+    for (const [key, value] of Object.entries(raw.cards)) {
+      if (!isRecord(value)) continue
+      const { box, due, seen, lapses } = value
+      if (isInteger(box, 1, 6) && isFiniteNumber(due) && isInteger(seen, 0) && isInteger(lapses, 0)) {
+        cards[key] = fromLeitner(box, due, seen, lapses)
+      }
+    }
+  }
+  return { ...raw, cards }
+}
+
 export const PROGRESS_SCHEMA: VersionedSchema<ProgressData> = {
   version: PROGRESS_VERSION,
-  migrations: {},
+  migrations: { 1: migrateLeitnerToFsrs },
   parse: parseProgress,
 }
 
@@ -82,10 +100,18 @@ export function dailyStreak(days: readonly string[], now: number): number {
   return streak
 }
 
-export function recordAnswer(direction: Direction, id: string, clean: boolean, now = Date.now()): CardState {
+export interface Answer {
+  /** Acertada sin fallar ninguna tecla. */
+  clean: boolean
+  /** Tiempo hasta acertar, en ms. */
+  ms: number
+}
+
+export function recordAnswer(direction: Direction, id: string, answer: Answer, now = Date.now()): CardState {
   const data = store.get()
   const key = cardKey(direction, id)
-  const card = review(data.cards[key], clean, now)
+  const previous = data.cards[key]
+  const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now)
   const today = dayKey(now)
   const days = data.days.at(-1) === today ? data.days : [...data.days, today].slice(-MAX_DAYS)
   store.set({ ...data, cards: { ...data.cards, [key]: card }, days })
@@ -119,7 +145,7 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
   const cards = { ...current.cards }
   for (const [key, card] of Object.entries(incoming.cards)) {
     const mine = cards[key]
-    if (!mine || card.seen > mine.seen || (card.seen === mine.seen && card.due > mine.due)) cards[key] = card
+    if (!mine || card.reps > mine.reps || (card.reps === mine.reps && card.due > mine.due)) cards[key] = card
   }
   return {
     cards,

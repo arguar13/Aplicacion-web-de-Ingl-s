@@ -51,10 +51,16 @@ export function useQuiz(deck: Deck, direction: Direction) {
   }))
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
   const resolving = useRef(false)
+  // Momento en que apareció la palabra: lo que se tarda en acertar afina el repaso espaciado.
+  const shownAt = useRef(0)
   // Inglés → español: suena al aparecer. Español → inglés: sonar antes delataría la respuesta,
   // así que suena al acertar.
   const promptIsEnglish = direction === 'en-es'
   const canReplay = promptIsEnglish || state.solved
+
+  useEffect(() => {
+    shownAt.current = performance.now()
+  }, [state.round])
 
   useEffect(() => {
     if (promptIsEnglish && getSettings().autoplay) void playPronunciation(state.round.word.id)
@@ -99,7 +105,7 @@ export function useQuiz(deck: Deck, direction: Direction) {
 
     resolving.current = true
     const clean = wrong.length === 0
-    recordAnswer(direction, round.word.id, clean)
+    recordAnswer(direction, round.word.id, { clean, ms: performance.now() - shownAt.current })
     advanceSession(session, round.word.id, clean)
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)

@@ -1,18 +1,16 @@
 import { describe, expect, it, vi } from 'vitest'
 import { MemoryStorage } from '@/test/memoryStorage'
-import { EMPTY_PROGRESS, parseProgress, PROGRESS_KEY, PROGRESS_VERSION } from './progress'
-import { parseSettings, SETTINGS_KEY, SETTINGS_VERSION } from './settings'
+import { EMPTY_PROGRESS, parseProgress, PROGRESS_KEY, PROGRESS_SCHEMA, PROGRESS_VERSION } from './progress'
+import { parseSettings, SETTINGS_KEY, SETTINGS_SCHEMA, SETTINGS_VERSION } from './settings'
+import { fromLeitner } from './scheduler'
 import { backupKey, createPersistedStore } from './store'
 import { isRecord } from './validate'
 
+// Mismo esquema que usa la app (versión, migraciones y validación), no una copia a mano.
 const progressStore = (storage: Storage) =>
-  createPersistedStore({
-    key: PROGRESS_KEY,
-    version: PROGRESS_VERSION,
-    fallback: EMPTY_PROGRESS,
-    parse: parseProgress,
-    storage,
-  })
+  createPersistedStore({ ...PROGRESS_SCHEMA, key: PROGRESS_KEY, fallback: EMPTY_PROGRESS, storage })
+const settingsStore = (storage: Storage) =>
+  createPersistedStore({ ...SETTINGS_SCHEMA, key: SETTINGS_KEY, fallback: parseSettings({}), storage })
 
 /** Progreso tal como lo guardaba la Fase 5: sin campo `version`. */
 const PHASE_5_PROGRESS = {
@@ -25,37 +23,37 @@ const PHASE_5_PROGRESS = {
   lastDeckId: 'level-2',
 }
 
+/** El mismo progreso tras la migración v1 → v2 (Fase 8): cada caja Leitner pasa a FSRS. */
+const PHASE_5_MIGRATED = {
+  ...PHASE_5_PROGRESS,
+  cards: {
+    'en-es:the': fromLeitner(4, 1790000000000, 5, 1),
+    'es-en:water': fromLeitner(1, 1790000600000, 2, 2),
+  },
+}
+
 describe('almacén persistido', () => {
-  it('lee sin pérdidas el progreso guardado por la Fase 5', () => {
+  it('lee sin pérdidas el progreso guardado por la Fase 5 (migrado a FSRS)', () => {
     const storage = new MemoryStorage()
     storage.setItem(PROGRESS_KEY, JSON.stringify(PHASE_5_PROGRESS))
-    expect(progressStore(storage).get()).toEqual(PHASE_5_PROGRESS)
+    expect(progressStore(storage).get()).toEqual(PHASE_5_MIGRATED)
+    // Queda guardado en la versión nueva, con el original respaldado.
+    expect(JSON.parse(storage.getItem(PROGRESS_KEY) ?? '')).toMatchObject({ version: PROGRESS_VERSION })
+    expect(storage.getItem(backupKey(PROGRESS_KEY))).toBe(JSON.stringify(PHASE_5_PROGRESS))
   })
 
   it('lee sin pérdidas los ajustes guardados por la Fase 5', () => {
     const storage = new MemoryStorage()
     const phase5 = { direction: 'es-en', autoplay: false, theme: 'dark' }
     storage.setItem(SETTINGS_KEY, JSON.stringify(phase5))
-    const store = createPersistedStore({
-      key: SETTINGS_KEY,
-      version: SETTINGS_VERSION,
-      fallback: parseSettings({}),
-      parse: parseSettings,
-      storage,
-    })
+    const store = settingsStore(storage)
     // Los campos añadidos después (detailsPause, Fase 7) toman su valor por defecto.
     expect(store.get()).toEqual({ ...phase5, detailsPause: 'mistakes' })
   })
 
   it('guarda con número de versión y conserva el tema en la raíz (index.html lo lee antes de pintar)', () => {
     const storage = new MemoryStorage()
-    const store = createPersistedStore({
-      key: SETTINGS_KEY,
-      version: SETTINGS_VERSION,
-      fallback: parseSettings({}),
-      parse: parseSettings,
-      storage,
-    })
+    const store = settingsStore(storage)
     store.set({ ...store.get(), theme: 'dark' })
     expect(JSON.parse(storage.getItem(SETTINGS_KEY) ?? '')).toMatchObject({ version: SETTINGS_VERSION, theme: 'dark' })
   })
@@ -89,7 +87,7 @@ describe('almacén persistido', () => {
       }),
     )
     expect(progressStore(storage).get()).toEqual({
-      cards: PHASE_5_PROGRESS.cards,
+      cards: PHASE_5_MIGRATED.cards,
       days: ['2026-09-24', '2026-09-26'],
       bestStreak: 0,
       lastDeckId: null,

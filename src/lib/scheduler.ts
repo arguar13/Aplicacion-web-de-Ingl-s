@@ -1,56 +1,146 @@
 /**
- * Repaso espaciado estilo Leitner, pensado para rondas rápidas.
+ * Repaso espaciado con FSRS (Free Spaced Repetition Scheduler), pensado para rondas rápidas.
  *
- * Cada palabra vive en una "caja". Acertar a la primera la sube de caja y la aleja en el tiempo;
- * fallar la devuelve a la caja 1. Dentro de la sesión, lo fallado vuelve a salir a las pocas rondas.
+ * Cada palabra tiene una estabilidad (días que tarda en bajar al 90 % la probabilidad de
+ * recordarla) y una dificultad propias, que se ajustan con cada respuesta. El repaso se programa
+ * para cuando la probabilidad de recordarla cae al 90 %: lo fácil se aleja rápido, lo difícil vuelve
+ * pronto. Dentro de la sesión, lo fallado vuelve a salir a las pocas rondas.
  */
+import { type Card, createEmptyCard, fsrs, generatorParameters, type Grade, Rating, State } from 'ts-fsrs'
 import type { Rng, Word } from './types'
 import { isFiniteNumber, isInteger, isRecord } from './validate'
 
 export const MINUTE = 60_000
 export const DAY = 24 * 60 * MINUTE
 
-/** Espera hasta el siguiente repaso según la caja (el índice es la caja). */
-export const INTERVALS = [0, 10 * MINUTE, DAY, 3 * DAY, 7 * DAY, 21 * DAY, 60 * DAY] as const
-export const MAX_BOX = INTERVALS.length - 1
-/** Desde esta caja la palabra se considera dominada (acertada en varios días distintos). */
-export const MASTERED_BOX = 4
+/** Desde esta estabilidad (días) la palabra se considera dominada. */
+export const MASTERED_STABILITY = 7
 /** Rondas que esperan las palabras falladas antes de volver a salir en la misma sesión. */
 export const REQUEUE_AFTER = 4
 const RECENT_WINDOW = 3
+/** Respuesta rápida o lenta, para afinar la nota que recibe FSRS. */
+export const FAST_ANSWER_MS = 2500
+export const SLOW_ANSWER_MS = 8000
 
+// Sin "fuzz": el mismo historial da siempre el mismo calendario (y los tests son deterministas).
+const scheduler = fsrs(generatorParameters({ enable_fuzz: false, request_retention: 0.9 }))
+
+export type CardPhase = 'learning' | 'review' | 'relearning'
+
+/** Estado guardado de una palabra: lo que FSRS necesita, en formato compacto. */
 export interface CardState {
-  box: number
   /** Momento (ms) a partir del cual toca repasarla. */
   due: number
-  seen: number
+  stability: number
+  difficulty: number
+  phase: CardPhase
+  /** Paso de aprendizaje en curso (fase learning/relearning). */
+  step: number
+  /** Veces respondida. */
+  reps: number
+  /** Veces olvidada tras haberla aprendido. */
   lapses: number
+  /** Último repaso (ms). */
+  last: number
+}
+
+const PHASES: Record<CardPhase, State> = {
+  learning: State.Learning,
+  review: State.Review,
+  relearning: State.Relearning,
+}
+
+function toFsrs(card: CardState): Card {
+  return {
+    due: new Date(card.due),
+    stability: card.stability,
+    difficulty: card.difficulty,
+    elapsed_days: 0,
+    scheduled_days: Math.max(0, Math.round((card.due - card.last) / DAY)),
+    learning_steps: card.step,
+    reps: card.reps,
+    lapses: card.lapses,
+    state: PHASES[card.phase],
+    last_review: new Date(card.last),
+  }
+}
+
+function fromFsrs(card: Card): CardState {
+  const phase = card.state === State.Review ? 'review' : card.state === State.Relearning ? 'relearning' : 'learning'
+  return {
+    due: card.due.getTime(),
+    stability: card.stability,
+    difficulty: card.difficulty,
+    phase,
+    step: card.learning_steps,
+    reps: card.reps,
+    lapses: card.lapses,
+    last: card.last_review?.getTime() ?? card.due.getTime(),
+  }
+}
+
+/** Nota de la respuesta para FSRS según si hubo fallos y lo que tardó. */
+export function gradeAnswer({ clean, ms, isNew }: { clean: boolean; ms: number; isNew: boolean }): Grade {
+  if (!clean) return Rating.Again
+  if (ms >= SLOW_ANSWER_MS) return Rating.Hard
+  // Una palabra nueva acertada podría ser suerte (1 de 4): pasa por un paso de aprendizaje.
+  if (!isNew && ms <= FAST_ANSWER_MS) return Rating.Easy
+  return Rating.Good
+}
+
+/** Nuevo estado de una palabra tras responderla. */
+export function review(card: CardState | undefined, grade: Grade, now: number): CardState {
+  const current = card ? toFsrs(card) : createEmptyCard(new Date(now))
+  return fromFsrs(scheduler.next(current, new Date(now), grade).card)
+}
+
+// --- Migración desde Leitner (progreso v1) --------------------------------------------------------
+
+/** Intervalo de cada caja Leitner de la versión 1, en ms (el índice es la caja). */
+const LEITNER_INTERVALS = [0, 10 * MINUTE, DAY, 3 * DAY, 7 * DAY, 21 * DAY, 60 * DAY]
+
+/**
+ * Convierte una tarjeta Leitner en una FSRS equivalente: la estabilidad es el intervalo de su caja
+ * (FSRS programa el repaso cuando la retención baja al 90 %, justo a una estabilidad de distancia),
+ * la fecha de repaso no cambia y la dificultad sube con los olvidos. Así "dominadas" (caja 4 o más
+ * = estabilidad de 7 días o más) sigue contando lo mismo tras migrar.
+ */
+export function fromLeitner(box: number, due: number, seen: number, lapses: number): CardState {
+  const interval = LEITNER_INTERVALS[Math.min(Math.max(box, 1), LEITNER_INTERVALS.length - 1)]
+  const learning = box <= 1
+  return {
+    due,
+    stability: learning ? 0.5 : interval / DAY,
+    difficulty: Math.min(10, 5 + lapses * 0.75),
+    phase: learning ? (lapses > 0 ? 'relearning' : 'learning') : 'review',
+    step: 0,
+    reps: seen,
+    lapses,
+    last: due - interval,
+  }
 }
 
 /** Valida una tarjeta leída del almacenamiento; `null` si no es utilizable. */
 export function parseCard(raw: unknown): CardState | null {
   if (!isRecord(raw)) return null
-  const { box, due, seen, lapses } = raw
-  if (!isInteger(box, 1, MAX_BOX) || !isFiniteNumber(due) || !isInteger(seen, 0) || !isInteger(lapses, 0)) return null
-  return { box, due, seen, lapses }
+  const { due, stability, difficulty, phase, step, reps, lapses, last } = raw
+  if (!isFiniteNumber(due) || !isFiniteNumber(last)) return null
+  if (!isFiniteNumber(stability) || stability <= 0 || !isFiniteNumber(difficulty)) return null
+  if (phase !== 'learning' && phase !== 'review' && phase !== 'relearning') return null
+  if (!isInteger(step, 0) || !isInteger(reps, 0) || !isInteger(lapses, 0)) return null
+  return { due, stability, difficulty: Math.min(10, Math.max(1, difficulty)), phase, step, reps, lapses, last }
 }
 
 export type CardStatus = 'new' | 'learning' | 'mastered'
 
+export const isMastered = (card: CardState) => card.phase === 'review' && card.stability >= MASTERED_STABILITY
+
 export function statusOf(card: CardState | undefined): CardStatus {
   if (!card) return 'new'
-  return card.box >= MASTERED_BOX ? 'mastered' : 'learning'
+  return isMastered(card) ? 'mastered' : 'learning'
 }
 
-/** Nuevo estado de una palabra tras responderla. `clean` = acertada sin fallar ninguna tecla. */
-export function review(card: CardState | undefined, clean: boolean, now: number): CardState {
-  const seen = (card?.seen ?? 0) + 1
-  const lapses = card?.lapses ?? 0
-  if (!clean) return { box: 1, due: now + INTERVALS[1], seen, lapses: lapses + 1 }
-  // Una palabra nueva acertada a la primera probablemente ya se conoce: salta directo a un día.
-  const box = card ? Math.min(card.box + 1, MAX_BOX) : 2
-  return { box, due: now + INTERVALS[box], seen, lapses }
-}
+// --- Sesión y elección de la siguiente palabra -----------------------------------------------------
 
 export interface Session {
   /** Rondas completadas en esta sesión. */
@@ -83,13 +173,16 @@ export interface Pick {
 export interface PickOptions {
   /** Cómo se introducen las palabras nuevas: por frecuencia (niveles) o al azar (todas). */
   newOrder: 'frequency' | 'random'
+  /** false cuando ya se alcanzó el límite de palabras nuevas del día. */
+  allowNew?: boolean
 }
 
-type CardLookup = (id: string) => CardState | undefined
+export type CardLookup = (id: string) => CardState | undefined
 
 /**
  * Decide la siguiente palabra. Prioridad: falladas en la sesión que ya toca repetir, repasos
- * vencidos, palabras nuevas y, si no queda nada, práctica libre favoreciendo las más débiles.
+ * vencidos, palabras nuevas (si quedan del límite diario) y, si no queda nada, práctica libre
+ * favoreciendo las más frágiles (menor estabilidad).
  */
 export function pickNext(
   words: readonly Word[],
@@ -118,11 +211,15 @@ export function pickNext(
 
   const due: Array<{ word: Word; due: number }> = []
   const fresh: Word[] = []
+  const seen: Word[] = []
   for (const word of words) {
     if (!available(word) || session.requeue.has(word.id)) continue
     const card = getCard(word.id)
     if (!card) fresh.push(word)
-    else if (card.due <= now) due.push({ word, due: card.due })
+    else {
+      seen.push(word)
+      if (card.due <= now) due.push({ word, due: card.due })
+    }
   }
 
   if (due.length > 0) {
@@ -130,21 +227,23 @@ export function pickNext(
     return { word: pickAmong(due.slice(0, 3)).word, reason: 'review' }
   }
 
-  if (fresh.length > 0) {
+  if (fresh.length > 0 && (options.allowNew ?? true)) {
     // Por frecuencia, pero con algo de variedad entre las siguientes.
     const pool = options.newOrder === 'frequency' ? fresh.slice(0, 3) : fresh
     return { word: pickAmong(pool), reason: 'new' }
   }
 
-  // Todo visto y nada pendiente: torneo entre unas cuantas al azar, gana la de caja más baja.
-  const candidates = words.filter(available)
+  // Nada pendiente: torneo entre unas cuantas ya vistas, gana la más frágil. Si no hay ninguna
+  // vista (límite de nuevas alcanzado en un mazo sin empezar), se practica con las nuevas.
+  const candidates = seen.length > 0 ? seen : fresh.length > 0 ? fresh : words.filter(available)
   const pool = candidates.length > 0 ? candidates : [...words]
+  const strength = (w: Word) => getCard(w.id)?.stability ?? 0
   let best = pickAmong(pool)
   for (let i = 0; i < 4; i++) {
     const other = pickAmong(pool)
-    if ((getCard(other.id)?.box ?? 0) < (getCard(best.id)?.box ?? 0)) best = other
+    if (strength(other) < strength(best)) best = other
   }
-  return { word: best, reason: 'practice' }
+  return { word: best, reason: getCard(best.id) ? 'practice' : 'new' }
 }
 
 export interface DeckSummary {
