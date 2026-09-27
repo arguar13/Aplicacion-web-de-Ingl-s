@@ -6,7 +6,7 @@ const byEnglish = new Map(words.map((word) => [word.en, word]))
 
 /** Palabra que se está preguntando ahora (modo inglés → español). */
 export async function currentWord(page: Page) {
-  const prompt = page.locator('main section p[lang="en"]')
+  const prompt = page.getByRole('heading', { level: 1 })
   await expect(prompt).toBeVisible()
   const text = (await prompt.textContent())?.trim() ?? ''
   const word = byEnglish.get(text)
@@ -16,14 +16,17 @@ export async function currentWord(page: Page) {
 
 /** Tecla de respuesta con la traducción indicada. */
 export const optionKey = (page: Page, label: string) =>
-  page.locator('main button[aria-keyshortcuts]').filter({ has: page.getByText(label, { exact: true }) })
+  page
+    .getByRole('group', { name: 'Respuestas' })
+    .getByRole('button')
+    .filter({ has: page.getByText(label, { exact: true }) })
 
 /** Responde bien la palabra actual y espera a que aparezca la siguiente. */
 export async function answerCorrectly(page: Page) {
   const word = await currentWord(page)
   await optionKey(page, word.es).first().click()
   await expect(page.getByText(/¡Correcto!|Eso es\./)).toBeVisible()
-  await expect(page.locator('main section p[lang="en"]')).not.toHaveText(word.en, { timeout: 3000 })
+  await expect(page.getByRole('heading', { level: 1 })).not.toHaveText(word.en, { timeout: 3000 })
   return word
 }
 
@@ -47,3 +50,6 @@ export async function expectAccessible(page: Page) {
 /** Progreso guardado en el dispositivo. */
 export const storedProgress = (page: Page) =>
   page.evaluate(() => JSON.parse(localStorage.getItem('tecla:progress:v1') ?? 'null') as unknown)
+
+/** Texto literal dentro de una expresión regular ("(de ir)" no es un grupo). */
+export const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

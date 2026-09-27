@@ -43,7 +43,8 @@ describe('almacén persistido', () => {
       parse: parseSettings,
       storage,
     })
-    expect(store.get()).toEqual(phase5)
+    // Los campos añadidos después (detailsPause, Fase 7) toman su valor por defecto.
+    expect(store.get()).toEqual({ ...phase5, detailsPause: 'mistakes' })
   })
 
   it('guarda con número de versión y conserva el tema en la raíz (index.html lo lee antes de pintar)', () => {

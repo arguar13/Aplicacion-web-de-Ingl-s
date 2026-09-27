@@ -27,6 +27,8 @@ interface State {
   /** Ids de las teclas que el usuario ya pulsó mal en esta ronda. */
   wrong: string[]
   solved: boolean
+  /** Tras responder, la partida se detiene con el detalle de la palabra a la vista. */
+  expanded: boolean
   stats: QuizStats
 }
 
@@ -44,6 +46,7 @@ export function useQuiz(deck: Deck, direction: Direction) {
     next: null,
     wrong: [],
     solved: false,
+    expanded: false,
     stats: { solved: 0, firstTry: 0, streak: 0 },
   }))
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
@@ -67,16 +70,23 @@ export function useQuiz(deck: Deck, direction: Direction) {
   }, [state.next])
 
   useEffect(() => {
-    if (!state.solved) return
-    const timer = setTimeout(
-      () => {
-        resolving.current = false
-        setState((s) => (s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false } : s))
-      },
-      promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS,
-    )
+    if (!state.solved || state.expanded) return
+    const timer = setTimeout(advance, promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
     return () => clearTimeout(timer)
-  }, [state.solved, promptIsEnglish])
+  }, [state.solved, state.expanded, promptIsEnglish])
+
+  /** Pasa a la siguiente palabra (ya calculada al acertar). */
+  function advance() {
+    resolving.current = false
+    setState((s) =>
+      s.solved && s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false } : s,
+    )
+  }
+
+  /** Detiene el avance automático para ver el detalle de la palabra recién resuelta. */
+  function expand() {
+    setState((s) => (s.solved ? { ...s, expanded: true } : s))
+  }
 
   function answer(id: string) {
     const { round, wrong, solved, stats } = state
@@ -93,17 +103,20 @@ export function useQuiz(deck: Deck, direction: Direction) {
     advanceSession(session, round.word.id, clean)
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)
+    const pause = getSettings().detailsPause
     setState({
       ...state,
       solved: true,
+      // Tras un fallo es cuando más ayuda ver el ejemplo; quien va rápido no se detiene.
+      expanded: pause === 'always' || (pause === 'mistakes' && !clean),
       next: nextRound(deck, direction, session),
       stats: { solved: stats.solved + 1, firstTry: stats.firstTry + (clean ? 1 : 0), streak },
     })
   }
 
-  function replay() {
-    if (canReplay) void playPronunciation(state.round.word.id)
+  function replay({ slow = false }: { slow?: boolean } = {}) {
+    if (canReplay) void playPronunciation(state.round.word.id, { slow })
   }
 
-  return { ...state, canReplay, answer, replay }
+  return { ...state, canReplay, answer, replay, expand, advance }
 }

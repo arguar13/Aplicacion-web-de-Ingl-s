@@ -119,3 +119,15 @@ export function DownloadIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Tortuga: escuchar despacio. */
+export function SlowIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 16c0-4.4 3.1-8 7-8s7 3.6 7 8H3Z" />
+      <path d="m7 12.5 3-2.5 3 2.5-3 3.5-3-3.5Z" />
+      <path d="M17 13.5h2.2a2 2 0 1 0 0-4c-1.2 0-2 .8-2.4 1.8" />
+      <path d="M6 16v2.5M14 16v2.5" />
+    </svg>
+  )
+}

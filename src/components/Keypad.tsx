@@ -19,7 +19,7 @@ export function Keypad({ options, direction, answerId, wrong, solved, onAnswer }
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-4 short:gap-3">
+    <div role="group" aria-label="Respuestas" className="grid grid-cols-2 gap-3 sm:gap-4 short:gap-3">
       {options.map((option, index) => (
         <OptionKey
           key={`${answerId}-${option.id}`}

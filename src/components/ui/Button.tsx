@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes, Ref } from 'react'
 import { cn } from '@/lib/cn'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'danger-outline'
@@ -22,6 +22,7 @@ const sizes: Record<ButtonSize, string> = {
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
   size?: ButtonSize
+  ref?: Ref<HTMLButtonElement>
 }
 
 /** Botón de acción con las variantes del sistema visual de Tecla. */

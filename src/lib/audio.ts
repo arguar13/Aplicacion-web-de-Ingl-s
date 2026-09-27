@@ -12,6 +12,8 @@ import { audioUrl } from './audioUrl'
 
 /** Audios decodificados que se guardan en memoria (~200 KB cada uno). */
 const MAX_CACHED = 40
+/** Velocidad de "escuchar despacio". */
+export const SLOW_RATE = 0.7
 
 const AudioContextClass: typeof AudioContext | undefined =
   typeof window === 'undefined' ? undefined : (window.AudioContext ?? window.webkitAudioContext)
@@ -79,9 +81,15 @@ export function preloadPronunciation(id: string): void {
   else void audioUrl(id).then((url) => fetch(url))
 }
 
-export async function playPronunciation(id: string): Promise<void> {
+export interface PlayOptions {
+  /** Más despacio y con el mismo tono (un <audio> con preservesPitch; Web Audio lo haría más grave). */
+  slow?: boolean
+}
+
+export async function playPronunciation(id: string, { slow = false }: PlayOptions = {}): Promise<void> {
   const token = ++playToken
-  if (!AudioContextClass) return playWithElement(id, token)
+  stopCurrent()
+  if (slow || !AudioContextClass) return playWithElement(id, token, slow ? SLOW_RATE : 1)
 
   const ctx = getContext(AudioContextClass)
   const buffer = await load(id, AudioContextClass)
@@ -89,7 +97,6 @@ export async function playPronunciation(id: string): Promise<void> {
   if (!buffer || token !== playToken) return
   if (ctx.state === 'suspended') await ctx.resume()
 
-  current?.stop()
   const source = ctx.createBufferSource()
   source.buffer = buffer
   source.connect(ctx.destination)
@@ -104,11 +111,20 @@ export async function playPronunciation(id: string): Promise<void> {
   current = source
 }
 
-async function playWithElement(id: string, token: number): Promise<void> {
+/** Corta lo que esté sonando, venga de Web Audio o de un elemento <audio>. */
+function stopCurrent() {
+  current?.stop()
+  current = null
+  currentElement?.pause()
+  currentElement = null
+}
+
+async function playWithElement(id: string, token: number, rate: number): Promise<void> {
   const url = await audioUrl(id)
   if (token !== playToken) return
-  currentElement?.pause()
   const element = new Audio(url)
+  element.preservesPitch = true
+  element.playbackRate = rate
   currentElement = element
   try {
     await element.play()

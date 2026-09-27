@@ -33,7 +33,7 @@ test('ajustes se abre como panel y atrás lo cierra sin salir de la partida', as
   await page.goBack()
   await expect(dialog).toBeHidden()
   await expect(page).toHaveURL(/#\/nivel\/1$/)
-  await expect(page.locator('main section p[lang="en"]')).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 
   await page.getByRole('button', { name: 'Ajustes' }).click()
   await dialog.getByRole('button', { name: 'Cerrar' }).click()

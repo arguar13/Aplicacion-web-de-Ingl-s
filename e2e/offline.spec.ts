@@ -12,7 +12,7 @@ test('funciona sin conexión tras la primera visita', async ({ page, context, br
 
   await context.setOffline(true)
   await page.goto('./#/nivel/1')
-  await expect(page.locator('main section p[lang="en"]')).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   await expect(page).toHaveTitle('Nivel 1 · Esenciales — Tecla')
 })
 

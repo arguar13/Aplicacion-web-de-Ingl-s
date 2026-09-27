@@ -2,6 +2,7 @@ import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
+import { useWordDetails } from '@/lib/details'
 import type { Direction } from '@/lib/types'
 import { IconButton } from './ui/IconButton'
 import { Header, Stat } from './Header'
@@ -10,6 +11,7 @@ import { Kbd } from './ui/Kbd'
 import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
+import { DetailCard } from './DetailCard'
 
 interface Props {
   deck: Deck
@@ -20,15 +22,29 @@ interface Props {
 
 export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
   const quiz = useQuiz(deck, direction)
-  const { round, stats, answer, replay } = quiz
+  const { round, stats, answer, replay, expand, advance } = quiz
   const summary = useDeckSummaries(direction)(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
+  const details = useWordDetails(round.word.id)
+  const showDetail = quiz.solved && quiz.expanded
+  const listenSlowly = () => replay({ slow: true })
 
   useKeyDown((event) => {
-    if (event.key === 'Escape') return onExit()
-    if (event.key === ' ') {
+    const key = event.key.toLowerCase()
+    if (key === 'escape') return onExit()
+    if (key === ' ') {
       event.preventDefault()
       return replay()
+    }
+    if (key === 'l') return listenSlowly()
+    if (quiz.solved) {
+      if (key === 'e') return expand()
+      if (key === 'enter' || key === 'arrowright') {
+        // Enter sobre el botón enfocado ya lo pulsa el navegador: no avanzar dos veces.
+        event.preventDefault()
+        return advance()
+      }
+      return
     }
     const option = round.options[Number(event.key) - 1]
     if (option) answer(option.id)
@@ -75,31 +91,57 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
               word={round.word}
               direction={direction}
               reason={round.reason}
+              ipa={details?.ipa}
               solved={quiz.solved}
+              expanded={quiz.expanded}
               mistakes={quiz.wrong.length}
               canReplay={quiz.canReplay}
-              onReplay={replay}
+              onReplay={() => replay()}
+              onListenSlowly={listenSlowly}
+              onExpand={expand}
             />
-            <Keypad
-              options={round.options}
-              direction={direction}
-              answerId={round.word.id}
-              wrong={quiz.wrong}
-              solved={quiz.solved}
-              onAnswer={answer}
-            />
+            {showDetail ? (
+              <DetailCard
+                key={round.word.id}
+                word={round.word}
+                direction={direction}
+                details={details}
+                onContinue={advance}
+                onListenSlowly={listenSlowly}
+              />
+            ) : (
+              <Keypad
+                options={round.options}
+                direction={direction}
+                answerId={round.word.id}
+                wrong={quiz.wrong}
+                solved={quiz.solved}
+                onAnswer={answer}
+              />
+            )}
           </div>
         </div>
       </main>
 
-      <footer className="hidden items-center justify-center gap-6 pb-6 text-xs text-muted pointer-fine:flex">
-        <span className="flex items-center gap-2">
-          <Kbd>1</Kbd>–<Kbd>4</Kbd> responder
-        </span>
-        {quiz.canReplay && (
+      <footer className="hidden flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 pb-6 text-xs text-muted pointer-fine:flex">
+        {quiz.solved ? (
           <span className="flex items-center gap-2">
-            <Kbd>Espacio</Kbd> escuchar
+            <Kbd>Enter</Kbd> seguir
           </span>
+        ) : (
+          <span className="flex items-center gap-2">
+            <Kbd>1</Kbd>–<Kbd>4</Kbd> responder
+          </span>
+        )}
+        {quiz.canReplay && (
+          <>
+            <span className="flex items-center gap-2">
+              <Kbd>Espacio</Kbd> escuchar
+            </span>
+            <span className="flex items-center gap-2">
+              <Kbd>L</Kbd> despacio
+            </span>
+          </>
         )}
         <span className="flex items-center gap-2">
           <Kbd>Esc</Kbd> niveles

@@ -31,7 +31,8 @@ test('elegir un nivel, acertar y fallar', async ({ page }) => {
   // Una tecla equivocada se marca y el usuario puede seguir intentando.
   const word = await currentWord(page)
   const wrong = page
-    .locator('main button[aria-keyshortcuts]')
+    .getByRole('group', { name: 'Respuestas' })
+    .getByRole('button')
     .filter({ hasNot: page.locator('span', { hasText: new RegExp(`^${word.es.replace(/[()]/g, '\\$&')}$`) }) })
     .first()
   await wrong.click()
@@ -53,7 +54,7 @@ test('se juega con el teclado', async ({ page, isMobile }) => {
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/#\/nivel\/1$/)
   const word = await currentWord(page)
-  const keys = page.locator('main button[aria-keyshortcuts]')
+  const keys = page.getByRole('group', { name: 'Respuestas' }).getByRole('button')
   const labels = await keys.locator('span[lang="es"]').allTextContents()
   await page.keyboard.press(String(labels.indexOf(word.es) + 1))
   await expect(page.getByText('¡Correcto!')).toBeVisible()
