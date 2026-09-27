@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ALL_DECK, ALL_WORDS, LEVEL_SIZE, LEVELS, samplePreview } from './decks'
+import { ALL_DECK, ALL_WORDS, DISTRACTOR_WINDOW, distractorPool, LEVEL_SIZE, LEVELS, samplePreview } from './decks'
 
 describe('niveles', () => {
   it('cubren todas las palabras, en orden y sin solaparse', () => {
@@ -24,6 +24,24 @@ describe('niveles', () => {
       const preview = samplePreview(deck)
       expect(preview).toHaveLength(4)
       expect(preview.every((w) => deck.words.includes(w))).toBe(true)
+    }
+  })
+})
+
+const rank = (id: string) => ALL_WORDS.findIndex((w) => w.id === id)
+
+describe('distractores de dificultad parecida', () => {
+  it('en un nivel salen del propio nivel', () => {
+    expect(distractorPool(LEVELS[2], LEVELS[2].words[10])).toBe(LEVELS[2].words)
+  })
+
+  it('en el mazo completo salen de palabras de frecuencia cercana', () => {
+    for (const index of [0, 1234, 2500, ALL_WORDS.length - 1]) {
+      const word = ALL_WORDS[index]
+      const pool = distractorPool(ALL_DECK, word)
+      expect(pool).toHaveLength(DISTRACTOR_WINDOW)
+      expect(pool).toContain(word)
+      expect(pool.every((w) => Math.abs(rank(w.id) - index) <= DISTRACTOR_WINDOW)).toBe(true)
     }
   })
 })

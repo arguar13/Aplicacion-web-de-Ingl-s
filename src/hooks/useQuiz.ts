@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { playPronunciation, preloadPronunciation } from '@/lib/audio'
-import type { Deck } from '@/lib/decks'
+import { type Deck, distractorPool } from '@/lib/decks'
 import { cardLookup, getProgress, recordAnswer, recordStreak } from '@/lib/progress'
 import { buildOptions } from '@/lib/quiz'
 import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
@@ -35,7 +35,7 @@ interface State {
 function nextRound(deck: Deck, direction: Direction, session: Session): Round {
   const lookup = cardLookup(getProgress(), direction)
   const pick = pickNext(deck.words, lookup, session, Date.now(), { newOrder: deck.newOrder })
-  return { ...pick, options: buildOptions(pick.word, deck.words) }
+  return { ...pick, options: buildOptions(pick.word, distractorPool(deck, pick.word)) }
 }
 
 export function useQuiz(deck: Deck, direction: Direction) {

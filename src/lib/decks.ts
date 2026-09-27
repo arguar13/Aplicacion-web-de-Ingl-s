@@ -63,3 +63,21 @@ export const ALL_DECK: Deck = {
 export function samplePreview(deck: Deck, count = 4): Word[] {
   return Array.from({ length: count }, (_, i) => deck.words[Math.floor(((i + 0.5) / count) * deck.words.length)])
 }
+
+/** Tamaño del entorno de frecuencia del que salen los distractores en mazos de más de un nivel. */
+export const DISTRACTOR_WINDOW = LEVEL_SIZE
+
+const rankOf = new Map(ALL_WORDS.map((word, index) => [word.id, index]))
+
+/**
+ * Palabras de las que salen los distractores de `word`. En un nivel, el propio nivel (todas son de
+ * frecuencia parecida). En un mazo mayor, las de frecuencia cercana a la respuesta: si no, una
+ * palabra avanzada competiría con "the" y se adivinaría por descarte.
+ */
+export function distractorPool(deck: Deck, word: Word): readonly Word[] {
+  if (deck.words.length <= LEVEL_SIZE) return deck.words
+  const rank = rankOf.get(word.id) ?? 0
+  const start = Math.max(0, Math.min(rank - DISTRACTOR_WINDOW / 2, ALL_WORDS.length - DISTRACTOR_WINDOW))
+  const nearby = new Set(ALL_WORDS.slice(start, start + DISTRACTOR_WINDOW).map((w) => w.id))
+  return deck.words.filter((w) => nearby.has(w.id))
+}
