@@ -21,13 +21,26 @@ export const optionKey = (page: Page, label: string) =>
     .getByRole('button')
     .filter({ has: page.getByText(label, { exact: true }) })
 
-/** Responde bien la palabra actual y espera a que aparezca la siguiente. */
-export async function answerCorrectly(page: Page) {
+/** Pulsa la tecla correcta de la palabra actual. */
+export async function answerCurrent(page: Page) {
   const word = await currentWord(page)
   await optionKey(page, word.es).first().click()
+  return word
+}
+
+/** Responde bien la palabra actual y espera a que aparezca la siguiente. */
+export async function answerCorrectly(page: Page) {
+  const word = await answerCurrent(page)
   await expect(page.getByText(/¡Correcto!|Eso es\./)).toBeVisible()
   await expect(page.getByRole('heading', { level: 1 })).not.toHaveText(word.en, { timeout: 3000 })
   return word
+}
+
+/** Responde bien `count` palabras seguidas (una tras otra: cada ronda espera a la anterior). */
+export async function answerManyCorrectly(page: Page, count: number): Promise<void> {
+  if (count <= 0) return
+  await answerCorrectly(page)
+  return answerManyCorrectly(page, count - 1)
 }
 
 /** La página no se desplaza en horizontal: nada se sale del ancho de la pantalla. */

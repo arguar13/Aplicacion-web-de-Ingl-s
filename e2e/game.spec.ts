@@ -68,6 +68,9 @@ test('se juega con el teclado', async ({ page, isMobile }) => {
   const labels = await keys.locator('span[lang="es"]').allTextContents()
   await page.keyboard.press(String(labels.indexOf(word.es) + 1))
   await expect(page.getByText('¡Correcto!')).toBeVisible()
+  // Con palabras respondidas, Esc muestra antes el resumen; otro Esc sale.
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('heading', { name: 'Buen trabajo' })).toBeVisible()
   await page.keyboard.press('Escape')
   await expect(page).toHaveURL(/#\/$/)
 })

@@ -14,6 +14,7 @@ import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
 import { DetailCard } from './DetailCard'
+import { SessionSummary } from './SessionSummary'
 
 interface Props {
   deck: Deck
@@ -24,7 +25,7 @@ interface Props {
 
 export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
   const quiz = useQuiz(deck, direction)
-  const { round, stats, answer, replay, expand, advance } = quiz
+  const { round, stats, answer, replay, expand, advance, resume, requestExit } = quiz
   const summary = useDeckSummaries(direction)(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
   const details = useWordDetails(round.word.id)
@@ -33,9 +34,19 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
   const showDetail = quiz.solved && quiz.expanded
   const listenSlowly = () => replay({ slow: true })
 
+  // Salir con palabras respondidas muestra antes el resumen de la sesión.
+  const exit = () => {
+    if (!requestExit()) onExit()
+  }
+
   useKeyDown((event) => {
     const key = event.key.toLowerCase()
-    if (key === 'escape') return onExit()
+    if (quiz.summary) {
+      // En el resumen, Enter lo hace el botón principal (tiene el foco); Esc sale.
+      if (key === 'escape') onExit()
+      return
+    }
+    if (key === 'escape') return exit()
     if (key === ' ') {
       event.preventDefault()
       return replay()
@@ -68,7 +79,7 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
             <div className="flex items-center justify-between gap-3">
               <button
                 type="button"
-                onClick={onExit}
+                onClick={quiz.summary ? onExit : exit}
                 className="-ml-2 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
               >
                 <ArrowLeftIcon width={16} height={16} />
@@ -90,67 +101,80 @@ export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
-            <WordScreen
-              word={round.word}
+          {quiz.summary ? (
+            <SessionSummary
+              reason={quiz.summary}
+              stats={stats}
               direction={direction}
-              reason={round.reason}
-              ipa={details?.ipa}
-              solved={quiz.solved}
-              expanded={quiz.expanded}
-              mistakes={quiz.wrong.length}
-              canReplay={quiz.canReplay}
-              onReplay={() => replay()}
-              onListenSlowly={listenSlowly}
-              onExpand={expand}
+              dailyGoal={dailyGoal}
+              onContinue={resume}
+              onFinish={onExit}
             />
-            {showDetail ? (
-              <DetailCard
-                key={round.word.id}
+          ) : (
+            <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
+              <WordScreen
                 word={round.word}
                 direction={direction}
-                details={details}
-                onContinue={advance}
-                onListenSlowly={listenSlowly}
-              />
-            ) : (
-              <Keypad
-                options={round.options}
-                direction={direction}
-                answerId={round.word.id}
-                wrong={quiz.wrong}
+                reason={round.reason}
+                ipa={details?.ipa}
                 solved={quiz.solved}
-                onAnswer={answer}
+                expanded={quiz.expanded}
+                mistakes={quiz.wrong.length}
+                canReplay={quiz.canReplay}
+                onReplay={() => replay()}
+                onListenSlowly={listenSlowly}
+                onExpand={expand}
               />
-            )}
-          </div>
+              {showDetail ? (
+                <DetailCard
+                  key={round.word.id}
+                  word={round.word}
+                  direction={direction}
+                  details={details}
+                  onContinue={advance}
+                  onListenSlowly={listenSlowly}
+                />
+              ) : (
+                <Keypad
+                  options={round.options}
+                  direction={direction}
+                  answerId={round.word.id}
+                  wrong={quiz.wrong}
+                  solved={quiz.solved}
+                  onAnswer={answer}
+                />
+              )}
+            </div>
+          )}
         </div>
       </main>
 
-      <footer className="hidden flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 pb-6 text-xs text-muted pointer-fine:flex">
-        {quiz.solved ? (
-          <span className="flex items-center gap-2">
-            <Kbd>Enter</Kbd> seguir
-          </span>
-        ) : (
-          <span className="flex items-center gap-2">
-            <Kbd>1</Kbd>–<Kbd>4</Kbd> responder
-          </span>
-        )}
-        {quiz.canReplay && (
-          <>
+      {!quiz.summary && (
+        <footer className="hidden flex-wrap items-center justify-center gap-x-6 gap-y-2 px-4 pb-6 text-xs text-muted pointer-fine:flex">
+          {quiz.solved ? (
             <span className="flex items-center gap-2">
-              <Kbd>Espacio</Kbd> escuchar
+              <Kbd>Enter</Kbd> seguir
             </span>
+          ) : (
             <span className="flex items-center gap-2">
-              <Kbd>L</Kbd> despacio
+              <Kbd>1</Kbd>–<Kbd>4</Kbd> responder
             </span>
-          </>
-        )}
-        <span className="flex items-center gap-2">
-          <Kbd>Esc</Kbd> niveles
-        </span>
-      </footer>
+          )}
+          {quiz.canReplay && (
+            <>
+              <span className="flex items-center gap-2">
+                <Kbd>Espacio</Kbd> escuchar
+              </span>
+              <span className="flex items-center gap-2">
+                <Kbd>L</Kbd> despacio
+              </span>
+            </>
+          )}
+          <span className="flex items-center gap-2">
+            <Kbd>Esc</Kbd> niveles
+          </span>
+        </footer>
+      )}
     </>
   )
 }

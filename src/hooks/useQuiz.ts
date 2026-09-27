@@ -5,7 +5,7 @@ import { cardLookup, getProgress, recordAnswer, recordStreak, todayStats } from 
 import { buildOptions } from '@/lib/quiz'
 import { advanceSession, createSession, pickNext, type Session } from '@/lib/scheduler'
 import { getSettings } from '@/lib/settings'
-import type { Direction, Round } from '@/lib/types'
+import type { Direction, Round, Word } from '@/lib/types'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
 const ADVANCE_DELAY_MS = 850
@@ -18,7 +18,18 @@ export interface QuizStats {
   /** Palabras resueltas sin fallar. */
   firstTry: number
   streak: number
+  /** Mejor racha de la sesión. */
+  bestStreak: number
+  /** Palabras nuevas vistas en esta sesión. */
+  fresh: number
+  /** Palabras falladas alguna vez en la sesión, sin repetir, en el orden en que se fallaron. */
+  missed: Word[]
 }
+
+/** Por qué se muestra el resumen: se cumplió la meta del día o el usuario quiere salir. */
+export type SummaryReason = 'goal' | 'exit'
+
+const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [] }
 
 interface State {
   round: Round
@@ -29,6 +40,10 @@ interface State {
   solved: boolean
   /** Tras responder, la partida se detiene con el detalle de la palabra a la vista. */
   expanded: boolean
+  /** Esta respuesta completó la meta del día: al avanzar se muestra el resumen. */
+  goalReached: boolean
+  /** Resumen de la sesión a la vista (la partida está detenida). */
+  summary: SummaryReason | null
   stats: QuizStats
 }
 
@@ -53,7 +68,9 @@ export function useQuiz(deck: Deck, direction: Direction) {
     wrong: [],
     solved: false,
     expanded: false,
-    stats: { solved: 0, firstTry: 0, streak: 0 },
+    goalReached: false,
+    summary: null,
+    stats: EMPTY_STATS,
   }))
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
   const resolving = useRef(false)
@@ -82,17 +99,41 @@ export function useQuiz(deck: Deck, direction: Direction) {
   }, [state.next])
 
   useEffect(() => {
-    if (!state.solved || state.expanded) return
+    // Avance automático solo con la ronda resuelta y nada abierto (ni detalle ni resumen).
+    if (!state.solved || state.expanded || state.summary) return
     const timer = setTimeout(advance, promptIsEnglish ? ADVANCE_DELAY_MS : ADVANCE_DELAY_WITH_AUDIO_MS)
     return () => clearTimeout(timer)
-  }, [state.solved, state.expanded, promptIsEnglish])
+  }, [state.solved, state.expanded, state.summary, promptIsEnglish])
 
   /** Pasa a la siguiente palabra (ya calculada al acertar). */
+  /** Pasa a la siguiente palabra, o al resumen si esta respuesta completó la meta del día. */
   function advance() {
+    setState((s) => {
+      if (!s.solved || !s.next) return s
+      if (s.goalReached) return { ...s, goalReached: false, expanded: false, summary: 'goal' }
+      resolving.current = false
+      return { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false }
+    })
+  }
+
+  /** Sale del resumen y sigue con la siguiente palabra. */
+  function resume() {
     resolving.current = false
     setState((s) =>
-      s.solved && s.next ? { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false } : s,
+      s.next
+        ? { ...s, round: s.next, next: null, wrong: [], solved: false, expanded: false, summary: null }
+        : { ...s, summary: null },
     )
+  }
+
+  /**
+   * El usuario quiere salir. Si respondió algo, primero ve el resumen de la sesión (devuelve true);
+   * si no, puede salir directamente (devuelve false).
+   */
+  function requestExit(): boolean {
+    if (state.stats.solved === 0 || state.summary) return false
+    setState({ ...state, summary: 'exit' })
+    return true
   }
 
   /** Detiene el avance automático para ver el detalle de la palabra recién resuelta. */
@@ -105,12 +146,16 @@ export function useQuiz(deck: Deck, direction: Direction) {
     if (resolving.current || solved || wrong.includes(id)) return
 
     if (id !== round.word.id) {
-      setState({ ...state, wrong: [...wrong, id], stats: { ...stats, streak: 0 } })
+      const missed = stats.missed.some((w) => w.id === round.word.id) ? stats.missed : [...stats.missed, round.word]
+      setState({ ...state, wrong: [...wrong, id], stats: { ...stats, streak: 0, missed } })
       return
     }
 
     resolving.current = true
     const clean = wrong.length === 0
+    const isNew = !cardLookup(getProgress(), direction)(round.word.id)
+    const { dailyGoal } = getSettings()
+    const answeredBefore = todayStats(getProgress()).answers
     recordAnswer(direction, round.word.id, { clean, ms: performance.now() - shownAt.current })
     advanceSession(session, round.word.id, clean)
     const streak = clean ? stats.streak + 1 : 0
@@ -122,7 +167,15 @@ export function useQuiz(deck: Deck, direction: Direction) {
       // Tras un fallo es cuando más ayuda ver el ejemplo; quien va rápido no se detiene.
       expanded: pause === 'always' || (pause === 'mistakes' && !clean),
       next: nextRound(deck, direction, session),
-      stats: { solved: stats.solved + 1, firstTry: stats.firstTry + (clean ? 1 : 0), streak },
+      goalReached: answeredBefore < dailyGoal && answeredBefore + 1 >= dailyGoal,
+      stats: {
+        ...stats,
+        solved: stats.solved + 1,
+        firstTry: stats.firstTry + (clean ? 1 : 0),
+        streak,
+        bestStreak: Math.max(stats.bestStreak, streak),
+        fresh: stats.fresh + (isNew ? 1 : 0),
+      },
     })
   }
 
@@ -130,5 +183,5 @@ export function useQuiz(deck: Deck, direction: Direction) {
     if (canReplay) void playPronunciation(state.round.word.id, { slow })
   }
 
-  return { ...state, canReplay, answer, replay, expand, advance }
+  return { ...state, canReplay, answer, replay, expand, advance, resume, requestExit }
 }
