@@ -7,9 +7,9 @@
 import { useSyncExternalStore } from 'react'
 
 export interface PersistedStore<T> {
-  get(): T
-  set(next: T): void
-  subscribe(listener: () => void): () => void
+  get: () => T
+  set: (next: T) => void
+  subscribe: (listener: () => void) => () => void
   fallback: T
 }
 
@@ -40,7 +40,7 @@ export function createPersistedStore<T>(key: string, fallback: T, parse: (raw: u
   return {
     fallback,
     get: () => value,
-    set(next) {
+    set: (next) => {
       value = next
       try {
         localStorage.setItem(key, JSON.stringify(next))
@@ -49,9 +49,11 @@ export function createPersistedStore<T>(key: string, fallback: T, parse: (raw: u
       }
       emit()
     },
-    subscribe(listener) {
+    subscribe: (listener) => {
       listeners.add(listener)
-      return () => listeners.delete(listener)
+      return () => {
+        listeners.delete(listener)
+      }
     },
   }
 }

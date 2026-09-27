@@ -86,9 +86,9 @@ describe('summarize', () => {
   })
 })
 
-describe('dailyStreak', () => {
-  const day = (offset: number) => dayKey(NOW + offset * DAY)
+const day = (offset: number) => dayKey(NOW + offset * DAY)
 
+describe('dailyStreak', () => {
   it('cuenta los días seguidos hasta hoy', () => {
     expect(dailyStreak([day(-2), day(-1), day(0)], NOW)).toBe(3)
   })

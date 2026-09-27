@@ -1,8 +1,7 @@
+import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
-import { cardLookup, useProgress } from '@/lib/progress'
-import { summarize } from '@/lib/scheduler'
 import type { Direction } from '@/lib/types'
 import { IconButton } from './controls'
 import { Header, Stat } from './Header'
@@ -22,8 +21,7 @@ interface Props {
 export function Game({ deck, direction, onExit, onOpenSettings }: Props) {
   const quiz = useQuiz(deck, direction)
   const { round, stats, answer, replay } = quiz
-  const progress = useProgress()
-  const summary = summarize(deck.words, cardLookup(progress, direction), Date.now())
+  const summary = useDeckSummaries(direction)(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
 
   useKeyDown((event) => {

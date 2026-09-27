@@ -1,12 +1,8 @@
 /** Instalación como app y audio sin conexión. */
 import { useSyncExternalStore } from 'react'
+import { runPool } from './pool'
 
 // --- Instalación --------------------------------------------------------------------------------
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt(): Promise<void>
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
-}
 
 let installPrompt: BeforeInstallPromptEvent | null = null
 const installListeners = new Set<() => void>()
@@ -16,7 +12,7 @@ if (typeof window !== 'undefined') {
   // Chrome/Edge/Android ofrecen instalar mediante este evento; se guarda para lanzarlo desde Ajustes.
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault()
-    installPrompt = event as BeforeInstallPromptEvent
+    installPrompt = event
     emitInstall()
   })
   window.addEventListener('appinstalled', () => {
@@ -25,9 +21,23 @@ if (typeof window !== 'undefined') {
   })
 }
 
+const subscribeInstall = (listener: () => void) => {
+  installListeners.add(listener)
+  return () => {
+    installListeners.delete(listener)
+  }
+}
+
+async function install() {
+  if (!installPrompt) return
+  await installPrompt.prompt()
+  await installPrompt.userChoice
+  installPrompt = null
+  emitInstall()
+}
+
 export const isStandalone = () =>
-  window.matchMedia('(display-mode: standalone)').matches ||
-  (navigator as Navigator & { standalone?: boolean }).standalone === true
+  window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true
 
 /** iPhone/iPad no tienen el evento de instalación: se instala desde el menú Compartir de Safari. */
 export const isIOS = () =>
@@ -35,22 +45,10 @@ export const isIOS = () =>
 
 export function useInstallPrompt() {
   const available = useSyncExternalStore(
-    (listener) => {
-      installListeners.add(listener)
-      return () => installListeners.delete(listener)
-    },
+    subscribeInstall,
     () => installPrompt !== null,
     () => false,
   )
-
-  async function install() {
-    if (!installPrompt) return
-    await installPrompt.prompt()
-    await installPrompt.userChoice
-    installPrompt = null
-    emitInstall()
-  }
-
   return { available, install }
 }
 
@@ -75,31 +73,33 @@ export async function countCachedAudio(): Promise<number> {
  * del service worker: así, al terminar, todas están de verdad en la caché. Se puede cancelar con
  * `signal`.
  */
+const audioUrl = (id: string) => new URL(`${import.meta.env.BASE_URL}audio/${id}.mp3`, location.href).href
+
 export async function downloadAudio(
   ids: readonly string[],
   onProgress: (done: number) => void,
   signal: AbortSignal,
 ): Promise<void> {
   const cache = await caches.open(AUDIO_CACHE)
-  const url = (id: string) => new URL(`${import.meta.env.BASE_URL}audio/${id}.mp3`, location.href).href
   const cached = new Set((await cache.keys()).map((request) => request.url))
-  const pending = ids.filter((id) => !cached.has(url(id)))
+  const pending = ids.filter((id) => !cached.has(audioUrl(id)))
 
   let done = ids.length - pending.length
   onProgress(done)
 
-  let next = 0
-  async function worker() {
-    while (next < pending.length && !signal.aborted) {
-      const id = pending[next++]
+  await runPool(
+    pending,
+    CONCURRENCY,
+    async (id) => {
       try {
-        const response = await fetch(url(id), { signal })
-        if (response.ok) await cache.put(url(id), response)
+        const response = await fetch(audioUrl(id), { signal })
+        if (response.ok) await cache.put(audioUrl(id), response)
       } catch {
+        // Sin red o cancelado: esa pronunciación queda para la próxima descarga.
         if (signal.aborted) return
       }
       onProgress(++done)
-    }
-  }
-  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+    },
+    signal,
+  )
 }

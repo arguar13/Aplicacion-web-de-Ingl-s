@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "jsx-a11y", "import", "vitest", "oxc", "unicorn"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "env": { "browser": true, "es2024": true },
+  "ignorePatterns": ["dist", "dev-dist", "node_modules", "playwright-report", "test-results"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "react/jsx-key": "error",
+    "react/self-closing-comp": "error",
+    "react/react-in-jsx-scope": "off",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
+    "eqeqeq": ["error", "always"],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "prefer-const": "error",
+    "no-var": "error",
+    // Hojas de estilo y fuentes se importan por su efecto; el resto de módulos debe usarse.
+    "import/no-unassigned-import": ["error", { "allow": ["**/*.css", "@fontsource/**", "@fontsource-variable/**"] }],
+    // Las limpiezas de useEffect devuelven una función solo a veces: es el patrón de React.
+    "typescript/consistent-return": "off",
+    // La barra de progreso de dos tramos y el aviso con role="status" no tienen etiqueta nativa
+    // equivalente (<progress> tiene un solo valor; <output> es el resultado de un cálculo).
+    "jsx-a11y/prefer-tag-over-role": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx", "e2e/**"],
+      "rules": { "typescript/no-non-null-assertion": "off" }
+    }
+  ]
+}

@@ -54,12 +54,12 @@ export function useQuiz(deck: Deck, direction: Direction) {
   const canReplay = promptIsEnglish || state.solved
 
   useEffect(() => {
-    if (promptIsEnglish && getSettings().autoplay) playPronunciation(state.round.word.id)
+    if (promptIsEnglish && getSettings().autoplay) void playPronunciation(state.round.word.id)
     else preloadPronunciation(state.round.word.id)
   }, [state.round, promptIsEnglish])
 
   useEffect(() => {
-    if (state.solved && !promptIsEnglish && getSettings().autoplay) playPronunciation(state.round.word.id)
+    if (state.solved && !promptIsEnglish && getSettings().autoplay) void playPronunciation(state.round.word.id)
   }, [state.solved, state.round, promptIsEnglish])
 
   useEffect(() => {

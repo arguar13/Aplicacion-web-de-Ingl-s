@@ -17,8 +17,7 @@ const buffers = new Map<string, Promise<AudioBuffer | null>>()
 function getContext(): AudioContext {
   if (!context) {
     // En iOS hace que suene aunque el interruptor de silencio esté activado, como un reproductor.
-    const nav = navigator as Navigator & { audioSession?: { type: string } }
-    if (nav.audioSession) nav.audioSession.type = 'playback'
+    if (navigator.audioSession) navigator.audioSession.type = 'playback'
     context = new AudioContext()
   }
   return context
@@ -56,7 +55,10 @@ function load(id: string): Promise<AudioBuffer | null> {
     })
 
   buffers.set(id, promise)
-  if (buffers.size > MAX_CACHED) buffers.delete(buffers.keys().next().value!)
+  if (buffers.size > MAX_CACHED) {
+    const oldest = buffers.keys().next()
+    if (!oldest.done) buffers.delete(oldest.value)
+  }
   return promise
 }
 

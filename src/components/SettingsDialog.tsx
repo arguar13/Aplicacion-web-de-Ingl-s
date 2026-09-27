@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 import { resetProgress } from '@/lib/progress'
 import { type ThemePreference, updateSettings, useSettings } from '@/lib/settings'
 import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
@@ -23,6 +23,8 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
     if (!open && dialog.open) dialog.close()
   }, [open])
 
+  useLightDismissFallback(ref)
+
   function close() {
     setConfirmReset(false)
     onClose()
@@ -32,7 +34,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
     <dialog
       ref={ref}
       onClose={close}
-      onClick={(event) => event.target === ref.current && close()}
+      closedby="any"
       aria-labelledby="settings-title"
       className={[
         'm-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-t-[28px] border border-line bg-surface p-0 text-ink',
@@ -112,4 +114,20 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
       </div>
     </dialog>
   )
+}
+
+/**
+ * `closedby="any"` cierra el diálogo al tocar fuera. En los navegadores que aún no lo soportan, se
+ * replica: un toque sobre el propio <dialog> (y no sobre su contenido) es un toque en el fondo.
+ */
+function useLightDismissFallback(ref: RefObject<HTMLDialogElement | null>) {
+  useEffect(() => {
+    const dialog = ref.current
+    if (!dialog || 'closedBy' in HTMLDialogElement.prototype) return
+    const onClick = (event: MouseEvent) => {
+      if (event.target === dialog) dialog.close()
+    }
+    dialog.addEventListener('click', onClick)
+    return () => dialog.removeEventListener('click', onClick)
+  }, [ref])
 }

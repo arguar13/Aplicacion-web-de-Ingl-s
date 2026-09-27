@@ -9,7 +9,10 @@ import { initTheme } from './lib/theme'
 
 initTheme()
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')
+if (!container) throw new Error('Falta el elemento #root en index.html')
+
+createRoot(container).render(
   <StrictMode>
     <App />
   </StrictMode>,

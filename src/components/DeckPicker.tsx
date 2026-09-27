@@ -1,9 +1,10 @@
+import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
-import { cardLookup, dailyStreak, useProgress } from '@/lib/progress'
-import { type DeckSummary, summarize } from '@/lib/scheduler'
+import { dailyStreak, useProgress } from '@/lib/progress'
+import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import type { Direction } from '@/lib/types'
 import { IconButton, Segmented } from './controls'
@@ -30,9 +31,8 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
   const progress = useProgress()
   const { direction } = useSettings()
   const now = useNow()
-  const lookup = cardLookup(progress, direction)
-  const summaries = new Map(DECKS.map((deck) => [deck.id, summarize(deck.words, lookup, now)]))
-  const total = summaries.get(ALL_DECK.id)!
+  const summaryOf = useDeckSummaries(direction)
+  const total = summaryOf(ALL_DECK)
   const suggested = DECKS.find((d) => d.id === progress.lastDeckId) ?? LEVELS[0]
   const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
@@ -80,19 +80,19 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
           />
         </div>
 
-        <ContinueCard deck={suggested} summary={summaries.get(suggested.id)!} resuming={hasProgress} onPick={onPick} />
+        <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
 
         <h2 className="mt-12 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase sm:mt-14">
           Todos los niveles
         </h2>
-        <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
           {LEVELS.map((deck, index) => (
             <li
               key={deck.id}
               className="animate-rise"
               style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'both' }}
             >
-              <LevelCard deck={deck} summary={summaries.get(deck.id)!} onPick={onPick} />
+              <LevelCard deck={deck} summary={summaryOf(deck)} onPick={onPick} />
             </li>
           ))}
           <li

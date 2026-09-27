@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { type ReactNode, useId } from 'react'
 import { cn } from '@/lib/cn'
 
 interface SegmentedProps<T extends string> {
@@ -9,34 +9,37 @@ interface SegmentedProps<T extends string> {
   className?: string
 }
 
-/** Grupo de opciones excluyentes con aspecto de pastilla. */
+/**
+ * Grupo de opciones excluyentes con aspecto de pastilla. Por dentro son radios nativos: el
+ * navegador aporta la navegación con flechas, el foco y el anuncio a lectores de pantalla.
+ */
 export function Segmented<T extends string>({ label, value, options, onChange, className }: SegmentedProps<T>) {
+  const name = useId()
   return (
-    <div
-      role="radiogroup"
-      aria-label={label}
-      className={cn('inline-flex rounded-full border border-line bg-bg p-1', className)}
-    >
-      {options.map((option) => {
-        const active = option.value === value
-        return (
-          <button
-            key={option.value}
-            type="button"
-            role="radio"
-            aria-checked={active}
-            onClick={() => onChange(option.value)}
-            className={cn(
-              'flex-1 cursor-pointer rounded-full px-3.5 py-1.5 text-sm font-medium whitespace-nowrap transition-[background-color,color,box-shadow] duration-200',
-              'focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent',
-              active ? 'bg-raised text-ink shadow-[0_1px_3px_rgb(0_0_0/0.12)]' : 'text-muted hover:text-ink',
-            )}
-          >
-            {option.label}
-          </button>
-        )
-      })}
-    </div>
+    <fieldset className={cn('inline-flex rounded-full border border-line bg-bg p-1', className)}>
+      <legend className="sr-only">{label}</legend>
+      {options.map((option) => (
+        <label
+          key={option.value}
+          className={cn(
+            'flex-1 cursor-pointer rounded-full px-3.5 py-1.5 text-center text-sm font-medium whitespace-nowrap text-muted',
+            'transition-[background-color,color,box-shadow] duration-200 hover:text-ink',
+            'has-checked:bg-raised has-checked:text-ink has-checked:shadow-[0_1px_3px_rgb(0_0_0/0.12)]',
+            'has-focus-visible:outline-2 has-focus-visible:outline-offset-1 has-focus-visible:outline-accent',
+          )}
+        >
+          <input
+            type="radio"
+            name={name}
+            value={option.value}
+            checked={option.value === value}
+            onChange={() => onChange(option.value)}
+            className="sr-only"
+          />
+          {option.label}
+        </label>
+      ))}
+    </fieldset>
   )
 }
 
