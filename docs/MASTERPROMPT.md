@@ -423,3 +423,13 @@ Actualiza esta sección al cerrar cada fase.
 - La palabra en juego es el `<h1>` y el teclado el grupo "Respuestas": los e2e seleccionan por rol.
 - Pendiente para más adelante: audio de las frases de ejemplo (no se generó para no inflar la
   descarga offline; si se añade, con el mismo versionado de `vite/audio-versions.ts`).
+
+### Fase 8 · cerrada el 27-09-2026
+
+- Diagnósticos 7 (planificador) y 11 (sesiones sin cierre): **resueltos**.
+- FSRS (ts-fsrs) con nota según fallos y tiempo de respuesta; progreso v2 con migración desde
+  Leitner que conserva fechas y dominadas (test con datos reales de la Fase 5).
+- Historial diario en el progreso (`history`), meta diaria, límite de nuevas, resumen de sesión,
+  repaso del día, "Mis difíciles" y previsión de 7 días.
+- Regla aprendida: **los e2e se encadenan al commit** (`npm run check && npx playwright test && git
+commit`); un resumen de Playwright se lee entero, no solo la última línea.

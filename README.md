@@ -4,8 +4,14 @@ Aprende vocabulario en inglés con una idea simple: aparece una palabra en ingl�
 y pulsas la tecla con su traducción al español.
 
 Las 3.978 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 niveles de 500.
-El repaso espaciado decide qué palabra sale: lo que fallas vuelve a las pocas rondas, lo que aciertas
-se aleja en el tiempo (10 min → 1 día → 3 → 7 → 21 → 60 días). El progreso se guarda en el dispositivo.
+El repaso espaciado usa FSRS: cada palabra tiene su propia estabilidad y dificultad, y vuelve cuando la
+probabilidad de recordarla baja al 90 %. Lo que fallas vuelve a las pocas rondas; lo que aciertas se
+aleja, más cuanto más rápido respondes. El progreso se guarda en el dispositivo.
+
+Cada día tiene una meta (10, 20, 40 o 60 palabras) y un límite de palabras nuevas. Al cumplir la meta,
+o al salir de una partida, un resumen muestra palabras, precisión, nuevas, mejor racha y las palabras
+falladas. En el inicio, el **repaso del día** reúne lo que toca repasar de todos los niveles (con la
+previsión de la semana) y **Mis difíciles** junta las palabras que más se olvidan.
 
 Dos sentidos, cada uno con su propio progreso: inglés → español (la pronunciación suena al aparecer) y
 español → inglés (suena al acertar, para no delatar la respuesta). Las otras tres opciones de cada
@@ -51,8 +57,8 @@ por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build y l
 y WebKit. El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
 Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espacio` para volver a escuchar ·
-`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para seguir · `Esc` para volver a los
-niveles.
+`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para seguir · `R` repaso del día ·
+`D` mis difíciles · `Esc` para volver a los niveles.
 
 ## Despliegue en Hostinger
 
@@ -79,10 +85,11 @@ src/data/details.json     IPA, formas y ejemplo de cada palabra (se carga aparte
 src/lib/words.ts          Valida el vocabulario al cargarlo
 src/lib/decks.ts          Niveles (bloques de 500 palabras) y de dónde salen los distractores
 src/lib/details.ts        Detalles de cada palabra: carga diferida, validación y textos
-src/lib/scheduler.ts      Repaso espaciado: cajas, intervalos y elección de la siguiente palabra
+src/lib/scheduler.ts      Repaso espaciado (FSRS): notas, calendario, migración desde Leitner y siguiente palabra
+src/lib/smartDecks.ts     Repaso del día, "Mis difíciles" y previsión de repasos
 src/lib/quiz.ts           Opciones de cada ronda (misma categoría, sin sentidos repetidos)
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
-src/lib/progress.ts       Progreso (tarjetas por sentido, días, récord) y cómo combinar dos
+src/lib/progress.ts       Progreso (tarjetas por sentido, historial diario, récord) y cómo combinar dos
 src/lib/settings.ts       Ajustes (sentido, pronunciación automática, tema)
 src/lib/backup.ts         Copias de seguridad: exportar, validar e importar
 src/lib/safekeeping.ts    Última copia, aviso en Safari y almacenamiento persistente
@@ -105,7 +112,7 @@ scripts/data/examples/    Frases de ejemplo por nivel (fuente de details.json)
 scripts/generate_audio.py Genera el audio de las palabras que no lo tengan (pip install gtts)
 ```
 
-Stack: Vite, React 19, TypeScript 7, Tailwind CSS 4, vite-plugin-pwa (Workbox). Calidad: Vitest,
+Stack: Vite, React 19, TypeScript 7, Tailwind CSS 4, vite-plugin-pwa (Workbox), ts-fsrs. Calidad: Vitest,
 Testing Library, Playwright, axe, oxlint y Prettier.
 
 ## Agregar palabras
