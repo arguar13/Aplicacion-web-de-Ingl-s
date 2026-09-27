@@ -1,0 +1,826 @@
+[
+  { "id": "the", "en": "The sun is very bright today.", "es": "El sol está muy brillante hoy." },
+  { "id": "to", "en": "We are going to the park.", "es": "Vamos al parque." },
+  { "id": "and", "en": "We bought bread and cheese for lunch.", "es": "Compramos pan y queso para el almuerzo." },
+  { "id": "of", "en": "I drink a cup of tea every morning.", "es": "Tomo una taza de té cada mañana." },
+  { "id": "a", "en": "She has a cat named Luna.", "es": "Ella tiene una gata llamada Luna." },
+  { "id": "in", "en": "The milk is in the fridge.", "es": "La leche está en el refrigerador." },
+  { "id": "i", "en": "I usually wake up at seven.", "es": "Yo normalmente me despierto a las siete." },
+  { "id": "is", "en": "The weather is nice today.", "es": "Hoy el clima está lindo." },
+  { "id": "for", "en": "This gift is for my mom.", "es": "Este regalo es para mi mamá." },
+  { "id": "that", "en": "That house on the corner is mine.", "es": "Esa casa de la esquina es mía." },
+  { "id": "you", "en": "You look very happy today.", "es": "Te ves muy feliz hoy." },
+  { "id": "it", "en": "Where is my book? I can't find it.", "es": "¿Dónde está mi libro? No lo encuentro." },
+  { "id": "on", "en": "Your keys are on the table.", "es": "Tus llaves están en la mesa." },
+  { "id": "with", "en": "I live with my parents.", "es": "Vivo con mis padres." },
+  { "id": "this", "en": "This book is really interesting.", "es": "Este libro es muy interesante." },
+  { "id": "was", "en": "The room was very cold last night.", "es": "La habitación estaba muy fría anoche." },
+  { "id": "be", "en": "I want to be a pilot one day.", "es": "Quiero ser piloto algún día." },
+  { "id": "as", "en": "She works as a teacher in Lima.", "es": "Ella trabaja como maestra en Lima." },
+  { "id": "are", "en": "You are a great cook!", "es": "¡Eres un excelente cocinero!" },
+  { "id": "have", "en": "I have a small garden at home.", "es": "Tengo un pequeño jardín en casa." },
+  { "id": "at", "en": "Let's meet at the coffee shop.", "es": "Nos vemos en la cafetería." },
+  { "id": "he", "en": "He drives to work every day.", "es": "Él maneja al trabajo todos los días." },
+  { "id": "not", "en": "I am not hungry right now.", "es": "No tengo hambre ahora." },
+  { "id": "by", "en": "This song was written by my uncle.", "es": "Esta canción fue escrita por mi tío." },
+  { "id": "but", "en": "I like dogs, but I prefer cats.", "es": "Me gustan los perros, pero prefiero los gatos." },
+  { "id": "from", "en": "My friend is from Colombia.", "es": "Mi amigo es de Colombia." },
+  { "id": "my", "en": "My sister is a nurse.", "es": "Mi hermana es enfermera." },
+  { "id": "or", "en": "Do you want tea or coffee?", "es": "¿Quieres té o café?" },
+  { "id": "we", "en": "We play soccer on Saturdays.", "es": "Nosotros jugamos fútbol los sábados." },
+  { "id": "an", "en": "I eat an apple every day.", "es": "Como una manzana cada día." },
+  { "id": "your", "en": "Is this your jacket?", "es": "¿Esta es tu chaqueta?" },
+  { "id": "all", "en": "All the students passed the test.", "es": "Todos los estudiantes aprobaron el examen." },
+  { "id": "so", "en": "It was raining, so we stayed inside.", "es": "Estaba lloviendo, así que nos quedamos adentro." },
+  { "id": "his", "en": "His car is in the garage.", "es": "Su auto está en el garaje." },
+  { "id": "they", "en": "They live next to the park.", "es": "Ellos viven al lado del parque." },
+  { "id": "me", "en": "Is this gift really for me?", "es": "¿Este regalo es de verdad para mí?" },
+  { "id": "if", "en": "If it rains, we will stay home.", "es": "Si llueve, nos quedaremos en casa." },
+  {
+    "id": "one",
+    "en": "This shirt is too small; I need a bigger one.",
+    "es": "Esta camisa me queda pequeña; necesito una más grande."
+  },
+  { "id": "can", "en": "My little sister can read already.", "es": "Mi hermanita ya puede leer." },
+  { "id": "will", "en": "It will be sunny tomorrow.", "es": "Mañana estará soleado." },
+  { "id": "just", "en": "I just want a glass of water.", "es": "Solo quiero un vaso de agua." },
+  { "id": "like", "en": "I like to read before bed.", "es": "Me gusta leer antes de dormir." },
+  { "id": "about", "en": "We talked about our summer plans.", "es": "Hablamos acerca de nuestros planes de verano." },
+  { "id": "up", "en": "Look up at the stars!", "es": "¡Mira hacia arriba, a las estrellas!" },
+  {
+    "id": "out",
+    "en": "The kids went out to play in the snow.",
+    "es": "Los niños salieron afuera a jugar en la nieve."
+  },
+  { "id": "what", "en": "What color is your car?", "es": "¿De qué color es tu auto?" },
+  { "id": "has", "en": "My sister has a beautiful voice.", "es": "Mi hermana tiene una voz hermosa." },
+  { "id": "when", "en": "When does the store close?", "es": "¿Cuándo cierra la tienda?" },
+  { "id": "more", "en": "Can I have more rice, please?", "es": "¿Me das más arroz, por favor?" },
+  { "id": "do", "en": "What do you want to do tonight?", "es": "¿Qué quieres hacer esta noche?" },
+  { "id": "no", "en": "We have no time to lose.", "es": "No tenemos tiempo que perder." },
+  { "id": "were", "en": "The streets were empty this morning.", "es": "Las calles estaban vacías esta mañana." },
+  { "id": "who", "en": "Who is that man with your sister?", "es": "¿Quién es ese hombre que está con tu hermana?" },
+  { "id": "had", "en": "She had long hair as a child.", "es": "Ella tenía el pelo largo de niña." },
+  { "id": "their", "en": "Their kids go to my school.", "es": "Sus hijos van a mi escuela." },
+  { "id": "there", "en": "Put the box over there.", "es": "Pon la caja allá." },
+  { "id": "her", "en": "Her dog is very friendly.", "es": "Su perro es muy amigable." },
+  { "id": "which", "en": "Which bus goes to the airport?", "es": "¿Qué autobús va al aeropuerto?" },
+  { "id": "time", "en": "Time goes fast when you are having fun.", "es": "El tiempo pasa rápido cuando te diviertes." },
+  { "id": "get", "en": "Where can I get a good coffee?", "es": "¿Dónde puedo conseguir un buen café?" },
+  { "id": "been", "en": "I have been busy all week.", "es": "He estado ocupado toda la semana." },
+  {
+    "id": "would",
+    "en": "I would love a cup of hot chocolate.",
+    "es": "Me encantaría una taza de chocolate caliente."
+  },
+  { "id": "she", "en": "She works at a hospital near here.", "es": "Ella trabaja en un hospital cerca de aquí." },
+  { "id": "new", "en": "We just moved into a new apartment.", "es": "Acabamos de mudarnos a un departamento nuevo." },
+  {
+    "id": "people",
+    "en": "Many people walk in this park on weekends.",
+    "es": "Mucha gente camina en este parque los fines de semana."
+  },
+  { "id": "how", "en": "How do you say this in English?", "es": "¿Cómo se dice esto en inglés?" },
+  {
+    "id": "some",
+    "en": "Some students take the bus to school.",
+    "es": "Algunos estudiantes toman el autobús a la escuela."
+  },
+  { "id": "also", "en": "She plays the piano and also sings.", "es": "Ella toca el piano y también canta." },
+  { "id": "them", "en": "Tell them that dinner is ready.", "es": "Diles a ellos que la cena está lista." },
+  { "id": "now", "en": "I have to leave now.", "es": "Tengo que irme ahora." },
+  { "id": "other", "en": "Where is my other shoe?", "es": "¿Dónde está mi otro zapato?" },
+  { "id": "its", "en": "The cat is playing with its toy.", "es": "El gato está jugando con su juguete." },
+  { "id": "our", "en": "Our teacher is very funny.", "es": "Nuestro maestro es muy gracioso." },
+  { "id": "than", "en": "My brother is taller than me.", "es": "Mi hermano es más alto que yo." },
+  { "id": "good", "en": "This is a really good book.", "es": "Este es un libro muy bueno." },
+  { "id": "only", "en": "I only have five dollars.", "es": "Solo tengo cinco dólares." },
+  { "id": "after", "en": "Let's go for a walk after dinner.", "es": "Vamos a caminar después de la cena." },
+  { "id": "first", "en": "This is my first day at work.", "es": "Este es mi primer día de trabajo." },
+  { "id": "him", "en": "Give the book to him, not to me.", "es": "Dale el libro a él, no a mí." },
+  { "id": "into", "en": "He walked into the kitchen.", "es": "Él entró en la cocina." },
+  { "id": "know", "en": "Do you know where the station is?", "es": "¿Sabes dónde está la estación?" },
+  { "id": "see", "en": "I can see the ocean from my window.", "es": "Puedo ver el mar desde mi ventana." },
+  { "id": "two", "en": "I have two cats and a dog.", "es": "Tengo dos gatos y un perro." },
+  { "id": "make", "en": "Let's make pancakes for breakfast.", "es": "Hagamos panqueques para el desayuno." },
+  { "id": "over", "en": "The plane flew over our house.", "es": "El avión voló por encima de nuestra casa." },
+  { "id": "think", "en": "What do you think about my new hat?", "es": "¿Qué piensas de mi sombrero nuevo?" },
+  { "id": "any", "en": "You can call me at any time.", "es": "Puedes llamarme a cualquier hora." },
+  { "id": "then", "en": "I was only five years old then.", "es": "Yo solo tenía cinco años entonces." },
+  { "id": "could", "en": "Could you open the window, please?", "es": "¿Podrías abrir la ventana, por favor?" },
+  { "id": "back", "en": "She looked back and smiled at us.", "es": "Ella miró atrás y nos sonrió." },
+  { "id": "these", "en": "These cookies are delicious.", "es": "Estas galletas están deliciosas." },
+  { "id": "us", "en": "Can you call us when you arrive?", "es": "¿Puedes llamarnos a nosotros cuando llegues?" },
+  { "id": "want", "en": "Do you want some ice cream?", "es": "¿Quieres un poco de helado?" },
+  { "id": "because", "en": "I stayed home because I was sick.", "es": "Me quedé en casa porque estaba enfermo." },
+  { "id": "go", "en": "Let's go to the movies tonight.", "es": "Vamos al cine esta noche." },
+  { "id": "well", "en": "She speaks English very well.", "es": "Ella habla inglés muy bien." },
+  { "id": "said", "en": "She said she was tired.", "es": "Ella dijo que estaba cansada." },
+  { "id": "way", "en": "Is there a better way to do this?", "es": "¿Hay una mejor forma de hacer esto?" },
+  { "id": "most", "en": "Most people like warm weather.", "es": "A la mayoría de la gente le gusta el clima cálido." },
+  { "id": "much", "en": "I don't have much free time today.", "es": "Hoy no tengo mucho tiempo libre." },
+  { "id": "very", "en": "The soup is very good.", "es": "La sopa está muy buena." },
+  { "id": "where", "en": "Where is the nearest bus stop?", "es": "¿Dónde está la parada de autobús más cercana?" },
+  { "id": "even", "en": "Even my dad liked the movie.", "es": "Incluso a mi papá le gustó la película." },
+  { "id": "should", "en": "You should drink more water.", "es": "Deberías tomar más agua." },
+  { "id": "may", "en": "We are going on vacation in May.", "es": "Nos vamos de vacaciones en mayo." },
+  { "id": "here", "en": "Come here and look at this!", "es": "¡Ven aquí y mira esto!" },
+  { "id": "need", "en": "We need more milk and eggs.", "es": "Necesitamos más leche y huevos." },
+  { "id": "really", "en": "I really like your new haircut.", "es": "De verdad me gusta tu nuevo corte de pelo." },
+  { "id": "did", "en": "What did you do last weekend?", "es": "¿Qué hiciste el fin de semana pasado?" },
+  {
+    "id": "right",
+    "en": "Every child has the right to go to school.",
+    "es": "Todo niño tiene derecho a ir a la escuela."
+  },
+  { "id": "work", "en": "I work from home on Fridays.", "es": "Trabajo desde casa los viernes." },
+  { "id": "year", "en": "We visit my grandparents every year.", "es": "Visitamos a mis abuelos cada año." },
+  { "id": "being", "en": "Thank you for being so kind.", "es": "Gracias por ser tan amable." },
+  { "id": "day", "en": "Sunday is my favorite day of the week.", "es": "El domingo es mi día favorito de la semana." },
+  { "id": "too", "en": "This coffee is too hot to drink.", "es": "Este café está demasiado caliente para tomarlo." },
+  { "id": "before", "en": "Wash your hands before lunch.", "es": "Lávate las manos antes del almuerzo." },
+  { "id": "off", "en": "Make sure the lights are off.", "es": "Asegúrate de que las luces estén apagadas." },
+  { "id": "why", "en": "Why are you so happy today?", "es": "¿Por qué estás tan feliz hoy?" },
+  { "id": "made", "en": "My mom made soup for dinner.", "es": "Mi mamá hizo sopa para la cena." },
+  { "id": "still", "en": "Are you still at the office?", "es": "¿Aún estás en la oficina?" },
+  { "id": "take", "en": "We can take a taxi to the hotel.", "es": "Podemos tomar un taxi al hotel." },
+  { "id": "got", "en": "He got a good grade on his test.", "es": "Él obtuvo una buena nota en su examen." },
+  { "id": "many", "en": "There are many birds in this park.", "es": "Hay muchos pájaros en este parque." },
+  { "id": "never", "en": "I never drink coffee at night.", "es": "Nunca tomo café en la noche." },
+  { "id": "those", "en": "Those shoes look very comfortable.", "es": "Esos zapatos se ven muy cómodos." },
+  { "id": "life", "en": "My life changed when I moved here.", "es": "Mi vida cambió cuando me mudé aquí." },
+  { "id": "say", "en": "Don't forget to say thank you.", "es": "No olvides decir gracias." },
+  { "id": "world", "en": "She wants to travel around the world.", "es": "Ella quiere viajar por todo el mundo." },
+  { "id": "down", "en": "The kids ran down the hill.", "es": "Los niños corrieron colina abajo." },
+  { "id": "great", "en": "The food at this place is great.", "es": "La comida de este lugar es excelente." },
+  { "id": "through", "en": "The train goes through a long tunnel.", "es": "El tren pasa a través de un largo túnel." },
+  { "id": "last", "en": "This is the last piece of cake.", "es": "Este es el último pedazo de pastel." },
+  {
+    "id": "while",
+    "en": "I cook while my husband cleans the kitchen.",
+    "es": "Yo cocino mientras mi esposo limpia la cocina."
+  },
+  { "id": "best", "en": "This is the best pizza in the city.", "es": "Esta es la mejor pizza de la ciudad." },
+  { "id": "such", "en": "I never said such a thing!", "es": "¡Yo nunca dije tal cosa!" },
+  { "id": "love", "en": "I love my family very much.", "es": "Amo mucho a mi familia." },
+  { "id": "man", "en": "The man at the door is my uncle.", "es": "El hombre de la puerta es mi tío." },
+  { "id": "home", "en": "Home is where my family is.", "es": "El hogar es donde está mi familia." },
+  { "id": "long", "en": "It was a long day at work.", "es": "Fue un día largo en el trabajo." },
+  { "id": "look", "en": "Look at the beautiful sunset!", "es": "¡Mira el hermoso atardecer!" },
+  { "id": "something", "en": "I want to tell you something.", "es": "Quiero decirte algo." },
+  { "id": "use", "en": "Can I use your pencil for a minute?", "es": "¿Puedo usar tu lápiz un minuto?" },
+  { "id": "same", "en": "We go to the same school.", "es": "Vamos a la misma escuela." },
+  { "id": "used", "en": "He bought a used car last year.", "es": "Él compró un auto usado el año pasado." },
+  { "id": "both", "en": "Both kids love ice cream.", "es": "A ambos niños les encanta el helado." },
+  { "id": "every", "en": "I walk my dog every evening.", "es": "Paseo a mi perro cada tarde." },
+  { "id": "am", "en": "I am very happy with my new job.", "es": "Estoy muy feliz con mi nuevo trabajo." },
+  { "id": "come", "en": "Can you come to my house on Sunday?", "es": "¿Puedes venir a mi casa el domingo?" },
+  { "id": "part", "en": "This is my favorite part of the movie.", "es": "Esta es mi parte favorita de la película." },
+  { "id": "state", "en": "She moved to another state for work.", "es": "Ella se mudó a otro estado por trabajo." },
+  { "id": "three", "en": "We stayed at the hotel for three nights.", "es": "Nos quedamos tres noches en el hotel." },
+  { "id": "around", "en": "We walked around the lake.", "es": "Caminamos alrededor del lago." },
+  {
+    "id": "between",
+    "en": "The bank is between the school and the park.",
+    "es": "El banco está entre la escuela y el parque."
+  },
+  { "id": "always", "en": "She always drinks tea in the morning.", "es": "Ella siempre toma té en la mañana." },
+  { "id": "better", "en": "This bed is better than the old one.", "es": "Esta cama es mejor que la vieja." },
+  { "id": "find", "en": "I can't find my glasses anywhere.", "es": "No puedo encontrar mis lentes por ningún lado." },
+  { "id": "help", "en": "Can you help me with my homework?", "es": "¿Me puedes ayudar con mi tarea?" },
+  { "id": "high", "en": "The mountains here are very high.", "es": "Las montañas de aquí son muy altas." },
+  {
+    "id": "little",
+    "en": "They live in a little house by the river.",
+    "es": "Viven en una casa pequeña junto al río."
+  },
+  { "id": "old", "en": "My grandpa has a very old car.", "es": "Mi abuelo tiene un auto muy viejo." },
+  { "id": "since", "en": "I have lived here since 2015.", "es": "Vivo aquí desde 2015." },
+  { "id": "another", "en": "Can I have another cookie?", "es": "¿Puedo comer otra galleta?" },
+  { "id": "does", "en": "She does yoga every morning.", "es": "Ella hace yoga todas las mañanas." },
+  { "id": "own", "en": "She wants her own room.", "es": "Ella quiere su propio cuarto." },
+  { "id": "under", "en": "The dog sleeps under the table.", "es": "El perro duerme debajo de la mesa." },
+  {
+    "id": "during",
+    "en": "Please turn off your phone during class.",
+    "es": "Por favor, apaga tu teléfono durante la clase."
+  },
+  { "id": "game", "en": "Let's play a board game tonight.", "es": "Juguemos un juego de mesa esta noche." },
+  { "id": "thing", "en": "What is that thing on the table?", "es": "¿Qué es esa cosa que está en la mesa?" },
+  { "id": "give", "en": "Can you give this letter to your mom?", "es": "¿Puedes darle esta carta a tu mamá?" },
+  { "id": "house", "en": "Their house has a blue door.", "es": "Su casa tiene una puerta azul." },
+  { "id": "place", "en": "This is a nice place for lunch.", "es": "Este es un lugar lindo para almorzar." },
+  { "id": "school", "en": "My little brother walks to school.", "es": "Mi hermanito camina a la escuela." },
+  { "id": "again", "en": "Can you say that again, please?", "es": "¿Puedes decir eso de nuevo, por favor?" },
+  { "id": "next", "en": "The next train leaves at five.", "es": "El próximo tren sale a las cinco." },
+  { "id": "each", "en": "Each student gets a free book.", "es": "Cada estudiante recibe un libro gratis." },
+  {
+    "id": "mr",
+    "en": "Mr. Smith teaches math at our school.",
+    "es": "El señor Smith enseña matemáticas en nuestra escuela."
+  },
+  {
+    "id": "well-being",
+    "en": "Sleep is important for your well-being.",
+    "es": "Dormir es importante para tu bienestar."
+  },
+  { "id": "without", "en": "I can't start my day without coffee.", "es": "No puedo empezar el día sin café." },
+  {
+    "id": "against",
+    "en": "The bike is leaning against the wall.",
+    "es": "La bicicleta está apoyada contra la pared."
+  },
+  { "id": "end", "en": "We will finish at the end of the month.", "es": "Terminaremos a fin de mes." },
+  { "id": "found", "en": "I found a coin under the bed.", "es": "Encontré una moneda debajo de la cama." },
+  { "id": "must", "en": "You must wear a helmet on a bike.", "es": "Debes usar casco cuando andas en bicicleta." },
+  { "id": "show", "en": "Can you show me the way to the station?", "es": "¿Puedes mostrarme el camino a la estación?" },
+  { "id": "big", "en": "They have a big dog named Rocky.", "es": "Tienen un perro grande llamado Rocky." },
+  { "id": "feel", "en": "I feel tired after work.", "es": "Me siento cansado después del trabajo." },
+  { "id": "sure", "en": "Are you sure about that?", "es": "¿Estás seguro de eso?" },
+  { "id": "team", "en": "Our team played very well yesterday.", "es": "Nuestro equipo jugó muy bien ayer." },
+  { "id": "ever", "en": "Have you ever been to Peru?", "es": "¿Alguna vez has estado en Perú?" },
+  {
+    "id": "family",
+    "en": "My family eats dinner together every night.",
+    "es": "Mi familia cena junta todas las noches."
+  },
+  { "id": "keep", "en": "Keep the milk in the fridge.", "es": "Mantén la leche en el refrigerador." },
+  { "id": "might", "en": "It might rain later today.", "es": "Podría llover más tarde hoy." },
+  { "id": "please", "en": "Can you pass the salt, please?", "es": "¿Me pasas la sal, por favor?" },
+  { "id": "put", "en": "Put your shoes by the door.", "es": "Pon tus zapatos junto a la puerta." },
+  {
+    "id": "money",
+    "en": "I am saving money for a new bike.",
+    "es": "Estoy ahorrando dinero para una bicicleta nueva."
+  },
+  { "id": "free", "en": "Are you free on Saturday night?", "es": "¿Estás libre el sábado en la noche?" },
+  { "id": "second", "en": "This is my second time in Mexico.", "es": "Esta es mi segunda vez en México." },
+  { "id": "someone", "en": "Someone is knocking at the door.", "es": "Alguien está tocando la puerta." },
+  { "id": "away", "en": "Please stay away from the fire.", "es": "Por favor, mantente lejos del fuego." },
+  { "id": "left", "en": "He writes with his left hand.", "es": "Él escribe con la mano izquierda." },
+  { "id": "number", "en": "What is your phone number?", "es": "¿Cuál es tu número de teléfono?" },
+  { "id": "city", "en": "Our city has a beautiful river.", "es": "Nuestra ciudad tiene un río hermoso." },
+  { "id": "lot", "en": "We have a lot of homework today.", "es": "Hoy tenemos mucha tarea." },
+  { "id": "name", "en": "My dog's name is Max.", "es": "El nombre de mi perro es Max." },
+  { "id": "night", "en": "It rained all night.", "es": "Llovió toda la noche." },
+  {
+    "id": "play",
+    "en": "The kids play in the yard after school.",
+    "es": "Los niños juegan en el patio después de la escuela."
+  },
+  { "id": "until", "en": "Wait here until I come back.", "es": "Espera aquí hasta que yo regrese." },
+  { "id": "company", "en": "She works for a big company.", "es": "Ella trabaja para una compañía grande." },
+  { "id": "few", "en": "Few people know about this beach.", "es": "Pocas personas conocen esta playa." },
+  { "id": "let", "en": "Let me help you with that bag.", "es": "Déjame ayudarte con esa bolsa." },
+  { "id": "real", "en": "Is that a real dog or a toy?", "es": "¿Ese es un perro real o un juguete?" },
+  { "id": "different", "en": "My brother and I are very different.", "es": "Mi hermano y yo somos muy diferentes." },
+  { "id": "set", "en": "Please set the plates on the table.", "es": "Por favor, coloca los platos en la mesa." },
+  { "id": "thought", "en": "That was a very nice thought.", "es": "Ese fue un pensamiento muy lindo." },
+  { "id": "done", "en": "Is your homework done yet?", "es": "¿Ya está hecha tu tarea?" },
+  {
+    "id": "however",
+    "en": "It was sunny; however, it was very cold.",
+    "es": "Hacía sol; sin embargo, hacía mucho frío."
+  },
+  {
+    "id": "god",
+    "en": "My grandma thanks God for every meal.",
+    "es": "Mi abuela le da gracias a Dios por cada comida."
+  },
+  {
+    "id": "government",
+    "en": "The government built a new bridge in our city.",
+    "es": "El gobierno construyó un puente nuevo en nuestra ciudad."
+  },
+  {
+    "id": "group",
+    "en": "A group of students is waiting outside.",
+    "es": "Un grupo de estudiantes está esperando afuera."
+  },
+  { "id": "public", "en": "The public library is open on Sundays.", "es": "La biblioteca pública abre los domingos." },
+  { "id": "top", "en": "The books are on the top shelf.", "es": "Los libros están en el estante de arriba." },
+  { "id": "women", "en": "Many women work at this hospital.", "es": "Muchas mujeres trabajan en este hospital." },
+  { "id": "business", "en": "My uncle has a small business.", "es": "Mi tío tiene un pequeño negocio." },
+  { "id": "care", "en": "Plants need a lot of care.", "es": "Las plantas necesitan mucho cuidado." },
+  { "id": "start", "en": "When does the movie start?", "es": "¿A qué hora comienza la película?" },
+  {
+    "id": "system",
+    "en": "The school has a new computer system.",
+    "es": "La escuela tiene un nuevo sistema de computadoras."
+  },
+  { "id": "week", "en": "I go swimming twice a week.", "es": "Voy a nadar dos veces por semana." },
+  { "id": "already", "en": "I have already eaten lunch.", "es": "Ya almorcé." },
+  { "id": "anything", "en": "You can order anything you want.", "es": "Puedes pedir cualquier cosa que quieras." },
+  {
+    "id": "case",
+    "en": "In case of rain, the party will be inside.",
+    "es": "En caso de lluvia, la fiesta será adentro."
+  },
+  { "id": "nothing", "en": "There is nothing in the fridge.", "es": "No hay nada en el refrigerador." },
+  { "id": "person", "en": "She is a very friendly person.", "es": "Ella es una persona muy amable." },
+  { "id": "today", "en": "Today is my mom's birthday.", "es": "Hoy es el cumpleaños de mi mamá." },
+  { "id": "change", "en": "I want to change my hair color.", "es": "Quiero cambiar el color de mi pelo." },
+  { "id": "enough", "en": "Do we have enough chairs for everyone?", "es": "¿Tenemos suficientes sillas para todos?" },
+  { "id": "everything", "en": "Everything is ready for the party.", "es": "Todo está listo para la fiesta." },
+  { "id": "full", "en": "My glass is full of juice.", "es": "Mi vaso está lleno de jugo." },
+  { "id": "live", "en": "We live near the train station.", "es": "Vivimos cerca de la estación de tren." },
+  { "id": "point", "en": "That is a good point.", "es": "Ese es un buen punto." },
+  { "id": "read", "en": "I like to read before I go to bed.", "es": "Me gusta leer antes de dormir." },
+  { "id": "told", "en": "My mom told me about her trip.", "es": "Mi mamá me contó sobre su viaje." },
+  { "id": "yet", "en": "The bus has not arrived yet.", "es": "El autobús todavía no ha llegado." },
+  { "id": "bad", "en": "That was a bad idea.", "es": "Esa fue una mala idea." },
+  { "id": "four", "en": "Our kitchen table has four chairs.", "es": "La mesa de nuestra cocina tiene cuatro sillas." },
+  { "id": "hard", "en": "The math test was very hard.", "es": "El examen de matemáticas fue muy difícil." },
+  { "id": "mean", "en": "What does this sign mean?", "es": "¿Qué significa este letrero?" },
+  { "id": "once", "en": "Once you finish, you can go home.", "es": "Una vez que termines, puedes irte a casa." },
+  { "id": "support", "en": "Thank you for your support this year.", "es": "Gracias por tu apoyo este año." },
+  { "id": "tell", "en": "Can you tell me the time?", "es": "¿Me puedes decir la hora?" },
+  {
+    "id": "including",
+    "en": "Everyone came, including my old friends from school.",
+    "es": "Todos vinieron, incluyendo a mis viejos amigos de la escuela."
+  },
+  { "id": "music", "en": "We listen to music in the car.", "es": "Escuchamos música en el auto." },
+  {
+    "id": "power",
+    "en": "Reading gives you the power to learn anything.",
+    "es": "Leer te da el poder de aprender cualquier cosa."
+  },
+  { "id": "seen", "en": "Have you seen my keys?", "es": "¿Has visto mis llaves?" },
+  {
+    "id": "stop",
+    "en": "The bus will stop at the next corner.",
+    "es": "El autobús se detendrá en la próxima esquina."
+  },
+  { "id": "water", "en": "Can I have a glass of water?", "es": "¿Me das un vaso de agua?" },
+  { "id": "believe", "en": "I can't believe it's already Friday!", "es": "¡No puedo creer que ya sea viernes!" },
+  { "id": "call", "en": "I will call my mom tonight.", "es": "Voy a llamar a mi mamá esta noche." },
+  { "id": "head", "en": "My head hurts after a long day.", "es": "Me duele la cabeza después de un día largo." },
+  { "id": "men", "en": "Two men are fixing the roof.", "es": "Dos hombres están arreglando el techo." },
+  {
+    "id": "national",
+    "en": "Today is a national holiday, so the school is closed.",
+    "es": "Hoy es feriado nacional, así que la escuela está cerrada."
+  },
+  {
+    "id": "small",
+    "en": "They rent a small apartment downtown.",
+    "es": "Alquilan un departamento pequeño en el centro."
+  },
+  { "id": "took", "en": "She took the bus to work today.", "es": "Hoy ella tomó el autobús para ir al trabajo." },
+  { "id": "white", "en": "The walls in my room are white.", "es": "Las paredes de mi cuarto son blancas." },
+  {
+    "id": "came",
+    "en": "My cousins came to visit us last week.",
+    "es": "Mis primos vinieron a visitarnos la semana pasada."
+  },
+  { "id": "far", "en": "The school is not far from our house.", "es": "La escuela no está lejos de nuestra casa." },
+  { "id": "job", "en": "She found a new job downtown.", "es": "Ella encontró un nuevo trabajo en el centro." },
+  {
+    "id": "side",
+    "en": "There is a small garden on the side of the house.",
+    "es": "Hay un pequeño jardín al lado de la casa."
+  },
+  {
+    "id": "though",
+    "en": "He came to the party, though he was tired.",
+    "es": "Vino a la fiesta, aunque estaba cansado."
+  },
+  { "id": "try", "en": "I will try to finish early.", "es": "Voy a intentar terminar temprano." },
+  { "id": "went", "en": "We went to the zoo last Sunday.", "es": "Fuimos al zoológico el domingo pasado." },
+  { "id": "yes", "en": "Yes, I would love to come!", "es": "¡Sí, me encantaría ir!" },
+  { "id": "actually", "en": "Actually, I prefer tea to coffee.", "es": "De hecho, prefiero el té al café." },
+  { "id": "american", "en": "We ate a big American breakfast.", "es": "Comimos un gran desayuno americano." },
+  { "id": "later", "en": "Let's talk about it later.", "es": "Hablemos de eso más tarde." },
+  { "id": "less", "en": "I want to spend less money on clothes.", "es": "Quiero gastar menos dinero en ropa." },
+  { "id": "line", "en": "Draw a straight line on the paper.", "es": "Dibuja una línea recta en el papel." },
+  {
+    "id": "order",
+    "en": "The numbers are not in the right order.",
+    "es": "Los números no están en el orden correcto."
+  },
+  { "id": "party", "en": "Are you coming to my birthday party?", "es": "¿Vienes a mi fiesta de cumpleaños?" },
+  { "id": "run", "en": "I like to run before work.", "es": "Me gusta correr antes del trabajo." },
+  {
+    "id": "service",
+    "en": "The service at this restaurant is great.",
+    "es": "El servicio en este restaurante es excelente."
+  },
+  { "id": "country", "en": "Brazil is a very big country.", "es": "Brasil es un país muy grande." },
+  { "id": "open", "en": "Is the bank open on Saturday?", "es": "¿El banco está abierto el sábado?" },
+  { "id": "season", "en": "The soccer season starts in August.", "es": "La temporada de fútbol empieza en agosto." },
+  { "id": "thank", "en": "I want to thank you for your help.", "es": "Quiero agradecerte por tu ayuda." },
+  { "id": "children", "en": "Children love to play in the snow.", "es": "A los niños les encanta jugar en la nieve." },
+  { "id": "everyone", "en": "Everyone in my family likes soccer.", "es": "A todos en mi familia les gusta el fútbol." },
+  { "id": "general", "en": "The general idea of the book is simple.", "es": "La idea general del libro es sencilla." },
+  {
+    "id": "united",
+    "en": "The team stayed united after the loss.",
+    "es": "El equipo se mantuvo unido después de la derrota."
+  },
+  { "id": "area", "en": "This area has many good restaurants.", "es": "Esta área tiene muchos buenos restaurantes." },
+  {
+    "id": "black",
+    "en": "He always wears black shoes to work.",
+    "es": "Él siempre usa zapatos negros para ir al trabajo."
+  },
+  {
+    "id": "following",
+    "en": "Read the following sentences out loud.",
+    "es": "Lee las siguientes oraciones en voz alta."
+  },
+  { "id": "law", "en": "Wearing a seat belt is the law here.", "es": "Usar el cinturón de seguridad es la ley aquí." },
+  { "id": "together", "en": "Let's cook dinner together tonight.", "es": "Cocinemos juntos esta noche." },
+  {
+    "id": "war",
+    "en": "My grandfather told us stories about the war.",
+    "es": "Mi abuelo nos contó historias sobre la guerra."
+  },
+  { "id": "whole", "en": "I ate the whole pizza by myself!", "es": "¡Me comí la pizza entera yo solo!" },
+  {
+    "id": "car",
+    "en": "Our car is parked in front of the house.",
+    "es": "Nuestro auto está estacionado frente a la casa."
+  },
+  { "id": "face", "en": "She had a big smile on her face.", "es": "Tenía una gran sonrisa en el rostro." },
+  { "id": "five", "en": "I have five cousins in Mexico.", "es": "Tengo cinco primos en México." },
+  { "id": "kind", "en": "What kind of music do you like?", "es": "¿Qué tipo de música te gusta?" },
+  { "id": "maybe", "en": "Maybe we can go to the beach tomorrow.", "es": "Tal vez podamos ir a la playa mañana." },
+  {
+    "id": "per",
+    "en": "The tickets cost ten dollars per person.",
+    "es": "Las entradas cuestan diez dólares por persona."
+  },
+  {
+    "id": "president",
+    "en": "The club chose a new president this year.",
+    "es": "El club eligió un nuevo presidente este año."
+  },
+  { "id": "story", "en": "My dad tells me a story every night.", "es": "Mi papá me cuenta una historia cada noche." },
+  { "id": "working", "en": "My dad is working late tonight.", "es": "Mi papá está trabajando hasta tarde hoy." },
+  {
+    "id": "course",
+    "en": "I am taking a cooking course this summer.",
+    "es": "Estoy tomando un curso de cocina este verano."
+  },
+  { "id": "health", "en": "My grandfather is in good health.", "es": "Mi abuelo tiene buena salud." },
+  { "id": "hope", "en": "I hope you feel better soon.", "es": "Espero que te sientas mejor pronto." },
+  { "id": "important", "en": "It is important to be on time.", "es": "Es importante llegar a tiempo." },
+  { "id": "least", "en": "I sleep at least eight hours a night.", "es": "Duermo por lo menos ocho horas cada noche." },
+  {
+    "id": "means",
+    "en": "The bike is her main means of transportation.",
+    "es": "La bicicleta es su principal medio de transporte."
+  },
+  { "id": "news", "en": "Did you hear the good news?", "es": "¿Escuchaste las buenas noticias?" },
+  {
+    "id": "within",
+    "en": "The package will arrive within three days.",
+    "es": "El paquete llegará dentro de tres días."
+  },
+  { "id": "able", "en": "She is able to swim very fast.", "es": "Ella es capaz de nadar muy rápido." },
+  { "id": "book", "en": "I am reading a book about the sea.", "es": "Estoy leyendo un libro sobre el mar." },
+  { "id": "early", "en": "We took an early flight to Miami.", "es": "Tomamos un vuelo temprano a Miami." },
+  {
+    "id": "information",
+    "en": "You can find more information on our website.",
+    "es": "Puedes encontrar más información en nuestro sitio web."
+  },
+  {
+    "id": "local",
+    "en": "We buy fresh bread at a local bakery.",
+    "es": "Compramos pan fresco en una panadería local."
+  },
+  { "id": "oh", "en": "Oh, I forgot my keys again!", "es": "¡Vaya, olvidé mis llaves otra vez!" },
+  {
+    "id": "post",
+    "en": "She shared a funny post about her cat.",
+    "es": "Ella compartió una publicación graciosa sobre su gato."
+  },
+  { "id": "thanks", "en": "Thanks for the coffee this morning!", "es": "¡Gracias por el café de esta mañana!" },
+  { "id": "video", "en": "He made a funny video of his dog.", "es": "Él hizo un video gracioso de su perro." },
+  { "id": "young", "en": "My grandmother looks very young.", "es": "Mi abuela se ve muy joven." },
+  { "id": "ago", "en": "I moved here two years ago.", "es": "Me mudé aquí hace dos años." },
+  { "id": "social", "en": "Dogs are very social animals.", "es": "Los perros son animales muy sociales." },
+  { "id": "talk", "en": "Can we talk after lunch?", "es": "¿Podemos hablar después del almuerzo?" },
+  { "id": "court", "en": "The case will go to court next month.", "es": "El caso irá a la corte el próximo mes." },
+  { "id": "fact", "en": "The fact is that we need more time.", "es": "El hecho es que necesitamos más tiempo." },
+  { "id": "given", "en": "Given the rain, we stayed at home.", "es": "Dada la lluvia, nos quedamos en casa." },
+  { "id": "half", "en": "She ate half of the pizza.", "es": "Ella se comió la mitad de la pizza." },
+  { "id": "hand", "en": "Raise your hand if you have a question.", "es": "Levanta la mano si tienes una pregunta." },
+  { "id": "level", "en": "What level of English do you have?", "es": "¿Qué nivel de inglés tienes?" },
+  { "id": "mind", "en": "Reading keeps your mind active.", "es": "Leer mantiene tu mente activa." },
+  { "id": "often", "en": "We often eat dinner outside in summer.", "es": "A menudo cenamos afuera en verano." },
+  { "id": "single", "en": "There was not a single cloud in the sky.", "es": "No había ni una sola nube en el cielo." },
+  { "id": "become", "en": "She wants to become a doctor.", "es": "Ella quiere convertirse en doctora." },
+  { "id": "body", "en": "Exercise is good for your body.", "es": "El ejercicio es bueno para el cuerpo." },
+  {
+    "id": "control",
+    "en": "The pilot has full control of the plane.",
+    "es": "El piloto tiene control total del avión."
+  },
+  {
+    "id": "death",
+    "en": "The death of her old dog made her sad.",
+    "es": "La muerte de su viejo perro la puso triste."
+  },
+  { "id": "food", "en": "Fruit is a healthy food for kids.", "es": "La fruta es un alimento sano para los niños." },
+  { "id": "guy", "en": "The guy at the store helped me.", "es": "El chico de la tienda me ayudó." },
+  { "id": "office", "en": "My office is on the third floor.", "es": "Mi oficina está en el tercer piso." },
+  { "id": "pay", "en": "Can I pay with a card?", "es": "¿Puedo pagar con tarjeta?" },
+  { "id": "problem", "en": "No problem, I can help you.", "es": "No hay problema, puedo ayudarte." },
+  { "id": "south", "en": "Many birds fly south in winter.", "es": "Muchas aves vuelan al sur en invierno." },
+  { "id": "true", "en": "Is that story true?", "es": "¿Esa historia es verdadera?" },
+  { "id": "almost", "en": "It's almost time for dinner.", "es": "Ya casi es hora de cenar." },
+  { "id": "history", "en": "We have a history test tomorrow.", "es": "Mañana tenemos un examen de historia." },
+  {
+    "id": "known",
+    "en": "This beach is known for its white sand.",
+    "es": "Esta playa es conocida por su arena blanca."
+  },
+  {
+    "id": "large",
+    "en": "They live in a large house near the lake.",
+    "es": "Viven en una casa grande cerca del lago."
+  },
+  { "id": "lost", "en": "We found a lost dog in the park.", "es": "Encontramos un perro perdido en el parque." },
+  {
+    "id": "research",
+    "en": "Her research is about ocean animals.",
+    "es": "Su investigación trata sobre animales marinos."
+  },
+  { "id": "room", "en": "My room has a big window.", "es": "Mi habitación tiene una ventana grande." },
+  { "id": "several", "en": "I called you several times yesterday.", "es": "Ayer te llamé varias veces." },
+  {
+    "id": "university",
+    "en": "My brother studies at a big university.",
+    "es": "Mi hermano estudia en una universidad grande."
+  },
+  { "id": "win", "en": "Who do you think will win?", "es": "¿Quién crees que va a ganar?" },
+  { "id": "wrong", "en": "I think you are wrong about that.", "es": "Creo que estás equivocado en eso." },
+  {
+    "id": "along",
+    "en": "We walked along the beach at sunset.",
+    "es": "Caminamos a lo largo de la playa al atardecer."
+  },
+  { "id": "anyone", "en": "Anyone can learn to cook.", "es": "Cualquiera puede aprender a cocinar." },
+  { "id": "else", "en": "Do you want anything else?", "es": "¿Quieres algo más?" },
+  { "id": "girl", "en": "The girl next to me is my cousin.", "es": "La chica que está a mi lado es mi prima." },
+  { "id": "matter", "en": "It doesn't matter what you wear.", "es": "No importa lo que te pongas." },
+  { "id": "pretty", "en": "She has a pretty garden.", "es": "Ella tiene un jardín bonito." },
+  { "id": "remember", "en": "Do you remember my name?", "es": "¿Recuerdas mi nombre?" },
+  { "id": "air", "en": "Open the window to let in fresh air.", "es": "Abre la ventana para que entre aire fresco." },
+  { "id": "bit", "en": "Can you wait a bit longer?", "es": "¿Puedes esperar un poco más?" },
+  { "id": "friend", "en": "I met a new friend at school.", "es": "Conocí a un nuevo amigo en la escuela." },
+  { "id": "hit", "en": "He hit the ball over the fence.", "es": "Él golpeó la pelota por encima de la cerca." },
+  { "id": "nice", "en": "We had a nice day at the lake.", "es": "Pasamos un día lindo en el lago." },
+  { "id": "probably", "en": "It will probably rain this afternoon.", "es": "Probablemente va a llover esta tarde." },
+  { "id": "understand", "en": "I don't understand this question.", "es": "No entiendo esta pregunta." },
+  { "id": "yeah", "en": "Yeah, I can help you tomorrow.", "es": "Sí, puedo ayudarte mañana." },
+  { "id": "class", "en": "Our English class starts at nine.", "es": "Nuestra clase de inglés empieza a las nueve." },
+  { "id": "close", "en": "Please close the window.", "es": "Por favor, cierra la ventana." },
+  { "id": "idea", "en": "Going to the beach is a great idea.", "es": "Ir a la playa es una excelente idea." },
+  {
+    "id": "international",
+    "en": "The airport has many international flights.",
+    "es": "El aeropuerto tiene muchos vuelos internacionales."
+  },
+  { "id": "past", "en": "Let's forget the past and start again.", "es": "Olvidemos el pasado y empecemos de nuevo." },
+  { "id": "possible", "en": "Is it possible to change my ticket?", "es": "¿Es posible cambiar mi boleto?" },
+  { "id": "cause", "en": "They found the cause of the problem.", "es": "Encontraron la causa del problema." },
+  { "id": "due", "en": "The game was canceled due to rain.", "es": "El partido se canceló debido a la lluvia." },
+  { "id": "happy", "en": "The kids were happy to see the snow.", "es": "Los niños estaban felices de ver la nieve." },
+  { "id": "human", "en": "Making mistakes is part of being human.", "es": "Cometer errores es parte de ser humano." },
+  { "id": "move", "en": "Can you help me move this table?", "es": "¿Me ayudas a mover esta mesa?" },
+  { "id": "question", "en": "That is a very good question.", "es": "Esa es una muy buena pregunta." },
+  { "id": "series", "en": "We watched the whole series in one week.", "es": "Vimos toda la serie en una semana." },
+  { "id": "wait", "en": "Wait for me at the bus stop.", "es": "Espérame en la parada del autobús." },
+  {
+    "id": "woman",
+    "en": "The woman at the front desk was very kind.",
+    "es": "La mujer de la recepción fue muy amable."
+  },
+  { "id": "ask", "en": "Ask your teacher if you need help.", "es": "Pregúntale a tu maestro si necesitas ayuda." },
+  {
+    "id": "community",
+    "en": "Our community has a beautiful park.",
+    "es": "Nuestra comunidad tiene un parque hermoso."
+  },
+  {
+    "id": "data",
+    "en": "The data shows that more people ride bikes now.",
+    "es": "Los datos muestran que ahora más gente anda en bicicleta."
+  },
+  { "id": "late", "en": "The train was late this morning.", "es": "El tren llegó tarde esta mañana." },
+  { "id": "leave", "en": "You can leave your bag here.", "es": "Puedes dejar tu bolsa aquí." },
+  { "id": "north", "en": "It gets very cold in the north.", "es": "En el norte hace mucho frío." },
+  { "id": "saw", "en": "I saw your brother at the store.", "es": "Vi a tu hermano en la tienda." },
+  {
+    "id": "special",
+    "en": "Today is a special day for our family.",
+    "es": "Hoy es un día especial para nuestra familia."
+  },
+  {
+    "id": "watch",
+    "en": "We watch movies every Friday night.",
+    "es": "Miramos películas todos los viernes en la noche."
+  },
+  {
+    "id": "either",
+    "en": "You can take either road to town.",
+    "es": "Puedes tomar cualquiera de los dos caminos al pueblo."
+  },
+  { "id": "future", "en": "What do you want to do in the future?", "es": "¿Qué quieres hacer en el futuro?" },
+  { "id": "light", "en": "Please turn on the light.", "es": "Por favor, enciende la luz." },
+  { "id": "low", "en": "This table is too low for me.", "es": "Esta mesa es demasiado baja para mí." },
+  {
+    "id": "million",
+    "en": "The city has about one million people.",
+    "es": "La ciudad tiene cerca de un millón de habitantes."
+  },
+  { "id": "morning", "en": "I drink coffee every morning.", "es": "Tomo café todas las mañanas." },
+  { "id": "police", "en": "Call the police if you see an accident.", "es": "Llama a la policía si ves un accidente." },
+  { "id": "short", "en": "She has short hair.", "es": "Ella tiene el pelo corto." },
+  { "id": "stay", "en": "Please stay in your seat.", "es": "Por favor, permanece en tu asiento." },
+  { "id": "taken", "en": "Is this seat taken?", "es": "¿Este asiento está ocupado?" },
+  { "id": "age", "en": "At your age, I was already working.", "es": "A tu edad, yo ya trabajaba." },
+  { "id": "buy", "en": "Where can I buy a bus ticket?", "es": "¿Dónde puedo comprar un boleto de autobús?" },
+  { "id": "deal", "en": "We made a deal: I cook, you wash.", "es": "Hicimos un trato: yo cocino y tú lavas." },
+  {
+    "id": "rather",
+    "en": "The room is rather small for four people.",
+    "es": "La habitación es más bien pequeña para cuatro personas."
+  },
+  { "id": "reason", "en": "Tell me the reason you are sad.", "es": "Dime la razón por la que estás triste." },
+  { "id": "red", "en": "She bought a red dress for the party.", "es": "Ella compró un vestido rojo para la fiesta." },
+  {
+    "id": "report",
+    "en": "I have to finish my report by Friday.",
+    "es": "Tengo que terminar mi informe para el viernes."
+  },
+  { "id": "soon", "en": "The bus will be here soon.", "es": "El autobús llegará pronto." },
+  { "id": "third", "en": "This is my third cup of coffee today.", "es": "Esta es mi tercera taza de café hoy." },
+  { "id": "turn", "en": "Turn right at the bank.", "es": "Gira a la derecha en el banco." },
+  { "id": "whether", "en": "I don't know whether he is coming.", "es": "No sé si él va a venir." },
+  { "id": "among", "en": "The house is hidden among the trees.", "es": "La casa está escondida entre los árboles." },
+  { "id": "check", "en": "Did you check your email today?", "es": "¿Revisaste tu correo hoy?" },
+  {
+    "id": "development",
+    "en": "Play is important for a child's development.",
+    "es": "El juego es importante para el desarrollo de un niño."
+  },
+  { "id": "form", "en": "Please fill out this form.", "es": "Por favor, llena este formulario." },
+  {
+    "id": "further",
+    "en": "The hotel is a little further down the road.",
+    "es": "El hotel está un poco más adelante en el camino."
+  },
+  { "id": "heart", "en": "Her heart was beating fast.", "es": "Su corazón latía rápido." },
+  { "id": "myself", "en": "I bought a gift for myself.", "es": "Me compré un regalo para mí mismo." },
+  { "id": "yourself", "en": "You can do it yourself.", "es": "Puedes hacerlo tú mismo." },
+  { "id": "act", "en": "The first act of the play was funny.", "es": "El primer acto de la obra fue divertido." },
+  { "id": "although", "en": "Although it was cold, we went swimming.", "es": "Aunque hacía frío, fuimos a nadar." },
+  { "id": "child", "en": "Every child needs love and care.", "es": "Cada niño necesita amor y cuidado." },
+  {
+    "id": "fire",
+    "en": "We sat around the fire and told stories.",
+    "es": "Nos sentamos alrededor del fuego y contamos historias."
+  },
+  { "id": "fun", "en": "The party was really fun.", "es": "La fiesta fue muy divertida." },
+  { "id": "living", "en": "They are living in a small town now.", "es": "Ahora están viviendo en un pueblo pequeño." },
+  {
+    "id": "major",
+    "en": "Rain is a major problem for farmers here.",
+    "es": "La lluvia es un problema importante para los agricultores de aquí."
+  },
+  {
+    "id": "media",
+    "en": "The media talked about the storm all day.",
+    "es": "Los medios de comunicación hablaron de la tormenta todo el día."
+  },
+  { "id": "phone", "en": "My phone is on the kitchen table.", "es": "Mi teléfono está en la mesa de la cocina." },
+  {
+    "id": "well-known",
+    "en": "He is a well-known doctor in our town.",
+    "es": "Es un doctor bien conocido en nuestro pueblo."
+  },
+  { "id": "art", "en": "She loves art and paints every day.", "es": "Le encanta el arte y pinta todos los días." },
+  { "id": "behind", "en": "The cat is hiding behind the sofa.", "es": "El gato se esconde detrás del sofá." },
+  { "id": "building", "en": "Our office is in a tall building.", "es": "Nuestra oficina está en un edificio alto." },
+  { "id": "easy", "en": "This recipe is very easy to make.", "es": "Esta receta es muy fácil de hacer." },
+  {
+    "id": "market",
+    "en": "We buy fruit at the market on Saturdays.",
+    "es": "Compramos fruta en el mercado los sábados."
+  },
+  { "id": "near", "en": "Is there a bank near here?", "es": "¿Hay un banco cerca de aquí?" },
+  { "id": "plan", "en": "What is your plan for the weekend?", "es": "¿Cuál es tu plan para el fin de semana?" },
+  {
+    "id": "political",
+    "en": "They never talk about political topics at dinner.",
+    "es": "Nunca hablan de temas políticos en la cena."
+  },
+  { "id": "quite", "en": "The movie was quite long.", "es": "La película fue bastante larga." },
+  { "id": "six", "en": "The store opens at six in the morning.", "es": "La tienda abre a las seis de la mañana." },
+  { "id": "west", "en": "The sun sets in the west.", "es": "El sol se pone en el oeste." },
+  {
+    "id": "according",
+    "en": "According to the news, it will snow tomorrow.",
+    "es": "De acuerdo a las noticias, mañana va a nevar."
+  },
+  {
+    "id": "available",
+    "en": "Is the doctor available this afternoon?",
+    "es": "¿Está disponible el doctor esta tarde?"
+  },
+  { "id": "education", "en": "A good education opens many doors.", "es": "Una buena educación abre muchas puertas." },
+  { "id": "final", "en": "We are studying for the final exam.", "es": "Estamos estudiando para el examen final." },
+  {
+    "id": "former",
+    "en": "The former owner of the house was a painter.",
+    "es": "El dueño anterior de la casa era pintor."
+  },
+  { "id": "front", "en": "Let's meet in front of the library.", "es": "Nos vemos frente a la biblioteca." },
+  { "id": "list", "en": "I made a list of things to buy.", "es": "Hice una lista de cosas para comprar." },
+  { "id": "ready", "en": "Are you ready to go?", "es": "¿Estás listo para irnos?" },
+  { "id": "sometimes", "en": "Sometimes I walk to work.", "es": "A veces camino al trabajo." },
+  {
+    "id": "son",
+    "en": "Their son is learning to ride a bike.",
+    "es": "Su hijo está aprendiendo a andar en bicicleta."
+  },
+  { "id": "street", "en": "We live on a quiet street.", "es": "Vivimos en una calle tranquila." },
+  { "id": "bring", "en": "Can you bring some bread for dinner?", "es": "¿Puedes traer pan para la cena?" },
+  { "id": "college", "en": "My sister started college this year.", "es": "Mi hermana empezó la universidad este año." },
+  { "id": "current", "en": "What is your current address?", "es": "¿Cuál es tu dirección actual?" },
+  { "id": "example", "en": "Can you give me an example?", "es": "¿Puedes darme un ejemplo?" },
+  { "id": "experience", "en": "Do you have any experience with children?", "es": "¿Tienes experiencia con niños?" },
+  { "id": "heard", "en": "I heard a loud noise last night.", "es": "Anoche oí un ruido fuerte." },
+  { "id": "meet", "en": "I want you to meet my sister.", "es": "Quiero que conozcas a mi hermana." },
+  {
+    "id": "program",
+    "en": "My favorite TV program starts at eight.",
+    "es": "Mi programa de televisión favorito empieza a las ocho."
+  },
+  { "id": "type", "en": "This type of apple is very sweet.", "es": "Este tipo de manzana es muy dulce." },
+  { "id": "baby", "en": "The baby is sleeping in her room.", "es": "La bebé está durmiendo en su cuarto." },
+  { "id": "chance", "en": "This is your chance to win.", "es": "Esta es tu oportunidad de ganar." },
+  { "id": "father", "en": "My father works at a bank.", "es": "Mi padre trabaja en un banco." },
+  { "id": "march", "en": "Her birthday is in March.", "es": "Su cumpleaños es en marzo." },
+  { "id": "process", "en": "Learning a language is a slow process.", "es": "Aprender un idioma es un proceso lento." },
+  { "id": "song", "en": "This song always makes me happy.", "es": "Esta canción siempre me pone feliz." },
+  { "id": "study", "en": "I study English every evening.", "es": "Estudio inglés todas las noches." },
+  { "id": "word", "en": "I don't know this word in English.", "es": "No conozco esta palabra en inglés." },
+  { "id": "across", "en": "The bakery is across the street.", "es": "La panadería está al otro lado de la calle." },
+  { "id": "action", "en": "He loves action movies.", "es": "Le encantan las películas de acción." },
+  { "id": "clear", "en": "Her answer was very clear.", "es": "Su respuesta fue muy clara." },
+  { "id": "gave", "en": "My aunt gave me a book for my birthday.", "es": "Mi tía me dio un libro por mi cumpleaños." },
+  { "id": "himself", "en": "He fixed the bike himself.", "es": "Él mismo arregló la bicicleta." },
+  { "id": "month", "en": "My birthday is next month.", "es": "Mi cumpleaños es el próximo mes." },
+  {
+    "id": "outside",
+    "en": "The kids are playing outside the house.",
+    "es": "Los niños están jugando afuera de la casa."
+  },
+  {
+    "id": "self",
+    "en": "After a good rest, he was his old self again.",
+    "es": "Después de un buen descanso, volvió a ser el mismo de antes."
+  },
+  { "id": "board", "en": "The school board meets every Monday.", "es": "La junta escolar se reúne todos los lunes." },
+  { "id": "cost", "en": "The cost of the trip was very high.", "es": "El costo del viaje fue muy alto." },
+  { "id": "cut", "en": "Can you cut the bread, please?", "es": "¿Puedes cortar el pan, por favor?" },
+  {
+    "id": "field",
+    "en": "The cows are eating grass in the field.",
+    "es": "Las vacas están comiendo pasto en el campo."
+  },
+  { "id": "held", "en": "She held the baby in her arms.", "es": "Ella sostuvo al bebé en sus brazos." },
+  {
+    "id": "instead",
+    "en": "We stayed home and watched a movie instead.",
+    "es": "En cambio, nos quedamos en casa y vimos una película."
+  },
+  { "id": "main", "en": "The main door is on the left.", "es": "La puerta principal está a la izquierda." },
+  { "id": "moment", "en": "Please wait here for a moment.", "es": "Por favor, espera aquí un momento." },
+  { "id": "mother", "en": "My mother makes the best soup.", "es": "Mi madre hace la mejor sopa." },
+  { "id": "road", "en": "This road goes to the beach.", "es": "Este camino lleva a la playa." },
+  { "id": "thinking", "en": "I am thinking about my next trip.", "es": "Estoy pensando en mi próximo viaje." },
+  { "id": "town", "en": "She grew up in a small town.", "es": "Ella creció en un pueblo pequeño." },
+  {
+    "id": "department",
+    "en": "She works in the sales department.",
+    "es": "Ella trabaja en el departamento de ventas."
+  },
+  {
+    "id": "energy",
+    "en": "Kids have so much energy in the morning.",
+    "es": "Los niños tienen mucha energía en la mañana."
+  },
+  { "id": "fight", "en": "Doctors fight hard to save lives.", "es": "Los médicos luchan mucho para salvar vidas." },
+  { "id": "fine", "en": "Don't worry, everything is working fine.", "es": "No te preocupes, todo funciona bien." },
+  { "id": "force", "en": "The wind blew with great force.", "es": "El viento sopló con mucha fuerza." },
+  { "id": "hear", "en": "Can you hear the birds singing?", "es": "¿Puedes escuchar a los pájaros cantar?" },
+  { "id": "issue", "en": "We need to talk about this issue.", "es": "Tenemos que hablar de este asunto." },
+  { "id": "price", "en": "The price of eggs went up again.", "es": "El precio de los huevos subió otra vez." }
+]

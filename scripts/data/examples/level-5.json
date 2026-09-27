@@ -1,0 +1,1870 @@
+[
+  {
+    "id": "comparison",
+    "en": "The comparison between the two phones was very helpful.",
+    "es": "La comparación entre los dos celulares fue muy útil."
+  },
+  {
+    "id": "defeat",
+    "en": "After the defeat, the team trained even harder.",
+    "es": "Después de la derrota, el equipo entrenó aún más duro."
+  },
+  {
+    "id": "democracy",
+    "en": "In a democracy, people vote for their leaders.",
+    "es": "En una democracia, la gente vota por sus líderes."
+  },
+  {
+    "id": "detailed",
+    "en": "She gave us a detailed map of the park.",
+    "es": "Ella nos dio un mapa detallado del parque."
+  },
+  { "id": "exact", "en": "Do you know the exact time of the meeting?", "es": "¿Sabes la hora exacta de la reunión?" },
+  {
+    "id": "fee",
+    "en": "There is a small fee to enter the museum.",
+    "es": "Hay una pequeña tarifa para entrar al museo."
+  },
+  {
+    "id": "lock",
+    "en": "The lock on the front door is broken.",
+    "es": "La cerradura de la puerta principal está rota."
+  },
+  {
+    "id": "musical",
+    "en": "My sister plays three musical instruments.",
+    "es": "Mi hermana toca tres instrumentos musicales."
+  },
+  { "id": "nose", "en": "The cold wind made my nose red.", "es": "El viento frío me puso la nariz roja." },
+  {
+    "id": "plastic",
+    "en": "This bottle is made of recycled plastic.",
+    "es": "Esta botella está hecha de plástico reciclado."
+  },
+  {
+    "id": "quote",
+    "en": "Her favorite quote is written on her bedroom wall.",
+    "es": "Su cita favorita está escrita en la pared de su cuarto."
+  },
+  {
+    "id": "recording",
+    "en": "We listened to an old recording of my grandfather singing.",
+    "es": "Escuchamos una grabación vieja de mi abuelo cantando."
+  },
+  {
+    "id": "suspect",
+    "en": "I suspect that the store is closed today.",
+    "es": "Sospecho que la tienda está cerrada hoy."
+  },
+  { "id": "swear", "en": "I swear I didn't eat your cookies!", "es": "¡Te juro que no me comí tus galletas!" },
+  { "id": "tie", "en": "Can you help me tie my shoes?", "es": "¿Me ayudas a atarme los zapatos?" },
+  {
+    "id": "trend",
+    "en": "Working from home is a growing trend.",
+    "es": "Trabajar desde casa es una tendencia en aumento."
+  },
+  {
+    "id": "valuable",
+    "en": "This old ring is very valuable to my family.",
+    "es": "Este anillo viejo es muy valioso para mi familia."
+  },
+  {
+    "id": "wealth",
+    "en": "Good health is more important than wealth.",
+    "es": "La buena salud es más importante que la riqueza."
+  },
+  { "id": "wise", "en": "My grandmother is a very wise woman.", "es": "Mi abuela es una mujer muy sabia." },
+  {
+    "id": "approval",
+    "en": "You need your manager's approval for this trip.",
+    "es": "Necesitas la aprobación de tu gerente para este viaje."
+  },
+  {
+    "id": "bread",
+    "en": "We bought fresh bread at the bakery this morning.",
+    "es": "Compramos pan fresco en la panadería esta mañana."
+  },
+  { "id": "contain", "en": "Does this soup contain any meat?", "es": "¿Esta sopa contiene carne?" },
+  {
+    "id": "convention",
+    "en": "Thousands of fans came to the comic book convention.",
+    "es": "Miles de fans vinieron a la convención de cómics."
+  },
+  {
+    "id": "document",
+    "en": "Sign the document at the bottom of the page.",
+    "es": "Firma el documento en la parte de abajo de la página."
+  },
+  {
+    "id": "employee",
+    "en": "Each new employee gets a desk and a laptop.",
+    "es": "Cada empleado nuevo recibe un escritorio y una computadora portátil."
+  },
+  {
+    "id": "engineer",
+    "en": "My brother works as an engineer for a large company.",
+    "es": "Mi hermano trabaja como ingeniero en una empresa grande."
+  },
+  {
+    "id": "equivalent",
+    "en": "There is no English equivalent for this Spanish word.",
+    "es": "No hay un equivalente en inglés para esta palabra en español."
+  },
+  {
+    "id": "fairly",
+    "en": "The test was fairly easy for most students.",
+    "es": "El examen fue bastante fácil para la mayoría de los estudiantes."
+  },
+  {
+    "id": "gang",
+    "en": "The police arrested members of a local gang.",
+    "es": "La policía arrestó a miembros de una pandilla local."
+  },
+  {
+    "id": "graduate",
+    "en": "She is a recent graduate of the state university.",
+    "es": "Ella es recién graduada de la universidad estatal."
+  },
+  {
+    "id": "inner",
+    "en": "We painted the inner walls of the house white.",
+    "es": "Pintamos de blanco las paredes internas de la casa."
+  },
+  {
+    "id": "lift",
+    "en": "Lift your arms above your head slowly.",
+    "es": "Eleva los brazos por encima de la cabeza lentamente."
+  },
+  {
+    "id": "neighborhood",
+    "en": "Our neighborhood has a small park and a bakery.",
+    "es": "Nuestro vecindario tiene un parque pequeño y una panadería."
+  },
+  {
+    "id": "operate",
+    "en": "Only trained workers can operate this machine.",
+    "es": "Solo los trabajadores capacitados pueden operar esta máquina."
+  },
+  {
+    "id": "outstanding",
+    "en": "She got an outstanding grade on her final exam.",
+    "es": "Ella sacó una nota sobresaliente en su examen final."
+  },
+  {
+    "id": "permission",
+    "en": "You need permission to leave class early.",
+    "es": "Necesitas permiso para salir temprano de clase."
+  },
+  {
+    "id": "reply",
+    "en": "Please reply to my email when you can.",
+    "es": "Por favor, responde a mi correo cuando puedas."
+  },
+  {
+    "id": "rid",
+    "en": "We need to get rid of these old boxes.",
+    "es": "Tenemos que deshacernos de estas cajas viejas."
+  },
+  {
+    "id": "shoulder",
+    "en": "My shoulder hurts after carrying that heavy bag.",
+    "es": "Me duele el hombro después de cargar esa bolsa pesada."
+  },
+  {
+    "id": "shower",
+    "en": "I take a shower every morning before work.",
+    "es": "Me doy una ducha todas las mañanas antes del trabajo."
+  },
+  {
+    "id": "tower",
+    "en": "You can see the whole city from the tower.",
+    "es": "Desde la torre puedes ver toda la ciudad."
+  },
+  {
+    "id": "tradition",
+    "en": "Sunday lunch at grandma's house is our family tradition.",
+    "es": "El almuerzo del domingo en casa de la abuela es nuestra tradición familiar."
+  },
+  {
+    "id": "visual",
+    "en": "The teacher uses visual aids to explain new words.",
+    "es": "La maestra usa apoyos visuales para explicar palabras nuevas."
+  },
+  {
+    "id": "wheel",
+    "en": "The front wheel of my bike is flat.",
+    "es": "La rueda delantera de mi bicicleta está desinflada."
+  },
+  {
+    "id": "appointment",
+    "en": "I have a doctor's appointment at three o'clock.",
+    "es": "Tengo una cita con el médico a las tres."
+  },
+  { "id": "barely", "en": "I could barely hear you on the phone.", "es": "Apenas podía oírte por teléfono." },
+  {
+    "id": "cabinet",
+    "en": "The plates are in the kitchen cabinet.",
+    "es": "Los platos están en el gabinete de la cocina."
+  },
+  {
+    "id": "celebrate",
+    "en": "Let's celebrate your birthday at the beach!",
+    "es": "¡Celebremos tu cumpleaños en la playa!"
+  },
+  { "id": "chocolate", "en": "Would you like hot chocolate or tea?", "es": "¿Quieres chocolate caliente o té?" },
+  {
+    "id": "coal",
+    "en": "Long ago, trains ran on coal.",
+    "es": "Hace mucho tiempo, los trenes funcionaban con carbón."
+  },
+  {
+    "id": "contemporary",
+    "en": "The museum has a room for contemporary art.",
+    "es": "El museo tiene una sala de arte contemporáneo."
+  },
+  {
+    "id": "criticism",
+    "en": "He listened to the criticism and improved his work.",
+    "es": "Él escuchó la crítica y mejoró su trabajo."
+  },
+  {
+    "id": "dna",
+    "en": "Every living thing has DNA in its cells.",
+    "es": "Todos los seres vivos tienen ADN en sus células."
+  },
+  {
+    "id": "effectively",
+    "en": "She explains grammar very effectively.",
+    "es": "Ella explica la gramática muy eficazmente."
+  },
+  {
+    "id": "extensive",
+    "en": "The hotel has an extensive garden with many trees.",
+    "es": "El hotel tiene un jardín extenso con muchos árboles."
+  },
+  {
+    "id": "formation",
+    "en": "The birds flew south in a V formation.",
+    "es": "Los pájaros volaron hacia el sur en formación de V."
+  },
+  {
+    "id": "gallery",
+    "en": "We saw beautiful paintings at the art gallery.",
+    "es": "Vimos pinturas hermosas en la galería de arte."
+  },
+  {
+    "id": "highway",
+    "en": "There was a lot of traffic on the highway today.",
+    "es": "Hoy había mucho tráfico en la carretera."
+  },
+  {
+    "id": "historic",
+    "en": "Our hotel is in the historic part of town.",
+    "es": "Nuestro hotel está en la zona histórica de la ciudad."
+  },
+  { "id": "hunt", "en": "The lions began their hunt at night.", "es": "Los leones comenzaron su caza por la noche." },
+  {
+    "id": "improvement",
+    "en": "Your English shows a big improvement this year.",
+    "es": "Tu inglés muestra una gran mejora este año."
+  },
+  { "id": "inch", "en": "The baby grew an inch last month.", "es": "El bebé creció una pulgada el mes pasado." },
+  {
+    "id": "initially",
+    "en": "Initially, I didn't like the new job.",
+    "es": "Inicialmente, no me gustaba el nuevo trabajo."
+  },
+  {
+    "id": "junior",
+    "en": "My sister is a junior in college this year.",
+    "es": "Mi hermana está en tercer año de la universidad este año."
+  },
+  {
+    "id": "jury",
+    "en": "After two days, the jury reached a decision.",
+    "es": "Después de dos días, el jurado llegó a una decisión."
+  },
+  {
+    "id": "olympic",
+    "en": "She dreams of winning an Olympic medal.",
+    "es": "Ella sueña con ganar una medalla olímpica."
+  },
+  {
+    "id": "philosophy",
+    "en": "My brother is studying philosophy at the university.",
+    "es": "Mi hermano estudia filosofía en la universidad."
+  },
+  { "id": "pride", "en": "She looked at her garden with pride.", "es": "Ella miró su jardín con orgullo." },
+  { "id": "repeat", "en": "Could you repeat that, please?", "es": "¿Podrías repetir eso, por favor?" },
+  { "id": "rough", "en": "This towel feels rough on my skin.", "es": "Esta toalla se siente áspera en la piel." },
+  {
+    "id": "settlement",
+    "en": "Farmers built their first settlement near the river.",
+    "es": "Los agricultores construyeron su primer asentamiento cerca del río."
+  },
+  {
+    "id": "smell",
+    "en": "I can smell fresh coffee in the kitchen.",
+    "es": "Puedo oler café recién hecho en la cocina."
+  },
+  { "id": "speaker", "en": "Our speaker today is a famous chef.", "es": "Nuestro orador de hoy es un chef famoso." },
+  { "id": "surrounding", "en": "We hiked in the surrounding hills.", "es": "Caminamos por las colinas circundantes." },
+  { "id": "tone", "en": "Please don't talk to me in that tone.", "es": "Por favor, no me hables en ese tono." },
+  { "id": "topic", "en": "What is the topic of your essay?", "es": "¿Cuál es el tema de tu ensayo?" },
+  { "id": "universal", "en": "Music is a universal language.", "es": "La música es un lenguaje universal." },
+  { "id": "vast", "en": "The desert is a vast and empty place.", "es": "El desierto es un lugar vasto y vacío." },
+  {
+    "id": "auto",
+    "en": "My uncle works in an auto shop downtown.",
+    "es": "Mi tío trabaja en un taller de autos en el centro."
+  },
+  {
+    "id": "consistent",
+    "en": "His story is not consistent with the facts.",
+    "es": "Su historia no es coherente con los hechos."
+  },
+  { "id": "earn", "en": "How much do you earn at your new job?", "es": "¿Cuánto ganas en tu nuevo trabajo?" },
+  {
+    "id": "finger",
+    "en": "I cut my finger while cooking dinner.",
+    "es": "Me corté el dedo mientras preparaba la cena."
+  },
+  { "id": "grey", "en": "The sky was grey all afternoon.", "es": "El cielo estuvo gris toda la tarde." },
+  {
+    "id": "guitar",
+    "en": "My friend is learning to play the guitar.",
+    "es": "Mi amigo está aprendiendo a tocar la guitarra."
+  },
+  { "id": "ignore", "en": "Just ignore the noise and go to sleep.", "es": "Solo ignora el ruido y duérmete." },
+  { "id": "latin", "en": "Many English words come from Latin.", "es": "Muchas palabras en inglés vienen del latín." },
+  {
+    "id": "meal",
+    "en": "Breakfast is my favorite meal of the day.",
+    "es": "El desayuno es mi comida favorita del día."
+  },
+  { "id": "naturally", "en": "Her hair is naturally curly.", "es": "Su cabello es naturalmente rizado." },
+  {
+    "id": "necessarily",
+    "en": "Expensive food is not necessarily better.",
+    "es": "La comida cara no es necesariamente mejor."
+  },
+  {
+    "id": "partnership",
+    "en": "The two companies formed a partnership last year.",
+    "es": "Las dos empresas formaron una asociación el año pasado."
+  },
+  {
+    "id": "percentage",
+    "en": "What percentage of students passed the test?",
+    "es": "¿Qué porcentaje de estudiantes aprobó el examen?"
+  },
+  { "id": "pocket", "en": "My keys are in my jacket pocket.", "es": "Mis llaves están en el bolsillo de mi chaqueta." },
+  {
+    "id": "practical",
+    "en": "Sneakers are more practical than high heels for travel.",
+    "es": "Los tenis son más prácticos que los tacones para viajar."
+  },
+  {
+    "id": "primarily",
+    "en": "This app is primarily for young students.",
+    "es": "Esta aplicación es principalmente para estudiantes jóvenes."
+  },
+  {
+    "id": "relative",
+    "en": "We stayed with a relative during our trip.",
+    "es": "Nos quedamos con un pariente durante nuestro viaje."
+  },
+  {
+    "id": "rescue",
+    "en": "The rescue of the lost hikers took all night.",
+    "es": "El rescate de los excursionistas perdidos duró toda la noche."
+  },
+  { "id": "rush", "en": "Don't rush, we have plenty of time.", "es": "No te apures, tenemos mucho tiempo." },
+  { "id": "sharp", "en": "Be careful, that knife is very sharp.", "es": "Ten cuidado, ese cuchillo está muy afilado." },
+  {
+    "id": "stable",
+    "en": "He finally found a stable job near home.",
+    "es": "Por fin encontró un trabajo estable cerca de casa."
+  },
+  {
+    "id": "temporary",
+    "en": "This is only a temporary job for the summer.",
+    "es": "Este es solo un trabajo temporario para el verano."
+  },
+  { "id": "trick", "en": "My dog learned a new trick today.", "es": "Mi perro aprendió un truco nuevo hoy." },
+  { "id": "bone", "en": "Our dog is chewing on a big bone.", "es": "Nuestro perro está mordiendo un hueso grande." },
+  {
+    "id": "chamber",
+    "en": "The old castle has a secret chamber under the floor.",
+    "es": "El viejo castillo tiene una cámara secreta bajo el piso."
+  },
+  {
+    "id": "chart",
+    "en": "Look at the chart to see our monthly sales.",
+    "es": "Mira el gráfico para ver nuestras ventas mensuales."
+  },
+  {
+    "id": "clothing",
+    "en": "We donated our old clothing to a local shelter.",
+    "es": "Donamos nuestra ropa vieja a un refugio local."
+  },
+  {
+    "id": "complicated",
+    "en": "The instructions for this game are too complicated.",
+    "es": "Las instrucciones de este juego son demasiado complicadas."
+  },
+  {
+    "id": "defend",
+    "en": "A goalkeeper must defend the goal at all times.",
+    "es": "Un portero debe defender la portería en todo momento."
+  },
+  {
+    "id": "everyday",
+    "en": "Learn words you can use in everyday life.",
+    "es": "Aprende palabras que puedas usar en la vida cotidiana."
+  },
+  { "id": "extent", "en": "To some extent, I agree with you.", "es": "En cierta medida, estoy de acuerdo contigo." },
+  {
+    "id": "fishing",
+    "en": "Fishing is a popular hobby in this town.",
+    "es": "La pesca es un pasatiempo popular en este pueblo."
+  },
+  { "id": "format", "en": "Please send the file in PDF format.", "es": "Por favor, envía el archivo en formato PDF." },
+  {
+    "id": "gap",
+    "en": "The gap between rich and poor families is growing.",
+    "es": "La brecha entre las familias ricas y pobres está creciendo."
+  },
+  {
+    "id": "gate",
+    "en": "Close the gate so the dog stays inside.",
+    "es": "Cierra la puerta para que el perro se quede adentro."
+  },
+  {
+    "id": "household",
+    "en": "Almost every household in town has a car.",
+    "es": "Casi todos los hogares del pueblo tienen carro."
+  },
+  {
+    "id": "immigration",
+    "en": "We waited in line at immigration for an hour.",
+    "es": "Esperamos en la fila de inmigración durante una hora."
+  },
+  {
+    "id": "impressive",
+    "en": "What an impressive view from the mountain!",
+    "es": "¡Qué vista tan impresionante desde la montaña!"
+  },
+  {
+    "id": "killer",
+    "en": "The detective in the book finally finds the killer.",
+    "es": "El detective del libro por fin encuentra al asesino."
+  },
+  {
+    "id": "lesson",
+    "en": "Today's lesson is about the past tense.",
+    "es": "La lección de hoy trata sobre el tiempo pasado."
+  },
+  {
+    "id": "membership",
+    "en": "Membership in the club is free for students.",
+    "es": "La afiliación al club es gratis para los estudiantes."
+  },
+  { "id": "mirror", "en": "She looked at herself in the mirror.", "es": "Ella se miró en el espejo." },
+  { "id": "mount", "en": "We need to mount the TV on the wall.", "es": "Tenemos que montar el televisor en la pared." },
+  { "id": "occur", "en": "When did the accident occur?", "es": "¿Cuándo ocurrió el accidente?" },
+  {
+    "id": "parking",
+    "en": "Parking is free after six in the evening.",
+    "es": "El estacionamiento es gratis después de las seis de la tarde."
+  },
+  {
+    "id": "proposal",
+    "en": "The boss liked our proposal for the new project.",
+    "es": "Al jefe le gustó nuestra propuesta para el nuevo proyecto."
+  },
+  { "id": "province", "en": "Which province is your family from?", "es": "¿De qué provincia es tu familia?" },
+  {
+    "id": "recognition",
+    "en": "She received recognition for her hard work.",
+    "es": "Ella recibió reconocimiento por su esfuerzo."
+  },
+  {
+    "id": "reputation",
+    "en": "That restaurant has a great reputation in town.",
+    "es": "Ese restaurante tiene una gran reputación en la ciudad."
+  },
+  { "id": "shortly", "en": "The doctor will see you shortly.", "es": "El médico lo atenderá dentro de poco." },
+  { "id": "strongly", "en": "The wind blew strongly all night.", "es": "El viento sopló fuertemente toda la noche." },
+  {
+    "id": "technique",
+    "en": "The coach showed us a new swimming technique.",
+    "es": "El entrenador nos mostró una nueva técnica de natación."
+  },
+  { "id": "thin", "en": "He is tall and thin like his father.", "es": "Él es alto y delgado como su padre." },
+  {
+    "id": "adventure",
+    "en": "Our trip to the jungle was a real adventure.",
+    "es": "Nuestro viaje a la selva fue una verdadera aventura."
+  },
+  {
+    "id": "argue",
+    "en": "My brothers always argue about video games.",
+    "es": "Mis hermanos siempre discuten por los videojuegos."
+  },
+  {
+    "id": "assessment",
+    "en": "The teacher did a quick assessment of our reading.",
+    "es": "La maestra hizo una evaluación rápida de nuestra lectura."
+  },
+  {
+    "id": "atmosphere",
+    "en": "The Earth's atmosphere protects us from the sun.",
+    "es": "La atmósfera de la Tierra nos protege del sol."
+  },
+  {
+    "id": "awful",
+    "en": "The weather was awful during our vacation.",
+    "es": "El clima estuvo horrible durante nuestras vacaciones."
+  },
+  {
+    "id": "bedroom",
+    "en": "My bedroom has a big window facing the garden.",
+    "es": "Mi dormitorio tiene una ventana grande que da al jardín."
+  },
+  {
+    "id": "belief",
+    "en": "It is a common belief that carrots help your eyes.",
+    "es": "Es una creencia común que las zanahorias ayudan a la vista."
+  },
+  {
+    "id": "carefully",
+    "en": "Read the instructions carefully before you start.",
+    "es": "Lee las instrucciones con cuidado antes de empezar."
+  },
+  { "id": "ceo", "en": "The CEO spoke to all the employees today.", "es": "El CEO habló hoy con todos los empleados." },
+  { "id": "cloud", "en": "There isn't a single cloud in the sky.", "es": "No hay ni una sola nube en el cielo." },
+  {
+    "id": "contrast",
+    "en": "I like the contrast between the dark walls and white floor.",
+    "es": "Me gusta el contraste entre las paredes oscuras y el piso blanco."
+  },
+  { "id": "egg", "en": "I eat a boiled egg for breakfast.", "es": "Me como un huevo cocido en el desayuno." },
+  {
+    "id": "element",
+    "en": "Surprise is a key element of a good story.",
+    "es": "La sorpresa es un elemento clave de una buena historia."
+  },
+  {
+    "id": "elsewhere",
+    "en": "This store is too expensive, so let's shop elsewhere.",
+    "es": "Esta tienda es muy cara, así que compremos en otra parte."
+  },
+  {
+    "id": "establish",
+    "en": "The school wants to establish clear rules for phones.",
+    "es": "La escuela quiere establecer reglas claras para los celulares."
+  },
+  {
+    "id": "extension",
+    "en": "What is your phone extension at work?",
+    "es": "¿Cuál es tu extensión de teléfono en el trabajo?"
+  },
+  {
+    "id": "founder",
+    "en": "The founder of the company started in his garage.",
+    "es": "El fundador de la empresa empezó en su garaje."
+  },
+  { "id": "gear", "en": "One gear in the old clock is broken.", "es": "Un engranaje del reloj viejo está roto." },
+  {
+    "id": "hip",
+    "en": "My grandmother hurt her hip last winter.",
+    "es": "Mi abuela se lastimó la cadera el invierno pasado."
+  },
+  { "id": "loose", "en": "This shirt is too loose on me.", "es": "Esta camisa me queda muy suelta." },
+  {
+    "id": "moral",
+    "en": "Parents teach children moral values like honesty.",
+    "es": "Los padres enseñan a los niños valores morales como la honestidad."
+  },
+  {
+    "id": "offensive",
+    "en": "Please don't use offensive words in class.",
+    "es": "Por favor, no uses palabras ofensivas en clase."
+  },
+  { "id": "package", "en": "A package arrived for you this morning.", "es": "Llegó un paquete para ti esta mañana." },
+  {
+    "id": "poverty",
+    "en": "Many families in the region live in poverty.",
+    "es": "Muchas familias de la región viven en la pobreza."
+  },
+  { "id": "ridiculous", "en": "That hat looks ridiculous on you!", "es": "¡Ese sombrero se te ve ridículo!" },
+  {
+    "id": "sensitive",
+    "en": "My teeth are sensitive to cold drinks.",
+    "es": "Mis dientes son sensibles a las bebidas frías."
+  },
+  {
+    "id": "shock",
+    "en": "The news came as a shock to the whole town.",
+    "es": "La noticia causó conmoción en todo el pueblo."
+  },
+  {
+    "id": "silence",
+    "en": "There was a long silence after the question.",
+    "es": "Hubo un largo silencio después de la pregunta."
+  },
+  {
+    "id": "soldier",
+    "en": "The soldier returned home to his family.",
+    "es": "El soldado regresó a casa con su familia."
+  },
+  {
+    "id": "superior",
+    "en": "This new phone is superior to the old model.",
+    "es": "Este celular nuevo es superior al modelo viejo."
+  },
+  { "id": "thick", "en": "She is reading a very thick book.", "es": "Ella está leyendo un libro muy grueso." },
+  {
+    "id": "transition",
+    "en": "The transition to the new school was easy for her.",
+    "es": "La transición a la nueva escuela fue fácil para ella."
+  },
+  {
+    "id": "violent",
+    "en": "The movie was too violent for young children.",
+    "es": "La película era demasiado violenta para los niños pequeños."
+  },
+  { "id": "wash", "en": "Wash your hands before dinner.", "es": "Lávate las manos antes de cenar." },
+  { "id": "acid", "en": "Lemon juice contains a natural acid.", "es": "El jugo de limón contiene un ácido natural." },
+  { "id": "actress", "en": "The actress won an award for her role.", "es": "La actriz ganó un premio por su papel." },
+  {
+    "id": "administrative",
+    "en": "She has an administrative job at the hospital.",
+    "es": "Ella tiene un trabajo administrativo en el hospital."
+  },
+  {
+    "id": "anxiety",
+    "en": "Deep breathing can help with anxiety before exams.",
+    "es": "Respirar profundo puede ayudar con la ansiedad antes de los exámenes."
+  },
+  {
+    "id": "bonus",
+    "en": "Everyone got a bonus at the end of the year.",
+    "es": "Todos recibieron un bono a fin de año."
+  },
+  {
+    "id": "charity",
+    "en": "She gives money to charity every month.",
+    "es": "Ella da dinero a obras de caridad cada mes."
+  },
+  {
+    "id": "compare",
+    "en": "Let's compare prices before we buy a new TV.",
+    "es": "Comparemos precios antes de comprar un televisor nuevo."
+  },
+  {
+    "id": "cooking",
+    "en": "My mom's cooking is the best in the world.",
+    "es": "La cocina de mi mamá es la mejor del mundo."
+  },
+  { "id": "curious", "en": "Cats are very curious animals.", "es": "Los gatos son animales muy curiosos." },
+  {
+    "id": "discovery",
+    "en": "The discovery of the old map surprised everyone.",
+    "es": "El descubrimiento del mapa antiguo sorprendió a todos."
+  },
+  {
+    "id": "encourage",
+    "en": "My parents always encourage me to read more.",
+    "es": "Mis padres siempre me alientan a leer más."
+  },
+  {
+    "id": "enforcement",
+    "en": "Strict enforcement of the speed limit keeps our street safe.",
+    "es": "La aplicación estricta del límite de velocidad mantiene segura nuestra calle."
+  },
+  { "id": "flash", "en": "We saw a flash of light in the sky.", "es": "Vimos un destello de luz en el cielo." },
+  {
+    "id": "formal",
+    "en": "You should wear formal clothes to the wedding.",
+    "es": "Deberías usar ropa formal para la boda."
+  },
+  {
+    "id": "formula",
+    "en": "The teacher wrote the formula on the board.",
+    "es": "La maestra escribió la fórmula en el pizarrón."
+  },
+  {
+    "id": "gray",
+    "en": "My grandfather has gray hair and a kind smile.",
+    "es": "Mi abuelo tiene el cabello gris y una sonrisa amable."
+  },
+  {
+    "id": "hungry",
+    "en": "The hungry kids ate all the pizza.",
+    "es": "Los niños hambrientos se comieron toda la pizza."
+  },
+  {
+    "id": "innocent",
+    "en": "The man told the judge that he was innocent.",
+    "es": "El hombre le dijo al juez que era inocente."
+  },
+  {
+    "id": "math",
+    "en": "Math was my favorite subject in school.",
+    "es": "Las matemáticas eran mi materia favorita en la escuela."
+  },
+  {
+    "id": "mystery",
+    "en": "How the cat got on the roof is a mystery.",
+    "es": "Cómo se subió el gato al techo es un misterio."
+  },
+  { "id": "palace", "en": "The king lived in a huge palace.", "es": "El rey vivía en un palacio enorme." },
+  {
+    "id": "penalty",
+    "en": "There is a penalty for returning library books late.",
+    "es": "Hay una multa por devolver tarde los libros de la biblioteca."
+  },
+  { "id": "pet", "en": "Do you have a pet at home?", "es": "¿Tienes una mascota en casa?" },
+  {
+    "id": "photography",
+    "en": "She took a photography class last summer.",
+    "es": "Ella tomó una clase de fotografía el verano pasado."
+  },
+  {
+    "id": "protest",
+    "en": "Students held a peaceful protest in front of the school.",
+    "es": "Los estudiantes hicieron una protesta pacífica frente a la escuela."
+  },
+  {
+    "id": "publication",
+    "en": "The publication of her first book made her very happy.",
+    "es": "La publicación de su primer libro la hizo muy feliz."
+  },
+  {
+    "id": "rating",
+    "en": "This hotel has a high rating online.",
+    "es": "Este hotel tiene una calificación alta en internet."
+  },
+  {
+    "id": "refer",
+    "en": "The teacher didn't refer to anyone by name.",
+    "es": "La maestra no se refirió a nadie por su nombre."
+  },
+  {
+    "id": "select",
+    "en": "Select your favorite color from the list.",
+    "es": "Selecciona tu color favorito de la lista."
+  },
+  {
+    "id": "silent",
+    "en": "The library was completely silent.",
+    "es": "La biblioteca estaba completamente silenciosa."
+  },
+  {
+    "id": "spoken",
+    "en": "Spoken English is different from written English.",
+    "es": "El inglés hablado es diferente del inglés escrito."
+  },
+  {
+    "id": "successfully",
+    "en": "The team successfully finished the project on time.",
+    "es": "El equipo terminó exitosamente el proyecto a tiempo."
+  },
+  {
+    "id": "suffer",
+    "en": "Many people suffer from allergies in spring.",
+    "es": "Muchas personas sufren de alergias en primavera."
+  },
+  {
+    "id": "trail",
+    "en": "We followed a narrow trail through the forest.",
+    "es": "Seguimos un sendero angosto por el bosque."
+  },
+  { "id": "unusual", "en": "It is unusual to see snow here in April.", "es": "Es inusual ver nieve aquí en abril." },
+  {
+    "id": "arrival",
+    "en": "We are waiting for the arrival of our guests.",
+    "es": "Estamos esperando la llegada de nuestros invitados."
+  },
+  {
+    "id": "assault",
+    "en": "The man was arrested for assault last night.",
+    "es": "El hombre fue arrestado por agresión anoche."
+  },
+  { "id": "badly", "en": "I slept badly because of the noise.", "es": "Dormí mal por el ruido." },
+  {
+    "id": "chase",
+    "en": "Dogs love to chase balls in the park.",
+    "es": "A los perros les encanta perseguir pelotas en el parque."
+  },
+  {
+    "id": "concrete",
+    "en": "The workers poured concrete for the new sidewalk.",
+    "es": "Los obreros echaron concreto para la nueva acera."
+  },
+  { "id": "deeply", "en": "She was deeply moved by the letter.", "es": "La carta la conmovió profundamente." },
+  { "id": "explanation", "en": "Thank you for the clear explanation.", "es": "Gracias por la explicación tan clara." },
+  {
+    "id": "exposure",
+    "en": "Too much exposure to the sun is bad for your skin.",
+    "es": "Demasiada exposición al sol es mala para la piel."
+  },
+  {
+    "id": "fiction",
+    "en": "I prefer fiction to history books.",
+    "es": "Prefiero la ficción a los libros de historia."
+  },
+  {
+    "id": "guarantee",
+    "en": "We guarantee delivery within three days.",
+    "es": "Garantizamos la entrega en un plazo de tres días."
+  },
+  { "id": "happiness", "en": "Money can't buy happiness.", "es": "El dinero no puede comprar la felicidad." },
+  { "id": "ideal", "en": "This is the ideal place for a picnic.", "es": "Este es el lugar ideal para un pícnic." },
+  { "id": "legend", "en": "There is an old legend about this lake.", "es": "Hay una vieja leyenda sobre este lago." },
+  { "id": "mood", "en": "She is in a good mood today.", "es": "Ella está de buen ánimo hoy." },
+  { "id": "muscle", "en": "I hurt a muscle playing soccer.", "es": "Me lastimé un músculo jugando fútbol." },
+  { "id": "passion", "en": "Cooking is his true passion.", "es": "Cocinar es su verdadera pasión." },
+  {
+    "id": "procedure",
+    "en": "Follow the safety procedure in case of fire.",
+    "es": "Sigue el procedimiento de seguridad en caso de incendio."
+  },
+  {
+    "id": "producer",
+    "en": "The producer of the movie was very happy with the result.",
+    "es": "El productor de la película quedó muy contento con el resultado."
+  },
+  { "id": "rank", "en": "What is his rank in the army?", "es": "¿Cuál es su rango en el ejército?" },
+  {
+    "id": "sand",
+    "en": "Kids love to build castles in the sand.",
+    "es": "A los niños les encanta hacer castillos en la arena."
+  },
+  {
+    "id": "shadow",
+    "en": "In the evening, the tree casts a long shadow.",
+    "es": "Por la tarde, el árbol proyecta una sombra larga."
+  },
+  { "id": "tape", "en": "I need some tape to close this box.", "es": "Necesito cinta para cerrar esta caja." },
+  { "id": "thread", "en": "Do you have a needle and thread?", "es": "¿Tienes aguja e hilo?" },
+  {
+    "id": "wage",
+    "en": "Workers were happy when the minimum wage went up.",
+    "es": "Los trabajadores se alegraron cuando subió el salario mínimo."
+  },
+  {
+    "id": "clock",
+    "en": "The clock on the wall is five minutes slow.",
+    "es": "El reloj de la pared está atrasado cinco minutos."
+  },
+  {
+    "id": "commitment",
+    "en": "Learning a language takes time and commitment.",
+    "es": "Aprender un idioma requiere tiempo y compromiso."
+  },
+  {
+    "id": "confident",
+    "en": "I feel confident about the job interview.",
+    "es": "Me siento seguro para la entrevista de trabajo."
+  },
+  {
+    "id": "custom",
+    "en": "It is a local custom to greet with a kiss.",
+    "es": "Es una costumbre local saludar con un beso."
+  },
+  {
+    "id": "desk",
+    "en": "My laptop is on the desk in my room.",
+    "es": "Mi computadora portátil está en el escritorio de mi cuarto."
+  },
+  { "id": "ear", "en": "My left ear hurts a little.", "es": "Me duele un poco la oreja izquierda." },
+  {
+    "id": "electricity",
+    "en": "After the storm, the town had no electricity for two days.",
+    "es": "Después de la tormenta, el pueblo estuvo sin electricidad dos días."
+  },
+  { "id": "helpful", "en": "Thanks, your advice was really helpful.", "es": "Gracias, tu consejo fue muy útil." },
+  {
+    "id": "horror",
+    "en": "She screamed in horror when she saw the spider.",
+    "es": "Ella gritó de horror cuando vio la araña."
+  },
+  {
+    "id": "label",
+    "en": "Read the label before you take the medicine.",
+    "es": "Lee la etiqueta antes de tomar la medicina."
+  },
+  {
+    "id": "naked",
+    "en": "You can see those stars with the naked eye.",
+    "es": "Puedes ver esas estrellas a ojo desnudo."
+  },
+  {
+    "id": "pitch",
+    "en": "The first pitch of the game was very fast.",
+    "es": "El primer lanzamiento del partido fue muy rápido."
+  },
+  {
+    "id": "rear",
+    "en": "Please exit through the rear of the bus.",
+    "es": "Por favor, salgan por la parte trasera del autobús."
+  },
+  {
+    "id": "reveal",
+    "en": "A good magician will never reveal his secrets.",
+    "es": "Un buen mago nunca revelará sus secretos."
+  },
+  {
+    "id": "romantic",
+    "en": "They had a romantic dinner by the sea.",
+    "es": "Tuvieron una cena romántica junto al mar."
+  },
+  { "id": "strategic", "en": "Chess is a strategic game.", "es": "El ajedrez es un juego estratégico." },
+  {
+    "id": "swimming",
+    "en": "Swimming is great exercise for the whole body.",
+    "es": "La natación es un gran ejercicio para todo el cuerpo."
+  },
+  {
+    "id": "welfare",
+    "en": "The school cares about the welfare of its students.",
+    "es": "La escuela se preocupa por el bienestar de sus estudiantes."
+  },
+  {
+    "id": "wire",
+    "en": "The lamp doesn't work because a wire is loose.",
+    "es": "La lámpara no funciona porque un cable está suelto."
+  },
+  {
+    "id": "worker",
+    "en": "Every worker needs a break during the day.",
+    "es": "Todo trabajador necesita un descanso durante el día."
+  },
+  { "id": "alright", "en": "Alright, let's start the lesson.", "es": "Está bien, empecemos la lección." },
+  {
+    "id": "anger",
+    "en": "He couldn't hide his anger at the unfair decision.",
+    "es": "No pudo ocultar su enojo por la decisión injusta."
+  },
+  {
+    "id": "architecture",
+    "en": "I love the old architecture of this city.",
+    "es": "Me encanta la arquitectura antigua de esta ciudad."
+  },
+  {
+    "id": "assist",
+    "en": "The nurse will assist the doctor during the exam.",
+    "es": "La enfermera ayudará al médico durante el examen."
+  },
+  { "id": "behalf", "en": "I'm writing on behalf of my whole team.", "es": "Escribo en nombre de todo mi equipo." },
+  {
+    "id": "belt",
+    "en": "These pants are too big, so I need a belt.",
+    "es": "Estos pantalones me quedan grandes, así que necesito un cinturón."
+  },
+  {
+    "id": "capture",
+    "en": "He tried to capture the sunset with his camera.",
+    "es": "Intentó capturar el atardecer con su cámara."
+  },
+  {
+    "id": "ceremony",
+    "en": "The wedding ceremony was short and beautiful.",
+    "es": "La ceremonia de boda fue corta y hermosa."
+  },
+  {
+    "id": "designer",
+    "en": "She works as a web designer from home.",
+    "es": "Ella trabaja como diseñadora web desde casa."
+  },
+  {
+    "id": "diamond",
+    "en": "Her ring has a small diamond in the center.",
+    "es": "Su anillo tiene un pequeño diamante en el centro."
+  },
+  {
+    "id": "disappointed",
+    "en": "I was disappointed when they canceled the concert.",
+    "es": "Me sentí decepcionado cuando cancelaron el concierto."
+  },
+  {
+    "id": "economics",
+    "en": "My cousin is studying economics at college.",
+    "es": "Mi primo estudia ciencias económicas en la universidad."
+  },
+  {
+    "id": "efficient",
+    "en": "This new washing machine is very efficient.",
+    "es": "Esta lavadora nueva es muy eficiente."
+  },
+  { "id": "electrical", "en": "Don't touch the electrical wires!", "es": "¡No toques los cables eléctricos!" },
+  {
+    "id": "essentially",
+    "en": "The two phones are essentially the same.",
+    "es": "Los dos celulares son esencialmente iguales."
+  },
+  {
+    "id": "establishment",
+    "en": "This establishment closes at midnight.",
+    "es": "Este establecimiento cierra a medianoche."
+  },
+  {
+    "id": "flower",
+    "en": "He gave her a red flower on her birthday.",
+    "es": "Él le dio una flor roja en su cumpleaños."
+  },
+  {
+    "id": "ghost",
+    "en": "My little brother thinks there's a ghost in the attic.",
+    "es": "Mi hermanito cree que hay un fantasma en el ático."
+  },
+  {
+    "id": "hockey",
+    "en": "We watched a hockey game on TV last night.",
+    "es": "Anoche vimos un partido de hockey en la tele."
+  },
+  {
+    "id": "hunting",
+    "en": "Hunting is not allowed in this national park.",
+    "es": "La caza no está permitida en este parque nacional."
+  },
+  {
+    "id": "kit",
+    "en": "Every car should have a first aid kit.",
+    "es": "Todo carro debería tener un equipo de primeros auxilios."
+  },
+  {
+    "id": "nervous",
+    "en": "I always get nervous before a test.",
+    "es": "Siempre me pongo nervioso antes de un examen."
+  },
+  { "id": "newly", "en": "They moved into a newly built house.", "es": "Se mudaron a una casa recién construida." },
+  { "id": "odd", "en": "There's an odd smell coming from the fridge.", "es": "Sale un olor extraño del refrigerador." },
+  {
+    "id": "ordinary",
+    "en": "It was just an ordinary day at the office.",
+    "es": "Fue solo un día común en la oficina."
+  },
+  {
+    "id": "participate",
+    "en": "All students must participate in the science fair.",
+    "es": "Todos los estudiantes deben participar en la feria de ciencias."
+  },
+  {
+    "id": "prayer",
+    "en": "Before dinner, the family says a short prayer.",
+    "es": "Antes de cenar, la familia dice una breve oración."
+  },
+  { "id": "rarely", "en": "My father rarely drinks coffee.", "es": "Mi padre casi nunca toma café." },
+  {
+    "id": "skill",
+    "en": "Listening is an important skill for learning languages.",
+    "es": "Escuchar es una habilidad importante para aprender idiomas."
+  },
+  { "id": "soil", "en": "Tomatoes grow well in rich soil.", "es": "Los tomates crecen bien en suelo fértil." },
+  { "id": "solve", "en": "Can you help me solve this problem?", "es": "¿Me ayudas a resolver este problema?" },
+  {
+    "id": "stomach",
+    "en": "My stomach hurts after eating too much.",
+    "es": "Me duele el estómago después de comer demasiado."
+  },
+  { "id": "suck", "en": "Babies often suck their thumbs.", "es": "Los bebés a menudo se chupan el dedo." },
+  {
+    "id": "trash",
+    "en": "Don't forget to take out the trash tonight.",
+    "es": "No olvides sacar la basura esta noche."
+  },
+  { "id": "virus", "en": "The flu is caused by a virus.", "es": "La gripe es causada por un virus." },
+  {
+    "id": "walker",
+    "en": "An early morning walker found the lost dog.",
+    "es": "Un caminante madrugador encontró al perro perdido."
+  },
+  {
+    "id": "whoever",
+    "en": "Whoever finishes first can choose the movie.",
+    "es": "Quienquiera que termine primero puede elegir la película."
+  },
+  {
+    "id": "aspect",
+    "en": "Price is an important aspect of any decision.",
+    "es": "El precio es un aspecto importante de cualquier decisión."
+  },
+  { "id": "colonel", "en": "The colonel gave orders to his soldiers.", "es": "El coronel dio órdenes a sus soldados." },
+  {
+    "id": "comfort",
+    "en": "I care more about comfort than style.",
+    "es": "Me importa más la comodidad que el estilo."
+  },
+  {
+    "id": "cousin",
+    "en": "My cousin is coming to visit this weekend.",
+    "es": "Mi primo viene de visita este fin de semana."
+  },
+  {
+    "id": "crack",
+    "en": "There is a long crack in the kitchen wall.",
+    "es": "Hay una grieta larga en la pared de la cocina."
+  },
+  {
+    "id": "deck",
+    "en": "We watched the sunset from the deck of the ship.",
+    "es": "Vimos el atardecer desde la cubierta del barco."
+  },
+  {
+    "id": "dramatic",
+    "en": "There was a dramatic change in the weather.",
+    "es": "Hubo un cambio dramático en el clima."
+  },
+  { "id": "dust", "en": "The old books were covered in dust.", "es": "Los libros viejos estaban cubiertos de polvo." },
+  {
+    "id": "evolution",
+    "en": "We learned about the evolution of birds in science class.",
+    "es": "Aprendimos sobre la evolución de las aves en la clase de ciencias."
+  },
+  {
+    "id": "illness",
+    "en": "He missed work because of a serious illness.",
+    "es": "Faltó al trabajo por una enfermedad grave."
+  },
+  {
+    "id": "institution",
+    "en": "The university is a respected institution.",
+    "es": "La universidad es una institución respetada."
+  },
+  { "id": "knife", "en": "Use a sharp knife to cut the bread.", "es": "Usa un cuchillo afilado para cortar el pan." },
+  {
+    "id": "mexican",
+    "en": "My neighbor is a Mexican who loves to cook.",
+    "es": "Mi vecino es un mexicano al que le encanta cocinar."
+  },
+  {
+    "id": "minority",
+    "en": "Only a minority of students voted against the plan.",
+    "es": "Solo una minoría de estudiantes votó en contra del plan."
+  },
+  { "id": "priority", "en": "Your safety is our top priority.", "es": "Tu seguridad es nuestra máxima prioridad." },
+  {
+    "id": "promotion",
+    "en": "She got a promotion after two years at the company.",
+    "es": "Ella recibió una promoción después de dos años en la empresa."
+  },
+  {
+    "id": "rail",
+    "en": "The workers replaced an old rail on the train track.",
+    "es": "Los trabajadores cambiaron un riel viejo de la vía del tren."
+  },
+  {
+    "id": "remote",
+    "en": "They live in a remote village in the mountains.",
+    "es": "Viven en un pueblo remoto en las montañas."
+  },
+  { "id": "repair", "en": "Can you repair my bike by Friday?", "es": "¿Puedes reparar mi bicicleta para el viernes?" },
+  { "id": "root", "en": "The root of this plant is very long.", "es": "La raíz de esta planta es muy larga." },
+  {
+    "id": "steal",
+    "en": "Someone tried to steal my bike yesterday.",
+    "es": "Alguien intentó robar mi bicicleta ayer."
+  },
+  {
+    "id": "telephone",
+    "en": "The telephone rang in the middle of the night.",
+    "es": "El teléfono sonó en medio de la noche."
+  },
+  {
+    "id": "whereas",
+    "en": "I like tea, whereas my wife prefers coffee.",
+    "es": "A mí me gusta el té, mientras que mi esposa prefiere el café."
+  },
+  {
+    "id": "alliance",
+    "en": "The two schools formed an alliance to share resources.",
+    "es": "Las dos escuelas formaron una alianza para compartir recursos."
+  },
+  {
+    "id": "buddy",
+    "en": "My buddy from work is coming over for dinner.",
+    "es": "Mi compañero del trabajo viene a cenar a casa."
+  },
+  { "id": "butter", "en": "Can you pass me the butter, please?", "es": "¿Me pasas la mantequilla, por favor?" },
+  {
+    "id": "conclusion",
+    "en": "Write a short conclusion at the end of your essay.",
+    "es": "Escribe una conclusión breve al final de tu ensayo."
+  },
+  {
+    "id": "confirm",
+    "en": "Call the hotel to confirm your reservation.",
+    "es": "Llama al hotel para confirmar tu reservación."
+  },
+  {
+    "id": "crystal",
+    "en": "The lake water was as clear as crystal.",
+    "es": "El agua del lago era clara como el cristal."
+  },
+  {
+    "id": "decline",
+    "en": "Sales usually decline after the holidays.",
+    "es": "Las ventas suelen disminuir después de las fiestas."
+  },
+  {
+    "id": "delay",
+    "en": "There is a two-hour delay on our flight.",
+    "es": "Hay una demora de dos horas en nuestro vuelo."
+  },
+  {
+    "id": "desert",
+    "en": "Camels can walk for days across the desert.",
+    "es": "Los camellos pueden caminar días enteros por el desierto."
+  },
+  {
+    "id": "elite",
+    "en": "Only the elite of the sport compete in this race.",
+    "es": "Solo la élite del deporte compite en esta carrera."
+  },
+  {
+    "id": "forth",
+    "en": "He walked back and forth across the room.",
+    "es": "Caminaba de un lado a otro por la habitación."
+  },
+  {
+    "id": "hire",
+    "en": "The restaurant plans to hire two new cooks.",
+    "es": "El restaurante planea contratar a dos cocineros nuevos."
+  },
+  { "id": "insane", "en": "My friend thinks my idea is insane.", "es": "Mi amigo piensa que mi idea es una locura." },
+  {
+    "id": "layer",
+    "en": "Put a thin layer of butter on the bread.",
+    "es": "Pon una capa delgada de mantequilla en el pan."
+  },
+  {
+    "id": "marry",
+    "en": "He asked her to marry him on the beach.",
+    "es": "Le pidió que se casara con él en la playa."
+  },
+  { "id": "nowhere", "en": "My keys are nowhere to be found.", "es": "No encuentro mis llaves en ningún lugar." },
+  { "id": "nurse", "en": "The nurse checked my blood pressure.", "es": "La enfermera me tomó la presión." },
+  {
+    "id": "obtain",
+    "en": "You must obtain a visa before you travel.",
+    "es": "Debes obtener una visa antes de viajar."
+  },
+  {
+    "id": "organic",
+    "en": "We buy organic vegetables at the market.",
+    "es": "Compramos verduras orgánicas en el mercado."
+  },
+  {
+    "id": "ownership",
+    "en": "The ownership of the house passed to her son.",
+    "es": "La propiedad de la casa pasó a su hijo."
+  },
+  { "id": "poetry", "en": "She writes poetry in her free time.", "es": "Ella escribe poesía en su tiempo libre." },
+  {
+    "id": "pot",
+    "en": "Put the pasta in a big pot of boiling water.",
+    "es": "Pon la pasta en una olla grande con agua hirviendo."
+  },
+  { "id": "pray", "en": "Many people pray before they eat.", "es": "Muchas personas oran antes de comer." },
+  { "id": "recall", "en": "I can't recall his name right now.", "es": "No puedo recordar su nombre ahora mismo." },
+  { "id": "sake", "en": "For the sake of your health, get more sleep.", "es": "Por el bien de tu salud, duerme más." },
+  {
+    "id": "sheet",
+    "en": "Write your name at the top of the sheet.",
+    "es": "Escribe tu nombre en la parte de arriba de la hoja."
+  },
+  {
+    "id": "smooth",
+    "en": "The table has a smooth, shiny surface.",
+    "es": "La mesa tiene una superficie lisa y brillante."
+  },
+  {
+    "id": "spiritual",
+    "en": "Yoga is a spiritual practice for many people.",
+    "es": "El yoga es una práctica espiritual para muchas personas."
+  },
+  { "id": "string", "en": "My guitar needs a new string.", "es": "Mi guitarra necesita una cuerda nueva." },
+  { "id": "sudden", "en": "The sudden noise woke up the baby.", "es": "El ruido repentino despertó al bebé." },
+  { "id": "vacation", "en": "We're going on vacation next week.", "es": "Nos vamos de vacaciones la próxima semana." },
+  {
+    "id": "abroad",
+    "en": "My sister wants to study abroad next year.",
+    "es": "Mi hermana quiere estudiar en el extranjero el próximo año."
+  },
+  {
+    "id": "arab",
+    "en": "My roommate in college was an Arab from Egypt.",
+    "es": "Mi compañero de cuarto en la universidad era un árabe de Egipto."
+  },
+  {
+    "id": "associate",
+    "en": "He met with a business associate for lunch.",
+    "es": "Se reunió a almorzar con un asociado de negocios."
+  },
+  { "id": "bench", "en": "Let's sit on that bench in the shade.", "es": "Sentémonos en ese banco a la sombra." },
+  {
+    "id": "bother",
+    "en": "Sorry to bother you, but can I ask something?",
+    "es": "Perdón por molestarte, pero ¿puedo preguntarte algo?"
+  },
+  { "id": "citizen", "en": "Every citizen has the right to vote.", "es": "Todo ciudadano tiene derecho a votar." },
+  {
+    "id": "compete",
+    "en": "Ten teams will compete in the tournament.",
+    "es": "Diez equipos van a competir en el torneo."
+  },
+  { "id": "cricket", "en": "Cricket is very popular in India.", "es": "El críquet es muy popular en la India." },
+  { "id": "disaster", "en": "The party was a complete disaster.", "es": "La fiesta fue un desastre total." },
+  {
+    "id": "discover",
+    "en": "Scientists hope to discover new species in the jungle.",
+    "es": "Los científicos esperan descubrir nuevas especies en la selva."
+  },
+  {
+    "id": "entrance",
+    "en": "Meet me at the main entrance of the mall.",
+    "es": "Nos vemos en la entrada principal del centro comercial."
+  },
+  {
+    "id": "fitness",
+    "en": "She works hard to improve her fitness.",
+    "es": "Ella se esfuerza por mejorar su aptitud física."
+  },
+  { "id": "friendship", "en": "Their friendship started in first grade.", "es": "Su amistad comenzó en primer grado." },
+  { "id": "intense", "en": "The heat in the city was intense today.", "es": "Hoy el calor en la ciudad fue intenso." },
+  { "id": "lifetime", "en": "It was the trip of a lifetime!", "es": "¡Fue el viaje de toda una vida!" },
+  {
+    "id": "liquid",
+    "en": "Take this liquid medicine twice a day.",
+    "es": "Toma este medicamento líquido dos veces al día."
+  },
+  {
+    "id": "makeup",
+    "en": "She doesn't wear much makeup to work.",
+    "es": "Ella no usa mucho maquillaje para ir al trabajo."
+  },
+  { "id": "mortgage", "en": "They pay their mortgage every month.", "es": "Pagan su hipoteca cada mes." },
+  {
+    "id": "narrow",
+    "en": "The street is too narrow for big trucks.",
+    "es": "La calle es demasiado angosta para los camiones grandes."
+  },
+  {
+    "id": "occasionally",
+    "en": "We occasionally eat out on Fridays.",
+    "es": "Ocasionalmente comemos fuera los viernes."
+  },
+  { "id": "pan", "en": "Heat some oil in a pan.", "es": "Calienta un poco de aceite en una sartén." },
+  {
+    "id": "physics",
+    "en": "Physics is hard, but I find it interesting.",
+    "es": "La física es difícil, pero me parece interesante."
+  },
+  {
+    "id": "potentially",
+    "en": "This is a potentially dangerous road at night.",
+    "es": "Esta es una carretera potencialmente peligrosa de noche."
+  },
+  {
+    "id": "reduction",
+    "en": "The store announced a price reduction on all shoes.",
+    "es": "La tienda anunció una reducción de precio en todos los zapatos."
+  },
+  {
+    "id": "reflect",
+    "en": "The calm lake seemed to reflect the mountains.",
+    "es": "El lago tranquilo parecía reflejar las montañas."
+  },
+  { "id": "refuse", "en": "I can't refuse such a kind offer.", "es": "No puedo rechazar una oferta tan amable." },
+  { "id": "resource", "en": "Water is a precious resource.", "es": "El agua es un recurso valioso." },
+  { "id": "shell", "en": "The turtle hid inside its shell.", "es": "La tortuga se escondió dentro de su caparazón." },
+  {
+    "id": "subsequent",
+    "en": "The first meeting was long, but subsequent meetings were shorter.",
+    "es": "La primera reunión fue larga, pero las reuniones subsecuentes fueron más cortas."
+  },
+  {
+    "id": "translation",
+    "en": "I read the Spanish translation of the book.",
+    "es": "Leí la traducción al español del libro."
+  },
+  {
+    "id": "visible",
+    "en": "The mountains are visible from my window.",
+    "es": "Las montañas son visibles desde mi ventana."
+  },
+  { "id": "angle", "en": "Take the photo from a different angle.", "es": "Toma la foto desde otro ángulo." },
+  { "id": "arrive", "en": "What time does your flight arrive?", "es": "¿A qué hora llega tu vuelo?" },
+  { "id": "belong", "en": "Does this jacket belong to you?", "es": "¿Esta chaqueta te pertenece?" },
+  { "id": "connect", "en": "How do I connect my phone to the TV?", "es": "¿Cómo conecto mi celular a la tele?" },
+  {
+    "id": "defensive",
+    "en": "The team played a very defensive game.",
+    "es": "El equipo jugó un partido muy defensivo."
+  },
+  {
+    "id": "efficiency",
+    "en": "The new system improved our efficiency at work.",
+    "es": "El nuevo sistema mejoró nuestra eficiencia en el trabajo."
+  },
+  {
+    "id": "enterprise",
+    "en": "She runs a small family enterprise.",
+    "es": "Ella dirige una pequeña empresa familiar."
+  },
+  {
+    "id": "experiment",
+    "en": "We did a fun experiment with water and salt.",
+    "es": "Hicimos un experimento divertido con agua y sal."
+  },
+  { "id": "grass", "en": "The kids are playing on the grass.", "es": "Los niños están jugando en el pasto." },
+  {
+    "id": "hence",
+    "en": "The road was closed, hence the delay.",
+    "es": "La carretera estaba cerrada, por eso hubo demora."
+  },
+  {
+    "id": "increasingly",
+    "en": "Online classes are increasingly popular.",
+    "es": "Las clases en línea son cada vez más populares."
+  },
+  { "id": "incredibly", "en": "The pizza here is incredibly good.", "es": "La pizza de aquí es increíblemente buena." },
+  {
+    "id": "journalist",
+    "en": "A journalist wrote an article about our school.",
+    "es": "Un periodista escribió un artículo sobre nuestra escuela."
+  },
+  {
+    "id": "mill",
+    "en": "The old mill by the river still grinds flour.",
+    "es": "El viejo molino junto al río todavía muele harina."
+  },
+  {
+    "id": "occasion",
+    "en": "This dress is perfect for a special occasion.",
+    "es": "Este vestido es perfecto para una ocasión especial."
+  },
+  { "id": "pace", "en": "We walked at a slow pace along the beach.", "es": "Caminamos a un ritmo lento por la playa." },
+  {
+    "id": "passenger",
+    "en": "Each passenger can bring one small bag.",
+    "es": "Cada pasajero puede llevar una bolsa pequeña."
+  },
+  {
+    "id": "possession",
+    "en": "This old watch is my most valued possession.",
+    "es": "Este reloj viejo es mi posesión más valiosa."
+  },
+  {
+    "id": "rapid",
+    "en": "The city has seen rapid growth in recent years.",
+    "es": "La ciudad ha tenido un rápido crecimiento en los últimos años."
+  },
+  {
+    "id": "regulation",
+    "en": "There is a new regulation about smoking in parks.",
+    "es": "Hay una nueva regulación sobre fumar en los parques."
+  },
+  {
+    "id": "resident",
+    "en": "Every resident of the building has a parking space.",
+    "es": "Cada residente del edificio tiene un lugar de estacionamiento."
+  },
+  {
+    "id": "spin",
+    "en": "The kids love to spin until they get dizzy.",
+    "es": "A los niños les encanta girar hasta marearse."
+  },
+  {
+    "id": "suitable",
+    "en": "These shoes are not suitable for hiking.",
+    "es": "Estos zapatos no son adecuados para ir de excursión."
+  },
+  { "id": "thirty", "en": "The class has thirty students.", "es": "La clase tiene treinta estudiantes." },
+  {
+    "id": "valid",
+    "en": "Your passport is valid for ten more years.",
+    "es": "Tu pasaporte es válido por diez años más."
+  },
+  {
+    "id": "vital",
+    "en": "Water is vital for all living things.",
+    "es": "El agua es vital para todos los seres vivos."
+  },
+  {
+    "id": "whilst",
+    "en": "I love the city, whilst my sister prefers the country.",
+    "es": "A mí me encanta la ciudad, mientras que mi hermana prefiere el campo."
+  },
+  {
+    "id": "agriculture",
+    "en": "Agriculture is important to the local economy.",
+    "es": "La agricultura es importante para la economía local."
+  },
+  {
+    "id": "collect",
+    "en": "We collect rainwater for the garden.",
+    "es": "Recolectamos agua de lluvia para el jardín."
+  },
+  {
+    "id": "currency",
+    "en": "The euro is the currency of many countries.",
+    "es": "El euro es la moneda de muchos países."
+  },
+  {
+    "id": "exhibition",
+    "en": "The museum has a new exhibition of old photos.",
+    "es": "El museo tiene una nueva exhibición de fotos antiguas."
+  },
+  { "id": "funeral", "en": "The whole town came to the funeral.", "es": "Todo el pueblo vino al funeral." },
+  { "id": "genuine", "en": "Her smile was warm and genuine.", "es": "Su sonrisa era cálida y genuina." },
+  { "id": "honey", "en": "I put honey in my tea instead of sugar.", "es": "Le pongo miel a mi té en lugar de azúcar." },
+  {
+    "id": "hook",
+    "en": "Hang your coat on the hook by the door.",
+    "es": "Cuelga tu abrigo en el gancho junto a la puerta."
+  },
+  {
+    "id": "hunter",
+    "en": "The hunter waited quietly in the woods.",
+    "es": "El cazador esperó en silencio en el bosque."
+  },
+  { "id": "introduce", "en": "Let me introduce you to my parents.", "es": "Déjame presentarte a mis padres." },
+  {
+    "id": "legacy",
+    "en": "Her legacy lives on through her music.",
+    "es": "Su legado sigue vivo a través de su música."
+  },
+  { "id": "log", "en": "Keep a log of your daily exercise.", "es": "Lleva un registro de tu ejercicio diario." },
+  { "id": "merely", "en": "It was merely a small mistake.", "es": "Fue meramente un pequeño error." },
+  {
+    "id": "monitor",
+    "en": "My computer monitor is too bright.",
+    "es": "El monitor de mi computadora tiene demasiado brillo."
+  },
+  {
+    "id": "ratio",
+    "en": "The ratio of students to teachers is twenty to one.",
+    "es": "La proporción de estudiantes por maestro es de veinte a uno."
+  },
+  { "id": "regret", "en": "You won't regret taking this class.", "es": "No te vas a arrepentir de tomar esta clase." },
+  { "id": "remind", "en": "Please remind me to call my mother.", "es": "Por favor, recuérdame llamar a mi mamá." },
+  {
+    "id": "resort",
+    "en": "We spent a week at a beach resort.",
+    "es": "Pasamos una semana en un centro turístico de playa."
+  },
+  { "id": "reverse", "en": "It's hard to reverse a bad decision.", "es": "Es difícil revertir una mala decisión." },
+  {
+    "id": "routine",
+    "en": "Exercise is part of my morning routine.",
+    "es": "El ejercicio es parte de mi rutina de la mañana."
+  },
+  { "id": "seed", "en": "Plant the seed about an inch deep.", "es": "Planta la semilla a una pulgada de profundidad." },
+  {
+    "id": "settle",
+    "en": "Many families decided to settle near the coast.",
+    "es": "Muchas familias decidieron asentarse cerca de la costa."
+  },
+  {
+    "id": "sin",
+    "en": "Wasting good food is a sin, says my grandma.",
+    "es": "Desperdiciar buena comida es pecado, dice mi abuela."
+  },
+  { "id": "spell", "en": "How do you spell your last name?", "es": "¿Cómo se deletrea tu apellido?" },
+  { "id": "summary", "en": "Write a short summary of the story.", "es": "Escribe un breve resumen de la historia." },
+  {
+    "id": "survival",
+    "en": "Water is essential for survival in the desert.",
+    "es": "El agua es esencial para la supervivencia en el desierto."
+  },
+  { "id": "sword", "en": "The knight carried a heavy sword.", "es": "El caballero llevaba una espada pesada." },
+  { "id": "tongue", "en": "The dog licked me with its long tongue.", "es": "El perro me lamió con su larga lengua." },
+  {
+    "id": "ward",
+    "en": "The children's ward is on the third floor.",
+    "es": "El pabellón infantil está en el tercer piso."
+  },
+  {
+    "id": "achievement",
+    "en": "Finishing the marathon was a great achievement.",
+    "es": "Terminar el maratón fue un gran logro."
+  },
+  { "id": "asleep", "en": "The baby is finally asleep.", "es": "Por fin el bebé está dormido." },
+  { "id": "coat", "en": "Wear your coat, it's cold outside.", "es": "Ponte el abrigo, hace frío afuera." },
+  {
+    "id": "comprehensive",
+    "en": "The clinic offers comprehensive care for families.",
+    "es": "La clínica ofrece atención integral para las familias."
+  },
+  {
+    "id": "consent",
+    "en": "Both parents must consent to the school trip.",
+    "es": "Ambos padres deben consentir la excursión escolar."
+  },
+  {
+    "id": "destruction",
+    "en": "The storm caused great destruction along the coast.",
+    "es": "La tormenta causó gran destrucción a lo largo de la costa."
+  },
+  {
+    "id": "divorce",
+    "en": "After the divorce, the kids lived with their mom.",
+    "es": "Después del divorcio, los niños vivieron con su mamá."
+  },
+  { "id": "drove", "en": "She drove to work in the rain.", "es": "Ella condujo al trabajo bajo la lluvia." },
+  {
+    "id": "engage",
+    "en": "Good teachers help students engage in class.",
+    "es": "Los buenos maestros ayudan a los estudiantes a involucrarse en la clase."
+  },
+  {
+    "id": "extraordinary",
+    "en": "She has an extraordinary talent for music.",
+    "es": "Ella tiene un talento extraordinario para la música."
+  },
+  {
+    "id": "frequency",
+    "en": "At rush hour, the frequency of the buses increases.",
+    "es": "En la hora pico, aumenta la frecuencia de los autobuses."
+  },
+  {
+    "id": "gene",
+    "en": "Eye color depends on more than one gene.",
+    "es": "El color de ojos depende de más de un gen."
+  },
+  {
+    "id": "headquarters",
+    "en": "The company has its headquarters in a tall building downtown.",
+    "es": "La empresa tiene su sede en un edificio alto del centro."
+  },
+  {
+    "id": "heritage",
+    "en": "Music is an important part of our heritage.",
+    "es": "La música es una parte importante de nuestra herencia."
+  },
+  {
+    "id": "initiative",
+    "en": "She took the initiative and organized the meeting.",
+    "es": "Ella tomó la iniciativa y organizó la reunión."
+  },
+  { "id": "juice", "en": "I'd like a glass of orange juice.", "es": "Quisiera un vaso de jugo de naranja." },
+  {
+    "id": "landscape",
+    "en": "The landscape here is green and beautiful.",
+    "es": "El paisaje aquí es verde y hermoso."
+  },
+  {
+    "id": "objective",
+    "en": "Our main objective is to finish by Friday.",
+    "es": "Nuestro objetivo principal es terminar para el viernes."
+  },
+  {
+    "id": "privacy",
+    "en": "Teenagers need some privacy in their rooms.",
+    "es": "Los adolescentes necesitan algo de privacidad en sus cuartos."
+  },
+  {
+    "id": "regard",
+    "en": "With regard to your question, the answer is yes.",
+    "es": "Con respecto a tu pregunta, la respuesta es sí."
+  },
+  {
+    "id": "residence",
+    "en": "The hotel was once a private residence.",
+    "es": "El hotel antes era una residencia privada."
+  },
+  {
+    "id": "roughly",
+    "en": "The trip takes roughly two hours by car.",
+    "es": "El viaje dura aproximadamente dos horas en carro."
+  },
+  {
+    "id": "salary",
+    "en": "She asked for a higher salary at her new job.",
+    "es": "Ella pidió un salario más alto en su nuevo trabajo."
+  },
+  {
+    "id": "script",
+    "en": "The actors practiced the script all afternoon.",
+    "es": "Los actores ensayaron el guion toda la tarde."
+  },
+  { "id": "strip", "en": "Cut the paper into a long strip.", "es": "Corta el papel en una tira larga." },
+  { "id": "tube", "en": "The toothpaste tube is almost empty.", "es": "El tubo de pasta de dientes está casi vacío." },
+  {
+    "id": "breast",
+    "en": "The little bird has a bright red breast.",
+    "es": "El pajarito tiene el pecho de un rojo brillante."
+  },
+  {
+    "id": "consumption",
+    "en": "We need to reduce our water consumption.",
+    "es": "Necesitamos reducir nuestro consumo de agua."
+  },
+  {
+    "id": "corruption",
+    "en": "The new mayor promised to fight corruption.",
+    "es": "El nuevo alcalde prometió combatir la corrupción."
+  },
+  { "id": "cotton", "en": "This shirt is made of soft cotton.", "es": "Esta camisa es de algodón suave." },
+  {
+    "id": "discount",
+    "en": "Students get a ten percent discount here.",
+    "es": "Aquí los estudiantes reciben un descuento del diez por ciento."
+  },
+  { "id": "dozen", "en": "I bought a dozen eggs at the store.", "es": "Compré una docena de huevos en la tienda." },
+  {
+    "id": "exception",
+    "en": "Everyone came to the party, with one exception.",
+    "es": "Todos vinieron a la fiesta, con una excepción."
+  },
+  { "id": "exit", "en": "Where is the emergency exit?", "es": "¿Dónde está la salida de emergencia?" },
+  {
+    "id": "expand",
+    "en": "The owners want to expand the restaurant next year.",
+    "es": "Los dueños quieren expandir el restaurante el próximo año."
+  },
+  { "id": "grateful", "en": "I'm grateful for all your help.", "es": "Estoy agradecido por toda tu ayuda." },
+  {
+    "id": "impression",
+    "en": "She made a great impression at the interview.",
+    "es": "Ella causó una gran impresión en la entrevista."
+  },
+  {
+    "id": "indicate",
+    "en": "The signs indicate the way to the exit.",
+    "es": "Los letreros indican el camino a la salida."
+  },
+  { "id": "input", "en": "Thank you for your input on the project.", "es": "Gracias por tu aporte al proyecto." },
+  { "id": "knock", "en": "Knock on the door before you come in.", "es": "Toca la puerta antes de entrar." },
+  { "id": "leather", "en": "He bought a brown leather jacket.", "es": "Compró una chaqueta de cuero café." },
+  { "id": "ought", "en": "You ought to see a doctor about that cough.", "es": "Deberías ver a un médico por esa tos." },
+  {
+    "id": "outcome",
+    "en": "We are happy with the outcome of the game.",
+    "es": "Estamos contentos con el resultado del partido."
+  },
+  {
+    "id": "poll",
+    "en": "A new poll shows that most people like the park.",
+    "es": "Una nueva encuesta muestra que a la mayoría le gusta el parque."
+  },
+  {
+    "id": "reporter",
+    "en": "A reporter from the local news came to our school.",
+    "es": "Un reportero de las noticias locales vino a nuestra escuela."
+  },
+  {
+    "id": "rob",
+    "en": "Two men tried to rob the bank last night.",
+    "es": "Dos hombres intentaron robar el banco anoche."
+  },
+  {
+    "id": "sequence",
+    "en": "Put the pictures in the correct sequence.",
+    "es": "Pon las imágenes en la secuencia correcta."
+  },
+  {
+    "id": "stretch",
+    "en": "Always stretch your legs before you run.",
+    "es": "Siempre estira las piernas antes de correr."
+  },
+  { "id": "tear", "en": "A tear rolled down her cheek.", "es": "Una lágrima rodó por su mejilla." },
+  { "id": "tennis", "en": "Do you want to play tennis on Saturday?", "es": "¿Quieres jugar tenis el sábado?" },
+  {
+    "id": "terrorist",
+    "en": "The news reported that a terrorist was arrested at the airport.",
+    "es": "Las noticias informaron que arrestaron a un terrorista en el aeropuerto."
+  },
+  { "id": "theater", "en": "We went to the theater to see a play.", "es": "Fuimos al teatro a ver una obra." },
+  { "id": "twelve", "en": "There are twelve months in a year.", "es": "Hay doce meses en un año." },
+  { "id": "wolf", "en": "We heard a wolf howling in the night.", "es": "Escuchamos a un lobo aullando en la noche." },
+  {
+    "id": "absence",
+    "en": "Nobody noticed his absence from the meeting.",
+    "es": "Nadie notó su ausencia en la reunión."
+  },
+  { "id": "ate", "en": "She ate a sandwich for lunch.", "es": "Ella comió un sándwich en el almuerzo." },
+  {
+    "id": "contribute",
+    "en": "Everyone can contribute ideas to the plan.",
+    "es": "Todos pueden contribuir con ideas al plan."
+  },
+  {
+    "id": "contribution",
+    "en": "Thank you for your generous contribution.",
+    "es": "Gracias por su generosa contribución."
+  },
+  { "id": "deny", "en": "He didn't deny breaking the window.", "es": "Él no negó haber roto la ventana." },
+  { "id": "ease", "en": "She passed the test with ease.", "es": "Ella aprobó el examen con facilidad." },
+  {
+    "id": "extend",
+    "en": "The hotel agreed to extend our stay by two nights.",
+    "es": "El hotel aceptó extender nuestra estadía por dos noches."
+  },
+  {
+    "id": "fame",
+    "en": "She never cared about fame or money.",
+    "es": "A ella nunca le importaron la fama ni el dinero."
+  },
+  {
+    "id": "instant",
+    "en": "For an instant, I thought I saw my old friend.",
+    "es": "Por un instante, creí ver a mi viejo amigo."
+  },
+  {
+    "id": "principle",
+    "en": "Honesty is an important principle in our family.",
+    "es": "La honestidad es un principio importante en nuestra familia."
+  },
+  {
+    "id": "progressive",
+    "en": "Doctors noticed a progressive improvement in his health.",
+    "es": "Los médicos notaron una mejora progresiva en su salud."
+  },
+  {
+    "id": "punishment",
+    "en": "Their punishment was no TV for a week.",
+    "es": "Su castigo fue no ver televisión por una semana."
+  },
+  {
+    "id": "rally",
+    "en": "Thousands of people went to the rally downtown.",
+    "es": "Miles de personas fueron al mitin en el centro."
+  },
+  {
+    "id": "rapidly",
+    "en": "The weather changed rapidly in the afternoon.",
+    "es": "El clima cambió rápidamente en la tarde."
+  },
+  {
+    "id": "reader",
+    "en": "She is a fast reader and loves novels.",
+    "es": "Ella es una lectora rápida y le encantan las novelas."
+  },
+  {
+    "id": "representation",
+    "en": "The painting is a representation of city life.",
+    "es": "La pintura es una representación de la vida en la ciudad."
+  },
+  { "id": "sum", "en": "They paid a large sum for the house.", "es": "Pagaron una gran suma por la casa." },
+  { "id": "swing", "en": "Monkeys swing from tree to tree.", "es": "Los monos se balancean de árbol en árbol." },
+  { "id": "tail", "en": "The dog wags its tail when it's happy.", "es": "El perro mueve la cola cuando está feliz." },
+  { "id": "twin", "en": "Her twin lives in another city now.", "es": "Su gemela ahora vive en otra ciudad." },
+  { "id": "upcoming", "en": "Are you ready for the upcoming exam?", "es": "¿Estás listo para el próximo examen?" },
+  {
+    "id": "boom",
+    "en": "The town grew fast during the oil boom.",
+    "es": "El pueblo creció rápido durante el auge del petróleo."
+  },
+  { "id": "column", "en": "Add the numbers in the first column.", "es": "Suma los números de la primera columna." },
+  {
+    "id": "commit",
+    "en": "The police believe he did not commit the crime.",
+    "es": "La policía cree que él no cometió el crimen."
+  }
+]
