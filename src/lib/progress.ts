@@ -1,7 +1,8 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
-import { type CardState, review } from './scheduler'
-import { createPersistedStore, isRecord, useStore } from './store'
+import { type CardState, parseCard, review } from './scheduler'
+import { createPersistedStore, useStore } from './store'
 import type { Direction } from './types'
+import { isDayKey, isInteger, isRecord } from './validate'
 
 /** Días de práctica que se conservan para calcular la racha. */
 const MAX_DAYS = 400
@@ -15,11 +16,42 @@ export interface ProgressData {
   lastDeckId: string | null
 }
 
-const EMPTY: ProgressData = { cards: {}, days: [], bestStreak: 0, lastDeckId: null }
+export const EMPTY_PROGRESS: ProgressData = { cards: {}, days: [], bestStreak: 0, lastDeckId: null }
+const EMPTY = EMPTY_PROGRESS
 
-const store = createPersistedStore<ProgressData>('tecla:progress:v1', EMPTY, (raw) =>
-  isRecord(raw) && isRecord(raw.cards) ? { ...EMPTY, ...(raw as Partial<ProgressData>) } : EMPTY,
-)
+/** El "v1" de la clave es histórico: la versión del esquema va en el campo `version`. */
+export const PROGRESS_KEY = 'tecla:progress:v1'
+export const PROGRESS_VERSION = 1
+
+const CARD_KEY = /^(en-es|es-en):[a-z0-9-]+$/
+
+/**
+ * Valida el progreso guardado. Cada tarjeta se valida por separado: una entrada dañada se descarta
+ * sin arrastrar al resto.
+ */
+export function parseProgress(raw: Record<string, unknown>): ProgressData {
+  const cards: Record<string, CardState> = {}
+  if (isRecord(raw.cards)) {
+    for (const [key, value] of Object.entries(raw.cards)) {
+      const card = CARD_KEY.test(key) ? parseCard(value) : null
+      if (card) cards[key] = card
+    }
+  }
+  const days = Array.isArray(raw.days) ? [...new Set(raw.days.filter(isDayKey))].toSorted().slice(-MAX_DAYS) : []
+  return {
+    cards,
+    days,
+    bestStreak: isInteger(raw.bestStreak, 0) ? raw.bestStreak : 0,
+    lastDeckId: typeof raw.lastDeckId === 'string' ? raw.lastDeckId : null,
+  }
+}
+
+const store = createPersistedStore<ProgressData>({
+  key: PROGRESS_KEY,
+  version: PROGRESS_VERSION,
+  fallback: EMPTY,
+  parse: parseProgress,
+})
 
 export const useProgress = () => useStore(store)
 export const getProgress = () => store.get()

@@ -5,6 +5,7 @@
  * fallar la devuelve a la caja 1. Dentro de la sesión, lo fallado vuelve a salir a las pocas rondas.
  */
 import type { Rng, Word } from './types'
+import { isFiniteNumber, isInteger, isRecord } from './validate'
 
 export const MINUTE = 60_000
 export const DAY = 24 * 60 * MINUTE
@@ -24,6 +25,14 @@ export interface CardState {
   due: number
   seen: number
   lapses: number
+}
+
+/** Valida una tarjeta leída del almacenamiento; `null` si no es utilizable. */
+export function parseCard(raw: unknown): CardState | null {
+  if (!isRecord(raw)) return null
+  const { box, due, seen, lapses } = raw
+  if (!isInteger(box, 1, MAX_BOX) || !isFiniteNumber(due) || !isInteger(seen, 0) || !isInteger(lapses, 0)) return null
+  return { box, due, seen, lapses }
 }
 
 export type CardStatus = 'new' | 'learning' | 'mastered'

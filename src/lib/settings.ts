@@ -1,5 +1,5 @@
 /** Preferencias del usuario, guardadas en el dispositivo. */
-import { createPersistedStore, isRecord, useStore } from './store'
+import { createPersistedStore, useStore } from './store'
 import type { Direction } from './types'
 
 export type ThemePreference = 'system' | 'light' | 'dark'
@@ -16,13 +16,21 @@ export const SETTINGS_KEY = 'tecla:settings:v1'
 
 const DEFAULTS: Settings = { direction: 'en-es', autoplay: true, theme: 'system' }
 
-const store = createPersistedStore<Settings>(SETTINGS_KEY, DEFAULTS, (raw) => {
-  if (!isRecord(raw)) return DEFAULTS
+export const SETTINGS_VERSION = 1
+
+export function parseSettings(raw: Record<string, unknown>): Settings {
   return {
     direction: raw.direction === 'es-en' ? 'es-en' : 'en-es',
     autoplay: typeof raw.autoplay === 'boolean' ? raw.autoplay : DEFAULTS.autoplay,
     theme: raw.theme === 'light' || raw.theme === 'dark' ? raw.theme : 'system',
   }
+}
+
+const store = createPersistedStore<Settings>({
+  key: SETTINGS_KEY,
+  version: SETTINGS_VERSION,
+  fallback: DEFAULTS,
+  parse: parseSettings,
 })
 
 export const useSettings = () => useStore(store)
