@@ -86,17 +86,43 @@ Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espaci
 
 ## Despliegue en Hostinger
 
-El build es un sitio estático: no necesita Node en el servidor.
+El build es un sitio estático: no necesita Node en el servidor. Las rutas son relativas, así que
+funciona en la raíz del dominio o en una subcarpeta (p. ej. `public_html/ingles/`).
 
-1. `npm run build`
-2. Sube **el contenido** de `dist/` (no la carpeta en sí) a `public_html/`, con el Administrador de
-   archivos de hPanel o por FTP. Incluye el archivo oculto `.htaccess`.
-3. Listo. Las rutas son relativas, así que también funciona dentro de una subcarpeta
-   (p. ej. `public_html/ingles/`).
+### Despliegue automático (recomendado)
+
+`.github/workflows/deploy.yml` publica en Hostinger por FTPS cada vez que el CI pasa en `main`
+(y a mano desde la pestaña **Actions → Despliegue → Run workflow**). Sube solo los archivos que
+cambiaron. Mientras no esté configurado, se salta sin fallar. Para activarlo, en GitHub:
+**Settings → Secrets and variables → Actions**:
+
+| Tipo     | Nombre           | Valor                                                                           |
+| -------- | ---------------- | ------------------------------------------------------------------------------- |
+| Secreto  | `FTP_SERVER`     | Servidor FTP de hPanel (**Archivos → Cuentas FTP**), p. ej. `ftp.tudominio.com` |
+| Secreto  | `FTP_USERNAME`   | Usuario FTP                                                                     |
+| Secreto  | `FTP_PASSWORD`   | Contraseña FTP                                                                  |
+| Variable | `SITE_URL`       | Dirección pública, p. ej. `https://tudominio.com/`                              |
+| Variable | `DEPLOY_ENABLED` | `true`                                                                          |
+| Variable | `FTP_SERVER_DIR` | Opcional. Carpeta de destino; por defecto `public_html/`                        |
+| Variable | `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
+
+Con `SITE_URL`, el build añade la URL canónica, las URLs absolutas de la imagen para compartir y
+`sitemap.xml`. Sin ella todo funciona, pero sin esos extras.
+
+### Despliegue manual
+
+1. `SITE_URL=https://tudominio.com/ npm run build` (o solo `npm run build`).
+2. Sube **el contenido** de `dist/` (no la carpeta en sí) a `public_html/`, con el Administrador
+   de archivos de hPanel o por FTP. Incluye el archivo oculto `.htaccess`.
+
+### Servidor
 
 `public/.htaccess` configura HTTPS, compresión, caché larga para los archivos con hash, revalidación
 del HTML, `sw.js` y el manifiesto (para que cada despliegue llegue al instante) y cabeceras de
-seguridad. El service worker necesita HTTPS, que Hostinger incluye con su certificado SSL gratuito. Cada MP3 se pide con la versión de su contenido (`audio/<id>.mp3?v=<hash>`, calculada en el build por `vite/audio-versions.ts`), así que se cachea como inmutable: si se regenera un audio, su URL cambia y llega a todos al instante.
+seguridad. El service worker necesita HTTPS, que Hostinger incluye con su certificado SSL gratuito.
+Cada MP3 se pide con la versión de su contenido (`audio/<id>.mp3?v=<hash>`, calculada en el build
+por `vite/audio-versions.ts`), así que se cachea como inmutable: si se regenera un audio, su URL
+cambia y llega a todos al instante.
 
 ## Estructura
 
