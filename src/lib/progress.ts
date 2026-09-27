@@ -27,6 +27,8 @@ export interface ProgressData {
   /** Resumen de cada día estudiado (desde la Fase 8), con clave AAAA-MM-DD. */
   history: Record<string, DayStats>
   bestStreak: number
+  /** Récord de Relámpago (palabras acertadas en 60 s). */
+  blitzBest: number
   lastDeckId: string | null
 }
 
@@ -42,7 +44,14 @@ function parseDayStats(raw: unknown): DayStats | null {
   return { answers, clean: Math.min(clean, answers), fresh: Math.min(fresh, answers), ms }
 }
 
-export const EMPTY_PROGRESS: ProgressData = { cards: {}, days: [], history: {}, bestStreak: 0, lastDeckId: null }
+export const EMPTY_PROGRESS: ProgressData = {
+  cards: {},
+  days: [],
+  history: {},
+  bestStreak: 0,
+  blitzBest: 0,
+  lastDeckId: null,
+}
 const EMPTY = EMPTY_PROGRESS
 
 /** El "v1" de la clave es histórico: la versión del esquema va en el campo `version`. */
@@ -77,6 +86,8 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
     days,
     history,
     bestStreak: isInteger(raw.bestStreak, 0) ? raw.bestStreak : 0,
+    // Campo añadido en la Fase 9.
+    blitzBest: isInteger(raw.blitzBest, 0) ? raw.blitzBest : 0,
     lastDeckId: typeof raw.lastDeckId === 'string' ? raw.lastDeckId : null,
   }
 }
@@ -180,6 +191,33 @@ function trimHistory(history: Record<string, DayStats>): Record<string, DayStats
 /** Lo estudiado hoy (o el día de `now`). */
 export const todayStats = (progress: ProgressData, now = Date.now()) => progress.history[dayKey(now)] ?? EMPTY_DAY
 
+/** Suma práctica al día sin tocar las tarjetas (Relámpago). */
+export function recordPractice(practice: { answers: number; clean: number; ms: number }, now = Date.now()) {
+  if (practice.answers === 0) return
+  const data = store.get()
+  const today = dayKey(now)
+  const days = data.days.at(-1) === today ? data.days : [...data.days, today].slice(-MAX_DAYS)
+  const stats = data.history[today] ?? EMPTY_DAY
+  const history = {
+    ...data.history,
+    [today]: {
+      ...stats,
+      answers: stats.answers + practice.answers,
+      clean: stats.clean + practice.clean,
+      ms: stats.ms + practice.ms,
+    },
+  }
+  store.set({ ...data, days, history: trimHistory(history) })
+}
+
+/** Guarda la puntuación de Relámpago si es récord; devuelve si lo fue. */
+export function recordBlitzScore(score: number): boolean {
+  const data = store.get()
+  if (score <= data.blitzBest) return false
+  store.set({ ...data, blitzBest: score })
+  return true
+}
+
 export function recordStreak(streak: number) {
   const data = store.get()
   if (streak > data.bestStreak) store.set({ ...data, bestStreak: streak })
@@ -226,6 +264,7 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     days: [...new Set([...current.days, ...incoming.days])].toSorted().slice(-MAX_DAYS),
     history: trimHistory(history),
     bestStreak: Math.max(current.bestStreak, incoming.bestStreak),
+    blitzBest: Math.max(current.blitzBest, incoming.blitzBest),
     lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
   }
 }

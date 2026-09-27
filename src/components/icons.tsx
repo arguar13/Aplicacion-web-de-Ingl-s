@@ -183,3 +183,12 @@ export function ClozeIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Relámpago. */
+export function BoltIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M13 2 4.5 13.5H12L11 22l8.5-11.5H12L13 2Z" />
+    </svg>
+  )
+}

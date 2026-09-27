@@ -13,6 +13,7 @@ const PROGRESS: ProgressData = {
   days: ['2026-09-25', '2026-09-26'],
   history: { '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 60_000 } },
   bestStreak: 9,
+  blitzBest: 7,
   lastDeckId: 'level-1',
 }
 const SETTINGS = { ...parseSettings({}), theme: 'dark' as const }
@@ -67,6 +68,7 @@ describe('combinar progresos', () => {
         '2026-09-26': { answers: 8, clean: 8, fresh: 1, ms: 90_000 },
       },
       bestStreak: 15,
+      blitzBest: 11,
       lastDeckId: 'level-3',
     }
     expect(mergeProgress(PROGRESS, incoming)).toEqual({
@@ -82,6 +84,7 @@ describe('combinar progresos', () => {
         '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 90_000 },
       },
       bestStreak: 15,
+      blitzBest: 11,
       lastDeckId: 'level-1',
     })
   })

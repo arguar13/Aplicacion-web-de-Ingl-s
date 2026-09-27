@@ -15,7 +15,7 @@ import { BackupReminder } from './BackupReminder'
 import { ForecastChart } from './ForecastChart'
 import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
-import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
+import { ArrowRightIcon, BoltIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
@@ -27,10 +27,11 @@ const shortcutOf = (deck: Deck) => (deck.level === null ? '0' : deck.level <= 9 
 interface Props {
   onPick: (deck: Deck) => void
   onOpenSmart: (kind: SmartDeckKind) => void
+  onOpenBlitz: () => void
   onOpenSettings: () => void
 }
 
-export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
+export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenSettings }: Props) {
   const progress = useProgress()
   const { mode, dailyGoal } = useSettings()
   const track = trackOf(mode)
@@ -99,6 +100,7 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenSettings }: Props) {
               onOpen={() => onOpenSmart('review')}
             />
             <HardCard count={hard} onOpen={() => onOpenSmart('hard')} />
+            <BlitzCard best={progress.blitzBest} onOpen={onOpenBlitz} />
           </div>
         )}
 
@@ -212,6 +214,33 @@ function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
             ? 'Olvidadas dos veces o más, o de dificultad alta'
             : 'Aparecerán aquí las que olvides más de una vez'}
         </span>
+      </span>
+    </button>
+  )
+}
+
+/** Relámpago: el juego contrarreloj, con el récord. */
+function BlitzCard({ best, onOpen }: { best: number; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={cn(
+        cardBase,
+        'flex items-center gap-4 border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)] sm:col-span-2',
+        'hover:border-accent/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--accent)_30%,var(--line))]',
+      )}
+    >
+      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:rotate-12">
+        <BoltIcon />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[17px] font-semibold">Relámpago</span>
+        <span className="block text-sm text-muted">60 segundos, todas las que puedas</span>
+      </span>
+      <span className="shrink-0 text-right">
+        <span className="block text-[10px] font-medium tracking-[0.14em] text-muted uppercase">Récord</span>
+        <span className="block font-display text-3xl leading-none tabular-nums">{formatCount(best)}</span>
       </span>
     </button>
   )

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { DeckPicker } from '@/components/DeckPicker'
+import { BlitzScreen } from '@/components/BlitzScreen'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { SmartDeckScreen } from '@/components/SmartDeckScreen'
 import { Game } from '@/components/Game'
@@ -29,6 +30,8 @@ function openDeck(deck: Deck) {
 
 const openSmart = (kind: SmartDeckKind) => navigate({ screen: { name: 'smart', kind }, panel: null })
 
+const openBlitz = () => navigate({ screen: { name: 'blitz' }, panel: null })
+
 const exitToHome = () => goBack(HOME)
 const recoverToHome = () => navigate(HOME, { replace: true })
 
@@ -52,7 +55,9 @@ export default function App() {
       <ErrorBoundary resetKey={screenKey} onGoHome={recoverToHome}>
         {/* La clave vuelve a montar el contenedor en cada pantalla y con él su animación de entrada. */}
         <div key={screenKey} className="flex flex-1 animate-screen flex-col">
-          {route.screen.name === 'smart' ? (
+          {route.screen.name === 'blitz' ? (
+            <BlitzScreen onExit={exitToHome} />
+          ) : route.screen.name === 'smart' ? (
             <SmartDeckScreen kind={route.screen.kind} onExit={exitToHome} onOpenSettings={openSettings} />
           ) : route.screen.name === 'deck' ? (
             <Game
@@ -63,7 +68,12 @@ export default function App() {
               onOpenSettings={openSettings}
             />
           ) : (
-            <DeckPicker onPick={openDeck} onOpenSmart={openSmart} onOpenSettings={openSettings} />
+            <DeckPicker
+              onPick={openDeck}
+              onOpenSmart={openSmart}
+              onOpenBlitz={openBlitz}
+              onOpenSettings={openSettings}
+            />
           )}
         </div>
       </ErrorBoundary>

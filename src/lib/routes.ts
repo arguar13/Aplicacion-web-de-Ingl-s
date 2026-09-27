@@ -12,7 +12,8 @@ import type { SmartDeckKind } from './smartDecks'
 
 const PANELS = ['settings'] as const
 export type Panel = (typeof PANELS)[number]
-export type Screen = { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind }
+export type Screen =
+  { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind } | { name: 'blitz' }
 
 export interface Route {
   screen: Screen
@@ -22,6 +23,7 @@ export interface Route {
 export const HOME: Route = { screen: { name: 'home' }, panel: null }
 
 const PANEL_SLUGS: Record<Panel, string> = { settings: 'ajustes' }
+const BLITZ_PATH = '/relampago'
 const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard']
 const SMART_PATHS: Record<SmartDeckKind, string> = { review: '/repaso', hard: '/dificiles' }
 const SMART_TITLES: Record<SmartDeckKind, string> = { review: 'Repaso del día', hard: 'Mis difíciles' }
@@ -44,6 +46,7 @@ export function parseHash(hash: string): Route {
   const panel = PANELS.find((p) => PANEL_SLUGS[p] === panelSlug) ?? null
 
   if (path === '/') return { screen: { name: 'home' }, panel }
+  if (path === BLITZ_PATH) return { screen: { name: 'blitz' }, panel }
   const smart = SMART_KINDS.find((kind) => SMART_PATHS[kind] === path)
   if (smart) return { screen: { name: 'smart', kind: smart }, panel }
   const deck = deckFromPath(path)
@@ -52,7 +55,14 @@ export function parseHash(hash: string): Route {
 
 export function formatHash(route: Route): string {
   const { screen } = route
-  const path = screen.name === 'deck' ? deckPath(screen.deck) : screen.name === 'smart' ? SMART_PATHS[screen.kind] : '/'
+  const path =
+    screen.name === 'deck'
+      ? deckPath(screen.deck)
+      : screen.name === 'smart'
+        ? SMART_PATHS[screen.kind]
+        : screen.name === 'blitz'
+          ? BLITZ_PATH
+          : '/'
   return `#${path}${route.panel ? `?panel=${PANEL_SLUGS[route.panel]}` : ''}`
 }
 
@@ -61,6 +71,7 @@ export function titleOf(route: Route): string {
   const base = 'Tecla · Vocabulario en inglés'
   if (route.screen.name === 'home') return base
   if (route.screen.name === 'smart') return `${SMART_TITLES[route.screen.kind]} — Tecla`
+  if (route.screen.name === 'blitz') return 'Relámpago — Tecla'
   const { deck } = route.screen
   return `${deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`} — Tecla`
 }
