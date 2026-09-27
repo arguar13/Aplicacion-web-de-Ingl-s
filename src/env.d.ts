@@ -1,5 +1,10 @@
 /** APIs del navegador que aún no están en lib.dom de TypeScript. */
 
+interface ImportMetaEnv {
+  /** Versión de la app (package.json), la inyecta vite.config.ts. */
+  readonly APP_VERSION: string
+}
+
 /** Chrome, Edge y Android ofrecen instalar la PWA con este evento. */
 interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>

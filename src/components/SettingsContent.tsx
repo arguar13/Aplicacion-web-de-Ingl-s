@@ -124,6 +124,8 @@ export function SettingsContent() {
           )}
         </SettingRow>
       </Group>
+
+      <p className="mt-6 text-center text-xs text-muted">Tecla {import.meta.env.APP_VERSION}</p>
     </div>
   )
 }

@@ -72,16 +72,22 @@ npm run format       # Prettier
 npm run check        # tipos + lint + formato + tests: lo que exige cada commit
 npm run build        # typecheck + build de producción en dist/
 npm run preview      # sirve dist/ para probar el build
+npm run budget       # presupuesto de tamaño del build (tras npm run build)
+npm run capture      # regenera la imagen para compartir y las capturas del manifiesto
 ```
+
+No dejes nada escuchando en el puerto 4173: los e2e reutilizan lo que haya ahí (en vez de hacer
+su propio build) y probarían una versión vieja. Para una vista previa manual, usa otro puerto.
 
 La primera vez, los tests e2e necesitan los navegadores: `npx playwright install chromium webkit`.
 
 Calidad: cada commit pasa por `npm run check` (hook de pre-commit con simple-git-hooks) y cada push
-por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build y los e2e en Chromium
-y WebKit. El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
+por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build con su presupuesto
+de tamaño, los e2e en Chromium y WebKit (con axe en todas las pantallas, en los dos temas) y
+Lighthouse en móvil (rendimiento ≥ 90; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
 Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espacio` para volver a escuchar ·
-`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para seguir · `R` repaso del día ·
+`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para continuar · `R` repaso del día ·
 `D` mis difíciles · `Esc` para volver a los niveles.
 
 ## Despliegue en Hostinger

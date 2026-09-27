@@ -6,6 +6,8 @@ import { answerCorrectly, expectAccessible, expectNoHorizontalScroll, storedProg
 test('el tema elegido se aplica y se recuerda', async ({ page }) => {
   await page.goto('./#/?panel=ajustes')
   const dialog = page.getByRole('dialog', { name: 'Ajustes' })
+  // La versión de package.json, al pie (para saber qué versión tiene quien cuenta un problema).
+  await expect(dialog.getByText(/^Tecla \d+\.\d+\.\d+$/)).toBeVisible()
   await dialog.getByText('Oscuro', { exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await page.reload()

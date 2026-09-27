@@ -488,3 +488,30 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   progreso, historial y logros idénticos, sin avisos de logros repetidos.
 - Sincronización: **solo propuesta**, en `docs/SINCRONIZACION.md` (recomendación: código de
   sincronización cifrado con PHP en el mismo Hostinger). **Pendiente de la decisión del dueño.**
+
+### Fase 13 · cerrada el 27-09-2026 · versión 1.0.0
+
+- Lighthouse móvil (build local, red lenta simulada): rendimiento 91, accesibilidad 100, buenas
+  prácticas 100 y SEO 100 (antes 92/100/100/91). El primer pintado observado bajó de 0,6 s a
+  0,14 s con la pantalla de arranque, pero la nota simulada lo ata a los ~153 KB de JS inicial
+  (react-dom y el vocabulario). **Pendiente para superar 95:** sacar el vocabulario del camino
+  crítico (carga asíncrona de `words.json` con un estado de carga en el inicio). La CI exige ≥ 90
+  para que no retroceda; el presupuesto de tamaño (`npm run budget`) frena el crecimiento.
+- Pantallas diferidas (partida, repaso, relámpago, estadísticas, diccionario y el contenido de
+  Ajustes), adelantadas tras el primer pintado y precacheadas.
+- SEO: metadatos para compartir, `og.png`, `robots.txt`, y con `SITE_URL` canónica y `sitemap.xml`.
+  Capturas del manifiesto generadas desde la app real (`npm run capture`).
+- Despliegue automático por FTPS (`deploy.yml`), inactivo hasta que el dueño cargue los secretos
+  (pasos en el README). Depende de un CI en verde, y el CI de la cuenta sigue en
+  `startup_failure` (facturación o minutos de Actions): **resolverlo es requisito para desplegar
+  automáticamente**. Mientras tanto vale el despliegue manual.
+- Accesibilidad: axe en las 9 pantallas y paneles, en los dos temas, más un recorrido solo con
+  teclado. Salieron dos bugs de raíz: Enter sobre un botón enfocado disparaba el atajo de la
+  pantalla, y cerrar un panel porque cambió la ruta hacía retroceder el historial.
+- Revisión visual (4 tamaños × 2 temas): atajos de teclado visibles en pantallas táctiles (causa:
+  `cn` no resuelve conflictos de clases; ahora los componentes base exponen variantes), barra de
+  la partida flotando en teléfonos altos, datos de Tu progreso cortados, vibración ofrecida en
+  escritorio.
+- Lección de proceso: una vista previa propia en el puerto 4173 hacía que los e2e probaran un
+  build viejo (`reuseExistingServer`). Queda documentado en el README.
+- CHANGELOG.md con todas las fases y versión 1.0.0 (visible al pie de Ajustes).

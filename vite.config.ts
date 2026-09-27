@@ -5,8 +5,13 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 import { audioVersions } from './vite/audio-versions.ts'
 import { siteMeta } from './vite/site-meta.ts'
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
+  define: {
+    // Versión de package.json, visible al pie de Ajustes (útil cuando alguien cuenta un problema).
+    'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
+  },
   // Rutas relativas: el build funciona igual en la raíz del dominio que en una subcarpeta de public_html.
   base: './',
   plugins: [
