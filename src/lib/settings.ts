@@ -1,5 +1,5 @@
 /** Preferencias del usuario, guardadas en el dispositivo. */
-import { createPersistedStore, useStore } from './store'
+import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import type { Direction } from './types'
 
 export type ThemePreference = 'system' | 'light' | 'dark'
@@ -26,16 +26,21 @@ export function parseSettings(raw: Record<string, unknown>): Settings {
   }
 }
 
-const store = createPersistedStore<Settings>({
-  key: SETTINGS_KEY,
+export const SETTINGS_SCHEMA: VersionedSchema<Settings> = {
   version: SETTINGS_VERSION,
-  fallback: DEFAULTS,
+  migrations: {},
   parse: parseSettings,
-})
+}
+
+const store = createPersistedStore<Settings>({ ...SETTINGS_SCHEMA, key: SETTINGS_KEY, fallback: DEFAULTS })
 
 export const useSettings = () => useStore(store)
 export const getSettings = () => store.get()
 export const subscribeSettings = store.subscribe
+
+export function replaceSettings(next: Settings) {
+  store.set(next)
+}
 
 export function updateSettings(patch: Partial<Settings>) {
   store.set({ ...store.get(), ...patch })

@@ -8,6 +8,7 @@ import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import type { Direction } from '@/lib/types'
 import { IconButton, Segmented } from './controls'
+import { BackupReminder } from './BackupReminder'
 import { Header, Stat } from './Header'
 import { ArrowRightIcon, SettingsIcon, ShuffleIcon } from './icons'
 import { Kbd } from './Kbd'
@@ -81,6 +82,7 @@ export function DeckPicker({ onPick, onOpenSettings }: Props) {
         </div>
 
         <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
+        <BackupReminder onOpenSettings={onOpenSettings} />
 
         <h2 className="mt-12 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase sm:mt-14">
           Todos los niveles

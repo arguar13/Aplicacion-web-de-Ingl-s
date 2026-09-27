@@ -1,6 +1,6 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
 import { type CardState, parseCard, review } from './scheduler'
-import { createPersistedStore, useStore } from './store'
+import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import type { Direction } from './types'
 import { isDayKey, isInteger, isRecord } from './validate'
 
@@ -46,12 +46,13 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
   }
 }
 
-const store = createPersistedStore<ProgressData>({
-  key: PROGRESS_KEY,
+export const PROGRESS_SCHEMA: VersionedSchema<ProgressData> = {
   version: PROGRESS_VERSION,
-  fallback: EMPTY,
+  migrations: {},
   parse: parseProgress,
-})
+}
+
+const store = createPersistedStore<ProgressData>({ ...PROGRESS_SCHEMA, key: PROGRESS_KEY, fallback: EMPTY })
 
 export const useProgress = () => useStore(store)
 export const getProgress = () => store.get()
@@ -103,4 +104,27 @@ export function setLastDeck(deckId: string) {
 
 export function resetProgress() {
   store.set(EMPTY)
+}
+
+/** Sustituye todo el progreso (p. ej. al restaurar una copia). */
+export function replaceProgress(data: ProgressData) {
+  store.set(data)
+}
+
+/**
+ * Combina dos progresos sin perder práctica: de cada palabra se queda la versión más trabajada
+ * (más veces vista; a igualdad, la de repaso más lejano), los días se unen y el récord es el mayor.
+ */
+export function mergeProgress(current: ProgressData, incoming: ProgressData): ProgressData {
+  const cards = { ...current.cards }
+  for (const [key, card] of Object.entries(incoming.cards)) {
+    const mine = cards[key]
+    if (!mine || card.seen > mine.seen || (card.seen === mine.seen && card.due > mine.due)) cards[key] = card
+  }
+  return {
+    cards,
+    days: [...new Set([...current.days, ...incoming.days])].toSorted().slice(-MAX_DAYS),
+    bestStreak: Math.max(current.bestStreak, incoming.bestStreak),
+    lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
+  }
 }

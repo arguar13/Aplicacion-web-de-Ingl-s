@@ -100,3 +100,22 @@ export function LogoMark(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function ShieldIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3 5 6v5c0 4.4 3 8.3 7 9.5 4-1.2 7-5.1 7-9.5V6l-7-3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
+export function DownloadIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 4v11" />
+      <path d="m7 10 5 5 5-5" />
+      <path d="M5 20h14" />
+    </svg>
+  )
+}

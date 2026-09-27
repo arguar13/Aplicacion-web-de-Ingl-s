@@ -23,15 +23,18 @@ export interface PersistedStore<T> {
 
 type Raw = Record<string, unknown>
 
-export interface StoreOptions<T extends object> {
-  key: string
+export interface VersionedSchema<T> {
   /** Versión del esquema actual. */
   version: number
-  fallback: T
   /** Pasos de migración: `migrations[n]` convierte datos de la versión n en datos de la n + 1. */
   migrations?: Readonly<Record<number, (raw: Raw) => Raw>>
   /** Valida y normaliza datos de la versión actual. Nunca debe lanzar. */
   parse: (raw: Raw) => T
+}
+
+export interface StoreOptions<T extends object> extends VersionedSchema<T> {
+  key: string
+  fallback: T
   /** Solo para tests; por defecto, localStorage. */
   storage?: Storage
 }
@@ -46,6 +49,34 @@ interface Loaded<T> {
 
 export const backupKey = (key: string) => `${key}:respaldo`
 
+export type VersionedResult<T> =
+  { status: 'ok'; value: T; migrated: boolean } | { status: 'newer'; value: T } | { status: 'invalid'; reason: string }
+
+/**
+ * Lleva un objeto guardado con `version` (o sin ella: versión 1) a la versión actual del esquema y
+ * lo valida. Es el mismo camino para lo leído de localStorage y para una copia importada.
+ */
+export function readVersioned<T>(data: unknown, schema: VersionedSchema<T>): VersionedResult<T> {
+  if (!isRecord(data)) return { status: 'invalid', reason: 'No es un objeto' }
+  const { version: rawVersion, ...rest } = data
+  const from = typeof rawVersion === 'number' ? rawVersion : 1
+  if (!Number.isInteger(from) || from < 1)
+    return { status: 'invalid', reason: `Versión no válida: ${String(rawVersion)}` }
+  if (from > schema.version) return { status: 'newer', value: schema.parse(rest) }
+
+  let migrated: Raw = rest
+  for (let v = from; v < schema.version; v++) {
+    const step = schema.migrations?.[v]
+    if (!step) return { status: 'invalid', reason: `Falta la migración de la versión ${v} a la ${v + 1}` }
+    try {
+      migrated = step(migrated)
+    } catch (error) {
+      return { status: 'invalid', reason: error instanceof Error ? error.message : String(error) }
+    }
+  }
+  return { status: 'ok', value: schema.parse(migrated), migrated: from < schema.version }
+}
+
 function defaultStorage(): Storage | undefined {
   try {
     return typeof localStorage === 'undefined' ? undefined : localStorage
@@ -56,7 +87,7 @@ function defaultStorage(): Storage | undefined {
 }
 
 export function createPersistedStore<T extends object>(options: StoreOptions<T>): PersistedStore<T> {
-  const { key, version, fallback, migrations = {}, parse } = options
+  const { key, version, fallback } = options
   const storage = options.storage ?? defaultStorage()
 
   const backup = (text: string) => {
@@ -83,29 +114,19 @@ export function createPersistedStore<T extends object>(options: StoreOptions<T>)
       backup(text)
       return { value: fallback, writable: true, dirty: false }
     }
-    if (!isRecord(data)) {
-      backup(text)
-      return { value: fallback, writable: true, dirty: false }
-    }
 
-    const { version: rawVersion, ...rest } = data
-    const from = typeof rawVersion === 'number' ? rawVersion : 1
-    if (from > version) return { value: parse(rest), writable: false, dirty: false }
-
-    let migrated: Raw = rest
-    try {
-      for (let v = from; v < version; v++) {
-        const step = migrations[v]
-        if (!step) throw new Error(`Falta la migración de la versión ${v} a la ${v + 1} en ${key}`)
-        migrated = step(migrated)
-      }
-    } catch (error) {
-      console.error(error)
-      backup(text)
-      return { value: fallback, writable: true, dirty: false }
+    const result = readVersioned(data, options)
+    switch (result.status) {
+      case 'newer':
+        return { value: result.value, writable: false, dirty: false }
+      case 'invalid':
+        console.error(`Datos no válidos en ${key}: ${result.reason}`)
+        backup(text)
+        return { value: fallback, writable: true, dirty: false }
+      case 'ok':
+        if (result.migrated) backup(text)
+        return { value: result.value, writable: true, dirty: result.migrated }
     }
-    if (from < version) backup(text)
-    return { value: parse(migrated), writable: true, dirty: from < version }
   }
 
   let loaded = load()

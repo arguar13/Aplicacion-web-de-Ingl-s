@@ -8,6 +8,7 @@ import type { Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, titleOf } from '@/lib/routes'
+import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { useSettings } from '@/lib/settings'
 
 const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
@@ -33,6 +34,8 @@ export default function App() {
   useEffect(() => {
     document.title = titleOf(route)
   }, [route])
+
+  useProtectOnceThereIsProgress()
 
   return (
     <div className="flex min-h-dvh flex-col">

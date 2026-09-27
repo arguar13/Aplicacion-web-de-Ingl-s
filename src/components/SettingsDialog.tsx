@@ -2,8 +2,10 @@ import { type RefObject, useEffect, useRef, useState } from 'react'
 import { resetProgress } from '@/lib/progress'
 import { type ThemePreference, updateSettings, useSettings } from '@/lib/settings'
 import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
+import { BackupSection, ProtectionRow } from './BackupSection'
 import { Segmented, Switch } from './controls'
 import { CloseIcon } from './icons'
+import { Button } from './ui/Button'
 
 const THEMES: Array<{ value: ThemePreference; label: string }> = [
   { value: 'system', label: 'Automático' },
@@ -81,36 +83,29 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
             />
           </div>
 
+          <BackupSection />
+          <ProtectionRow />
           <InstallRow />
           <OfflineAudioRow />
 
           <SettingRow title="Borrar progreso" description="Vuelve a empezar desde cero en este dispositivo.">
             {confirmReset ? (
-              <button
-                type="button"
+              <Button
+                variant="danger"
                 onClick={() => {
                   resetProgress()
                   setConfirmReset(false)
                 }}
-                className="h-9 shrink-0 cursor-pointer rounded-full bg-bad px-4 text-sm font-semibold text-white transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bad"
               >
                 Sí, borrar
-              </button>
+              </Button>
             ) : (
-              <button
-                type="button"
-                onClick={() => setConfirmReset(true)}
-                className="h-9 shrink-0 cursor-pointer rounded-full border border-bad/40 px-4 text-sm font-semibold text-bad transition-colors hover:bg-bad-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bad"
-              >
+              <Button variant="danger-outline" onClick={() => setConfirmReset(true)}>
                 Borrar
-              </button>
+              </Button>
             )}
           </SettingRow>
         </div>
-
-        <p className="mt-2 text-xs leading-relaxed text-muted">
-          Tu progreso se guarda solo en este dispositivo y navegador.
-        </p>
       </div>
     </dialog>
   )
