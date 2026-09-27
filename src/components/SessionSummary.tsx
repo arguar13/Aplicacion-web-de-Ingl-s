@@ -96,9 +96,7 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
             </Button>
             <Button ref={primary} variant="primary" size="lg" onClick={onContinue}>
               Seguir practicando
-              <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-                Enter
-              </Kbd>
+              <Kbd tone="accent">Enter</Kbd>
             </Button>
           </>
         ) : (
@@ -108,9 +106,7 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
             </Button>
             <Button ref={primary} variant="primary" size="lg" onClick={onFinish}>
               Volver a los niveles
-              <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-                Enter
-              </Kbd>
+              <Kbd tone="accent">Enter</Kbd>
             </Button>
           </>
         )}

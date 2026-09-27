@@ -97,9 +97,7 @@ export function DetailCard({ word, mode, details, onContinue, onListenSlowly }: 
         </Button>
         <Button ref={continueButton} variant="primary" size="lg" onClick={onContinue} aria-keyshortcuts="Enter">
           Continuar
-          <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-            Enter
-          </Kbd>
+          <Kbd tone="accent">Enter</Kbd>
         </Button>
       </div>
     </Surface>

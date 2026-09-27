@@ -60,11 +60,9 @@ export function TypeAnswer({ word, solved, typed, onSubmit, onContinue }: Props)
           )}
         />
         {!solved && (
-          <Button type="submit" variant="primary" size="lg" disabled={!text.trim()} className="h-14">
+          <Button type="submit" variant="primary" size="xl" disabled={!text.trim()}>
             Comprobar
-            <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-              Enter
-            </Kbd>
+            <Kbd tone="accent">Enter</Kbd>
           </Button>
         )}
       </form>

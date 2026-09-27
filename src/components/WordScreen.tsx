@@ -145,7 +145,7 @@ export function WordScreen({
             className="inline-flex h-8 animate-rise cursor-pointer items-center gap-1.5 rounded-full px-3 text-sm font-medium text-accent transition-colors hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-accent"
           >
             Ver ejemplo
-            <Kbd className="hidden h-5 min-w-5 pointer-fine:inline-flex">E</Kbd>
+            <Kbd size="sm">E</Kbd>
           </button>
         )}
       </div>

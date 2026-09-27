@@ -145,9 +145,7 @@ function Blitz({ pool, onExit }: { pool: readonly Word[]; onExit: () => void }) 
               </p>
               <Button variant="primary" size="lg" onClick={start} className="mt-8">
                 Empezar
-                <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-                  Enter
-                </Kbd>
+                <Kbd tone="accent">Enter</Kbd>
               </Button>
             </Surface>
           )}
@@ -217,9 +215,7 @@ function Blitz({ pool, onExit }: { pool: readonly Word[]; onExit: () => void }) 
                 </Button>
                 <Button variant="primary" size="lg" onClick={start}>
                   Otra vez
-                  <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-                    Enter
-                  </Kbd>
+                  <Kbd tone="accent">Enter</Kbd>
                 </Button>
               </div>
             </Surface>

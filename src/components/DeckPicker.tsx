@@ -182,7 +182,7 @@ function ReviewCard({
             {due > 0 ? `${plural(due, 'palabra')} te ${due === 1 ? 'espera' : 'esperan'} hoy` : 'Todo al día'}
           </span>
         </span>
-        {due > 0 && <Kbd className="hidden pointer-fine:inline-flex">R</Kbd>}
+        {due > 0 && <Kbd>R</Kbd>}
       </span>
       <ForecastChart counts={counts} now={now} className="mt-5 w-full" />
       <span className="mt-2 block text-[11px] text-muted">
@@ -214,7 +214,7 @@ function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
             {count > 0 ? 'Las que más se te olvidan' : 'Por ahora, ninguna'}
           </span>
         </span>
-        {count > 0 && <Kbd className="hidden pointer-fine:inline-flex">D</Kbd>}
+        {count > 0 && <Kbd>D</Kbd>}
       </span>
       <span className="mt-auto pt-5">
         <span
@@ -320,9 +320,7 @@ function ContinueCard({
         <span className="grid size-12 place-items-center rounded-full bg-accent-ink text-accent transition-transform group-hover:translate-x-0.5">
           <ArrowRightIcon />
         </span>
-        <Kbd className="hidden border-accent-ink/25 bg-accent-ink/10 text-accent-ink pointer-fine:inline-flex">
-          Enter
-        </Kbd>
+        <Kbd tone="accent">Enter</Kbd>
       </span>
     </button>
   )
@@ -366,7 +364,7 @@ function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary
           </span>
         </span>
       </span>
-      {shortcut && <Kbd className="absolute top-4 right-4 hidden pointer-fine:inline-flex">{shortcut}</Kbd>}
+      {shortcut && <Kbd className="absolute top-4 right-4">{shortcut}</Kbd>}
     </button>
   )
 }
@@ -395,7 +393,7 @@ function AllWordsCard({ summary, onPick }: { summary: DeckSummary; onPick: (deck
           Las {summary.total.toLocaleString('es')}, {ALL_DECK.description.toLowerCase()}
         </span>
       </span>
-      <Kbd className="hidden pointer-fine:inline-flex">0</Kbd>
+      <Kbd>0</Kbd>
     </button>
   )
 }

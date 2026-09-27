@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, Ref } from 'react'
 import { cn } from '@/lib/cn'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'danger-outline'
-export type ButtonSize = 'sm' | 'md' | 'lg'
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 const variants: Record<ButtonVariant, string> = {
   primary:
@@ -17,6 +17,8 @@ const sizes: Record<ButtonSize, string> = {
   sm: 'h-8 px-3 text-sm',
   md: 'h-9 px-4 text-sm',
   lg: 'h-12 px-6 text-[15px]',
+  /** A la altura de un campo de texto grande (escribir la respuesta). */
+  xl: 'h-14 px-6 text-[15px]',
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

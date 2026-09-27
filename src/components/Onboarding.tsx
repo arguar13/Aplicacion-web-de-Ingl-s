@@ -246,7 +246,7 @@ function PlacementTest({
       />
       <Button variant="ghost" size="lg" onClick={() => onAnswer(null)} className="self-center">
         No la sé
-        <Kbd className="hidden h-5 min-w-5 pointer-fine:inline-flex">0</Kbd>
+        <Kbd size="sm">0</Kbd>
       </Button>
     </div>
   )
