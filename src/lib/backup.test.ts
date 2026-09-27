@@ -9,7 +9,9 @@ const NOW = new Date(2026, 8, 27, 10).getTime()
 /** Tarjeta equivalente a una caja Leitner (misma semántica que en la versión 1). */
 const card = (box: number, seen: number, due = NOW) => fromLeitner(box, due, seen, 0)
 
+// Los tests parten del progreso vacío: un campo nuevo con valor por defecto no los rompe.
 const PROGRESS: ProgressData = {
+  ...EMPTY_PROGRESS,
   cards: { 'en-es:the': card(4, 5), 'es-en:the': card(2, 2), 'en-es:water': card(1, 1) },
   days: ['2026-09-25', '2026-09-26'],
   history: { '2026-09-26': { answers: 12, clean: 9, fresh: 3, ms: 60_000 } },
@@ -67,6 +69,7 @@ describe('copias de seguridad', () => {
 describe('combinar progresos', () => {
   it('se queda con la versión más practicada de cada palabra y une el resto', () => {
     const incoming: ProgressData = {
+      ...EMPTY_PROGRESS,
       cards: { 'en-es:the': card(2, 3), 'en-es:water': card(3, 4), 'en-es:tree': card(2, 1) },
       days: ['2026-09-20', '2026-09-26'],
       history: {
@@ -79,6 +82,7 @@ describe('combinar progresos', () => {
       lastDeckId: 'level-3',
     }
     expect(mergeProgress(PROGRESS, incoming)).toEqual({
+      ...EMPTY_PROGRESS,
       cards: {
         'en-es:the': card(4, 5),
         'es-en:the': card(2, 2),

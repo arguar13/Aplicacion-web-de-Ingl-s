@@ -25,10 +25,8 @@ const PHASE_5_PROGRESS = {
 
 /** El mismo progreso tras la migración v1 → v2 (Fase 8): cada caja Leitner pasa a FSRS. */
 const PHASE_5_MIGRATED = {
+  ...EMPTY_PROGRESS,
   ...PHASE_5_PROGRESS,
-  history: {},
-  blitzBest: 0,
-  favorites: [],
   cards: {
     'en-es:the': fromLeitner(4, 1790000000000, 5, 1),
     'es-en:water': fromLeitner(1, 1790000600000, 2, 2),
@@ -98,6 +96,7 @@ describe('almacén persistido', () => {
       }),
     )
     expect(progressStore(storage).get()).toEqual({
+      ...EMPTY_PROGRESS,
       cards: PHASE_5_MIGRATED.cards,
       days: ['2026-09-24', '2026-09-26'],
       history: {},

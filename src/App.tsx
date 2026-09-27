@@ -11,11 +11,12 @@ import { SmartDeckScreen } from '@/components/SmartDeckScreen'
 import { StatsScreen } from '@/components/stats/StatsScreen'
 import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
+import { useNow } from '@/hooks/useNow'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, type Deck } from '@/lib/decks'
 import { watchAchievements } from '@/lib/achievements'
 import { useOnboardingDone } from '@/lib/onboarding'
-import { setLastDeck, useProgress } from '@/lib/progress'
+import { dayKey, noonOf, setLastDeck, settleStreak, useProgress } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
@@ -100,6 +101,12 @@ export default function App() {
   }, [])
 
   useEffect(() => watchAchievements(), [])
+
+  // Al abrir la app y al cambiar de día: los protectores cuidan los días sin práctica.
+  const today = dayKey(useNow())
+  useEffect(() => {
+    settleStreak(noonOf(today))
+  }, [today])
 
   const { panel } = route
   return (

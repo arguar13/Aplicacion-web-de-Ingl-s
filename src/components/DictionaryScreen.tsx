@@ -16,6 +16,8 @@ import { ArrowLeftIcon, StarIcon } from './icons'
 
 const ROW_HEIGHT = 64
 
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
+
 const STATUS_FILTERS: Array<{ value: StatusFilter; label: string }> = [
   { value: 'all', label: 'Todas' },
   { value: 'new', label: 'Nuevas' },
@@ -248,5 +250,3 @@ function FilterSelect({
     </div>
   )
 }
-
-const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)

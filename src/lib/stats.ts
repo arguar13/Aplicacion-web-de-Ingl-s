@@ -1,5 +1,5 @@
 /** Cálculos de la pantalla de estadísticas, a partir del historial diario del progreso. */
-import { dailyStreak, dayKey, type DayStats, type ProgressData } from './progress'
+import { currentStreak, dayKey, type DayStats, type ProgressData } from './progress'
 
 const DAY = 24 * 60 * 60 * 1000
 
@@ -128,7 +128,7 @@ export function totals(progress: ProgressData, now: number): Totals {
     }
   }
   return {
-    streak: dailyStreak(progress.days, now),
+    streak: currentStreak(progress, now),
     daysPracticed: progress.days.length,
     answers,
     ms,

@@ -28,6 +28,8 @@
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "prefer-const": "error",
     "no-var": "error",
+    // Usar una constante antes de declararla rompe el módulo al cargar (zona muerta temporal).
+    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
     // Hojas de estilo y fuentes se importan por su efecto; el resto de módulos debe usarse.
     "import/no-unassigned-import": ["error", { "allow": ["**/*.css", "@fontsource/**", "@fontsource-variable/**"] }],
     // Las limpiezas de useEffect devuelven una función solo a veces: es el patrón de React.

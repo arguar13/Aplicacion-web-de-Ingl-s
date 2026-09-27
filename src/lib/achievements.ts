@@ -4,7 +4,7 @@
  */
 import { LEVELS } from './decks'
 import { useSyncExternalStore } from 'react'
-import { cardKey, countMastered, dailyStreak, getProgress, type ProgressData, subscribeProgress } from './progress'
+import { cardKey, countMastered, currentStreak, getProgress, type ProgressData, subscribeProgress } from './progress'
 import { isMastered } from './scheduler'
 import { getSettings, subscribeSettings } from './settings'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
@@ -66,7 +66,7 @@ const streakAchievement = (id: string, days: number, title: string, description:
   description,
   icon: 'flame',
   measure: ({ progress, now }) => ({
-    value: Math.max(longestDailyStreak(progress.days), dailyStreak(progress.days, now)),
+    value: Math.max(longestDailyStreak([...progress.days, ...progress.frozenDays]), currentStreak(progress, now)),
     target: days,
   }),
 })

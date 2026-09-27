@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
   cardLookup,
+  currentStreak,
+  MAX_FREEZES,
+  settleStreak,
   getProgress,
   KNOWN_STABILITY_DAYS,
   markKnown,
@@ -66,5 +69,44 @@ describe('favoritas y "ya la sé"', () => {
     expect(card?.due).toBe(NOW + KNOWN_STABILITY_DAYS * 86_400_000)
     restoreCard('en-es', 'the', previous)
     expect(cardLookup(getProgress(), 'en-es')('the')).toBeUndefined()
+  })
+})
+
+describe('protectores de racha', () => {
+  const DAY = 86_400_000
+  /** Practica una palabra cada día durante `count` días seguidos, empezando `from` días después de NOW. */
+  const practiceDays = (from: number, count: number) => {
+    for (let d = from; d < from + count; d++) recordAnswer('en-es', 'the', { clean: true, ms: 1000 }, NOW + d * DAY)
+  }
+
+  it('se gana uno al completar 7 días seguidos', () => {
+    practiceDays(0, 6)
+    expect(getProgress().freezes).toBe(0)
+    practiceDays(6, 1)
+    expect(getProgress().freezes).toBe(1)
+  })
+
+  it('cuida un día sin práctica y la racha sigue', () => {
+    practiceDays(0, 7)
+    // Día 7 sin practicar; el 8 vuelve.
+    expect(settleStreak(NOW + 8 * DAY)).toBe(1)
+    expect(getProgress().freezes).toBe(0)
+    expect(currentStreak(getProgress(), NOW + 8 * DAY)).toBe(8)
+    practiceDays(8, 1)
+    expect(currentStreak(getProgress(), NOW + 8 * DAY)).toBe(9)
+    // Los días cuidados no cuentan como practicados.
+    expect(getProgress().days).toHaveLength(8)
+  })
+
+  it('si no alcanzan para todos los días perdidos, no se gastan y la racha se corta', () => {
+    practiceDays(0, 7)
+    expect(settleStreak(NOW + 10 * DAY)).toBe(0)
+    expect(getProgress().freezes).toBe(1)
+    expect(currentStreak(getProgress(), NOW + 10 * DAY)).toBe(0)
+  })
+
+  it('se guardan como mucho dos', () => {
+    practiceDays(0, 21)
+    expect(getProgress().freezes).toBe(MAX_FREEZES)
   })
 })

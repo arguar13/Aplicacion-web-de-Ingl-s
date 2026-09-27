@@ -5,6 +5,11 @@ import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { TRACKS, type Track } from './types'
 import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
 
+/** Protectores de racha que se pueden guardar a la vez. */
+export const MAX_FREEZES = 2
+/** Se gana un protector cada tantos días seguidos de racha. */
+export const FREEZE_EVERY = 7
+
 /** Días de práctica que se conservan para calcular la racha. */
 const MAX_DAYS = 400
 
@@ -34,6 +39,10 @@ export interface ProgressData {
   blitzBest: number
   /** Palabras marcadas como favoritas (ids). Desde la Fase 10. */
   favorites: string[]
+  /** Protectores de racha disponibles (Fase 11). */
+  freezes: number
+  /** Días sin práctica que cuidó un protector: cuentan para la racha, no como días practicados. */
+  frozenDays: string[]
   lastDeckId: string | null
 }
 
@@ -58,6 +67,8 @@ export const EMPTY_PROGRESS: ProgressData = {
   bestStreak: 0,
   blitzBest: 0,
   favorites: [],
+  freezes: 0,
+  frozenDays: [],
   lastDeckId: null,
 }
 const EMPTY = EMPTY_PROGRESS
@@ -96,6 +107,11 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
     bestStreak: isInteger(raw.bestStreak, 0) ? raw.bestStreak : 0,
     // Campo añadido en la Fase 9.
     blitzBest: isInteger(raw.blitzBest, 0) ? raw.blitzBest : 0,
+    // Campos añadidos en la Fase 11.
+    freezes: isInteger(raw.freezes, 0, MAX_FREEZES) ? raw.freezes : 0,
+    frozenDays: Array.isArray(raw.frozenDays)
+      ? [...new Set(raw.frozenDays.filter(isDayKey))].toSorted().slice(-MAX_DAYS)
+      : [],
     // Campo añadido en la Fase 10.
     favorites: Array.isArray(raw.favorites)
       ? [...new Set(raw.favorites.filter((id): id is string => typeof id === 'string'))]
@@ -141,12 +157,44 @@ export function cardLookup(progress: ProgressData, track: Track) {
   return (id: string) => progress.cards[cardKey(track, id)]
 }
 
+/** Mediodía del día AAAA-MM-DD en hora local (lejos de los cambios de hora). */
+export const noonOf = (day: string) => new Date(`${day}T12:00:00`).getTime()
+
 export function dayKey(time: number): string {
   const d = new Date(time)
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
 /** Días seguidos practicando, contando hoy o, si hoy aún no, hasta ayer. */
+/** Racha actual contando los días que cuidó un protector. */
+export const currentStreak = (progress: ProgressData, now: number) =>
+  dailyStreak([...progress.days, ...progress.frozenDays], now)
+
+/**
+ * Al volver tras días sin practicar: si hay protectores para todos los días perdidos (y había
+ * racha antes), cada uno cuida un día y la racha sigue. Si no alcanzan, la racha se corta sin
+ * gastarlos. Devuelve los días cuidados.
+ */
+export function settleStreak(now = Date.now()): number {
+  const data = store.get()
+  const covered = new Set([...data.days, ...data.frozenDays])
+  const cursor = new Date(now)
+  cursor.setDate(cursor.getDate() - 1)
+  const missing: string[] = []
+  while (!covered.has(dayKey(cursor.getTime())) && missing.length <= data.freezes) {
+    missing.push(dayKey(cursor.getTime()))
+    cursor.setDate(cursor.getDate() - 1)
+  }
+  const streakBefore = covered.has(dayKey(cursor.getTime()))
+  if (missing.length === 0 || !streakBefore || missing.length > data.freezes) return 0
+  store.set({
+    ...data,
+    freezes: data.freezes - missing.length,
+    frozenDays: [...data.frozenDays, ...missing].toSorted().slice(-MAX_DAYS),
+  })
+  return missing.length
+}
+
 export function dailyStreak(days: readonly string[], now: number): number {
   const practiced = new Set(days)
   const cursor = new Date(now)
@@ -182,7 +230,12 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
   })
   const cards = { ...data.cards, [key]: card }
   const today = dayKey(now)
-  const days = data.days.at(-1) === today ? data.days : [...data.days, today].slice(-MAX_DAYS)
+  const firstToday = data.days.at(-1) !== today
+  const days = firstToday ? [...data.days, today].slice(-MAX_DAYS) : data.days
+  // La primera práctica del día que completa una semana de racha regala un protector.
+  const streak = dailyStreak([...days, ...data.frozenDays], now)
+  const freezes =
+    firstToday && streak > 0 && streak % FREEZE_EVERY === 0 ? Math.min(MAX_FREEZES, data.freezes + 1) : data.freezes
   const stats = data.history[today] ?? EMPTY_DAY
   const history = {
     ...data.history,
@@ -194,7 +247,7 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
       mastered: countMastered(cards),
     },
   }
-  store.set({ ...data, cards, days, history: trimHistory(history) })
+  store.set({ ...data, cards, days, freezes, history: trimHistory(history) })
   return card
 }
 
@@ -343,6 +396,8 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     bestStreak: Math.max(current.bestStreak, incoming.bestStreak),
     blitzBest: Math.max(current.blitzBest, incoming.blitzBest),
     favorites: [...new Set([...current.favorites, ...incoming.favorites])],
+    freezes: Math.max(current.freezes, incoming.freezes),
+    frozenDays: [...new Set([...current.frozenDays, ...incoming.frozenDays])].toSorted().slice(-MAX_DAYS),
     lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
   }
 }

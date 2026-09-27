@@ -4,7 +4,7 @@ import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
 import { formatCount, plural } from '@/lib/format'
-import { dailyStreak, todayStats, useProgress } from '@/lib/progress'
+import { currentStreak, todayStats, useProgress } from '@/lib/progress'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
@@ -12,6 +12,7 @@ import { trackOf } from '@/lib/types'
 import { Badge } from './ui/Badge'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
+import { StreakBanner } from './StreakBanner'
 import { ForecastChart } from './ForecastChart'
 import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
@@ -76,7 +77,7 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
         {anyProgress && (
           <>
             {/* En pantallas estrechas solo cabe la meta de hoy; el resto está en "Tu progreso". */}
-            <Stat label="Días" value={dailyStreak(progress.days, now)} className="max-[27.5rem]:hidden" />
+            <Stat label="Días" value={currentStreak(progress, now)} className="max-[27.5rem]:hidden" />
             <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} className="max-[27.5rem]:hidden" />
             <GoalStat done={todayStats(progress, now).answers} goal={dailyGoal} />
           </>
@@ -101,6 +102,7 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
         </div>
 
         <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
+        <StreakBanner progress={progress} now={now} />
         <BackupReminder onOpenSettings={onOpenSettings} />
         {anyProgress && (
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">

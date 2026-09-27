@@ -26,6 +26,19 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Red de seguridad: un error al cargar los módulos ocurre antes de React (y de su pantalla de
+      // error). Si la app no llegó a pintarse, se muestra un aviso en vez de una página en blanco.
+      window.addEventListener('error', function () {
+        var root = document.getElementById('root')
+        if (!root || root.childElementCount > 0) return
+        root.innerHTML =
+          '<main style="min-height:100dvh;display:grid;place-items:center;padding:24px;font-family:system-ui,sans-serif;text-align:center;color:var(--ink,#1c1a17)">' +
+          '<div><p style="font-size:28px;margin:0 0 8px">Tecla no pudo arrancar</p>' +
+          '<p style="margin:0 0 20px;color:var(--muted,#6a645a)">Tu progreso está a salvo en este dispositivo. Prueba a recargar.</p>' +
+          '<button onclick="location.reload()" style="font:600 15px system-ui,sans-serif;padding:12px 24px;border-radius:999px;border:0;background:var(--accent,#4338ca);color:var(--accent-ink,#fff);cursor:pointer">Recargar</button></div></main>'
+      })
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
