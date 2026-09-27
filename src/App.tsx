@@ -4,8 +4,9 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Game } from '@/components/Game'
 import { SettingsDialog } from '@/components/SettingsDialog'
 import { UpdateToast } from '@/components/UpdateToast'
-import type { Deck } from '@/lib/decks'
+import { ALL_WORDS, type Deck } from '@/lib/decks'
 import { setLastDeck } from '@/lib/progress'
+import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, titleOf } from '@/lib/routes'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
@@ -36,6 +37,10 @@ export default function App() {
   }, [route])
 
   useProtectOnceThereIsProgress()
+
+  useEffect(() => {
+    void pruneStaleAudio(ALL_WORDS.map((word) => word.id))
+  }, [])
 
   return (
     <div className="flex min-h-dvh flex-col">

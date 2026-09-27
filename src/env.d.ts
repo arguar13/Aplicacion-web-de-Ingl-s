@@ -16,3 +16,9 @@ interface Navigator {
   /** Audio Session API (Safari): permite que suene aunque el iPhone esté en silencio. */
   readonly audioSession?: { type: 'auto' | 'playback' | 'transient' | 'transient-solo' | 'ambient' | 'play-and-record' }
 }
+
+/** Versión de cada pronunciación según su contenido: { id: hash }. Ver vite/audio-versions.ts. */
+declare module 'virtual:audio-versions' {
+  const versions: Readonly<Record<string, string>>
+  export default versions
+}

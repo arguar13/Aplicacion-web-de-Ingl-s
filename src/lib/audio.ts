@@ -5,6 +5,7 @@
  * palabra no sonaría al aparecer. Un AudioContext, en cambio, se desbloquea una vez con el primer
  * gesto y a partir de ahí puede sonar cuando queramos, con menos latencia.
  */
+import { audioUrl } from './audioUrl'
 
 /** Audios decodificados que se guardan en memoria (~200 KB cada uno). */
 const MAX_CACHED = 40
@@ -43,7 +44,8 @@ function load(id: string): Promise<AudioBuffer | null> {
     return cached
   }
 
-  const promise = fetch(`${import.meta.env.BASE_URL}audio/${id}.mp3`)
+  const promise = audioUrl(id)
+    .then((url) => fetch(url))
     .then((res) => {
       if (!res.ok) throw new Error(`Audio no encontrado: ${id}`)
       return res.arrayBuffer()

@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
+import { audioVersions } from './vite/audio-versions.ts'
 
 export default defineConfig({
   // Rutas relativas: el build funciona igual en la raíz del dominio que en una subcarpeta de public_html.
@@ -10,6 +11,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    audioVersions(fileURLToPath(new URL('./public/audio', import.meta.url))),
     VitePWA({
       // El usuario decide cuándo actualizar: recargar a mitad de una sesión sería molesto.
       registerType: 'prompt',
@@ -38,6 +40,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'assets/*latin*.woff2'],
         globIgnores: ['audio/**'],
         navigateFallback: 'index.html',
+        // Controla la página desde la primera visita (si no, hasta recargar no se guardaría ningún
+        // audio ni se podría descargar para usar sin conexión). Las actualizaciones siguen esperando
+        // a que el usuario las acepte: no hay skipWaiting.
+        clientsClaim: true,
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
@@ -47,6 +53,8 @@ export default defineConfig({
             options: {
               cacheName: 'tecla-audio',
               cacheableResponse: { statuses: [200] },
+              // La URL lleva ?v=<hash del contenido>: cada versión es una entrada distinta y las
+              // antiguas se borran desde la app (pruneStaleAudio).
             },
           },
         ],

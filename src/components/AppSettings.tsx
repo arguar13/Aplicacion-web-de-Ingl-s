@@ -5,8 +5,8 @@ import {
   downloadAudio,
   isIOS,
   isStandalone,
-  offlineAudioSupported,
   useInstallPrompt,
+  useOfflineAudioSupported,
 } from '@/lib/pwa'
 
 /** Fila de ajustes: título y descripción a la izquierda, control a la derecha. */
@@ -64,7 +64,8 @@ export function InstallRow() {
   return null
 }
 
-const TOTAL = ALL_WORDS.length
+const ALL_IDS = ALL_WORDS.map((w) => w.id)
+const TOTAL = ALL_IDS.length
 const APPROX_MB = Math.round((TOTAL * 5.6) / 1000)
 
 export function OfflineAudioRow() {
@@ -72,23 +73,22 @@ export function OfflineAudioRow() {
   const [progress, setProgress] = useState<number | null>(null)
   const controller = useRef<AbortController | null>(null)
 
-  useEffect(() => {
-    void countCachedAudio().then(setCached)
-    return () => controller.current?.abort()
-  }, [])
+  const supported = useOfflineAudioSupported()
 
-  if (!offlineAudioSupported()) return null
+  useEffect(() => {
+    if (supported) void countCachedAudio(ALL_IDS).then(setCached)
+  }, [supported])
+
+  useEffect(() => () => controller.current?.abort(), [])
+
+  if (!supported) return null
 
   async function start() {
     controller.current = new AbortController()
     setProgress(0)
-    await downloadAudio(
-      ALL_WORDS.map((w) => w.id),
-      setProgress,
-      controller.current.signal,
-    )
+    await downloadAudio(ALL_IDS, setProgress, controller.current.signal)
     setProgress(null)
-    setCached(await countCachedAudio())
+    setCached(await countCachedAudio(ALL_IDS))
   }
 
   const downloading = progress !== null

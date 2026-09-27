@@ -32,8 +32,9 @@ AddType application/manifest+json .webmanifest
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
+  # Los MP3 se piden con ?v=<hash del contenido>: si un audio cambia, cambia su URL.
   <FilesMatch "\.mp3$">
-    Header set Cache-Control "public, max-age=2592000"
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
   <FilesMatch "\.(svg|png|ico)$">

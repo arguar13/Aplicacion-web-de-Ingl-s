@@ -1,5 +1,6 @@
 /** Instalación como app y audio sin conexión. */
 import { useSyncExternalStore } from 'react'
+import { loadAudioVersions, versionedAudioUrl } from './audioUrl'
 import { runPool } from './pool'
 
 // --- Instalación --------------------------------------------------------------------------------
@@ -58,14 +59,46 @@ export function useInstallPrompt() {
 const AUDIO_CACHE = 'tecla-audio'
 const CONCURRENCY = 12
 
-/** El audio sin conexión depende del service worker, que solo existe en el build de producción. */
-export const offlineAudioSupported = () =>
-  typeof window !== 'undefined' && 'caches' in window && !!navigator.serviceWorker?.controller
+const hasServiceWorker = () => typeof navigator !== 'undefined' && 'serviceWorker' in navigator
 
-export async function countCachedAudio(): Promise<number> {
-  if (!offlineAudioSupported()) return 0
-  const cache = await caches.open(AUDIO_CACHE)
-  return (await cache.keys()).length
+const subscribeController = (listener: () => void) => {
+  if (!hasServiceWorker()) return () => undefined
+  navigator.serviceWorker.addEventListener('controllerchange', listener)
+  return () => navigator.serviceWorker.removeEventListener('controllerchange', listener)
+}
+
+/**
+ * El audio sin conexión necesita un service worker que controle la página (solo existe en el build
+ * de producción). Con `clientsClaim` lo hace ya en la primera visita; el hook se actualiza en cuanto
+ * toma el control, sin recargar.
+ */
+export function useOfflineAudioSupported(): boolean {
+  return useSyncExternalStore(
+    subscribeController,
+    () => hasServiceWorker() && 'caches' in window && navigator.serviceWorker.controller !== null,
+    () => false,
+  )
+}
+
+/** Pronunciaciones guardadas en su versión actual. */
+export async function countCachedAudio(ids: readonly string[]): Promise<number> {
+  if (!('caches' in window)) return 0
+  const [cache, versions] = await Promise.all([caches.open(AUDIO_CACHE), loadAudioVersions()])
+  const cached = new Set((await cache.keys()).map((request) => request.url))
+  return ids.filter((id) => cached.has(versionedAudioUrl(id, versions))).length
+}
+
+/**
+ * Borra de la caché las pronunciaciones que ya no están en su versión actual (se regeneraron o la
+ * palabra dejó de existir): cada versión nueva es una URL distinta y la antigua ocuparía espacio.
+ */
+export async function pruneStaleAudio(ids: readonly string[]): Promise<number> {
+  if (!('caches' in window) || !(await caches.has(AUDIO_CACHE))) return 0
+  const [cache, versions] = await Promise.all([caches.open(AUDIO_CACHE), loadAudioVersions()])
+  const current = new Set(ids.map((id) => versionedAudioUrl(id, versions)))
+  const stale = (await cache.keys()).filter((request) => !current.has(request.url))
+  await Promise.all(stale.map((request) => cache.delete(request)))
+  return stale.length
 }
 
 /**
@@ -73,16 +106,14 @@ export async function countCachedAudio(): Promise<number> {
  * del service worker: así, al terminar, todas están de verdad en la caché. Se puede cancelar con
  * `signal`.
  */
-const audioUrl = (id: string) => new URL(`${import.meta.env.BASE_URL}audio/${id}.mp3`, location.href).href
-
 export async function downloadAudio(
   ids: readonly string[],
   onProgress: (done: number) => void,
   signal: AbortSignal,
 ): Promise<void> {
-  const cache = await caches.open(AUDIO_CACHE)
+  const [cache, versions] = await Promise.all([caches.open(AUDIO_CACHE), loadAudioVersions()])
   const cached = new Set((await cache.keys()).map((request) => request.url))
-  const pending = ids.filter((id) => !cached.has(audioUrl(id)))
+  const pending = ids.map((id) => versionedAudioUrl(id, versions)).filter((url) => !cached.has(url))
 
   let done = ids.length - pending.length
   onProgress(done)
@@ -90,10 +121,10 @@ export async function downloadAudio(
   await runPool(
     pending,
     CONCURRENCY,
-    async (id) => {
+    async (url) => {
       try {
-        const response = await fetch(audioUrl(id), { signal })
-        if (response.ok) await cache.put(audioUrl(id), response)
+        const response = await fetch(url, { signal })
+        if (response.ok) await cache.put(url, response)
       } catch {
         // Sin red o cancelado: esa pronunciación queda para la próxima descarga.
         if (signal.aborted) return

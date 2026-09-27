@@ -40,7 +40,7 @@ El build es un sitio estático: no necesita Node en el servidor.
 
 `public/.htaccess` configura HTTPS, compresión, caché larga para los archivos con hash, revalidación
 del HTML, `sw.js` y el manifiesto (para que cada despliegue llegue al instante) y cabeceras de
-seguridad. El service worker necesita HTTPS, que Hostinger incluye con su certificado SSL gratuito. Los MP3 se cachean 30 días: si se regenera un audio, cámbiale el nombre o espera ese plazo.
+seguridad. El service worker necesita HTTPS, que Hostinger incluye con su certificado SSL gratuito. Cada MP3 se pide con la versión de su contenido (`audio/<id>.mp3?v=<hash>`, calculada en el build por `vite/audio-versions.ts`), así que se cachea como inmutable: si se regenera un audio, su URL cambia y llega a todos al instante.
 
 ## Estructura
 
