@@ -1,6 +1,7 @@
 /**
  * Genera las imágenes de presentación de Tecla:
  *   public/og.png                    Imagen para compartir el enlace (1200×630).
+ *   public/icons/*.png               Íconos de la PWA, desde el mismo SVG que public/favicon.svg.
  *   public/screenshots/*.png         Capturas del manifiesto (instalación enriquecida).
  *
  * Las capturas son de la app real: requiere el build servido en local.
@@ -21,49 +22,59 @@ const byEnglish = new Map(words.map((word) => [word.en, word]))
 
 const fontUrl = async (path) =>
   `data:font/woff2;base64,${(await readFile(new URL(`node_modules/${path}`, root))).toString('base64')}`
-const [serif, serifItalic, inter] = await Promise.all([
-  fontUrl('@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2'),
-  fontUrl('@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2'),
+const [geist, inter] = await Promise.all([
+  fontUrl('@fontsource-variable/geist/files/geist-latin-wght-normal.woff2'),
   fontUrl('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'),
 ])
 
-/** Imagen para compartir: el mismo lenguaje visual que la app (papel cálido, índigo, serif). */
+/** Logo (igual que public/favicon.svg): una "T" con un punto sobre el degradado de marca. */
+const logo = (id, { bleed = false, glyphScale = 1 } = {}) => `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/>
+  </linearGradient></defs>
+  ${bleed ? `<rect width="64" height="64" fill="url(#${id})"/>` : `<rect x="2" y="2" width="60" height="60" rx="18" fill="url(#${id})"/>`}
+  <g transform="translate(32 32) scale(${glyphScale}) translate(-32 -32)">
+    <rect x="17" y="17" width="30" height="8" rx="4" fill="#fff"/>
+    <rect x="28" y="17" width="8" height="30" rx="4" fill="#fff"/>
+    <circle cx="45" cy="43" r="4" fill="#fff" opacity=".75"/>
+  </g>
+</svg>`
+
+/** Imagen para compartir: el mismo lenguaje visual que la app (neutros fríos, aurora, Geist). */
 const ogHtml = `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
-@font-face { font-family: Serif; src: url(${serif}) format('woff2'); }
-@font-face { font-family: Serif; font-style: italic; src: url(${serifItalic}) format('woff2'); }
+@font-face { font-family: Geist; font-weight: 100 900; src: url(${geist}) format('woff2'); }
 @font-face { font-family: Inter; font-weight: 100 900; src: url(${inter}) format('woff2'); }
 * { box-sizing: border-box; margin: 0; }
-body { width: 1200px; height: 630px; overflow: hidden; font-family: Inter; color: #1c1a17;
-  background: radial-gradient(900px 520px at 78% -10%, #e6e3fa, transparent 70%), #f4f1ea;
+body { width: 1200px; height: 630px; overflow: hidden; font-family: Inter; color: #0c0c14;
+  background: radial-gradient(760px 480px at 8% -8%, rgb(99 102 241 / .18), transparent 62%),
+    radial-gradient(760px 480px at 96% 0%, rgb(168 85 247 / .16), transparent 60%), #f6f6f9;
   display: grid; grid-template-columns: 1fr 470px; align-items: center; gap: 56px; padding: 0 84px; }
-.brand { display: flex; align-items: center; gap: 16px; font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
-.logo { width: 60px; height: 60px; transform: rotate(-6deg); }
-h1 { font-family: Serif; font-weight: 400; font-size: 96px; line-height: 1; letter-spacing: -0.02em; margin-top: 44px; }
-h1 em { color: #4338ca; }
-p { margin-top: 26px; font-size: 27px; line-height: 1.4; color: #5b564d; max-width: 520px; text-wrap: pretty; }
-.card { background: #fffdf8; border: 1px solid #e4dfd3; border-radius: 36px; padding: 40px 36px 36px;
-  box-shadow: 0 30px 60px -30px rgba(40, 32, 90, .35); }
-.eyebrow { text-align: center; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #6a645a; }
-.word { text-align: center; font-family: Serif; font-size: 84px; line-height: 1; margin: 18px 0 34px; }
+.brand { display: flex; align-items: center; gap: 14px; font-family: Geist; font-size: 28px; font-weight: 600; letter-spacing: -0.03em; }
+.logo { width: 52px; height: 52px; }
+h1 { font-family: Geist; font-weight: 650; font-size: 92px; line-height: .98; letter-spacing: -0.045em; margin-top: 40px; }
+h1 span { background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+p { margin-top: 26px; font-size: 26px; line-height: 1.4; color: #5d6070; max-width: 520px; text-wrap: pretty; }
+.card { background: #fff; border: 1px solid #e6e6ee; border-radius: 32px; padding: 38px 34px 34px;
+  box-shadow: 0 1px 2px rgb(15 15 35 / .04), 0 40px 80px -30px rgb(79 70 229 / .35); }
+.eyebrow { text-align: center; font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #5d6070; }
+.word { text-align: center; font-family: Geist; font-weight: 650; letter-spacing: -0.04em; font-size: 88px; line-height: 1; margin: 18px 0 32px; }
 .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.key { display: flex; align-items: center; gap: 12px; border: 1px solid #e4dfd3; border-radius: 18px; padding: 16px;
-  font-size: 22px; font-weight: 500; background: #fffdf8; box-shadow: 0 3px 0 0 #e4dfd3; }
-.key b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: #f4f1ea;
-  font-size: 15px; font-weight: 600; color: #6a645a; }
-.key.ok { border-color: #1f7a4d; background: #e3f3ea; box-shadow: 0 3px 0 0 #1f7a4d; color: #145c39; }
-.key.ok b { background: #1f7a4d; color: #fff; }
+.key { display: flex; align-items: center; justify-content: center; border: 1px solid #e6e6ee; border-radius: 20px; padding: 22px 16px;
+  font-size: 22px; font-weight: 550; background: #fff; box-shadow: 0 1px 2px rgb(15 15 35 / .06), 0 4px 12px -6px rgb(15 15 35 / .08); }
+.key.ok { border-color: #047857; background: #047857; color: #fff; box-shadow: 0 16px 36px -16px #047857; }
 </style></head><body>
 <div>
-  <div class="brand"><svg class="logo" viewBox="0 0 64 64"><rect x="4" y="8" width="56" height="52" rx="14" fill="#2f2a8f"/><rect x="4" y="4" width="56" height="50" rx="14" fill="#4338ca"/><text x="32" y="41" font-family="Serif" font-size="30" font-style="italic" fill="#fff" text-anchor="middle">Aa</text></svg>Tecla</div>
-  <h1>Inglés, <em>tecla</em><br>a tecla</h1>
-  <p>Las 3978 palabras más usadas, con repaso espaciado. Pocos minutos al día.</p>
+  <div class="brand"><span class="logo">${logo('og')}</span>Tecla</div>
+  <h1>Inglés, <span>tecla</span><br>a tecla</h1>
+  <p>Las palabras más usadas del inglés, con repaso espaciado inteligente. Gratis.</p>
 </div>
 <div class="card">
   <div class="eyebrow">¿Qué significa?</div>
   <div class="word" lang="en">water</div>
   <div class="keys">
-    <div class="key"><b>1</b>fuego</div><div class="key ok"><b>2</b>agua</div>
-    <div class="key"><b>3</b>tierra</div><div class="key"><b>4</b>aire</div>
+    <div class="key">fuego</div><div class="key ok">agua</div>
+    <div class="key">tierra</div><div class="key">aire</div>
   </div>
 </div>
 </body></html>`
@@ -75,6 +86,25 @@ await og.setContent(ogHtml)
 await og.evaluate(() => document.fonts.ready)
 await og.screenshot({ path: out('og.png') })
 await og.close()
+
+/**
+ * Íconos de la PWA desde el mismo SVG: normales (con esquinas redondeadas y fondo transparente),
+ * "maskable" para Android (a sangre, con la letra dentro de la zona segura del 80 %) y el de iOS
+ * (a sangre: iOS redondea las esquinas por su cuenta).
+ */
+const ICONS = [
+  { file: 'icons/icon-192.png', size: 192, svg: logo('i192') },
+  { file: 'icons/icon-512.png', size: 512, svg: logo('i512') },
+  { file: 'icons/maskable-512.png', size: 512, svg: logo('m512', { bleed: true, glyphScale: 0.8 }) },
+  { file: 'icons/apple-touch-icon.png', size: 180, svg: logo('a180', { bleed: true, glyphScale: 0.9 }) },
+]
+async function renderIcon({ file, size, svg }) {
+  const page = await browser.newPage({ viewport: { width: size, height: size } })
+  await page.setContent(`<body style="margin:0">${svg}</body>`)
+  await page.screenshot({ path: out(file), omitBackground: true })
+  await page.close()
+}
+await Promise.all(ICONS.map(renderIcon))
 
 /** Responde bien la palabra en pantalla y, en cadena, las `remaining` siguientes. */
 async function practice(page, remaining) {

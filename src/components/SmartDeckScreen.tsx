@@ -40,7 +40,9 @@ function SmartDeckSession({ kind, mode, onExit, onOpenSettings }: Props & { mode
       <Header />
       <main className="grid flex-1 place-items-center px-4 py-12 sm:px-6">
         <Surface className="w-full max-w-md animate-rise px-6 py-9 text-center sm:px-9">
-          <h1 className="font-display text-4xl leading-tight">{review ? 'Todo al día' : 'Nada difícil por ahora'}</h1>
+          <h1 className="font-display text-3xl leading-tight sm:text-4xl">
+            {review ? 'Todo al día' : 'Nada difícil por ahora'}
+          </h1>
           <p className="mx-auto mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
             {review
               ? 'No te toca repasar nada hoy. Aquí tienes lo que viene los próximos días.'

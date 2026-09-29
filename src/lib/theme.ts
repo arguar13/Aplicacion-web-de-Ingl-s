@@ -1,7 +1,7 @@
 import { getSettings, subscribeSettings } from './settings'
 
 /** Color de la barra del navegador en móvil para cada tema (igual que --bg en index.css). */
-const THEME_COLOR = { light: '#f4f1ea', dark: '#0f1013' } as const
+const THEME_COLOR = { light: '#f6f6f9', dark: '#08080c' } as const
 
 const systemDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
 

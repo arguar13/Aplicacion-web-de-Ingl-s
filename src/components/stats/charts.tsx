@@ -38,7 +38,7 @@ function Tooltip({ left, children }: { left: string; children: ReactNode }) {
   return (
     <div
       role="status"
-      className="pointer-events-none absolute -top-2 z-10 -translate-x-1/2 -translate-y-full rounded-xl border border-line bg-raised px-3 py-1.5 text-center text-xs whitespace-nowrap shadow-[0_8px_24px_-12px_rgb(0_0_0/0.35)]"
+      className="pointer-events-none absolute -top-2 z-10 -translate-x-1/2 -translate-y-full rounded-xl border border-line bg-raised px-3 py-1.5 text-center text-xs whitespace-nowrap shadow-float"
       style={{ left }}
     >
       {children}

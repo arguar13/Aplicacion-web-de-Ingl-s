@@ -52,9 +52,9 @@ export function Sheet({ open, onClose, title, titleLang, children }: SheetProps)
       closedby="any"
       aria-labelledby={titleId}
       className={[
-        'm-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-t-[28px] border border-line bg-surface p-0 text-ink',
-        'shadow-[0_-12px_40px_-12px_rgb(0_0_0/0.25)] backdrop:bg-black/40 backdrop:backdrop-blur-[2px]',
-        'open:animate-rise sm:m-auto sm:max-w-md sm:rounded-[28px]',
+        'm-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-y-auto rounded-t-3xl border border-line bg-surface p-0 text-ink',
+        'shadow-float backdrop:bg-black/35 backdrop:backdrop-blur-sm',
+        'open:animate-rise sm:m-auto sm:max-w-md sm:rounded-3xl',
       ].join(' ')}
     >
       <div className="px-6 pt-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:px-7 sm:pb-7">

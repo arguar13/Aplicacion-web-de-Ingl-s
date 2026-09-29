@@ -25,7 +25,7 @@ export function Segmented<T extends string>({ label, value, options, onChange, c
             // relative: el radio oculto (sr-only, absoluto) queda dentro de su etiqueta.
             'relative flex-1 cursor-pointer rounded-full px-3.5 py-1.5 text-center text-sm font-medium whitespace-nowrap text-muted',
             'transition-[background-color,color,box-shadow] duration-200 hover:text-ink',
-            'has-checked:bg-raised has-checked:text-ink has-checked:shadow-[0_1px_3px_rgb(0_0_0/0.12)]',
+            'has-checked:bg-raised has-checked:text-ink has-checked:shadow-key',
             'has-focus-visible:outline-2 has-focus-visible:outline-offset-1 has-focus-visible:outline-accent',
           )}
         >

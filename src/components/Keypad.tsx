@@ -37,14 +37,13 @@ export function Keypad({ options, language, answerId, wrong, solved, onAnswer }:
 
 const stateStyles: Record<KeyState, string> = {
   idle: cn(
-    'cursor-pointer border-line bg-raised text-ink shadow-[0_4px_0_0_var(--line-strong)]',
-    'hover:border-accent/40 hover:shadow-[0_4px_0_0_color-mix(in_oklab,var(--accent)_35%,var(--line-strong))]',
-    'active:translate-y-1 active:shadow-none',
+    'cursor-pointer border-line bg-surface text-ink shadow-key',
+    'hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-key-hover',
+    'active:translate-y-0 active:scale-[0.98]',
   ),
-  correct: 'animate-pop border-ok bg-ok text-ok-ink shadow-[0_4px_0_0_color-mix(in_oklab,var(--ok)_65%,black)]',
-  wrong:
-    'animate-shake border-bad/30 bg-bad-soft text-bad shadow-[0_4px_0_0_color-mix(in_oklab,var(--bad)_25%,transparent)]',
-  dimmed: 'border-line bg-raised text-muted opacity-45 shadow-[0_4px_0_0_var(--line)]',
+  correct: 'animate-pop border-ok bg-ok text-ok-ink shadow-[0_16px_36px_-16px_var(--ok)]',
+  wrong: 'animate-shake border-bad/40 bg-bad-soft text-bad',
+  dimmed: 'border-line bg-surface text-muted opacity-40',
 }
 
 interface KeyProps {
@@ -63,13 +62,19 @@ function OptionKey({ label, lang, shortcut, state, onPress }: KeyProps) {
       disabled={state !== 'idle'}
       aria-keyshortcuts={String(shortcut)}
       className={cn(
-        'relative flex min-h-24 items-center justify-center rounded-2xl border px-4 pt-5 pb-4 text-center text-[17px] leading-snug font-medium select-none sm:min-h-28 sm:text-lg md:min-h-32 md:text-xl short:min-h-22 short:text-base',
-        'transition-[translate,box-shadow,background-color,border-color,color,opacity] duration-150',
+        'relative flex min-h-24 items-center justify-center rounded-[20px] border px-4 pt-5 pb-4 text-center text-[17px] leading-snug font-medium select-none sm:min-h-28 sm:text-lg md:min-h-32 md:text-xl short:min-h-22 short:text-base',
+        'transition-[translate,scale,box-shadow,background-color,border-color,color,opacity] duration-150',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
         stateStyles[state],
       )}
     >
-      <span className="absolute top-2.5 left-3.5 text-[11px] font-semibold tabular-nums opacity-50">{shortcut}</span>
+      {/* El número es el atajo de teclado: como los demás atajos, solo con ratón o trackpad. */}
+      <span
+        aria-hidden
+        className="absolute top-3 left-3 hidden size-5 items-center justify-center rounded-md bg-current/8 text-[11px] font-semibold tabular-nums opacity-70 pointer-fine:flex"
+      >
+        {shortcut}
+      </span>
       <span lang={lang}>{label}</span>
     </button>
   )

@@ -35,7 +35,9 @@ export function Confetti({ pieces = 110 }: { pieces?: number }) {
     context.scale(ratio, ratio)
 
     const style = getComputedStyle(document.documentElement)
-    const colors = ['--accent', '--ok', '--accent-soft', '--bad'].map((name) => style.getPropertyValue(name).trim())
+    const colors = ['--accent', '--accent-2', '--ok', '--accent-soft'].map((name) =>
+      style.getPropertyValue(name).trim(),
+    )
     const particles: Piece[] = Array.from({ length: pieces }, (_, i) => ({
       x: width / 2 + (Math.random() - 0.5) * width * 0.3,
       y: height * 0.3,
@@ -44,7 +46,7 @@ export function Confetti({ pieces = 110 }: { pieces?: number }) {
       size: 5 + Math.random() * 5,
       rotation: Math.random() * Math.PI,
       spin: (Math.random() - 0.5) * 0.02,
-      color: colors[i % colors.length] || '#4338ca',
+      color: colors[i % colors.length] || '#4f46e5',
     }))
 
     let frame = 0

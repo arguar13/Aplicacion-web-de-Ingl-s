@@ -6,9 +6,10 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-accent text-accent-ink shadow-[0_2px_0_0_color-mix(in_oklab,var(--accent)_65%,black)] hover:brightness-110 active:translate-y-px active:shadow-none',
-  secondary: 'border border-line-strong text-ink hover:border-accent/50 hover:text-accent',
-  ghost: 'text-muted hover:bg-bg hover:text-ink',
+    'bg-brand text-accent-ink shadow-glow hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.98]',
+  secondary:
+    'border border-line bg-surface text-ink shadow-key hover:-translate-y-px hover:border-line-strong active:translate-y-0 active:scale-[0.98]',
+  ghost: 'text-muted hover:bg-ink/5 hover:text-ink',
   danger: 'bg-bad text-white hover:brightness-110 focus-visible:outline-bad',
   'danger-outline': 'border border-bad/40 text-bad hover:bg-bad-soft focus-visible:outline-bad',
 }
@@ -34,7 +35,7 @@ export function Button({ variant = 'secondary', size = 'md', className, type = '
       type={type}
       className={cn(
         'inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap',
-        'transition-[background-color,border-color,color,filter,translate,box-shadow] duration-150',
+        'transition-[background-color,border-color,color,filter,translate,scale,box-shadow] duration-150',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
         'disabled:cursor-default disabled:opacity-60',
         variants[variant],

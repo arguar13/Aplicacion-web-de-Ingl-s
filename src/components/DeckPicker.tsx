@@ -88,7 +88,7 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
         <div className="animate-rise text-center">
           <p className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Vocabulario en inglés</p>
           <h1 className="mt-4 font-display text-5xl leading-[1.02] sm:text-6xl">
-            Escucha, <em className="text-accent">piensa</em>, pulsa.
+            Escucha, <span className="text-brand">piensa</span>, pulsa.
           </h1>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted">
             {total.total.toLocaleString('es')} palabras ordenadas por lo mucho que se usan. Lo que falles volverá justo
@@ -143,9 +143,9 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
 }
 
 const cardBase = cn(
-  'group relative w-full cursor-pointer rounded-2xl border text-left',
-  'transition-[translate,box-shadow,border-color] duration-150',
-  'hover:-translate-y-0.5 active:translate-y-1 active:shadow-none',
+  'group relative w-full cursor-pointer rounded-3xl border text-left',
+  'transition-[translate,scale,box-shadow,border-color] duration-200',
+  'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]',
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
 )
 
@@ -170,9 +170,9 @@ function ReviewCard({
       aria-keyshortcuts={due > 0 ? 'R' : undefined}
       className={cn(
         cardBase,
-        'flex h-full flex-col border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)]',
-        'hover:border-accent/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--accent)_30%,var(--line))]',
-        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-[0_4px_0_0_var(--line)]',
+        'flex h-full flex-col border-line bg-surface p-5 shadow-card',
+        'hover:border-accent/40 hover:shadow-key-hover',
+        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
       )}
     >
       <span className="flex w-full items-start justify-between gap-3">
@@ -202,9 +202,9 @@ function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
       aria-keyshortcuts={count > 0 ? 'D' : undefined}
       className={cn(
         cardBase,
-        'flex h-full flex-col border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)]',
-        'hover:border-bad/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--bad)_25%,var(--line))]',
-        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-[0_4px_0_0_var(--line)]',
+        'flex h-full flex-col border-line bg-surface p-5 shadow-card',
+        'hover:border-bad/40 hover:shadow-[0_14px_30px_-14px_color-mix(in_oklab,var(--bad)_45%,transparent)]',
+        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
       )}
     >
       <span className="flex w-full items-start justify-between gap-3">
@@ -240,8 +240,8 @@ function BlitzCard({ best, onOpen }: { best: number; onOpen: () => void }) {
       onClick={onOpen}
       className={cn(
         cardBase,
-        'flex items-center gap-4 border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)] sm:col-span-2',
-        'hover:border-accent/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--accent)_30%,var(--line))]',
+        'flex items-center gap-4 border-line bg-surface p-5 shadow-card sm:col-span-2',
+        'hover:border-accent/40 hover:shadow-key-hover',
       )}
     >
       <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:rotate-12">
@@ -294,8 +294,7 @@ function ContinueCard({
       aria-keyshortcuts="Enter"
       className={cn(
         cardBase,
-        'mt-9 flex animate-rise items-center gap-4 border-accent bg-accent p-5 text-accent-ink sm:mt-10 sm:gap-5 sm:p-6',
-        'shadow-[0_4px_0_0_color-mix(in_oklab,var(--accent)_65%,black),0_18px_40px_-16px_var(--accent)]',
+        'mt-9 flex animate-rise items-center gap-4 overflow-hidden border-transparent bg-brand p-5 text-accent-ink shadow-glow sm:mt-10 sm:gap-5 sm:p-6',
       )}
     >
       <span className="min-w-0 flex-1">
@@ -336,11 +335,11 @@ function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary
       aria-keyshortcuts={shortcut ?? undefined}
       className={cn(
         cardBase,
-        'flex h-full gap-4 border-line bg-surface p-5 shadow-[0_4px_0_0_var(--line)]',
-        'hover:border-accent/40 hover:shadow-[0_6px_0_0_color-mix(in_oklab,var(--accent)_30%,var(--line))]',
+        'flex h-full gap-4 border-line bg-surface p-5 shadow-card',
+        'hover:border-accent/40 hover:shadow-key-hover',
       )}
     >
-      <span className="w-9 shrink-0 font-display text-5xl leading-[0.9] text-accent tabular-nums">{deck.level}</span>
+      <span className="w-9 shrink-0 text-brand font-display text-5xl leading-[0.9] tabular-nums">{deck.level}</span>
       <span className="flex min-w-0 flex-1 flex-col">
         <span className="flex flex-wrap items-center gap-x-2 gap-y-1 pr-8">
           <span className="text-[17px] font-semibold">{deck.name}</span>
@@ -350,7 +349,7 @@ function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary
           Palabras {deck.from.toLocaleString('es')}–{deck.to.toLocaleString('es')}
         </span>
         <span className="mt-2 hidden text-sm leading-snug text-muted sm:block">{deck.description}</span>
-        <span lang="en" className="mt-2 block truncate font-display text-lg text-ink/75 italic sm:mt-3">
+        <span lang="en" className="mt-2 block truncate text-[15px] font-medium text-ink/70 sm:mt-3">
           {samplePreview(deck)
             .map((w) => w.en)
             .join(' · ')}
@@ -377,11 +376,10 @@ function AllWordsCard({ summary, onPick }: { summary: DeckSummary; onPick: (deck
       aria-keyshortcuts="0"
       className={cn(
         cardBase,
-        'flex items-center gap-4 border-accent/25 bg-accent-soft p-5',
-        'shadow-[0_4px_0_0_color-mix(in_oklab,var(--accent)_25%,transparent)] hover:border-accent/50',
+        'flex items-center gap-4 border-accent/25 bg-accent-soft p-5 hover:border-accent/50 hover:shadow-key-hover',
       )}
     >
-      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-accent-ink">
+      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand text-accent-ink">
         <ShuffleIcon width={18} height={18} />
       </span>
       <span className="min-w-0 flex-1">

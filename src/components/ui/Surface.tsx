@@ -9,13 +9,5 @@ export function Surface({
   className,
   ...props
 }: HTMLAttributes<HTMLElement> & { as?: SurfaceElement }) {
-  return (
-    <Element
-      className={cn(
-        'rounded-[28px] border border-line bg-surface shadow-[0_1px_2px_rgb(0_0_0/0.04),0_18px_40px_-20px_rgb(0_0_0/0.18)]',
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <Element className={cn('rounded-3xl border border-line bg-surface shadow-card', className)} {...props} />
 }

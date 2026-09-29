@@ -25,7 +25,7 @@ export function BackupReminder({ onOpenSettings }: { onOpenSettings: () => void 
   return (
     <aside
       aria-labelledby="backup-reminder-title"
-      className="relative mt-6 flex animate-rise gap-3.5 rounded-2xl border border-line bg-surface p-4 pr-12 shadow-[0_1px_2px_rgb(0_0_0/0.04)] sm:p-5 sm:pr-14"
+      className="relative mt-6 flex animate-rise gap-3.5 rounded-2xl border border-line bg-surface p-4 pr-12 shadow-card sm:p-5 sm:pr-14"
     >
       <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
         <ShieldIcon />

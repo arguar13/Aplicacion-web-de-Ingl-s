@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react'
+import { type SVGProps, useId } from 'react'
 
 const base: SVGProps<SVGSVGElement> = {
   width: 20,
@@ -74,29 +74,24 @@ export function ShuffleIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+/**
+ * Logo: una "T" geométrica con un punto (la tecla pulsada) sobre el degradado de marca. Cada
+ * instancia necesita su propio id de degradado: el SVG puede aparecer varias veces en la página.
+ */
 export function LogoMark(props: SVGProps<SVGSVGElement>) {
+  const gradient = useId()
   return (
     <svg width={30} height={30} viewBox="0 0 64 64" aria-hidden {...props}>
-      <rect
-        x="4"
-        y="8"
-        width="56"
-        height="52"
-        rx="14"
-        style={{ fill: 'color-mix(in oklab, var(--accent) 70%, black)' }}
-      />
-      <rect x="4" y="4" width="56" height="50" rx="14" style={{ fill: 'var(--accent)' }} />
-      <text
-        x="32"
-        y="40"
-        fontFamily="Instrument Serif, Georgia, serif"
-        fontSize="32"
-        fontStyle="italic"
-        textAnchor="middle"
-        style={{ fill: 'var(--accent-ink)' }}
-      >
-        Aa
-      </text>
+      <defs>
+        <linearGradient id={gradient} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style={{ stopColor: 'var(--accent)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--accent-2)' }} />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="60" height="60" rx="18" fill={`url(#${gradient})`} />
+      <rect x="17" y="17" width="30" height="8" rx="4" style={{ fill: 'var(--accent-ink)' }} />
+      <rect x="28" y="17" width="8" height="30" rx="4" style={{ fill: 'var(--accent-ink)' }} />
+      <circle cx="45" cy="43" r="4" style={{ fill: 'var(--accent-ink)' }} opacity="0.75" />
     </svg>
   )
 }

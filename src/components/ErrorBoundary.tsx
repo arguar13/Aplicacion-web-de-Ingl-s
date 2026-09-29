@@ -61,7 +61,7 @@ export function ErrorScreen({
     <main role="alert" className="grid flex-1 place-items-center px-4 py-16 sm:px-6">
       <Surface className="w-full max-w-md animate-rise px-6 py-9 text-center sm:px-9">
         <LogoMark width={44} height={44} className="mx-auto -rotate-6" />
-        <h1 className="mt-5 font-display text-4xl leading-tight">Algo se trabó</h1>
+        <h1 className="mt-5 font-display text-3xl leading-tight sm:text-4xl">Algo se trabó</h1>
         <p className="mx-auto mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
           Tu progreso está a salvo: se guarda con cada respuesta. Vuelve a intentarlo y, si se repite, recarga la
           página.

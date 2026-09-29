@@ -17,7 +17,7 @@
       content="Escucha una palabra, pulsa su traducción y repásala justo antes de olvidarla. Pocos minutos al día."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="theme-color" content="#f6f6f9" />
     <script>
       // Aplica el tema antes de pintar para evitar un destello del tema equivocado.
       try {
@@ -37,10 +37,10 @@
       /* Pantalla de arranque: se pinta con el HTML, sin esperar a la app (en una red lenta, segundos
          antes). React la reemplaza al montarse. Colores iguales a --bg de index.css. */
       html {
-        background: #f4f1ea;
+        background: #f6f6f9;
       }
       html[data-theme='dark'] {
-        background: #0f1013;
+        background: #08080c;
       }
       .arranque {
         min-height: 100vh;
@@ -58,21 +58,16 @@
     <div id="root">
       <div class="arranque" data-arranque role="status" aria-label="Cargando Tecla">
         <svg viewBox="0 0 64 64" aria-hidden="true">
-          <g transform="rotate(-6 32 32)">
-            <rect x="4" y="8" width="56" height="52" rx="14" fill="#2f2a8f" />
-            <rect x="4" y="4" width="56" height="50" rx="14" fill="#4338ca" />
-            <text
-              x="32"
-              y="41"
-              font-family="Georgia, serif"
-              font-size="30"
-              font-style="italic"
-              fill="#fff"
-              text-anchor="middle"
-            >
-              Aa
-            </text>
-          </g>
+          <defs>
+            <linearGradient id="arranque-degradado" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4f46e5" />
+              <stop offset="1" stop-color="#7c3aed" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="60" height="60" rx="18" fill="url(#arranque-degradado)" />
+          <rect x="17" y="17" width="30" height="8" rx="4" fill="#fff" />
+          <rect x="28" y="17" width="8" height="30" rx="4" fill="#fff" />
+          <circle cx="45" cy="43" r="4" fill="#fff" opacity=".75" />
         </svg>
       </div>
     </div>
@@ -87,7 +82,7 @@
           '<main style="min-height:100dvh;display:grid;place-items:center;padding:24px;font-family:system-ui,sans-serif;text-align:center;color:var(--ink,#1c1a17)">' +
           '<div><p style="font-size:28px;margin:0 0 8px">Tecla no pudo arrancar</p>' +
           '<p style="margin:0 0 20px;color:var(--muted,#6a645a)">Tu progreso está a salvo en este dispositivo. Prueba a recargar.</p>' +
-          '<button onclick="location.reload()" style="font:600 15px system-ui,sans-serif;padding:12px 24px;border-radius:999px;border:0;background:var(--accent,#4338ca);color:var(--accent-ink,#fff);cursor:pointer">Recargar</button></div></main>'
+          '<button onclick="location.reload()" style="font:600 15px system-ui,sans-serif;padding:12px 24px;border-radius:999px;border:0;background:var(--accent,#4f46e5);color:var(--accent-ink,#fff);cursor:pointer">Recargar</button></div></main>'
       })
     </script>
     <script type="module" src="/src/main.tsx"></script>

@@ -62,7 +62,7 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
           <Panel>
             <LogoMark width={64} height={64} className="mx-auto -rotate-6" />
             <h1 className="mt-6 font-display text-5xl leading-[1.05]">
-              Inglés, <em className="text-accent">tecla</em> a tecla
+              Inglés, <span className="text-brand">tecla</span> a tecla
             </h1>
             <p className="mx-auto mt-4 max-w-sm text-[15px] leading-relaxed text-muted">
               Escucha una palabra, piensa y pulsa su traducción. Tecla te la vuelve a preguntar justo antes de que la
@@ -88,7 +88,7 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
         {step === 'restore' && backup && (
           <Panel>
             <p className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Tu copia</p>
-            <h1 className="mt-3 font-display text-4xl leading-tight">Sigue donde lo dejaste</h1>
+            <h1 className="mt-3 font-display text-3xl leading-tight sm:text-4xl">Sigue donde lo dejaste</h1>
             <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-line bg-bg px-5 py-4">
               <BackupSummary backup={backup} />
             </div>
@@ -108,7 +108,7 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
 
         {step === 'goal' && (
           <Panel>
-            <h1 className="font-display text-4xl leading-tight">¿Cuánto quieres practicar al día?</h1>
+            <h1 className="font-display text-3xl leading-tight sm:text-4xl">¿Cuánto quieres practicar al día?</h1>
             <p className="mt-2 text-[15px] text-muted">Puedes cambiarlo cuando quieras en Ajustes.</p>
             <fieldset className="mt-6 grid grid-cols-2 gap-2.5">
               <legend className="sr-only">Meta diaria</legend>
@@ -142,7 +142,7 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
 
         {step === 'level' && (
           <Panel>
-            <h1 className="font-display text-4xl leading-tight">¿Ya sabes algo de inglés?</h1>
+            <h1 className="font-display text-3xl leading-tight sm:text-4xl">¿Ya sabes algo de inglés?</h1>
             <p className="mt-2 text-[15px] text-muted">Así empiezas donde de verdad aprendes algo nuevo.</p>
             <div className="mt-6 grid gap-2.5">
               <Choice
@@ -331,10 +331,10 @@ function Choice({
     <button
       type="button"
       onClick={onClick}
-      className={`group flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl border px-5 py-4 text-left transition-[border-color,translate,box-shadow] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+      className={`group flex w-full cursor-pointer items-center justify-between gap-4 rounded-3xl border px-5 py-4 text-left transition-[border-color,translate,box-shadow] hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
         primary
-          ? 'border-accent bg-accent text-accent-ink shadow-[0_3px_0_0_color-mix(in_oklab,var(--accent)_65%,black)]'
-          : 'border-line bg-surface hover:border-accent/40'
+          ? 'border-transparent bg-brand text-accent-ink shadow-glow'
+          : 'border-line bg-surface shadow-key hover:border-accent/40 hover:shadow-key-hover'
       }`}
     >
       <span>

@@ -57,9 +57,7 @@ export function Medal({ icon, unlocked, size = 56 }: { icon: AchievementIcon; un
       aria-hidden
       className={cn(
         'relative grid shrink-0 place-items-center rounded-full',
-        unlocked
-          ? 'bg-accent text-accent-ink shadow-[inset_0_-3px_0_0_color-mix(in_oklab,var(--accent)_65%,black),0_6px_16px_-8px_var(--accent)]'
-          : 'bg-line text-muted shadow-[inset_0_-3px_0_0_var(--line-strong)]',
+        unlocked ? 'bg-brand text-accent-ink shadow-glow' : 'bg-line text-muted',
       )}
       style={{ width: size, height: size }}
     >

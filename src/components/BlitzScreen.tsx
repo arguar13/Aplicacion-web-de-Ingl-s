@@ -229,7 +229,7 @@ function NotEnoughWords({ seen, onExit }: { seen: number; onExit: () => void }) 
       <Header />
       <main className="grid flex-1 place-items-center px-4 py-12 sm:px-6">
         <Surface className="w-full max-w-md animate-rise px-6 py-9 text-center sm:px-9">
-          <h1 className="font-display text-4xl leading-tight">Aún no hay suficientes palabras</h1>
+          <h1 className="font-display text-3xl leading-tight sm:text-4xl">Aún no hay suficientes palabras</h1>
           <p className="mx-auto mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
             Relámpago usa palabras que ya viste en traducir. Llevas {plural(seen, 'palabra')}; con {BLITZ_MIN_WORDS} ya
             puedes jugar.

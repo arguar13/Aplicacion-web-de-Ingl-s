@@ -3,44 +3,66 @@
 /* Celular en horizontal: poca altura, así que la palabra y el teclado van lado a lado. */
 @custom-variant short (@media (orientation: landscape) and (max-height: 540px));
 
-/* Paleta: papel cálido de día, tinta profunda de noche. Todos los colores de la app salen de aquí. */
+/*
+ * Sistema visual: neutros fríos, acento índigo–violeta y profundidad con sombras suaves en capas.
+ * Todos los colores y elevaciones de la app salen de aquí. Contraste AA comprobado para cada par de
+ * texto y fondo en los dos temas.
+ */
 :root {
   color-scheme: light;
-  --bg: #f4f1ea;
-  --surface: #fffdf8;
+  --bg: #f6f6f9;
+  --surface: #ffffff;
   --raised: #ffffff;
-  --ink: #1c1a17;
-  --muted: #6a645a;
-  --line: #e4ded2;
-  --line-strong: #d3cbbc;
-  --accent: #4338ca;
+  --ink: #0c0c14;
+  --muted: #5d6070;
+  --line: #e6e6ee;
+  --line-strong: #d4d4df;
+  --accent: #4f46e5;
+  --accent-2: #7c3aed;
   --accent-ink: #ffffff;
-  --accent-soft: #e6e3fa;
-  --ok: #157a53;
+  --accent-soft: #eeedff;
+  --ok: #047857;
   --ok-ink: #ffffff;
-  --ok-soft: #dff3e9;
-  --bad: #ba3e38;
-  --bad-soft: #fbe7e4;
+  --ok-soft: #e6f6ee;
+  --bad: #d12a2a;
+  --bad-soft: #fdeded;
+  --aurora-a: rgb(99 102 241 / 0.14);
+  --aurora-b: rgb(168 85 247 / 0.1);
+
+  --elev-card: 0 1px 2px rgb(15 15 35 / 0.04), 0 10px 30px -14px rgb(15 15 35 / 0.12);
+  --elev-key: 0 1px 2px rgb(15 15 35 / 0.06), 0 4px 12px -6px rgb(15 15 35 / 0.08);
+  --elev-key-hover: 0 14px 30px -14px rgb(79 70 229 / 0.4);
+  --elev-float: 0 30px 70px -24px rgb(15 15 35 / 0.32);
+  --elev-glow: 0 14px 34px -12px rgb(79 70 229 / 0.55);
 }
 
 /* data-theme lo fija index.html antes de pintar y luego src/lib/theme.ts según los ajustes. */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #0f1013;
-  --surface: #16181d;
-  --raised: #1e2127;
-  --ink: #eeebe4;
-  --muted: #9b958a;
-  --line: #2a2d34;
-  --line-strong: #353943;
-  --accent: #a5b0ff;
-  --accent-ink: #14163a;
-  --accent-soft: #1f2245;
-  --ok: #3ecf8e;
-  --ok-ink: #06291a;
-  --ok-soft: #12291d;
-  --bad: #ff8078;
-  --bad-soft: #35191a;
+  --bg: #08080c;
+  --surface: #111118;
+  --raised: #191922;
+  --ink: #f3f3f7;
+  --muted: #9c9cae;
+  --line: #24242f;
+  --line-strong: #33333f;
+  --accent: #8f8cff;
+  --accent-2: #c084fc;
+  --accent-ink: #0b0a24;
+  --accent-soft: #1d1b3d;
+  --ok: #34d399;
+  --ok-ink: #04210f;
+  --ok-soft: #0b2a1f;
+  --bad: #fb7185;
+  --bad-soft: #2f1219;
+  --aurora-a: rgb(99 102 241 / 0.22);
+  --aurora-b: rgb(168 85 247 / 0.14);
+
+  --elev-card: inset 0 1px 0 rgb(255 255 255 / 0.03), 0 16px 40px -20px rgb(0 0 0 / 0.7);
+  --elev-key: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 6px 16px -8px rgb(0 0 0 / 0.6);
+  --elev-key-hover: 0 14px 34px -14px rgb(143 140 255 / 0.4);
+  --elev-float: 0 40px 90px -24px rgb(0 0 0 / 0.8);
+  --elev-glow: 0 14px 40px -12px rgb(143 140 255 / 0.5);
 }
 
 @theme inline {
@@ -52,6 +74,7 @@
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-ok: var(--ok);
@@ -59,11 +82,28 @@
   --color-ok-soft: var(--ok-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
+
+  /* Elevaciones con nombre: `shadow-card`, `shadow-key`, `shadow-float`, `shadow-glow`… */
+  --shadow-card: var(--elev-card);
+  --shadow-key: var(--elev-key);
+  --shadow-key-hover: var(--elev-key-hover);
+  --shadow-float: var(--elev-float);
+  --shadow-glow: var(--elev-glow);
+}
+
+/* Degradado de marca para las acciones principales y los acentos de texto. */
+@utility bg-brand {
+  background-image: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+@utility text-brand {
+  background-image: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background-clip: text;
+  color: transparent;
 }
 
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-display: 'Geist Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 
   --animate-rise: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
   --animate-pop: pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -104,9 +144,19 @@
 @layer base {
   body {
     @apply bg-bg font-sans text-ink antialiased;
-    background-image: radial-gradient(1100px 520px at 50% -12%, var(--accent-soft), transparent 70%);
+    /* Aurora: dos resplandores de color muy suaves arriba, fijos al hacer scroll. */
+    background-image:
+      radial-gradient(900px 520px at 12% -12%, var(--aurora-a), transparent 62%),
+      radial-gradient(820px 480px at 92% -8%, var(--aurora-b), transparent 60%);
     background-attachment: fixed;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Títulos y cifras en Geist: seminegrita y apretada, como las apps actuales. */
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    font-feature-settings: 'ss01', 'tnum';
   }
 
   @media (prefers-reduced-motion: reduce) {

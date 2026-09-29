@@ -22,7 +22,7 @@ export function AchievementToast() {
   return (
     <div
       role="status"
-      className="pointer-events-none fixed inset-x-4 top-[max(1rem,env(safe-area-inset-top))] z-50 mx-auto flex max-w-sm animate-rise items-center gap-3.5 rounded-2xl border border-line bg-raised py-3 pr-4 pl-3 shadow-[0_18px_40px_-16px_rgb(0_0_0/0.35)]"
+      className="pointer-events-none fixed inset-x-4 top-[max(1rem,env(safe-area-inset-top))] z-50 mx-auto flex max-w-sm animate-rise items-center gap-3.5 rounded-2xl border border-line bg-raised py-3 pr-4 pl-3 shadow-float"
     >
       <span className="animate-pop">
         <Medal icon={first.icon} unlocked size={44} />

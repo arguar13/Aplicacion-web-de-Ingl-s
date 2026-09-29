@@ -88,11 +88,11 @@ function WordSheetContent({ word }: { word: Word }) {
 
       {example && (
         <figure className="mt-4 border-l-2 border-accent/60 pl-4">
-          <blockquote lang="en" className="font-display text-xl leading-snug italic">
+          <blockquote lang="en" className="text-lg leading-snug font-medium tracking-[-0.01em]">
             {parts ? (
               <>
                 {parts[0]}
-                <mark className="rounded-md bg-accent-soft px-1 text-accent not-italic">{parts[1]}</mark>
+                <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
                 {parts[2]}
               </>
             ) : (

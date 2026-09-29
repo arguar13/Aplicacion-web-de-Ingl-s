@@ -72,11 +72,14 @@ export function DetailCard({ word, mode, details, onContinue, onListenSlowly }: 
       ) : (
         example && (
           <figure className="mt-4 border-l-2 border-accent/60 pl-4">
-            <blockquote lang="en" className="font-display text-[1.35rem] leading-snug italic sm:text-2xl">
+            <blockquote
+              lang="en"
+              className="text-[1.2rem] leading-snug font-medium tracking-[-0.01em] sm:text-[1.35rem]"
+            >
               {parts ? (
                 <>
                   {parts[0]}
-                  <mark className="rounded-md bg-accent-soft px-1 text-accent not-italic">{parts[1]}</mark>
+                  <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
                   {parts[2]}
                 </>
               ) : (

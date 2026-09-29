@@ -4,22 +4,20 @@ import { LogoMark } from './icons'
 
 export function Header({ children, action }: { children?: ReactNode; action?: ReactNode }) {
   return (
-    <header className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-4 pt-5 sm:px-6 sm:pt-7 short:max-w-4xl short:pt-3">
-      <div className="flex shrink-0 items-center gap-2.5">
-        <LogoMark />
-        {/* En pantallas estrechas con estadísticas no cabe el nombre: queda el icono (y el nombre para lectores de pantalla). */}
-        <span
-          className={cn(
-            'font-display text-[26px] leading-none tracking-tight',
-            children ? 'max-[23.5rem]:sr-only' : false,
-          )}
-        >
-          Tecla
-        </span>
-      </div>
-      <div className="flex items-center gap-3 max-[25rem]:gap-2 sm:gap-5">
-        {children && <dl className="flex items-center gap-4 max-[25rem]:gap-2.5 sm:gap-7">{children}</dl>}
-        {action}
+    // Cabecera fija de vidrio esmerilado: queda a mano al desplazarse sin tapar el contenido.
+    <header className="sticky top-0 z-30 border-b border-line/60 bg-bg/70 backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4 short:max-w-4xl short:py-2">
+        <div className="flex shrink-0 items-center gap-2.5">
+          <LogoMark />
+          {/* En pantallas estrechas con estadísticas no cabe el nombre: queda el icono (y el nombre para lectores de pantalla). */}
+          <span className={cn('font-display text-[21px] leading-none', children ? 'max-[23.5rem]:sr-only' : false)}>
+            Tecla
+          </span>
+        </div>
+        <div className="flex items-center gap-3 max-[25rem]:gap-2 sm:gap-5">
+          {children && <dl className="flex items-center gap-4 max-[25rem]:gap-2.5 sm:gap-7">{children}</dl>}
+          {action}
+        </div>
       </div>
     </header>
   )
