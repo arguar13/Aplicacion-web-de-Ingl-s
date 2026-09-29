@@ -1,4 +1,4 @@
-# Masterprompt · Tecla, fases 6 a 13
+# Masterprompt · Tecla, fases 6 a 18
 
 > Copia este documento completo como instrucción para el agente de código. Está pensado para
 > ejecutarse **una fase por sesión**, en orden, empezando por la Fase 6. Al iniciar cada sesión
@@ -367,6 +367,99 @@ idéntico (test e2e); importar un archivo inválido muestra un error claro y no 
 
 **Criterios de aceptación:** Lighthouse y axe en verde en CI; despliegue automático funcionando
 (o documentado a falta solo de los secretos); README y CHANGELOG al día.
+
+---
+
+### Segunda etapa (fases 14 a 18) · pedido del dueño del 29-09-2026
+
+> "Más palabras; que empiece por las más frecuentes y, a medida que aprendo, me dé palabras más
+> difíciles; que lo que fallo vuelva; repetición espaciada inteligente para no olvidar; más
+> funciones premium; un estilo moderno (hoy parece retro), elegante, atractivo y premium; todo
+> absolutamente gratis."
+
+Reglas adicionales de esta etapa:
+
+- **Gratis de verdad:** nada de pagos, cuentas, anuncios ni servicios de terceros de pago. Todo
+  corre en el navegador o se genera en el build (fuentes, voces y datos con licencias libres).
+- **Nunca perder progreso:** el vocabulario crece sin cambiar el `id` de las palabras que ya
+  existen, y cualquier cambio de formato guardado pasa por una migración versionada con test.
+
+### Fase 14 · Rediseño moderno y premium
+
+**Objetivo:** que Tecla se sienta una app actual de primer nivel, no un cuaderno antiguo.
+
+- Nueva identidad visual en los tokens de `index.css`: neutros fríos (en lugar del papel cálido),
+  acento índigo–violeta vivo con degradado sutil y superficies con profundidad (bordes finos,
+  sombras suaves en capas, vidrio esmerilado en la cabecera).
+- Tipografía: una grotesca moderna (Geist) para títulos y cifras, con Inter para el texto
+  corrido. Se retira la serif de estilo antiguo.
+- Componentes base renovados (botones, teclas de respuesta, tarjetas, hojas, chips, interruptores)
+  y microinteracciones con muelle; todo respeta `prefers-reduced-motion`.
+- Modo oscuro de primer nivel (negro profundo con resplandores de color), contraste AA en ambos
+  temas y con las pruebas de axe en verde.
+- Revisión de cada pantalla en 4 tamaños y 2 temas; capturas e imagen para compartir regeneradas.
+
+**Criterios de aceptación:** ninguna pantalla conserva la estética anterior; axe y Lighthouse en
+verde; las capturas del manifiesto muestran el diseño nuevo.
+
+### Fase 15 · Vocabulario ampliado
+
+**Objetivo:** duplicar el vocabulario con la misma calidad.
+
+- De 3978 a unas 8000 palabras, elegidas por frecuencia real (wordfreq) y filtradas: sin nombres
+  propios, sin formas flexionadas que ya estén como lema, sin groserías ni fragmentos.
+- Cada palabra nueva con traducción revisada al español neutro latinoamericano, categoría
+  gramatical, IPA, formas irregulares, frase de ejemplo traducida y audio (gTTS, como las demás).
+- Nuevos niveles con nombre y descripción.
+- **El vocabulario deja de ir dentro del JavaScript inicial** (hoy ya pesa la mitad del arranque;
+  duplicado lo empeoraría): se carga como JSON en paralelo con la app, precacheado para usarlo sin
+  conexión, y la pantalla de arranque cubre la espera.
+
+**Criterios de aceptación:** el progreso de las 3978 palabras actuales se conserva intacto (test);
+el JS inicial no crece; todas las palabras tienen audio, ejemplo e IPA (test de datos).
+
+### Fase 16 · Motor de aprendizaje inteligente
+
+**Objetivo:** que la app decida sola qué practicar y lo adapte a cada persona.
+
+- **Sesión inteligente** como acción principal del inicio: mezcla los repasos que vencen, lo que
+  se falló y palabras nuevas, sin elegir niveles a mano (los niveles siguen disponibles).
+- **Dificultad adaptativa:** las palabras nuevas llegan en orden de frecuencia, pero el ritmo y el
+  punto de avance se ajustan a los resultados. Con aciertos rápidos y sostenidos avanza más rápido
+  y puede saltar lo que ya sabes (con una comprobación); con errores frena las nuevas y refuerza lo
+  pendiente.
+- **Escalera de habilidades por palabra:** primero reconocer (inglés → español), luego recordar
+  (español → inglés), después escuchar y por último escribir. Cada palabra sube de escalón al
+  dominar el anterior.
+- **Distractores cada vez más finos:** con el dominio, las opciones se parecen más (misma
+  categoría, significado cercano o forma parecida).
+- **Lo fallado vuelve:** reaparece dentro de la misma sesión a los pocos turnos y luego según FSRS.
+  La retención objetivo se puede ajustar (relajado, normal o intensivo).
+
+**Criterios de aceptación:** tests unitarios del planificador con usuarios simulados (principiante,
+avanzado, irregular) que demuestran la adaptación; e2e de una sesión inteligente completa.
+
+### Fase 17 · Funciones premium (gratis)
+
+**Objetivo:** funciones de app de pago, sin coste.
+
+- **Pronunciación con tu voz:** dices la palabra y la app la reconoce (Web Speech API del
+  navegador, sin servidor), con una pista si no coincide. Se ofrece solo donde el navegador lo
+  permite.
+- **Colecciones temáticas** (comida, viajes, cuerpo, trabajo, emociones, casa…), generadas en el
+  build a partir de las categorías de WordNet, para practicar por tema.
+- **Palabra del día** en el inicio, con su ejemplo y audio.
+- **Informe semanal:** progreso, palabras más costosas, mejor momento del día y logros.
+- **Modo concentración:** sesión de 5 minutos sin distracciones, con cuenta atrás.
+
+**Criterios de aceptación:** cada función con tests; nada que requiera cuenta, pago ni conexión
+(salvo el reconocimiento de voz donde el navegador lo haga en línea, avisado).
+
+### Fase 18 · Cierre de la segunda etapa
+
+- Rendimiento: JS inicial dentro del presupuesto y Lighthouse ≥ 95 en móvil si el vocabulario
+  asíncrono lo permite (fue el límite en la Fase 13).
+- README, CHANGELOG (2.0.0), capturas y registro de avance al día.
 
 ---
 
