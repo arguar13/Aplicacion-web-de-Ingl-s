@@ -12,10 +12,13 @@ describe('historial de respuestas', () => {
     recordAnswer('en-es', 'the', { clean: true, ms: 1234.6 }, NOW)
     recordAnswer('type', 'water', { clean: true, almost: true, ms: 3000 }, NOW + 1)
     recordAnswer('listen', 'tree', { clean: false, ms: 5000 }, NOW + 2)
+    recordAnswer('en-es', 'the', { clean: true, ms: 900 }, NOW + 3)
+    // `f` marca el primer encuentro con la palabra en esa habilidad (lo usa el entrenador).
     expect(getEvents()).toEqual([
-      { t: NOW, id: 'the', track: 'en-es', r: 'clean', ms: 1235 },
-      { t: NOW + 1, id: 'water', track: 'type', r: 'almost', ms: 3000 },
-      { t: NOW + 2, id: 'tree', track: 'listen', r: 'miss', ms: 5000 },
+      { t: NOW, id: 'the', track: 'en-es', r: 'clean', ms: 1235, f: true },
+      { t: NOW + 1, id: 'water', track: 'type', r: 'almost', ms: 3000, f: true },
+      { t: NOW + 2, id: 'tree', track: 'listen', r: 'miss', ms: 5000, f: true },
+      { t: NOW + 3, id: 'the', track: 'en-es', r: 'clean', ms: 900 },
     ])
   })
 

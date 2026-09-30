@@ -8,3 +8,4 @@ playwright-report
 test-results
 lighthouse-report
 .lighthouseci
+.audio-tmp

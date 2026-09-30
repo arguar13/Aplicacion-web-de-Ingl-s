@@ -1,0 +1,2739 @@
+[
+  {
+    "id": "alternatively",
+    "es": "como alternativa, alternativamente",
+    "pos": "adv",
+    "example_en": "Alternatively, we can take the bus to work.",
+    "example_es": "Como alternativa, podemos tomar el autobús al trabajo."
+  },
+  {
+    "id": "assurance",
+    "es": "garantía, seguridad",
+    "pos": "noun",
+    "example_en": "The manager gave us his assurance that it was safe.",
+    "example_es": "El gerente nos dio su garantía de que era seguro."
+  },
+  {
+    "id": "barber",
+    "es": "barbero, peluquero",
+    "pos": "noun",
+    "example_en": "My barber cuts my hair every two weeks.",
+    "example_es": "Mi barbero me corta el pelo cada dos semanas."
+  },
+  {
+    "id": "bash",
+    "es": "fiesta (informal)",
+    "pos": "noun",
+    "example_en": "We are throwing a big bash for her birthday.",
+    "example_es": "Vamos a hacer una gran fiesta para su cumpleaños."
+  },
+  {
+    "id": "battalion",
+    "es": "batallón",
+    "pos": "noun",
+    "example_en": "The battalion marched through the valley at dawn.",
+    "example_es": "El batallón marchó por el valle al amanecer."
+  },
+  {
+    "id": "boycott",
+    "es": "boicot",
+    "pos": "noun",
+    "example_en": "The boycott of the store lasted three months.",
+    "example_es": "El boicot a la tienda duró tres meses."
+  },
+  {
+    "id": "carpenter",
+    "es": "carpintero",
+    "pos": "noun",
+    "example_en": "The carpenter built a new table for our kitchen.",
+    "example_es": "El carpintero construyó una mesa nueva para nuestra cocina."
+  },
+  {
+    "id": "cuisine",
+    "es": "cocina, gastronomía",
+    "pos": "noun",
+    "example_en": "We really enjoyed the local cuisine during our trip.",
+    "example_es": "Disfrutamos mucho la cocina local durante nuestro viaje."
+  },
+  {
+    "id": "dioxide",
+    "es": "dióxido",
+    "pos": "noun",
+    "example_en": "Plants absorb carbon dioxide from the air.",
+    "example_es": "Las plantas absorben dióxido de carbono del aire."
+  },
+  {
+    "id": "doom",
+    "es": "fatalidad, perdición",
+    "pos": "noun",
+    "example_en": "They felt a sense of doom before the storm.",
+    "example_es": "Sintieron una sensación de fatalidad antes de la tormenta."
+  },
+  {
+    "id": "eclipse",
+    "es": "eclipse",
+    "pos": "noun",
+    "example_en": "We watched the solar eclipse with special glasses.",
+    "example_es": "Vimos el eclipse solar con lentes especiales."
+  },
+  {
+    "id": "eighteen",
+    "es": "dieciocho",
+    "pos": "num",
+    "example_en": "My sister will turn eighteen next month.",
+    "example_es": "Mi hermana cumplirá dieciocho años el próximo mes."
+  },
+  {
+    "id": "gal",
+    "es": "chica (informal)",
+    "pos": "noun",
+    "example_en": "She is a friendly gal from a small town.",
+    "example_es": "Ella es una chica amable de un pueblo pequeño."
+  },
+  {
+    "id": "glimpse",
+    "es": "vistazo, atisbo",
+    "pos": "noun",
+    "example_en": "I caught a glimpse of the bird before it flew away.",
+    "example_es": "Alcancé a ver el pájaro un instante antes de que se fuera volando."
+  },
+  {
+    "id": "hawk",
+    "es": "halcón, gavilán",
+    "pos": "noun",
+    "example_en": "A hawk was flying in circles above the field.",
+    "example_es": "Un halcón volaba en círculos sobre el campo."
+  },
+  {
+    "id": "homemade",
+    "es": "casero",
+    "pos": "adj",
+    "example_en": "My grandmother makes the best homemade bread.",
+    "example_es": "Mi abuela hace el mejor pan casero."
+  },
+  {
+    "id": "honorable",
+    "es": "honorable",
+    "pos": "adj",
+    "example_en": "He was an honorable man who always kept his word.",
+    "example_es": "Era un hombre honorable que siempre cumplía su palabra."
+  },
+  {
+    "id": "infectious",
+    "es": "infeccioso, contagioso",
+    "pos": "adj",
+    "example_en": "The flu is an infectious disease.",
+    "example_es": "La gripe es una enfermedad infecciosa."
+  },
+  {
+    "id": "insulin",
+    "es": "insulina",
+    "pos": "noun",
+    "example_en": "People with diabetes often need insulin every day.",
+    "example_es": "Las personas con diabetes a menudo necesitan insulina todos los días."
+  },
+  {
+    "id": "intro",
+    "skip": "abreviatura de \"introduction\""
+  },
+  {
+    "id": "kindle",
+    "es": "encender, avivar",
+    "pos": "verb",
+    "example_en": "We used dry leaves to kindle the fire.",
+    "example_es": "Usamos hojas secas para encender el fuego."
+  },
+  {
+    "id": "manor",
+    "es": "casa señorial, mansión",
+    "pos": "noun",
+    "example_en": "The old manor stands at the end of the road.",
+    "example_es": "La vieja casa señorial está al final del camino."
+  },
+  {
+    "id": "masterpiece",
+    "es": "obra maestra",
+    "pos": "noun",
+    "example_en": "This painting is considered a masterpiece.",
+    "example_es": "Esta pintura se considera una obra maestra."
+  },
+  {
+    "id": "memo",
+    "es": "memorándum, nota",
+    "pos": "noun",
+    "example_en": "The boss sent a memo to all employees.",
+    "example_es": "El jefe envió un memorándum a todos los empleados."
+  },
+  {
+    "id": "narrator",
+    "es": "narrador",
+    "pos": "noun",
+    "example_en": "The narrator of the story is a young girl.",
+    "example_es": "La narradora de la historia es una niña."
+  },
+  {
+    "id": "obesity",
+    "es": "obesidad",
+    "pos": "noun",
+    "example_en": "Exercise can help prevent obesity in children.",
+    "example_es": "El ejercicio puede ayudar a prevenir la obesidad en los niños."
+  },
+  {
+    "id": "partisan",
+    "es": "partidista",
+    "pos": "adj",
+    "example_en": "The debate became very partisan and angry.",
+    "example_es": "El debate se volvió muy partidista y agresivo."
+  },
+  {
+    "id": "pony",
+    "es": "poni",
+    "pos": "noun",
+    "example_en": "The children took turns riding the pony.",
+    "example_es": "Los niños se turnaron para montar el poni."
+  },
+  {
+    "id": "protestant",
+    "es": "protestante",
+    "pos": "adj",
+    "example_en": "The town has an old protestant church.",
+    "example_es": "El pueblo tiene una antigua iglesia protestante."
+  },
+  {
+    "id": "reluctant",
+    "es": "reacio, renuente",
+    "pos": "adj",
+    "example_en": "He was reluctant to lend me his car.",
+    "example_es": "Él estaba reacio a prestarme su carro."
+  },
+  {
+    "id": "respiratory",
+    "es": "respiratorio",
+    "pos": "adj",
+    "example_en": "Smoking can cause serious respiratory problems.",
+    "example_es": "Fumar puede causar graves problemas respiratorios."
+  },
+  {
+    "id": "retention",
+    "es": "retención",
+    "pos": "noun",
+    "example_en": "The company wants to improve employee retention.",
+    "example_es": "La empresa quiere mejorar la retención de empleados."
+  },
+  {
+    "id": "ribbon",
+    "es": "cinta, listón",
+    "pos": "noun",
+    "example_en": "She tied her hair with a red ribbon.",
+    "example_es": "Ella se ató el pelo con una cinta roja."
+  },
+  {
+    "id": "roommate",
+    "es": "compañero de cuarto",
+    "pos": "noun",
+    "example_en": "My roommate always leaves dirty dishes in the sink.",
+    "example_es": "Mi compañero de cuarto siempre deja platos sucios en el fregadero."
+  },
+  {
+    "id": "rotten",
+    "es": "podrido",
+    "pos": "adj",
+    "example_en": "Throw away that apple, it is rotten.",
+    "example_es": "Tira esa manzana, está podrida."
+  },
+  {
+    "id": "shotgun",
+    "es": "escopeta",
+    "pos": "noun",
+    "example_en": "The farmer kept a shotgun in the barn.",
+    "example_es": "El granjero guardaba una escopeta en el granero."
+  },
+  {
+    "id": "sofa",
+    "es": "sofá",
+    "pos": "noun",
+    "example_en": "We bought a new sofa for the living room.",
+    "example_es": "Compramos un sofá nuevo para la sala."
+  },
+  {
+    "id": "submarine",
+    "es": "submarino",
+    "pos": "noun",
+    "example_en": "The submarine can stay underwater for weeks.",
+    "example_es": "El submarino puede permanecer bajo el agua durante semanas."
+  },
+  {
+    "id": "suburb",
+    "es": "suburbio, afueras",
+    "pos": "noun",
+    "example_en": "They moved to a quiet suburb outside the city.",
+    "example_es": "Se mudaron a un suburbio tranquilo en las afueras de la ciudad."
+  },
+  {
+    "id": "sympathetic",
+    "es": "comprensivo, compasivo",
+    "pos": "adj",
+    "example_en": "My teacher was very sympathetic when I was sick.",
+    "example_es": "Mi maestro fue muy comprensivo cuando estuve enfermo."
+  },
+  {
+    "id": "taxation",
+    "es": "tributación, impuestos",
+    "pos": "noun",
+    "example_en": "The new law changes the taxation of small businesses.",
+    "example_es": "La nueva ley cambia la tributación de las pequeñas empresas."
+  },
+  {
+    "id": "temper",
+    "es": "genio, carácter",
+    "pos": "noun",
+    "example_en": "My uncle has a very bad temper.",
+    "example_es": "Mi tío tiene muy mal genio."
+  },
+  {
+    "id": "altar",
+    "es": "altar",
+    "pos": "noun",
+    "example_en": "The couple stood together in front of the altar.",
+    "example_es": "La pareja estaba de pie frente al altar."
+  },
+  {
+    "id": "amp",
+    "skip": "abreviatura de \"amplifier\" o \"ampere\""
+  },
+  {
+    "id": "atlas",
+    "es": "atlas",
+    "pos": "noun",
+    "example_en": "We looked for the island in the old atlas.",
+    "example_es": "Buscamos la isla en el viejo atlas."
+  },
+  {
+    "id": "automation",
+    "es": "automatización",
+    "pos": "noun",
+    "example_en": "Automation has changed the way factories work.",
+    "example_es": "La automatización ha cambiado la forma en que funcionan las fábricas."
+  },
+  {
+    "id": "awe",
+    "es": "asombro, admiración",
+    "pos": "noun",
+    "example_en": "We stared at the mountains in awe.",
+    "example_es": "Miramos las montañas con asombro."
+  },
+  {
+    "id": "cavalry",
+    "es": "caballería",
+    "pos": "noun",
+    "example_en": "The cavalry rode into the battle on horses.",
+    "example_es": "La caballería entró a caballo en la batalla."
+  },
+  {
+    "id": "coffin",
+    "es": "ataúd",
+    "pos": "noun",
+    "example_en": "The coffin was covered with white flowers.",
+    "example_es": "El ataúd estaba cubierto de flores blancas."
+  },
+  {
+    "id": "colorful",
+    "es": "colorido",
+    "pos": "adj",
+    "example_en": "The market was full of colorful fruit.",
+    "example_es": "El mercado estaba lleno de fruta colorida."
+  },
+  {
+    "id": "combo",
+    "es": "combo, combinación",
+    "pos": "noun",
+    "example_en": "I ordered the chicken combo with a drink.",
+    "example_es": "Pedí el combo de pollo con una bebida."
+  },
+  {
+    "id": "communism",
+    "es": "comunismo",
+    "pos": "noun",
+    "example_en": "We studied the history of communism in class.",
+    "example_es": "Estudiamos la historia del comunismo en clase."
+  },
+  {
+    "id": "conductor",
+    "es": "director (de orquesta)",
+    "pos": "noun",
+    "example_en": "The conductor raised his hands and the music began.",
+    "example_es": "El director levantó las manos y comenzó la música."
+  },
+  {
+    "id": "crow",
+    "es": "cuervo",
+    "pos": "noun",
+    "example_en": "A black crow landed on the fence.",
+    "example_es": "Un cuervo negro se posó en la cerca."
+  },
+  {
+    "id": "decisive",
+    "es": "decisivo",
+    "pos": "adj",
+    "example_en": "That goal was decisive for the final result.",
+    "example_es": "Ese gol fue decisivo para el resultado final."
+  },
+  {
+    "id": "decorative",
+    "es": "decorativo",
+    "pos": "adj",
+    "example_en": "She put some decorative pillows on the bed.",
+    "example_es": "Ella puso unos cojines decorativos en la cama."
+  },
+  {
+    "id": "definitive",
+    "es": "definitivo",
+    "pos": "adj",
+    "example_en": "We still don't have a definitive answer.",
+    "example_es": "Todavía no tenemos una respuesta definitiva."
+  },
+  {
+    "id": "epidemic",
+    "es": "epidemia",
+    "pos": "noun",
+    "example_en": "The epidemic spread quickly through the region.",
+    "example_es": "La epidemia se propagó rápidamente por la región."
+  },
+  {
+    "id": "eternity",
+    "es": "eternidad",
+    "pos": "noun",
+    "example_en": "Waiting for the results felt like an eternity.",
+    "example_es": "Esperar los resultados se sintió como una eternidad."
+  },
+  {
+    "id": "extraction",
+    "es": "extracción",
+    "pos": "noun",
+    "example_en": "The dentist said I need a tooth extraction.",
+    "example_es": "El dentista dijo que necesito una extracción dental."
+  },
+  {
+    "id": "fatty",
+    "es": "graso",
+    "pos": "adj",
+    "example_en": "Try to avoid fatty foods before going to bed.",
+    "example_es": "Trata de evitar los alimentos grasos antes de dormir."
+  },
+  {
+    "id": "filthy",
+    "es": "mugriento, muy sucio",
+    "pos": "adj",
+    "example_en": "His shoes were filthy after the hike.",
+    "example_es": "Sus zapatos estaban mugrientos después de la caminata."
+  },
+  {
+    "id": "flush",
+    "es": "jalar la cadena, descargar (el inodoro)",
+    "pos": "verb",
+    "example_en": "Please remember to flush the toilet.",
+    "example_es": "Por favor, recuerda jalar la cadena del inodoro."
+  },
+  {
+    "id": "font",
+    "es": "fuente, tipo de letra",
+    "pos": "noun",
+    "example_en": "Please use a bigger font for the title.",
+    "example_es": "Por favor, usa una fuente más grande para el título."
+  },
+  {
+    "id": "freestyle",
+    "es": "estilo libre",
+    "pos": "noun",
+    "example_en": "She won the gold medal in freestyle swimming.",
+    "example_es": "Ella ganó la medalla de oro en natación estilo libre."
+  },
+  {
+    "id": "glue",
+    "es": "pegamento",
+    "pos": "noun",
+    "example_en": "I fixed the broken cup with some glue.",
+    "example_es": "Arreglé la taza rota con un poco de pegamento."
+  },
+  {
+    "id": "grandpa",
+    "es": "abuelo, abuelito",
+    "pos": "noun",
+    "example_en": "My grandpa tells the funniest stories.",
+    "example_es": "Mi abuelo cuenta las historias más divertidas."
+  },
+  {
+    "id": "hairy",
+    "es": "peludo",
+    "pos": "adj",
+    "example_en": "The spider had long hairy legs.",
+    "example_es": "La araña tenía patas largas y peludas."
+  },
+  {
+    "id": "homicide",
+    "es": "homicidio",
+    "pos": "noun",
+    "example_en": "The police are investigating the homicide.",
+    "example_es": "La policía está investigando el homicidio."
+  },
+  {
+    "id": "ironic",
+    "es": "irónico",
+    "pos": "adj",
+    "example_en": "It is ironic that the fire station burned down.",
+    "example_es": "Es irónico que la estación de bomberos se haya incendiado."
+  },
+  {
+    "id": "luggage",
+    "es": "equipaje",
+    "pos": "noun",
+    "example_en": "Our luggage arrived late at the airport.",
+    "example_es": "Nuestro equipaje llegó tarde al aeropuerto."
+  },
+  {
+    "id": "madame",
+    "skip": "tratamiento de origen francés"
+  },
+  {
+    "id": "microwave",
+    "es": "microondas",
+    "pos": "noun",
+    "example_en": "Heat the soup in the microwave for two minutes.",
+    "example_es": "Calienta la sopa en el microondas durante dos minutos."
+  },
+  {
+    "id": "morocco",
+    "skip": "nombre propio (país)"
+  },
+  {
+    "id": "ounce",
+    "es": "onza",
+    "pos": "noun",
+    "example_en": "The recipe calls for one ounce of butter.",
+    "example_es": "La receta pide una onza de mantequilla."
+  },
+  {
+    "id": "picnic",
+    "es": "pícnic, día de campo",
+    "pos": "noun",
+    "example_en": "We had a picnic by the lake on Sunday.",
+    "example_es": "Hicimos un pícnic junto al lago el domingo."
+  },
+  {
+    "id": "predominantly",
+    "es": "predominantemente",
+    "pos": "adv",
+    "example_en": "The neighborhood is predominantly residential.",
+    "example_es": "El barrio es predominantemente residencial."
+  },
+  {
+    "id": "providence",
+    "es": "providencia",
+    "pos": "noun",
+    "example_en": "They believed that providence would protect them.",
+    "example_es": "Creían que la providencia los protegería."
+  },
+  {
+    "id": "psychic",
+    "es": "vidente, psíquico",
+    "pos": "noun",
+    "example_en": "The psychic said she could see the future.",
+    "example_es": "La vidente dijo que podía ver el futuro."
+  },
+  {
+    "id": "puppet",
+    "es": "títere, marioneta",
+    "pos": "noun",
+    "example_en": "The children laughed at the funny puppet show.",
+    "example_es": "Los niños se rieron con el divertido espectáculo de títeres."
+  },
+  {
+    "id": "reproductive",
+    "es": "reproductivo",
+    "pos": "adj",
+    "example_en": "We learned about the reproductive system in biology.",
+    "example_es": "Aprendimos sobre el sistema reproductivo en biología."
+  },
+  {
+    "id": "righteous",
+    "es": "justo, recto",
+    "pos": "adj",
+    "example_en": "He believed he was fighting for a righteous cause.",
+    "example_es": "Él creía que luchaba por una causa justa."
+  },
+  {
+    "id": "rivalry",
+    "es": "rivalidad",
+    "pos": "noun",
+    "example_en": "There is a strong rivalry between the two teams.",
+    "example_es": "Hay una fuerte rivalidad entre los dos equipos."
+  },
+  {
+    "id": "royalty",
+    "es": "realeza",
+    "pos": "noun",
+    "example_en": "The hotel has welcomed royalty from many countries.",
+    "example_es": "El hotel ha recibido a miembros de la realeza de muchos países."
+  },
+  {
+    "id": "sausage",
+    "es": "salchicha",
+    "pos": "noun",
+    "example_en": "He had eggs and a sausage for breakfast.",
+    "example_es": "Él comió huevos y una salchicha en el desayuno."
+  },
+  {
+    "id": "spicy",
+    "es": "picante",
+    "pos": "adj",
+    "example_en": "This sauce is too spicy for me.",
+    "example_es": "Esta salsa es demasiado picante para mí."
+  },
+  {
+    "id": "sticky",
+    "es": "pegajoso",
+    "pos": "adj",
+    "example_en": "My hands are sticky from the candy.",
+    "example_es": "Tengo las manos pegajosas por el dulce."
+  },
+  {
+    "id": "thankfully",
+    "es": "afortunadamente, por suerte",
+    "pos": "adv",
+    "example_en": "Thankfully, nobody was hurt in the accident.",
+    "example_es": "Afortunadamente, nadie resultó herido en el accidente."
+  },
+  {
+    "id": "tick",
+    "es": "garrapata",
+    "pos": "noun",
+    "example_en": "The vet removed a tick from the dog's ear.",
+    "example_es": "El veterinario le quitó una garrapata de la oreja al perro."
+  },
+  {
+    "id": "vent",
+    "es": "rejilla de ventilación, respiradero",
+    "pos": "noun",
+    "example_en": "Cold air came out of the vent in the ceiling.",
+    "example_es": "Salía aire frío de la rejilla de ventilación del techo."
+  },
+  {
+    "id": "wan",
+    "skip": "palabra rara; suele ser sigla o nombre propio"
+  },
+  {
+    "id": "axe",
+    "es": "hacha",
+    "pos": "noun",
+    "example_en": "He used an axe to chop the firewood.",
+    "example_es": "Usó un hacha para cortar la leña."
+  },
+  {
+    "id": "bulletin",
+    "es": "boletín",
+    "pos": "noun",
+    "example_en": "We heard the news on the evening bulletin.",
+    "example_es": "Escuchamos la noticia en el boletín de la tarde."
+  },
+  {
+    "id": "capitalist",
+    "es": "capitalista",
+    "pos": "adj",
+    "example_en": "The country has a capitalist economy.",
+    "example_es": "El país tiene una economía capitalista."
+  },
+  {
+    "id": "cautious",
+    "es": "cauteloso, prudente",
+    "pos": "adj",
+    "example_en": "Be cautious when you drive in the rain.",
+    "example_es": "Sé cauteloso cuando manejes bajo la lluvia."
+  },
+  {
+    "id": "constable",
+    "es": "agente de policía, alguacil",
+    "pos": "noun",
+    "example_en": "The constable asked the driver a few questions.",
+    "example_es": "El agente de policía le hizo algunas preguntas al conductor."
+  },
+  {
+    "id": "cooperate",
+    "es": "cooperar",
+    "pos": "verb",
+    "example_en": "The two schools agreed to cooperate on the project.",
+    "example_es": "Las dos escuelas acordaron cooperar en el proyecto."
+  },
+  {
+    "id": "curb",
+    "es": "borde de la acera",
+    "pos": "noun",
+    "example_en": "Please park the car close to the curb.",
+    "example_es": "Por favor, estaciona el carro cerca del borde de la acera."
+  },
+  {
+    "id": "deeds",
+    "skip": "forma de otra palabra (plural de \"deed\")"
+  },
+  {
+    "id": "dong",
+    "skip": "nombre propio o jerga vulgar"
+  },
+  {
+    "id": "efficiently",
+    "es": "eficientemente",
+    "pos": "adv",
+    "example_en": "The new machine works quickly and efficiently.",
+    "example_es": "La nueva máquina funciona de forma rápida y eficiente."
+  },
+  {
+    "id": "encouragement",
+    "es": "ánimo, aliento",
+    "pos": "noun",
+    "example_en": "Thank you for your encouragement during the exam.",
+    "example_es": "Gracias por tus palabras de ánimo durante el examen."
+  },
+  {
+    "id": "faction",
+    "es": "facción",
+    "pos": "noun",
+    "example_en": "One faction of the party voted against the plan.",
+    "example_es": "Una facción del partido votó en contra del plan."
+  },
+  {
+    "id": "fascist",
+    "es": "fascista",
+    "pos": "adj",
+    "example_en": "The book describes life under a fascist government.",
+    "example_es": "El libro describe la vida bajo un gobierno fascista."
+  },
+  {
+    "id": "gamble",
+    "es": "apostar, arriesgarse",
+    "pos": "verb",
+    "example_en": "He likes to gamble on horse races.",
+    "example_es": "A él le gusta apostar en las carreras de caballos."
+  },
+  {
+    "id": "goalkeeper",
+    "es": "portero, arquero",
+    "pos": "noun",
+    "example_en": "The goalkeeper stopped the ball with one hand.",
+    "example_es": "El portero detuvo el balón con una mano."
+  },
+  {
+    "id": "hopeful",
+    "es": "esperanzado",
+    "pos": "adj",
+    "example_en": "We are hopeful that the weather will improve.",
+    "example_es": "Tenemos la esperanza de que el clima mejore."
+  },
+  {
+    "id": "hygiene",
+    "es": "higiene",
+    "pos": "noun",
+    "example_en": "Good hygiene helps prevent many illnesses.",
+    "example_es": "Una buena higiene ayuda a prevenir muchas enfermedades."
+  },
+  {
+    "id": "imaginary",
+    "es": "imaginario",
+    "pos": "adj",
+    "example_en": "My little brother has an imaginary friend.",
+    "example_es": "Mi hermanito tiene un amigo imaginario."
+  },
+  {
+    "id": "inconsistent",
+    "es": "inconsistente, incoherente",
+    "pos": "adj",
+    "example_en": "His story was inconsistent with the facts.",
+    "example_es": "Su historia no concordaba con los hechos."
+  },
+  {
+    "id": "kindergarten",
+    "es": "jardín de niños, kínder",
+    "pos": "noun",
+    "example_en": "My daughter starts kindergarten in September.",
+    "example_es": "Mi hija empieza el kínder en septiembre."
+  },
+  {
+    "id": "loudly",
+    "es": "en voz alta, ruidosamente",
+    "pos": "adv",
+    "example_en": "Please don't talk so loudly in the library.",
+    "example_es": "Por favor, no hables tan alto en la biblioteca."
+  },
+  {
+    "id": "northwestern",
+    "es": "del noroeste",
+    "pos": "adj",
+    "example_en": "They live in a small northwestern town.",
+    "example_es": "Viven en un pequeño pueblo del noroeste."
+  },
+  {
+    "id": "oppression",
+    "es": "opresión",
+    "pos": "noun",
+    "example_en": "The people fought for years against oppression.",
+    "example_es": "El pueblo luchó durante años contra la opresión."
+  },
+  {
+    "id": "patriotic",
+    "es": "patriótico",
+    "pos": "adj",
+    "example_en": "They sang patriotic songs on Independence Day.",
+    "example_es": "Cantaron canciones patrióticas el Día de la Independencia."
+  },
+  {
+    "id": "playground",
+    "es": "parque infantil, patio de recreo",
+    "pos": "noun",
+    "example_en": "The kids are playing on the playground.",
+    "example_es": "Los niños están jugando en el parque infantil."
+  },
+  {
+    "id": "probable",
+    "es": "probable",
+    "pos": "adj",
+    "example_en": "The most probable cause of the fire was a cigarette.",
+    "example_es": "La causa más probable del incendio fue un cigarrillo."
+  },
+  {
+    "id": "probation",
+    "es": "período de prueba, libertad condicional",
+    "pos": "noun",
+    "example_en": "New workers are on probation for three months.",
+    "example_es": "Los nuevos trabajadores están en período de prueba durante tres meses."
+  },
+  {
+    "id": "receptor",
+    "es": "receptor",
+    "pos": "noun",
+    "example_en": "The drug blocks a receptor in the brain.",
+    "example_es": "El medicamento bloquea un receptor en el cerebro."
+  },
+  {
+    "id": "remake",
+    "es": "nueva versión",
+    "pos": "noun",
+    "example_en": "The remake is better than the original movie.",
+    "example_es": "La nueva versión es mejor que la película original."
+  },
+  {
+    "id": "reproduction",
+    "es": "reproducción",
+    "pos": "noun",
+    "example_en": "This painting is only a reproduction.",
+    "example_es": "Esta pintura es solo una reproducción."
+  },
+  {
+    "id": "shrimp",
+    "es": "camarón",
+    "pos": "noun",
+    "example_en": "I ordered rice with shrimp for lunch.",
+    "example_es": "Pedí arroz con camarón para el almuerzo."
+  },
+  {
+    "id": "spokesman",
+    "es": "portavoz, vocero",
+    "pos": "noun",
+    "example_en": "A spokesman for the company answered questions.",
+    "example_es": "Un vocero de la empresa respondió preguntas."
+  },
+  {
+    "id": "strap",
+    "es": "correa, tirante",
+    "pos": "noun",
+    "example_en": "The strap of my bag broke this morning.",
+    "example_es": "La correa de mi bolso se rompió esta mañana."
+  },
+  {
+    "id": "subjective",
+    "es": "subjetivo",
+    "pos": "adj",
+    "example_en": "Taste in music is very subjective.",
+    "example_es": "El gusto musical es muy subjetivo."
+  },
+  {
+    "id": "traumatic",
+    "es": "traumático",
+    "pos": "adj",
+    "example_en": "The accident was a traumatic experience for her.",
+    "example_es": "El accidente fue una experiencia traumática para ella."
+  },
+  {
+    "id": "trillion",
+    "es": "billón (un millón de millones)",
+    "pos": "num",
+    "example_en": "The country owes more than one trillion dollars.",
+    "example_es": "El país debe más de un billón de dólares."
+  },
+  {
+    "id": "aboriginal",
+    "es": "aborigen",
+    "pos": "adj",
+    "example_en": "The museum displays aboriginal art from the region.",
+    "example_es": "El museo exhibe arte aborigen de la región."
+  },
+  {
+    "id": "alignment",
+    "es": "alineación",
+    "pos": "noun",
+    "example_en": "The mechanic checked the alignment of the wheels.",
+    "example_es": "El mecánico revisó la alineación de las ruedas."
+  },
+  {
+    "id": "allergic",
+    "es": "alérgico",
+    "pos": "adj",
+    "example_en": "I am allergic to cats.",
+    "example_es": "Soy alérgico a los gatos."
+  },
+  {
+    "id": "apparatus",
+    "es": "aparato, equipo",
+    "pos": "noun",
+    "example_en": "The firefighters wore breathing apparatus.",
+    "example_es": "Los bomberos llevaban equipo de respiración."
+  },
+  {
+    "id": "backpack",
+    "es": "mochila",
+    "pos": "noun",
+    "example_en": "She put her books in her backpack.",
+    "example_es": "Ella puso sus libros en su mochila."
+  },
+  {
+    "id": "balcony",
+    "es": "balcón",
+    "pos": "noun",
+    "example_en": "We drank coffee on the balcony every morning.",
+    "example_es": "Tomábamos café en el balcón todas las mañanas."
+  },
+  {
+    "id": "bodily",
+    "es": "corporal, físico",
+    "pos": "adj",
+    "example_en": "Sweating is a normal bodily function.",
+    "example_es": "Sudar es una función corporal normal."
+  },
+  {
+    "id": "chapman",
+    "skip": "nombre propio (apellido)"
+  },
+  {
+    "id": "collaborative",
+    "es": "colaborativo",
+    "pos": "adj",
+    "example_en": "The book was a collaborative effort by five authors.",
+    "example_es": "El libro fue un esfuerzo colaborativo de cinco autores."
+  },
+  {
+    "id": "compensate",
+    "es": "compensar",
+    "pos": "verb",
+    "example_en": "The company will compensate you for the damage.",
+    "example_es": "La empresa te compensará por el daño."
+  },
+  {
+    "id": "constructive",
+    "es": "constructivo",
+    "pos": "adj",
+    "example_en": "Thank you for your constructive comments.",
+    "example_es": "Gracias por tus comentarios constructivos."
+  },
+  {
+    "id": "cosmic",
+    "es": "cósmico",
+    "pos": "adj",
+    "example_en": "Scientists study cosmic radiation from distant stars.",
+    "example_es": "Los científicos estudian la radiación cósmica de estrellas lejanas."
+  },
+  {
+    "id": "developmental",
+    "es": "del desarrollo",
+    "pos": "adj",
+    "example_en": "The doctor checks the baby's developmental progress.",
+    "example_es": "El médico revisa el progreso del desarrollo del bebé."
+  },
+  {
+    "id": "disco",
+    "es": "discoteca, música disco",
+    "pos": "noun",
+    "example_en": "They danced all night at the disco.",
+    "example_es": "Bailaron toda la noche en la discoteca."
+  },
+  {
+    "id": "distraction",
+    "es": "distracción",
+    "pos": "noun",
+    "example_en": "My phone is a big distraction when I study.",
+    "example_es": "Mi celular es una gran distracción cuando estudio."
+  },
+  {
+    "id": "ecological",
+    "es": "ecológico",
+    "pos": "adj",
+    "example_en": "The oil spill caused an ecological disaster.",
+    "example_es": "El derrame de petróleo causó un desastre ecológico."
+  },
+  {
+    "id": "ecosystem",
+    "es": "ecosistema",
+    "pos": "noun",
+    "example_en": "The forest is a delicate ecosystem.",
+    "example_es": "El bosque es un ecosistema delicado."
+  },
+  {
+    "id": "exempt",
+    "es": "exento",
+    "pos": "adj",
+    "example_en": "Some basic foods are exempt from the tax.",
+    "example_es": "Algunos alimentos básicos están exentos del impuesto."
+  },
+  {
+    "id": "fertility",
+    "es": "fertilidad",
+    "pos": "noun",
+    "example_en": "Farmers add compost to improve the fertility of the soil.",
+    "example_es": "Los agricultores añaden composta para mejorar la fertilidad del suelo."
+  },
+  {
+    "id": "foam",
+    "es": "espuma",
+    "pos": "noun",
+    "example_en": "The waves left white foam on the sand.",
+    "example_es": "Las olas dejaron espuma blanca en la arena."
+  },
+  {
+    "id": "foremost",
+    "es": "principal, más destacado",
+    "pos": "adj",
+    "example_en": "She is one of the foremost experts in the field.",
+    "example_es": "Ella es una de las principales expertas en el campo."
+  },
+  {
+    "id": "forge",
+    "es": "forjar",
+    "pos": "verb",
+    "example_en": "The two countries hope to forge a strong friendship.",
+    "example_es": "Los dos países esperan forjar una fuerte amistad."
+  },
+  {
+    "id": "hierarchy",
+    "es": "jerarquía",
+    "pos": "noun",
+    "example_en": "There is a strict hierarchy in the army.",
+    "example_es": "Hay una jerarquía estricta en el ejército."
+  },
+  {
+    "id": "invalid",
+    "es": "inválido, no válido",
+    "pos": "adj",
+    "example_en": "Your password is invalid, please try again.",
+    "example_es": "Tu contraseña no es válida, por favor intenta de nuevo."
+  },
+  {
+    "id": "jointly",
+    "es": "conjuntamente",
+    "pos": "adv",
+    "example_en": "The two brothers own the house jointly.",
+    "example_es": "Los dos hermanos son dueños de la casa conjuntamente."
+  },
+  {
+    "id": "lightweight",
+    "es": "ligero, liviano",
+    "pos": "adj",
+    "example_en": "I need a lightweight jacket for the trip.",
+    "example_es": "Necesito una chaqueta ligera para el viaje."
+  },
+  {
+    "id": "metabolism",
+    "es": "metabolismo",
+    "pos": "noun",
+    "example_en": "Exercise can speed up your metabolism.",
+    "example_es": "El ejercicio puede acelerar tu metabolismo."
+  },
+  {
+    "id": "newborn",
+    "es": "recién nacido",
+    "pos": "noun",
+    "example_en": "The newborn slept peacefully in her arms.",
+    "example_es": "El recién nacido dormía tranquilo en sus brazos."
+  },
+  {
+    "id": "notch",
+    "es": "muesca",
+    "pos": "noun",
+    "example_en": "He cut a small notch in the stick.",
+    "example_es": "Hizo una pequeña muesca en el palo."
+  },
+  {
+    "id": "omega",
+    "es": "omega",
+    "pos": "noun",
+    "example_en": "Omega is the last letter of the Greek alphabet.",
+    "example_es": "Omega es la última letra del alfabeto griego."
+  },
+  {
+    "id": "parody",
+    "es": "parodia",
+    "pos": "noun",
+    "example_en": "The show is a parody of old horror movies.",
+    "example_es": "El programa es una parodia de viejas películas de terror."
+  },
+  {
+    "id": "parole",
+    "es": "libertad condicional",
+    "pos": "noun",
+    "example_en": "He was released on parole after five years.",
+    "example_es": "Salió en libertad condicional después de cinco años."
+  },
+  {
+    "id": "penguin",
+    "es": "pingüino",
+    "pos": "noun",
+    "example_en": "The penguin slid across the ice on its belly.",
+    "example_es": "El pingüino se deslizó sobre el hielo con la panza."
+  },
+  {
+    "id": "phantom",
+    "es": "fantasma",
+    "pos": "noun",
+    "example_en": "The old sailors told stories about a phantom ship.",
+    "example_es": "Los viejos marineros contaban historias sobre un barco fantasma."
+  },
+  {
+    "id": "precedent",
+    "es": "precedente",
+    "pos": "noun",
+    "example_en": "The court's decision set an important precedent.",
+    "example_es": "La decisión del tribunal sentó un precedente importante."
+  },
+  {
+    "id": "prevalent",
+    "es": "frecuente, predominante",
+    "pos": "adj",
+    "example_en": "This disease is more prevalent in warm countries.",
+    "example_es": "Esta enfermedad es más frecuente en los países cálidos."
+  },
+  {
+    "id": "prom",
+    "es": "baile de graduación",
+    "pos": "noun",
+    "example_en": "She wore a long blue dress to the prom.",
+    "example_es": "Ella llevó un vestido largo azul al baile de graduación."
+  },
+  {
+    "id": "python",
+    "es": "pitón (serpiente)",
+    "pos": "noun",
+    "example_en": "The python wrapped itself around the tree branch.",
+    "example_es": "La pitón se enroscó en la rama del árbol."
+  },
+  {
+    "id": "questionable",
+    "es": "cuestionable, dudoso",
+    "pos": "adj",
+    "example_en": "His decision to quit was questionable.",
+    "example_es": "Su decisión de renunciar fue cuestionable."
+  },
+  {
+    "id": "queue",
+    "es": "fila, cola",
+    "pos": "noun",
+    "example_en": "We waited in a long queue for tickets.",
+    "example_es": "Esperamos en una larga fila para comprar boletos."
+  },
+  {
+    "id": "sailor",
+    "es": "marinero",
+    "pos": "noun",
+    "example_en": "The old sailor told us about his voyages.",
+    "example_es": "El viejo marinero nos habló de sus viajes."
+  },
+  {
+    "id": "seventy",
+    "es": "setenta",
+    "pos": "num",
+    "example_en": "My grandfather is seventy years old.",
+    "example_es": "Mi abuelo tiene setenta años."
+  },
+  {
+    "id": "sociology",
+    "es": "sociología",
+    "pos": "noun",
+    "example_en": "She is studying sociology at the university.",
+    "example_es": "Ella estudia sociología en la universidad."
+  },
+  {
+    "id": "stab",
+    "es": "apuñalar",
+    "pos": "verb",
+    "example_en": "The villain tried to stab the hero with a knife.",
+    "example_es": "El villano intentó apuñalar al héroe con un cuchillo."
+  },
+  {
+    "id": "tenant",
+    "es": "inquilino",
+    "pos": "noun",
+    "example_en": "The new tenant moves in next week.",
+    "example_es": "El nuevo inquilino se muda la próxima semana."
+  },
+  {
+    "id": "traction",
+    "es": "tracción",
+    "pos": "noun",
+    "example_en": "These tires have good traction on wet roads.",
+    "example_es": "Estas llantas tienen buena tracción en caminos mojados."
+  },
+  {
+    "id": "tractor",
+    "es": "tractor",
+    "pos": "noun",
+    "example_en": "The farmer drove his tractor across the field.",
+    "example_es": "El granjero manejó su tractor por el campo."
+  },
+  {
+    "id": "trout",
+    "es": "trucha",
+    "pos": "noun",
+    "example_en": "We caught a trout in the river.",
+    "example_es": "Pescamos una trucha en el río."
+  },
+  {
+    "id": "turnover",
+    "es": "rotación (de personal), facturación",
+    "pos": "noun",
+    "example_en": "The restaurant has a high staff turnover.",
+    "example_es": "El restaurante tiene una alta rotación de personal."
+  },
+  {
+    "id": "unwanted",
+    "es": "no deseado",
+    "pos": "adj",
+    "example_en": "Delete unwanted emails to free up space.",
+    "example_es": "Borra los correos no deseados para liberar espacio."
+  },
+  {
+    "id": "variant",
+    "es": "variante",
+    "pos": "noun",
+    "example_en": "Scientists are studying a new variant of the virus.",
+    "example_es": "Los científicos están estudiando una nueva variante del virus."
+  },
+  {
+    "id": "visibility",
+    "es": "visibilidad",
+    "pos": "noun",
+    "example_en": "Visibility was poor because of the fog.",
+    "example_es": "La visibilidad era mala por la niebla."
+  },
+  {
+    "id": "abundant",
+    "es": "abundante",
+    "pos": "adj",
+    "example_en": "Fish are abundant in this lake.",
+    "example_es": "Los peces son abundantes en este lago."
+  },
+  {
+    "id": "algebra",
+    "es": "álgebra",
+    "pos": "noun",
+    "example_en": "We have an algebra test tomorrow.",
+    "example_es": "Tenemos un examen de álgebra mañana."
+  },
+  {
+    "id": "antenna",
+    "es": "antena",
+    "pos": "noun",
+    "example_en": "The antenna on the roof was damaged by the wind.",
+    "example_es": "La antena del techo fue dañada por el viento."
+  },
+  {
+    "id": "audition",
+    "es": "audición, prueba",
+    "pos": "noun",
+    "example_en": "She has an audition for the school play.",
+    "example_es": "Ella tiene una audición para la obra de la escuela."
+  },
+  {
+    "id": "bravo",
+    "es": "bravo",
+    "pos": "interj",
+    "example_en": "Bravo, that was a wonderful performance!",
+    "example_es": "¡Bravo, fue una actuación maravillosa!"
+  },
+  {
+    "id": "chop",
+    "es": "picar, cortar",
+    "pos": "verb",
+    "example_en": "Chop the onions into small pieces.",
+    "example_es": "Pica las cebollas en trozos pequeños."
+  },
+  {
+    "id": "comparative",
+    "es": "comparativo",
+    "pos": "adj",
+    "example_en": "We did a comparative study of two schools.",
+    "example_es": "Hicimos un estudio comparativo de dos escuelas."
+  },
+  {
+    "id": "complement",
+    "es": "complementar",
+    "pos": "verb",
+    "example_en": "This sauce will complement the fish perfectly.",
+    "example_es": "Esta salsa complementará el pescado a la perfección."
+  },
+  {
+    "id": "conquest",
+    "es": "conquista",
+    "pos": "noun",
+    "example_en": "The book tells the story of the conquest of the region.",
+    "example_es": "El libro cuenta la historia de la conquista de la región."
+  },
+  {
+    "id": "continuity",
+    "es": "continuidad",
+    "pos": "noun",
+    "example_en": "The new coach will provide continuity for the team.",
+    "example_es": "El nuevo entrenador le dará continuidad al equipo."
+  },
+  {
+    "id": "credible",
+    "es": "creíble",
+    "pos": "adj",
+    "example_en": "The witness gave a credible account of the events.",
+    "example_es": "El testigo dio un relato creíble de los hechos."
+  },
+  {
+    "id": "delightful",
+    "es": "encantador, delicioso",
+    "pos": "adj",
+    "example_en": "We had a delightful evening with our friends.",
+    "example_es": "Pasamos una velada encantadora con nuestros amigos."
+  },
+  {
+    "id": "digit",
+    "es": "dígito",
+    "pos": "noun",
+    "example_en": "Each digit of the code must be a number.",
+    "example_es": "Cada dígito del código debe ser un número."
+  },
+  {
+    "id": "dinosaur",
+    "es": "dinosaurio",
+    "pos": "noun",
+    "example_en": "The museum has a huge dinosaur skeleton.",
+    "example_es": "El museo tiene un enorme esqueleto de dinosaurio."
+  },
+  {
+    "id": "drainage",
+    "es": "drenaje",
+    "pos": "noun",
+    "example_en": "The streets flood because of poor drainage.",
+    "example_es": "Las calles se inundan por el mal drenaje."
+  },
+  {
+    "id": "embarrassment",
+    "es": "vergüenza",
+    "pos": "noun",
+    "example_en": "His face turned red with embarrassment.",
+    "example_es": "Su cara se puso roja de vergüenza."
+  },
+  {
+    "id": "fairness",
+    "es": "justicia, equidad",
+    "pos": "noun",
+    "example_en": "The players questioned the fairness of the decision.",
+    "example_es": "Los jugadores cuestionaron la justicia de la decisión."
+  },
+  {
+    "id": "felony",
+    "es": "delito grave",
+    "pos": "noun",
+    "example_en": "Robbing a bank is a felony.",
+    "example_es": "Robar un banco es un delito grave."
+  },
+  {
+    "id": "floral",
+    "es": "floral",
+    "pos": "adj",
+    "example_en": "She wore a dress with a floral pattern.",
+    "example_es": "Ella llevaba un vestido con estampado floral."
+  },
+  {
+    "id": "fortress",
+    "es": "fortaleza",
+    "pos": "noun",
+    "example_en": "The ancient fortress sits on top of the hill.",
+    "example_es": "La antigua fortaleza está en lo alto de la colina."
+  },
+  {
+    "id": "fundamentally",
+    "es": "fundamentalmente",
+    "pos": "adv",
+    "example_en": "The two plans are fundamentally different.",
+    "example_es": "Los dos planes son fundamentalmente diferentes."
+  },
+  {
+    "id": "herd",
+    "es": "manada, rebaño",
+    "pos": "noun",
+    "example_en": "A herd of cows crossed the road.",
+    "example_es": "Un rebaño de vacas cruzó el camino."
+  },
+  {
+    "id": "ideological",
+    "es": "ideológico",
+    "pos": "adj",
+    "example_en": "The two parties have deep ideological differences.",
+    "example_es": "Los dos partidos tienen profundas diferencias ideológicas."
+  },
+  {
+    "id": "immortal",
+    "es": "inmortal",
+    "pos": "adj",
+    "example_en": "In the legend, the king wanted to be immortal.",
+    "example_es": "En la leyenda, el rey quería ser inmortal."
+  },
+  {
+    "id": "incumbent",
+    "es": "en funciones, actual",
+    "pos": "adj",
+    "example_en": "The incumbent mayor is running for a second term.",
+    "example_es": "El alcalde en funciones se postula para un segundo mandato."
+  },
+  {
+    "id": "insufficient",
+    "es": "insuficiente",
+    "pos": "adj",
+    "example_en": "The money was insufficient to pay all the bills.",
+    "example_es": "El dinero era insuficiente para pagar todas las cuentas."
+  },
+  {
+    "id": "jelly",
+    "es": "jalea, gelatina",
+    "pos": "noun",
+    "example_en": "I like toast with butter and jelly.",
+    "example_es": "Me gusta el pan tostado con mantequilla y jalea."
+  },
+  {
+    "id": "lick",
+    "es": "lamer",
+    "pos": "verb",
+    "example_en": "The puppy likes to lick my face.",
+    "example_es": "Al cachorro le gusta lamerme la cara."
+  },
+  {
+    "id": "literal",
+    "es": "literal",
+    "pos": "adj",
+    "example_en": "The literal meaning of the phrase is quite different.",
+    "example_es": "El significado literal de la frase es bastante diferente."
+  },
+  {
+    "id": "lunar",
+    "es": "lunar",
+    "pos": "adj",
+    "example_en": "The lunar surface is covered with craters.",
+    "example_es": "La superficie lunar está cubierta de cráteres."
+  },
+  {
+    "id": "maternal",
+    "es": "materno, maternal",
+    "pos": "adj",
+    "example_en": "My maternal grandmother lives on a farm.",
+    "example_es": "Mi abuela materna vive en una granja."
+  },
+  {
+    "id": "memoir",
+    "es": "memorias",
+    "pos": "noun",
+    "example_en": "She wrote a memoir about her childhood.",
+    "example_es": "Ella escribió unas memorias sobre su infancia."
+  },
+  {
+    "id": "modification",
+    "es": "modificación",
+    "pos": "noun",
+    "example_en": "The plan needs a small modification.",
+    "example_es": "El plan necesita una pequeña modificación."
+  },
+  {
+    "id": "mold",
+    "es": "moho, molde",
+    "pos": "noun",
+    "example_en": "There was green mold on the old bread.",
+    "example_es": "Había moho verde en el pan viejo."
+  },
+  {
+    "id": "objection",
+    "es": "objeción",
+    "pos": "noun",
+    "example_en": "Does anyone have an objection to the plan?",
+    "example_es": "¿Alguien tiene alguna objeción al plan?"
+  },
+  {
+    "id": "occurrence",
+    "es": "suceso, hecho",
+    "pos": "noun",
+    "example_en": "Snow is a rare occurrence in this city.",
+    "example_es": "La nieve es un suceso poco común en esta ciudad."
+  },
+  {
+    "id": "offspring",
+    "es": "descendencia, crías",
+    "pos": "noun",
+    "example_en": "The bird feeds its offspring several times a day.",
+    "example_es": "El ave alimenta a sus crías varias veces al día."
+  },
+  {
+    "id": "outrageous",
+    "es": "escandaloso, indignante",
+    "pos": "adj",
+    "example_en": "The prices at that restaurant are outrageous.",
+    "example_es": "Los precios de ese restaurante son escandalosos."
+  },
+  {
+    "id": "packet",
+    "es": "sobre, paquete",
+    "pos": "noun",
+    "example_en": "Add one packet of sugar to your coffee.",
+    "example_es": "Agrega un sobre de azúcar a tu café."
+  },
+  {
+    "id": "pathway",
+    "es": "camino, sendero",
+    "pos": "noun",
+    "example_en": "A narrow pathway leads to the beach.",
+    "example_es": "Un camino estrecho lleva a la playa."
+  },
+  {
+    "id": "peach",
+    "es": "durazno",
+    "pos": "noun",
+    "example_en": "This peach is sweet and juicy.",
+    "example_es": "Este durazno es dulce y jugoso."
+  },
+  {
+    "id": "polo",
+    "es": "polo",
+    "pos": "noun",
+    "example_en": "They watched a polo match on the weekend.",
+    "example_es": "Vieron un partido de polo el fin de semana."
+  },
+  {
+    "id": "prohibition",
+    "es": "prohibición",
+    "pos": "noun",
+    "example_en": "There is a prohibition on smoking in the building.",
+    "example_es": "Hay una prohibición de fumar en el edificio."
+  },
+  {
+    "id": "prop",
+    "es": "objeto de utilería",
+    "pos": "noun",
+    "example_en": "The actor dropped a prop during the play.",
+    "example_es": "El actor dejó caer un objeto de utilería durante la obra."
+  },
+  {
+    "id": "registry",
+    "es": "registro",
+    "pos": "noun",
+    "example_en": "Their names are listed in the national registry.",
+    "example_es": "Sus nombres figuran en el registro nacional."
+  },
+  {
+    "id": "remarkably",
+    "es": "notablemente, sorprendentemente",
+    "pos": "adv",
+    "example_en": "She recovered remarkably quickly after the surgery.",
+    "example_es": "Ella se recuperó sorprendentemente rápido después de la cirugía."
+  },
+  {
+    "id": "scar",
+    "es": "cicatriz",
+    "pos": "noun",
+    "example_en": "He has a small scar on his chin.",
+    "example_es": "Él tiene una pequeña cicatriz en la barbilla."
+  },
+  {
+    "id": "scripture",
+    "es": "escrituras sagradas",
+    "pos": "noun",
+    "example_en": "The priest read a passage from scripture.",
+    "example_es": "El sacerdote leyó un pasaje de las Escrituras."
+  },
+  {
+    "id": "simplicity",
+    "es": "sencillez, simplicidad",
+    "pos": "noun",
+    "example_en": "I love the simplicity of this design.",
+    "example_es": "Me encanta la sencillez de este diseño."
+  },
+  {
+    "id": "stereo",
+    "es": "equipo de sonido, estéreo",
+    "pos": "noun",
+    "example_en": "He turned up the music on the stereo.",
+    "example_es": "Subió el volumen de la música en el equipo de sonido."
+  },
+  {
+    "id": "surrey",
+    "skip": "nombre propio (lugar)"
+  },
+  {
+    "id": "sustainability",
+    "es": "sostenibilidad, sustentabilidad",
+    "pos": "noun",
+    "example_en": "The company is committed to sustainability.",
+    "example_es": "La empresa está comprometida con la sostenibilidad."
+  },
+  {
+    "id": "symphony",
+    "es": "sinfonía",
+    "pos": "noun",
+    "example_en": "The orchestra played a beautiful symphony.",
+    "example_es": "La orquesta tocó una hermosa sinfonía."
+  },
+  {
+    "id": "tesla",
+    "skip": "nombre propio o marca"
+  },
+  {
+    "id": "textbook",
+    "es": "libro de texto",
+    "pos": "noun",
+    "example_en": "Open your textbook to page fifty.",
+    "example_es": "Abran su libro de texto en la página cincuenta."
+  },
+  {
+    "id": "theological",
+    "es": "teológico",
+    "pos": "adj",
+    "example_en": "He studied at a theological school.",
+    "example_es": "Él estudió en una escuela teológica."
+  },
+  {
+    "id": "undercover",
+    "es": "encubierto, de incógnito",
+    "pos": "adj",
+    "example_en": "An undercover police officer joined the gang.",
+    "example_es": "Un policía encubierto se unió a la pandilla."
+  },
+  {
+    "id": "vegetation",
+    "es": "vegetación",
+    "pos": "noun",
+    "example_en": "The island is covered in thick vegetation.",
+    "example_es": "La isla está cubierta de vegetación espesa."
+  },
+  {
+    "id": "accountant",
+    "es": "contador",
+    "pos": "noun",
+    "example_en": "Our accountant helps us with our taxes.",
+    "example_es": "Nuestro contador nos ayuda con los impuestos."
+  },
+  {
+    "id": "activate",
+    "es": "activar",
+    "pos": "verb",
+    "example_en": "You need to activate your new card first.",
+    "example_es": "Primero tienes que activar tu nueva tarjeta."
+  },
+  {
+    "id": "behold",
+    "es": "contemplar",
+    "pos": "verb",
+    "example_en": "The view from the mountain was a joy to behold.",
+    "example_es": "Era un placer contemplar la vista desde la montaña."
+  },
+  {
+    "id": "billionaire",
+    "es": "multimillonario",
+    "pos": "noun",
+    "example_en": "The billionaire donated money to build a hospital.",
+    "example_es": "El multimillonario donó dinero para construir un hospital."
+  },
+  {
+    "id": "bypass",
+    "es": "evitar, eludir",
+    "pos": "verb",
+    "example_en": "We can bypass the traffic by taking this road.",
+    "example_es": "Podemos evitar el tráfico si tomamos este camino."
+  },
+  {
+    "id": "calculation",
+    "es": "cálculo",
+    "pos": "noun",
+    "example_en": "I made a quick calculation of the total cost.",
+    "example_es": "Hice un cálculo rápido del costo total."
+  },
+  {
+    "id": "cancellation",
+    "es": "cancelación",
+    "pos": "noun",
+    "example_en": "The cancellation of the flight ruined our plans.",
+    "example_es": "La cancelación del vuelo arruinó nuestros planes."
+  },
+  {
+    "id": "cane",
+    "es": "bastón, caña",
+    "pos": "noun",
+    "example_en": "My grandfather walks with a cane.",
+    "example_es": "Mi abuelo camina con bastón."
+  },
+  {
+    "id": "catalyst",
+    "es": "catalizador",
+    "pos": "noun",
+    "example_en": "The new law was a catalyst for change.",
+    "example_es": "La nueva ley fue un catalizador del cambio."
+  },
+  {
+    "id": "cedar",
+    "es": "cedro",
+    "pos": "noun",
+    "example_en": "The chest is made of cedar wood.",
+    "example_es": "El baúl está hecho de madera de cedro."
+  },
+  {
+    "id": "corpse",
+    "es": "cadáver",
+    "pos": "noun",
+    "example_en": "The detective examined the corpse carefully.",
+    "example_es": "El detective examinó el cadáver con cuidado."
+  },
+  {
+    "id": "crab",
+    "es": "cangrejo",
+    "pos": "noun",
+    "example_en": "A small crab walked sideways across the sand.",
+    "example_es": "Un pequeño cangrejo caminó de lado por la arena."
+  },
+  {
+    "id": "dementia",
+    "es": "demencia",
+    "pos": "noun",
+    "example_en": "Her grandmother suffers from dementia.",
+    "example_es": "Su abuela sufre de demencia."
+  },
+  {
+    "id": "designation",
+    "es": "designación, denominación",
+    "pos": "noun",
+    "example_en": "The area received its designation as a national park.",
+    "example_es": "La zona recibió su designación como parque nacional."
+  },
+  {
+    "id": "dice",
+    "es": "dados",
+    "pos": "noun",
+    "example_en": "Roll the dice to start the game.",
+    "example_es": "Tira los dados para empezar el juego."
+  },
+  {
+    "id": "dispatch",
+    "es": "enviar, despachar",
+    "pos": "verb",
+    "example_en": "We will dispatch your order tomorrow morning.",
+    "example_es": "Enviaremos tu pedido mañana por la mañana."
+  },
+  {
+    "id": "duchess",
+    "es": "duquesa",
+    "pos": "noun",
+    "example_en": "The duchess lived in a large castle.",
+    "example_es": "La duquesa vivía en un gran castillo."
+  },
+  {
+    "id": "extinction",
+    "es": "extinción",
+    "pos": "noun",
+    "example_en": "Many animals are in danger of extinction.",
+    "example_es": "Muchos animales están en peligro de extinción."
+  },
+  {
+    "id": "foil",
+    "es": "papel de aluminio",
+    "pos": "noun",
+    "example_en": "Wrap the potatoes in foil before baking them.",
+    "example_es": "Envuelve las papas en papel de aluminio antes de hornearlas."
+  },
+  {
+    "id": "geology",
+    "es": "geología",
+    "pos": "noun",
+    "example_en": "She wants to study geology in college.",
+    "example_es": "Ella quiere estudiar geología en la universidad."
+  },
+  {
+    "id": "gram",
+    "es": "gramo",
+    "pos": "noun",
+    "example_en": "A paper clip weighs about one gram.",
+    "example_es": "Un clip pesa aproximadamente un gramo."
+  },
+  {
+    "id": "heavenly",
+    "es": "celestial, divino",
+    "pos": "adj",
+    "example_en": "This chocolate cake tastes heavenly.",
+    "example_es": "Este pastel de chocolate sabe divino."
+  },
+  {
+    "id": "horrific",
+    "es": "horrendo, espantoso",
+    "pos": "adj",
+    "example_en": "It was a horrific accident on the highway.",
+    "example_es": "Fue un accidente horrendo en la carretera."
+  },
+  {
+    "id": "mentality",
+    "es": "mentalidad",
+    "pos": "noun",
+    "example_en": "The team needs a winning mentality.",
+    "example_es": "El equipo necesita una mentalidad ganadora."
+  },
+  {
+    "id": "neural",
+    "es": "neuronal",
+    "pos": "adj",
+    "example_en": "The brain is a huge neural network.",
+    "example_es": "El cerebro es una enorme red neuronal."
+  },
+  {
+    "id": "newsletter",
+    "es": "boletín informativo",
+    "pos": "noun",
+    "example_en": "Sign up for our monthly newsletter.",
+    "example_es": "Suscríbete a nuestro boletín informativo mensual."
+  },
+  {
+    "id": "nineteenth",
+    "es": "decimonoveno",
+    "pos": "num",
+    "example_en": "The house was built in the nineteenth century.",
+    "example_es": "La casa fue construida en el siglo diecinueve."
+  },
+  {
+    "id": "nitrogen",
+    "es": "nitrógeno",
+    "pos": "noun",
+    "example_en": "Most of the air we breathe is nitrogen.",
+    "example_es": "La mayor parte del aire que respiramos es nitrógeno."
+  },
+  {
+    "id": "ooh",
+    "es": "oh, uy",
+    "pos": "interj",
+    "example_en": "Ooh, that cake looks delicious!",
+    "example_es": "¡Uy, ese pastel se ve delicioso!"
+  },
+  {
+    "id": "payroll",
+    "es": "nómina",
+    "pos": "noun",
+    "example_en": "The company has fifty people on its payroll.",
+    "example_es": "La empresa tiene cincuenta personas en su nómina."
+  },
+  {
+    "id": "phenomenal",
+    "es": "fenomenal, extraordinario",
+    "pos": "adj",
+    "example_en": "The singer gave a phenomenal performance.",
+    "example_es": "El cantante dio una actuación fenomenal."
+  },
+  {
+    "id": "photographic",
+    "es": "fotográfico",
+    "pos": "adj",
+    "example_en": "She has an amazing photographic memory.",
+    "example_es": "Ella tiene una increíble memoria fotográfica."
+  },
+  {
+    "id": "pinch",
+    "es": "pizca, pellizco",
+    "pos": "noun",
+    "example_en": "Add a pinch of salt to the soup.",
+    "example_es": "Agrega una pizca de sal a la sopa."
+  },
+  {
+    "id": "ping",
+    "skip": "onomatopeya o jerga técnica"
+  },
+  {
+    "id": "predictable",
+    "es": "predecible",
+    "pos": "adj",
+    "example_en": "The ending of the movie was very predictable.",
+    "example_es": "El final de la película fue muy predecible."
+  },
+  {
+    "id": "professionally",
+    "es": "profesionalmente",
+    "pos": "adv",
+    "example_en": "He plays the guitar professionally.",
+    "example_es": "Él toca la guitarra profesionalmente."
+  },
+  {
+    "id": "queer",
+    "skip": "término sensible, históricamente ofensivo"
+  },
+  {
+    "id": "resurrection",
+    "es": "resurrección",
+    "pos": "noun",
+    "example_en": "The story is about the resurrection of an old town.",
+    "example_es": "La historia trata sobre la resurrección de un viejo pueblo."
+  },
+  {
+    "id": "rover",
+    "es": "vehículo explorador",
+    "pos": "noun",
+    "example_en": "The rover sent new pictures from the surface of Mars.",
+    "example_es": "El vehículo explorador envió nuevas fotos desde la superficie de Marte."
+  },
+  {
+    "id": "shipment",
+    "es": "envío, cargamento",
+    "pos": "noun",
+    "example_en": "The shipment will arrive next Tuesday.",
+    "example_es": "El envío llegará el próximo martes."
+  },
+  {
+    "id": "spatial",
+    "es": "espacial",
+    "pos": "adj",
+    "example_en": "Architects need good spatial skills.",
+    "example_es": "Los arquitectos necesitan buenas habilidades espaciales."
+  },
+  {
+    "id": "stainless",
+    "es": "inoxidable",
+    "pos": "adj",
+    "example_en": "The kitchen has a stainless steel sink.",
+    "example_es": "La cocina tiene un fregadero de acero inoxidable."
+  },
+  {
+    "id": "statutory",
+    "es": "legal, reglamentario",
+    "pos": "adj",
+    "example_en": "Workers have a statutory right to paid holidays.",
+    "example_es": "Los trabajadores tienen el derecho legal a vacaciones pagadas."
+  },
+  {
+    "id": "stellar",
+    "es": "estelar, excelente",
+    "pos": "adj",
+    "example_en": "The team had a stellar season this year.",
+    "example_es": "El equipo tuvo una temporada estelar este año."
+  },
+  {
+    "id": "stubborn",
+    "es": "terco, obstinado",
+    "pos": "adj",
+    "example_en": "My brother is too stubborn to say sorry.",
+    "example_es": "Mi hermano es demasiado terco para pedir perdón."
+  },
+  {
+    "id": "syrup",
+    "es": "jarabe, almíbar",
+    "pos": "noun",
+    "example_en": "She poured syrup on her pancakes.",
+    "example_es": "Ella le puso jarabe a sus panqueques."
+  },
+  {
+    "id": "transplant",
+    "es": "trasplante",
+    "pos": "noun",
+    "example_en": "He needed a heart transplant to survive.",
+    "example_es": "Él necesitaba un trasplante de corazón para sobrevivir."
+  },
+  {
+    "id": "turf",
+    "es": "césped",
+    "pos": "noun",
+    "example_en": "The players ran onto the green turf.",
+    "example_es": "Los jugadores salieron corriendo al césped verde."
+  },
+  {
+    "id": "twitch",
+    "es": "temblar, crisparse",
+    "pos": "verb",
+    "example_en": "My eye starts to twitch when I am tired.",
+    "example_es": "El ojo me empieza a temblar cuando estoy cansado."
+  },
+  {
+    "id": "volcano",
+    "es": "volcán",
+    "pos": "noun",
+    "example_en": "The volcano erupted for the first time in years.",
+    "example_es": "El volcán hizo erupción por primera vez en años."
+  },
+  {
+    "id": "ark",
+    "es": "arca",
+    "pos": "noun",
+    "example_en": "The children built a toy ark with animals.",
+    "example_es": "Los niños construyeron un arca de juguete con animales."
+  },
+  {
+    "id": "bum",
+    "skip": "jerga coloquial u ofensiva"
+  },
+  {
+    "id": "conception",
+    "es": "concepción",
+    "pos": "noun",
+    "example_en": "The project changed a lot since its conception.",
+    "example_es": "El proyecto cambió mucho desde su concepción."
+  },
+  {
+    "id": "congo",
+    "skip": "nombre propio (país)"
+  },
+  {
+    "id": "cue",
+    "es": "señal, pie (en teatro)",
+    "pos": "noun",
+    "example_en": "The actor waited for his cue to enter the stage.",
+    "example_es": "El actor esperó su señal para entrar al escenario."
+  },
+  {
+    "id": "deed",
+    "es": "acción, hazaña",
+    "pos": "noun",
+    "example_en": "Helping your neighbor is a good deed.",
+    "example_es": "Ayudar a tu vecino es una buena acción."
+  },
+  {
+    "id": "disciplinary",
+    "es": "disciplinario",
+    "pos": "adj",
+    "example_en": "The school took disciplinary action against the student.",
+    "example_es": "La escuela tomó medidas disciplinarias contra el estudiante."
+  },
+  {
+    "id": "dwarf",
+    "es": "enano",
+    "pos": "noun",
+    "example_en": "The fairy tale is about a dwarf who lives in a cave.",
+    "example_es": "El cuento de hadas trata sobre un enano que vive en una cueva."
+  },
+  {
+    "id": "eighty",
+    "es": "ochenta",
+    "pos": "num",
+    "example_en": "The concert hall has eighty seats.",
+    "example_es": "La sala de conciertos tiene ochenta asientos."
+  },
+  {
+    "id": "eligibility",
+    "es": "elegibilidad, derecho (a algo)",
+    "pos": "noun",
+    "example_en": "Check your eligibility for the scholarship online.",
+    "example_es": "Consulta en línea tu elegibilidad para la beca."
+  },
+  {
+    "id": "finite",
+    "es": "finito, limitado",
+    "pos": "adj",
+    "example_en": "The planet has a finite amount of fresh water.",
+    "example_es": "El planeta tiene una cantidad finita de agua dulce."
+  },
+  {
+    "id": "flagship",
+    "es": "buque insignia, producto estrella",
+    "pos": "noun",
+    "example_en": "This store is the company's flagship.",
+    "example_es": "Esta tienda es el buque insignia de la empresa."
+  },
+  {
+    "id": "forensic",
+    "es": "forense",
+    "pos": "adj",
+    "example_en": "The police are waiting for the forensic report.",
+    "example_es": "La policía está esperando el informe forense."
+  },
+  {
+    "id": "forthcoming",
+    "es": "próximo, venidero",
+    "pos": "adj",
+    "example_en": "The band will play songs from its forthcoming album.",
+    "example_es": "La banda tocará canciones de su próximo álbum."
+  },
+  {
+    "id": "gallon",
+    "es": "galón",
+    "pos": "noun",
+    "example_en": "Milk is cheaper if you buy a gallon.",
+    "example_es": "La leche es más barata si compras un galón."
+  },
+  {
+    "id": "glucose",
+    "es": "glucosa",
+    "pos": "noun",
+    "example_en": "The doctor checked the glucose level in my blood.",
+    "example_es": "El médico revisó el nivel de glucosa en mi sangre."
+  },
+  {
+    "id": "gore",
+    "skip": "suele ser nombre propio o término de nicho"
+  },
+  {
+    "id": "gown",
+    "es": "vestido largo, bata",
+    "pos": "noun",
+    "example_en": "She wore a beautiful gown to the dinner.",
+    "example_es": "Ella llevó un hermoso vestido largo a la cena."
+  },
+  {
+    "id": "greedy",
+    "es": "codicioso, avaro",
+    "pos": "adj",
+    "example_en": "The greedy king wanted all the gold for himself.",
+    "example_es": "El rey codicioso quería todo el oro para él."
+  },
+  {
+    "id": "halo",
+    "es": "aureola, halo",
+    "pos": "noun",
+    "example_en": "The angel in the painting has a golden halo.",
+    "example_es": "El ángel de la pintura tiene una aureola dorada."
+  },
+  {
+    "id": "infamous",
+    "es": "infame, de mala fama",
+    "pos": "adj",
+    "example_en": "The prison was infamous for its cruel guards.",
+    "example_es": "La prisión tenía mala fama por sus guardias crueles."
+  },
+  {
+    "id": "inspirational",
+    "es": "inspirador",
+    "pos": "adj",
+    "example_en": "The coach gave an inspirational speech before the game.",
+    "example_es": "El entrenador dio un discurso inspirador antes del partido."
+  },
+  {
+    "id": "internally",
+    "es": "internamente",
+    "pos": "adv",
+    "example_en": "The problem was solved internally by the team.",
+    "example_es": "El equipo resolvió el problema internamente."
+  },
+  {
+    "id": "lateral",
+    "es": "lateral",
+    "pos": "adj",
+    "example_en": "The doctor took a lateral picture of my knee.",
+    "example_es": "El médico tomó una imagen lateral de mi rodilla."
+  },
+  {
+    "id": "lifelong",
+    "es": "de toda la vida",
+    "pos": "adj",
+    "example_en": "They have been lifelong friends since school.",
+    "example_es": "Son amigos de toda la vida desde la escuela."
+  },
+  {
+    "id": "limestone",
+    "es": "piedra caliza",
+    "pos": "noun",
+    "example_en": "The old church is built of limestone.",
+    "example_es": "La vieja iglesia está construida de piedra caliza."
+  },
+  {
+    "id": "merge",
+    "es": "fusionar, unir",
+    "pos": "verb",
+    "example_en": "The two companies decided to merge next year.",
+    "example_es": "Las dos empresas decidieron fusionarse el próximo año."
+  },
+  {
+    "id": "mesh",
+    "es": "malla",
+    "pos": "noun",
+    "example_en": "The window has a metal mesh to keep insects out.",
+    "example_es": "La ventana tiene una malla metálica para evitar los insectos."
+  },
+  {
+    "id": "migrant",
+    "es": "migrante",
+    "pos": "noun",
+    "example_en": "The migrant found work on a farm.",
+    "example_es": "El migrante encontró trabajo en una granja."
+  },
+  {
+    "id": "moron",
+    "skip": "insulto"
+  },
+  {
+    "id": "mortar",
+    "es": "mortero, argamasa",
+    "pos": "noun",
+    "example_en": "The workers mixed mortar to lay the bricks.",
+    "example_es": "Los obreros mezclaron mortero para colocar los ladrillos."
+  },
+  {
+    "id": "naive",
+    "es": "ingenuo",
+    "pos": "adj",
+    "example_en": "It was naive of me to believe his story.",
+    "example_es": "Fue ingenuo de mi parte creer su historia."
+  },
+  {
+    "id": "noticeable",
+    "es": "notable, perceptible",
+    "pos": "adj",
+    "example_en": "There was a noticeable change in his attitude.",
+    "example_es": "Hubo un cambio notable en su actitud."
+  },
+  {
+    "id": "perfume",
+    "es": "perfume",
+    "pos": "noun",
+    "example_en": "She bought a bottle of perfume for her mother.",
+    "example_es": "Ella compró un frasco de perfume para su mamá."
+  },
+  {
+    "id": "prestige",
+    "es": "prestigio",
+    "pos": "noun",
+    "example_en": "The university has great prestige around the world.",
+    "example_es": "La universidad tiene un gran prestigio en todo el mundo."
+  },
+  {
+    "id": "pyramid",
+    "es": "pirámide",
+    "pos": "noun",
+    "example_en": "We climbed to the top of the ancient pyramid.",
+    "example_es": "Subimos a la cima de la antigua pirámide."
+  },
+  {
+    "id": "remotely",
+    "es": "a distancia, remotamente",
+    "pos": "adv",
+    "example_en": "Many people now work remotely from home.",
+    "example_es": "Muchas personas ahora trabajan a distancia desde casa."
+  },
+  {
+    "id": "rigid",
+    "es": "rígido",
+    "pos": "adj",
+    "example_en": "The box is made of rigid plastic.",
+    "example_es": "La caja está hecha de plástico rígido."
+  },
+  {
+    "id": "spacecraft",
+    "es": "nave espacial",
+    "pos": "noun",
+    "example_en": "The spacecraft landed safely on the moon.",
+    "example_es": "La nave espacial aterrizó sin problemas en la luna."
+  },
+  {
+    "id": "specification",
+    "es": "especificación",
+    "pos": "noun",
+    "example_en": "The engineer wrote a detailed specification for the bridge.",
+    "example_es": "El ingeniero redactó una especificación detallada para el puente."
+  },
+  {
+    "id": "splendid",
+    "es": "espléndido",
+    "pos": "adj",
+    "example_en": "We had a splendid view of the sea.",
+    "example_es": "Teníamos una vista espléndida del mar."
+  },
+  {
+    "id": "textile",
+    "es": "textil",
+    "pos": "adj",
+    "example_en": "The city is famous for its textile industry.",
+    "example_es": "La ciudad es famosa por su industria textil."
+  },
+  {
+    "id": "unsure",
+    "es": "inseguro, no seguro",
+    "pos": "adj",
+    "example_en": "I am unsure about what to do next.",
+    "example_es": "No estoy seguro de qué hacer a continuación."
+  },
+  {
+    "id": "veterinary",
+    "es": "veterinario",
+    "pos": "adj",
+    "example_en": "We took the cat to a veterinary clinic.",
+    "example_es": "Llevamos al gato a una clínica veterinaria."
+  },
+  {
+    "id": "allocation",
+    "es": "asignación",
+    "pos": "noun",
+    "example_en": "The allocation of funds was discussed at the meeting.",
+    "example_es": "La asignación de fondos se discutió en la reunión."
+  },
+  {
+    "id": "amusement",
+    "es": "diversión, entretenimiento",
+    "pos": "noun",
+    "example_en": "The children watched the clown with amusement.",
+    "example_es": "Los niños miraban al payaso divertidos."
+  },
+  {
+    "id": "anticipation",
+    "es": "expectación, anticipación",
+    "pos": "noun",
+    "example_en": "The fans waited in anticipation for the band.",
+    "example_es": "Los fans esperaban con expectación a la banda."
+  },
+  {
+    "id": "appropriately",
+    "es": "adecuadamente, apropiadamente",
+    "pos": "adv",
+    "example_en": "Please dress appropriately for the interview.",
+    "example_es": "Por favor, vístete adecuadamente para la entrevista."
+  },
+  {
+    "id": "arrogant",
+    "es": "arrogante",
+    "pos": "adj",
+    "example_en": "He is talented but a little arrogant.",
+    "example_es": "Él tiene talento, pero es un poco arrogante."
+  },
+  {
+    "id": "authorization",
+    "es": "autorización",
+    "pos": "noun",
+    "example_en": "You need authorization to enter this room.",
+    "example_es": "Necesitas autorización para entrar a esta sala."
+  },
+  {
+    "id": "auxiliary",
+    "es": "auxiliar",
+    "pos": "adj",
+    "example_en": "The hospital has an auxiliary power generator.",
+    "example_es": "El hospital tiene un generador de energía auxiliar."
+  },
+  {
+    "id": "baggage",
+    "es": "equipaje",
+    "pos": "noun",
+    "example_en": "Please collect your baggage at the next belt.",
+    "example_es": "Por favor, recoge tu equipaje en la siguiente banda."
+  },
+  {
+    "id": "beacon",
+    "es": "faro, señal luminosa",
+    "pos": "noun",
+    "example_en": "The beacon guided the ships safely to the port.",
+    "example_es": "La señal luminosa guio a los barcos a salvo hasta el puerto."
+  },
+  {
+    "id": "bounty",
+    "es": "recompensa",
+    "pos": "noun",
+    "example_en": "The sheriff offered a bounty for the thief.",
+    "example_es": "El alguacil ofreció una recompensa por el ladrón."
+  },
+  {
+    "id": "ceramic",
+    "es": "de cerámica, cerámico",
+    "pos": "adj",
+    "example_en": "She bought a ceramic bowl at the market.",
+    "example_es": "Ella compró un tazón de cerámica en el mercado."
+  },
+  {
+    "id": "cereal",
+    "es": "cereal",
+    "pos": "noun",
+    "example_en": "I eat a bowl of cereal every morning.",
+    "example_es": "Como un plato de cereal todas las mañanas."
+  },
+  {
+    "id": "clergy",
+    "es": "clero",
+    "pos": "noun",
+    "example_en": "Members of the clergy attended the ceremony.",
+    "example_es": "Miembros del clero asistieron a la ceremonia."
+  },
+  {
+    "id": "cola",
+    "es": "refresco de cola",
+    "pos": "noun",
+    "example_en": "He ordered a pizza and a cola.",
+    "example_es": "Él pidió una pizza y un refresco de cola."
+  },
+  {
+    "id": "coma",
+    "es": "coma (estado médico)",
+    "pos": "noun",
+    "example_en": "The patient was in a coma for two weeks.",
+    "example_es": "El paciente estuvo en coma durante dos semanas."
+  },
+  {
+    "id": "comfortably",
+    "es": "cómodamente",
+    "pos": "adv",
+    "example_en": "The car seats five people comfortably.",
+    "example_es": "En el carro caben cinco personas cómodamente."
+  },
+  {
+    "id": "compass",
+    "es": "brújula",
+    "pos": "noun",
+    "example_en": "We used a compass to find our way home.",
+    "example_es": "Usamos una brújula para encontrar el camino a casa."
+  },
+  {
+    "id": "contempt",
+    "es": "desprecio, desdén",
+    "pos": "noun",
+    "example_en": "She looked at him with contempt.",
+    "example_es": "Ella lo miró con desprecio."
+  },
+  {
+    "id": "credentials",
+    "es": "credenciales",
+    "pos": "noun",
+    "example_en": "Enter your credentials to log in.",
+    "example_es": "Ingresa tus credenciales para iniciar sesión."
+  },
+  {
+    "id": "ecology",
+    "es": "ecología",
+    "pos": "noun",
+    "example_en": "We learned about the ecology of the rainforest.",
+    "example_es": "Aprendimos sobre la ecología de la selva tropical."
+  },
+  {
+    "id": "emergence",
+    "es": "surgimiento, aparición",
+    "pos": "noun",
+    "example_en": "The emergence of the internet changed the world.",
+    "example_es": "El surgimiento de internet cambió el mundo."
+  },
+  {
+    "id": "endurance",
+    "es": "resistencia",
+    "pos": "noun",
+    "example_en": "Running a marathon requires great endurance.",
+    "example_es": "Correr un maratón requiere una gran resistencia."
+  },
+  {
+    "id": "evacuation",
+    "es": "evacuación",
+    "pos": "noun",
+    "example_en": "The fire forced the evacuation of the building.",
+    "example_es": "El incendio obligó a la evacuación del edificio."
+  },
+  {
+    "id": "exceptionally",
+    "es": "excepcionalmente",
+    "pos": "adv",
+    "example_en": "The weather was exceptionally warm for winter.",
+    "example_es": "El clima fue excepcionalmente cálido para ser invierno."
+  },
+  {
+    "id": "expenditure",
+    "es": "gasto",
+    "pos": "noun",
+    "example_en": "The government plans to cut public expenditure.",
+    "example_es": "El gobierno planea reducir el gasto público."
+  },
+  {
+    "id": "falcon",
+    "es": "halcón",
+    "pos": "noun",
+    "example_en": "The falcon dived quickly to catch its prey.",
+    "example_es": "El halcón se lanzó rápidamente para atrapar a su presa."
+  },
+  {
+    "id": "groove",
+    "es": "ranura, surco",
+    "pos": "noun",
+    "example_en": "The door slides along a groove in the floor.",
+    "example_es": "La puerta se desliza por una ranura en el piso."
+  },
+  {
+    "id": "homosexuality",
+    "es": "homosexualidad",
+    "pos": "noun",
+    "example_en": "The documentary explores attitudes toward homosexuality over time.",
+    "example_es": "El documental explora las actitudes hacia la homosexualidad a lo largo del tiempo."
+  },
+  {
+    "id": "ironically",
+    "es": "irónicamente",
+    "pos": "adv",
+    "example_en": "Ironically, the fire started in the fire station.",
+    "example_es": "Irónicamente, el incendio comenzó en la estación de bomberos."
+  },
+  {
+    "id": "jealousy",
+    "es": "celos, envidia",
+    "pos": "noun",
+    "example_en": "His jealousy ruined their friendship.",
+    "example_es": "Sus celos arruinaron su amistad."
+  },
+  {
+    "id": "jewellery",
+    "skip": "grafía británica"
+  },
+  {
+    "id": "laden",
+    "es": "cargado",
+    "pos": "adj",
+    "example_en": "The trees were laden with ripe apples.",
+    "example_es": "Los árboles estaban cargados de manzanas maduras."
+  },
+  {
+    "id": "mil",
+    "skip": "abreviatura"
+  },
+  {
+    "id": "overweight",
+    "es": "con sobrepeso",
+    "pos": "adj",
+    "example_en": "The vet said my dog is overweight.",
+    "example_es": "El veterinario dijo que mi perro tiene sobrepeso."
+  },
+  {
+    "id": "palette",
+    "es": "paleta (de colores)",
+    "pos": "noun",
+    "example_en": "The artist mixed the paint on her palette.",
+    "example_es": "La artista mezcló la pintura en su paleta."
+  },
+  {
+    "id": "pneumonia",
+    "es": "neumonía, pulmonía",
+    "pos": "noun",
+    "example_en": "My grandfather was in the hospital with pneumonia.",
+    "example_es": "Mi abuelo estuvo en el hospital con neumonía."
+  },
+  {
+    "id": "policeman",
+    "es": "policía",
+    "pos": "noun",
+    "example_en": "A policeman helped the lost child find his parents.",
+    "example_es": "Un policía ayudó al niño perdido a encontrar a sus padres."
+  },
+  {
+    "id": "potent",
+    "es": "potente",
+    "pos": "adj",
+    "example_en": "This is a very potent medicine.",
+    "example_es": "Este es un medicamento muy potente."
+  },
+  {
+    "id": "psycho",
+    "skip": "jerga coloquial u ofensiva"
+  },
+  {
+    "id": "rainy",
+    "es": "lluvioso",
+    "pos": "adj",
+    "example_en": "We stayed home on that rainy afternoon.",
+    "example_es": "Nos quedamos en casa esa tarde lluviosa."
+  },
+  {
+    "id": "renovation",
+    "es": "remodelación, renovación",
+    "pos": "noun",
+    "example_en": "The kitchen renovation took three months.",
+    "example_es": "La remodelación de la cocina tomó tres meses."
+  },
+  {
+    "id": "reverend",
+    "es": "reverendo",
+    "pos": "noun",
+    "example_en": "The reverend gave a short speech at the wedding.",
+    "example_es": "El reverendo dio un breve discurso en la boda."
+  },
+  {
+    "id": "rust",
+    "es": "óxido",
+    "pos": "noun",
+    "example_en": "The old bike was covered in rust.",
+    "example_es": "La vieja bicicleta estaba cubierta de óxido."
+  },
+  {
+    "id": "salty",
+    "es": "salado",
+    "pos": "adj",
+    "example_en": "The soup is a little too salty.",
+    "example_es": "La sopa está un poco salada."
+  },
+  {
+    "id": "seizure",
+    "es": "convulsión, incautación",
+    "pos": "noun",
+    "example_en": "The boy had a seizure and was taken to hospital.",
+    "example_es": "El niño tuvo una convulsión y lo llevaron al hospital."
+  },
+  {
+    "id": "serum",
+    "es": "suero",
+    "pos": "noun",
+    "example_en": "Scientists developed a serum against the snake's poison.",
+    "example_es": "Los científicos desarrollaron un suero contra el veneno de la serpiente."
+  },
+  {
+    "id": "singular",
+    "es": "singular",
+    "pos": "adj",
+    "example_en": "The word \"child\" is singular, and \"children\" is plural.",
+    "example_es": "La palabra \"child\" es singular, y \"children\" es plural."
+  },
+  {
+    "id": "storyline",
+    "es": "argumento, trama",
+    "pos": "noun",
+    "example_en": "The movie has a very simple storyline.",
+    "example_es": "La película tiene un argumento muy sencillo."
+  },
+  {
+    "id": "stray",
+    "es": "callejero, extraviado",
+    "pos": "adj",
+    "example_en": "We found a stray dog near the school.",
+    "example_es": "Encontramos un perro callejero cerca de la escuela."
+  },
+  {
+    "id": "stud",
+    "skip": "jerga coloquial; sentidos ambiguos"
+  },
+  {
+    "id": "supper",
+    "es": "cena",
+    "pos": "noun",
+    "example_en": "We usually have supper at seven o'clock.",
+    "example_es": "Normalmente cenamos a las siete."
+  },
+  {
+    "id": "sweetheart",
+    "es": "cariño, amor",
+    "pos": "noun",
+    "example_en": "Good night, sweetheart, sleep well.",
+    "example_es": "Buenas noches, cariño, que duermas bien."
+  },
+  {
+    "id": "systemic",
+    "es": "sistémico",
+    "pos": "adj",
+    "example_en": "The report found systemic problems in the hospital.",
+    "example_es": "El informe encontró problemas sistémicos en el hospital."
+  },
+  {
+    "id": "tempo",
+    "es": "tempo, ritmo",
+    "pos": "noun",
+    "example_en": "The song has a fast tempo.",
+    "example_es": "La canción tiene un ritmo rápido."
+  },
+  {
+    "id": "thereof",
+    "es": "de ello, del mismo",
+    "pos": "adv",
+    "example_en": "Time, or the lack thereof, is our main problem.",
+    "example_es": "El tiempo, o la falta de él, es nuestro principal problema."
+  },
+  {
+    "id": "torch",
+    "es": "antorcha",
+    "pos": "noun",
+    "example_en": "The runner carried the torch through the city.",
+    "example_es": "El corredor llevó la antorcha por la ciudad."
+  },
+  {
+    "id": "unchanged",
+    "es": "sin cambios, inalterado",
+    "pos": "adj",
+    "example_en": "The price of bread has remained unchanged this year.",
+    "example_es": "El precio del pan se ha mantenido sin cambios este año."
+  },
+  {
+    "id": "upright",
+    "es": "erguido, vertical",
+    "pos": "adj",
+    "example_en": "Please keep your seat in the upright position.",
+    "example_es": "Por favor, mantenga su asiento en posición vertical."
+  },
+  {
+    "id": "vanity",
+    "es": "vanidad",
+    "pos": "noun",
+    "example_en": "Her vanity made her spend hours in front of the mirror.",
+    "example_es": "Su vanidad la hacía pasar horas frente al espejo."
+  },
+  {
+    "id": "acceleration",
+    "es": "aceleración",
+    "pos": "noun",
+    "example_en": "This car has amazing acceleration.",
+    "example_es": "Este carro tiene una aceleración increíble."
+  },
+  {
+    "id": "aerospace",
+    "es": "aeroespacial",
+    "pos": "adj",
+    "example_en": "My cousin works in the aerospace industry.",
+    "example_es": "Mi primo trabaja en la industria aeroespacial."
+  },
+  {
+    "id": "aluminium",
+    "skip": "grafía británica"
+  },
+  {
+    "id": "analog",
+    "es": "analógico",
+    "pos": "adj",
+    "example_en": "My grandfather still uses an analog watch.",
+    "example_es": "Mi abuelo todavía usa un reloj analógico."
+  },
+  {
+    "id": "analytical",
+    "es": "analítico",
+    "pos": "adj",
+    "example_en": "This job requires strong analytical skills.",
+    "example_es": "Este trabajo requiere sólidas habilidades analíticas."
+  },
+  {
+    "id": "arcade",
+    "es": "sala de videojuegos",
+    "pos": "noun",
+    "example_en": "We spent the afternoon playing games at the arcade.",
+    "example_es": "Pasamos la tarde jugando en la sala de videojuegos."
+  },
+  {
+    "id": "asthma",
+    "es": "asma",
+    "pos": "noun",
+    "example_en": "My friend uses an inhaler for her asthma.",
+    "example_es": "Mi amiga usa un inhalador para su asma."
+  },
+  {
+    "id": "bacterial",
+    "es": "bacteriano",
+    "pos": "adj",
+    "example_en": "The doctor said it was a bacterial infection.",
+    "example_es": "El médico dijo que era una infección bacteriana."
+  },
+  {
+    "id": "bankrupt",
+    "es": "en bancarrota, quebrado",
+    "pos": "adj",
+    "example_en": "The company went bankrupt after two years.",
+    "example_es": "La empresa quedó en bancarrota después de dos años."
+  },
+  {
+    "id": "blink",
+    "es": "parpadear",
+    "pos": "verb",
+    "example_en": "Try not to blink when I take the photo.",
+    "example_es": "Trata de no parpadear cuando tome la foto."
+  }
+]

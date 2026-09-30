@@ -16,6 +16,8 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('al cumplir la meta del día aparece el resumen y se puede seguir', async ({ page }) => {
+  // Diez rondas (cada una con su pausa tras el acierto) y un análisis de axe: en WebKit pasa de 30 s.
+  test.slow()
   await page.goto('./#/nivel/1')
   await answerManyCorrectly(page, 9)
   await answerCurrent(page)

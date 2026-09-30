@@ -13,6 +13,7 @@ import { isHard } from '@/lib/smartDecks'
 import { PARTS_OF_SPEECH, trackOf, type Word } from '@/lib/types'
 import { Header } from './Header'
 import { ArrowLeftIcon, StarIcon } from './icons'
+import { Select } from './ui/controls'
 
 const ROW_HEIGHT = 64
 
@@ -99,7 +100,7 @@ export function DictionaryScreen({ onExit, onOpenWord }: { onExit: () => void; o
             ))}
           </fieldset>
           <div className="mt-2 flex gap-2">
-            <FilterSelect
+            <Select
               label="Nivel"
               value={filters.level === null ? '' : String(filters.level)}
               onChange={(value) => update({ level: value ? Number(value) : null })}
@@ -108,7 +109,7 @@ export function DictionaryScreen({ onExit, onOpenWord }: { onExit: () => void; o
                 ...LEVELS.map((deck) => ({ value: String(deck.level), label: `Nivel ${deck.level} · ${deck.name}` })),
               ]}
             />
-            <FilterSelect
+            <Select
               label="Categoría"
               value={filters.pos ?? ''}
               onChange={(value) => update({ pos: PARTS_OF_SPEECH.find((pos) => pos === value) ?? null })}
@@ -215,38 +216,5 @@ function WordRow({
         {word.es}
       </span>
     </button>
-  )
-}
-
-function FilterSelect({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string
-  value: string
-  onChange: (value: string) => void
-  options: Array<{ value: string; label: string }>
-}) {
-  const id = useId()
-  return (
-    <div className="min-w-0 flex-1">
-      <label htmlFor={id} className="sr-only">
-        {label}
-      </label>
-      <select
-        id={id}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="h-10 w-full cursor-pointer truncate rounded-xl border border-line-strong bg-raised px-3 text-sm text-ink outline-none focus:border-accent"
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
   )
 }

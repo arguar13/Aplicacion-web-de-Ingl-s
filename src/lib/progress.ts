@@ -1,6 +1,7 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
 import { appendEvent, clearEvents } from './events'
 import { type CardState, fromLeitner, gradeAnswer, isMastered, parseCard, review } from './scheduler'
+import { getSettings, RETENTION } from './settings'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { TRACKS, type Track } from './types'
 import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
@@ -214,19 +215,22 @@ export interface Answer {
   ms: number
   /** Modo escribir: acertada con un error de tecleo. */
   almost?: boolean
+  /** El entrenador confía en que una nueva acertada al instante ya se sabía (ver gradeAnswer). */
+  trusted?: boolean
 }
 
 export function recordAnswer(track: Track, id: string, answer: Answer, now = Date.now()): CardState {
   const data = store.get()
   const key = cardKey(track, id)
   const previous = data.cards[key]
-  const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now)
+  const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now, RETENTION[getSettings().intensity])
   appendEvent({
     t: now,
     id,
     track,
     r: !answer.clean ? 'miss' : answer.almost ? 'almost' : 'clean',
     ms: Math.round(answer.ms),
+    ...(previous ? {} : { f: true as const }),
   })
   const cards = { ...data.cards, [key]: card }
   const today = dayKey(now)

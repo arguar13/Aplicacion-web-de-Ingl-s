@@ -1,13 +1,12 @@
-import words from '@/data/words.json'
 import type { Word } from './types'
-import { parseWords } from './words'
+import { vocabulary } from './vocabulary'
 
 /** Todo el vocabulario, ordenado de la palabra más usada a la menos usada (ver scripts/rank_words.py). */
-export const ALL_WORDS = parseWords(words)
+export const ALL_WORDS = vocabulary()
 
 export const LEVEL_SIZE = 500
 
-export type DeckKind = 'level' | 'all' | 'review' | 'hard'
+export type DeckKind = 'level' | 'all' | 'review' | 'hard' | 'coach' | 'topic'
 
 export interface Deck {
   id: string
@@ -29,11 +28,20 @@ const LEVEL_INFO: Array<[name: string, description: string]> = [
   ['Esenciales', 'Las palabras que sostienen cualquier conversación.'],
   ['Básico', 'Lo que oyes a diario en series y canciones.'],
   ['Cotidiano', 'Trabajo, casa, ciudad y rutina.'],
+  ['Conversación', 'Para charlar con soltura de casi cualquier tema.'],
   ['Intermedio', 'Para entender noticias y artículos.'],
-  ['Fluido', 'Matices para expresarte con soltura.'],
+  ['Intermedio alto', 'Opiniones, matices y temas del mundo.'],
+  ['Fluido', 'Para expresarte con precisión y naturalidad.'],
   ['Avanzado', 'Vocabulario de libros y conversaciones profundas.'],
+  ['Profesional', 'Trabajo, ciencia, economía y sociedad.'],
+  ['Culto', 'Las palabras que distinguen a un buen lector.'],
   ['Experto', 'Menos comunes, pero muy útiles.'],
-  ['Maestría', 'El remate: lo menos frecuente de la lista.'],
+  ['Especialista', 'Lo que aparece en la prensa, los ensayos y la ley.'],
+  ['Erudito', 'Para leer casi cualquier cosa sin diccionario.'],
+  ['Refinado', 'Precisión y elegancia al hablar y al escribir.'],
+  ['Maestría', 'Vocabulario de hablante culto.'],
+  ['Élite', 'Lo que pocos estudiantes llegan a dominar.'],
+  ['Leyenda', 'El remate: lo menos frecuente de la lista.'],
 ]
 
 export const LEVELS: readonly Deck[] = Array.from({ length: Math.ceil(ALL_WORDS.length / LEVEL_SIZE) }, (_, i) => {
@@ -65,6 +73,19 @@ export const ALL_DECK: Deck = {
   to: ALL_WORDS.length,
 }
 
+/** La sesión inteligente: todo el vocabulario, y el entrenador decide qué toca (ver coach.ts). */
+export const COACH_DECK: Deck = {
+  id: 'coach',
+  kind: 'coach',
+  level: null,
+  name: 'Sesión inteligente',
+  description: 'Repasos, lo que falta afianzar y palabras nuevas a tu ritmo.',
+  words: ALL_WORDS,
+  newOrder: 'frequency',
+  from: 1,
+  to: ALL_WORDS.length,
+}
+
 /** Unas cuantas palabras repartidas por el mazo, para dar una idea de su dificultad. */
 export function samplePreview(deck: Deck, count = 4): Word[] {
   return Array.from({ length: count }, (_, i) => deck.words[Math.floor(((i + 0.5) / count) * deck.words.length)])
@@ -81,8 +102,14 @@ const rankOf = new Map(ALL_WORDS.map((word, index) => [word.id, index]))
  * de frecuencia cercana a la respuesta: si no, una palabra avanzada competiría con "the" y se
  * adivinaría por descarte, y un mazo pequeño repetiría siempre las mismas opciones.
  */
+/** Con al menos estas palabras, una colección temática saca los distractores de sí misma. */
+const TOPIC_POOL_MIN = 12
+
 export function distractorPool(deck: Deck, word: Word): readonly Word[] {
   if (deck.kind === 'level') return deck.words
+  // En una colección, las opciones son del mismo tema (todas comidas, todos animales): exige
+  // saber la palabra exacta, no solo el campo.
+  if (deck.kind === 'topic' && deck.words.length >= TOPIC_POOL_MIN) return deck.words
   const rank = rankOf.get(word.id) ?? 0
   const start = Math.max(0, Math.min(rank - DISTRACTOR_WINDOW / 2, ALL_WORDS.length - DISTRACTOR_WINDOW))
   return ALL_WORDS.slice(start, start + DISTRACTOR_WINDOW)

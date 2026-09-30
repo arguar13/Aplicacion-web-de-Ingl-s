@@ -20,17 +20,19 @@ export interface StudyEvent {
   r: EventResult
   /** Tiempo hasta acertar (ms). */
   ms: number
+  /** Primer encuentro con la palabra en esta habilidad (desde la Fase 16; antes no se marcaba). */
+  f?: true
 }
 
 const RESULTS: readonly EventResult[] = ['clean', 'almost', 'miss']
 
 export function parseEvent(raw: unknown): StudyEvent | null {
   if (!isRecord(raw)) return null
-  const { t, id, track, r, ms } = raw
+  const { t, id, track, r, ms, f } = raw
   const knownTrack = TRACKS.find((known) => known === track)
   const result = RESULTS.find((known) => known === r)
   if (!isFiniteNumber(t) || typeof id !== 'string' || !knownTrack || !result || !isFiniteNumber(ms)) return null
-  return { t, id, track: knownTrack, r: result, ms }
+  return { t, id, track: knownTrack, r: result, ms, ...(f === true ? { f } : {}) }
 }
 
 export function parseEvents(raw: unknown): StudyEvent[] {

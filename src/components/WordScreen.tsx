@@ -34,6 +34,7 @@ const REASON_BADGE: Partial<Record<PickReason, { label: string; tone: BadgeTone 
   new: { label: 'Nueva', tone: 'accent-soft' },
   review: { label: 'Repaso', tone: 'ok-soft' },
   relearn: { label: 'Otra vez', tone: 'bad-soft' },
+  skill: { label: 'Nueva habilidad', tone: 'accent-soft' },
 }
 
 const PROMPT_LABEL: Record<Mode, string> = {

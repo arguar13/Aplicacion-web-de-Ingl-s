@@ -62,7 +62,7 @@ export function InstallRow() {
 
 const ALL_IDS = ALL_WORDS.map((w) => w.id)
 const TOTAL = ALL_IDS.length
-const APPROX_MB = Math.round((TOTAL * 5.6) / 1000)
+const APPROX_MB = import.meta.env.AUDIO_MB
 
 export function OfflineAudioRow() {
   const [cached, setCached] = useState<number | null>(null)

@@ -5,6 +5,44 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## 2.0.0 · 2026-09-29 · Segunda etapa (Fases 14 a 18)
+
+### Añadido
+
+- **Sesión inteligente** (#/sesion), la acción principal del inicio: un entrenador decide cada
+  ronda (lo fallado vuelve, repasos por riesgo de olvido, escalera de habilidades reconocer →
+  recordar → escuchar → escribir y palabras nuevas por frecuencia) a un ritmo que se adapta
+  (afianzar, normal, acelerar). Con palabras afianzadas, distractores parecidos.
+- **Vocabulario ampliado** de 3978 a 8461 palabras (17 niveles), con traducción revisada, ejemplo,
+  IPA y audio.
+- **Voz neuronal** (en-US-AvaNeural) para todas las palabras.
+- **Colecciones** (#/colecciones): 19 temas generados con WordNet y el sentido de cada traducción;
+  opciones del mismo tema.
+- **Palabra del día**, **Pronúnciala** (reconocimiento de voz del navegador), **Tu semana** en Tu
+  progreso y **modo concentración** (#/enfoque, 5 minutos).
+- Ajustes: intensidad del repaso (retención 85/90/95 %) y nivel de partida de la sesión
+  inteligente.
+
+### Cambiado
+
+- **Rediseño moderno:** neutros fríos, acento índigo–violeta, Geist e Inter, elevaciones suaves,
+  cabecera de vidrio y logo nuevo.
+- **Prueba de nivel adaptativa:** 1, 2, 4, 8… y afina; como mucho unas 20 palabras.
+- El vocabulario y los detalles se sirven como JSON aparte (el JS inicial bajó de 153 a 113 KB con
+  el doble de palabras).
+- Las tarjetas de nivel tienen un nombre accesible corto ("Nivel 3, Cotidiano").
+- El vocabulario se descarga en formato compacto (77 KB en vez de 117) y la bienvenida se pinta desde
+  el HTML para quien entra por primera vez.
+- El inicio muestra 6 niveles y "Ver los 17 niveles".
+- Audio comprimido: 38 MB para las 8461 palabras.
+
+### Corregido
+
+- La llegada de las fuentes desplazaba la pantalla (CLS 0,11): ahora las de respaldo tienen sus
+  medidas.
+- Tailwind escaneaba los datos y el audio: generaba clases por palabras del vocabulario y
+  reconstruía el CSS con cada audio nuevo.
+
 ## 1.0.0 · 2026-09-27 · Lanzamiento (Fase 13)
 
 ### Añadido

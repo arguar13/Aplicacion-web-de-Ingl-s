@@ -10,6 +10,7 @@ import { type CardState, isMastered, statusOf } from '@/lib/scheduler'
 import { useSettings } from '@/lib/settings'
 import { type Track, trackOf, TRACKS, type Word } from '@/lib/types'
 import { SlowIcon, SpeakerIcon, StarIcon } from './icons'
+import { PronounceRow } from './PronounceRow'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
@@ -85,6 +86,7 @@ function WordSheetContent({ word }: { word: Word }) {
         </span>
       </p>
       {forms && <p className="mt-1 text-[13px] text-muted">{forms}</p>}
+      <PronounceRow word={word.en} />
 
       {example && (
         <figure className="mt-4 border-l-2 border-accent/60 pl-4">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Aprende las 3978 palabras más usadas del inglés: escúchalas, pulsa su traducción y repásalas justo antes de olvidarlas. Gratis y sin conexión."
+      content="Aprende más de 8000 palabras del inglés, de las más usadas a las más difíciles, con repaso espaciado inteligente. Gratis y sin conexión."
     />
     <!-- Al compartir el enlace. La imagen y la URL canónica las añade vite/site-meta.ts. -->
     <meta property="og:type" content="website" />
@@ -71,6 +71,22 @@
         </svg>
       </div>
     </div>
+    <!-- Bienvenida para quien entra por primera vez: la genera src/components/Welcome.tsx (un test
+         comprueba que esta copia sea idéntica). -->
+    <!-- prettier-ignore -->
+    <template id="bienvenida"><div class="flex min-h-dvh flex-col" data-arranque=""><div class="flex flex-1 flex-col"><main class="flex flex-1 items-center justify-center px-4 py-10 sm:px-6"><div class="w-full max-w-lg"><ol aria-label="Paso 1 de 3" class="mb-5 flex justify-center gap-2"><li aria-hidden="true" class="h-1.5 rounded-full transition-[width,background-color] duration-300 w-6 bg-accent"></li><li aria-hidden="true" class="h-1.5 rounded-full transition-[width,background-color] duration-300 w-1.5 bg-line-strong"></li><li aria-hidden="true" class="h-1.5 rounded-full transition-[width,background-color] duration-300 w-1.5 bg-line-strong"></li></ol><div class="rounded-3xl border border-line bg-surface shadow-card px-6 py-10 text-center sm:px-10"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" class="mx-auto -rotate-6"><defs><linearGradient id="_R_6_" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"></stop><stop offset="1" style="stop-color:var(--accent-2)"></stop></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="18" fill="url(#_R_6_)"></rect><rect x="17" y="17" width="30" height="8" rx="4" style="fill:var(--accent-ink)"></rect><rect x="28" y="17" width="8" height="30" rx="4" style="fill:var(--accent-ink)"></rect><circle cx="45" cy="43" r="4" style="fill:var(--accent-ink)" opacity="0.75"></circle></svg><h1 class="mt-6 font-display text-5xl leading-[1.05]">Inglés, <span class="text-brand">tecla</span> a tecla</h1><p class="mx-auto mt-4 max-w-sm text-[15px] leading-relaxed text-muted">Escucha una palabra, piensa y pulsa su traducción. Tecla te la vuelve a preguntar justo antes de que la olvides: pocos minutos al día bastan.</p><div class="mt-8 flex flex-col-reverse justify-center gap-2.5 sm:flex-row"><button type="button" class="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition-[background-color,border-color,color,filter,translate,scale,box-shadow] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-default disabled:opacity-60 text-muted hover:bg-ink/5 hover:text-ink h-12 px-6 text-[15px]" aria-disabled="true">Saltar</button><button type="button" class="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition-[background-color,border-color,color,filter,translate,scale,box-shadow] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-default disabled:opacity-60 bg-brand text-accent-ink shadow-glow hover:-translate-y-px hover:brightness-110 active:translate-y-0 active:scale-[0.98] h-12 px-6 text-[15px]" aria-disabled="true">Empezar</button></div><div class="mt-6 border-t border-line pt-5 text-sm text-muted">¿Ya usas Tecla en otro dispositivo? <button type="button" aria-disabled="true" class="cursor-pointer font-semibold text-accent underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Restaura tu copia</button></div></div></div></main></div></div></template>
+    <script>
+      // Primera visita al inicio (sin bienvenida vista ni progreso): se pinta la bienvenida ya, sin
+      // esperar a la app; la app la reemplaza al montarse. Un enlace directo a otra pantalla no.
+      try {
+        var ruta = location.hash.replace(/\?.*/, '')
+        var inicio = ruta === '' || ruta === '#' || ruta === '#/'
+        if (inicio && !localStorage.getItem('tecla:onboarding') && !localStorage.getItem('tecla:progress:v1')) {
+          document.getElementById('root').innerHTML = document.getElementById('bienvenida').innerHTML
+          document.documentElement.setAttribute('data-prerendered', '')
+        }
+      } catch (e) {}
+    </script>
     <script>
       // Red de seguridad: un error al cargar los módulos ocurre antes de React (y de su pantalla de
       // error). Si la app no llegó a montarse (sigue la pantalla de arranque), se muestra un aviso en

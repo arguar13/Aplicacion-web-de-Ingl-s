@@ -5,6 +5,7 @@ import { answerManyCorrectly, expectAccessible, expectNoHorizontalScroll } from 
 /** Todas las pantallas y paneles, con el título que confirma que ya están pintados. */
 const SCREENS: Array<{ path: string; ready: (page: Page) => ReturnType<Page['getByRole']> }> = [
   { path: './', ready: (page) => page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' }) },
+  { path: './#/sesion', ready: (page) => page.getByRole('group', { name: 'Respuestas' }) },
   { path: './#/nivel/1', ready: (page) => page.getByRole('group', { name: 'Respuestas' }) },
   { path: './#/repaso', ready: (page) => page.getByRole('heading', { level: 1 }) },
   { path: './#/dificiles', ready: (page) => page.getByRole('heading', { level: 1 }) },
@@ -17,7 +18,7 @@ const SCREENS: Array<{ path: string; ready: (page: Page) => ReturnType<Page['get
 
 for (const theme of ['light', 'dark'] as const) {
   test(`todas las pantallas son accesibles en el tema ${theme === 'light' ? 'claro' : 'oscuro'}`, async ({ page }) => {
-    // Nueve pantallas con su análisis de axe: más margen que una prueba normal.
+    // Diez pantallas con su análisis de axe: más margen que una prueba normal.
     test.slow()
     await page.addInitScript((value) => {
       localStorage.setItem('tecla:settings:v1', JSON.stringify({ version: 1, theme: value }))

@@ -1,9 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { playPronunciation, preloadPronunciation } from '@/lib/audio'
-import { type Deck, distractorPool } from '@/lib/decks'
-import { cardLookup, getProgress, recordAnswer, recordStreak, todayStats } from '@/lib/progress'
-import { buildOptions } from '@/lib/quiz'
-import { advanceSession, createSession, isMastered, pickNext, type Session } from '@/lib/scheduler'
+import { assessLearner, modeOf, pickCoach } from '@/lib/coach'
+import { type Deck, distractorPool, LEVEL_SIZE } from '@/lib/decks'
+import { getEvents } from '@/lib/events'
+import {
+  cardKey,
+  cardLookup,
+  getProgress,
+  type ProgressData,
+  recordAnswer,
+  recordStreak,
+  todayStats,
+} from '@/lib/progress'
+import { buildOptions, CONFUSABLE_STABILITY } from '@/lib/quiz'
+import { advanceSession, createSession, isMastered, pickNext, type PickReason, type Session } from '@/lib/scheduler'
 import { feedback } from '@/lib/feedback'
 import { getSettings } from '@/lib/settings'
 import { type Mode, type Round, type Track, trackOf, type Word } from '@/lib/types'
@@ -28,8 +38,11 @@ export interface QuizStats {
   missed: Word[]
 }
 
-/** Por qué se muestra el resumen: se completó el nivel, se cumplió la meta del día o se quiere salir. */
-export type SummaryReason = 'level' | 'goal' | 'exit'
+/**
+ * Por qué se muestra el resumen: se completó el nivel, se cumplió la meta del día, se acabó el tiempo
+ * del modo concentración o se quiere salir.
+ */
+export type SummaryReason = 'level' | 'goal' | 'time' | 'exit'
 
 const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [] }
 
@@ -56,19 +69,49 @@ interface State {
 /** Modos en que la palabra suena al aparecer: la pregunta es la palabra inglesa, oída o leída. */
 const soundsOnShow = (mode: Mode) => mode === 'en-es' || mode === 'listen'
 
+/**
+ * La siguiente ronda. En la sesión inteligente la decide el entrenador (palabra y modo); en los
+ * demás mazos, el planificador con el modo elegido.
+ */
 function nextRound(deck: Deck, mode: Mode, session: Session): Round {
   const progress = getProgress()
   const now = Date.now()
   const { newPerDay } = getSettings()
   const allowNew = newPerDay === 0 || todayStats(progress, now).fresh < newPerDay
+  if (deck.kind === 'coach') {
+    const learner = assessLearner(getEvents())
+    const startRank = (getSettings().startLevel - 1) * LEVEL_SIZE
+    const pick = pickCoach(progress, session, now, learner, { allowNew, startRank })
+    const trusted = learner.pace === 'fast' && pick.reason === 'new'
+    return buildRound(deck, pick.word, modeOf(pick.track), pick.reason, progress, trusted)
+  }
   const pick = pickNext(deck.words, cardLookup(progress, trackOf(mode)), session, now, {
     newOrder: deck.newOrder,
     allowNew,
   })
-  // En escribir no hay teclas: la respuesta se escribe.
-  const options = mode === 'type' ? [] : buildOptions(pick.word, distractorPool(deck, pick.word))
-  return { ...pick, options }
+  return buildRound(deck, pick.word, mode, pick.reason, progress, false)
 }
+
+function buildRound(
+  deck: Deck,
+  word: Word,
+  mode: Mode,
+  reason: PickReason,
+  progress: ProgressData,
+  trusted: boolean,
+): Round {
+  // Con la palabra ya afianzada, distractores parecidos: sigue exigiendo atención.
+  const card = progress.cards[cardKey(trackOf(mode), word.id)]
+  const confusable = card !== undefined && card.stability >= CONFUSABLE_STABILITY
+  // En escribir no hay teclas: la respuesta se escribe.
+  const options =
+    mode === 'type' ? [] : buildOptions(word, distractorPool(deck, word), undefined, undefined, { confusable })
+  return { word, mode, reason, options, ...(trusted ? { trusted } : {}) }
+}
+
+/** Clave de la ronda en la sesión: en la inteligente, habilidad y palabra (puede salir en varias). */
+const sessionKey = (deck: Deck, round: Round) =>
+  deck.kind === 'coach' ? cardKey(trackOf(round.mode), round.word.id) : round.word.id
 
 /** Falladas de la sesión con `word` añadida (una sola vez). */
 const missedWith = (stats: QuizStats, word: Word) =>
@@ -86,8 +129,12 @@ const deckMastered = (deck: Deck, track: Track) => {
 const withNext = (s: State): State =>
   s.next ? { ...s, round: s.next, next: null, wrong: [], typed: null, solved: false, expanded: false } : s
 
-export function useQuiz(deck: Deck, mode: Mode) {
-  const track = trackOf(mode)
+export interface QuizOptions {
+  /** Modo concentración: al pasar este momento (ms), la siguiente ronda es el resumen. */
+  endsAt?: number | null
+}
+
+export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions = {}) {
   // Objeto mutable de la sesión: no se pinta, solo alimenta al planificador.
   const [session] = useState(createSession)
   const [state, setState] = useState<State>(() => ({
@@ -104,9 +151,15 @@ export function useQuiz(deck: Deck, mode: Mode) {
   }))
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
   const resolving = useRef(false)
+  // El resumen de "tiempo cumplido" sale una vez: si se sigue practicando, ya no interrumpe.
+  const timeShown = useRef(false)
+  // Fijo durante la partida: una ref, para que avanzar no dependa de él.
+  const deadline = useRef(endsAt)
   // Momento en que apareció la palabra: lo que se tarda en acertar afina el repaso espaciado.
   const shownAt = useRef(0)
-  const onShow = soundsOnShow(mode)
+  // El modo es de cada ronda: en la sesión inteligente cambia de una a otra.
+  const roundMode = state.round.mode
+  const onShow = soundsOnShow(roundMode)
   // Si la pregunta no es la palabra inglesa, sonar antes delataría la respuesta: suena al acertar.
   const canReplay = onShow || state.solved
 
@@ -116,9 +169,9 @@ export function useQuiz(deck: Deck, mode: Mode) {
 
   useEffect(() => {
     // En escuchar, el audio es la pregunta: suena aunque la pronunciación automática esté apagada.
-    if (mode === 'listen' || (onShow && getSettings().autoplay)) void playPronunciation(state.round.word.id)
+    if (roundMode === 'listen' || (onShow && getSettings().autoplay)) void playPronunciation(state.round.word.id)
     else preloadPronunciation(state.round.word.id)
-  }, [state.round, mode, onShow])
+  }, [state.round, roundMode, onShow])
 
   useEffect(() => {
     if (state.solved && !onShow && getSettings().autoplay) void playPronunciation(state.round.word.id)
@@ -139,9 +192,16 @@ export function useQuiz(deck: Deck, mode: Mode) {
   function advance() {
     setState((s) => {
       if (!s.solved || !s.next) return s
+      // Se acabó el tiempo del modo concentración: la ronda en curso termina y llega el resumen.
+      if (deadline.current !== null && !timeShown.current && Date.now() >= deadline.current) {
+        timeShown.current = true
+        return { ...s, expanded: false, summary: 'time' }
+      }
       // Completar un nivel es más raro (y más grande) que la meta del día: se celebra primero.
       if (s.levelDone) return { ...s, levelDone: false, goalReached: false, expanded: false, summary: 'level' }
-      if (s.goalReached) return { ...s, goalReached: false, expanded: false, summary: 'goal' }
+      // En el modo concentración la meta no interrumpe: se celebra al terminar.
+      if (s.goalReached && deadline.current === null)
+        return { ...s, goalReached: false, expanded: false, summary: 'goal' }
       resolving.current = false
       return withNext(s)
     })
@@ -174,14 +234,20 @@ export function useQuiz(deck: Deck, mode: Mode) {
    */
   function solve(clean: boolean, extra: Partial<State> = {}, { almost = false } = {}) {
     const { round, stats } = state
+    const track = trackOf(round.mode)
     resolving.current = true
     const isNew = !cardLookup(getProgress(), track)(round.word.id)
     const { dailyGoal, detailsPause } = getSettings()
     const answeredBefore = todayStats(getProgress()).answers
     const levelWasDone = deck.kind === 'level' && deckMastered(deck, track)
-    recordAnswer(track, round.word.id, { clean, almost, ms: performance.now() - shownAt.current })
+    recordAnswer(track, round.word.id, {
+      clean,
+      almost,
+      ms: performance.now() - shownAt.current,
+      trusted: round.trusted,
+    })
     feedback(clean ? 'correct' : 'wrong')
-    advanceSession(session, round.word.id, clean)
+    advanceSession(session, sessionKey(deck, round), clean)
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)
     setState({

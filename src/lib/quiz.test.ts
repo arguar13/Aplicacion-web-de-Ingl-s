@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { buildOptions, normalize, senses } from './quiz'
+import { buildOptions, resemblance, normalize, senses } from './quiz'
 import { ALL_WORDS, LEVELS } from './decks'
 import { PARTS_OF_SPEECH, type Word } from './types'
 
@@ -23,6 +23,34 @@ describe('buildOptions', () => {
       const all = options.flatMap((o) => senses(o.es))
       expect(new Set(all).size).toBe(all.length)
     }
+  })
+
+  it('en los datos, cada traducción tiene sentidos y ninguno repetido', () => {
+    const repeated = WORDS.filter((word) => {
+      const keys = senses(word.es)
+      return keys.length === 0 || new Set(keys).size !== keys.length
+    })
+    expect(repeated.map((word) => `${word.id}: ${word.es}`)).toEqual([])
+  })
+
+  it('con una palabra afianzada, los distractores se le parecen más', () => {
+    const word = WORDS.find((w) => w.id === 'affect') ?? WORDS.find((w) => w.pos === 'verb')!
+    const pool = WORDS.slice(0, 3000)
+    const average = (confusable: boolean) => {
+      let total = 0
+      for (let i = 0; i < 40; i++) {
+        const options = buildOptions(word, pool, undefined, undefined, { confusable })
+        total += options.filter((o) => o !== word).reduce((sum, o) => sum + resemblance(word.en, o.en), 0)
+      }
+      return total / 40
+    }
+    expect(average(true)).toBeGreaterThan(average(false) + 3)
+  })
+
+  it('el parecido premia comienzo y final compartidos', () => {
+    expect(resemblance('affect', 'effect')).toBeGreaterThan(resemblance('affect', 'water'))
+    expect(resemblance('contract', 'contact')).toBeGreaterThan(resemblance('contract', 'table'))
+    expect(resemblance('same', 'same')).toBe(0)
   })
 
   it('separa los sentidos ignorando paréntesis', () => {

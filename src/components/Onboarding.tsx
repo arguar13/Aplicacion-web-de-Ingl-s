@@ -1,14 +1,15 @@
-import { type ChangeEvent, type ReactNode, useId, useRef, useState } from 'react'
+import { useId, useState } from 'react'
 import { useKeyDown } from '@/hooks/useKeyDown'
-import { type Backup, readBackupFile, restoreBackup } from '@/lib/backup'
+import { type Backup, restoreBackup } from '@/lib/backup'
 import { type Deck, LEVELS } from '@/lib/decks'
 import { plural } from '@/lib/format'
 import { finishOnboarding } from '@/lib/onboarding'
 import { answerPlacement, placementProgress, type PlacementState, startPlacement } from '@/lib/placement'
+import { welcomePrerendered } from '@/lib/prerender'
 import { markKnown } from '@/lib/progress'
 import { DAILY_GOALS, type DailyGoal, updateSettings, useSettings } from '@/lib/settings'
 import { BackupSummary } from './BackupSection'
-import { LogoMark } from './icons'
+import { Actions, Panel, StepDots, WelcomeScreen } from './Welcome'
 import { Keypad } from './Keypad'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
@@ -33,6 +34,8 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
   const [backup, setBackup] = useState<Backup | null>(null)
   const { dailyGoal } = useSettings()
   const goalName = useId()
+  // La bienvenida pintada desde el HTML ya se ve: no se anima al montarse.
+  const [still] = useState(welcomePrerendered)
 
   function finish(deck: Deck) {
     finishOnboarding()
@@ -51,39 +54,24 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
     }
   })
 
+  if (step === 'welcome') {
+    return (
+      <WelcomeScreen
+        still={still}
+        onStart={() => setStep('goal')}
+        onSkip={finishOnboarding}
+        onBackup={(parsed) => {
+          setBackup(parsed)
+          setStep('restore')
+        }}
+      />
+    )
+  }
+
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-10 sm:px-6">
       <div className="w-full max-w-lg">
-        {(step === 'welcome' || step === 'goal' || step === 'level') && (
-          <StepDots current={step === 'welcome' ? 0 : step === 'goal' ? 1 : 2} />
-        )}
-
-        {step === 'welcome' && (
-          <Panel>
-            <LogoMark width={64} height={64} className="mx-auto -rotate-6" />
-            <h1 className="mt-6 font-display text-5xl leading-[1.05]">
-              Inglés, <span className="text-brand">tecla</span> a tecla
-            </h1>
-            <p className="mx-auto mt-4 max-w-sm text-[15px] leading-relaxed text-muted">
-              Escucha una palabra, piensa y pulsa su traducción. Tecla te la vuelve a preguntar justo antes de que la
-              olvides: pocos minutos al día bastan.
-            </p>
-            <Actions>
-              <Button variant="ghost" size="lg" onClick={finishOnboarding}>
-                Saltar
-              </Button>
-              <Button variant="primary" size="lg" onClick={() => setStep('goal')}>
-                Empezar
-              </Button>
-            </Actions>
-            <RestoreLink
-              onBackup={(parsed) => {
-                setBackup(parsed)
-                setStep('restore')
-              }}
-            />
-          </Panel>
-        )}
+        {(step === 'goal' || step === 'level') && <StepDots current={step === 'goal' ? 1 : 2} />}
 
         {step === 'restore' && backup && (
           <Panel>
@@ -147,7 +135,7 @@ export function Onboarding({ onStart }: { onStart: (deck: Deck) => void }) {
             <div className="mt-6 grid gap-2.5">
               <Choice
                 title="Hacer la prueba de nivel"
-                detail="Unas pocas palabras de cada nivel · 2 minutos"
+                detail="Se adapta a tus respuestas · unos 2 minutos"
                 onClick={() => {
                   setPlacement(startPlacement())
                   setStep('test')
@@ -200,7 +188,7 @@ function PlacementTest({
               onStart(deck)
             }}
           >
-            Empezar el nivel {deck.level}
+            Empezar desde el nivel {deck.level}
           </Button>
         </Actions>
       </Panel>
@@ -249,70 +237,6 @@ function PlacementTest({
         <Kbd size="sm">0</Kbd>
       </Button>
     </div>
-  )
-}
-
-/** Para quien ya usa Tecla en otro dispositivo: elegir su copia sin pasar por la bienvenida. */
-function RestoreLink({ onBackup }: { onBackup: (backup: Backup) => void }) {
-  const input = useRef<HTMLInputElement>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  async function onFile(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    event.target.value = ''
-    if (!file) return
-    const parsed = await readBackupFile(file)
-    if (parsed.ok) onBackup(parsed.backup)
-    else setError(parsed.error)
-  }
-
-  return (
-    <div className="mt-6 border-t border-line pt-5 text-sm text-muted">
-      ¿Ya usas Tecla en otro dispositivo?{' '}
-      <button
-        type="button"
-        onClick={() => input.current?.click()}
-        className="cursor-pointer font-semibold text-accent underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      >
-        Restaura tu copia
-      </button>
-      <input
-        ref={input}
-        type="file"
-        accept="application/json,.json"
-        onChange={(event) => void onFile(event)}
-        className="sr-only"
-        tabIndex={-1}
-        aria-label="Archivo de copia de Tecla"
-      />
-      {error && (
-        <p role="alert" className="mt-3 font-medium text-bad">
-          {error}
-        </p>
-      )}
-    </div>
-  )
-}
-
-function Panel({ children }: { children: ReactNode }) {
-  return <Surface className="animate-rise px-6 py-10 text-center sm:px-10">{children}</Surface>
-}
-
-function Actions({ children }: { children: ReactNode }) {
-  return <div className="mt-8 flex flex-col-reverse justify-center gap-2.5 sm:flex-row">{children}</div>
-}
-
-function StepDots({ current }: { current: number }) {
-  return (
-    <ol aria-label={`Paso ${current + 1} de 3`} className="mb-5 flex justify-center gap-2">
-      {['bienvenida', 'meta', 'nivel'].map((step, i) => (
-        <li
-          key={step}
-          aria-hidden
-          className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${i === current ? 'w-6 bg-accent' : 'w-1.5 bg-line-strong'}`}
-        />
-      ))}
-    </ol>
   )
 }
 

@@ -5,6 +5,7 @@
  * propio chunk: la primera ronda no espera por ellos y el service worker los guarda para usarlos
  * sin conexión.
  */
+import detailsUrl from '@/data/details.json?url'
 import { useSyncExternalStore } from 'react'
 import { isRecord } from './validate'
 
@@ -63,13 +64,27 @@ let details: DetailsMap | null = null
 let loading: Promise<DetailsMap> | null = null
 const listeners = new Set<() => void>()
 
-/** Empieza a cargar los detalles (una sola vez) y avisa a quien los espera. */
+/**
+ * Empieza a cargar los detalles (una sola vez) y avisa a quien los espera. Van como JSON aparte y
+ * no como módulo JavaScript: con 8000 palabras pesan más de 1 MB, y el navegador lee un JSON mucho
+ * más rápido que el mismo contenido escrito como código. Si falla la red, se reintenta en la
+ * próxima petición en vez de quedar sin detalles para siempre.
+ */
 export function loadDetails(): Promise<DetailsMap> {
-  loading ??= import('@/data/details.json').then((module) => {
-    details = parseDetails(module.default)
-    for (const listener of listeners) listener()
-    return details
-  })
+  loading ??= fetch(detailsUrl)
+    .then((response) => {
+      if (!response.ok) throw new Error(`No se pudieron cargar los detalles (HTTP ${response.status})`)
+      return response.json() as Promise<unknown>
+    })
+    .then((raw) => {
+      details = parseDetails(raw)
+      for (const listener of listeners) listener()
+      return details
+    })
+    .catch((error: unknown) => {
+      loading = null
+      throw error
+    })
   return loading
 }
 
@@ -88,7 +103,8 @@ export function useWordDetails(id: string): WordDetails | null {
     () => null,
   )
   if (!map) {
-    void loadDetails()
+    // Sin conexión ni caché, la palabra se muestra sin detalles; la próxima vez se reintenta.
+    loadDetails().catch(() => undefined)
     return null
   }
   return map.get(id) ?? {}

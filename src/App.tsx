@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { AchievementToast } from '@/components/achievements/AchievementToast'
 import { DeckPicker } from '@/components/DeckPicker'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
@@ -8,14 +8,16 @@ import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
 import { useNow } from '@/hooks/useNow'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
-import { ALL_WORDS, type Deck } from '@/lib/decks'
+import { ALL_WORDS, COACH_DECK, type Deck } from '@/lib/decks'
 import { watchAchievements } from '@/lib/achievements'
+import { cn } from '@/lib/cn'
 import { useOnboardingDone } from '@/lib/onboarding'
+import { welcomePrerendered } from '@/lib/prerender'
 import { dayKey, noonOf, setLastDeck, settleStreak, useProgress } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
-import { useSettings } from '@/lib/settings'
+import { updateSettings, useSettings } from '@/lib/settings'
 import type { SmartDeckKind } from '@/lib/smartDecks'
 import type { Mode } from '@/lib/types'
 
@@ -33,6 +35,10 @@ const BlitzScreen = lazy(() => import('@/components/BlitzScreen').then((module) 
 const StatsScreen = lazy(() =>
   import('@/components/stats/StatsScreen').then((module) => ({ default: module.StatsScreen })),
 )
+const TopicsScreen = lazy(() =>
+  import('@/components/TopicsScreen').then((module) => ({ default: module.TopicsScreen })),
+)
+const TopicGame = lazy(() => import('@/components/TopicsScreen').then((module) => ({ default: module.TopicGame })))
 const DictionaryScreen = lazy(() =>
   import('@/components/DictionaryScreen').then((module) => ({ default: module.DictionaryScreen })),
 )
@@ -60,6 +66,15 @@ function openDeck(deck: Deck) {
 }
 
 const openSmart = (kind: SmartDeckKind) => go({ name: 'smart', kind })
+const startCoach = () => go({ name: 'coach' })
+/** Duración del modo concentración. */
+const FOCUS_MINUTES = 5
+
+/** Al terminar la bienvenida: la sesión inteligente empieza en el nivel recomendado (o el 1). */
+function startAfterOnboarding(deck: Deck) {
+  updateSettings({ startLevel: deck.level ?? 1 })
+  startCoach()
+}
 const exitToHome = () => goBack(HOME)
 const recoverToHome = () => navigate(HOME, { replace: true })
 
@@ -67,12 +82,16 @@ const recoverToHome = () => navigate(HOME, { replace: true })
 function Home() {
   const onboarded = useOnboardingDone()
   const hasProgress = Object.keys(useProgress().cards).length > 0
-  if (!onboarded && !hasProgress) return <Onboarding onStart={openDeck} />
+  if (!onboarded && !hasProgress) return <Onboarding onStart={startAfterOnboarding} />
   return (
     <DeckPicker
+      onStartCoach={startCoach}
+      onStartFocus={() => go({ name: 'focus' })}
       onPick={openDeck}
       onOpenSmart={openSmart}
       onOpenBlitz={() => go({ name: 'blitz' })}
+      onOpenTopics={() => go({ name: 'topics' })}
+      onOpenWord={openWord}
       onOpenStats={() => go({ name: 'stats' })}
       onOpenDictionary={() => go({ name: 'dictionary' })}
       onOpenSettings={openSettings}
@@ -96,10 +115,27 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
       )
     case 'smart':
       return <SmartDeckScreen kind={screen.kind} onExit={exitToHome} onOpenSettings={openSettings} />
+    case 'topics':
+      return <TopicsScreen onExit={exitToHome} onOpen={(topic) => go({ name: 'topic', topic })} />
+    case 'topic':
+      return <TopicGame topic={screen.topic} mode={mode} onExit={exitToHome} onOpenSettings={openSettings} />
+    case 'focus':
+      return (
+        <Game
+          deck={COACH_DECK}
+          mode="en-es"
+          focusMinutes={FOCUS_MINUTES}
+          onExit={exitToHome}
+          onOpenSettings={openSettings}
+        />
+      )
+    case 'coach':
+      // El entrenador elige el modo de cada ronda: el del selector no se usa aquí.
+      return <Game deck={COACH_DECK} mode="en-es" onExit={exitToHome} onOpenSettings={openSettings} />
     case 'blitz':
       return <BlitzScreen onExit={exitToHome} />
     case 'stats':
-      return <StatsScreen onExit={exitToHome} />
+      return <StatsScreen onExit={exitToHome} onOpenWord={openWord} />
     case 'dictionary':
       return <DictionaryScreen onExit={exitToHome} onOpenWord={openWord} />
   }
@@ -108,6 +144,8 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
 export default function App() {
   const route = useRoute()
   const screenKey = formatHash({ screen: route.screen, panel: null })
+  // La primera pantalla, si index.html ya pintó la bienvenida, aparece sin animación.
+  const [firstScreen] = useState(screenKey)
   const { mode } = useSettings()
 
   useEffect(() => {
@@ -138,7 +176,10 @@ export default function App() {
     <div className="flex min-h-dvh flex-col">
       <ErrorBoundary resetKey={screenKey} onGoHome={recoverToHome}>
         {/* La clave vuelve a montar el contenedor en cada pantalla y con él su animación de entrada. */}
-        <div key={screenKey} className="flex flex-1 animate-screen flex-col">
+        <div
+          key={screenKey}
+          className={cn('flex flex-1 flex-col', !(welcomePrerendered && screenKey === firstScreen) && 'animate-screen')}
+        >
           <Suspense fallback={null}>
             <ScreenView screen={route.screen} mode={mode} />
           </Suspense>

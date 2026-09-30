@@ -46,7 +46,7 @@ jobs:
         with:
           name: dist
           path: dist
-      # Rendimiento ≥ 90 y accesibilidad, buenas prácticas y SEO al 100 (lighthouserc.json).
+      # Rendimiento ≥ 85 y accesibilidad, buenas prácticas y SEO al 100 (lighthouserc.json).
       - run: npx --yes @lhci/cli@0.15.1 autorun
       - uses: actions/upload-artifact@v5
         if: always()

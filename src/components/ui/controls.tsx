@@ -75,3 +75,39 @@ export function Switch({
     </button>
   )
 }
+
+/** Lista desplegable nativa (muchas opciones: niveles, categorías), con el estilo de la app. */
+export function Select({
+  label,
+  value,
+  onChange,
+  options,
+  className,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+  options: Array<{ value: string; label: string }>
+  className?: string
+}) {
+  const id = useId()
+  return (
+    <div className={cn('min-w-0 flex-1', className)}>
+      <label htmlFor={id} className="sr-only">
+        {label}
+      </label>
+      <select
+        id={id}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="h-10 w-full cursor-pointer truncate rounded-xl border border-line-strong bg-raised px-3 text-sm text-ink outline-none focus:border-accent"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}

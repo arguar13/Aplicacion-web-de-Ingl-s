@@ -9,12 +9,16 @@
  */
 import { ALL_DECK, ALL_WORDS, type Deck, LEVELS } from './decks'
 import type { SmartDeckKind } from './smartDecks'
+import { isTopicId, topicInfo, type TopicId } from './topicMeta'
 
 /** Panel sobre la pantalla: los ajustes o la ficha de una palabra. */
 export type Panel = 'settings' | { word: string }
 
 /** Pantallas sin parámetros: su ruta y el título de la pestaña. */
 const SIMPLE_SCREENS = {
+  coach: { path: '/sesion', title: 'Sesión inteligente' },
+  focus: { path: '/enfoque', title: 'Modo concentración' },
+  topics: { path: '/colecciones', title: 'Colecciones' },
   blitz: { path: '/relampago', title: 'Relámpago' },
   stats: { path: '/estadisticas', title: 'Tu progreso' },
   dictionary: { path: '/diccionario', title: 'Diccionario' },
@@ -23,7 +27,11 @@ type SimpleScreen = keyof typeof SIMPLE_SCREENS
 const SIMPLE_NAMES = Object.keys(SIMPLE_SCREENS).filter((name): name is SimpleScreen => name in SIMPLE_SCREENS)
 
 export type Screen =
-  { name: 'home' } | { name: 'deck'; deck: Deck } | { name: 'smart'; kind: SmartDeckKind } | { name: SimpleScreen }
+  | { name: 'home' }
+  | { name: 'deck'; deck: Deck }
+  | { name: 'smart'; kind: SmartDeckKind }
+  | { name: 'topic'; topic: TopicId }
+  | { name: SimpleScreen }
 
 export interface Route {
   screen: Screen
@@ -62,6 +70,8 @@ function parseScreen(path: string): Screen | null {
   if (simple) return { name: simple }
   const smart = SMART_KINDS.find((kind) => SMART[kind].path === path)
   if (smart) return { name: 'smart', kind: smart }
+  const topic = /^\/tema\/([a-z]+)$/.exec(path)?.[1]
+  if (topic) return isTopicId(topic) ? { name: 'topic', topic } : null
   const deck = deckFromPath(path)
   return deck ? { name: 'deck', deck } : null
 }
@@ -82,6 +92,11 @@ function screenPath(screen: Screen): string {
       return deckPath(screen.deck)
     case 'smart':
       return SMART[screen.kind].path
+    case 'topic':
+      return `/tema/${screen.topic}`
+    case 'coach':
+    case 'focus':
+    case 'topics':
     case 'blitz':
     case 'stats':
     case 'dictionary':
@@ -108,6 +123,11 @@ export function titleOf(route: Route): string {
       return `${screen.deck.level === null ? screen.deck.name : `Nivel ${screen.deck.level} · ${screen.deck.name}`} — Tecla`
     case 'smart':
       return `${SMART[screen.kind].title} — Tecla`
+    case 'topic':
+      return `${topicInfo(screen.topic).name} — Tecla`
+    case 'coach':
+    case 'focus':
+    case 'topics':
     case 'blitz':
     case 'stats':
     case 'dictionary':

@@ -5,7 +5,8 @@ sustantivo aunque en inglés suela ser verbo. Sirve para que los distractores de
 de la misma categoría que la respuesta (ver src/lib/quiz.ts).
 
 Fuentes, en orden de prioridad:
-  1. POS_OVERRIDES: correcciones manuales tras revisar el resultado.
+  1. POS_OVERRIDES: correcciones manuales tras revisar el resultado; y scripts/data/pos_reviewed.json,
+     la categoría que se eligió al traducir cada palabra de la ampliación (merge_translations.py).
   2. Palabras funcionales (listas cerradas): artículos, pronombres, preposiciones…
   3. Morfología de la traducción: infinitivos (-ar, -er, -ir, -se) → verbo; -mente → adverbio.
   4. WordNet (nltk), incluidas formas flexionadas ("went" → go), eligiendo la categoría más usada
@@ -25,6 +26,8 @@ from pathlib import Path
 from nltk.corpus import wordnet as wn
 
 WORDS = Path(__file__).resolve().parent.parent / "src" / "data" / "words.json"
+REVIEWED_FILE = Path(__file__).resolve().parent / "data" / "pos_reviewed.json"
+REVIEWED = json.loads(REVIEWED_FILE.read_text(encoding="utf-8")) if REVIEWED_FILE.exists() else {}
 
 # Categorías de src/lib/types.ts (PartOfSpeech).
 POS = ("noun", "verb", "adj", "adv", "pron", "det", "prep", "conj", "num", "interj")
@@ -118,6 +121,8 @@ def tag(word: dict) -> tuple[str, str]:
     wid, en, es = word["id"], word["en"].lower(), word["es"]
     if wid in POS_OVERRIDES:
         return POS_OVERRIDES[wid], "manual"
+    if wid in REVIEWED:
+        return REVIEWED[wid], "revisada al traducir"
 
     options = senses(es)
     english = english_counts(en)

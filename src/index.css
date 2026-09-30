@@ -1,5 +1,65 @@
 @import 'tailwindcss';
 
+/*
+ * Tailwind busca clases en el proyecto: los datos no son código. El vocabulario tiene palabras como
+ * "table", "block" o "hidden" (que se volverían clases que nadie usa) y public/ tiene miles de
+ * audios (cada uno nuevo reconstruiría el CSS en desarrollo).
+ */
+@source not './data';
+@source not '../public';
+@source not '../scripts';
+
+/*
+ * Respaldo con las medidas de Geist e Inter: mientras llegan las fuentes, el texto se pinta con
+ * Arial ajustada a su tamaño y altura de línea, así que al cambiar no se mueve nada (sin esto, la
+ * llegada de la fuente desplazaba la pantalla). Medidas calculadas de los propios archivos; la
+ * negrita tiene su cara para que el navegador no la simule (cambiaría el ancho).
+ */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial');
+  font-weight: 100 500;
+  size-adjust: 107.51%;
+  ascent-override: 93.48%;
+  descent-override: 27.44%;
+  line-gap-override: 0%;
+  /* Sin esto vale 'auto': el navegador puede esconder el texto mientras resuelve la fuente local. */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 600 900;
+  size-adjust: 107.51%;
+  ascent-override: 93.48%;
+  descent-override: 27.44%;
+  line-gap-override: 0%;
+  /* Sin esto vale 'auto': el navegador puede esconder el texto mientras resuelve la fuente local. */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  font-weight: 100 500;
+  size-adjust: 108.13%;
+  ascent-override: 89.59%;
+  descent-override: 22.31%;
+  line-gap-override: 0%;
+  /* Sin esto vale 'auto': el navegador puede esconder el texto mientras resuelve la fuente local. */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 600 900;
+  size-adjust: 108.13%;
+  ascent-override: 89.59%;
+  descent-override: 22.31%;
+  line-gap-override: 0%;
+  /* Sin esto vale 'auto': el navegador puede esconder el texto mientras resuelve la fuente local. */
+  font-display: swap;
+}
+
 /* Celular en horizontal: poca altura, así que la palabra y el teclado van lado a lado. */
 @custom-variant short (@media (orientation: landscape) and (max-height: 540px));
 
@@ -102,8 +162,8 @@
 }
 
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Geist Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Geist Variable', 'Geist Fallback', ui-sans-serif, system-ui, sans-serif;
 
   --animate-rise: rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
   --animate-pop: pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1);

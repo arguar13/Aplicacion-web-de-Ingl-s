@@ -11,7 +11,11 @@ test('las estadísticas reflejan lo practicado y son accesibles', async ({ page 
   await page.getByRole('button', { name: 'Tu progreso' }).click()
   await expect(page).toHaveURL(/#\/estadisticas$/)
   await expect(page.getByRole('heading', { name: 'Tu progreso' })).toBeVisible()
-  await expect(page.getByText('Respuestas').locator('..')).toContainText('3')
+  // Tu semana y los datos de siempre: los dos cuentan las tres respuestas.
+  const week = page.getByRole('region', { name: 'Tu semana' })
+  await expect(week.getByText('Respuestas').locator('..')).toContainText('3')
+  const tiles = page.locator('dl').filter({ hasText: 'Días practicados' })
+  await expect(tiles.getByText('Respuestas').locator('..')).toContainText('3')
   await expect(
     page.getByRole('img', { name: /Actividad de las últimas 26 semanas: 1 días con práctica/ }),
   ).toBeVisible()

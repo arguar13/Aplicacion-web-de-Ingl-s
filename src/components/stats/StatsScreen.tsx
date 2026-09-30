@@ -16,6 +16,7 @@ import { ArrowLeftIcon } from '../icons'
 import { Segmented } from '../ui/controls'
 import { Surface } from '../ui/Surface'
 import { AccuracyChart, ActivityHeatmap, MasteredChart } from './charts'
+import { WeekReport } from './WeekReport'
 
 const TRACK_OPTIONS: Array<{ value: Track; label: string }> = [
   { value: 'en-es', label: 'Traducir' },
@@ -25,7 +26,7 @@ const TRACK_OPTIONS: Array<{ value: Track; label: string }> = [
 ]
 
 /** Estadísticas: actividad, evolución, precisión y avance por nivel. */
-export function StatsScreen({ onExit }: { onExit: () => void }) {
+export function StatsScreen({ onExit, onOpenWord }: { onExit: () => void; onOpenWord: (id: string) => void }) {
   const progress = useProgress()
   const { mode, dailyGoal } = useSettings()
   const now = useNow()
@@ -58,6 +59,7 @@ export function StatsScreen({ onExit }: { onExit: () => void }) {
           Inicio
         </button>
         <h1 className="mt-4 font-display text-5xl leading-none">Tu progreso</h1>
+        <WeekReport now={now} onOpenWord={onOpenWord} />
 
         {/* Cinco datos: en el móvil, dos por fila y el último a lo ancho; desde tableta, tres y dos
             (en una sola fila no caben valores como "menos de 1 min"). */}

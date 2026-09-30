@@ -1,3 +1,4 @@
+import { useId, useState } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
@@ -10,31 +11,60 @@ import { updateSettings, useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
 import { trackOf } from '@/lib/types'
 import { Badge } from './ui/Badge'
+import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
+import { CoachCard } from './CoachCard'
+import { WordOfDayCard } from './WordOfDayCard'
 import { StreakBanner } from './StreakBanner'
 import { ForecastChart } from './ForecastChart'
 import { ModePicker } from './ModePicker'
 import { GoalStat, Header, Stat } from './Header'
-import { ArrowRightIcon, BoltIcon, BookIcon, ChartIcon, SettingsIcon, ShuffleIcon } from './icons'
+import {
+  ArrowRightIcon,
+  BoltIcon,
+  BookIcon,
+  ChartIcon,
+  LayersIcon,
+  SettingsIcon,
+  ShuffleIcon,
+  TimerIcon,
+} from './icons'
 import { Kbd } from './ui/Kbd'
 import { ProgressBar } from './ProgressBar'
 
 const DECKS = [...LEVELS, ALL_DECK]
+/** Niveles que se ven de entrada en el inicio. */
+const LEVELS_SHOWN = 6
 
 /** Tecla para elegir cada mazo: 1–9 para los niveles, 0 para todas las palabras. */
 const shortcutOf = (deck: Deck) => (deck.level === null ? '0' : deck.level <= 9 ? String(deck.level) : null)
 
 interface Props {
+  onStartCoach: () => void
+  onStartFocus: () => void
   onPick: (deck: Deck) => void
   onOpenSmart: (kind: SmartDeckKind) => void
   onOpenBlitz: () => void
+  onOpenTopics: () => void
   onOpenStats: () => void
   onOpenDictionary: () => void
   onOpenSettings: () => void
+  onOpenWord: (id: string) => void
 }
 
-export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOpenDictionary, onOpenSettings }: Props) {
+export function DeckPicker({
+  onStartCoach,
+  onStartFocus,
+  onPick,
+  onOpenSmart,
+  onOpenBlitz,
+  onOpenTopics,
+  onOpenStats,
+  onOpenDictionary,
+  onOpenSettings,
+  onOpenWord,
+}: Props) {
   const progress = useProgress()
   const { mode, dailyGoal } = useSettings()
   const track = trackOf(mode)
@@ -45,11 +75,18 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
   const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
 
+  // Los primeros niveles y el que se está practicando; el resto, a un toque (son 17).
+  const [showAllLevels, setShowAllLevels] = useState(false)
+  const levelsId = useId()
+  const visibleLevels = showAllLevels
+    ? LEVELS
+    : LEVELS.filter((deck, index) => index < LEVELS_SHOWN || deck.id === suggested.id)
+
   const due = anyProgress ? dueToday(progress, track, now).length : 0
   const hard = anyProgress ? hardWords(progress, track).length : 0
 
   useKeyDown((event) => {
-    if (event.key === 'Enter') return onPick(suggested)
+    if (event.key === 'Enter') return onStartCoach()
     const key = event.key.toLowerCase()
     if (key === 'r' && due > 0) return onOpenSmart('review')
     if (key === 'd' && hard > 0) return onOpenSmart('hard')
@@ -91,17 +128,18 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
             Escucha, <span className="text-brand">piensa</span>, pulsa.
           </h1>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted">
-            {total.total.toLocaleString('es')} palabras ordenadas por lo mucho que se usan. Lo que falles volverá justo
-            antes de que lo olvides.
+            {total.total.toLocaleString('es')} palabras, de las más usadas a las más difíciles. Tecla decide qué
+            practicar y te lo vuelve a preguntar justo antes de que lo olvides.
           </p>
-          <ModePicker
-            value={mode}
-            onChange={(next) => updateSettings({ mode: next })}
-            className="mx-auto mt-7 max-w-2xl"
-          />
         </div>
 
-        <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
+        <CoachCard now={now} onStart={onStartCoach} />
+        <div className="mt-3 flex justify-center">
+          <Button variant="ghost" size="sm" onClick={onStartFocus}>
+            <TimerIcon width={16} height={16} />
+            Modo concentración · 5 min
+          </Button>
+        </div>
         <StreakBanner progress={progress} now={now} />
         <BackupReminder onOpenSettings={onOpenSettings} />
         {anyProgress && (
@@ -116,12 +154,21 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
             <BlitzCard best={progress.blitzBest} onOpen={onOpenBlitz} />
           </div>
         )}
+        <WordOfDayCard now={now} onOpenWord={onOpenWord} />
+        <TopicsCard onOpen={onOpenTopics} />
 
-        <h2 className="mt-12 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase sm:mt-14">
-          Todos los niveles
-        </h2>
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-          {LEVELS.map((deck, index) => (
+        <section aria-labelledby="por-tu-cuenta" className="mt-12 sm:mt-14">
+          <h2 id="por-tu-cuenta" className="font-display text-2xl">
+            Practica por tu cuenta
+          </h2>
+          <p className="mt-1 text-sm text-muted">Elige cómo practicar y por dónde: un nivel o todas las palabras.</p>
+          <ModePicker value={mode} onChange={(next) => updateSettings({ mode: next })} className="mt-5" />
+          <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
+        </section>
+
+        <h2 className="mt-10 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Todos los niveles</h2>
+        <ul id={levelsId} className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+          {visibleLevels.map((deck, index) => (
             <li
               key={deck.id}
               className="animate-rise"
@@ -132,11 +179,18 @@ export function DeckPicker({ onPick, onOpenSmart, onOpenBlitz, onOpenStats, onOp
           ))}
           <li
             className="animate-rise sm:col-span-2"
-            style={{ animationDelay: `${LEVELS.length * 40}ms`, animationFillMode: 'both' }}
+            style={{ animationDelay: `${visibleLevels.length * 40}ms`, animationFillMode: 'both' }}
           >
             <AllWordsCard summary={total} onPick={onPick} />
           </li>
         </ul>
+        {!showAllLevels && (
+          <div className="mt-4 flex justify-center">
+            <Button onClick={() => setShowAllLevels(true)} aria-controls={levelsId} aria-expanded={false}>
+              Ver los {LEVELS.length} niveles
+            </Button>
+          </div>
+        )}
       </main>
     </>
   )
@@ -233,6 +287,30 @@ function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
 }
 
 /** Relámpago: el juego contrarreloj, con el récord. */
+/** Acceso a las colecciones temáticas (comida, animales, viajes…). */
+function TopicsCard({ onOpen }: { onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={cn(
+        cardBase,
+        'mt-4 flex items-center gap-4 border-line bg-surface p-5 shadow-card',
+        'hover:border-accent/40 hover:shadow-key-hover',
+      )}
+    >
+      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:-rotate-6">
+        <LayersIcon />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[17px] font-semibold">Colecciones</span>
+        <span className="block text-sm text-muted">Practica por temas: comida, viajes, emociones y más</span>
+      </span>
+      <ArrowRightIcon className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
+    </button>
+  )
+}
+
 function BlitzCard({ best, onOpen }: { best: number; onOpen: () => void }) {
   return (
     <button
@@ -291,35 +369,29 @@ function ContinueCard({
     <button
       type="button"
       onClick={() => onPick(deck)}
-      aria-keyshortcuts="Enter"
       className={cn(
         cardBase,
-        'mt-9 flex animate-rise items-center gap-4 overflow-hidden border-transparent bg-brand p-5 text-accent-ink shadow-glow sm:mt-10 sm:gap-5 sm:p-6',
+        'mt-5 flex items-center gap-4 border-line bg-surface p-5 shadow-card sm:gap-5',
+        'hover:border-accent/40 hover:shadow-key-hover',
       )}
     >
       <span className="min-w-0 flex-1">
-        <span className="block text-[11px] font-semibold tracking-[0.18em] uppercase opacity-75">
-          {resuming ? 'Continuar' : 'Empieza aquí'}
+        <span className="block text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
+          {resuming ? 'Continuar' : 'Empieza por un nivel'}
         </span>
-        <span className="mt-1 block font-display text-3xl leading-tight sm:text-4xl">{deckLabel(deck)}</span>
-        <span className="mt-1 block text-sm opacity-80">{detail}</span>
+        <span className="mt-1 block font-display text-2xl leading-tight">{deckLabel(deck)}</span>
+        <span className="mt-0.5 block text-sm text-muted">{detail}</span>
         {resuming && (
-          <span className="mt-4 flex items-center gap-3">
-            <span className="flex h-1.5 flex-1 overflow-hidden rounded-full bg-accent-ink/20">
-              <span className="bg-accent-ink" style={{ width: `${(summary.mastered / summary.total) * 100}%` }} />
-              <span className="bg-accent-ink/45" style={{ width: `${(summary.learning / summary.total) * 100}%` }} />
-            </span>
-            <span className="text-xs font-medium tabular-nums opacity-80">
+          <span className="mt-3 flex items-center gap-3">
+            <ProgressBar summary={summary} className="flex-1" />
+            <span className="text-xs font-medium text-muted tabular-nums">
               {Math.round((summary.mastered / summary.total) * 100)}%
             </span>
           </span>
         )}
       </span>
-      <span className="flex shrink-0 flex-col items-center gap-2">
-        <span className="grid size-12 place-items-center rounded-full bg-accent-ink text-accent transition-transform group-hover:translate-x-0.5">
-          <ArrowRightIcon />
-        </span>
-        <Kbd tone="accent">Enter</Kbd>
+      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-brand text-accent-ink transition-transform group-hover:translate-x-0.5">
+        <ArrowRightIcon />
       </span>
     </button>
   )
@@ -328,10 +400,15 @@ function ContinueCard({
 function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary; onPick: (deck: Deck) => void }) {
   const shortcut = shortcutOf(deck)
   const started = summary.fresh < summary.total
+  const details = useId()
   return (
+    // Nombre corto y preciso ("Nivel 13, Erudito"); el resto de la tarjeta queda como descripción.
+    // Sin esto, el nombre sería todo su texto ("…sin diccionario") y chocaría con otros botones.
     <button
       type="button"
       onClick={() => onPick(deck)}
+      aria-label={`Nivel ${deck.level}, ${deck.name}`}
+      aria-describedby={details}
       aria-keyshortcuts={shortcut ?? undefined}
       className={cn(
         cardBase,
@@ -340,7 +417,7 @@ function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary
       )}
     >
       <span className="w-9 shrink-0 text-brand font-display text-5xl leading-[0.9] tabular-nums">{deck.level}</span>
-      <span className="flex min-w-0 flex-1 flex-col">
+      <span id={details} className="flex min-w-0 flex-1 flex-col">
         <span className="flex flex-wrap items-center gap-x-2 gap-y-1 pr-8">
           <span className="text-[17px] font-semibold">{deck.name}</span>
           <DueBadge count={summary.due} />

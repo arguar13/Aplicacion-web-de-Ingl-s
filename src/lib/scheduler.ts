@@ -22,8 +22,20 @@ const RECENT_WINDOW = 3
 export const FAST_ANSWER_MS = 2500
 export const SLOW_ANSWER_MS = 8000
 
+/** Retención objetivo por defecto: FSRS programa el repaso cuando la probabilidad de recordar baja a esto. */
+export const DEFAULT_RETENTION = 0.9
+
 // Sin "fuzz": el mismo historial da siempre el mismo calendario (y los tests son deterministas).
-const scheduler = fsrs(generatorParameters({ enable_fuzz: false, request_retention: 0.9 }))
+// Un planificador por retención objetivo (relajado, normal, intensivo), creado al usarse.
+const schedulers = new Map<number, ReturnType<typeof fsrs>>()
+function schedulerFor(retention: number) {
+  let scheduler = schedulers.get(retention)
+  if (!scheduler) {
+    scheduler = fsrs(generatorParameters({ enable_fuzz: false, request_retention: retention }))
+    schedulers.set(retention, scheduler)
+  }
+  return scheduler
+}
 
 export type CardPhase = 'learning' | 'review' | 'relearning'
 
@@ -85,24 +97,36 @@ export function gradeAnswer({
   ms,
   isNew,
   almost = false,
+  trusted = false,
 }: {
   clean: boolean
   ms: number
   isNew: boolean
   /** Escrita con un error de tecleo: se sabe, pero no del todo. */
   almost?: boolean
+  /**
+   * Quien viene acertando casi todas las nuevas, y rápido: un acierto instantáneo en una palabra
+   * nueva es que ya la sabía (no suerte), así que se aleja como fácil. Lo decide el entrenador.
+   */
+  trusted?: boolean
 }): Grade {
   if (!clean) return Rating.Again
   if (almost || ms >= SLOW_ANSWER_MS) return Rating.Hard
-  // Una palabra nueva acertada podría ser suerte (1 de 4): pasa por un paso de aprendizaje.
-  if (!isNew && ms <= FAST_ANSWER_MS) return Rating.Easy
+  // Una palabra nueva acertada podría ser suerte (1 de 4): pasa por un paso de aprendizaje, salvo
+  // que el entrenador confíe en que ya se sabía.
+  if ((!isNew || trusted) && ms <= FAST_ANSWER_MS) return Rating.Easy
   return Rating.Good
 }
 
 /** Nuevo estado de una palabra tras responderla. */
-export function review(card: CardState | undefined, grade: Grade, now: number): CardState {
+export function review(
+  card: CardState | undefined,
+  grade: Grade,
+  now: number,
+  retention = DEFAULT_RETENTION,
+): CardState {
   const current = card ? toFsrs(card) : createEmptyCard(new Date(now))
-  return fromFsrs(scheduler.next(current, new Date(now), grade).card)
+  return fromFsrs(schedulerFor(retention).next(current, new Date(now), grade).card)
 }
 
 // --- Migración desde Leitner (progreso v1) --------------------------------------------------------
@@ -174,7 +198,8 @@ export function advanceSession(session: Session, id: string, clean: boolean): vo
   session.recent = [id, ...session.recent.filter((r) => r !== id)].slice(0, RECENT_WINDOW)
 }
 
-export type PickReason = 'relearn' | 'review' | 'new' | 'practice'
+/** Por qué sale una palabra. `skill`: sube de escalón en la sesión inteligente (ver coach.ts). */
+export type PickReason = 'relearn' | 'review' | 'new' | 'practice' | 'skill'
 
 export interface Pick {
   word: Word

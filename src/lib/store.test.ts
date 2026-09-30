@@ -48,8 +48,8 @@ describe('almacén persistido', () => {
     const phase5 = { direction: 'es-en', autoplay: false, theme: 'dark' }
     storage.setItem(SETTINGS_KEY, JSON.stringify(phase5))
     const store = settingsStore(storage)
-    // Los campos añadidos después (Fases 7 y 8) toman su valor por defecto.
-    // `direction` (Fase 5) pasa a ser `mode` (Fase 9); los campos añadidos después toman su valor por defecto.
+    // `direction` (Fase 5) pasa a ser `mode` (Fase 9); los campos añadidos después (Fases 7, 8, 11 y
+    // 16) toman su valor por defecto.
     expect(store.get()).toEqual({
       mode: 'es-en',
       autoplay: false,
@@ -59,6 +59,8 @@ describe('almacén persistido', () => {
       newPerDay: 20,
       sounds: true,
       haptics: true,
+      intensity: 'normal',
+      startLevel: 1,
     })
   })
 

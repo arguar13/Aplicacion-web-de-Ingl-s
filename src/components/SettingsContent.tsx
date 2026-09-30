@@ -1,10 +1,12 @@
 import { type ReactNode, useId, useState } from 'react'
 import { resetAchievements } from '@/lib/achievements'
+import { LEVELS } from '@/lib/decks'
 import { canVibrate } from '@/lib/feedback'
 import { resetProgress } from '@/lib/progress'
 import {
   DAILY_GOALS,
   type DetailsPause,
+  type Intensity,
   NEW_PER_DAY,
   parseSettings,
   type ThemePreference,
@@ -15,7 +17,7 @@ import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
 import { BackupSection, ProtectionRow } from './BackupSection'
 import { ReminderRow } from './ReminderRow'
 import { Button } from './ui/Button'
-import { Segmented, Switch } from './ui/controls'
+import { Segmented, Select, Switch } from './ui/controls'
 
 const DETAILS_PAUSES: Array<{ value: DetailsPause; label: string }> = [
   { value: 'mistakes', label: 'Al fallar' },
@@ -28,6 +30,14 @@ const NEW_LIMITS = NEW_PER_DAY.map((limit) => ({
   value: String(limit),
   label: limit === 0 ? 'Sin límite' : String(limit),
 }))
+
+const INTENSITIES: Array<{ value: Intensity; label: string }> = [
+  { value: 'relaxed', label: 'Relajado' },
+  { value: 'normal', label: 'Normal' },
+  { value: 'intensive', label: 'Intensivo' },
+]
+
+const START_LEVELS = LEVELS.map((deck) => ({ value: String(deck.level), label: `Nivel ${deck.level} · ${deck.name}` }))
 
 const THEMES: Array<{ value: ThemePreference; label: string }> = [
   { value: 'system', label: 'Automático' },
@@ -64,6 +74,27 @@ export function SettingsContent() {
           options={DETAILS_PAUSES}
           onChange={(detailsPause) => updateSettings({ detailsPause })}
         />
+        <ChoiceRow
+          title="Intensidad del repaso"
+          description="Intensivo repasa más a menudo para olvidar menos; relajado, menos veces y con más olvidos."
+          value={settings.intensity}
+          options={INTENSITIES}
+          onChange={(intensity) => updateSettings({ intensity })}
+        />
+        <div className="py-4">
+          <p className="text-[15px] font-medium">Sesión inteligente: empezar en</p>
+          <p className="mt-0.5 text-[13px] leading-snug text-muted">
+            Desde qué nivel llegan las palabras nuevas. Lo propone la prueba de nivel; lo anterior que falte se repasa
+            después.
+          </p>
+          <Select
+            label="Nivel de partida de la sesión inteligente"
+            value={String(Math.min(settings.startLevel, LEVELS.length))}
+            onChange={(value) => updateSettings({ startLevel: Number(value) })}
+            options={START_LEVELS}
+            className="mt-3"
+          />
+        </div>
         <SettingRow
           title="Pronunciación automática"
           description="Suena al aparecer cada palabra. En modo español → inglés, al acertar."

@@ -6,7 +6,7 @@ Fuentes:
   - Formas: tabla de verbos irregulares (scripts/data/irregular_verbs.py) y excepciones de
     sustantivos de WordNet (niños → children). Las palabras que ya son una forma flexionada
     ("went", "children") guardan de qué palabra son forma.
-  - Ejemplos: scripts/data/examples/level-*.json (una frase por palabra, revisada).
+  - Ejemplos: scripts/data/examples/*.json (una frase por palabra, revisada).
 
     pip install nltk && python -m nltk.downloader cmudict wordnet
     python scripts/enrich_words.py
@@ -94,7 +94,16 @@ def to_ipa(phones: list[str]) -> str:
 
 PRONUNCIATIONS = cmudict.dict()
 # Palabras que el diccionario no trae como tales.
-IPA_OVERRIDES = {"ceo": "/ˌsiˌiˈoʊ/", "wastage": "/ˈweɪstɪdʒ/"}
+# Palabras que no están en CMUdict (sobre todo recientes), transcritas a mano con el mismo estilo.
+IPA_OVERRIDES = {
+    "ceo": "/ˌsiˌiˈoʊ/", "wastage": "/ˈweɪstɪdʒ/",
+    "blog": "/blɑɡ/", "anime": "/ˈænəˌmeɪ/", "podcast": "/ˈpɑdˌkæst/", "iconic": "/aɪˈkɑnɪk/",
+    "upload": "/ˈʌpˌloʊd/", "meme": "/mim/", "blogger": "/ˈblɑɡɚ/", "bot": "/bɑt/",
+    "preseason": "/ˈpriˌsizən/", "midfield": "/ˈmɪdˌfild/", "playlist": "/ˈpleɪˌlɪst/",
+    "reboot": "/ˈriˌbut/", "fandom": "/ˈfændəm/", "webcam": "/ˈwɛbˌkæm/", "spectral": "/ˈspɛktrəl/",
+    "homepage": "/ˈhoʊmˌpeɪdʒ/", "relegation": "/ˌrɛləˈɡeɪʃən/", "mindfulness": "/ˈmaɪndfəlnəs/",
+    "batsman": "/ˈbætsmən/", "playable": "/ˈpleɪəbəl/", "iteration": "/ˌɪtəˈreɪʃən/",
+}
 
 
 def ipa_of(word: str) -> str | None:
@@ -166,7 +175,7 @@ def forms_of(word: dict) -> tuple[dict | None, dict | None]:
 
 def load_examples() -> dict:
     examples = {}
-    for path in sorted(EXAMPLES.glob("level-*.json")):
+    for path in sorted(EXAMPLES.glob("*.json")):
         for example in json.loads(path.read_text(encoding="utf-8")):
             examples[example["id"]] = {"en": example["en"].strip(), "es": example["es"].strip()}
     return examples

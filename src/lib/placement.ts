@@ -1,19 +1,19 @@
 /**
- * Prueba de nivel del primer uso: unas pocas palabras de cada nivel, de más frecuente a menos. Se
- * detiene en el primer nivel que no se supera y recomienda empezar por él. Las palabras acertadas
- * se marcan como sabidas: no hace falta que el repaso espaciado las vuelva a presentar como nuevas.
+ * Prueba de nivel del primer uso: unas pocas palabras por nivel probado, y una búsqueda adaptativa
+ * del primer nivel que no se supera. Prueba los niveles 1, 2, 4, 8, 16… hasta el primer fallo y
+ * luego afina a medio camino entre el último superado y el primero fallado. Con 17 niveles son
+ * como mucho 7 niveles probados (unas 20 palabras), no los 17 uno tras otro; y quien empieza de
+ * cero termina en 3 palabras. Las palabras acertadas se marcan como sabidas: no hace falta que el
+ * repaso espaciado las presente como nuevas.
  */
 import { type Deck, LEVELS } from './decks'
 import { buildOptions } from './quiz'
-import type { Rng, Word } from './types'
+import { CONTENT_POS, type Rng, type Word } from './types'
 
 /** Palabras por nivel. */
 export const WORDS_PER_LEVEL = 3
 /** Aciertos necesarios para superar un nivel. */
 export const PASS_MARK = 2
-
-/** Palabras de contenido: con un artículo o una preposición se adivina demasiado. */
-const CONTENT = new Set(['noun', 'verb', 'adj', 'adv'])
 
 export interface PlacementItem {
   level: number
@@ -26,7 +26,7 @@ export interface PlacementItem {
  * mitad y al final), siempre las mismas para que la prueba sea comparable.
  */
 export function placementItems(deck: Deck, rng: Rng = Math.random): PlacementItem[] {
-  const content = deck.words.filter((word) => CONTENT.has(word.pos))
+  const content = deck.words.filter((word) => CONTENT_POS.has(word.pos))
   return Array.from({ length: WORDS_PER_LEVEL }, (_, i) => {
     const word = content[Math.floor(((i + 0.5) / WORDS_PER_LEVEL) * content.length)]
     return { level: deck.level ?? 0, word, options: buildOptions(word, deck.words, undefined, rng) }
@@ -43,18 +43,27 @@ export interface PlacementState {
   correct: number
   /** Palabras acertadas en toda la prueba. */
   known: Word[]
+  /** Nivel más alto superado (0 = ninguno) y más bajo fallado (null = aún ninguno). */
+  passed: number
+  failed: number | null
+  /** Niveles ya probados, para la barra de progreso. */
+  probes: number
   /** Nivel recomendado al terminar (null mientras sigue). */
   result: number | null
 }
 
+function probe(level: number, state: Omit<PlacementState, 'levelIndex' | 'items' | 'step' | 'correct'>, rng: Rng) {
+  return { ...state, levelIndex: level - 1, items: placementItems(LEVELS[level - 1], rng), step: 0, correct: 0 }
+}
+
 export function startPlacement(rng: Rng = Math.random): PlacementState {
-  return { levelIndex: 0, items: placementItems(LEVELS[0], rng), step: 0, correct: 0, known: [], result: null }
+  return probe(1, { known: [], passed: 0, failed: null, probes: 0, result: null }, rng)
 }
 
 /**
- * Registra la respuesta (`null` = "no la sé") y pasa a la siguiente palabra, al siguiente nivel o al
- * resultado. Un nivel se supera con PASS_MARK aciertos de WORDS_PER_LEVEL; en cuanto ya no se puede
- * superar, la prueba termina y recomienda ese nivel.
+ * Registra la respuesta (`null` = "no la sé") y pasa a la siguiente palabra, al siguiente nivel a
+ * probar o al resultado. Un nivel se supera con PASS_MARK aciertos de WORDS_PER_LEVEL; en cuanto ya
+ * no se puede superar (o ya está superado), no se sigue preguntando por él.
  */
 export function answerPlacement(
   state: PlacementState,
@@ -68,19 +77,29 @@ export function answerPlacement(
   const known = right ? [...state.known, item.word] : state.known
   const step = state.step + 1
   const remaining = WORDS_PER_LEVEL - step
-  const level = LEVELS[state.levelIndex].level ?? 1
+  const level = state.levelIndex + 1
 
-  if (correct + remaining < PASS_MARK) return { ...state, step, correct, known, result: level }
-  if (step < WORDS_PER_LEVEL) return { ...state, step, correct, known }
+  const failedNow = correct + remaining < PASS_MARK
+  const passedNow = correct >= PASS_MARK
+  if (!failedNow && !passedNow) return { ...state, step, correct, known }
 
-  // Nivel superado: al siguiente, o el último si se superaron todos.
-  const next = state.levelIndex + 1
-  if (next >= LEVELS.length) return { ...state, step, correct, known, result: level }
-  return { levelIndex: next, items: placementItems(LEVELS[next], rng), step: 0, correct: 0, known, result: null }
+  const passed = passedNow ? level : state.passed
+  const failed = failedNow ? level : state.failed
+  const probes = state.probes + 1
+  const done = { ...state, step, correct, known, passed, failed, probes }
+  const last = LEVELS.length
+  if (failed !== null && failed - passed <= 1) return { ...done, result: failed }
+  if (failed === null && passed === last) return { ...done, result: last }
+  // Sin fallos aún, se dobla el nivel (1, 2, 4, 8…); con un fallo, a medio camino.
+  const next = failed === null ? Math.min(passed * 2, last) : Math.floor((passed + failed) / 2)
+  return probe(next, { known, passed, failed, probes, result: null }, rng)
 }
 
-/** Progreso de la prueba (0–1), para la barra. */
+/** Niveles que como mucho se prueban: los que dobla la búsqueda y los que luego afina. */
+const MAX_PROBES = 2 * Math.ceil(Math.log2(LEVELS.length)) + 1
+
+/** Progreso de la prueba (0–1), para la barra. Cada nivel probado acerca el resultado. */
 export function placementProgress(state: PlacementState): number {
   if (state.result !== null) return 1
-  return (state.levelIndex * WORDS_PER_LEVEL + state.step) / (LEVELS.length * WORDS_PER_LEVEL)
+  return Math.min(0.95, (state.probes + state.step / WORDS_PER_LEVEL) / MAX_PROBES)
 }

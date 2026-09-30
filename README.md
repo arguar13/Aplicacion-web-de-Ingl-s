@@ -1,64 +1,77 @@
 # Tecla
 
-Aprende vocabulario en inglés con una idea simple: aparece una palabra en inglés, suena su pronunciación
-y pulsas la tecla con su traducción al español.
+Aprende vocabulario en inglés con una idea simple: aparece una palabra, suena su pronunciación y
+pulsas la tecla con su traducción. Más de 8000 palabras (8461), de las más usadas a las más
+difíciles, con repaso espaciado inteligente. Gratis, sin cuentas, sin anuncios y sin conexión.
 
-Las 3.978 palabras están ordenadas por frecuencia de uso real y agrupadas en 8 niveles de 500.
-El repaso espaciado usa FSRS: cada palabra tiene su propia estabilidad y dificultad, y vuelve cuando la
-probabilidad de recordarla baja al 90 %. Lo que fallas vuelve a las pocas rondas; lo que aciertas se
-aleja, más cuanto más rápido respondes. El progreso se guarda en el dispositivo.
+## La sesión inteligente
 
-Cada día tiene una meta (10, 20, 40 o 60 palabras) y un límite de palabras nuevas. Al cumplir la meta,
-o al salir de una partida, un resumen muestra palabras, precisión, nuevas, mejor racha y las palabras
-falladas. En el inicio, el **repaso del día** reúne lo que toca repasar de todos los niveles (con la
-previsión de la semana) y **Mis difíciles** junta las palabras que más se olvidan.
+La acción principal del inicio. Un entrenador decide qué practicar en cada ronda, sin elegir niveles:
 
-Cinco formas de practicar, elegidas en el inicio: **traducir** (inglés → español; la pronunciación
-suena al aparecer), **inverso** (español → inglés; suena al acertar para no delatar la respuesta),
-**escuchar** (solo el audio), **escribir** (la palabra inglesa con el teclado; un error de tecleo es
-"¡casi!" con la corrección letra por letra) y **completar** (la frase de ejemplo con un hueco).
-Escuchar y escribir tienen progreso propio; completar refuerza el de traducir. Las otras opciones de
-cada ronda son de la misma categoría gramatical que la respuesta, para que no se puedan descartar sin
-saber la palabra. **Relámpago** es un juego aparte: 60 segundos con palabras ya vistas y récord
-personal.
+- **Lo fallado vuelve** a las pocas rondas, marcado como «Otra vez», y luego según el repaso
+  espaciado.
+- **Repasos a tiempo** con FSRS: cada palabra tiene su estabilidad y dificultad, y vuelve cuando la
+  probabilidad de recordarla baja a la retención elegida (relajado 85 %, normal 90 %, intensivo
+  95 %). Primero lo que más riesgo tiene de olvidarse.
+- **Escalera de habilidades:** cada palabra se aprende primero reconociéndola (inglés → español),
+  luego recordándola (español → inglés), después de oído y por último escribiéndola.
+- **Dificultad que se adapta:** las nuevas llegan en orden de frecuencia, a un ritmo que depende de
+  cómo vas. Quien acierta casi todo y rápido **acelera**: las nuevas vienen de más adelante en la
+  lista (más difíciles) y lo que ya sabía se aleja. Con errores **afianza**: menos palabras a la vez
+  hasta consolidar. Con palabras ya afianzadas, las opciones se parecen más entre sí.
+- La tarjeta del inicio resume la práctica de hoy (repasos, nuevas, minutos), el ritmo y el
+  vocabulario que ya reconoces con su nivel orientativo (A1–C2).
 
-Tras responder aparece la pronunciación en IPA, y la partida puede detenerse para mostrar el detalle
-de la palabra: categoría, formas irregulares y una frase de ejemplo con su traducción. Se detiene sola
-tras un fallo (configurable: al fallar, siempre o nunca) y con «Ver ejemplo» tras un acierto. Cada
-palabra se puede escuchar despacio, sin que cambie el tono de la voz.
+La **prueba de nivel** de la bienvenida es adaptativa: prueba los niveles 1, 2, 4, 8, 16… y afina
+entre el último superado y el primero fallado. Nadie contesta más de unas 20 palabras, y la sesión
+inteligente empieza en el nivel recomendado. El **modo concentración** es una sesión de 5 minutos con
+cuenta atrás.
 
-**Tu progreso** (#/estadisticas) muestra racha, tiempo, precisión, un mapa de calor de actividad, la
-evolución de las palabras dominadas y el avance por nivel en cada habilidad. El **diccionario**
-(#/diccionario) busca en inglés y español entre las 3.978 palabras y abre la ficha de cada una:
-pronunciación, ejemplo, progreso por habilidad, últimas respuestas, favorita y "ya la sé".
+## Más formas de practicar
 
-La primera vez, una bienvenida de tres pasos (saltable) explica la idea, pide una meta diaria y
-ofrece una **prueba de nivel** de un minuto: recomienda por dónde empezar y marca como sabidas las
-palabras acertadas. **Trece logros** con medallas propias (primera sesión, rachas de 7 y 30 días,
-100/500/1.000 dominadas, nivel completado, sesión perfecta…) se anuncian al conseguirlos y se
-exhiben en Tu progreso. Cada 7 días con la meta cumplida se gana un **protector de racha** (hasta 2)
-que cubre un día sin práctica, y un aviso en el inicio indica cuando la racha está en riesgo. Las
-celebraciones son proporcionales: un sonido suave al acertar, confeti al cumplir la meta, más al
-completar un nivel; nada se mueve si el sistema pide reducir movimiento.
+- **Por tu cuenta:** 17 niveles de 500 palabras y cinco modos: **traducir**, **inverso**,
+  **escuchar** (solo el audio), **escribir** (un error de tecleo es «¡casi!», con la corrección
+  letra por letra) y **completar** (la frase de ejemplo con un hueco). Las opciones de cada ronda
+  son de la misma categoría gramatical que la respuesta.
+- **Colecciones** (#/colecciones): 19 temas (comida, animales, cuerpo, emociones, ropa,
+  transporte…) generados a partir de WordNet con el sentido de la traducción. En una colección las
+  opciones son del mismo tema: hay que saber la palabra exacta.
+- **Repaso del día**, **Mis difíciles** y **Relámpago** (60 segundos contra el reloj).
+- **Palabra del día:** una palabra nueva un poco más adelante de por donde vas, con su ejemplo.
+- **Pronúnciala:** en la ficha de cada palabra, dices la palabra y el reconocimiento de voz del
+  navegador te dice si se entiende (Chrome, Edge y Safari; Chrome lo hace con su servicio en línea).
 
-Ajustes, por secciones: **práctica** (meta diaria, palabras nuevas por día, cuándo detenerse a ver
-el ejemplo, pronunciación automática), **sonido** (efectos y vibración), **apariencia** (tema
-claro, oscuro o automático), **recordatorio** (un evento diario para el calendario del dispositivo,
-la única forma fiable de avisar a una hora sin servidor en iPhone, Android y escritorio) y **tus
-datos** (copia de seguridad para guardar, enviar y restaurar, combinando o reemplazando;
-protección del almacenamiento; instalación; audio sin conexión; borrar el progreso). La copia lleva
-el progreso, el historial, los logros con su fecha y los ajustes. En un dispositivo nuevo se
-restaura desde la misma bienvenida. La sincronización automática entre dispositivos está
-propuesta, pendiente de decisión, en [docs/SINCRONIZACION.md](docs/SINCRONIZACION.md). En Safari sin instalar, donde
-los datos se borran tras 7 días sin visitas, un aviso discreto recuerda guardar una copia.
+Cada palabra tiene pronunciación con voz neuronal (se puede escuchar despacio sin cambiar el tono),
+IPA, formas irregulares y una frase de ejemplo traducida.
 
-Cada pantalla tiene su dirección (`#/`, `#/nivel/3`, `#/todas`, `?panel=ajustes`): el botón atrás
-del navegador o de Android recorre la app en vez de cerrarla, y los enlaces directos funcionan.
+## Tu progreso
+
+**Tu progreso** (#/estadisticas) empieza por **Tu semana**: respuestas, acierto, nuevas, dominadas
+ganadas, a qué hora rindes mejor y las palabras que más te costaron. Luego racha, tiempo, mapa de
+calor, evolución de las dominadas, precisión semanal, avance por nivel, previsión de repasos y la
+vitrina de **trece logros**. El **diccionario** (#/diccionario) busca en inglés y español y abre la
+ficha de cada palabra: pronunciación, ejemplo, progreso por habilidad, últimas respuestas, favorita
+y «ya la sé».
+
+Hay meta diaria, límite de palabras nuevas, **protectores de racha** (uno cada 7 días con la meta
+cumplida) y celebraciones proporcionales (sonido, vibración en Android, confeti) que respetan el
+movimiento reducido.
+
+## Tus datos
+
+Todo se guarda en el dispositivo. Ajustes, por secciones: práctica (meta, nuevas por día,
+intensidad del repaso, nivel de partida, ejemplo tras responder, pronunciación automática), sonido,
+apariencia (claro, oscuro o automático), recordatorio (un evento diario para el calendario del
+dispositivo) y tus datos (copia de seguridad para guardar, enviar y restaurar; protección del
+almacenamiento; instalación; audio sin conexión; borrar el progreso). La copia lleva el progreso,
+el historial, los logros y los ajustes, y se restaura desde la misma bienvenida en un dispositivo
+nuevo. La sincronización automática está propuesta en
+[docs/SINCRONIZACION.md](docs/SINCRONIZACION.md), pendiente de decisión.
 
 Es una PWA: se instala en Android, iPhone y escritorio y funciona sin conexión desde la primera
-visita. La app se guarda entera al primer uso; cada pronunciación se guarda al sonar, y desde
-Ajustes se pueden descargar todas (~22 MB). Cuando hay una versión nueva, un aviso deja actualizar
-sin cortar la sesión.
+visita. Cada pronunciación se guarda al sonar y desde Ajustes se pueden descargar todas
+(unos 38 MB). Cada pantalla tiene su dirección (`#/sesion`, `#/nivel/3`, `#/tema/comida`,
+`?panel=ajustes`…): el botón atrás recorre la app en vez de cerrarla.
 
 ## Desarrollo
 
@@ -84,7 +97,7 @@ La primera vez, los tests e2e necesitan los navegadores: `npx playwright install
 Calidad: cada commit pasa por `npm run check` (hook de pre-commit con simple-git-hooks) y cada push
 por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build con su presupuesto
 de tamaño, los e2e en Chromium y WebKit (con axe en todas las pantallas, en los dos temas) y
-Lighthouse en móvil (rendimiento ≥ 90; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
+Lighthouse en móvil (rendimiento ≥ 85; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
 Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espacio` para volver a escuchar ·
 `L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para continuar · `R` repaso del día ·
@@ -137,8 +150,16 @@ public/audio/             Pronunciaciones, una por palabra: <id>.mp3
 public/.htaccess          Configuración del servidor (Hostinger)
 public/icons/             Iconos de la app (normal, maskable para Android y apple-touch-icon)
 src/data/words.json       Vocabulario { id, en, es, pos }, ordenado por frecuencia. El id es el nombre del audio.
-src/data/details.json     IPA, formas y ejemplo de cada palabra (se carga aparte, en segundo plano)
+                          Se sirve como JSON aparte y main.tsx monta la app cuando llega.
+src/data/details.json     IPA, formas y ejemplo de cada palabra (JSON aparte, en segundo plano)
+src/data/topics.json      Colecciones temáticas: ids por tema (lo genera scripts/build_topics.py)
+src/lib/vocabulary.ts     Carga del vocabulario (y cómo lo fijan los tests)
 src/lib/words.ts          Valida el vocabulario al cargarlo
+src/lib/coach.ts          Entrenador de la sesión inteligente: qué toca, ritmo y escalera de habilidades
+src/lib/topicMeta.ts      Nombres de las colecciones; topics.ts, sus palabras y mazos
+src/lib/wordOfDay.ts      Palabra del día
+src/lib/weekly.ts         Informe de la semana
+src/lib/speech.ts         Pronunciar con la voz (reconocimiento de voz del navegador)
 src/lib/decks.ts          Niveles (bloques de 500 palabras) y de dónde salen los distractores
 src/lib/details.ts        Detalles de cada palabra: carga diferida, validación y textos
 src/lib/scheduler.ts      Repaso espaciado (FSRS): notas, calendario, migración desde Leitner y siguiente palabra
@@ -170,12 +191,18 @@ src/components/           Pantallas y piezas de la app
 src/components/ui/        Componentes base: Button, IconButton, Badge, Surface, Sheet, Toast…
 src/index.css             Sistema visual: paleta clara/oscura (AA), tipografías, animaciones
 vite/audio-versions.ts    Plugin de Vite: hash de cada MP3 para versionar sus URLs
+vite/startup-preload.ts   Plugin de Vite: precarga en paralelo el vocabulario y los módulos de la app
+vite/site-meta.ts         Plugin de Vite: metadatos para compartir, robots.txt y sitemap.xml
 e2e/                      Tests de extremo a extremo (Playwright)
+scripts/select_candidates.py Próximas palabras por frecuencia, filtradas (pip install wordfreq nltk)
+scripts/merge_translations.py Suma al vocabulario los lotes traducidos y revisados
 scripts/rank_words.py     Reordena words.json por frecuencia (pip install wordfreq)
+scripts/build_topics.py   Genera topics.json con WordNet y el sentido de cada traducción
 scripts/tag_pos.py        Categoría gramatical de cada palabra (pip install nltk)
 scripts/enrich_words.py   Genera details.json: IPA, formas irregulares y ejemplos
-scripts/data/examples/    Frases de ejemplo por nivel (fuente de details.json)
-scripts/generate_audio.py Genera el audio de las palabras que no lo tengan (pip install gtts)
+scripts/data/examples/    Frases de ejemplo (fuente de details.json)
+scripts/data/translations/ Lotes de la ampliación: candidatas, traducciones revisadas y su validador
+scripts/generate_audio.py Genera el audio con la voz neuronal (pip install edge-tts)
 ```
 
 Stack: Vite, React 19, TypeScript 7, Tailwind CSS 4, vite-plugin-pwa (Workbox), ts-fsrs. Calidad: Vitest,
@@ -183,19 +210,20 @@ Testing Library, Playwright, axe, oxlint y Prettier.
 
 ## Agregar palabras
 
-1. Añade `{ "id", "en", "es" }` a `src/data/words.json` (el id en minúsculas, con guiones).
-2. `python scripts/generate_audio.py` crea su audio con la misma voz que el resto.
-3. `python scripts/tag_pos.py --report` asigna la categoría gramatical (`pos`) y lista los casos
-   dudosos; las correcciones van en `POS_OVERRIDES` (pip install nltk; usa WordNet en inglés y
-   español).
-4. `python scripts/rank_words.py` las recoloca por frecuencia.
-5. `npm test` comprueba que los ids sean únicos, que cada palabra tenga audio y categoría.
+1. `python scripts/select_candidates.py N` elige las N siguientes palabras por frecuencia, sin
+   nombres propios, formas flexionadas, grafías británicas ni groserías.
+2. Se traducen y revisan por lotes en `scripts/data/translations/batch-NN.json` (traducción,
+   categoría y frase de ejemplo, o `skip` con el motivo) y se validan con
+   `python scripts/data/translations/validate.py NN`.
+3. `python scripts/merge_translations.py`, luego `rank_words.py`, `tag_pos.py`,
+   `enrich_words.py` y `build_topics.py` (en ese orden).
+4. `python scripts/generate_audio.py` crea el audio de las nuevas con la misma voz.
+5. `npm test` comprueba ids únicos, audio, IPA, ejemplo, categoría y sentidos sin repetir.
 
 Las traducciones siguen estas reglas: español latinoamericano neutro, el sentido más común primero,
-como mucho dos sentidos separados por coma y en minúscula salvo nombres propios. Dos palabras que
-comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`), y los
-distractores son de la misma categoría gramatical que la respuesta: la traducción de un verbo
-compite con otros verbos, no con sustantivos que se descartarían sin saber la palabra.
+como mucho dos o tres sentidos separados por coma y en minúscula salvo nombres propios. Dos palabras
+que comparten un sentido nunca salen juntas como opciones (ver `senses()` en `src/lib/quiz.ts`), y
+los distractores son de la misma categoría gramatical que la respuesta.
 
 ## Datos y licencias
 
@@ -204,9 +232,11 @@ compite con otros verbos, no con sustantivos que se descartarían sin saber la p
   (BSD de 2 cláusulas), convertido a IPA por `scripts/enrich_words.py`.
 - Categorías y plurales irregulares: [WordNet](https://wordnet.princeton.edu/) (licencia WordNet 3.0)
   y [Open Multilingual Wordnet](https://omwn.org/) para el español.
+- Colecciones temáticas: campos semánticos de WordNet, alineados con la traducción.
 - Traducciones, frases de ejemplo y verbos irregulares: propios del proyecto.
-- Audio: gTTS (voz de Google Translate).
+- Audio: voz neuronal en-US-AvaNeural de Microsoft (la de «Leer en voz alta» de Edge), generada con
+  [edge-tts](https://github.com/rany2/edge-tts).
 
-Para regenerar los detalles tras cambiar el vocabulario: `python scripts/enrich_words.py` (las
-palabras nuevas necesitan antes su frase en `scripts/data/examples/level-N.json`; `npm test`
-comprueba que ninguna falte y que cada frase contenga su palabra).
+Para regenerar los detalles tras cambiar el vocabulario: `python scripts/enrich_words.py` (cada
+palabra necesita su frase en `scripts/data/examples/`; `npm test` comprueba que ninguna falte y que
+cada frase contenga su palabra).

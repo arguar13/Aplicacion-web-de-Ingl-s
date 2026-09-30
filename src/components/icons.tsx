@@ -188,6 +188,46 @@ export function BoltIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+/** Cronómetro: el modo concentración. */
+export function TimerIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 9v4l2.5 2.5M9 2h6" />
+    </svg>
+  )
+}
+
+/** Micrófono: pronunciar con la voz. */
+export function MicIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+    </svg>
+  )
+}
+
+/** Capas: las colecciones temáticas. */
+export function LayersIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m12 3 9 5-9 5-9-5 9-5Z" />
+      <path d="m3 13 9 5 9-5" />
+    </svg>
+  )
+}
+
+/** Destello: la sesión inteligente. */
+export function SparkIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z" />
+      <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z" />
+    </svg>
+  )
+}
+
 /** Estadísticas. */
 export function ChartIcon(props: SVGProps<SVGSVGElement>) {
   return (

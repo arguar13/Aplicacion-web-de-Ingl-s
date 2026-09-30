@@ -25,8 +25,8 @@ const MISSED_SHOWN = 8
 export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount, onContinue, onFinish }: Props) {
   const titleId = useId()
   const primary = useRef<HTMLButtonElement>(null)
-  // La meta y el nivel completo se celebran; salir es un resumen tranquilo.
-  const goal = reason === 'goal' || reason === 'level'
+  // La meta, el nivel completo y el tiempo de concentración se celebran; salir es un resumen tranquilo.
+  const goal = reason === 'goal' || reason === 'level' || reason === 'time'
   const accuracy = stats.solved ? Math.round((stats.firstTry / stats.solved) * 100) : 0
   const missed = stats.missed.slice(0, MISSED_SHOWN)
   const more = stats.missed.length - missed.length
@@ -48,14 +48,22 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
       {goal && <Confetti pieces={reason === 'level' ? 180 : 110} />}
       {goal && <GoalBadge />}
       <h1 id={titleId} className="font-display text-4xl leading-tight sm:text-5xl">
-        {reason === 'level' ? '¡Nivel completo!' : reason === 'goal' ? '¡Meta cumplida!' : 'Buen trabajo'}
+        {reason === 'level'
+          ? '¡Nivel completo!'
+          : reason === 'goal'
+            ? '¡Meta cumplida!'
+            : reason === 'time'
+              ? '¡Tiempo cumplido!'
+              : 'Buen trabajo'}
       </h1>
       <p className="mx-auto mt-2 max-w-sm text-[15px] leading-relaxed text-muted">
         {reason === 'level'
           ? `Dominas las ${plural(wordCount, 'palabra')} de ${deckLabel}. Un paso enorme.`
           : reason === 'goal'
             ? `Respondiste ${plural(dailyGoal, 'palabra')} hoy. Lo que aprendiste vuelve justo antes de que lo olvides.`
-            : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
+            : reason === 'time'
+              ? 'Cinco minutos de concentración. Pocos minutos cada día son los que más rinden.'
+              : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
       </p>
 
       <dl className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4">

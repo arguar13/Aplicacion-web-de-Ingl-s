@@ -1,6 +1,10 @@
 import type { PartOfSpeech, Rng, Word } from './types'
 
 export const OPTIONS_PER_ROUND = 4
+/** Desde esta estabilidad (días) la palabra está afianzada y sus distractores se le parecen. */
+export const CONFUSABLE_STABILITY = 10
+/** Entre cuántas de las más parecidas se eligen los distractores de una palabra afianzada. */
+const CONFUSABLE_POOL = 12
 
 /** Clave para comparar traducciones: sin mayúsculas, tildes ni espacios sobrantes. */
 export function normalize(text: string): string {
@@ -42,6 +46,15 @@ export function buildOptions(
   pool: readonly Word[],
   count = OPTIONS_PER_ROUND,
   rng: Rng = Math.random,
+  {
+    confusable = false,
+  }: {
+    /**
+     * Palabra ya afianzada: los distractores de su misma categoría se eligen entre los que más se
+     * le parecen ("affect" / "effect"), para que siga exigiendo atención.
+     */
+    confusable?: boolean
+  } = {},
 ): Word[] {
   const used = new Set(senses(answer.es))
   const distractors: Word[] = []
@@ -57,8 +70,12 @@ export function buildOptions(
 
   // De la misma categoría gramatical que la respuesta; si no alcanzan, de una parecida; y si
   // tampoco, cualquiera. Un verbo entre tres sustantivos se adivinaría sin saber la palabra.
-  for (const accept of preferenceTiers(answer)) {
-    const candidates = pool.filter(accept)
+  for (const [tier, accept] of preferenceTiers(answer).entries()) {
+    const all = pool.filter(accept)
+    const candidates =
+      confusable && tier === 0
+        ? all.toSorted((a, b) => resemblance(answer.en, b.en) - resemblance(answer.en, a.en)).slice(0, CONFUSABLE_POOL)
+        : all
     for (let attempt = 0; attempt < count * 10 && !full() && candidates.length > 0; attempt++) {
       tryAdd(candidates[Math.floor(rng() * candidates.length)])
     }
@@ -68,6 +85,21 @@ export function buildOptions(
   }
 
   return shuffle([answer, ...distractors], rng)
+}
+
+/**
+ * Cuánto se parecen dos palabras inglesas a la vista: comienzo y final compartidos (lo que más
+ * confunde al leer rápido) y longitud parecida.
+ */
+export function resemblance(a: string, b: string): number {
+  const x = a.toLowerCase()
+  const y = b.toLowerCase()
+  if (x === y) return 0
+  let prefix = 0
+  while (prefix < Math.min(x.length, y.length) && x[prefix] === y[prefix]) prefix++
+  let suffix = 0
+  while (suffix < Math.min(x.length, y.length) - prefix && x.at(-1 - suffix) === y.at(-1 - suffix)) suffix++
+  return prefix * 2 + suffix - Math.abs(x.length - y.length) * 0.5
 }
 
 /** Familias de categorías: si faltan distractores de la misma, se buscan en la misma familia. */

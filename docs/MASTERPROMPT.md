@@ -608,3 +608,62 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
 - Lección de proceso: una vista previa propia en el puerto 4173 hacía que los e2e probaran un
   build viejo (`reuseExistingServer`). Queda documentado en el README.
 - CHANGELOG.md con todas las fases y versión 1.0.0 (visible al pie de Ajustes).
+
+### Fase 14 · cerrada el 29-09-2026
+
+- Identidad nueva en los tokens (neutros fríos, índigo–violeta, aurora, elevaciones con nombre),
+  Geist + Inter y logo nuevo en favicon, íconos, arranque e imagen para compartir.
+- Componentes renovados sin relieve 3D; teclas que se elevan y comprimen; cabecera de vidrio.
+- Contraste AA calculado para cada par en ambos temas antes de fijar la paleta.
+
+### Fase 15 · cerrada el 29-09-2026
+
+- 4483 palabras nuevas (8461 en total, 17 niveles): `select_candidates.py` (frecuencia, lemas,
+  sin nombres propios, flexiones, grafías británicas ni groserías) y 12 lotes traducidos y
+  revisados en paralelo, validados por `translations/validate.py`; 314 descartadas con motivo.
+- La categoría gramatical que eligió quien tradujo es la que manda (`pos_reviewed.json`).
+- IPA de todas (21 recientes a mano), ejemplo de todas y audio de todas.
+- **Voz:** gTTS bloqueó las peticiones (429) a mitad de la generación. En lugar de esperar o mezclar
+  voces, todo el audio se regeneró con una voz neuronal (edge-tts, en-US-AvaNeural), con escritura
+  atómica fuera de `public/` y reintentos.
+- **Arquitectura:** el vocabulario y los detalles pasan a JSON aparte; `main.tsx` monta la app al
+  llegar el vocabulario, y `vite/startup-preload.ts` precarga JSON y módulos en paralelo (sin
+  cascada). JS inicial: de 153 KB a 113 KB con el doble de palabras.
+- Lección: Tailwind escaneaba `src/data` y `public/` (clases fantasma por palabras del vocabulario y
+  reconstrucción del CSS con cada audio). Se excluyen con `@source not`.
+
+### Fase 16 · cerrada el 29-09-2026
+
+- `lib/coach.ts`: relearn → repasos por riesgo de olvido → subir de escalón → nuevas por frecuencia
+  con cupo de aprendizaje según el ritmo (afianzar 5, normal 9, acelerar 14); al acelerar, las
+  nuevas se toman FAST_JUMP puestos más adelante y un acierto instantáneo en una nueva se califica
+  como fácil. El ritmo sale del historial (`f` marca el primer encuentro).
+- Simulación en tests: un estudiante avanzado llega más de 4 veces más lejos que uno que empieza.
+- Distractores parecidos (`resemblance`) con palabras afianzadas; retención configurable.
+- Prueba de nivel adaptativa (búsqueda exponencial + binaria): con 17 niveles no hacía falta
+  recorrer 51 preguntas.
+
+### Fase 17 · cerrada el 29-09-2026
+
+- Colecciones (WordNet alineado con la traducción; objetos divididos en ropa, transporte, edificios
+  y objetos; correcciones revisadas en `TOPIC_OVERRIDES`), Palabra del día, Pronúnciala (Web Speech
+  API, tipos propios en env.d.ts), Tu semana y modo concentración.
+
+### Fase 18 · cerrada el 29-09-2026 · versión 2.0.0
+
+- Audio: 8461 pronunciaciones con voz neuronal, recortadas de silencio y a 32 kbps mono: 38 MB
+  (sin comprimir habrían sido ~90 MB). El tamaño que muestra Ajustes se calcula en el build.
+- Vocabulario compacto (`vite/vocabulary.ts`): columnas en vez de objetos, de 117 a 77 KB gzip;
+  `words.json` sigue siendo la fuente legible y un test comprueba la ida y vuelta sin pérdidas.
+- CLS de 0,11 a 0: fuentes de respaldo con las medidas de Geist e Inter (calculadas de los archivos)
+  y `font-display: swap` también en ellas.
+- Bienvenida pintada desde el HTML para quien entra por primera vez (plantilla generada del
+  componente y comprobada por test) y prioridad baja para el código y los datos de la app.
+  Medido con red lenta y CPU ×4: la bienvenida aparece a los 0,65–1 s, antes de que llegue la app.
+- Lighthouse móvil (laboratorio, máquina con ruido): rendimiento 86–90, accesibilidad, buenas
+  prácticas y SEO al 100. El límite es de modelo: el LCP que cuenta es el título que React vuelve a
+  montar al reemplazar la plantilla. **Pendiente para exigir ≥ 90 o 95:** hidratar la primera
+  pantalla (render de la app en el build y `hydrateRoot`) para que React reutilice el HTML ya
+  pintado. La CI exige ≥ 85 hasta entonces.
+- Lecciones: Tailwind escaneaba los datos y `public/`; los temporales de audio no deben vivir en la
+  carpeta que copia el build; el servidor de desarrollo necesita agrupar los cambios masivos de audio.

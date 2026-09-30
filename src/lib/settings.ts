@@ -11,6 +11,9 @@ export type DailyGoal = (typeof DAILY_GOALS)[number]
 /** Palabras nuevas por día; 0 = sin límite. */
 export const NEW_PER_DAY = [10, 20, 40, 0] as const
 export type NewPerDay = (typeof NEW_PER_DAY)[number]
+/** Cuánto se quiere recordar: la probabilidad de acordarse a la que FSRS programa cada repaso. */
+export type Intensity = 'relaxed' | 'normal' | 'intensive'
+export const RETENTION: Record<Intensity, number> = { relaxed: 0.85, normal: 0.9, intensive: 0.95 }
 
 export interface Settings {
   /** Cómo se practica (antes `direction`: solo había traducir e inverso). */
@@ -27,6 +30,10 @@ export interface Settings {
   sounds: boolean
   /** Vibración breve en esos momentos (donde el dispositivo la tenga). */
   haptics: boolean
+  /** Intensidad del repaso: más intensivo = repasos más frecuentes y menos olvidos. */
+  intensity: Intensity
+  /** Nivel desde el que la sesión inteligente introduce palabras nuevas (lo fija la prueba de nivel). */
+  startLevel: number
 }
 
 /** Clave de almacenamiento; index.html la lee antes de pintar para aplicar el tema sin parpadeo. */
@@ -41,6 +48,8 @@ const DEFAULTS: Settings = {
   newPerDay: 20,
   sounds: true,
   haptics: true,
+  intensity: 'normal',
+  startLevel: 1,
 }
 
 const oneOf = <T extends number>(options: readonly T[], value: unknown, fallback: T): T =>
@@ -63,6 +72,12 @@ export function parseSettings(raw: Record<string, unknown>): Settings {
     // Campos nuevos en la Fase 11.
     sounds: typeof raw.sounds === 'boolean' ? raw.sounds : DEFAULTS.sounds,
     haptics: typeof raw.haptics === 'boolean' ? raw.haptics : DEFAULTS.haptics,
+    // Campo nuevo en la Fase 16.
+    intensity: raw.intensity === 'relaxed' || raw.intensity === 'intensive' ? raw.intensity : DEFAULTS.intensity,
+    startLevel:
+      typeof raw.startLevel === 'number' && Number.isInteger(raw.startLevel) && raw.startLevel >= 1
+        ? raw.startLevel
+        : DEFAULTS.startLevel,
   }
 }
 

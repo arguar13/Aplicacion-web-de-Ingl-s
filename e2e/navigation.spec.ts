@@ -2,7 +2,7 @@ import { expect, test } from './fixtures'
 
 test('el botón atrás vuelve a los niveles en vez de salir de la app', async ({ page }) => {
   await page.goto('./')
-  await page.getByRole('button', { name: /Nivel 3 · Cotidiano|^3 Cotidiano/ }).click()
+  await page.getByRole('button', { name: 'Nivel 3, Cotidiano' }).click()
   await expect(page).toHaveURL(/#\/nivel\/3$/)
   await expect(page).toHaveTitle('Nivel 3 · Cotidiano — Tecla')
 

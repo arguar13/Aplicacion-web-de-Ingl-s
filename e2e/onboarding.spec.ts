@@ -36,16 +36,19 @@ test('primer uso: meta diaria y prueba de nivel que recomienda por dónde empeza
 
   await takeTest(page, 2)
   await expect(page.getByRole('heading', { name: /Nivel 3 · Cotidiano/ })).toBeVisible()
-  await expect(page.getByText(/Acertaste 6 palabras/)).toBeVisible()
-  await page.getByRole('button', { name: /Empezar el nivel 3/ }).click()
-  await expect(page).toHaveURL(/#\/nivel\/3$/)
+  // Un nivel se supera con 2 aciertos: la tercera palabra ya no se pregunta.
+  await expect(page.getByText(/Acertaste 4 palabras/)).toBeVisible()
+  await page.getByRole('button', { name: /Empezar desde el nivel 3/ }).click()
+  // La sesión inteligente arranca en el nivel recomendado.
+  await expect(page).toHaveURL(/#\/sesion$/)
 
   const saved = await page.evaluate(() => ({
     settings: JSON.parse(localStorage.getItem('tecla:settings:v1') ?? '{}'),
     progress: JSON.parse(localStorage.getItem('tecla:progress:v1') ?? '{}'),
   }))
   expect(saved.settings.dailyGoal).toBe(40)
-  expect(Object.keys(saved.progress.cards)).toHaveLength(6)
+  expect(saved.settings.startLevel).toBe(3)
+  expect(Object.keys(saved.progress.cards)).toHaveLength(4)
 
   // Terminada, no vuelve a aparecer.
   await page.goto('./')

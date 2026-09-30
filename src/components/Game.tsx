@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
+import { assessLearner, type Pace } from '@/lib/coach'
+import { useEvents } from '@/lib/events'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
@@ -20,15 +23,24 @@ import { SessionSummary } from './SessionSummary'
 interface Props {
   deck: Deck
   mode: Mode
+  /** Modo concentración: minutos de la sesión, con cuenta atrás. */
+  focusMinutes?: number
   onExit: () => void
   onOpenSettings: () => void
 }
 
-export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
-  const quiz = useQuiz(deck, mode)
+export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props) {
+  const [endsAt] = useState(() => (focusMinutes ? Date.now() + focusMinutes * 60_000 : null))
+  const quiz = useQuiz(deck, mode, { endsAt })
   const { round, stats, answer, submitTyped, replay, expand, advance, resume, requestExit } = quiz
-  const summary = useDeckSummaries(trackOf(mode))(deck)
+  const coach = deck.kind === 'coach'
+  // El modo es de cada ronda (en la sesión inteligente cambia de una a otra).
+  const roundMode = round.mode
+  const summary = useDeckSummaries(trackOf(roundMode))(deck)
   const masteredPct = Math.round((summary.mastered / summary.total) * 100)
+  const events = useEvents()
+  const pace = coach ? assessLearner(events).pace : null
+  const backLabel = coach ? 'Inicio' : deck.kind === 'topic' ? 'Colecciones' : 'Niveles'
   const details = useWordDetails(round.word.id)
   const today = todayStats(useProgress())
   const { dailyGoal } = useSettings()
@@ -82,7 +94,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
                 className="-ml-2 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
               >
                 <ArrowLeftIcon width={16} height={16} />
-                Niveles
+                {backLabel}
               </button>
               <div className="flex min-w-0 items-center gap-1">
                 <span className="truncate text-sm text-muted">
@@ -94,10 +106,16 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
                 </IconButton>
               </div>
             </div>
-            <div className="mt-2 flex items-center gap-3">
-              <ProgressBar summary={summary} className="flex-1" />
-              <span className="text-xs text-muted tabular-nums">{masteredPct}% dominado</span>
-            </div>
+            {coach && pace && endsAt !== null && focusMinutes ? (
+              <FocusBar endsAt={endsAt} minutes={focusMinutes} />
+            ) : coach && pace ? (
+              <CoachBar pace={pace} done={today.answers} goal={dailyGoal} />
+            ) : (
+              <div className="mt-2 flex items-center gap-3">
+                <ProgressBar summary={summary} className="flex-1" />
+                <span className="text-xs text-muted tabular-nums">{masteredPct}% dominado</span>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-1 flex-col justify-center">
@@ -115,7 +133,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
               <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
                 <WordScreen
                   word={round.word}
-                  mode={mode}
+                  mode={roundMode}
                   reason={round.reason}
                   ipa={details?.ipa}
                   example={details === null ? null : details.example}
@@ -132,12 +150,12 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
                   <DetailCard
                     key={round.word.id}
                     word={round.word}
-                    mode={mode}
+                    mode={roundMode}
                     details={details}
                     onContinue={advance}
                     onListenSlowly={listenSlowly}
                   />
-                ) : mode === 'type' ? (
+                ) : roundMode === 'type' ? (
                   <TypeAnswer
                     key={round.word.id}
                     word={round.word}
@@ -149,7 +167,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
                 ) : (
                   <Keypad
                     options={round.options}
-                    language={answerLanguage(mode)}
+                    language={answerLanguage(roundMode)}
                     answerId={round.word.id}
                     wrong={quiz.wrong}
                     solved={quiz.solved}
@@ -168,7 +186,7 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
             <span className="flex items-center gap-2">
               <Kbd>Enter</Kbd> continuar
             </span>
-          ) : mode === 'type' ? (
+          ) : roundMode === 'type' ? (
             <span className="flex items-center gap-2">
               <Kbd>Enter</Kbd> comprobar
             </span>
@@ -188,10 +206,83 @@ export function Game({ deck, mode, onExit, onOpenSettings }: Props) {
             </>
           )}
           <span className="flex items-center gap-2">
-            <Kbd>Esc</Kbd> niveles
+            <Kbd>Esc</Kbd> {backLabel.toLowerCase()}
           </span>
         </footer>
       )}
     </>
+  )
+}
+
+const PACE_INFO: Record<Pace, { label: string; hint: string }> = {
+  steady: { label: 'Afianzando', hint: 'Menos palabras nuevas a la vez hasta que las de ahora se asienten.' },
+  normal: { label: 'Ritmo normal', hint: 'Repasos y palabras nuevas en orden de frecuencia.' },
+  fast: { label: 'Acelerando', hint: 'Vas muy bien: las nuevas llegan antes y son más difíciles.' },
+}
+
+/** Barra de la sesión inteligente: el ritmo que decidió el entrenador y el avance de la meta del día. */
+function CoachBar({ pace, done, goal }: { pace: Pace; done: number; goal: number }) {
+  const { label, hint } = PACE_INFO[pace]
+  return (
+    <div className="mt-2 flex items-center gap-3">
+      <div
+        role="progressbar"
+        aria-label="Meta de hoy"
+        aria-valuemin={0}
+        aria-valuemax={goal}
+        aria-valuenow={Math.min(done, goal)}
+        className="h-1.5 flex-1 overflow-hidden rounded-full bg-line"
+      >
+        <div
+          className="h-full rounded-full bg-brand transition-[width] duration-500"
+          style={{ width: `${Math.min(done / goal, 1) * 100}%` }}
+        />
+      </div>
+      <span
+        title={hint}
+        className="shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-semibold text-accent"
+      >
+        {label}
+      </span>
+    </div>
+  )
+}
+
+/** Tiempo que queda (ms), actualizado cada segundo. */
+function useRemaining(endsAt: number): number {
+  const [now, setNow] = useState(Date.now)
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(timer)
+  }, [])
+  return Math.max(0, endsAt - now)
+}
+
+/** Barra del modo concentración: cuenta atrás. Al llegar a cero, la ronda en curso termina y sale el resumen. */
+function FocusBar({ endsAt, minutes }: { endsAt: number; minutes: number }) {
+  const remaining = useRemaining(endsAt)
+  const total = minutes * 60_000
+  const seconds = Math.ceil(remaining / 1000)
+  const label = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`
+  return (
+    <div className="mt-2 flex items-center gap-3">
+      <div
+        role="progressbar"
+        aria-label="Tiempo de concentración"
+        aria-valuemin={0}
+        aria-valuemax={minutes * 60}
+        aria-valuenow={minutes * 60 - seconds}
+        aria-valuetext={`Quedan ${label}`}
+        className="h-1.5 flex-1 overflow-hidden rounded-full bg-line"
+      >
+        <div
+          className="h-full rounded-full bg-brand transition-[width] duration-1000 ease-linear"
+          style={{ width: `${(1 - remaining / total) * 100}%` }}
+        />
+      </div>
+      <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-semibold text-accent tabular-nums">
+        {remaining > 0 ? label : 'Última'}
+      </span>
+    </div>
   )
 }

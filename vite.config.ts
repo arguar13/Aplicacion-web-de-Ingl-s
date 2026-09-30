@@ -1,3 +1,4 @@
+import { readdirSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
@@ -5,10 +6,20 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 import { audioVersions } from './vite/audio-versions.ts'
 import { siteMeta } from './vite/site-meta.ts'
+import { startupPreload } from './vite/startup-preload.ts'
+import { vocabularyAsset } from './vite/vocabulary.ts'
 import pkg from './package.json' with { type: 'json' }
+
+const AUDIO_DIR = fileURLToPath(new URL('./public/audio', import.meta.url))
+/** Megas de todas las pronunciaciones: lo que cuesta descargarlas para estudiar sin conexión. */
+const audioMegabytes = Math.max(
+  1,
+  Math.round(readdirSync(AUDIO_DIR).reduce((sum, file) => sum + statSync(`${AUDIO_DIR}/${file}`).size, 0) / 1e6),
+)
 
 export default defineConfig({
   define: {
+    'import.meta.env.AUDIO_MB': JSON.stringify(audioMegabytes),
     // Versión de package.json, visible al pie de Ajustes (útil cuando alguien cuenta un problema).
     'import.meta.env.APP_VERSION': JSON.stringify(pkg.version),
   },
@@ -17,8 +28,10 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    audioVersions(fileURLToPath(new URL('./public/audio', import.meta.url))),
+    audioVersions(AUDIO_DIR),
     siteMeta(),
+    startupPreload(),
+    vocabularyAsset(fileURLToPath(new URL('./src/data/words.json', import.meta.url))),
     VitePWA({
       // El usuario decide cuándo actualizar: recargar a mitad de una sesión sería molesto.
       registerType: 'prompt',
@@ -68,7 +81,7 @@ export default defineConfig({
       },
       workbox: {
         // La app completa queda disponible sin conexión. De las fuentes, solo los alfabetos latinos.
-        globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'assets/*latin*.woff2'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}', 'assets/*.json', 'assets/*latin*.woff2'],
         // Las capturas y la imagen para compartir no hacen falta para usar la app.
         globIgnores: ['audio/**', 'screenshots/**', 'og.png'],
         navigateFallback: 'index.html',
@@ -98,6 +111,8 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
+    // El vocabulario se fija antes de cada archivo (en la app lo carga main.tsx).
+    setupFiles: ['src/test/vocabulary.ts'],
     // e2e/ lo ejecuta Playwright (npm run test:e2e).
     include: ['src/**/*.test.{ts,tsx}', 'vite/**/*.test.ts'],
   },

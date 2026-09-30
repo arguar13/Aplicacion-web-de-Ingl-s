@@ -1,11 +1,15 @@
+import words from '../src/data/words.json' with { type: 'json' }
 import { expect, test } from './fixtures'
 import { expectAccessible, expectNoHorizontalScroll } from './helpers'
+
+/** Así lo escribe la app (sin separador de miles en español hasta 9999). */
+const TOTAL = `${words.length} palabras`
 
 test('el diccionario busca en los dos idiomas y abre la ficha de cada palabra', async ({ page }) => {
   await page.goto('./')
   await page.getByRole('button', { name: 'Diccionario' }).click()
   await expect(page).toHaveURL(/#\/diccionario$/)
-  await expect(page.getByText('3978 palabras')).toBeVisible()
+  await expect(page.getByText(TOTAL, { exact: true })).toBeVisible()
   await expectNoHorizontalScroll(page)
   await expectAccessible(page)
 
@@ -37,7 +41,7 @@ test('el diccionario busca en los dos idiomas y abre la ficha de cada palabra', 
   await expect(list.getByRole('button')).toHaveCount(1)
 })
 
-test('la lista de 3978 palabras solo pinta lo visible', async ({ page }) => {
+test('la lista de todas las palabras solo pinta lo visible', async ({ page }) => {
   await page.goto('./#/diccionario')
   const rows = page.getByRole('list', { name: 'Palabras' }).getByRole('listitem')
   expect(await rows.count()).toBeLessThan(60)

@@ -11,13 +11,17 @@ import { gzipSync } from 'node:zlib'
 const KB = 1024
 const BUDGET = {
   /** JS que el inicio necesita antes de pintarse (entrada + modulepreload). */
-  initialJs: 165 * KB,
+  initialJs: 125 * KB,
   initialCss: 14 * KB,
+  /** El vocabulario (JSON aparte, precargado en paralelo con la app). */
+  vocabulary: 90 * KB,
   /** Cada pantalla que se carga al abrirla. */
   lazyChunk: 30 * KB,
+  /** IPA, formas y ejemplos de todas las palabras: se cargan en segundo plano al empezar a jugar. */
+  details: 450 * KB,
 }
 /** Datos que se cargan aparte, en segundo plano: no son pantallas ni frenan el arranque. */
-const DATA_CHUNKS = [/^details-/, /^_virtual_audio-versions-/]
+const DATA_CHUNKS = [/^_virtual_audio-versions-/]
 
 const dist = new URL('../dist/', import.meta.url)
 const html = await readFile(new URL('index.html', dist), 'utf8')
@@ -27,6 +31,7 @@ const initialJs = [
   ...refs(/<link rel="modulepreload"[^>]*href="([^"]+)"/g),
 ]
 const initialCss = refs(/<link rel="stylesheet"[^>]*href="([^"]+)"/g)
+const vocabulary = refs(/<link rel="preload" as="fetch"[^>]*href="([^"]+)"/g)
 
 const gzipped = async (path) => gzipSync(await readFile(new URL(path, dist))).length
 const sum = async (paths) => (await Promise.all(paths.map(gzipped))).reduce((a, b) => a + b, 0)
@@ -35,9 +40,18 @@ const kb = (bytes) => `${(bytes / KB).toFixed(1)} KB`
 const checks = [
   { name: 'JS inicial', size: await sum(initialJs), budget: BUDGET.initialJs },
   { name: 'CSS inicial', size: await sum(initialCss), budget: BUDGET.initialCss },
+  { name: 'Vocabulario', size: await sum(vocabulary), budget: BUDGET.vocabulary },
 ]
-const assets = await readdir(new URL('assets/', dist))
-const lazy = assets.filter(
+const assetsList = await readdir(new URL('assets/', dist))
+const detailsFile = assetsList.find((file) => /^details-[\w-]+\.json$/.test(file))
+if (detailsFile) {
+  checks.push({
+    name: 'Detalles (segundo plano)',
+    size: await gzipped(`assets/${detailsFile}`),
+    budget: BUDGET.details,
+  })
+}
+const lazy = assetsList.filter(
   (file) =>
     file.endsWith('.js') && !initialJs.includes(`assets/${file}`) && !DATA_CHUNKS.some((pattern) => pattern.test(file)),
 )

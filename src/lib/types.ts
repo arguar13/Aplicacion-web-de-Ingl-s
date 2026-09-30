@@ -5,6 +5,9 @@ export const PARTS_OF_SPEECH = ['noun', 'verb', 'adj', 'adv', 'pron', 'det', 'pr
 /** Categoría gramatical de la traducción (ver scripts/tag_pos.py). */
 export type PartOfSpeech = (typeof PARTS_OF_SPEECH)[number]
 
+/** Palabras de contenido: con un artículo o una preposición se adivina demasiado (o se aprende poco). */
+export const CONTENT_POS: ReadonlySet<PartOfSpeech> = new Set(['noun', 'verb', 'adj', 'adv'])
+
 /** Una entrada del vocabulario. `id` también es el nombre del archivo de audio. */
 export interface Word {
   id: string
@@ -13,11 +16,15 @@ export interface Word {
   pos: PartOfSpeech
 }
 
-/** Una ronda: la palabra a adivinar, por qué salió y las teclas que se muestran. */
+/** Una ronda: la palabra a adivinar, cómo se pregunta, por qué salió y las teclas que se muestran. */
 export interface Round {
   word: Word
+  /** En la sesión inteligente cada ronda tiene su modo; en los demás mazos, el elegido. */
+  mode: Mode
   reason: PickReason
   options: Word[]
+  /** El entrenador confía en que, si se acierta al instante, ya se sabía (ver gradeAnswer). */
+  trusted?: boolean
 }
 
 export type Rng = () => number
