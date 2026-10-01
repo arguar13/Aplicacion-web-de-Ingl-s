@@ -106,7 +106,10 @@ Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espaci
 ## Despliegue en Hostinger
 
 El build es un sitio estático: no necesita Node en el servidor. Las rutas son relativas, así que
-funciona en la raíz del dominio o en una subcarpeta (p. ej. `public_html/ingles/`).
+funciona en la raíz del dominio, en una subcarpeta o en un subdominio (p. ej. `ingles.tudominio.com`,
+creado en hPanel en **Dominios → Subdominios** con su propia carpeta, como `public_html/ingles/`).
+Si el dominio ya tiene otro sitio en `public_html` (p. ej. un blog), Tecla va siempre en la carpeta
+del subdominio: no hace falta tocar ese sitio ni su modo mantenimiento.
 
 ### Despliegue automático (recomendado)
 
@@ -122,17 +125,26 @@ cambiaron. Mientras no esté configurado, se salta sin fallar. Para activarlo, e
 | Secreto  | `FTP_PASSWORD`   | Contraseña FTP                                                                  |
 | Variable | `SITE_URL`       | Dirección pública, p. ej. `https://tudominio.com/`                              |
 | Variable | `DEPLOY_ENABLED` | `true`                                                                          |
-| Variable | `FTP_SERVER_DIR` | Opcional. Carpeta de destino; por defecto `public_html/`                        |
+| Variable | `FTP_SERVER_DIR` | Obligatoria. Carpeta de Tecla, p. ej. `public_html/ingles/` (ver abajo)         |
 | Variable | `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
 
 Con `SITE_URL`, el build añade la URL canónica, las URLs absolutas de la imagen para compartir y
 `sitemap.xml`. Sin ella todo funciona, pero sin esos extras.
 
+`FTP_SERVER_DIR` es relativa a la carpeta en la que empieza la cuenta FTP (`./` es esa misma
+carpeta). No tiene valor por defecto, y antes de subir nada `scripts/check-deploy-target.sh`
+lista el destino: si contiene otro sitio (algún `.php` salvo `default.php`, la bienvenida de
+Hostinger, carpetas `wp-*` o un `index.html` sin el manifiesto de Tecla), el despliegue se cancela
+sin tocar nada. Lo más seguro es crear en **Archivos → Cuentas FTP** una cuenta limitada a la
+carpeta de Tecla y usar `FTP_SERVER_DIR` = `./`: así el despliegue no puede llegar a otros sitios
+del hosting.
+
 ### Despliegue manual
 
 1. `SITE_URL=https://tudominio.com/ npm run build` (o solo `npm run build`).
-2. Sube **el contenido** de `dist/` (no la carpeta en sí) a `public_html/`, con el Administrador
-   de archivos de hPanel o por FTP. Incluye el archivo oculto `.htaccess`.
+2. Sube **el contenido** de `dist/` (no la carpeta en sí) a la carpeta de Tecla (`public_html/` si
+   el dominio es solo para Tecla; si no, la del subdominio), con el Administrador de archivos de
+   hPanel o por FTP. Incluye el archivo oculto `.htaccess`.
 
 ### Servidor
 

@@ -5,6 +5,15 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## Sin publicar
+
+### Seguridad
+
+- **El despliegue ya no puede pisar otro sitio del hosting.** `FTP_SERVER_DIR` es obligatoria
+  (antes subía a `public_html/` por defecto) y, antes de subir, se comprueba que el destino no
+  contiene otro sitio (PHP, WordPress u otro `index.html`); si lo contiene, se cancela. Documentado
+  el despliegue en un subdominio con una cuenta FTP limitada a su carpeta.
+
 ## 2.0.0 · 2026-09-29 · Segunda etapa (Fases 14 a 18)
 
 ### Añadido

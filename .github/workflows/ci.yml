@@ -24,6 +24,8 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm test
+      - name: Pruebas de la comprobación del destino del despliegue
+        run: bash scripts/test_check_deploy_target.sh
       - run: npm run build
       - name: Presupuesto de tamaño
         run: npm run budget

@@ -1,5 +1,7 @@
 # Despliegue a Hostinger por FTPS. Se activa solo cuando el dueño configura el repositorio
 # (ver "Despliegue automático" en el README); mientras tanto se salta sin fallar.
+# La carpeta de destino es obligatoria y se comprueba antes de subir: si contiene otro sitio
+# (p. ej. un WordPress en public_html), el despliegue se cancela en lugar de pisarlo.
 name: Despliegue
 
 on:
@@ -29,6 +31,15 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - name: Comprobar que la carpeta de destino no es de otro sitio
+        id: destino
+        run: bash scripts/check-deploy-target.sh
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PROTOCOL: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
       - uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
@@ -48,7 +59,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          server-dir: ${{ steps.destino.outputs.dir }}
           # Sube solo lo que cambió (guarda su estado en el servidor) y nunca borra la carpeta
           # entera: los audios (~22 MB) solo se suben la primera vez.
           dangerous-clean-slate: false
