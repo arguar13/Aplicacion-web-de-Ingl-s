@@ -3,6 +3,7 @@ import type { QuizStats, SummaryReason } from '@/hooks/useQuiz'
 import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
 import { Confetti } from './Confetti'
+import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Surface } from './ui/Surface'
@@ -56,6 +57,11 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
               ? '¡Tiempo cumplido!'
               : 'Buen trabajo'}
       </h1>
+      {stats.xp > 0 && (
+        <Badge tone="accent-soft" className="mt-3 animate-pop px-3 py-1 text-sm">
+          +{formatCount(stats.xp)} XP
+        </Badge>
+      )}
       <p className="mx-auto mt-2 max-w-sm text-[15px] leading-relaxed text-muted">
         {reason === 'level'
           ? `Dominas las ${plural(wordCount, 'palabra')} de ${deckLabel}. Un paso enorme.`

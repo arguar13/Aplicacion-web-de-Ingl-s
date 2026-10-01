@@ -3,6 +3,7 @@ import { AchievementToast } from '@/components/achievements/AchievementToast'
 import { DeckPicker } from '@/components/DeckPicker'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Onboarding } from '@/components/Onboarding'
+import { MissionToast } from '@/components/MissionToast'
 import { loadSettingsContent, SettingsDialog } from '@/components/SettingsDialog'
 import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
@@ -10,6 +11,7 @@ import { useNow } from '@/hooks/useNow'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, COACH_DECK, type Deck } from '@/lib/decks'
 import { watchAchievements } from '@/lib/achievements'
+import { watchMissions } from '@/lib/missions'
 import { cn } from '@/lib/cn'
 import { useOnboardingDone } from '@/lib/onboarding'
 import { welcomePrerendered } from '@/lib/prerender'
@@ -159,6 +161,7 @@ export default function App() {
   }, [])
 
   useEffect(() => watchAchievements(), [])
+  useEffect(() => watchMissions(), [])
 
   useEffect(() => {
     const timer = setTimeout(prefetchLikelyScreens, PREFETCH_DELAY_MS)
@@ -189,6 +192,7 @@ export default function App() {
       <WordSheet id={panel !== null && panel !== 'settings' ? panel.word : null} onClose={closePanel} />
       <UpdateToast />
       <AchievementToast />
+      <MissionToast />
     </div>
   )
 }

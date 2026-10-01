@@ -15,6 +15,7 @@ import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
 import { CoachCard } from './CoachCard'
+import { MissionsCard } from './MissionsCard'
 import { WordOfDayCard } from './WordOfDayCard'
 import { StreakBanner } from './StreakBanner'
 import { ForecastChart } from './ForecastChart'
@@ -145,6 +146,7 @@ export function DeckPicker({
         </div>
         <StreakBanner progress={progress} now={now} />
         <BackupReminder onOpenSettings={onOpenSettings} />
+        <MissionsCard now={now} />
         {anyProgress && (
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <ReviewCard

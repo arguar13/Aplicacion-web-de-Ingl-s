@@ -5,17 +5,11 @@
  */
 import { ALL_WORDS, LEVEL_SIZE } from './decks'
 import { cardKey, type ProgressData } from './progress'
+import { daySeed } from './seed'
 import { CONTENT_POS, type Word } from './types'
 
 /** Cuántas palabras candidatas se miran a partir de la frontera de aprendizaje. */
 const WINDOW = 120
-
-/** Número estable a partir de la fecha ("2026-09-29"): mismo día, misma palabra. */
-function daySeed(day: string): number {
-  let hash = 2166136261
-  for (const char of day) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619)
-  return hash >>> 0
-}
 
 export function wordOfDay(progress: ProgressData, day: string, startLevel = 1): Word {
   const unseen = (word: Word) => !progress.cards[cardKey('en-es', word.id)]

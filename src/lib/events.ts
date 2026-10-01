@@ -58,6 +58,7 @@ const store = createPersistedStore<EventLog>({ ...EVENTS_SCHEMA, key: 'tecla:eve
 
 export const useEvents = () => useStore(store).events
 export const getEvents = () => store.get().events
+export const subscribeEvents = store.subscribe
 
 export function appendEvent(event: StudyEvent) {
   const { events } = store.get()

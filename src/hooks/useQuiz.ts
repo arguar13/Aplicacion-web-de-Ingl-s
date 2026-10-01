@@ -28,6 +28,7 @@ import { feedback } from '@/lib/feedback'
 import { getSettings } from '@/lib/settings'
 import { isTypedMode, type Mode, type Round, type Track, trackOf, type Word } from '@/lib/types'
 import { judgeTyped, type TypedVerdict } from '@/lib/typing'
+import { xpForAnswer } from '@/lib/xp'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
 const ADVANCE_DELAY_MS = 850
@@ -46,6 +47,8 @@ export interface QuizStats {
   fresh: number
   /** Palabras falladas alguna vez en la sesión, sin repetir, en el orden en que se fallaron. */
   missed: Word[]
+  /** Experiencia ganada en la sesión con las respuestas (las misiones se suman aparte). */
+  xp: number
 }
 
 /**
@@ -54,7 +57,7 @@ export interface QuizStats {
  */
 export type SummaryReason = 'level' | 'goal' | 'time' | 'exit'
 
-const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [] }
+const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [], xp: 0 }
 
 interface State {
   round: Round
@@ -299,6 +302,7 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
         bestStreak: Math.max(stats.bestStreak, streak),
         fresh: stats.fresh + (isNew ? 1 : 0),
         missed: clean ? stats.missed : missedWith(stats, round.word),
+        xp: stats.xp + xpForAnswer({ clean, fresh: isNew }),
       },
     })
   }

@@ -289,3 +289,23 @@ export function DictationIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Marca de verificación en un círculo: misión cumplida. */
+export function CheckCircleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8.5 12.3 2.4 2.4 4.6-5" />
+    </svg>
+  )
+}
+
+/** Bandera: las misiones del día. */
+export function FlagIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 21V4" />
+      <path d="M5 4h11l-2 4 2 4H5" />
+    </svg>
+  )
+}

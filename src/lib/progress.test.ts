@@ -41,6 +41,16 @@ describe('historial diario', () => {
     expect(todayStats(getProgress(), NOW + 24 * 3_600_000)).toMatchObject({ answers: 1, fresh: 1 })
   })
 
+  it('sin experiencia guardada (progreso anterior a la Fase 19), se calcula del historial', () => {
+    const parsed = parseProgress({ history: { '2026-09-26': { answers: 4, clean: 4, fresh: 1, ms: 1000 } } })
+    expect(parsed.xp).toBe(4 * 10 + 4 * 5 + 15)
+    expect(parsed.missions).toEqual({ day: '', done: [] })
+    expect(parseProgress({ xp: 123, missions: { day: '2026-09-26', done: ['a', 'a', 7] } })).toMatchObject({
+      xp: 123,
+      missions: { day: '2026-09-26', done: ['a'] },
+    })
+  })
+
   it('valida el historial guardado: descarta días y datos dañados', () => {
     const parsed = parseProgress({
       cards: {},

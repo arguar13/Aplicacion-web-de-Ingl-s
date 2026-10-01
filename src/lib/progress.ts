@@ -5,6 +5,7 @@ import { getSettings, RETENTION } from './settings'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { TRACKS, type Track } from './types'
 import { isDayKey, isFiniteNumber, isInteger, isRecord } from './validate'
+import { xpForAnswer, xpForPractice, xpFromHistory } from './xp'
 
 /** Protectores de racha que se pueden guardar a la vez. */
 export const MAX_FREEZES = 2
@@ -45,6 +46,10 @@ export interface ProgressData {
   /** Días sin práctica que cuidó un protector: cuentan para la racha, no como días practicados. */
   frozenDays: string[]
   lastDeckId: string | null
+  /** Experiencia acumulada (Fase 19). Solo sube. */
+  xp: number
+  /** Misiones del día cumplidas (Fase 19): el día y sus ids, para premiar cada una una sola vez. */
+  missions: { day: string; done: string[] }
 }
 
 /** Una respuesta cuenta como mucho esto en el tiempo de estudio: una pausa no infla el total. */
@@ -71,6 +76,8 @@ export const EMPTY_PROGRESS: ProgressData = {
   freezes: 0,
   frozenDays: [],
   lastDeckId: null,
+  xp: 0,
+  missions: { day: '', done: [] },
 }
 const EMPTY = EMPTY_PROGRESS
 
@@ -118,7 +125,15 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
       ? [...new Set(raw.favorites.filter((id): id is string => typeof id === 'string'))]
       : [],
     lastDeckId: typeof raw.lastDeckId === 'string' ? raw.lastDeckId : null,
+    // Campos añadidos en la Fase 19. Sin XP guardada, se calcula de lo ya practicado.
+    xp: isInteger(raw.xp, 0) ? raw.xp : xpFromHistory(history),
+    missions: parseMissions(raw.missions),
   }
+}
+
+function parseMissions(raw: unknown): ProgressData['missions'] {
+  if (!isRecord(raw) || !isDayKey(raw.day) || !Array.isArray(raw.done)) return { day: '', done: [] }
+  return { day: raw.day, done: [...new Set(raw.done.filter((id): id is string => typeof id === 'string'))] }
 }
 
 /**
@@ -264,8 +279,27 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
       mastered: countMastered(cards),
     },
   }
-  store.set({ ...data, cards, days, freezes, history: trimHistory(history) })
+  const xp = data.xp + xpForAnswer({ clean: answer.clean, fresh: !previous })
+  store.set({ ...data, cards, days, freezes, history: trimHistory(history), xp })
   return card
+}
+
+/** Suma experiencia (p. ej. el premio de una misión). */
+export function addXp(amount: number) {
+  const data = store.get()
+  if (amount > 0) store.set({ ...data, xp: data.xp + amount })
+}
+
+/**
+ * Anota misiones cumplidas (del día indicado) y suma su premio en una sola escritura. Las de otro
+ * día se olvidan: cada día tiene las suyas.
+ */
+export function completeMissions(day: string, ids: readonly string[], reward: number) {
+  const data = store.get()
+  const done = data.missions.day === day ? data.missions.done : []
+  const fresh = ids.filter((id) => !done.includes(id))
+  if (fresh.length === 0) return
+  store.set({ ...data, xp: data.xp + reward, missions: { day, done: [...done, ...fresh] } })
 }
 
 /** Palabras distintas dominadas en alguna habilidad. */
@@ -308,7 +342,7 @@ export function recordPractice(practice: { answers: number; clean: number; ms: n
       ms: stats.ms + practice.ms,
     },
   }
-  store.set({ ...data, days, history: trimHistory(history) })
+  store.set({ ...data, days, history: trimHistory(history), xp: data.xp + xpForPractice(practice) })
 }
 
 /** Marca o desmarca una palabra como favorita. */
@@ -416,5 +450,13 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     freezes: Math.max(current.freezes, incoming.freezes),
     frozenDays: [...new Set([...current.frozenDays, ...incoming.frozenDays])].toSorted().slice(-MAX_DAYS),
     lastDeckId: current.lastDeckId ?? incoming.lastDeckId,
+    // Como el historial: el máximo, no la suma (una copia restaurada sobre su propio origen contaría doble).
+    xp: Math.max(current.xp, incoming.xp),
+    missions: mergeMissions(current.missions, incoming.missions),
   }
+}
+
+function mergeMissions(a: ProgressData['missions'], b: ProgressData['missions']): ProgressData['missions'] {
+  if (a.day === b.day) return { day: a.day, done: [...new Set([...a.done, ...b.done])] }
+  return a.day > b.day ? a : b
 }
