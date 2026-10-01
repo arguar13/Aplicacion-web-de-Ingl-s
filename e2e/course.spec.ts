@@ -74,3 +74,20 @@ test('el examen del nivel se aprueba con el 80 % y queda anotado', async ({ page
   await page.goto('./')
   await expect(page.getByRole('region', { name: /Curso de inglés/ })).toContainText('1 de 6 niveles aprobados')
 })
+
+test('comprensión lectora y auditiva: texto o audio, preguntas, corrección y transcripción', async ({ page }) => {
+  test.slow()
+  const comprehension = a1.lessons.find((entry) => entry.id === 'comprension-lectora-y-auditiva')
+  if (!comprehension) throw new Error('A1 debe tener la lección de comprensión')
+  await page.goto(`./#/curso/a1/${comprehension.id}`)
+  await page.getByRole('button', { name: /Practicar/ }).click()
+  const exercises = comprehension.exercises.map(toExercise)
+  const first = exercises[0]
+  if (first.type !== 'reading') throw new Error('El primer ejercicio debe ser de lectura')
+  await expect(page.getByText('Comprensión lectora', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: first.title })).toBeVisible()
+  // Sin elegir todas las preguntas no se puede comprobar; con una mal, se ve la respuesta correcta.
+  await expect(page.getByRole('button', { name: /Comprobar/ })).toBeDisabled()
+  await solveAll(page, exercises)
+  await expect(page.getByRole('heading', { name: '¡Lección completada!' })).toBeVisible()
+})

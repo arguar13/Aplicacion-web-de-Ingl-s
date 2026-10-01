@@ -59,8 +59,20 @@ describe('validación del contenido', () => {
 })
 
 /** La respuesta correcta de un ejercicio, tal como la escribe su autor. */
-const own = (exercise: Exercise) =>
-  exercise.type === 'choice' ? exercise.answer : exercise.type === 'order' ? exercise.words : exercise.answers[0]
+const own = (exercise: Exercise) => {
+  switch (exercise.type) {
+    case 'choice':
+      return exercise.answer
+    case 'order':
+      return exercise.words
+    case 'reading':
+    case 'listening':
+      return exercise.questions.map((question) => question.answer)
+    case 'fill':
+    case 'translate':
+      return exercise.answers[0]
+  }
+}
 
 /** Qué está mal en un ejercicio, o null si está bien formado. */
 const problem = (exercise: Exercise): string | null => {
@@ -77,6 +89,15 @@ const problem = (exercise: Exercise): string | null => {
       return exercise.prompt.split('___').length !== 2 ? 'más de un hueco' : null
     case 'translate':
       return null
+    case 'reading':
+    case 'listening':
+      return exercise.questions.length < 2
+        ? 'menos de dos preguntas'
+        : exercise.questions.some((q) => new Set(q.options.map(normalizeSentence)).size !== q.options.length)
+          ? 'opciones repetidas en una pregunta'
+          : exercise.text.split(/\s+/).length < 30
+            ? 'texto demasiado corto'
+            : null
   }
 }
 
@@ -112,7 +133,8 @@ describe('contenido del curso', () => {
         const examples = lesson.sections.reduce((n, s) => n + (s.examples?.length ?? 0), 0)
         if (examples < 7) problems.push(`${where}: menos de siete ejemplos`)
         const types = new Set(lesson.exercises.map((exercise) => exercise.type))
-        if (types.size < 4) problems.push(`${where}: no usa los cuatro tipos de ejercicio`)
+        const comprehension = types.has('reading') || types.has('listening')
+        if (!comprehension && types.size < 4) problems.push(`${where}: no usa los cuatro tipos de ejercicio`)
       }
     }
     expect(problems).toEqual([])
@@ -147,6 +169,22 @@ describe('contenido del curso', () => {
         .filter(({ problem: found }) => found !== null)
       expect({ level: level.id, problems }).toEqual({ level: level.id, problems: [] })
     }
+  })
+
+  it('cada nivel tiene comprensión lectora y auditiva, en las lecciones y en el examen', () => {
+    const problems: string[] = []
+    for (const level of WRITTEN) {
+      const all = everyExercise(level).map(({ exercise }) => exercise)
+      const lessonTypes = new Set(level.lessons.flatMap((lesson) => lesson.exercises.map((e) => e.type)))
+      const examTypes = new Set(level.exam.map((e) => e.type))
+      if (!lessonTypes.has('reading')) problems.push(`${level.id}: sin lectura en las lecciones`)
+      if (!lessonTypes.has('listening')) problems.push(`${level.id}: sin escucha en las lecciones`)
+      if (!examTypes.has('reading') || !examTypes.has('listening'))
+        problems.push(`${level.id}: el examen no evalúa comprensión`)
+      if (all.filter((e) => e.type === 'reading' || e.type === 'listening').length < 8)
+        problems.push(`${level.id}: menos de ocho textos de comprensión`)
+    }
+    expect(problems).toEqual([])
   })
 
   it('los ids de lección son únicos en todo el curso', () => {

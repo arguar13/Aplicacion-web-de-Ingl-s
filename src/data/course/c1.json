@@ -1358,6 +1358,299 @@
           "answers": ["It all depends on you.", "Everything depends on you.", "It depends on you."]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Ensayos, crónicas y conferencias: estructura, tono y matiz.",
+      "sections": [
+        {
+          "heading": "La estructura del argumento",
+          "body": [
+            "Un ensayo plantea una tesis, la apoya con pruebas, concede algo al contrario y concluye. Localiza esas piezas: la tesis suele ir al principio o al final del primer párrafo; las concesiones empiezan con granted, admittedly, it is true that; la conclusión, con therefore, ultimately, in short."
+          ],
+          "examples": [
+            {
+              "en": "Granted, the policy has reduced costs; the question is at what price.",
+              "es": "Es cierto que la política ha reducido costes; la cuestión es a qué precio."
+            },
+            {
+              "en": "Ultimately, the evidence points in one direction.",
+              "es": "En última instancia, las pruebas apuntan en una dirección."
+            },
+            {
+              "en": "It is true that early results were promising.",
+              "es": "Es verdad que los primeros resultados fueron prometedores."
+            }
+          ]
+        },
+        {
+          "heading": "Tono e ironía",
+          "body": [
+            "El tono se reconoce en la elección de palabras: understatement (quitar hierro: not exactly a success), hipérbole, ironía (decir lo contrario de lo que se piensa). Si una afirmación parece absurda tomada al pie de la letra, probablemente es irónica. Las preguntas de tono ofrecen opciones como critical, sceptical, nostalgic, detached, admiring."
+          ],
+          "examples": [
+            {
+              "en": "The meeting was not exactly a triumph.",
+              "es": "La reunión no fue precisamente un triunfo."
+            },
+            {
+              "en": "Another brilliant idea from head office.",
+              "es": "Otra idea brillante de la central (irónico)."
+            },
+            {
+              "en": "He spoke with the quiet confidence of someone who had never been wrong, or had never noticed.",
+              "es": "Habló con la serena confianza de quien nunca se ha equivocado, o nunca se ha dado cuenta."
+            }
+          ]
+        },
+        {
+          "heading": "Escuchar con atención al matiz",
+          "body": [
+            "En conferencias y entrevistas largas, las ideas se califican constantemente: broadly speaking, with one exception, up to a point. Distingue lo que el hablante afirma, lo que atribuye a otros (some would argue) y lo que descarta. Las preguntas suelen apuntar a esa diferencia."
+          ],
+          "examples": [
+            {
+              "en": "Some would argue that the reforms came too late; I'm not sure that's fair.",
+              "es": "Algunos dirían que las reformas llegaron tarde; no estoy seguro de que sea justo."
+            },
+            {
+              "en": "Broadly speaking, the data support the theory, with one notable exception.",
+              "es": "En términos generales, los datos apoyan la teoría, con una excepción notable."
+            },
+            {
+              "en": "That's true up to a point.",
+              "es": "Eso es cierto hasta cierto punto."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "Essay: on silence",
+          "text": "We treat silence as an absence, a gap to be filled with music, chatter or the glow of a screen. Yet for most of human history, silence was the default and noise the exception. It is tempting to blame technology, and admittedly our devices make noise effortless. But the deeper change is cultural: we have come to regard a quiet mind as an idle one. Until we unlearn that, no app will give us back what we have given away.",
+          "questions": [
+            {
+              "prompt": "What is the author's main claim?",
+              "options": [
+                "Technology is entirely to blame",
+                "We now see silence as emptiness and a quiet mind as idle",
+                "Noise has always been the default"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "How does the author treat the role of technology?",
+              "options": [
+                "Dismisses it completely",
+                "Admits it plays a part but sees a deeper cause",
+                "Blames it entirely"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the final sentence suggest?",
+              "options": [
+                "An app could solve the problem",
+                "The solution is cultural, not technical",
+                "Silence is overrated"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Report: the village school",
+          "text": "When the village school was threatened with closure, the campaign to save it was led, improbably, by residents with no children: retired teachers, a farmer, the owner of the pub. Their argument was less about education than about what a village is for. A school, they said, is where a place rehearses its future. The council, perhaps sensing that it had lost the argument before it began, quietly withdrew the proposal.",
+          "questions": [
+            {
+              "prompt": "Why is the leadership of the campaign described as 'improbable'?",
+              "options": [
+                "The campaigners had no children at the school",
+                "They were all teachers",
+                "They came from another village"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What was the campaigners' main argument?",
+              "options": [
+                "Educational quality",
+                "The role of the school in the village's future",
+                "The cost of transport"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "How did the council respond?",
+              "options": ["It closed the school anyway", "It withdrew the proposal quietly", "It held a vote"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Column: the end of the expert?",
+          "text": "It has become fashionable to declare that we have had enough of experts. The sentiment is understandable: experts have been wrong, sometimes spectacularly, and rarely with consequences for themselves. Yet the alternative, trusting whoever speaks loudest, has a poor record too. The sensible position is neither reverence nor contempt but accountability: expertise that explains itself, admits uncertainty and can be checked.",
+          "questions": [
+            {
+              "prompt": "What is the author's attitude to the slogan about experts?",
+              "options": ["Enthusiastic agreement", "Understanding but critical", "Complete indifference"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the author see as the problem with the alternative?",
+              "options": [
+                "It is too expensive",
+                "Trusting the loudest voices has a poor record",
+                "Nobody speaks loudly enough"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the author propose?",
+              "options": ["Reverence for experts", "Contempt for experts", "Accountable expertise"],
+              "answer": 2
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Notice: research participants wanted",
+          "text": "The Department of Psychology is recruiting adults aged 25 to 60 for a study on sleep and decision-making. Participants will wear a small wrist monitor for two weeks and complete three online sessions of about forty minutes each. Those with diagnosed sleep disorders are not eligible, as the study concerns typical sleep patterns. Participation is voluntary and can be withdrawn at any time without explanation; a modest payment is offered on completion.",
+          "questions": [
+            {
+              "prompt": "Who is not eligible?",
+              "options": [
+                "People over 60 and people with diagnosed sleep disorders",
+                "Anyone who works at night",
+                "Students"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What will participants have to do?",
+              "options": [
+                "Sleep in the laboratory",
+                "Wear a wrist monitor and complete online sessions",
+                "Keep a diary for a year"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What is said about withdrawing from the study?",
+              "options": [
+                "It requires a medical reason",
+                "It is possible at any time without explanation",
+                "It leads to a fine"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Conference talk on cities",
+          "text": "Thank you. I want to challenge an assumption that underlies most urban planning: that density is the enemy of quality of life. Broadly speaking, the data show the opposite. Residents of dense, walkable neighbourhoods report higher satisfaction, with one notable exception: families with young children, who consistently prioritise space over proximity. So the question for planners is not whether to build densely, but how to do so without pushing those families out.",
+          "questions": [
+            {
+              "prompt": "What assumption does the speaker challenge?",
+              "options": [
+                "That cities need more roads",
+                "That density harms quality of life",
+                "That families prefer cities"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What exception does she mention?",
+              "options": ["Elderly residents", "Families with young children", "Students"],
+              "answer": 1
+            },
+            {
+              "prompt": "What question does she pose to planners?",
+              "options": [
+                "Whether to build densely",
+                "How to build densely without pushing families out",
+                "How to reduce traffic"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Interview with a translator",
+          "text": "People imagine translation as a kind of dictionary work, and I understand why, but the dictionary is the least of it. The hard part is tone: a joke that lands in one language dies in another. Some would say that makes translation impossible; I'd say it makes it a craft. You lose something in every sentence, yes. The skill is choosing what to lose.",
+          "questions": [
+            {
+              "prompt": "What misconception does the translator describe?",
+              "options": [
+                "That translation is dictionary work",
+                "That translators are badly paid",
+                "That jokes are easy to translate"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "How does she respond to the idea that translation is impossible?",
+              "options": ["She agrees", "She calls it a craft instead", "She refuses to answer"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does she say the skill consists of?",
+              "options": ["Avoiding all losses", "Choosing what to lose", "Translating word for word"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A museum audio guide",
+          "text": "The painting in front of you was long attributed to a pupil of the master, until cleaning in 1998 revealed a signature under two centuries of varnish. Not everyone was persuaded: a signature can be added, and several scholars still consider the brushwork too hesitant. The museum's position, for now, is cautious: the label reads 'attributed to', which is as far as the evidence allows.",
+          "questions": [
+            {
+              "prompt": "What did the cleaning in 1998 reveal?",
+              "options": ["A second painting", "A signature", "A date"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why are some scholars not persuaded?",
+              "options": ["The brushwork seems too hesitant", "The painting is too small", "The colours are wrong"],
+              "answer": 0
+            },
+            {
+              "prompt": "What does the label say?",
+              "options": ["By the master", "Attributed to", "Artist unknown"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Panel discussion on remote work",
+          "text": "Let me push back on that. The claim that remote work hurts creativity rests on a handful of studies that measured, essentially, how often people bumped into each other. That's true up to a point: chance encounters matter. But the same studies ignore the hours lost to commuting and the people who never applied for jobs in cities they couldn't afford. On balance, I'd call the evidence mixed rather than damning.",
+          "questions": [
+            {
+              "prompt": "What did the studies he criticises actually measure?",
+              "options": ["Productivity", "How often people met by chance", "Commuting time"],
+              "answer": 1
+            },
+            {
+              "prompt": "What do those studies ignore, according to the speaker?",
+              "options": ["Commuting time and people excluded by housing costs", "Office rents", "Software costs"],
+              "answer": 0
+            },
+            {
+              "prompt": "How does he describe the evidence?",
+              "options": ["Damning", "Mixed", "Conclusive"],
+              "answer": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1487,6 +1780,54 @@
       "type": "translate",
       "es": "La solución depende de ustedes.",
       "answers": ["The solution depends on you."]
+    },
+    {
+      "type": "reading",
+      "title": "Review: a biography",
+      "text": "Biographers of the composer have tended to divide into admirers and prosecutors. This new account does something rarer: it declines to take sides, and is more interesting for it. The author lets the contradictions stand: the generous teacher and the vindictive colleague, the atheist who wrote his most moving music for the church. If the book has a flaw, it is a reluctance to speculate where the record is silent, which leaves some chapters more inventory than portrait.",
+      "questions": [
+        {
+          "prompt": "What is unusual about this biography?",
+          "options": ["It takes the composer's side", "It refuses to take sides", "It attacks the composer"],
+          "answer": 1
+        },
+        {
+          "prompt": "What contradictions does the author leave unresolved?",
+          "options": [
+            "Between early and late works",
+            "Between the composer's generosity and vindictiveness, and his atheism and church music",
+            "Between fact and fiction"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "What flaw does the reviewer identify?",
+          "options": ["Too much speculation", "A reluctance to speculate", "Poor research"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Expert panel on language learning",
+      "text": "The idea that adults can't learn languages well is, broadly speaking, a myth, though like most myths it has a grain of truth. Children acquire accent more easily, that much is clear. But in vocabulary, in grammar, in reading, adults regularly outperform them, given the same hours. Some would argue that adults simply never get those hours. I'd say that's the real finding: it's not the brain that's the obstacle, it's the calendar.",
+      "questions": [
+        {
+          "prompt": "What grain of truth does the speaker concede?",
+          "options": ["Children learn accent more easily", "Children read better", "Adults have worse memory"],
+          "answer": 0
+        },
+        {
+          "prompt": "In what areas do adults outperform children?",
+          "options": ["Accent", "Vocabulary, grammar and reading", "Listening"],
+          "answer": 1
+        },
+        {
+          "prompt": "What does the speaker identify as the real obstacle?",
+          "options": ["The adult brain", "Lack of time", "Bad teaching"],
+          "answer": 1
+        }
+      ]
     }
   ]
 }

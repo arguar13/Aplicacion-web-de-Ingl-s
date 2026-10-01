@@ -1664,6 +1664,243 @@
           "answers": ["You can drive, can't you?"]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Correos, anuncios y conversaciones: quién, qué y por qué.",
+      "sections": [
+        {
+          "heading": "Textos cotidianos",
+          "body": [
+            "En A2 lees anuncios, correos informales, notas, instrucciones y artículos muy breves. Identifica quién escribe, a quién y para qué (invitar, avisar, pedir). Las palabras de tiempo (yesterday, next week, at the weekend) ordenan los hechos."
+          ],
+          "examples": [
+            {
+              "en": "Thanks for the invitation! I'd love to come, but I'm working until six.",
+              "es": "¡Gracias por la invitación! Me encantaría ir, pero trabajo hasta las seis."
+            },
+            {
+              "en": "The museum is free on the first Sunday of the month.",
+              "es": "El museo es gratis el primer domingo de mes."
+            }
+          ]
+        },
+        {
+          "heading": "Escuchar conversaciones",
+          "body": [
+            "En un diálogo, cada persona quiere algo: identifícalo. Fíjate en las correcciones (Actually, no…), los cambios de plan y las palabras que señalan la respuesta (so, but, instead). El tono también informa: sorprendido, molesto, contento."
+          ],
+          "examples": [
+            {
+              "en": "Shall we meet at seven? Actually, could we make it eight?",
+              "es": "¿Quedamos a las siete? De hecho, ¿podría ser a las ocho?"
+            },
+            {
+              "en": "I wanted the blue one, but they only had it in red.",
+              "es": "Quería el azul, pero solo lo tenían en rojo."
+            }
+          ]
+        },
+        {
+          "heading": "Trampas habituales",
+          "body": [
+            "Las opciones incorrectas suelen repetir una palabra del texto con otro sentido o un dato cambiado (el día, la cantidad). Que una palabra aparezca no significa que la opción sea cierta: comprueba la frase completa."
+          ],
+          "examples": [
+            {
+              "en": "The shop opens at ten, not at nine as before.",
+              "es": "La tienda abre a las diez, no a las nueve como antes."
+            },
+            {
+              "en": "Not everyone liked the film, but I loved it.",
+              "es": "No a todos les gustó la película, pero a mí me encantó."
+            },
+            {
+              "en": "Could you let me know by Friday? Otherwise I'll give the ticket to someone else.",
+              "es": "¿Me avisas antes del viernes? Si no, le daré la entrada a otra persona."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "An invitation",
+          "text": "Hi everyone! It's my birthday next Friday and I'm having a party at my place from eight o'clock. You don't need to bring anything, just come and have fun. If you can't come, let me know by Wednesday so I can order the right amount of pizza. There's no parking near my flat, so it's better to come by bus. Hope to see you all! Diego",
+          "questions": [
+            {
+              "prompt": "When is the party?",
+              "options": ["On Wednesday", "On Friday", "On Saturday"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why does Diego want to know by Wednesday?",
+              "options": ["To order the right amount of pizza", "To book a restaurant", "To buy presents"],
+              "answer": 0
+            },
+            {
+              "prompt": "How does he suggest coming?",
+              "options": ["By car", "By bus", "On foot"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A job advert",
+          "text": "Waiter wanted for a busy restaurant in the city centre. We are looking for a friendly person who can work evenings and weekends. Experience is useful but not necessary: we will train you. You must speak some English because many of our customers are tourists. Good pay and free meals. Send an email to jobs@riverside.com or come to the restaurant between three and five.",
+          "questions": [
+            {
+              "prompt": "When does the waiter have to work?",
+              "options": ["Mornings", "Evenings and weekends", "Only on Mondays"],
+              "answer": 1
+            },
+            {
+              "prompt": "Is experience necessary?",
+              "options": ["Yes, two years", "No, they will train you", "Only for the manager"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why do they want someone who speaks English?",
+              "options": ["The chef is English", "Many customers are tourists", "The menu is in English"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A short article",
+          "text": "Last year, the small town of Millbridge opened a new library. It was built in an old train station that closed in 1990. The building has large windows and a café on the first floor. The library is open every day except Monday, and children's activities take place on Saturday mornings. More than a thousand people visited it in the first week.",
+          "questions": [
+            {
+              "prompt": "What was the building before?",
+              "options": ["A school", "A train station", "A hospital"],
+              "answer": 1
+            },
+            {
+              "prompt": "When is the library closed?",
+              "options": ["On Mondays", "On Saturdays", "On Sundays"],
+              "answer": 0
+            },
+            {
+              "prompt": "What happens on Saturday mornings?",
+              "options": ["The café opens", "Children's activities", "The library closes early"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A hotel review",
+          "text": "We stayed at the Sea View Hotel for three nights last month. The room was clean and the bed was very comfortable, but the view wasn't great: we could only see the car park. Breakfast was excellent, with fresh fruit and good coffee. The staff were friendly and helped us book a boat trip. We would stay again, but we'd ask for a room on the top floor.",
+          "questions": [
+            {
+              "prompt": "What was the problem with the room?",
+              "options": ["It was dirty", "The bed was uncomfortable", "The view wasn't good"],
+              "answer": 2
+            },
+            {
+              "prompt": "What did the guests think of breakfast?",
+              "options": ["It was excellent", "It was too expensive", "There was no coffee"],
+              "answer": 0
+            },
+            {
+              "prompt": "Would they stay there again?",
+              "options": ["No, never", "Yes, but in a different room", "Only in winter"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Planning the weekend",
+          "text": "So, what are we doing on Saturday? I was thinking about the beach, but the forecast says it's going to rain. How about the new shopping centre instead? Hmm, I'd rather do something outdoors. What if we go hiking on Sunday, when the weather is better, and stay at home on Saturday? That sounds good to me.",
+          "questions": [
+            {
+              "prompt": "Why don't they go to the beach on Saturday?",
+              "options": ["It's too far", "It's going to rain", "It's closed"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the second speaker prefer?",
+              "options": ["Shopping", "Something outdoors", "Staying in a hotel"],
+              "answer": 1
+            },
+            {
+              "prompt": "What do they finally decide?",
+              "options": ["Hiking on Sunday", "The beach on Saturday", "The shopping centre"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A radio advert",
+          "text": "Looking for a new bike? This weekend only, City Bikes is offering twenty percent off all models. We're open from nine to eight on Saturday and from ten to six on Sunday. Our shop is at 25 Park Road, next to the railway station. Bring this advert and get a free helmet with every bike!",
+          "questions": [
+            {
+              "prompt": "How big is the discount?",
+              "options": ["Ten percent", "Twenty percent", "Fifty percent"],
+              "answer": 1
+            },
+            {
+              "prompt": "What time does the shop close on Sunday?",
+              "options": ["At six", "At eight", "At nine"],
+              "answer": 0
+            },
+            {
+              "prompt": "What do you get for free?",
+              "options": ["A lock", "A helmet", "A bottle"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "At the doctor's",
+          "text": "Good morning. What's the problem? I've had a sore throat for three days and I feel very tired. Do you have a temperature? Yes, a little. Okay, it's probably a virus. Drink a lot of water, stay at home for two or three days and take these tablets twice a day. If you don't feel better next week, come back.",
+          "questions": [
+            {
+              "prompt": "How long has the patient had a sore throat?",
+              "options": ["Three days", "Three weeks", "One day"],
+              "answer": 0
+            },
+            {
+              "prompt": "What does the doctor think it is?",
+              "options": ["An allergy", "A virus", "A broken bone"],
+              "answer": 1
+            },
+            {
+              "prompt": "How often should the patient take the tablets?",
+              "options": ["Once a day", "Twice a day", "Three times a day"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A story about last summer",
+          "text": "Last summer I went to Portugal with two friends. We were going to stay in Lisbon for a week, but on the second day we met a man who had a small boat, and he invited us to the islands. We spent five days there, swimming and fishing. It was the best holiday of my life, even though we never saw the museums we had planned to visit.",
+          "questions": [
+            {
+              "prompt": "Where did the speaker plan to stay?",
+              "options": ["In Lisbon", "On the islands", "In Porto"],
+              "answer": 0
+            },
+            {
+              "prompt": "How did they get to the islands?",
+              "options": ["By plane", "On a man's boat", "By bus"],
+              "answer": 1
+            },
+            {
+              "prompt": "What didn't they do?",
+              "options": ["Swim", "Visit the museums", "Go fishing"],
+              "answer": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1788,6 +2025,50 @@
       "type": "translate",
       "es": "¿Quién escribió este libro?",
       "answers": ["Who wrote this book?"]
+    },
+    {
+      "type": "reading",
+      "title": "A notice at the gym",
+      "text": "From 1 June, the gym will open at six in the morning instead of seven, and the swimming pool will stay open until ten at night. Yoga classes are moving from Tuesday to Thursday at the same time. Members who want to try the new dance class on Saturday should write their name on the list at reception.",
+      "questions": [
+        {
+          "prompt": "What time will the gym open from June?",
+          "options": ["At six", "At seven", "At ten"],
+          "answer": 0
+        },
+        {
+          "prompt": "When are the yoga classes now?",
+          "options": ["On Tuesday", "On Thursday", "On Saturday"],
+          "answer": 1
+        },
+        {
+          "prompt": "What should members do to try the dance class?",
+          "options": ["Pay extra", "Write their name on a list", "Call the teacher"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Buying a train ticket online",
+      "text": "Hi, I'm trying to buy a ticket on your website but it doesn't accept my card. Have you tried another browser? Yes, same problem. Okay, I can book it for you by phone. Which train? The 7:45 to Manchester tomorrow. That's 32 pounds. I'll send the ticket to your email in a few minutes.",
+      "questions": [
+        {
+          "prompt": "What is the customer's problem?",
+          "options": ["The train is full", "The website doesn't accept his card", "He lost his ticket"],
+          "answer": 1
+        },
+        {
+          "prompt": "What time is the train?",
+          "options": ["7:45", "8:45", "9:45"],
+          "answer": 0
+        },
+        {
+          "prompt": "How will he receive the ticket?",
+          "options": ["By post", "By email", "At the station"],
+          "answer": 1
+        }
+      ]
     }
   ]
 }

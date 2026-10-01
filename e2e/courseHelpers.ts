@@ -5,6 +5,14 @@ export type Exercise =
   | { type: 'fill'; prompt: string; answers: string[] }
   | { type: 'translate'; es: string; answers: string[] }
   | { type: 'order'; es: string; words: string[] }
+  | ({ type: 'reading' } & Passage)
+  | ({ type: 'listening' } & Passage)
+
+/** Un texto de comprensión (lectora o auditiva) con sus preguntas. */
+interface Passage {
+  title: string
+  questions: Array<{ options: string[]; answer: number }>
+}
 
 const isStrings = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string')
@@ -26,6 +34,17 @@ export function toExercise(raw: unknown): Exercise {
   if (entry.type === 'translate' && isStrings(entry.answers))
     return { type: 'translate', es: text('es'), answers: entry.answers }
   if (entry.type === 'order' && isStrings(entry.words)) return { type: 'order', es: text('es'), words: entry.words }
+  if ((entry.type === 'reading' || entry.type === 'listening') && Array.isArray(entry.questions)) {
+    const questions = entry.questions.map((question: unknown) => {
+      if (typeof question !== 'object' || question === null) throw new Error('Pregunta sin forma')
+      const q: Record<string, unknown> = { ...question }
+      if (!isStrings(q.options) || typeof q.answer !== 'number') throw new Error('Pregunta sin forma')
+      return { options: q.options, answer: q.answer }
+    })
+    return entry.type === 'reading'
+      ? { type: 'reading', title: text('title'), questions }
+      : { type: 'listening', title: text('title'), questions }
+  }
   throw new Error(`Ejercicio desconocido: ${JSON.stringify(raw)}`)
 }
 
@@ -39,6 +58,21 @@ export async function placeWords(page: Page, words: readonly string[]): Promise<
     .first()
     .click()
   return placeWords(page, rest)
+}
+
+/** Elige la opción correcta de cada pregunta de comprensión, una tras otra. */
+async function answerQuestions(
+  page: Page,
+  questions: ReadonlyArray<{ options: string[]; answer: number }>,
+  index = 0,
+): Promise<void> {
+  const question = questions[index]
+  if (!question) return
+  await page
+    .getByRole('group', { name: `Pregunta ${index + 1}` })
+    .getByRole('button', { name: question.options[question.answer], exact: true })
+    .click()
+  return answerQuestions(page, questions, index + 1)
 }
 
 /** Resuelve el ejercicio en pantalla con su respuesta correcta y pasa al siguiente. */
@@ -61,6 +95,11 @@ export async function solve(page: Page, exercise: Exercise) {
       await placeWords(page, exercise.words)
       await page.getByRole('button', { name: /Comprobar/ }).click()
       break
+    case 'reading':
+    case 'listening':
+      await answerQuestions(page, exercise.questions)
+      await page.getByRole('button', { name: /Comprobar/ }).click()
+      break
   }
   await expect(page.getByText('¡Correcto!')).toBeVisible()
   await page.getByRole('button', { name: /Continuar|Ver el resultado/ }).click()
@@ -79,6 +118,8 @@ const TYPE_BY_LABEL: Record<string, Exercise['type']> = {
   'Completa el hueco': 'fill',
   'Ordena las palabras': 'order',
   'Traduce al inglés': 'translate',
+  'Comprensión lectora': 'reading',
+  'Comprensión auditiva': 'listening',
 }
 
 const squash = (text: string) => text.replace(/\s+/g, ' ').trim()
@@ -86,14 +127,16 @@ const squash = (text: string) => text.replace(/\s+/g, ' ').trim()
 const shownText = (exercise: Exercise) =>
   exercise.type === 'choice' || exercise.type === 'fill'
     ? squash(exercise.prompt.replace('___', ' '))
-    : squash(exercise.es)
+    : exercise.type === 'reading' || exercise.type === 'listening'
+      ? squash(exercise.title)
+      : squash(exercise.es)
 
 /** Reconoce el ejercicio que está en pantalla entre los del fondo, por su tipo y su enunciado. */
 export async function shownExercise(page: Page, pool: readonly Exercise[]): Promise<Exercise> {
   const section = page.locator('section[aria-label*="ejercicio"]')
   const label = squash((await section.locator('span.uppercase').first().textContent()) ?? '')
   const type = TYPE_BY_LABEL[label]
-  const prompt = squash((await section.locator('p[lang]').first().textContent()) ?? '')
+  const prompt = squash((await section.locator('p[lang], h3[lang]').first().textContent()) ?? '')
   const found = pool.find((exercise) => exercise.type === type && shownText(exercise) === prompt)
   if (!found) throw new Error(`Ejercicio no reconocido: ${label} · ${prompt}`)
   return found

@@ -29,9 +29,20 @@ export interface Section {
   tip?: string
 }
 
+/** Una pregunta de comprensión: opciones y la correcta. */
+export interface Question {
+  prompt: string
+  options: string[]
+  answer: number
+}
+
 export type Exercise =
   /** Elegir una opción. */
   | { type: 'choice'; prompt: string; options: string[]; answer: number; explanation?: string }
+  /** Comprensión lectora: un texto corto y preguntas sobre él. */
+  | { type: 'reading'; title: string; text: string; questions: Question[]; explanation?: string }
+  /** Comprensión auditiva: se oye el texto (grabado o con la voz del navegador) y se responde. */
+  | { type: 'listening'; title: string; text: string; questions: Question[]; explanation?: string }
   /** Completar el hueco (___) escribiendo; vale cualquiera de las respuestas. */
   | { type: 'fill'; prompt: string; answers: string[]; explanation?: string }
   /** Ordenar las palabras para formar la frase (se guardan en el orden correcto). */
@@ -81,10 +92,23 @@ export function parseSection(raw: unknown): Section | null {
   return section
 }
 
+function parseQuestion(raw: unknown): Question | null {
+  if (!isRecord(raw) || !isString(raw.prompt) || !isStringList(raw.options) || raw.options.length < 2) return null
+  if (!isInteger(raw.answer, 0, raw.options.length - 1)) return null
+  return { prompt: raw.prompt, options: raw.options, answer: raw.answer }
+}
+
 export function parseExercise(raw: unknown): Exercise | null {
   if (!isRecord(raw)) return null
   const explanation = isString(raw.explanation) ? { explanation: raw.explanation } : {}
   switch (raw.type) {
+    case 'reading':
+    case 'listening': {
+      if (!isString(raw.title) || !isString(raw.text) || !Array.isArray(raw.questions)) return null
+      const questions = raw.questions.map(parseQuestion).filter((question): question is Question => question !== null)
+      if (questions.length === 0) return null
+      return { type: raw.type, title: raw.title, text: raw.text, questions, ...explanation }
+    }
     case 'choice':
       if (!isString(raw.prompt) || !isStringList(raw.options) || raw.options.length < 2) return null
       if (!isInteger(raw.answer, 0, raw.options.length - 1)) return null

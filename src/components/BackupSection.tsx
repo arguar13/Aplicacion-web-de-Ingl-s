@@ -11,8 +11,8 @@ import {
 import { canShareFiles, saveTextFile, shareTextFile } from '@/lib/download'
 import { formatLongDate, plural, relativeDay } from '@/lib/format'
 import { markBackupSaved, requestProtection, useProtection, useSafekeeping } from '@/lib/safekeeping'
-import { SettingRow } from './AppSettings'
 import { Button } from './ui/Button'
+import { SettingRow } from './ui/SettingRow'
 
 export function saveBackup() {
   const now = Date.now()

@@ -14,11 +14,12 @@ import {
   updateSettings,
   useSettings,
 } from '@/lib/settings'
-import { InstallRow, OfflineAudioRow, SettingRow } from './AppSettings'
+import { InstallRow, OfflineAudioRow } from './AppSettings'
 import { BackupSection, ProtectionRow } from './BackupSection'
 import { ReminderRow } from './ReminderRow'
 import { Button } from './ui/Button'
 import { Segmented, Select, Switch } from './ui/controls'
+import { SettingRow } from './ui/SettingRow'
 
 const DETAILS_PAUSES: Array<{ value: DetailsPause; label: string }> = [
   { value: 'mistakes', label: 'Al fallar' },

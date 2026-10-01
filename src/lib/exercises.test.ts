@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import type { Exercise } from './course'
-import { correctAnswer, judgeExercise, judgeSentence, normalizeSentence, scoreOf, shuffledWords } from './exercises'
+import {
+  correctAnswer,
+  judgeExercise,
+  judgeQuestions,
+  judgeSentence,
+  normalizeSentence,
+  scoreOf,
+  shuffledWords,
+} from './exercises'
 
 describe('corrección de ejercicios', () => {
   it('normaliza las frases: mayúsculas, puntuación final, espacios y apóstrofos', () => {
@@ -37,6 +45,24 @@ describe('corrección de ejercicios', () => {
     expect(correctAnswer(fill)).toBe('They are happy.')
     expect(correctAnswer(order)).toBe('She is a doctor.')
     expect(correctAnswer(translate)).toBe('I have two brothers.')
+  })
+
+  it('comprensión: todas bien es correcto; una mal de tres o más es «casi»', () => {
+    const questions = [{ answer: 0 }, { answer: 1 }, { answer: 2 }]
+    expect(judgeQuestions(questions, [0, 1, 2])).toBe('correct')
+    expect(judgeQuestions(questions, [0, 1, 0])).toBe('almost')
+    expect(judgeQuestions(questions, [1, 0, 2])).toBe('wrong')
+    expect(judgeQuestions([{ answer: 0 }, { answer: 1 }], [0, 0])).toBe('wrong')
+    expect(judgeQuestions(questions, [])).toBe('wrong')
+    const reading: Exercise = {
+      type: 'reading',
+      title: 'Nota',
+      text: 'Ana works at a bank. She starts at nine.',
+      questions: [{ prompt: 'Where does Ana work?', options: ['At a bank', 'At a school'], answer: 0 }],
+    }
+    expect(judgeExercise(reading, [0])).toBe('correct')
+    expect(judgeExercise(reading, 'bank')).toBe('wrong')
+    expect(correctAnswer(reading)).toBe('1. At a bank')
   })
 
   it('baraja las palabras de forma estable y nunca en el orden correcto', () => {

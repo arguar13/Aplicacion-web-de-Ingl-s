@@ -1681,6 +1681,247 @@
           "answers": ["I work in the morning.", "I work in the mornings."]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Carteles, mensajes y audios cortos: entender lo esencial.",
+      "sections": [
+        {
+          "heading": "Antes de leer: mira el formato",
+          "body": [
+            "Un cartel, un mensaje, un menú o un correo corto se entienden mirando primero qué son. Busca números, nombres, horas y precios: casi siempre están en las preguntas. No hace falta entender cada palabra."
+          ],
+          "examples": [
+            {
+              "en": "Open from 9 a.m. to 6 p.m. Closed on Sundays.",
+              "es": "Abierto de 9 a 18. Cerrado los domingos."
+            },
+            {
+              "en": "Meet me at the station at 7. Don't be late!",
+              "es": "Nos vemos en la estación a las 7. ¡No llegues tarde!"
+            },
+            {
+              "en": "Two coffees and a sandwich: $9.50.",
+              "es": "Dos cafés y un sándwich: 9,50 $."
+            }
+          ]
+        },
+        {
+          "heading": "Al escuchar: números y palabras clave",
+          "body": [
+            "En un audio corto, concéntrate en lo que se pregunta: una hora, un lugar, un precio, un día. Escucha dos veces: la primera para la idea general, la segunda para el detalle. Los números se dicen despacio: fifteen (15) y fifty (50) se parecen; fíjate en el acento."
+          ],
+          "examples": [
+            {
+              "en": "The train leaves at half past eight from platform two.",
+              "es": "El tren sale a las ocho y media del andén dos."
+            },
+            {
+              "en": "That's fifteen dollars, please.",
+              "es": "Son quince dólares, por favor."
+            },
+            {
+              "en": "My phone number is 555 0199.",
+              "es": "Mi número es 555 0199."
+            }
+          ]
+        },
+        {
+          "heading": "Cómo responder",
+          "body": [
+            "Lee las preguntas antes del texto o del audio: así sabes qué buscar. Descarta las opciones que contradicen un dato claro. Si dudas entre dos, vuelve al texto: la respuesta siempre está ahí."
+          ],
+          "examples": [
+            {
+              "en": "Where is the meeting? In room 4.",
+              "es": "¿Dónde es la reunión? En la sala 4."
+            },
+            {
+              "en": "How much is the ticket? It's six euros.",
+              "es": "¿Cuánto cuesta la entrada? Seis euros."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "A note on the fridge",
+          "text": "Hi Tom! I'm at the supermarket. Dinner is at seven tonight. Your sister is coming with her new boyfriend, so please clean the living room and buy some bread. There is money on the table. See you later! Mum",
+          "questions": [
+            {
+              "prompt": "Where is Mum now?",
+              "options": ["At the supermarket", "At work", "At the bakery"],
+              "answer": 0
+            },
+            {
+              "prompt": "What time is dinner?",
+              "options": ["At six", "At seven", "At eight"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does Tom have to buy?",
+              "options": ["Some bread", "Some milk", "Some flowers"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A café sign",
+          "text": "Welcome to Lucy's Café. We are open from Monday to Saturday, from 8 a.m. to 5 p.m. On Sundays we are closed. Breakfast is served until 11. Our coffee is two euros and a sandwich is four euros. Free Wi-Fi for all customers!",
+          "questions": [
+            {
+              "prompt": "When is the café closed?",
+              "options": ["On Saturdays", "On Sundays", "On Mondays"],
+              "answer": 1
+            },
+            {
+              "prompt": "Until what time can you have breakfast?",
+              "options": ["Until 8", "Until 11", "Until 5"],
+              "answer": 1
+            },
+            {
+              "prompt": "How much is a coffee?",
+              "options": ["Two euros", "Four euros", "Six euros"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A new student",
+          "text": "My name is Pablo and I'm from Chile. I'm twenty years old and I study engineering in Santiago. I live with two friends in a small flat near the university. In my free time I play football and listen to music. I don't like cooking, so I usually eat at the university.",
+          "questions": [
+            {
+              "prompt": "What does Pablo study?",
+              "options": ["Medicine", "Engineering", "Music"],
+              "answer": 1
+            },
+            {
+              "prompt": "Who does he live with?",
+              "options": ["His parents", "Two friends", "His sister"],
+              "answer": 1
+            },
+            {
+              "prompt": "What doesn't he like?",
+              "options": ["Football", "Music", "Cooking"],
+              "answer": 2
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "An email about a trip",
+          "text": "Dear Ana, I'm writing about our trip to the beach on Saturday. The bus leaves at nine from the main square. Please bring a hat, water and some sandwiches. The tickets cost ten euros and we pay on the bus. Don't forget your camera! See you on Saturday, Marta",
+          "questions": [
+            {
+              "prompt": "When does the bus leave?",
+              "options": ["At nine", "At ten", "At eleven"],
+              "answer": 0
+            },
+            {
+              "prompt": "What should Ana bring?",
+              "options": ["A hat, water and sandwiches", "A towel and a book", "A map"],
+              "answer": 0
+            },
+            {
+              "prompt": "Where do they pay?",
+              "options": ["At the square", "On the bus", "At the beach"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "At the ticket office",
+          "text": "Good morning. A ticket to Brighton, please. Single or return? Return, please, coming back this evening. That's twelve pounds fifty. The next train leaves at ten past nine from platform three. Thank you very much.",
+          "questions": [
+            {
+              "prompt": "What kind of ticket does the woman buy?",
+              "options": ["A single", "A return", "A monthly pass"],
+              "answer": 1
+            },
+            {
+              "prompt": "How much does it cost?",
+              "options": ["Twelve pounds fifty", "Twenty pounds", "Nine pounds"],
+              "answer": 0
+            },
+            {
+              "prompt": "Which platform does the train leave from?",
+              "options": ["Platform two", "Platform three", "Platform nine"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A phone message",
+          "text": "Hi Carla, it's Ben. I'm calling about tomorrow. I can't come to the cinema at six because I have to work late. Can we go at eight instead? The film is the same. Call me back when you get this. Bye!",
+          "questions": [
+            {
+              "prompt": "Why can't Ben come at six?",
+              "options": ["He is ill", "He has to work late", "He has no money"],
+              "answer": 1
+            },
+            {
+              "prompt": "What time does he suggest?",
+              "options": ["At seven", "At eight", "At nine"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does he want Carla to do?",
+              "options": ["Buy the tickets", "Call him back", "Choose another film"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "In a shop",
+          "text": "Can I help you? Yes, I'm looking for a jacket for my brother. What size is he? Medium, I think. We have this blue one for forty euros, and the black one is on sale, only thirty. I'll take the black one, please. Would you like a bag? No, thanks.",
+          "questions": [
+            {
+              "prompt": "Who is the jacket for?",
+              "options": ["The customer", "The customer's brother", "The customer's father"],
+              "answer": 1
+            },
+            {
+              "prompt": "How much is the black jacket?",
+              "options": ["Forty euros", "Thirty euros", "Thirteen euros"],
+              "answer": 1
+            },
+            {
+              "prompt": "Does the customer want a bag?",
+              "options": ["Yes", "No", "It isn't clear"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Directions",
+          "text": "Excuse me, where is the post office? Go straight on and take the second street on the left. The post office is next to the bank, opposite the park. It's about five minutes on foot. Thank you! You're welcome.",
+          "questions": [
+            {
+              "prompt": "Which street should the man take?",
+              "options": ["The first on the right", "The second on the left", "The second on the right"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is next to the post office?",
+              "options": ["A bank", "A school", "A supermarket"],
+              "answer": 0
+            },
+            {
+              "prompt": "How long does it take to walk there?",
+              "options": ["About five minutes", "About fifteen minutes", "About fifty minutes"],
+              "answer": 0
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1799,6 +2040,50 @@
       "type": "translate",
       "es": "Me gustaría un café, por favor.",
       "answers": ["I'd like a coffee, please.", "I would like a coffee, please.", "I'd like a coffee please."]
+    },
+    {
+      "type": "reading",
+      "title": "A text message",
+      "text": "Hi Luis! Are you free on Sunday? We're going to the park at 11 to play football. Bring a ball if you have one. After that, we can have lunch at my house. My mum is making pizza. Tell me if you can come. Sara",
+      "questions": [
+        {
+          "prompt": "What are they doing on Sunday?",
+          "options": ["Playing football", "Going to the cinema", "Studying"],
+          "answer": 0
+        },
+        {
+          "prompt": "What is Sara's mum making?",
+          "options": ["Pasta", "Pizza", "Salad"],
+          "answer": 1
+        },
+        {
+          "prompt": "What should Luis bring?",
+          "options": ["A ball", "A pizza", "Money"],
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "At the hotel reception",
+      "text": "Good evening, I have a reservation. What's your name, please? Daniel Costa. Yes, a double room for two nights. Here's your key: room 304, on the third floor. Breakfast is from seven to ten in the restaurant. Thank you. Enjoy your stay!",
+      "questions": [
+        {
+          "prompt": "How many nights is Daniel staying?",
+          "options": ["One", "Two", "Three"],
+          "answer": 1
+        },
+        {
+          "prompt": "Which floor is his room on?",
+          "options": ["The first", "The third", "The fourth"],
+          "answer": 1
+        },
+        {
+          "prompt": "When is breakfast?",
+          "options": ["From seven to ten", "From eight to eleven", "From six to nine"],
+          "answer": 0
+        }
+      ]
     }
   ]
 }

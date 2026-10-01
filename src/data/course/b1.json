@@ -1614,6 +1614,247 @@
           "answers": ["I'm very interested in history.", "I am very interested in history."]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Artículos, opiniones y entrevistas: idea principal, detalle y actitud.",
+      "sections": [
+        {
+          "heading": "Leer para la idea principal y para el detalle",
+          "body": [
+            "Primero una lectura rápida (skimming) para saber de qué va el texto y la actitud del autor; después, una búsqueda concreta (scanning) de lo que pregunta cada pregunta. Los conectores (however, although, so) marcan los giros del argumento."
+          ],
+          "examples": [
+            {
+              "en": "Although the hotel was small, the service was excellent.",
+              "es": "Aunque el hotel era pequeño, el servicio fue excelente."
+            },
+            {
+              "en": "The city is beautiful; however, it is very expensive.",
+              "es": "La ciudad es bonita; sin embargo, es muy cara."
+            }
+          ]
+        },
+        {
+          "heading": "Escuchar opiniones y razones",
+          "body": [
+            "En B1 los audios incluyen opiniones, consejos y explicaciones. Distingue el hecho (It rained all week) de la opinión (It was the worst holiday ever). Las preguntas suelen pedir por qué: busca because, so that, the reason is."
+          ],
+          "examples": [
+            {
+              "en": "I'd recommend the early train because it's less crowded.",
+              "es": "Recomendaría el tren temprano porque va menos lleno."
+            },
+            {
+              "en": "The reason I'm calling is to change my appointment.",
+              "es": "Llamo para cambiar mi cita."
+            }
+          ]
+        },
+        {
+          "heading": "Sinónimos y paráfrasis",
+          "body": [
+            "Las preguntas rara vez repiten las palabras del texto: dicen lo mismo de otra manera. Cheap → not expensive; she doesn't mind → it's OK for her; he's keen on → he likes. Aprende a reconocer la misma idea con otras palabras."
+          ],
+          "examples": [
+            {
+              "en": "The course isn't expensive. = The course is cheap.",
+              "es": "El curso no es caro. = El curso es barato."
+            },
+            {
+              "en": "He hardly ever cooks. = He almost never cooks.",
+              "es": "Casi nunca cocina."
+            },
+            {
+              "en": "The author admits the plan has flaws, but she still believes it is worth trying.",
+              "es": "La autora admite que el plan tiene fallos, pero sigue creyendo que vale la pena intentarlo."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "Working from home",
+          "text": "When my company allowed us to work from home two days a week, I was delighted: no more traffic, and more time with my children. A year later, my opinion is more mixed. I do get more done in the mornings, but I miss the conversations in the office, and it is hard to stop working when your desk is in your bedroom. My advice? Keep a routine, and close the laptop at six.",
+          "questions": [
+            {
+              "prompt": "How did the writer feel at first?",
+              "options": ["Worried", "Delighted", "Indifferent"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is a disadvantage he mentions?",
+              "options": ["He gets less done", "It's hard to stop working", "His children are noisy"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does he recommend?",
+              "options": ["Working more hours", "Keeping a routine", "Going back to the office"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A museum notice",
+          "text": "Due to building work, the east wing of the museum will be closed from 3 to 17 March. The Egyptian collection, normally in the east wing, has been moved temporarily to the ground floor. Tickets bought for these dates will be valid for any day until the end of April. We apologise for the inconvenience and thank you for your patience.",
+          "questions": [
+            {
+              "prompt": "Why is the east wing closed?",
+              "options": ["Because of a strike", "Because of building work", "Because of a flood"],
+              "answer": 1
+            },
+            {
+              "prompt": "Where is the Egyptian collection now?",
+              "options": ["On the ground floor", "In another museum", "In storage"],
+              "answer": 0
+            },
+            {
+              "prompt": "What can people with tickets for those dates do?",
+              "options": ["Get their money back", "Visit any day until the end of April", "Only visit in March"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Learning an instrument as an adult",
+          "text": "Many people believe that you have to start young to learn a musical instrument. Research suggests otherwise: adults learn more slowly in some ways, but they practise with more purpose and understand music theory faster. The biggest obstacle is not age but time. Adults who manage twenty minutes a day make steady progress, while those who practise for two hours once a week tend to give up.",
+          "questions": [
+            {
+              "prompt": "What do many people believe?",
+              "options": ["Adults can't learn music", "You must start young", "Music theory is easy"],
+              "answer": 1
+            },
+            {
+              "prompt": "According to the text, what is the biggest obstacle for adults?",
+              "options": ["Age", "Time", "Money"],
+              "answer": 1
+            },
+            {
+              "prompt": "Which practice habit works best?",
+              "options": ["Twenty minutes a day", "Two hours once a week", "Only at weekends"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A letter of complaint",
+          "text": "Dear Sir or Madam, I am writing to complain about the washing machine I bought from your shop on 2 May. It stopped working after only two weeks, and when I called your customer service, I was told to wait ten days for a technician. Nobody came. I would like a replacement or a full refund within seven days; otherwise, I will contact the consumer office. Yours faithfully, Elena Ruiz",
+          "questions": [
+            {
+              "prompt": "When did the machine stop working?",
+              "options": ["After two weeks", "After two months", "On 2 May"],
+              "answer": 0
+            },
+            {
+              "prompt": "What happened with the technician?",
+              "options": ["He came late", "He repaired it", "Nobody came"],
+              "answer": 2
+            },
+            {
+              "prompt": "What does Elena want?",
+              "options": ["A discount", "A replacement or a refund", "An apology letter"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A job interview",
+          "text": "Tell me about your last job. I worked at a travel agency for three years. I started as a receptionist and then I was promoted to sales. Why did you leave? The company moved to another city and I didn't want to relocate. What are you looking for now? I'd like a job where I can use my languages: I speak English, French and a bit of Italian.",
+          "questions": [
+            {
+              "prompt": "How did the candidate's role change?",
+              "options": ["From sales to manager", "From receptionist to sales", "From driver to guide"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why did she leave?",
+              "options": ["She was dismissed", "The company moved", "She wanted more money"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does she want to use in her new job?",
+              "options": ["Her languages", "Her driving licence", "Her computer skills"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A traffic report",
+          "text": "Good evening. There are long delays on the motorway heading north because of an accident near exit 12; the police advise drivers to use the old road instead. In the city centre, Bridge Street is closed until Friday for repairs, and buses 4 and 7 are stopping at the station instead. The weather is fine, so cycling is a good option tonight.",
+          "questions": [
+            {
+              "prompt": "Why are there delays on the motorway?",
+              "options": ["Because of roadworks", "Because of an accident", "Because of the weather"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is happening on Bridge Street?",
+              "options": ["A festival", "Repairs", "A demonstration"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the reporter suggest?",
+              "options": ["Taking the train", "Cycling", "Staying at home"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Two friends talking about a film",
+          "text": "Did you see the new detective film? I did, last night. Honestly, I expected more. The first hour was great, but then the story got confusing and the ending made no sense. Really? Everyone at work loved it. Well, the acting was good, I'll give it that. I just wouldn't pay to see it again.",
+          "questions": [
+            {
+              "prompt": "What did the speaker think of the beginning?",
+              "options": ["It was boring", "It was great", "It was confusing"],
+              "answer": 1
+            },
+            {
+              "prompt": "What was her main problem with the film?",
+              "options": ["The acting", "The ending", "The music"],
+              "answer": 1
+            },
+            {
+              "prompt": "What did people at work think?",
+              "options": ["They loved it", "They hated it", "They didn't see it"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A voicemail from the dentist",
+          "text": "Hello, this is a message for Mr Pérez from Green Dental Clinic. Unfortunately, Dr Lane is ill, so we have to cancel your appointment tomorrow at ten. We can offer you Thursday at the same time or Friday at four in the afternoon. Please call us back on 555 0120 to confirm which one you prefer. We're sorry for the inconvenience.",
+          "questions": [
+            {
+              "prompt": "Why is the appointment cancelled?",
+              "options": ["The clinic is closed", "The dentist is ill", "Mr Pérez called"],
+              "answer": 1
+            },
+            {
+              "prompt": "Which new times are offered?",
+              "options": [
+                "Thursday at ten or Friday at four",
+                "Monday at ten or Tuesday at four",
+                "Only Friday morning"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What should Mr Pérez do?",
+              "options": ["Go to the clinic", "Call back to confirm", "Send an email"],
+              "answer": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1747,6 +1988,58 @@
       "type": "translate",
       "es": "Cuanto más estudias, más aprendes.",
       "answers": ["The more you study, the more you learn."]
+    },
+    {
+      "type": "reading",
+      "title": "A city bike scheme",
+      "text": "Since the city introduced its bike-sharing scheme three years ago, more than two million journeys have been made. Supporters say the scheme has reduced traffic and pollution in the centre. Critics, however, point out that most stations are in wealthy areas and that the bikes are often broken. The council has promised fifty new stations in the suburbs next year and a repair team working seven days a week.",
+      "questions": [
+        {
+          "prompt": "What do supporters say?",
+          "options": [
+            "The bikes are often broken",
+            "Traffic and pollution have decreased",
+            "The scheme is too expensive"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "What is one of the critics' complaints?",
+          "options": ["The bikes are too fast", "Most stations are in wealthy areas", "There are too many stations"],
+          "answer": 1
+        },
+        {
+          "prompt": "What has the council promised?",
+          "options": ["To end the scheme", "New stations in the suburbs", "Free bikes for students"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "A university announcement",
+      "text": "Attention, all first-year students. Because of the heavy snow, this afternoon's lectures are cancelled. The library will stay open until eight, and tomorrow's classes will take place as normal unless the weather gets worse. Please check your email tonight for any updates, and don't come to the campus if the roads are not safe.",
+      "questions": [
+        {
+          "prompt": "Why are the lectures cancelled?",
+          "options": ["Because of a strike", "Because of heavy snow", "Because of a power cut"],
+          "answer": 1
+        },
+        {
+          "prompt": "What about tomorrow's classes?",
+          "options": [
+            "They are cancelled",
+            "They will take place unless the weather gets worse",
+            "They move to the library"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "How will students get updates?",
+          "options": ["By email", "By phone", "On the radio"],
+          "answer": 0
+        }
+      ]
     }
   ]
 }

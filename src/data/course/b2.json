@@ -1614,6 +1614,259 @@
           ]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Artículos de opinión, entrevistas y textos con intención: leer entre líneas.",
+      "sections": [
+        {
+          "heading": "Leer entre líneas",
+          "body": [
+            "En B2 los textos opinan, ironizan y sugieren. Las preguntas piden la actitud del autor, el propósito del texto o lo que se da por sentado. Fíjate en los adjetivos valorativos (so-called, supposedly, remarkably), en las concesiones (admittedly, to be fair) y en lo que no se dice."
+          ],
+          "examples": [
+            {
+              "en": "The so-called experts had never set foot in a classroom.",
+              "es": "Los supuestos expertos nunca habían pisado un aula."
+            },
+            {
+              "en": "Admittedly, the first version had its problems.",
+              "es": "Hay que reconocer que la primera versión tenía sus problemas."
+            },
+            {
+              "en": "Remarkably, nobody complained.",
+              "es": "Sorprendentemente, nadie se quejó."
+            }
+          ]
+        },
+        {
+          "heading": "Escuchar discursos y entrevistas",
+          "body": [
+            "En audios largos, anota las ideas por bloques: el tema, el cambio de tema (moving on, another thing), la opinión y el matiz (I'd say, to some extent, not entirely). Las preguntas de actitud se responden con el tono y con expresiones como I'm not convinced, that's a fair point, I can't help feeling."
+          ],
+          "examples": [
+            {
+              "en": "I'm not entirely convinced by that argument.",
+              "es": "No me convence del todo ese argumento."
+            },
+            {
+              "en": "Moving on to the question of cost…",
+              "es": "Pasando a la cuestión del coste…"
+            },
+            {
+              "en": "I can't help feeling we've missed something.",
+              "es": "No puedo evitar pensar que se nos ha pasado algo."
+            }
+          ]
+        },
+        {
+          "heading": "Preguntas de inferencia",
+          "body": [
+            "Inferir es deducir lo que el texto implica sin decirlo: si alguien «finalmente aceptó», antes se resistía; si «esta vez el tren llegó puntual», suele llegar tarde. Comprueba cada opción contra el texto: la correcta siempre tiene apoyo, aunque no sea literal."
+          ],
+          "examples": [
+            {
+              "en": "This time, the train actually arrived on time.",
+              "es": "Esta vez el tren sí llegó puntual (normalmente no)."
+            },
+            {
+              "en": "She eventually agreed to sign.",
+              "es": "Al final accedió a firmar (al principio no quería)."
+            },
+            {
+              "en": "Even the critics admitted it was an improvement.",
+              "es": "Hasta los críticos admitieron que era una mejora."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "Opinion: the four-day week",
+          "text": "Companies that have tried a four-day working week report happier staff and, surprisingly, no fall in productivity. Sceptics argue that the trials were small and the firms self-selected: those who expected success were the ones who volunteered. Even so, the results are hard to dismiss. Perhaps the real lesson is not about the number of days but about trust: employees who are judged by results rather than hours tend to deliver both.",
+          "questions": [
+            {
+              "prompt": "What do sceptics say about the trials?",
+              "options": [
+                "They were too long",
+                "They were small and the firms self-selected",
+                "They reduced productivity"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the author think about the results?",
+              "options": ["They should be ignored", "They are hard to dismiss", "They are completely wrong"],
+              "answer": 1
+            },
+            {
+              "prompt": "According to the author, what is the real lesson?",
+              "options": ["Working fewer days", "Trusting employees", "Paying more"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "A travel blog",
+          "text": "I had been warned that the mountain village was 'touristy', so I arrived expecting souvenir shops and overpriced coffee. Instead, I found a bakery where the owner insisted I try the bread before buying, a square where old men argued about football, and not a single tour bus. Perhaps my informant had visited in August. In late October, at least, the village felt entirely its own.",
+          "questions": [
+            {
+              "prompt": "What did the writer expect to find?",
+              "options": ["A quiet village", "Souvenir shops and expensive coffee", "A closed bakery"],
+              "answer": 1
+            },
+            {
+              "prompt": "How does the writer explain the difference?",
+              "options": [
+                "The informant probably visited in high season",
+                "The village has changed",
+                "The informant lied"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What is the writer's overall impression?",
+              "options": ["Disappointed", "Pleasantly surprised", "Bored"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Company notice",
+          "text": "Following feedback from staff, the office will adopt a 'quiet hours' policy from next month: between 9 and 11 a.m., meetings will not be scheduled and instant messages should be reserved for urgent matters. We recognise that some teams work closely with clients in other time zones; those teams may apply for an exception through their manager. The policy will be reviewed in three months.",
+          "questions": [
+            {
+              "prompt": "What will happen between 9 and 11?",
+              "options": ["No meetings will be scheduled", "The office will be closed", "Clients will visit"],
+              "answer": 0
+            },
+            {
+              "prompt": "Who can apply for an exception?",
+              "options": ["Anyone who asks", "Teams working with clients in other time zones", "Only managers"],
+              "answer": 1
+            },
+            {
+              "prompt": "When will the policy be reviewed?",
+              "options": ["Next week", "In three months", "Never"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Review: a history podcast",
+          "text": "Each episode of 'Lost Centuries' takes a single forgotten event and asks why it was forgotten. The host's enthusiasm is infectious, although his habit of interrupting guests can be irritating, and the sound quality of early episodes leaves something to be desired. Start with the later seasons: the research is deeper and the editing far tighter. Fans of easy answers should look elsewhere; this is history with its doubts left in.",
+          "questions": [
+            {
+              "prompt": "What does the reviewer criticise?",
+              "options": ["The host's lack of enthusiasm", "The host interrupting guests", "The choice of topics"],
+              "answer": 1
+            },
+            {
+              "prompt": "Which episodes does the reviewer recommend starting with?",
+              "options": ["The first season", "The later seasons", "Any episode"],
+              "answer": 1
+            },
+            {
+              "prompt": "Who would probably not enjoy the podcast?",
+              "options": ["People who like easy answers", "History students", "Fans of doubt"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Interview with a chef",
+          "text": "People assume I always wanted to be a chef, but I actually trained as an accountant. I lasted two years in an office before I admitted I was miserable. My family thought I was mad to leave a secure job, and to be fair, the first restaurant I opened closed within a year. What kept me going was stubbornness, mostly, and a cookbook my grandmother left me.",
+          "questions": [
+            {
+              "prompt": "What was the chef's first career?",
+              "options": ["Accountant", "Teacher", "Waiter"],
+              "answer": 0
+            },
+            {
+              "prompt": "What happened to his first restaurant?",
+              "options": ["It was a success", "It closed within a year", "He sold it"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does he say kept him going?",
+              "options": ["Money", "Stubbornness", "His family's support"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A radio debate on tourism",
+          "text": "Our guest argues that tourism has ruined the old town. Well, 'ruined' is a strong word. I'd say it has changed it beyond recognition. Rents have tripled and the bakery I grew up with is now a souvenir shop. But hasn't tourism also brought jobs? It has, for some. The question is whether a town where nobody can afford to live is still a town.",
+          "questions": [
+            {
+              "prompt": "How does the guest react to the word 'ruined'?",
+              "options": ["She agrees completely", "She thinks it is too strong", "She laughs"],
+              "answer": 1
+            },
+            {
+              "prompt": "What happened to the bakery?",
+              "options": ["It closed for good", "It became a souvenir shop", "It moved"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is the guest's main concern?",
+              "options": ["Noise", "That locals can no longer afford to live there", "Dirty streets"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "A lecture extract",
+          "text": "We tend to think memory works like a recording: you store an event and later you play it back. Decades of research say otherwise. Each time we remember something, we rebuild it, and the rebuilding is influenced by what we know now. This is why two witnesses to the same accident can give sincere but different accounts. Memory is less a library than a workshop.",
+          "questions": [
+            {
+              "prompt": "How do people usually imagine memory?",
+              "options": ["As a workshop", "As a recording", "As a conversation"],
+              "answer": 1
+            },
+            {
+              "prompt": "What happens each time we remember something?",
+              "options": ["We rebuild it", "We lose part of it", "We record it again"],
+              "answer": 0
+            },
+            {
+              "prompt": "Why can two witnesses give different accounts?",
+              "options": ["One of them is lying", "Memory is rebuilt each time", "They saw different accidents"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Customer service call",
+          "text": "Thanks for calling. How can I help? My internet has been dropping every evening for a week. I've restarted the router, as your website suggests, but nothing changes. I can see from here that there's a fault on your line. An engineer can come on Thursday morning. I work on Thursday; is there anything later? Friday afternoon, between two and five. That works. And you'll get a refund for the days without service.",
+          "questions": [
+            {
+              "prompt": "What has the customer already tried?",
+              "options": ["Changing the password", "Restarting the router", "Buying a new cable"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why can't the customer accept Thursday?",
+              "options": ["He is travelling", "He works", "He has a doctor's appointment"],
+              "answer": 1
+            },
+            {
+              "prompt": "What else does the agent offer?",
+              "options": ["A new router", "A refund for the days without service", "A discount next year"],
+              "answer": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1750,6 +2003,50 @@
         "I did it so that you wouldn't worry.",
         "I did it so you wouldn't worry.",
         "I did it so that you would not worry."
+      ]
+    },
+    {
+      "type": "reading",
+      "title": "Letter to the editor",
+      "text": "Your correspondent claims that the new bus lanes have 'strangled' the city centre. As someone who drives into town daily, I expected to agree. Instead, I have found my journey slightly longer but far more predictable, and my daughter, who once refused to take the bus, now does so without complaint. Perhaps the lanes have strangled something, but it is not the city: it is our excuse for never trying the alternative.",
+      "questions": [
+        {
+          "prompt": "What did the writer expect to feel about the bus lanes?",
+          "options": ["Agreement with the criticism", "Indifference", "Enthusiasm"],
+          "answer": 0
+        },
+        {
+          "prompt": "How has the writer's journey changed?",
+          "options": ["It is much faster", "Slightly longer but more predictable", "It is impossible"],
+          "answer": 1
+        },
+        {
+          "prompt": "What does the writer say the lanes have 'strangled'?",
+          "options": ["The city centre", "People's excuse for not trying the bus", "The bus company"],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Workplace announcement",
+      "text": "Before we finish, a word about the office move. Despite rumours to the contrary, nobody is losing their desk; what's changing is the floor plan, which will group teams by project rather than by department. I appreciate that some of you have strong views about this, and to be fair, the pilot on the third floor had teething problems. We've learned from those, and the full move will happen over two weekends in May.",
+      "questions": [
+        {
+          "prompt": "What rumour does the speaker deny?",
+          "options": ["That the company is closing", "That people will lose their desks", "That salaries will fall"],
+          "answer": 1
+        },
+        {
+          "prompt": "How will teams be grouped after the move?",
+          "options": ["By department", "By project", "By seniority"],
+          "answer": 1
+        },
+        {
+          "prompt": "What does the speaker admit about the pilot?",
+          "options": ["It was a complete failure", "It had teething problems", "It never happened"],
+          "answer": 1
+        }
       ]
     }
   ]

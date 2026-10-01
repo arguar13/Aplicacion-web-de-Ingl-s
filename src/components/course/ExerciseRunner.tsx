@@ -1,10 +1,14 @@
-import { type FormEvent, useEffect, useRef, useState } from 'react'
+import { type FormEvent, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { useKeyDown } from '@/hooks/useKeyDown'
+import { playPronunciation } from '@/lib/audio'
 import { cn } from '@/lib/cn'
 import type { Exercise } from '@/lib/course'
+import { useRecordedSentence } from '@/lib/courseAudio'
+import { bestEnglishVoice, canSpeak, speakEnglish, stopSpeaking } from '@/lib/tts'
 import { correctAnswer, judgeExercise, type Response, shuffledWords, type Verdict } from '@/lib/exercises'
 import { feedback } from '@/lib/feedback'
 import { formatCount } from '@/lib/format'
+import { SpeakerIcon } from '../icons'
 import { Button } from '../ui/Button'
 import { Kbd } from '../ui/Kbd'
 import { Surface } from '../ui/Surface'
@@ -21,6 +25,8 @@ const TYPE_LABEL: Record<Exercise['type'], string> = {
   fill: 'Completa el hueco',
   order: 'Ordena las palabras',
   translate: 'Traduce al inglés',
+  reading: 'Comprensión lectora',
+  listening: 'Comprensión auditiva',
 }
 
 const VERDICT: Record<Verdict, { text: string; tone: string }> = {
@@ -101,6 +107,9 @@ export function ExerciseRunner({ exercises, label, onFinish }: Props) {
         {exercise.type === 'fill' && <Typed exercise={exercise} verdict={verdict} onAnswer={answer} />}
         {exercise.type === 'translate' && <Typed exercise={exercise} verdict={verdict} onAnswer={answer} />}
         {exercise.type === 'order' && <Order exercise={exercise} seed={index} verdict={verdict} onAnswer={answer} />}
+        {(exercise.type === 'reading' || exercise.type === 'listening') && (
+          <Passage exercise={exercise} verdict={verdict} onAnswer={answer} />
+        )}
       </div>
 
       <div aria-live="polite" className="mt-4 min-h-6">
@@ -338,6 +347,146 @@ function Order({
             Deshacer
           </Button>
           <Button variant="primary" size="lg" onClick={() => onAnswer(words)} disabled={remaining.length > 0}>
+            Comprobar
+            <Kbd tone="accent">Enter</Kbd>
+          </Button>
+        </div>
+      )}
+    </>
+  )
+}
+
+/** Avisa cuando el navegador termina de cargar sus voces. */
+function subscribeVoices(listener: () => void) {
+  if (!canSpeak()) return () => undefined
+  window.speechSynthesis.addEventListener('voiceschanged', listener)
+  return () => window.speechSynthesis.removeEventListener('voiceschanged', listener)
+}
+const hasEnglishVoice = () => bestEnglishVoice() !== null
+
+/**
+ * Comprensión lectora o auditiva: un texto (a la vista, o solo de oído) y sus preguntas. En la
+ * auditiva, si no hay grabación ni voz en el navegador, el texto se muestra: mejor leer que no
+ * poder responder. La transcripción se destapa al corregir.
+ */
+function Passage({ exercise, verdict, onAnswer }: PartProps<Extract<Exercise, { type: 'reading' | 'listening' }>>) {
+  const [chosen, setChosen] = useState<Array<number | null>>(() => exercise.questions.map(() => null))
+  const recorded = useRecordedSentence(exercise.text)
+  const voice = useSyncExternalStore(subscribeVoices, hasEnglishVoice, () => false)
+  const canHear = recorded !== null || voice
+  const listening = exercise.type === 'listening' && canHear
+  const showText = exercise.type === 'reading' || !canHear || verdict !== null
+  const complete = chosen.every((option) => option !== null)
+  useEffect(() => () => stopSpeaking(), [])
+
+  const play = () => {
+    if (recorded) void playPronunciation(recorded)
+    else speakEnglish(exercise.text)
+  }
+  const pick = (question: number, option: number) => {
+    if (verdict !== null) return
+    setChosen((current) => current.map((value, i) => (i === question ? option : value)))
+  }
+  useKeyDown((event) => {
+    if (verdict === null && event.key === 'Enter' && complete) onAnswer(chosen.map((option) => option ?? -1))
+  })
+
+  return (
+    <>
+      <h3 lang="en" className="text-xl leading-snug font-semibold sm:text-2xl">
+        {exercise.title}
+      </h3>
+      {listening && (
+        <div className="mt-3 flex items-center gap-3 rounded-2xl border border-line bg-bg px-4 py-3">
+          <button
+            type="button"
+            onClick={play}
+            aria-label="Escuchar el audio"
+            className="grid size-12 shrink-0 cursor-pointer place-items-center rounded-full bg-accent-soft text-accent transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-95"
+          >
+            <SpeakerIcon width={24} height={24} />
+          </button>
+          <p className="text-sm text-muted">
+            {verdict === null
+              ? 'Escucha las veces que quieras y responde. La transcripción aparece al corregir.'
+              : 'Transcripción a la vista. Vuelve a escuchar si quieres.'}
+          </p>
+        </div>
+      )}
+      {showText && (
+        <p
+          lang="en"
+          className={cn(
+            'mt-3 rounded-2xl border border-line bg-bg px-4 py-3 text-[15px] leading-relaxed',
+            exercise.type === 'listening' && verdict !== null && 'animate-rise',
+          )}
+        >
+          {exercise.text}
+        </p>
+      )}
+      {exercise.type === 'listening' && !canHear && verdict === null && (
+        <p className="mt-2 text-xs text-muted">
+          Este navegador no tiene voz en inglés: el texto se muestra para leerlo.
+        </p>
+      )}
+      <ol className="mt-4 space-y-4">
+        {exercise.questions.map((question, qi) => (
+          <li key={question.prompt}>
+            <fieldset>
+              <legend lang="en" className="text-[15px] font-medium">
+                {qi + 1}. {question.prompt}
+              </legend>
+              <div
+                role="group"
+                aria-label={`Pregunta ${qi + 1}`}
+                className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2"
+              >
+                {question.options.map((option, oi) => {
+                  const state =
+                    verdict === null
+                      ? chosen[qi] === oi
+                        ? 'chosen'
+                        : 'idle'
+                      : oi === question.answer
+                        ? 'correct'
+                        : chosen[qi] === oi
+                          ? 'wrong'
+                          : 'dimmed'
+                  return (
+                    <button
+                      key={option}
+                      type="button"
+                      lang="en"
+                      onClick={() => pick(qi, oi)}
+                      disabled={verdict !== null}
+                      aria-pressed={chosen[qi] === oi}
+                      className={cn(
+                        'rounded-xl border px-3 py-2 text-left text-[15px] transition-[background-color,border-color,color,opacity] duration-150',
+                        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+                        state === 'idle' && 'cursor-pointer border-line bg-surface hover:border-accent/40',
+                        state === 'chosen' && 'cursor-pointer border-accent bg-accent-soft text-accent',
+                        state === 'correct' && 'border-ok bg-ok-soft text-ok',
+                        state === 'wrong' && 'border-bad/40 bg-bad-soft text-bad',
+                        state === 'dimmed' && 'border-line bg-surface text-muted opacity-50',
+                      )}
+                    >
+                      {option}
+                    </button>
+                  )
+                })}
+              </div>
+            </fieldset>
+          </li>
+        ))}
+      </ol>
+      {verdict === null && (
+        <div className="mt-4 flex justify-end">
+          <Button
+            variant="primary"
+            size="lg"
+            disabled={!complete}
+            onClick={() => onAnswer(chosen.map((option) => option ?? -1))}
+          >
             Comprobar
             <Kbd tone="accent">Enter</Kbd>
           </Button>

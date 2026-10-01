@@ -10,8 +10,26 @@ import { editDistance, judgeTyped, normalizeTyped } from './typing'
 
 export type Verdict = 'correct' | 'almost' | 'wrong'
 
-/** Lo que respondió el estudiante: el índice elegido, lo escrito o las palabras en el orden que las puso. */
-export type Response = number | string | string[]
+/**
+ * Lo que respondió el estudiante: el índice elegido, lo escrito, las palabras en el orden que las
+ * puso o, en comprensión, la opción elegida en cada pregunta.
+ */
+export type Response = number | string | string[] | number[]
+
+const isNumbers = (value: unknown): value is number[] =>
+  Array.isArray(value) && value.every((item) => typeof item === 'number')
+const isStrings = (value: unknown): value is string[] =>
+  Array.isArray(value) && value.every((item) => typeof item === 'string')
+
+/**
+ * Comprensión: todas bien es correcto; con tres preguntas o más, una sola mal cuenta como «casi»
+ * (se entendió el texto); si no, mal.
+ */
+export function judgeQuestions(questions: readonly { answer: number }[], chosen: readonly number[]): Verdict {
+  const wrong = questions.filter((question, i) => chosen[i] !== question.answer).length
+  if (wrong === 0) return 'correct'
+  return wrong === 1 && questions.length >= 3 ? 'almost' : 'wrong'
+}
 
 /** Frase comparable: minúsculas, sin puntuación final ni espacios sobrantes, apóstrofos rectos. */
 export function normalizeSentence(text: string): string {
@@ -59,7 +77,10 @@ export function judgeExercise(exercise: Exercise, response: Response): Verdict {
     case 'translate':
       return typeof response === 'string' ? judgeSentence(response, exercise.answers) : 'wrong'
     case 'order':
-      return Array.isArray(response) && response.join(' ') === exercise.words.join(' ') ? 'correct' : 'wrong'
+      return isStrings(response) && response.join(' ') === exercise.words.join(' ') ? 'correct' : 'wrong'
+    case 'reading':
+    case 'listening':
+      return isNumbers(response) ? judgeQuestions(exercise.questions, response) : 'wrong'
   }
 }
 
@@ -74,6 +95,9 @@ export function correctAnswer(exercise: Exercise): string {
       return exercise.answers[0]
     case 'order':
       return exercise.words.join(' ')
+    case 'reading':
+    case 'listening':
+      return exercise.questions.map((question, i) => `${i + 1}. ${question.options[question.answer]}`).join(' · ')
   }
 }
 

@@ -1377,6 +1377,287 @@
           "answers": ["I speak Spanish and English."]
         }
       ]
+    },
+    {
+      "id": "comprension-lectora-y-auditiva",
+      "title": "Comprensión lectora y auditiva",
+      "summary": "Literatura, prensa de calidad y debate: la lectura experta.",
+      "sections": [
+        {
+          "heading": "Textos literarios y de prensa",
+          "body": [
+            "En C2 se leen fragmentos de novela, columnas de estilo elaborado y textos académicos. La dificultad está en la sintaxis (incisos, inversiones, elipsis) y en el léxico de registro alto o figurado. Lee por unidades de sentido, no palabra a palabra, y reconstruye quién hace qué a quién antes de interpretar."
+          ],
+          "examples": [
+            {
+              "en": "What she had not expected, having rehearsed every objection, was indifference.",
+              "es": "Lo que no esperaba, tras haber ensayado cada objeción, era la indiferencia."
+            },
+            {
+              "en": "Rarely has a book so slim carried so much weight.",
+              "es": "Rara vez un libro tan delgado ha pesado tanto."
+            },
+            {
+              "en": "The town, such as it was, consisted of a church and a petrol station.",
+              "es": "El pueblo, si así podía llamarse, consistía en una iglesia y una gasolinera."
+            }
+          ]
+        },
+        {
+          "heading": "Implicatura y presuposición",
+          "body": [
+            "Lo que un texto presupone (da por sabido) y lo que implica (deja deducir) son el núcleo de las preguntas de C2. «Incluso su editor se sorprendió» presupone que el editor es quien menos debería sorprenderse. «Volvió a fracasar» presupone fracasos anteriores. Lee los adverbios con lupa: even, again, still, only, merely."
+          ],
+          "examples": [
+            {
+              "en": "Even her publisher was surprised by the book's success.",
+              "es": "Hasta su editor se sorprendió del éxito del libro."
+            },
+            {
+              "en": "He merely repeated what everyone already knew.",
+              "es": "Se limitó a repetir lo que todos sabían."
+            },
+            {
+              "en": "She still believes the letter was genuine.",
+              "es": "Ella sigue creyendo que la carta era auténtica."
+            }
+          ]
+        },
+        {
+          "heading": "Escuchar registro y estrategia",
+          "body": [
+            "En debates y entrevistas de alto nivel, los hablantes esquivan, matizan y reencuadran: with respect, that's not quite the point; I'd put it differently; if I may. Identifica cuándo alguien responde de verdad y cuándo cambia de tema, y qué posición defiende aunque no la enuncie."
+          ],
+          "examples": [
+            {
+              "en": "With respect, that's not quite the question I was asked.",
+              "es": "Con todo respeto, esa no es exactamente la pregunta que me hicieron."
+            },
+            {
+              "en": "I'd put it rather differently.",
+              "es": "Yo lo plantearía de otra manera."
+            },
+            {
+              "en": "If I may, the figures tell a less flattering story.",
+              "es": "Si me permite, las cifras cuentan una historia menos halagüeña."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "reading",
+          "title": "Novel extract",
+          "text": "The house had been sold, and with it the particular silence of its afternoons, which Helen now realised she had mistaken for peace. The new owners, a couple from the city with plans involving glass, had asked whether she wanted anything from the garden. She had said no, and then, absurdly, had driven back the following week to dig up a rosemary bush that had never, in thirty years, thrived.",
+          "questions": [
+            {
+              "prompt": "What does Helen realise about the silence of the house?",
+              "options": ["It was peace", "She had mistaken it for peace", "It had been too noisy"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is implied about the new owners' plans?",
+              "options": [
+                "They will keep the house as it is",
+                "They will change it radically",
+                "They will sell it again"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "Why is Helen's return described as absurd?",
+              "options": [
+                "She went back for a plant that had never done well",
+                "She had no car",
+                "The owners were away"
+              ],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Editorial: the price of convenience",
+          "text": "Nobody voted for the disappearance of the high street; it was decided one click at a time. We mourn the bookshop while ordering the book, and the paradox is not hypocrisy so much as the predictable result of a system in which the costs of convenience are borne by someone else, somewhere else, later. The question is not whether we can turn back, which we cannot, but whether we are prepared to pay, in money or in patience, for the things we claim to value.",
+          "questions": [
+            {
+              "prompt": "How, according to the editorial, was the fate of the high street decided?",
+              "options": ["By a vote", "Through countless small individual choices", "By the government"],
+              "answer": 1
+            },
+            {
+              "prompt": "How does the author characterise the paradox of mourning shops while shopping online?",
+              "options": ["As hypocrisy", "As the predictable result of a system", "As a myth"],
+              "answer": 1
+            },
+            {
+              "prompt": "What question does the author say really matters?",
+              "options": [
+                "Whether we can turn back",
+                "Whether we are willing to pay for what we value",
+                "Whether bookshops were profitable"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Academic abstract",
+          "text": "This study examines whether bilingual speakers show measurable delays in word retrieval compared with monolinguals, and whether such delays, where present, are offset by advantages in cognitive control. Across three experiments, bilinguals were marginally slower on picture-naming tasks but outperformed monolinguals on tasks requiring the suppression of irrelevant information. We argue that the two effects are not independent, and that the retrieval cost may itself be the mechanism through which the control advantage arises.",
+          "questions": [
+            {
+              "prompt": "What did the experiments find about picture naming?",
+              "options": [
+                "Bilinguals were much faster",
+                "Bilinguals were marginally slower",
+                "There was no difference"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "On which tasks did bilinguals do better?",
+              "options": ["Tasks requiring suppression of irrelevant information", "Memory tasks", "Reading tasks"],
+              "answer": 0
+            },
+            {
+              "prompt": "What is the authors' central argument?",
+              "options": [
+                "The two effects are unrelated",
+                "The retrieval cost may cause the control advantage",
+                "Bilingualism has no effects"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Satirical column",
+          "text": "The company's new wellbeing programme, launched with a video of executives doing yoga on a beach, offers employees a free meditation app, a monthly fruit basket and a reminder that they may, if they wish, take their legally mandated holiday. Nowhere in the glossy brochure is the word 'overtime', which, like the word 'rain' in a holiday advert, is presumably thought to spoil the mood.",
+          "questions": [
+            {
+              "prompt": "What is the author's attitude to the wellbeing programme?",
+              "options": ["Admiring", "Mocking", "Neutral"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the reference to 'legally mandated holiday' imply?",
+              "options": [
+                "The company is generous",
+                "The company presents a legal obligation as a gift",
+                "Holidays are new"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What is suggested by the comparison with the word 'rain'?",
+              "options": [
+                "The company avoids mentioning what is inconvenient",
+                "The office is by the sea",
+                "Employees like holidays"
+              ],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Literary interview",
+          "text": "You've said you distrust the word 'inspiration'. I do, because it suggests the book arrives, whereas in my experience it is dragged out, sentence by reluctant sentence. What people call inspiration is usually the moment the dragging stops hurting. Does that make writing joyless? Not at all. There is joy, but it's the joy of a long walk, not of a gift.",
+          "questions": [
+            {
+              "prompt": "Why does the writer distrust the word 'inspiration'?",
+              "options": ["It suggests books simply arrive", "It is too old-fashioned", "Critics use it too much"],
+              "answer": 0
+            },
+            {
+              "prompt": "What does she say people usually mean by inspiration?",
+              "options": ["The moment writing stops hurting", "A sudden idea", "Praise from readers"],
+              "answer": 0
+            },
+            {
+              "prompt": "How does she describe the joy of writing?",
+              "options": ["Like receiving a gift", "Like a long walk", "Like a holiday"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Parliamentary-style debate extract",
+          "text": "My honourable colleague describes the reform as a betrayal of rural communities. With respect, that is not quite the point. The question before us is not whether rural areas deserve investment, which nobody disputes, but whether this particular scheme, which has already cost twice its budget, is the way to deliver it. If I may, the figures tell a less flattering story than his speech.",
+          "questions": [
+            {
+              "prompt": "How does the speaker respond to the word 'betrayal'?",
+              "options": ["He accepts it", "He says it misses the point", "He apologises"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does the speaker say nobody disputes?",
+              "options": ["That the scheme is cheap", "That rural areas deserve investment", "That the debate is over"],
+              "answer": 1
+            },
+            {
+              "prompt": "What criticism does he make of the scheme?",
+              "options": ["It has cost twice its budget", "It has no supporters", "It is too small"],
+              "answer": 0
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Science programme",
+          "text": "For decades, the accepted story was that the dinosaurs were wiped out by a single catastrophic impact. That story is still broadly true, but it has become more complicated. Volcanic activity in what is now India had been stressing ecosystems for hundreds of thousands of years before the asteroid struck. Whether the impact was the cause of extinction or merely the final blow to an already weakened world is, as one researcher put it, a question of emphasis rather than fact.",
+          "questions": [
+            {
+              "prompt": "What has happened to the accepted story?",
+              "options": [
+                "It has been proved false",
+                "It remains broadly true but more complicated",
+                "It has been replaced by a volcanic theory"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What was happening before the asteroid struck?",
+              "options": [
+                "Ecosystems were thriving",
+                "Volcanic activity had been stressing ecosystems",
+                "Nothing unusual"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "How does the researcher quoted characterise the disagreement?",
+              "options": ["As a matter of fact", "As a question of emphasis", "As resolved"],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Radio essay on handwriting",
+          "text": "I was taught that handwriting revealed character, which may explain why I spent my childhood trying to have a better one. The truth, I suspect, is humbler: handwriting reveals mainly who taught you. Still, there is something in a handwritten page that a screen will never give: the record of hesitation, of a word crossed out and chosen again. We read not only what was written but how hard it was to write.",
+          "questions": [
+            {
+              "prompt": "What was the speaker taught about handwriting?",
+              "options": ["That it reveals character", "That it is useless", "That it reveals intelligence"],
+              "answer": 0
+            },
+            {
+              "prompt": "What does the speaker now believe handwriting mainly reveals?",
+              "options": ["Character", "Who taught you", "Mood"],
+              "answer": 1
+            },
+            {
+              "prompt": "What does a handwritten page offer, according to the speaker?",
+              "options": ["Clearer letters", "A record of hesitation and effort", "Faster reading"],
+              "answer": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "exam": [
@@ -1505,6 +1786,54 @@
         "She acts as if she were the boss.",
         "He behaves as if he were the boss.",
         "He acts as though he were the boss."
+      ]
+    },
+    {
+      "type": "reading",
+      "title": "Short story opening",
+      "text": "By the time the letter reached her, the man who had written it had been dead for eleven years, which made its single request, that she forgive him, less an appeal than an instruction. She read it twice at the kitchen table and once more standing up, as if the posture might change the meaning. It did not. Then she did what she had always done with things she could not answer: she put it in a drawer and made tea.",
+      "questions": [
+        {
+          "prompt": "Why is the request described as 'less an appeal than an instruction'?",
+          "options": [
+            "Because the writer is dead and cannot be answered",
+            "Because it is written in capitals",
+            "Because she had already forgiven him"
+          ],
+          "answer": 0
+        },
+        {
+          "prompt": "What does reading the letter standing up suggest?",
+          "options": ["She was in a hurry", "She hoped a change might alter its meaning", "She could not find a chair"],
+          "answer": 1
+        },
+        {
+          "prompt": "What does her final action reveal about her?",
+          "options": ["A habit of postponing what she cannot resolve", "Anger", "Relief"],
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Philosophy lecture",
+      "text": "We tend to assume that to understand a decision we must find its reason, as if every choice were an argument in miniature. Yet much of what we do is better described as habit, inclination or drift. This is not a counsel of despair. Habits can be examined and, with effort, changed; drift can be noticed. But the picture of the self as a perpetual deliberator is, I'd put it bluntly, a flattering fiction, and one that makes us worse at the reasoning we actually do.",
+      "questions": [
+        {
+          "prompt": "What assumption does the lecturer question?",
+          "options": ["That every decision has a reason behind it", "That habits cannot change", "That drift is good"],
+          "answer": 0
+        },
+        {
+          "prompt": "How does he describe the self as a 'perpetual deliberator'?",
+          "options": ["As accurate", "As a flattering fiction", "As a scientific fact"],
+          "answer": 1
+        },
+        {
+          "prompt": "What is his attitude to habits?",
+          "options": ["They are hopeless", "They can be examined and changed", "They are always good"],
+          "answer": 1
+        }
       ]
     }
   ]

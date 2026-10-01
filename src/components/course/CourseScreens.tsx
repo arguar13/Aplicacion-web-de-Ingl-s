@@ -689,6 +689,21 @@ export function ExamScreen({ level, onExit }: ExamProps) {
   )
 }
 
+/** Cómo se cita un ejercicio fallado en el resumen. */
+function missedLabel(exercise: Exercise): string {
+  switch (exercise.type) {
+    case 'choice':
+    case 'fill':
+      return exercise.prompt
+    case 'reading':
+    case 'listening':
+      return exercise.title
+    case 'order':
+    case 'translate':
+      return exercise.es
+  }
+}
+
 // --- Resultado ---------------------------------------------------------------------------------------
 
 function Result({
@@ -742,9 +757,7 @@ function Result({
                 key={`${exercise.type}:${correctAnswer(exercise)}`}
                 className="rounded-2xl border border-line bg-bg px-4 py-2.5 text-sm"
               >
-                <span className="block text-muted">
-                  {exercise.type === 'choice' || exercise.type === 'fill' ? exercise.prompt : exercise.es}
-                </span>
+                <span className="block text-muted">{missedLabel(exercise)}</span>
                 <span lang="en" className="block font-semibold">
                   {correctAnswer(exercise)}
                 </span>

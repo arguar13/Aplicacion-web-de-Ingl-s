@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { loadAudioVersions } from '@/lib/audioUrl'
 import { recordedCourseIds } from '@/lib/courseAudio'
 import { ALL_WORDS } from '@/lib/decks'
@@ -11,28 +11,9 @@ import {
   useOfflineAudioSupported,
 } from '@/lib/pwa'
 import { Button } from './ui/Button'
+import { SettingRow } from './ui/SettingRow'
 
 /** Fila de ajustes: título y descripción a la izquierda, control a la derecha. */
-export function SettingRow({
-  title,
-  description,
-  children,
-}: {
-  title: string
-  description: ReactNode
-  children?: ReactNode
-}) {
-  return (
-    <div className="flex items-center justify-between gap-4 py-4">
-      <div className="min-w-0">
-        <p className="text-[15px] font-medium">{title}</p>
-        <div className="mt-0.5 text-[13px] leading-snug text-muted">{description}</div>
-      </div>
-      {children}
-    </div>
-  )
-}
-
 export function InstallRow() {
   const { available, install } = useInstallPrompt()
   if (typeof window === 'undefined' || isStandalone()) return null
