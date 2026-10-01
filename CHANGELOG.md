@@ -13,7 +13,8 @@ Todos los cambios importantes de Tecla. El formato sigue
   Docker Desktop: cada job corre en un contenedor Linux con Node 24, sin gastar minutos. El código
   se publica en GitHub y GitLab a la vez. Se retira `.github/workflows/deploy.yml`.
 - El despliegue es un script independiente de la CI (`scripts/deploy.sh`): comprueba el destino y
-  sube solo lo que cambió con ftp-deploy, verificando el certificado del servidor FTPS.
+  sube solo lo que cambió (`scripts/ftp-upload.mjs`, sobre basic-ftp) con tres conexiones a la vez,
+  verificando el certificado del servidor FTPS.
 - Mantenimiento semanal del runner (`scripts/runner-maintenance.ps1`): renueva `node:24` y borra la
   versión anterior, sin tocar las imágenes de otros proyectos.
 
@@ -23,6 +24,11 @@ Todos los cambios importantes de Tecla. El formato sigue
   `ftp.<dominio>`, y la conexión fallaba al verificarlo. Con `FTP_TLS_NAME` = `hstgr.io` se
   conecta al servidor de siempre y el certificado se verifica contra ese nombre, sin desactivar
   la verificación. `FTP_DRY_RUN=true` simula la subida sin cambiar nada.
+- **Despliegues que se cortaban:** Hostinger cierra las sesiones FTP largas y ftp-deploy no sabía
+  reconectar ni guardaba su progreso, así que la primera subida (unos 8.500 archivos) nunca
+  terminaba. El uploader propio reabre la conexión y reintenta, guarda el estado durante la
+  subida para retomar donde quedó, y sube las entradas (`index.html`, `sw.js`, manifiesto) al
+  final y borra lo viejo después, para que el sitio nunca apunte a algo que aún no subió.
 
 ## 2.3.0 · 2026-10-01 · Un curso con el rigor de las certificaciones (Fase 21)
 

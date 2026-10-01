@@ -10,6 +10,9 @@ DirectoryIndex index.html
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Estado del despliegue (scripts/ftp-upload.mjs): solo lo lee el script, no se sirve.
+  RewriteRule ^\.tecla-deploy\.json$ - [F,L]
 </IfModule>
 
 # --- Tipos MIME ---------------------------------------------------------------

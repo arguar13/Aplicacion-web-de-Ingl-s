@@ -9,10 +9,10 @@
 #
 # Entrada (variables de entorno): FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (relativa
 # a la carpeta inicial de la cuenta FTP; "./" es esa misma carpeta) y FTP_PROTOCOL (ftps por
-# defecto, ftps-legacy o ftp, como FTP-Deploy-Action). Opcional: FTP_TLS_NAME, el nombre contra el
+# defecto, ftps-legacy o ftp). Opcional: FTP_TLS_NAME, el nombre contra el
 # que se verifica el certificado cuando no coincide con FTP_SERVER (en Hostinger, hstgr.io; ver
 # scripts/ftp-upload.mjs).
-# Salida: la carpeta terminada en "/" (lo que espera ftp-deploy) como única línea de stdout; los
+# Salida: la carpeta terminada en "/" (la recibe scripts/ftp-upload.mjs) como única línea de stdout; los
 # mensajes van a stderr. La usa scripts/deploy.sh.
 set -euo pipefail
 
@@ -55,7 +55,7 @@ listing="$(curl --silent --show-error --list-only --connect-timeout 30 --max-tim
 
 case "$status" in
   0) ;;
-  # La carpeta aún no existe (o no se puede entrar): FTP-Deploy-Action la crea al subir.
+  # La carpeta aún no existe (o no se puede entrar): scripts/ftp-upload.mjs la crea al subir.
   9 | 78) listing="" ;;
   *) fail "No se pudo listar $dir en el servidor (curl $status): $(cat "$err")" ;;
 esac
