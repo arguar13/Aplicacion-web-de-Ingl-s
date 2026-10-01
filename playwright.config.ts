@@ -20,7 +20,15 @@ export default defineConfig({
   projects: [
     { name: 'móvil', use: { ...devices['Pixel 7'] } },
     { name: 'escritorio', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'iphone', use: { ...devices['iPhone 15'] } },
+    {
+      name: 'iphone',
+      use: { ...devices['iPhone 15'] },
+      // El WebKit de Playwright en Windows es mucho más lento que en Linux (y no tiene audio): con
+      // varios a la vez se queda en la pantalla de carga, las pantallas grandes tardan más de 30 s en
+      // pasar axe y las respuestas, más de 5 s en verse. En Windows corre de dos en dos y con más
+      // tiempo por prueba y por comprobación; en la CI (Linux), con los valores normales.
+      ...(process.platform === 'win32' && { timeout: 120_000, workers: 2, expect: { timeout: 15_000 } }),
+    },
   ],
   webServer: {
     command: `npm run build && npx vite preview --port ${PORT} --strictPort --host 127.0.0.1`,

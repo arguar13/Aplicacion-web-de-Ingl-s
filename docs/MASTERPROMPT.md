@@ -774,3 +774,16 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   e2e en Chromium y Lighthouse) se ejecutó en local en verde; el README explica cómo desbloquearlo.
 - Pendiente: generar y subir las grabaciones del curso; logros del curso; WebKit en los e2e locales
   (solo corre en la CI).
+
+### Versión 2.4.0 · 01-10-2026 · OpenSpeak (fuera de las fases)
+
+- Pedido del dueño: nombre más profesional (**OpenSpeak**), tema claro por defecto, primera pantalla
+  más funcional y un estilo más premium, optimizado para móvil, tablet y escritorio. Detalle en el
+  CHANGELOG. Los nombres internos `tecla*` se mantienen (progreso y copias de los usuarios).
+- Revisión con los motores reales: WebKit (iPhone 15 y SE, iPad vertical y horizontal, MacBook) y
+  Chromium (Android, tablet, Full HD). Arreglados: desborde a 320 px (columnas de grid sin
+  `minmax(0, 1fr)`), el aviso de Safari a media fila y la cabecera de la partida apretada.
+- WebKit en los e2e locales ya corre: en Windows necesita más tiempo y menos paralelismo
+  (configurado en `playwright.config.ts`). Sus títulos se ven más finos que en Safari real porque el
+  WebKit de Windows no aplica el eje de grosor de las fuentes variables.
+- Pendiente: el bloqueo de GitHub (el dueño indica que es un cobro de GitHub Copilot).

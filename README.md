@@ -163,6 +163,10 @@ No dejes nada escuchando en el puerto 4173: los e2e reutilizan lo que haya ahí 
 su propio build) y probarían una versión vieja. Para una vista previa manual, usa otro puerto.
 
 La primera vez, los tests e2e necesitan los navegadores: `npx playwright install chromium webkit`.
+En Windows, el WebKit de Playwright es mucho más lento que en Linux y no tiene audio: el proyecto
+`iphone` corre ahí de dos en dos, con 120 s por prueba y 15 s por comprobación (ver
+`playwright.config.ts`). Si una prueba de
+WebKit se queda en «Cargando», casi siempre es carga del equipo, no un fallo de la app.
 
 Calidad: cada commit pasa por `npm run check` (hook de pre-commit con simple-git-hooks) y cada push
 por el pipeline de GitLab (`.gitlab-ci.yml`: check, build y despliegue) y la CI de GitHub Actions
