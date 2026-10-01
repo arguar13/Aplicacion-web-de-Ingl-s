@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { evaluateAchievements, getUnlocks, mergeUnlocks, recordUnlocks, resetAchievements } from './achievements'
 import { type Backup, backupFileName, describeProgress, parseBackup, restoreBackup, serializeBackup } from './backup'
+import { type CourseProgress, getCourseProgress, resetCourseProgress } from './courseProgress'
 import { getEvents, replaceEvents, type StudyEvent } from './events'
 import { EMPTY_PROGRESS, getProgress, mergeProgress, type ProgressData, replaceProgress } from './progress'
 import { fromLeitner } from './scheduler'
@@ -29,15 +30,43 @@ const UNLOCKS = Object.fromEntries(
     .filter((status) => status.unlocked)
     .map((status) => [status.achievement.id, NOW - 86_400_000]),
 )
+/** Progreso del curso: una lección y el examen de A1 aprobado. */
+const COURSE: CourseProgress = {
+  lessons: { 'a1/verbo-to-be': { best: 1, at: NOW - 3_600_000 } },
+  exams: { a1: { best: 0.9, at: NOW - 1_800_000 } },
+}
 const BACKUP: Backup = {
   exportedAt: NOW,
   progress: PROGRESS,
   settings: SETTINGS,
   events: EVENTS,
   achievements: UNLOCKS,
+  course: COURSE,
 }
 
 describe('copias de seguridad', () => {
+  it('el progreso del curso viaja en la copia; las copias anteriores lo traen vacío', () => {
+    resetCourseProgress()
+    const old = serializeBackup({ ...BACKUP, course: null }, NOW)
+    expect(old).not.toContain('"course"')
+    const parsed = parseBackup(old)
+    expect(parsed.ok && parsed.backup.course).toBeNull()
+    restoreBackup(BACKUP, 'replace')
+    expect(getCourseProgress()).toEqual(COURSE)
+    // Combinar se queda con la mejor nota de cada lección y examen.
+    restoreBackup(
+      {
+        ...BACKUP,
+        course: { lessons: { 'a1/verbo-to-be': { best: 0.5, at: NOW } }, exams: { a1: { best: 1, at: NOW } } },
+      },
+      'merge',
+    )
+    expect(getCourseProgress()).toEqual({
+      lessons: { 'a1/verbo-to-be': { best: 1, at: NOW - 3_600_000 } },
+      exams: { a1: { best: 1, at: NOW } },
+    })
+  })
+
   it('exportar e importar devuelve exactamente el mismo progreso, ajustes, historial y logros', () => {
     expect(Object.keys(UNLOCKS).length).toBeGreaterThan(0)
     expect(parseBackup(serializeBackup(BACKUP, NOW))).toEqual({ ok: true, backup: BACKUP })

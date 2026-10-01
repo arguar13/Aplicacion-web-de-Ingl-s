@@ -3,6 +3,13 @@
  * las webs no instaladas tras 7 días sin visitarlas) y para pasarlo a otro dispositivo.
  */
 import { getUnlocks, mergeUnlocks, parseUnlocks, replaceUnlocks, type Unlocks } from './achievements'
+import {
+  type CourseProgress,
+  getCourseProgress,
+  mergeCourseProgress,
+  parseCourseProgress,
+  replaceCourseProgress,
+} from './courseProgress'
 import { getEvents, mergeEvents, parseEvents, replaceEvents, type StudyEvent } from './events'
 import { finishOnboarding } from './onboarding'
 import { dayKey, getProgress, mergeProgress, PROGRESS_SCHEMA, type ProgressData, replaceProgress } from './progress'
@@ -24,12 +31,14 @@ export interface Backup {
   events: StudyEvent[]
   /** Cuándo se consiguió cada logro (desde la Fase 12; `null` en las copias anteriores). */
   achievements: Unlocks | null
+  /** Progreso del curso (desde la Fase 20; `null` en las copias anteriores). */
+  course: CourseProgress | null
 }
 
 export type ParsedBackup = { ok: true; backup: Backup } | { ok: false; error: string }
 
 export function serializeBackup(
-  { progress, settings, events, achievements }: Omit<Backup, 'exportedAt'>,
+  { progress, settings, events, achievements, course }: Omit<Backup, 'exportedAt'>,
   now = Date.now(),
 ): string {
   return JSON.stringify(
@@ -42,6 +51,7 @@ export function serializeBackup(
       events,
       // Campo añadido sin cambiar de versión: las versiones anteriores de la app lo ignoran.
       ...(achievements ? { achievements } : {}),
+      ...(course ? { course } : {}),
     },
     null,
     1,
@@ -51,7 +61,13 @@ export function serializeBackup(
 /** Copia de lo que hay ahora en este dispositivo. */
 export const currentBackup = (now = Date.now()): string =>
   serializeBackup(
-    { progress: getProgress(), settings: getSettings(), events: getEvents(), achievements: getUnlocks() },
+    {
+      progress: getProgress(),
+      settings: getSettings(),
+      events: getEvents(),
+      achievements: getUnlocks(),
+      course: getCourseProgress(),
+    },
     now,
   )
 
@@ -83,6 +99,7 @@ export function parseBackup(text: string): ParsedBackup {
       settings: settings.status === 'ok' ? settings.value : SETTINGS_SCHEMA.parse({}),
       events: parseEvents(data.events),
       achievements: 'achievements' in data ? parseUnlocks(data.achievements) : null,
+      course: 'course' in data ? parseCourseProgress(data.course) : null,
     },
   }
 }
@@ -105,10 +122,12 @@ export type RestoreMode = 'merge' | 'replace'
 export function restoreBackup(backup: Backup, mode: RestoreMode) {
   if (mode === 'merge') {
     if (backup.achievements) replaceUnlocks(mergeUnlocks(getUnlocks(), backup.achievements))
+    if (backup.course) replaceCourseProgress(mergeCourseProgress(getCourseProgress(), backup.course))
     replaceProgress(mergeProgress(getProgress(), backup.progress))
     replaceEvents(mergeEvents(getEvents(), backup.events))
   } else {
     replaceUnlocks(backup.achievements)
+    replaceCourseProgress(backup.course ?? { lessons: {}, exams: {} })
     replaceSettings(backup.settings)
     replaceProgress(backup.progress)
     replaceEvents(backup.events)

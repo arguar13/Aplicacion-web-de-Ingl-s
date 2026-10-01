@@ -1,0 +1,1058 @@
+{
+  "intro": "El nivel A1 es el primer escalón: presentarte, hablar de tu rutina, describir lo que te rodea y pedir cosas sencillas. Ocho lecciones cortas, cada una con su explicación, ejemplos y ejercicios, y un examen al final.",
+  "goals": [
+    "Presentarte y hablar de otras personas con el verbo to be.",
+    "Usar artículos, plurales y los pronombres básicos.",
+    "Contar tu rutina en presente simple, con preguntas y negaciones.",
+    "Describir dónde están las cosas y qué sabes hacer.",
+    "Decir qué está pasando ahora y contar algo del pasado."
+  ],
+  "lessons": [
+    {
+      "id": "verbo-to-be",
+      "title": "El verbo to be y los pronombres",
+      "summary": "Soy, eres, es: la base de casi todo lo que vas a decir.",
+      "sections": [
+        {
+          "heading": "Las formas de to be",
+          "body": [
+            "To be significa «ser» o «estar»: en inglés es un solo verbo. Tiene tres formas en presente: am (con I), is (con he, she, it) y are (con you, we, they).",
+            "Casi siempre se usa contraído al hablar: I'm, you're, he's, she's, it's, we're, they're."
+          ],
+          "examples": [
+            {
+              "en": "I am a student.",
+              "es": "Soy estudiante."
+            },
+            {
+              "en": "She is from Mexico.",
+              "es": "Ella es de México."
+            },
+            {
+              "en": "We are at home.",
+              "es": "Estamos en casa."
+            },
+            {
+              "en": "They're tired.",
+              "es": "Están cansados."
+            }
+          ],
+          "table": {
+            "headers": ["Pronombre", "Forma", "Contracción"],
+            "rows": [
+              ["I", "am", "I'm"],
+              ["you", "are", "you're"],
+              ["he / she / it", "is", "he's / she's / it's"],
+              ["we", "are", "we're"],
+              ["they", "are", "they're"]
+            ]
+          }
+        },
+        {
+          "heading": "Negación y preguntas",
+          "body": [
+            "Para negar, se añade not después del verbo: I am not, she is not (isn't), they are not (aren't).",
+            "Para preguntar, el verbo va delante del sujeto: Are you tired? Is he a doctor? La respuesta corta repite el verbo: Yes, I am. / No, he isn't."
+          ],
+          "examples": [
+            {
+              "en": "I'm not hungry.",
+              "es": "No tengo hambre."
+            },
+            {
+              "en": "She isn't here.",
+              "es": "Ella no está aquí."
+            },
+            {
+              "en": "Are you ready? Yes, I am.",
+              "es": "¿Estás listo? Sí."
+            },
+            {
+              "en": "Is it cold? No, it isn't.",
+              "es": "¿Hace frío? No."
+            }
+          ],
+          "tip": "En inglés el sujeto nunca se omite: «Soy médico» es I am a doctor, no «Am a doctor»."
+        },
+        {
+          "heading": "It para cosas, animales y el tiempo",
+          "body": [
+            "It se usa para objetos, animales, el clima y la hora. En español no lo decimos, pero en inglés es obligatorio.",
+            "Fíjate: it's (= it is) lleva apóstrofo; its (sin apóstrofo) significa «su» (de una cosa)."
+          ],
+          "examples": [
+            {
+              "en": "It's a good book.",
+              "es": "Es un buen libro."
+            },
+            {
+              "en": "It's raining.",
+              "es": "Está lloviendo."
+            },
+            {
+              "en": "It's five o'clock.",
+              "es": "Son las cinco."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I ___ a teacher.",
+          "options": ["am", "is", "are"],
+          "answer": 0,
+          "explanation": "Con I siempre va am."
+        },
+        {
+          "type": "choice",
+          "prompt": "They ___ my friends.",
+          "options": ["is", "are", "am"],
+          "answer": 1,
+          "explanation": "You, we y they usan are."
+        },
+        {
+          "type": "fill",
+          "prompt": "She ___ from Brazil.",
+          "answers": ["is", "'s"],
+          "explanation": "He, she e it usan is."
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ not at home. (negación)",
+          "answers": ["are", "'re"],
+          "explanation": "We are not = we aren't."
+        },
+        {
+          "type": "order",
+          "es": "¿Eres estudiante?",
+          "words": ["Are", "you", "a", "student?"],
+          "explanation": "En las preguntas, el verbo va delante del sujeto."
+        },
+        {
+          "type": "translate",
+          "es": "Hace frío hoy.",
+          "answers": ["It is cold today.", "It's cold today."],
+          "explanation": "El clima siempre lleva it."
+        }
+      ]
+    },
+    {
+      "id": "articulos-y-plurales",
+      "title": "Artículos a, an, the y el plural",
+      "summary": "Un, una, el, la… y cómo decir «dos gatos».",
+      "sections": [
+        {
+          "heading": "A y an: uno cualquiera",
+          "body": [
+            "A y an significan «un, una». Se usa a delante de un sonido de consonante (a car, a house) y an delante de un sonido de vocal (an apple, an hour: la h de hour no suena).",
+            "Solo van con sustantivos en singular que se pueden contar. En plural no hay artículo: cars, apples."
+          ],
+          "examples": [
+            {
+              "en": "I have a dog and an umbrella.",
+              "es": "Tengo un perro y un paraguas."
+            },
+            {
+              "en": "She is an engineer.",
+              "es": "Ella es ingeniera."
+            },
+            {
+              "en": "It's a university.",
+              "es": "Es una universidad (la u suena como «yu», consonante)."
+            }
+          ]
+        },
+        {
+          "heading": "The: uno concreto",
+          "body": [
+            "The significa «el, la, los, las»: se usa cuando los dos saben de qué cosa hablamos. No cambia con el género ni el número.",
+            "No se usa the para hablar de algo en general: I like coffee (no «the coffee»), Dogs are friendly."
+          ],
+          "examples": [
+            {
+              "en": "The book is on the table.",
+              "es": "El libro está en la mesa."
+            },
+            {
+              "en": "The children are at school.",
+              "es": "Los niños están en la escuela."
+            },
+            {
+              "en": "I love music.",
+              "es": "Me encanta la música (en general: sin the)."
+            }
+          ],
+          "tip": "Profesiones en singular llevan a/an: She's a nurse. En español decimos «es enfermera», sin artículo."
+        },
+        {
+          "heading": "El plural",
+          "body": [
+            "La regla general es añadir -s: book → books. Tras -s, -x, -ch, -sh se añade -es: box → boxes, watch → watches. Si termina en consonante + y, cambia a -ies: city → cities.",
+            "Algunos plurales son irregulares y hay que aprenderlos: man → men, woman → women, child → children, person → people, foot → feet, tooth → teeth."
+          ],
+          "examples": [
+            {
+              "en": "Two children and three women.",
+              "es": "Dos niños y tres mujeres."
+            },
+            {
+              "en": "I brush my teeth.",
+              "es": "Me cepillo los dientes."
+            },
+            {
+              "en": "There are many cities.",
+              "es": "Hay muchas ciudades."
+            }
+          ],
+          "table": {
+            "headers": ["Singular", "Plural"],
+            "rows": [
+              ["man", "men"],
+              ["woman", "women"],
+              ["child", "children"],
+              ["person", "people"],
+              ["foot", "feet"],
+              ["mouse", "mice"]
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I have ___ apple.",
+          "options": ["a", "an", "the"],
+          "answer": 1,
+          "explanation": "Apple empieza con sonido de vocal."
+        },
+        {
+          "type": "choice",
+          "prompt": "She is ___ doctor.",
+          "options": ["a", "an", "—"],
+          "answer": 0,
+          "explanation": "Las profesiones en singular llevan a/an."
+        },
+        {
+          "type": "fill",
+          "prompt": "The ___ (child, plural) are playing.",
+          "answers": ["children"],
+          "explanation": "Child tiene plural irregular: children."
+        },
+        {
+          "type": "fill",
+          "prompt": "I need two ___ (box, plural).",
+          "answers": ["boxes"],
+          "explanation": "Tras -x se añade -es."
+        },
+        {
+          "type": "order",
+          "es": "El coche es rojo.",
+          "words": ["The", "car", "is", "red."]
+        },
+        {
+          "type": "translate",
+          "es": "Tengo tres hermanas.",
+          "answers": ["I have three sisters."],
+          "explanation": "Plural regular: sister → sisters, sin artículo."
+        }
+      ]
+    },
+    {
+      "id": "presente-simple",
+      "title": "El presente simple: tu rutina",
+      "summary": "Lo que haces siempre o a menudo, y la famosa -s de la tercera persona.",
+      "sections": [
+        {
+          "heading": "Afirmar en presente simple",
+          "body": [
+            "El presente simple cuenta hábitos, rutinas y verdades generales. El verbo va sin cambios con I, you, we y they: I work, they live.",
+            "Con he, she e it se añade -s: she works, he lives. Si el verbo termina en -o, -s, -x, -ch, -sh se añade -es (goes, watches); si termina en consonante + y, -ies (study → studies)."
+          ],
+          "examples": [
+            {
+              "en": "I work in a bank.",
+              "es": "Trabajo en un banco."
+            },
+            {
+              "en": "She works in a hospital.",
+              "es": "Ella trabaja en un hospital."
+            },
+            {
+              "en": "He goes to school by bus.",
+              "es": "Él va a la escuela en autobús."
+            },
+            {
+              "en": "My sister studies English.",
+              "es": "Mi hermana estudia inglés."
+            }
+          ],
+          "table": {
+            "headers": ["Sujeto", "Verbo"],
+            "rows": [
+              ["I / you / we / they", "work"],
+              ["he / she / it", "works"],
+              ["he / she / it", "goes, watches, studies"]
+            ]
+          }
+        },
+        {
+          "heading": "Have y do en tercera persona",
+          "body": [
+            "Dos verbos muy frecuentes cambian de forma: have → has y do → does. He has a car, she does the shopping."
+          ],
+          "examples": [
+            {
+              "en": "She has two brothers.",
+              "es": "Ella tiene dos hermanos."
+            },
+            {
+              "en": "He does his homework at night.",
+              "es": "Él hace la tarea de noche."
+            },
+            {
+              "en": "They have a big house.",
+              "es": "Tienen una casa grande."
+            }
+          ]
+        },
+        {
+          "heading": "Expresiones de frecuencia",
+          "body": [
+            "Con el presente simple van palabras como always (siempre), usually (normalmente), often (a menudo), sometimes (a veces) y never (nunca). Van antes del verbo principal, pero después de to be.",
+            "Every day, on Mondays, at the weekend suelen ir al final de la frase."
+          ],
+          "examples": [
+            {
+              "en": "I always drink coffee in the morning.",
+              "es": "Siempre tomo café por la mañana."
+            },
+            {
+              "en": "She is never late.",
+              "es": "Ella nunca llega tarde."
+            },
+            {
+              "en": "We play football on Saturdays.",
+              "es": "Jugamos al fútbol los sábados."
+            }
+          ],
+          "tip": "La -s de la tercera persona es el error más común en A1: she like → she likes."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "My brother ___ in Madrid.",
+          "options": ["live", "lives", "living"],
+          "answer": 1,
+          "explanation": "Tercera persona: live + s."
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ coffee every morning.",
+          "options": ["drink", "drinks", "drinkes"],
+          "answer": 0,
+          "explanation": "Con I el verbo no cambia."
+        },
+        {
+          "type": "fill",
+          "prompt": "She ___ (go) to work by train.",
+          "answers": ["goes"],
+          "explanation": "Go termina en -o: goes."
+        },
+        {
+          "type": "fill",
+          "prompt": "He ___ (have) a cat.",
+          "answers": ["has"],
+          "explanation": "Have es irregular en tercera persona: has."
+        },
+        {
+          "type": "order",
+          "es": "Ella siempre estudia por la noche.",
+          "words": ["She", "always", "studies", "at", "night."],
+          "explanation": "Always va antes del verbo."
+        },
+        {
+          "type": "translate",
+          "es": "Trabajamos los lunes.",
+          "answers": ["We work on Mondays."],
+          "explanation": "Los días de la semana llevan on."
+        }
+      ]
+    },
+    {
+      "id": "preguntas-y-negaciones",
+      "title": "Preguntas y negaciones con do y does",
+      "summary": "¿Trabajas? No trabajo. El auxiliar que sostiene las preguntas.",
+      "sections": [
+        {
+          "heading": "Negar con don't y doesn't",
+          "body": [
+            "En presente simple se niega con do not (don't) o, con he, she e it, does not (doesn't). El verbo principal vuelve a su forma base: she doesn't work (no «doesn't works»)."
+          ],
+          "examples": [
+            {
+              "en": "I don't like fish.",
+              "es": "No me gusta el pescado."
+            },
+            {
+              "en": "She doesn't live here.",
+              "es": "Ella no vive aquí."
+            },
+            {
+              "en": "We don't have a car.",
+              "es": "No tenemos coche."
+            }
+          ],
+          "tip": "Cuando aparece doesn't, la -s ya está en el auxiliar: he doesn't play, nunca «he doesn't plays»."
+        },
+        {
+          "heading": "Preguntar con do y does",
+          "body": [
+            "Las preguntas empiezan con Do o Does, luego el sujeto y el verbo en forma base: Do you work? Does she live here?",
+            "Las respuestas cortas usan el auxiliar: Yes, I do. / No, she doesn't."
+          ],
+          "examples": [
+            {
+              "en": "Do you speak English? Yes, I do.",
+              "es": "¿Hablas inglés? Sí."
+            },
+            {
+              "en": "Does he play tennis? No, he doesn't.",
+              "es": "¿Él juega al tenis? No."
+            },
+            {
+              "en": "Do they have children?",
+              "es": "¿Tienen hijos?"
+            }
+          ]
+        },
+        {
+          "heading": "Preguntas con palabra interrogativa",
+          "body": [
+            "Las palabras interrogativas van delante del auxiliar: What do you do? (¿A qué te dedicas?), Where does she live?, When do they study?, Why do you ask?",
+            "Who como sujeto no necesita do: Who lives here?"
+          ],
+          "examples": [
+            {
+              "en": "Where do you live?",
+              "es": "¿Dónde vives?"
+            },
+            {
+              "en": "What time does the film start?",
+              "es": "¿A qué hora empieza la película?"
+            },
+            {
+              "en": "How often do you go to the gym?",
+              "es": "¿Con qué frecuencia vas al gimnasio?"
+            }
+          ],
+          "table": {
+            "headers": ["Palabra", "Significado"],
+            "rows": [
+              ["what", "qué"],
+              ["where", "dónde"],
+              ["when", "cuándo"],
+              ["who", "quién"],
+              ["why", "por qué"],
+              ["how", "cómo"]
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ she like music?",
+          "options": ["Do", "Does", "Is"],
+          "answer": 1,
+          "explanation": "Con she, el auxiliar es does."
+        },
+        {
+          "type": "choice",
+          "prompt": "They ___ eat meat.",
+          "options": ["doesn't", "don't", "not"],
+          "answer": 1,
+          "explanation": "They niega con don't."
+        },
+        {
+          "type": "fill",
+          "prompt": "He ___ (not / work) on Sundays.",
+          "answers": ["doesn't work", "does not work"],
+          "explanation": "Doesn't + verbo en forma base."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ you speak French?",
+          "answers": ["Do"],
+          "explanation": "Con you se pregunta con Do."
+        },
+        {
+          "type": "order",
+          "es": "¿Dónde vive tu hermano?",
+          "words": ["Where", "does", "your", "brother", "live?"],
+          "explanation": "Palabra interrogativa + does + sujeto + verbo."
+        },
+        {
+          "type": "translate",
+          "es": "No tengo tiempo.",
+          "answers": ["I don't have time.", "I do not have time."],
+          "explanation": "Have se niega con don't en inglés americano."
+        }
+      ]
+    },
+    {
+      "id": "there-is-y-lugar",
+      "title": "There is, there are y las preposiciones de lugar",
+      "summary": "Hay una silla; está al lado de la mesa.",
+      "sections": [
+        {
+          "heading": "Hay: there is y there are",
+          "body": [
+            "«Hay» se dice there is con singular y there are con plural. Para negar: there isn't, there aren't. Para preguntar: Is there…? Are there…?",
+            "Con cantidades indefinidas se usa some en afirmativas (there are some apples) y any en negativas y preguntas (there aren't any apples, are there any apples?)."
+          ],
+          "examples": [
+            {
+              "en": "There is a bank near here.",
+              "es": "Hay un banco cerca de aquí."
+            },
+            {
+              "en": "There are two cats in the garden.",
+              "es": "Hay dos gatos en el jardín."
+            },
+            {
+              "en": "Is there a pharmacy? Yes, there is.",
+              "es": "¿Hay una farmacia? Sí."
+            },
+            {
+              "en": "There aren't any eggs.",
+              "es": "No hay huevos."
+            }
+          ]
+        },
+        {
+          "heading": "Dónde está: in, on, at",
+          "body": [
+            "In para espacios cerrados o grandes (in the box, in the kitchen, in London). On para superficies (on the table, on the wall). At para puntos concretos (at the door, at the bus stop, at home, at work)."
+          ],
+          "examples": [
+            {
+              "en": "The keys are in the bag.",
+              "es": "Las llaves están en el bolso."
+            },
+            {
+              "en": "The picture is on the wall.",
+              "es": "El cuadro está en la pared."
+            },
+            {
+              "en": "She's at the station.",
+              "es": "Ella está en la estación."
+            }
+          ],
+          "table": {
+            "headers": ["Preposición", "Uso", "Ejemplo"],
+            "rows": [
+              ["in", "dentro, lugares grandes", "in the room, in Spain"],
+              ["on", "sobre una superficie", "on the desk, on the floor"],
+              ["at", "un punto concreto", "at the door, at school"]
+            ]
+          },
+          "tip": "At home, at work, at school: sin artículo."
+        },
+        {
+          "heading": "Más preposiciones de lugar",
+          "body": [
+            "Next to (al lado de), between (entre), behind (detrás de), in front of (delante de), under (debajo de), near (cerca de), opposite (enfrente de)."
+          ],
+          "examples": [
+            {
+              "en": "The bank is next to the post office.",
+              "es": "El banco está al lado de la oficina de correos."
+            },
+            {
+              "en": "The cat is under the chair.",
+              "es": "El gato está debajo de la silla."
+            },
+            {
+              "en": "My house is between the park and the school.",
+              "es": "Mi casa está entre el parque y la escuela."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ a supermarket on this street.",
+          "options": ["There is", "There are", "It is"],
+          "answer": 0,
+          "explanation": "Singular: there is."
+        },
+        {
+          "type": "choice",
+          "prompt": "The book is ___ the table.",
+          "options": ["in", "on", "at"],
+          "answer": 1,
+          "explanation": "Sobre una superficie: on."
+        },
+        {
+          "type": "fill",
+          "prompt": "There ___ three bedrooms in the house.",
+          "answers": ["are"],
+          "explanation": "Plural: there are."
+        },
+        {
+          "type": "fill",
+          "prompt": "Are there ___ apples? (cantidad indefinida en pregunta)",
+          "answers": ["any"],
+          "explanation": "En preguntas y negativas se usa any."
+        },
+        {
+          "type": "order",
+          "es": "Las llaves están en el bolso.",
+          "words": ["The", "keys", "are", "in", "the", "bag."]
+        },
+        {
+          "type": "translate",
+          "es": "No hay leche.",
+          "answers": ["There isn't any milk.", "There is no milk.", "There's no milk."],
+          "explanation": "Negativa con any o con no."
+        }
+      ]
+    },
+    {
+      "id": "can-y-habilidades",
+      "title": "Can y can't: lo que sabes hacer",
+      "summary": "Sé nadar, no puedo venir, ¿puedes ayudarme?",
+      "sections": [
+        {
+          "heading": "Habilidad y posibilidad",
+          "body": [
+            "Can significa «poder» o «saber hacer». Es igual para todas las personas y va seguido del verbo en forma base, sin to: I can swim, she can drive.",
+            "La negación es cannot, casi siempre contraída: can't."
+          ],
+          "examples": [
+            {
+              "en": "I can speak three languages.",
+              "es": "Hablo tres idiomas."
+            },
+            {
+              "en": "She can't drive.",
+              "es": "Ella no sabe conducir."
+            },
+            {
+              "en": "We can meet tomorrow.",
+              "es": "Podemos quedar mañana."
+            }
+          ],
+          "tip": "Nunca se añade -s ni to: she can sings y she can to sing son errores."
+        },
+        {
+          "heading": "Preguntas y peticiones",
+          "body": [
+            "Para preguntar, can va delante: Can you swim? Can he come? También sirve para pedir algo con educación: Can I have a coffee, please? Can you help me?",
+            "Could es más formal y amable: Could you open the window?"
+          ],
+          "examples": [
+            {
+              "en": "Can you help me? Yes, I can.",
+              "es": "¿Puedes ayudarme? Sí."
+            },
+            {
+              "en": "Can I have the bill, please?",
+              "es": "¿Me trae la cuenta, por favor?"
+            },
+            {
+              "en": "Could you repeat that?",
+              "es": "¿Podría repetirlo?"
+            }
+          ]
+        },
+        {
+          "heading": "Permiso",
+          "body": ["Can también pide o da permiso: Can I sit here? You can't park here (no se puede aparcar aquí)."],
+          "examples": [
+            {
+              "en": "Can I open the window?",
+              "es": "¿Puedo abrir la ventana?"
+            },
+            {
+              "en": "You can't smoke here.",
+              "es": "Aquí no se puede fumar."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "She ___ play the piano very well.",
+          "options": ["can", "cans", "can to"],
+          "answer": 0,
+          "explanation": "Can no cambia ni lleva to."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ you swim?",
+          "options": ["Do can", "Can", "Are"],
+          "answer": 1,
+          "explanation": "Can va delante del sujeto para preguntar."
+        },
+        {
+          "type": "fill",
+          "prompt": "I ___ (not) come to the party tomorrow.",
+          "answers": ["can't", "cannot", "can not"],
+          "explanation": "Negación: can't."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ I have a glass of water, please?",
+          "answers": ["Can", "Could"],
+          "explanation": "Petición educada: Can/Could I have…?"
+        },
+        {
+          "type": "order",
+          "es": "Mi padre sabe cocinar muy bien.",
+          "words": ["My", "father", "can", "cook", "very", "well."]
+        },
+        {
+          "type": "translate",
+          "es": "¿Puedes ayudarme?",
+          "answers": ["Can you help me?", "Could you help me?"]
+        }
+      ]
+    },
+    {
+      "id": "presente-continuo",
+      "title": "El presente continuo: lo que pasa ahora",
+      "summary": "Estoy estudiando, están durmiendo. Y la diferencia con el presente simple.",
+      "sections": [
+        {
+          "heading": "Formar el presente continuo",
+          "body": [
+            "Se forma con to be + verbo en -ing: I am working, she is reading, they are sleeping. Describe lo que ocurre en este momento o por estos días.",
+            "Ortografía de -ing: write → writing (se quita la e), sit → sitting (se dobla la consonante final en palabras cortas), study → studying."
+          ],
+          "examples": [
+            {
+              "en": "I'm studying English now.",
+              "es": "Estoy estudiando inglés ahora."
+            },
+            {
+              "en": "She is cooking dinner.",
+              "es": "Ella está preparando la cena."
+            },
+            {
+              "en": "They're playing in the park.",
+              "es": "Están jugando en el parque."
+            },
+            {
+              "en": "He's sitting on the sofa.",
+              "es": "Él está sentado en el sofá."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Forma -ing"],
+            "rows": [
+              ["work", "working"],
+              ["write", "writing"],
+              ["sit", "sitting"],
+              ["run", "running"],
+              ["study", "studying"]
+            ]
+          }
+        },
+        {
+          "heading": "Negación y preguntas",
+          "body": [
+            "Se niega con not tras to be: I'm not listening, he isn't working. Se pregunta invirtiendo to be: Are you listening? What is she doing?"
+          ],
+          "examples": [
+            {
+              "en": "I'm not watching TV.",
+              "es": "No estoy viendo la tele."
+            },
+            {
+              "en": "Is it raining? No, it isn't.",
+              "es": "¿Está lloviendo? No."
+            },
+            {
+              "en": "What are you doing?",
+              "es": "¿Qué estás haciendo?"
+            }
+          ]
+        },
+        {
+          "heading": "Presente simple o continuo",
+          "body": [
+            "Presente simple: hábitos y verdades (I work every day). Presente continuo: ahora mismo o algo temporal (I'm working today).",
+            "Algunos verbos no suelen usarse en continuo: like, love, want, know, need, understand. Se dice I want a coffee, no «I'm wanting»."
+          ],
+          "examples": [
+            {
+              "en": "I usually drink tea, but today I'm drinking coffee.",
+              "es": "Normalmente tomo té, pero hoy estoy tomando café."
+            },
+            {
+              "en": "She works in a bank. Right now she's having lunch.",
+              "es": "Ella trabaja en un banco. Ahora mismo está almorzando."
+            },
+            {
+              "en": "I know the answer.",
+              "es": "Sé la respuesta."
+            }
+          ],
+          "tip": "Now, right now, at the moment y today suelen pedir presente continuo."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Listen! The baby ___.",
+          "options": ["cries", "is crying", "crying"],
+          "answer": 1,
+          "explanation": "Ahora mismo: presente continuo."
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ a new book this week.",
+          "options": ["read", "am reading", "reads"],
+          "answer": 1,
+          "explanation": "Algo temporal, esta semana: continuo."
+        },
+        {
+          "type": "fill",
+          "prompt": "They ___ (play) football at the moment.",
+          "answers": ["are playing", "'re playing"]
+        },
+        {
+          "type": "fill",
+          "prompt": "She ___ (write) an email now.",
+          "answers": ["is writing", "'s writing"],
+          "explanation": "Write pierde la e: writing."
+        },
+        {
+          "type": "order",
+          "es": "¿Qué estás haciendo?",
+          "words": ["What", "are", "you", "doing?"]
+        },
+        {
+          "type": "translate",
+          "es": "No estoy trabajando hoy.",
+          "answers": ["I'm not working today.", "I am not working today."]
+        }
+      ]
+    },
+    {
+      "id": "pasado-simple",
+      "title": "El pasado simple: ayer y la semana pasada",
+      "summary": "Was, were, y los verbos en -ed (y los que no).",
+      "sections": [
+        {
+          "heading": "El pasado de to be",
+          "body": [
+            "To be en pasado tiene dos formas: was (I, he, she, it) y were (you, we, they). Negación: wasn't, weren't. Pregunta: Was it good? Were you there?"
+          ],
+          "examples": [
+            {
+              "en": "I was at home yesterday.",
+              "es": "Ayer estuve en casa."
+            },
+            {
+              "en": "They were very happy.",
+              "es": "Estaban muy contentos."
+            },
+            {
+              "en": "Was the film good? Yes, it was.",
+              "es": "¿Era buena la película? Sí."
+            },
+            {
+              "en": "We weren't tired.",
+              "es": "No estábamos cansados."
+            }
+          ]
+        },
+        {
+          "heading": "Verbos regulares: -ed",
+          "body": [
+            "Los verbos regulares forman el pasado añadiendo -ed: work → worked, play → played. Si terminan en -e, solo -d (live → lived); en consonante + y, -ied (study → studied); en palabras cortas con una consonante final, se dobla (stop → stopped).",
+            "La forma es la misma para todas las personas: I worked, she worked, they worked."
+          ],
+          "examples": [
+            {
+              "en": "I worked a lot last week.",
+              "es": "Trabajé mucho la semana pasada."
+            },
+            {
+              "en": "She lived in Paris for two years.",
+              "es": "Ella vivió en París dos años."
+            },
+            {
+              "en": "We stopped at a café.",
+              "es": "Paramos en un café."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Pasado"],
+            "rows": [
+              ["work", "worked"],
+              ["live", "lived"],
+              ["study", "studied"],
+              ["stop", "stopped"],
+              ["play", "played"]
+            ]
+          }
+        },
+        {
+          "heading": "Verbos irregulares, negación y preguntas",
+          "body": [
+            "Muchos verbos frecuentes son irregulares: go → went, have → had, see → saw, eat → ate, do → did, make → made, come → came, get → got, take → took, say → said.",
+            "Para negar y preguntar se usa did (igual para todos) con el verbo en forma base: I didn't go, Did you see it? Expresiones típicas: yesterday, last night, last week, two days ago, in 2010."
+          ],
+          "examples": [
+            {
+              "en": "We went to the beach yesterday.",
+              "es": "Ayer fuimos a la playa."
+            },
+            {
+              "en": "I didn't see him.",
+              "es": "No lo vi."
+            },
+            {
+              "en": "Did you have breakfast? Yes, I did.",
+              "es": "¿Desayunaste? Sí."
+            },
+            {
+              "en": "She got home at ten.",
+              "es": "Ella llegó a casa a las diez."
+            }
+          ],
+          "tip": "Con did el verbo vuelve a la forma base: Did you went? es un error; lo correcto es Did you go?"
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I ___ at the cinema last night.",
+          "options": ["was", "were", "am"],
+          "answer": 0,
+          "explanation": "I usa was."
+        },
+        {
+          "type": "choice",
+          "prompt": "They ___ to Rome in 2019.",
+          "options": ["goed", "went", "go"],
+          "answer": 1,
+          "explanation": "Go es irregular: went."
+        },
+        {
+          "type": "fill",
+          "prompt": "She ___ (study) medicine.",
+          "answers": ["studied"],
+          "explanation": "Consonante + y: studied."
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (not / see) the film.",
+          "answers": ["didn't see", "did not see"],
+          "explanation": "Did + not + forma base."
+        },
+        {
+          "type": "order",
+          "es": "¿Desayunaste esta mañana?",
+          "words": ["Did", "you", "have", "breakfast", "this", "morning?"]
+        },
+        {
+          "type": "translate",
+          "es": "Ayer trabajé mucho.",
+          "answers": ["I worked a lot yesterday.", "Yesterday I worked a lot.", "I worked hard yesterday."]
+        }
+      ]
+    }
+  ],
+  "exam": [
+    {
+      "type": "choice",
+      "prompt": "My parents ___ teachers.",
+      "options": ["is", "are", "am"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "She ___ an engineer.",
+      "options": ["is", "are", "am"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "I need ___ umbrella.",
+      "options": ["a", "an", "the"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "He ___ TV every evening.",
+      "options": ["watch", "watches", "is watch"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "___ they live in Lima?",
+      "options": ["Does", "Do", "Are"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "There ___ a lot of people in the park.",
+      "options": ["is", "are", "be"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "Look! It ___.",
+      "options": ["snows", "is snowing", "snow"],
+      "answer": 1
+    },
+    {
+      "type": "fill",
+      "prompt": "She ___ (not / like) fish.",
+      "answers": ["doesn't like", "does not like"]
+    },
+    {
+      "type": "fill",
+      "prompt": "The cat is ___ the sofa. (debajo)",
+      "answers": ["under"]
+    },
+    {
+      "type": "fill",
+      "prompt": "We ___ (go) to Italy last summer.",
+      "answers": ["went"]
+    },
+    {
+      "type": "fill",
+      "prompt": "I ___ (can / not) swim.",
+      "answers": ["can't", "cannot", "can not"]
+    },
+    {
+      "type": "order",
+      "es": "¿Dónde trabaja tu madre?",
+      "words": ["Where", "does", "your", "mother", "work?"]
+    },
+    {
+      "type": "order",
+      "es": "Hay dos ventanas en la habitación.",
+      "words": ["There", "are", "two", "windows", "in", "the", "room."]
+    },
+    {
+      "type": "translate",
+      "es": "Estoy aprendiendo inglés.",
+      "answers": ["I'm learning English.", "I am learning English."]
+    },
+    {
+      "type": "translate",
+      "es": "No vi la película.",
+      "answers": ["I didn't see the film.", "I did not see the film.", "I didn't see the movie."]
+    }
+  ]
+}

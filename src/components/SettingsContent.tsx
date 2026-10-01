@@ -1,5 +1,6 @@
 import { type ReactNode, useId, useState } from 'react'
 import { resetAchievements } from '@/lib/achievements'
+import { resetCourseProgress } from '@/lib/courseProgress'
 import { LEVELS } from '@/lib/decks'
 import { canVibrate } from '@/lib/feedback'
 import { resetProgress } from '@/lib/progress'
@@ -143,6 +144,7 @@ export function SettingsContent() {
               onClick={() => {
                 resetProgress()
                 resetAchievements()
+                resetCourseProgress()
                 setConfirmReset(false)
               }}
             >

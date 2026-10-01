@@ -1,0 +1,72 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import {
+  examPassed,
+  getCourseProgress,
+  levelSummary,
+  mergeCourseProgress,
+  parseCourseProgress,
+  recordExam,
+  recordLesson,
+  resetCourseProgress,
+  XP_EXAM,
+  XP_EXERCISE,
+  XP_LESSON,
+} from './courseProgress'
+import { getProgress, resetProgress } from './progress'
+
+const NOW = new Date(2026, 9, 1, 10).getTime()
+
+beforeEach(() => {
+  resetProgress()
+  resetCourseProgress()
+})
+
+describe('progreso del curso', () => {
+  it('valida lo guardado: descarta niveles desconocidos y notas sin forma', () => {
+    expect(
+      parseCourseProgress({
+        lessons: { 'a1/to-be': { best: 1.4, at: 5 }, 'zz/x': { best: 1, at: 1 }, 'a1/rota': { best: 'alta' } },
+        exams: { a1: { best: 0.9, at: 2 }, c9: { best: 1, at: 1 } },
+      }),
+    ).toEqual({ lessons: { 'a1/to-be': { best: 1, at: 5 } }, exams: { a1: { best: 0.9, at: 2 } } })
+    expect(parseCourseProgress(null)).toEqual({ lessons: {}, exams: {} })
+  })
+
+  it('una lección guarda su mejor nota y premia terminarla solo la primera vez', () => {
+    recordLesson('a1', 'to-be', 4, 0.8, NOW)
+    expect(getCourseProgress().lessons['a1/to-be']).toEqual({ best: 0.8, at: NOW })
+    expect(getProgress().xp).toBe(4 * XP_EXERCISE + XP_LESSON)
+    recordLesson('a1', 'to-be', 5, 1, NOW + 1000)
+    expect(getCourseProgress().lessons['a1/to-be']).toEqual({ best: 1, at: NOW + 1000 })
+    expect(getProgress().xp).toBe(9 * XP_EXERCISE + XP_LESSON)
+    // Una nota peor no pisa la mejor.
+    recordLesson('a1', 'to-be', 2, 0.4, NOW + 2000)
+    expect(getCourseProgress().lessons['a1/to-be'].best).toBe(1)
+  })
+
+  it('el examen se aprueba con el 80 % y el premio por aprobar se cobra una vez', () => {
+    expect(recordExam('a1', 7, 0.7, NOW)).toBe(false)
+    expect(examPassed(getCourseProgress(), 'a1')).toBe(false)
+    expect(getProgress().xp).toBe(7 * XP_EXERCISE)
+    expect(recordExam('a1', 9, 0.9, NOW + 1)).toBe(true)
+    expect(getProgress().xp).toBe(16 * XP_EXERCISE + XP_EXAM)
+    expect(recordExam('a1', 10, 1, NOW + 2)).toBe(true)
+    expect(getProgress().xp).toBe(26 * XP_EXERCISE + XP_EXAM)
+    expect(levelSummary(getCourseProgress(), 'a1', ['to-be', 'articles'])).toMatchObject({
+      done: 0,
+      total: 2,
+      passed: true,
+    })
+  })
+
+  it('combinar dos progresos se queda con la mejor nota de cada cosa', () => {
+    const merged = mergeCourseProgress(
+      { lessons: { 'a1/x': { best: 0.5, at: 1 } }, exams: { a1: { best: 0.9, at: 9 } } },
+      { lessons: { 'a1/x': { best: 0.9, at: 2 }, 'a2/y': { best: 1, at: 3 } }, exams: { a1: { best: 0.9, at: 4 } } },
+    )
+    expect(merged).toEqual({
+      lessons: { 'a1/x': { best: 0.9, at: 2 }, 'a2/y': { best: 1, at: 3 } },
+      exams: { a1: { best: 0.9, at: 4 } },
+    })
+  })
+})
