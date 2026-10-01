@@ -6,11 +6,13 @@ script="$(cd "$(dirname "$0")" && pwd)/check-deploy-target.sh"
 bin="$(mktemp -d)"
 trap 'rm -rf "$bin"' EXIT
 
-# curl falso: guarda la URL pedida, imprime FAKE_LISTING y sale con FAKE_STATUS.
+# curl falso: guarda la URL pedida (y en FAKE_ARGS_FILE, si está, todos los argumentos), imprime
+# FAKE_LISTING y sale con FAKE_STATUS.
 cat >"$bin/curl" <<'EOF'
 #!/usr/bin/env bash
 for arg; do url="$arg"; done
 echo "$url" >"$FAKE_URL_FILE"
+[[ -z "${FAKE_ARGS_FILE:-}" ]] || printf '%s\n' "$@" >"$FAKE_ARGS_FILE"
 printf '%b' "${FAKE_LISTING:-}"
 exit "${FAKE_STATUS:-0}"
 EOF
@@ -52,6 +54,33 @@ run "carpetas wp-* sin PHP" error "public_html/" "wp-content\n"
 run "otro sitio estático" error "public_html/" "index.html\nestilos.css\n"
 run "listado con rutas" error "public_html/" "public_html/wp-config.php\n"
 run "error de conexión" error "public_html/ingles/" "" 67
+
+# Con FTP_TLS_NAME, la URL lleva ese nombre y --connect-to dirige la conexión al servidor real.
+tls_check() {
+  local name="$1" protocol="$2" expect="$3" url_file args_file status=0
+  url_file="$(mktemp)"
+  args_file="$(mktemp)"
+  PATH="$bin:$PATH" FTP_SERVER=ftp.ejemplo.com FTP_USERNAME=u FTP_PASSWORD=p FTP_SERVER_DIR=./ \
+    FTP_TLS_NAME=hstgr.io FTP_PROTOCOL="$protocol" FAKE_URL_FILE="$url_file" \
+    FAKE_ARGS_FILE="$args_file" bash "$script" >/dev/null 2>&1 || status=$?
+  local problem=""
+  if [[ "$expect" == ok ]]; then
+    [[ "$status" == 0 ]] || problem="debía pasar y falló"
+    [[ "$(cat "$url_file")" == "ftp://hstgr.io/" ]] || problem="URL '$(cat "$url_file")'"
+    grep -qx "hstgr.io:21:ftp.ejemplo.com:21" "$args_file" || problem="falta --connect-to"
+  elif [[ "$status" == 0 ]]; then
+    problem="debía fallar y pasó"
+  fi
+  rm -f "$url_file" "$args_file"
+  if [[ -n "$problem" ]]; then
+    echo "FALLA  $name: $problem"
+    failures=$((failures + 1))
+  else
+    echo "ok     $name"
+  fi
+}
+tls_check "nombre TLS con FTPS" ftps ok
+tls_check "nombre TLS sin FTPS" ftp error
 
 if ((failures)); then
   echo "$failures prueba(s) fallaron."

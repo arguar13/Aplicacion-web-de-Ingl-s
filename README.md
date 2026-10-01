@@ -224,7 +224,13 @@ las entrega a ramas protegidas como `main`) y la contraseña además como **Mask
 | `FTP_PASSWORD`   | Contraseña FTP                                                                  |
 | `FTP_SERVER_DIR` | Obligatoria. Carpeta de Tecla, p. ej. `public_html/ingles/` (ver abajo)         |
 | `SITE_URL`       | Dirección pública, p. ej. `https://ingles.tudominio.com/`                       |
+| `FTP_TLS_NAME`   | En Hostinger, `hstgr.io` (ver abajo)                                            |
 | `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
+
+El certificado FTPS de Hostinger está emitido para `*.hstgr.io`, no para `ftp.tudominio.com`, y
+Hostinger no publica ningún nombre de ese dominio que apunte al servidor. Con `FTP_TLS_NAME` =
+`hstgr.io`, el despliegue se conecta a `FTP_SERVER` y verifica el certificado contra ese nombre:
+la conexión sigue cifrada y autenticada, sin desactivar la verificación.
 
 Con `SITE_URL`, el build añade la URL canónica, las URLs absolutas de la imagen para compartir y
 `sitemap.xml`. Sin ella todo funciona, pero sin esos extras.

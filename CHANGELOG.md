@@ -17,6 +17,13 @@ Todos los cambios importantes de Tecla. El formato sigue
 - Mantenimiento semanal del runner (`scripts/runner-maintenance.ps1`): renueva `node:24` y borra la
   versión anterior, sin tocar las imágenes de otros proyectos.
 
+### Corregido
+
+- **Despliegue por FTPS en Hostinger:** su certificado está emitido para `*.hstgr.io`, no para
+  `ftp.<dominio>`, y la conexión fallaba al verificarlo. Con `FTP_TLS_NAME` = `hstgr.io` se
+  conecta al servidor de siempre y el certificado se verifica contra ese nombre, sin desactivar
+  la verificación. `FTP_DRY_RUN=true` simula la subida sin cambiar nada.
+
 ## 2.3.0 · 2026-10-01 · Un curso con el rigor de las certificaciones (Fase 21)
 
 ### Añadido

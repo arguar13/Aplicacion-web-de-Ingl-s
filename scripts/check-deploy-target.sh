@@ -9,7 +9,9 @@
 #
 # Entrada (variables de entorno): FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (relativa
 # a la carpeta inicial de la cuenta FTP; "./" es esa misma carpeta) y FTP_PROTOCOL (ftps por
-# defecto, ftps-legacy o ftp, como FTP-Deploy-Action).
+# defecto, ftps-legacy o ftp, como FTP-Deploy-Action). Opcional: FTP_TLS_NAME, el nombre contra el
+# que se verifica el certificado cuando no coincide con FTP_SERVER (en Hostinger, hstgr.io; ver
+# scripts/ftp-upload.mjs).
 # Salida: la carpeta terminada en "/" (lo que espera ftp-deploy) como única línea de stdout; los
 # mensajes van a stderr. La usa scripts/deploy.sh.
 set -euo pipefail
@@ -34,7 +36,16 @@ esac
 path="${dir#./}"
 [[ "$path" == /* ]] && path="%2F${path#/}"
 path="${path// /%20}"
-url="$scheme://$FTP_SERVER/$path"
+
+# Con FTP_TLS_NAME, la URL lleva ese nombre (contra él se verifica el certificado) y --connect-to
+# dirige la conexión a FTP_SERVER.
+host="$FTP_SERVER"
+if [[ -n "${FTP_TLS_NAME:-}" ]]; then
+  [[ "${FTP_PROTOCOL:-ftps}" == ftps ]] || fail "FTP_TLS_NAME solo se admite con FTP_PROTOCOL=ftps."
+  host="$FTP_TLS_NAME"
+  tls+=(--connect-to "$FTP_TLS_NAME:21:$FTP_SERVER:21")
+fi
+url="$scheme://$host/$path"
 
 err="$(mktemp)"
 trap 'rm -f "$err"' EXIT
