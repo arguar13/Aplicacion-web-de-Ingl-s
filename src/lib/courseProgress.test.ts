@@ -8,10 +8,12 @@ import {
   parseCourseProgress,
   recordExam,
   recordLesson,
+  recordQuiz,
   resetCourseProgress,
   XP_EXAM,
   XP_EXERCISE,
   XP_LESSON,
+  XP_QUIZ_PERFECT,
 } from './courseProgress'
 import { getProgress, resetProgress } from './progress'
 
@@ -29,8 +31,15 @@ describe('progreso del curso', () => {
         lessons: { 'a1/to-be': { best: 1.4, at: 5 }, 'zz/x': { best: 1, at: 1 }, 'a1/rota': { best: 'alta' } },
         exams: { a1: { best: 0.9, at: 2 }, c9: { best: 1, at: 1 } },
       }),
-    ).toEqual({ lessons: { 'a1/to-be': { best: 1, at: 5 } }, exams: { a1: { best: 0.9, at: 2 } } })
-    expect(parseCourseProgress(null)).toEqual({ lessons: {}, exams: {} })
+    ).toEqual({ lessons: { 'a1/to-be': { best: 1, at: 5 } }, exams: { a1: { best: 0.9, at: 2 } }, quizzes: {} })
+    expect(parseCourseProgress(null)).toEqual({ lessons: {}, exams: {}, quizzes: {} })
+    expect(
+      parseCourseProgress({ quizzes: { a1: { best: 0.7, at: 1 }, mixto: { best: 1, at: 2 }, zz: { best: 1, at: 1 } } })
+        .quizzes,
+    ).toEqual({
+      a1: { best: 0.7, at: 1 },
+      mixto: { best: 1, at: 2 },
+    })
   })
 
   it('una lección guarda su mejor nota y premia terminarla solo la primera vez', () => {
@@ -75,25 +84,42 @@ describe('progreso del curso', () => {
       },
       { id: 'a2' as const, lessons: [{ id: 'z', title: 'Z' }] },
     ]
-    expect(nextStep({ lessons: {}, exams: {} }, levels)).toEqual({
+    expect(nextStep({ lessons: {}, exams: {}, quizzes: {} }, levels)).toEqual({
       level: 'a1',
       lesson: { id: 'x', title: 'X', index: 0 },
     })
-    const done = { lessons: { 'a1/x': { best: 1, at: 1 }, 'a1/y': { best: 1, at: 1 } }, exams: {} }
+    const done = { lessons: { 'a1/x': { best: 1, at: 1 }, 'a1/y': { best: 1, at: 1 } }, exams: {}, quizzes: {} }
     expect(nextStep(done, levels)).toEqual({ level: 'a1', lesson: null })
     const passed = { ...done, exams: { a1: { best: 0.9, at: 1 } } }
     expect(nextStep(passed, levels)).toEqual({ level: 'a2', lesson: { id: 'z', title: 'Z', index: 0 } })
     expect(nextStep({ ...passed, exams: { a1: { best: 1, at: 1 }, a2: { best: 1, at: 1 } } }, levels)).toBeNull()
   })
 
+  it('un quiz guarda su mejor nota y un quiz perfecto da experiencia extra', () => {
+    recordQuiz('a1', 7, 0.7, NOW)
+    expect(getCourseProgress().quizzes.a1).toEqual({ best: 0.7, at: NOW })
+    expect(getProgress().xp).toBe(7 * XP_EXERCISE)
+    recordQuiz('mixto', 12, 1, NOW + 1)
+    expect(getProgress().xp).toBe(19 * XP_EXERCISE + XP_QUIZ_PERFECT)
+  })
+
   it('combinar dos progresos se queda con la mejor nota de cada cosa', () => {
     const merged = mergeCourseProgress(
-      { lessons: { 'a1/x': { best: 0.5, at: 1 } }, exams: { a1: { best: 0.9, at: 9 } } },
-      { lessons: { 'a1/x': { best: 0.9, at: 2 }, 'a2/y': { best: 1, at: 3 } }, exams: { a1: { best: 0.9, at: 4 } } },
+      {
+        lessons: { 'a1/x': { best: 0.5, at: 1 } },
+        exams: { a1: { best: 0.9, at: 9 } },
+        quizzes: { a1: { best: 0.5, at: 1 } },
+      },
+      {
+        lessons: { 'a1/x': { best: 0.9, at: 2 }, 'a2/y': { best: 1, at: 3 } },
+        exams: { a1: { best: 0.9, at: 4 } },
+        quizzes: { a1: { best: 0.8, at: 2 }, mixto: { best: 1, at: 3 } },
+      },
     )
     expect(merged).toEqual({
       lessons: { 'a1/x': { best: 0.9, at: 2 }, 'a2/y': { best: 1, at: 3 } },
       exams: { a1: { best: 0.9, at: 4 } },
+      quizzes: { a1: { best: 0.8, at: 2 }, mixto: { best: 1, at: 3 } },
     })
   })
 })

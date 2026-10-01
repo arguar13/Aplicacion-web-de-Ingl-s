@@ -10,7 +10,7 @@ import b2Url from '@/data/course/b2.json?url'
 import c1Url from '@/data/course/c1.json?url'
 import c2Url from '@/data/course/c2.json?url'
 import { useSyncExternalStore } from 'react'
-import type { CourseLevelId } from './courseMeta'
+import { COURSE_LEVELS, type CourseLevelId } from './courseMeta'
 import { isInteger, isRecord } from './validate'
 
 export interface Example {
@@ -149,7 +149,10 @@ const FAILED: LevelState = { status: 'error' }
 const states = new Map<CourseLevelId, LevelState>()
 const pending = new Map<CourseLevelId, Promise<CourseLevel>>()
 const listeners = new Set<() => void>()
+/** Estado de todos los niveles, en el orden de COURSE_LEVELS; se rehace solo cuando algo cambia. */
+let all: LevelState[] = COURSE_LEVELS.map(() => LOADING)
 const emit = () => {
+  all = COURSE_LEVELS.map((info) => states.get(info.id) ?? LOADING)
   for (const listener of listeners) listener()
 }
 
@@ -200,6 +203,17 @@ export function useCourseLevel(id: CourseLevelId): LevelState {
   )
   if (!states.has(id)) loadCourseLevel(id).catch(() => undefined)
   return state
+}
+
+/** El estado de todos los niveles (para el quiz mixto). Pedirlos empieza la carga de los que falten. */
+export function useAllCourseLevels(): LevelState[] {
+  const snapshot = useSyncExternalStore(
+    subscribe,
+    () => all,
+    () => all,
+  )
+  for (const info of COURSE_LEVELS) if (!states.has(info.id)) loadCourseLevel(info.id).catch(() => undefined)
+  return snapshot
 }
 
 /** Vuelve a intentar la carga de un nivel que falló. */

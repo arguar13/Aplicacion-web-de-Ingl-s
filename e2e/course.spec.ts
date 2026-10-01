@@ -1,75 +1,7 @@
-import type { Page } from '@playwright/test'
 import a1 from '../src/data/course/a1.json' with { type: 'json' }
+import { solveAll, toExercise } from './courseHelpers'
 import { expect, test } from './fixtures'
 import { expectAccessible, expectNoHorizontalScroll } from './helpers'
-
-type Exercise =
-  | { type: 'choice'; options: string[]; answer: number; explanation?: string }
-  | { type: 'fill' | 'translate'; answers: string[] }
-  | { type: 'order'; words: string[] }
-
-const isStrings = (value: unknown): value is string[] =>
-  Array.isArray(value) && value.every((item) => typeof item === 'string')
-
-/** Lee un ejercicio del JSON con la forma que necesita el test (sin aserciones de tipo). */
-function toExercise(raw: unknown): Exercise {
-  if (typeof raw !== 'object' || raw === null) throw new Error('Ejercicio sin forma')
-  const entry: Record<string, unknown> = { ...raw }
-  if (entry.type === 'choice' && isStrings(entry.options) && typeof entry.answer === 'number') {
-    const explanation = typeof entry.explanation === 'string' ? { explanation: entry.explanation } : {}
-    return { type: 'choice', options: entry.options, answer: entry.answer, ...explanation }
-  }
-  if ((entry.type === 'fill' || entry.type === 'translate') && isStrings(entry.answers)) {
-    return { type: entry.type, answers: entry.answers }
-  }
-  if (entry.type === 'order' && isStrings(entry.words)) return { type: 'order', words: entry.words }
-  throw new Error(`Ejercicio desconocido: ${JSON.stringify(raw)}`)
-}
-
-/** Toca las palabras disponibles en el orden indicado, una tras otra. */
-async function placeWords(page: Page, words: readonly string[]): Promise<void> {
-  const [word, ...rest] = words
-  if (word === undefined) return
-  await page
-    .getByRole('group', { name: 'Palabras disponibles' })
-    .getByRole('button', { name: word, exact: true })
-    .first()
-    .click()
-  return placeWords(page, rest)
-}
-
-/** Resuelve el ejercicio en pantalla con su respuesta correcta y pasa al siguiente. */
-async function solve(page: Page, exercise: Exercise) {
-  switch (exercise.type) {
-    case 'choice':
-      await page
-        .getByRole('group', { name: 'Opciones' })
-        .getByRole('button', { name: exercise.options[exercise.answer], exact: true })
-        .click()
-      break
-    case 'fill':
-    case 'translate': {
-      const input = page.getByRole('textbox')
-      await input.fill(exercise.answers[0])
-      await input.press('Enter')
-      break
-    }
-    case 'order':
-      await placeWords(page, exercise.words)
-      await page.getByRole('button', { name: /Comprobar/ }).click()
-      break
-  }
-  await expect(page.getByText('¡Correcto!')).toBeVisible()
-  await page.getByRole('button', { name: /Continuar|Ver el resultado/ }).click()
-}
-
-/** Resuelve todos los ejercicios, uno tras otro (cada uno espera al anterior). */
-async function solveAll(page: Page, exercises: readonly Exercise[]): Promise<void> {
-  const [first, ...rest] = exercises
-  if (!first) return
-  await solve(page, first)
-  return solveAll(page, rest)
-}
 
 const lesson = a1.lessons[0]
 

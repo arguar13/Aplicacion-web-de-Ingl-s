@@ -55,6 +55,7 @@ interface Props {
   onOpenCourse: () => void
   onOpenLesson: (level: CourseLevelId, lesson: string) => void
   onOpenExam: (level: CourseLevelId) => void
+  onOpenQuiz: (level: CourseLevelId | null) => void
   onOpenStats: () => void
   onOpenDictionary: () => void
   onOpenSettings: () => void
@@ -72,6 +73,7 @@ export function DeckPicker({
   onOpenCourse,
   onOpenLesson,
   onOpenExam,
+  onOpenQuiz,
   onOpenStats,
   onOpenDictionary,
   onOpenSettings,
@@ -161,7 +163,12 @@ export function DeckPicker({
         <Suspense
           fallback={<div className="mt-4 min-h-44 rounded-3xl border border-line bg-surface shadow-card" aria-hidden />}
         >
-          <CourseCard onOpenCourse={onOpenCourse} onOpenLesson={onOpenLesson} onOpenExam={onOpenExam} />
+          <CourseCard
+            onOpenCourse={onOpenCourse}
+            onOpenLesson={onOpenLesson}
+            onOpenExam={onOpenExam}
+            onOpenQuiz={onOpenQuiz}
+          />
         </Suspense>
         {anyProgress && (
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">

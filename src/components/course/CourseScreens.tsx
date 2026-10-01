@@ -7,6 +7,7 @@ import {
   type Lesson,
   type LevelState,
   retryCourseLevel,
+  useAllCourseLevels,
   useCourseLevel,
 } from '@/lib/course'
 import { COURSE_LEVELS, type CourseLevelId, courseLevelInfo, EXAM_PASS } from '@/lib/courseMeta'
@@ -14,19 +15,23 @@ import {
   examPassed,
   lessonKey,
   levelSummary,
+  type QuizKey,
   recordExam,
   recordLesson,
+  recordQuiz,
   useCourseProgress,
   XP_EXAM,
   XP_EXERCISE,
   XP_LESSON,
+  XP_QUIZ_PERFECT,
 } from '@/lib/courseProgress'
+import { buildMixedQuiz, buildQuiz, MIXED_QUIZ_SIZE, QUIZ_SIZE, quizPool, quizSeed } from '@/lib/courseQuiz'
 import { correctAnswer, scoreOf, type Verdict } from '@/lib/exercises'
 import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
 import { Confetti } from '../Confetti'
 import { Header } from '../Header'
-import { ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon, GraduationIcon } from '../icons'
+import { ArrowLeftIcon, ArrowRightIcon, BoltIcon, CheckCircleIcon, GraduationIcon } from '../icons'
 import { SpeakExampleButton } from '../SpeakExampleButton'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
@@ -92,10 +97,11 @@ const pct = (ratio: number) => `${Math.round(ratio * 100)} %`
 interface CourseProps {
   onExit: () => void
   onOpenLevel: (level: CourseLevelId) => void
+  onOpenMixedQuiz: () => void
 }
 
-/** El curso: los seis niveles con su avance. */
-export function CourseScreen({ onExit, onOpenLevel }: CourseProps) {
+/** El curso: los seis niveles con su avance, y el quiz mixto. */
+export function CourseScreen({ onExit, onOpenLevel, onOpenMixedQuiz }: CourseProps) {
   const progress = useCourseProgress()
   return (
     <Shell back={{ label: 'Inicio', onClick: onExit }}>
@@ -115,7 +121,53 @@ export function CourseScreen({ onExit, onOpenLevel }: CourseProps) {
           </li>
         ))}
       </ol>
+      <QuizCard
+        title="Quiz mixto"
+        description={`${MIXED_QUIZ_SIZE} preguntas de todos los niveles, distintas cada vez.`}
+        best={progress.quizzes.mixto ?? null}
+        onOpen={onOpenMixedQuiz}
+      />
     </Shell>
+  )
+}
+
+/** Acceso a un quiz, con la mejor nota si ya se hizo. */
+function QuizCard({
+  title,
+  description,
+  best,
+  onOpen,
+}: {
+  title: string
+  description: string
+  best: { best: number } | null
+  onOpen: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={cn(
+        'group mt-4 flex w-full cursor-pointer items-center gap-4 rounded-3xl border border-line bg-surface p-5 text-left shadow-card',
+        'transition-[translate,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-key-hover',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+      )}
+    >
+      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:rotate-12">
+        <BoltIcon />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[17px] font-semibold">{title}</span>
+        <span className="block text-sm text-muted">{description}</span>
+      </span>
+      {best && (
+        <span className="shrink-0 text-right">
+          <span className="block text-[10px] font-medium tracking-[0.14em] text-muted uppercase">Mejor</span>
+          <span className="block font-display text-2xl leading-none tabular-nums">{pct(best.best)}</span>
+        </span>
+      )}
+      <ArrowRightIcon className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
+    </button>
   )
 }
 
@@ -189,9 +241,10 @@ interface LevelProps {
   onExit: () => void
   onOpenLesson: (lesson: string) => void
   onOpenExam: () => void
+  onOpenQuiz: () => void
 }
 
-export function LevelScreen({ level, onExit, onOpenLesson, onOpenExam }: LevelProps) {
+export function LevelScreen({ level, onExit, onOpenLesson, onOpenExam, onOpenQuiz }: LevelProps) {
   const info = courseLevelInfo(level)
   const state = useCourseLevel(level)
   const progress = useCourseProgress()
@@ -202,7 +255,13 @@ export function LevelScreen({ level, onExit, onOpenLesson, onOpenExam }: LevelPr
       {state.status !== 'ready' ? (
         <Pending state={state} level={level} />
       ) : (
-        <LevelContent level={state.level} progress={progress} onOpenLesson={onOpenLesson} onOpenExam={onOpenExam} />
+        <LevelContent
+          level={state.level}
+          progress={progress}
+          onOpenLesson={onOpenLesson}
+          onOpenExam={onOpenExam}
+          onOpenQuiz={onOpenQuiz}
+        />
       )}
     </Shell>
   )
@@ -213,11 +272,13 @@ function LevelContent({
   progress,
   onOpenLesson,
   onOpenExam,
+  onOpenQuiz,
 }: {
   level: CourseLevel
   progress: ReturnType<typeof useCourseProgress>
   onOpenLesson: (lesson: string) => void
   onOpenExam: () => void
+  onOpenQuiz: () => void
 }) {
   const summary = levelSummary(
     progress,
@@ -319,6 +380,12 @@ function LevelContent({
         </span>
         <ArrowRightIcon className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
       </button>
+      <QuizCard
+        title="Quiz rápido"
+        description={`${QUIZ_SIZE} preguntas al azar de este nivel, distintas cada vez.`}
+        best={progress.quizzes[level.id] ?? null}
+        onOpen={onOpenQuiz}
+      />
     </>
   )
 }
@@ -688,5 +755,121 @@ function Result({
       )}
       <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center">{actions}</div>
     </Surface>
+  )
+}
+
+// --- Quiz ---------------------------------------------------------------------------------------------
+
+interface QuizProps {
+  /** Nivel del quiz, o null para el mixto. */
+  level: CourseLevelId | null
+  onExit: () => void
+}
+
+type QuizPhase = { step: 'intro' } | { step: 'running' } | { step: 'done'; verdicts: Verdict[] }
+
+/** Un quiz: preguntas al azar del nivel (o de todos), distintas en cada intento. */
+export function QuizScreen({ level, onExit }: QuizProps) {
+  const states = useAllCourseLevels()
+  const progress = useCourseProgress()
+  const [phase, setPhase] = useState<QuizPhase>({ step: 'intro' })
+  const [attempt, setAttempt] = useState(0)
+  // La semilla se fija al empezar cada intento: el quiz no cambia a mitad de camino.
+  const [seed, setSeed] = useState(() => quizSeed(Date.now(), 0))
+  const key: QuizKey = level ?? 'mixto'
+  const name = level ? `Quiz ${courseLevelInfo(level).name}` : 'Quiz mixto'
+  const back = level
+    ? { label: `Nivel ${courseLevelInfo(level).name}`, onClick: onExit }
+    : { label: 'Curso', onClick: onExit }
+  const needed = level ? [states[COURSE_LEVELS.findIndex((info) => info.id === level)]] : states
+  const pending = needed.find((state): state is Exclude<LevelState, { status: 'ready' }> => state.status !== 'ready')
+  if (pending) {
+    return (
+      <Shell back={back}>
+        <Pending state={pending} level={level ?? 'a1'} />
+      </Shell>
+    )
+  }
+  const ready = needed.flatMap((state) => (state.status === 'ready' ? [state.level] : []))
+  const exercises = level
+    ? buildQuiz(quizPool(ready[0]), seed)
+    : buildMixedQuiz(
+        ready.filter((entry) => entry.lessons.length > 0),
+        seed,
+      )
+  const previous = progress.quizzes[key]
+
+  function start(next: number) {
+    setAttempt(next)
+    setSeed(quizSeed(Date.now(), next))
+    setPhase({ step: 'running' })
+  }
+
+  function finish(verdicts: Verdict[]) {
+    const score = scoreOf(verdicts)
+    recordQuiz(key, score.correct + score.almost, score.ratio)
+    feedback(score.ratio >= 0.7 ? 'goal' : 'wrong')
+    setPhase({ step: 'done', verdicts })
+    window.scrollTo({ top: 0 })
+  }
+
+  return (
+    <Shell back={back}>
+      <p className="mt-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">
+        {level ? `Nivel ${courseLevelInfo(level).name}` : 'Todos los niveles'}
+      </p>
+      <h1 className="mt-1 font-display text-4xl leading-tight sm:text-5xl">{name}</h1>
+
+      {phase.step === 'intro' && (
+        <Surface className="mt-6 px-6 py-8 text-center sm:px-9">
+          <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent-soft text-accent">
+            <BoltIcon width={30} height={30} />
+          </span>
+          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-muted">
+            {plural(exercises.length, 'pregunta')} al azar
+            {level ? ' de las lecciones y el examen de este nivel' : ' de todos los niveles'}, distintas cada vez. Un
+            quiz sin fallos da {XP_QUIZ_PERFECT} XP extra.
+            {previous && ` Tu mejor nota: ${pct(previous.best)}.`}
+          </p>
+          <Button variant="primary" size="lg" onClick={() => start(attempt)} className="mt-7">
+            Empezar el quiz
+            <Kbd tone="accent">Enter</Kbd>
+          </Button>
+        </Surface>
+      )}
+
+      {phase.step === 'running' && (
+        <div className="mt-6">
+          <ExerciseRunner key={seed} exercises={exercises} label={name} onFinish={finish} />
+        </div>
+      )}
+
+      {phase.step === 'done' && (
+        <Result
+          title={scoreOf(phase.verdicts).ratio >= 1 ? '¡Quiz perfecto!' : 'Quiz terminado'}
+          verdicts={phase.verdicts}
+          exercises={exercises}
+          xp={
+            (scoreOf(phase.verdicts).correct + scoreOf(phase.verdicts).almost) * XP_EXERCISE +
+            (scoreOf(phase.verdicts).ratio >= 1 ? XP_QUIZ_PERFECT : 0)
+          }
+          detail="Cada quiz trae preguntas distintas: repetirlo es la forma más rápida de repasar."
+          celebrate={scoreOf(phase.verdicts).ratio >= 0.7}
+          actions={
+            <>
+              <Button size="lg" onClick={onExit}>
+                {back.label}
+              </Button>
+              <Button variant="primary" size="lg" onClick={() => start(attempt + 1)}>
+                Otro quiz
+                <Kbd tone="accent">Enter</Kbd>
+              </Button>
+            </>
+          }
+          onEnter={() => start(attempt + 1)}
+          onExit={onExit}
+        />
+      )}
+    </Shell>
   )
 }

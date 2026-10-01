@@ -36,6 +36,8 @@ export type Screen =
   | { name: 'courseLevel'; level: CourseLevelId }
   | { name: 'lesson'; level: CourseLevelId; lesson: string }
   | { name: 'exam'; level: CourseLevelId }
+  /** Quiz de un nivel, o el mixto de todos (`level: null`). */
+  | { name: 'quiz'; level: CourseLevelId | null }
   | { name: SimpleScreen }
 
 export interface Route {
@@ -79,12 +81,15 @@ function parseScreen(path: string): Screen | null {
   if (smart) return { name: 'smart', kind: smart }
   const topic = /^\/tema\/([a-z]+)$/.exec(path)?.[1]
   if (topic) return isTopicId(topic) ? { name: 'topic', topic } : null
+  if (path === '/curso/quiz') return { name: 'quiz', level: null }
   const course = /^\/curso\/([a-z0-9]+)(?:\/([a-z0-9-]+))?$/.exec(path)
   if (course) {
     const [, level, rest] = course
     if (!isCourseLevelId(level)) return null
     if (rest === undefined) return { name: 'courseLevel', level }
-    return rest === 'examen' ? { name: 'exam', level } : { name: 'lesson', level, lesson: rest }
+    if (rest === 'examen') return { name: 'exam', level }
+    if (rest === 'quiz') return { name: 'quiz', level }
+    return { name: 'lesson', level, lesson: rest }
   }
   const deck = deckFromPath(path)
   return deck ? { name: 'deck', deck } : null
@@ -114,6 +119,8 @@ function screenPath(screen: Screen): string {
       return `/curso/${screen.level}/${screen.lesson}`
     case 'exam':
       return `/curso/${screen.level}/examen`
+    case 'quiz':
+      return screen.level === null ? '/curso/quiz' : `/curso/${screen.level}/quiz`
     case 'coach':
     case 'course':
     case 'focus':
@@ -154,6 +161,8 @@ export function titleOf(route: Route): string {
       return `Lección ${courseLevelInfo(screen.level).name} — Tecla`
     case 'exam':
       return `Examen ${courseLevelInfo(screen.level).name} — Tecla`
+    case 'quiz':
+      return screen.level === null ? 'Quiz mixto — Tecla' : `Quiz ${courseLevelInfo(screen.level).name} — Tecla`
     case 'coach':
     case 'course':
     case 'focus':

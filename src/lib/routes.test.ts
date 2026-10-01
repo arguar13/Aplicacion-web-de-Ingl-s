@@ -19,6 +19,10 @@ describe('rutas', () => {
     expect(parseHash('#/curso/a1').screen).toEqual({ name: 'courseLevel', level: 'a1' })
     expect(parseHash('#/curso/b2/examen').screen).toEqual({ name: 'exam', level: 'b2' })
     expect(parseHash('#/curso/a1/verbo-to-be').screen).toEqual({ name: 'lesson', level: 'a1', lesson: 'verbo-to-be' })
+    expect(parseHash('#/curso/b1/quiz').screen).toEqual({ name: 'quiz', level: 'b1' })
+    expect(parseHash('#/curso/quiz').screen).toEqual({ name: 'quiz', level: null })
+    expect(formatHash({ screen: { name: 'quiz', level: null }, panel: null })).toBe('#/curso/quiz')
+    expect(titleOf({ screen: { name: 'quiz', level: 'c2' }, panel: null })).toBe('Quiz C2 — Tecla')
     expect(parseHash('#/curso/z9')).toEqual(HOME)
     expect(parseHash('#/curso/a1/Mal Id')).toEqual(HOME)
     expect(formatHash({ screen: { name: 'lesson', level: 'a1', lesson: 'verbo-to-be' }, panel: null })).toBe(

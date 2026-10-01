@@ -14,16 +14,22 @@ export interface Attempt {
   at: number
 }
 
+/** Un quiz de nivel (su id) o el quiz mixto. */
+export type QuizKey = CourseLevelId | 'mixto'
+
 export interface CourseProgress {
   /** Clave `${nivel}/${lección}`. */
   lessons: Record<string, Attempt>
   exams: Partial<Record<CourseLevelId, Attempt>>
+  /** Mejor nota de cada quiz (desde la Fase 21). */
+  quizzes: Partial<Record<QuizKey, Attempt>>
 }
 
-/** Experiencia por cada ejercicio acertado, por terminar una lección y por aprobar un examen. */
+/** Experiencia por cada ejercicio acertado, por terminar una lección, por aprobar un examen y por un quiz perfecto. */
 export const XP_EXERCISE = 10
 export const XP_LESSON = 30
 export const XP_EXAM = 100
+export const XP_QUIZ_PERFECT = 25
 
 export const lessonKey = (level: CourseLevelId, lesson: string) => `${level}/${lesson}`
 
@@ -32,9 +38,12 @@ function parseAttempt(raw: unknown): Attempt | null {
   return { best: Math.min(1, Math.max(0, raw.best)), at: raw.at }
 }
 
+const isQuizKey = (value: string): value is QuizKey => value === 'mixto' || isCourseLevelId(value)
+
 export function parseCourseProgress(raw: unknown): CourseProgress {
   const lessons: Record<string, Attempt> = {}
   const exams: CourseProgress['exams'] = {}
+  const quizzes: CourseProgress['quizzes'] = {}
   if (isRecord(raw)) {
     if (isRecord(raw.lessons)) {
       for (const [key, value] of Object.entries(raw.lessons)) {
@@ -49,11 +58,17 @@ export function parseCourseProgress(raw: unknown): CourseProgress {
         if (attempt && isCourseLevelId(level)) exams[level] = attempt
       }
     }
+    if (isRecord(raw.quizzes)) {
+      for (const [key, value] of Object.entries(raw.quizzes)) {
+        const attempt = parseAttempt(value)
+        if (attempt && isQuizKey(key)) quizzes[key] = attempt
+      }
+    }
   }
-  return { lessons, exams }
+  return { lessons, exams, quizzes }
 }
 
-export const EMPTY_COURSE: CourseProgress = { lessons: {}, exams: {} }
+export const EMPTY_COURSE: CourseProgress = { lessons: {}, exams: {}, quizzes: {} }
 
 export const COURSE_SCHEMA: VersionedSchema<CourseProgress> = {
   version: 1,
@@ -96,6 +111,13 @@ export function recordExam(level: CourseLevelId, correct: number, ratio: number,
   return passed
 }
 
+/** Anota un quiz: su mejor nota, experiencia por acierto y un extra si no hubo fallos. */
+export function recordQuiz(key: QuizKey, correct: number, ratio: number, now = Date.now()) {
+  const data = store.get()
+  store.set({ ...data, quizzes: { ...data.quizzes, [key]: better(data.quizzes[key], { best: ratio, at: now }) } })
+  addXp(correct * XP_EXERCISE + (ratio >= 1 ? XP_QUIZ_PERFECT : 0))
+}
+
 export const examPassed = (progress: CourseProgress, level: CourseLevelId) =>
   (progress.exams[level]?.best ?? 0) >= EXAM_PASS
 
@@ -116,7 +138,11 @@ export function mergeCourseProgress(current: CourseProgress, incoming: CoursePro
     const attempt = incoming.exams[level.id]
     if (attempt) exams[level.id] = better(exams[level.id], attempt)
   }
-  return { lessons, exams }
+  const quizzes = { ...current.quizzes }
+  for (const [key, attempt] of Object.entries(incoming.quizzes)) {
+    if (isQuizKey(key)) quizzes[key] = better(quizzes[key], attempt)
+  }
+  return { lessons, exams, quizzes }
 }
 
 /** Resumen de un nivel: lecciones terminadas y si el examen está aprobado. */

@@ -34,6 +34,7 @@ const UNLOCKS = Object.fromEntries(
 const COURSE: CourseProgress = {
   lessons: { 'a1/verbo-to-be': { best: 1, at: NOW - 3_600_000 } },
   exams: { a1: { best: 0.9, at: NOW - 1_800_000 } },
+  quizzes: { a1: { best: 0.8, at: NOW - 900_000 } },
 }
 const BACKUP: Backup = {
   exportedAt: NOW,
@@ -57,13 +58,18 @@ describe('copias de seguridad', () => {
     restoreBackup(
       {
         ...BACKUP,
-        course: { lessons: { 'a1/verbo-to-be': { best: 0.5, at: NOW } }, exams: { a1: { best: 1, at: NOW } } },
+        course: {
+          lessons: { 'a1/verbo-to-be': { best: 0.5, at: NOW } },
+          exams: { a1: { best: 1, at: NOW } },
+          quizzes: {},
+        },
       },
       'merge',
     )
     expect(getCourseProgress()).toEqual({
       lessons: { 'a1/verbo-to-be': { best: 1, at: NOW - 3_600_000 } },
       exams: { a1: { best: 1, at: NOW } },
+      quizzes: { a1: { best: 0.8, at: NOW - 900_000 } },
     })
   })
 

@@ -56,6 +56,9 @@ const LessonScreen = lazy(() =>
 const ExamScreen = lazy(() =>
   import('@/components/course/CourseScreens').then((module) => ({ default: module.ExamScreen })),
 )
+const QuizScreen = lazy(() =>
+  import('@/components/course/CourseScreens').then((module) => ({ default: module.QuizScreen })),
+)
 const DictionaryScreen = lazy(() =>
   import('@/components/DictionaryScreen').then((module) => ({ default: module.DictionaryScreen })),
 )
@@ -88,6 +91,7 @@ const openCourse = () => go({ name: 'course' })
 const openLevel = (level: CourseLevelId) => go({ name: 'courseLevel', level })
 const openLesson = (level: CourseLevelId, lesson: string) => go({ name: 'lesson', level, lesson })
 const openExam = (level: CourseLevelId) => go({ name: 'exam', level })
+const openQuiz = (level: CourseLevelId | null) => go({ name: 'quiz', level })
 /** Volver de un nivel al curso, o de una lección a su nivel: por el historial si se llegó desde ahí. */
 const backToCourse = () => goBack({ screen: { name: 'course' }, panel: null })
 const backToLevel = (level: CourseLevelId) => goBack({ screen: { name: 'courseLevel', level }, panel: null })
@@ -119,6 +123,7 @@ function Home() {
       onOpenCourse={openCourse}
       onOpenLesson={openLesson}
       onOpenExam={openExam}
+      onOpenQuiz={openQuiz}
       onOpenWord={openWord}
       onOpenStats={() => go({ name: 'stats' })}
       onOpenDictionary={() => go({ name: 'dictionary' })}
@@ -168,7 +173,7 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
     case 'dictionary':
       return <DictionaryScreen onExit={exitToHome} onOpenWord={openWord} />
     case 'course':
-      return <CourseScreen onExit={exitToHome} onOpenLevel={openLevel} />
+      return <CourseScreen onExit={exitToHome} onOpenLevel={openLevel} onOpenMixedQuiz={() => openQuiz(null)} />
     case 'courseLevel':
       return (
         <LevelScreen
@@ -176,6 +181,7 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
           onExit={backToCourse}
           onOpenLesson={(lesson) => openLesson(screen.level, lesson)}
           onOpenExam={() => openExam(screen.level)}
+          onOpenQuiz={() => openQuiz(screen.level)}
         />
       )
     case 'lesson':
@@ -193,6 +199,16 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
       )
     case 'exam':
       return <ExamScreen key={screen.level} level={screen.level} onExit={() => backToLevel(screen.level)} />
+    case 'quiz': {
+      const { level } = screen
+      return (
+        <QuizScreen
+          key={level ?? 'mixto'}
+          level={level}
+          onExit={level === null ? backToCourse : () => backToLevel(level)}
+        />
+      )
+    }
   }
 }
 

@@ -127,7 +127,7 @@ export function restoreBackup(backup: Backup, mode: RestoreMode) {
     replaceEvents(mergeEvents(getEvents(), backup.events))
   } else {
     replaceUnlocks(backup.achievements)
-    replaceCourseProgress(backup.course ?? { lessons: {}, exams: {} })
+    replaceCourseProgress(backup.course ?? { lessons: {}, exams: {}, quizzes: {} })
     replaceSettings(backup.settings)
     replaceProgress(backup.progress)
     replaceEvents(backup.events)

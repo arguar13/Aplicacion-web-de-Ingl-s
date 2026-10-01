@@ -10,13 +10,14 @@ interface Props {
   onOpenCourse: () => void
   onOpenLesson: (level: CourseLevelId, lesson: string) => void
   onOpenExam: (level: CourseLevelId) => void
+  onOpenQuiz: (level: CourseLevelId | null) => void
 }
 
 /**
  * El curso en el inicio: el nivel en que se va y el siguiente paso (la lección que toca o el
  * examen). Solo carga el contenido del nivel en curso.
  */
-export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam }: Props) {
+export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam, onOpenQuiz }: Props) {
   const progress = useCourseProgress()
   const current = COURSE_LEVELS.find((level) => !examPassed(progress, level.id)) ?? null
   const state = useCourseLevel(current?.id ?? 'a1')
@@ -92,6 +93,9 @@ export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam }: Props) {
         )}
         <Button variant={current && step ? 'secondary' : 'primary'} onClick={onOpenCourse}>
           Ver el curso
+        </Button>
+        <Button variant="ghost" onClick={() => onOpenQuiz(current?.id ?? null)}>
+          {current ? `Quiz ${current.name}` : 'Quiz mixto'}
         </Button>
         {current && state.status === 'loading' && <Badge tone="accent-soft">Cargando…</Badge>}
       </div>
