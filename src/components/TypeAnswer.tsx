@@ -8,6 +8,8 @@ import { Surface } from './ui/Surface'
 
 interface Props {
   word: Word
+  /** Escribir (se ve la traducción) o dictado (solo se oyó la palabra). */
+  mode: 'type' | 'dictation'
   solved: boolean
   typed: { text: string; verdict: TypedVerdict } | null
   onSubmit: (text: string) => void
@@ -19,7 +21,7 @@ interface Props {
  * Modo escribir: un campo para la palabra inglesa. Al comprobar, muestra la respuesta correcta con
  * las letras que no coinciden marcadas.
  */
-export function TypeAnswer({ word, solved, typed, onSubmit, onContinue }: Props) {
+export function TypeAnswer({ word, mode, solved, typed, onSubmit, onContinue }: Props) {
   const [text, setText] = useState('')
   const input = useRef<HTMLInputElement>(null)
 
@@ -38,7 +40,7 @@ export function TypeAnswer({ word, solved, typed, onSubmit, onContinue }: Props)
     <Surface className="px-5 py-5 sm:px-6">
       <form onSubmit={submit} className="flex items-center gap-2.5">
         <label htmlFor={`type-${word.id}`} className="sr-only">
-          La palabra en inglés
+          {mode === 'dictation' ? 'La palabra que oíste' : 'La palabra en inglés'}
         </label>
         <input
           ref={input}
@@ -52,7 +54,7 @@ export function TypeAnswer({ word, solved, typed, onSubmit, onContinue }: Props)
           autoCapitalize="none"
           spellCheck={false}
           enterKeyHint="done"
-          placeholder="Escribe en inglés…"
+          placeholder={mode === 'dictation' ? 'Lo que oíste…' : 'Escribe en inglés…'}
           className={cn(
             'h-14 min-w-0 flex-1 rounded-2xl border bg-raised px-4 font-display text-3xl text-ink outline-none placeholder:font-sans placeholder:text-base placeholder:text-muted',
             'transition-[border-color,box-shadow] focus:border-accent focus:shadow-[0_0_0_3px_var(--accent-soft)]',

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatLongDate, plural, relativeDay } from './format'
+import { formatInterval, formatLongDate, plural, relativeDay } from './format'
 
 const NOW = new Date(2026, 8, 27, 10).getTime()
 const daysAgo = (n: number, hour = 12) => new Date(2026, 8, 27 - n, hour).getTime()
@@ -24,5 +24,20 @@ describe('plural', () => {
     expect(plural(2, 'día')).toBe('2 días')
     expect(plural(1, 'dominada')).toBe('1 dominada')
     expect(plural(3978, 'palabra')).toBe('3978 palabras')
+  })
+})
+
+describe('intervalos', () => {
+  it('redondea a la unidad que se entiende de un vistazo', () => {
+    const minute = 60_000
+    const day = 24 * 60 * minute
+    expect(formatInterval(20_000)).toBe('<1 min')
+    expect(formatInterval(10 * minute)).toBe('10 min')
+    expect(formatInterval(3 * 60 * minute)).toBe('3 h')
+    expect(formatInterval(4 * day)).toBe('4 d')
+    expect(formatInterval(21 * day)).toBe('3 sem')
+    expect(formatInterval(95 * day)).toBe('3 meses')
+    expect(formatInterval(365 * day)).toBe('1 año')
+    expect(formatInterval(2.5 * 365 * day)).toBe('2,5 años')
   })
 })

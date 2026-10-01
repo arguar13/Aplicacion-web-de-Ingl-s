@@ -268,3 +268,24 @@ export function FlameIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Tarjetas: dos naipes superpuestos, el modo de autoevaluación. */
+export function CardsIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3" y="7" width="13" height="14" rx="2.5" />
+      <path d="M8 4.5A2.5 2.5 0 0 1 10.5 3h8A2.5 2.5 0 0 1 21 5.5v10a2.5 2.5 0 0 1-2 2.45" />
+      <path d="M7 12h5M7 16h3" />
+    </svg>
+  )
+}
+
+/** Dictado: ondas de sonido y un lápiz. */
+export function DictationIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 10v4M8 7v10M12 4v16M16 9v6" />
+      <path d="m19.5 13.5 1.5 1.5-5 5h-1.5v-1.5l5-5Z" />
+    </svg>
+  )
+}

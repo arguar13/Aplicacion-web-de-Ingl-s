@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { assessLearner, type Pace } from '@/lib/coach'
 import { useEvents } from '@/lib/events'
 import { useKeyDown } from '@/hooks/useKeyDown'
+import { useNow } from '@/hooks/useNow'
 import { useQuiz } from '@/hooks/useQuiz'
 import type { Deck } from '@/lib/decks'
 import { useWordDetails } from '@/lib/details'
-import { todayStats, useProgress } from '@/lib/progress'
-import { useSettings } from '@/lib/settings'
-import { answerLanguage, type Mode, trackOf } from '@/lib/types'
+import { cardKey, todayStats, useProgress } from '@/lib/progress'
+import { previewIntervals, SELF_RATINGS } from '@/lib/scheduler'
+import { RETENTION, useSettings } from '@/lib/settings'
+import { answerLanguage, isTypedMode, type Mode, trackOf } from '@/lib/types'
 import { IconButton } from './ui/IconButton'
 import { GoalStat, Header, Stat } from './Header'
 import { ArrowLeftIcon, SettingsIcon } from './icons'
@@ -17,6 +19,7 @@ import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
 import { WordScreen } from './WordScreen'
 import { DetailCard } from './DetailCard'
+import { FlashCard } from './FlashCard'
 import { TypeAnswer } from './TypeAnswer'
 import { SessionSummary } from './SessionSummary'
 
@@ -32,7 +35,7 @@ interface Props {
 export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props) {
   const [endsAt] = useState(() => (focusMinutes ? Date.now() + focusMinutes * 60_000 : null))
   const quiz = useQuiz(deck, mode, { endsAt })
-  const { round, stats, answer, submitTyped, replay, expand, advance, resume, requestExit } = quiz
+  const { round, stats, answer, submitTyped, reveal, rate, replay, expand, advance, resume, requestExit } = quiz
   const coach = deck.kind === 'coach'
   // El modo es de cada ronda (en la sesión inteligente cambia de una a otra).
   const roundMode = round.mode
@@ -42,8 +45,16 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
   const pace = coach ? assessLearner(events).pace : null
   const backLabel = coach ? 'Inicio' : deck.kind === 'topic' ? 'Colecciones' : 'Niveles'
   const details = useWordDetails(round.word.id)
-  const today = todayStats(useProgress())
-  const { dailyGoal } = useSettings()
+  const progress = useProgress()
+  const today = todayStats(progress)
+  const { dailyGoal, intensity } = useSettings()
+  // Modo tarjetas: cuándo volvería la palabra con cada nota (al minuto: un minuto de más no cambia nada).
+  const now = useNow()
+  const flashCard = roundMode === 'flash' ? progress.cards[cardKey('en-es', round.word.id)] : undefined
+  const intervals = useMemo(
+    () => (roundMode === 'flash' ? previewIntervals(flashCard, now, RETENTION[intensity]) : null),
+    [roundMode, flashCard, now, intensity],
+  )
   const showDetail = quiz.solved && quiz.expanded
   const listenSlowly = () => replay({ slow: true })
 
@@ -68,6 +79,15 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
     if (quiz.solved) {
       if (key === 'e') return expand()
       if (key === 'enter' || key === 'arrowright') advance()
+      return
+    }
+    if (roundMode === 'flash') {
+      if (!quiz.revealed) {
+        if (key === 'enter') reveal()
+        return
+      }
+      const rating = SELF_RATINGS[Number(event.key) - 1]
+      if (rating) rate(rating)
       return
     }
     const option = round.options[Number(event.key) - 1]
@@ -138,6 +158,8 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
                   ipa={details?.ipa}
                   example={details === null ? null : details.example}
                   typedVerdict={quiz.typed?.verdict}
+                  revealed={quiz.revealed}
+                  rating={quiz.rating}
                   solved={quiz.solved}
                   expanded={quiz.expanded}
                   mistakes={quiz.wrong.length}
@@ -155,10 +177,21 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
                     onContinue={advance}
                     onListenSlowly={listenSlowly}
                   />
-                ) : roundMode === 'type' ? (
+                ) : roundMode === 'flash' && intervals ? (
+                  <FlashCard
+                    key={round.word.id}
+                    word={round.word}
+                    revealed={quiz.revealed}
+                    rating={quiz.rating}
+                    intervals={intervals}
+                    onReveal={reveal}
+                    onRate={rate}
+                  />
+                ) : isTypedMode(roundMode) ? (
                   <TypeAnswer
                     key={round.word.id}
                     word={round.word}
+                    mode={roundMode}
                     solved={quiz.solved}
                     typed={quiz.typed}
                     onSubmit={submitTyped}
@@ -186,9 +219,17 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
             <span className="flex items-center gap-2">
               <Kbd>Enter</Kbd> continuar
             </span>
-          ) : roundMode === 'type' ? (
+          ) : isTypedMode(roundMode) ? (
             <span className="flex items-center gap-2">
               <Kbd>Enter</Kbd> comprobar
+            </span>
+          ) : roundMode === 'flash' && !quiz.revealed ? (
+            <span className="flex items-center gap-2">
+              <Kbd>Enter</Kbd> mostrar
+            </span>
+          ) : roundMode === 'flash' ? (
+            <span className="flex items-center gap-2">
+              <Kbd>1</Kbd>–<Kbd>4</Kbd> calificar
             </span>
           ) : (
             <span className="flex items-center gap-2">

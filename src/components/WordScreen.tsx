@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 import { splitAround } from '@/lib/details'
-import type { PickReason } from '@/lib/scheduler'
-import type { Mode, Word } from '@/lib/types'
+import type { PickReason, SelfRating } from '@/lib/scheduler'
+import { isTypedMode, type Mode, type Word } from '@/lib/types'
 import type { TypedVerdict } from '@/lib/typing'
 import { SlowIcon, SpeakerIcon } from './icons'
 import { Badge, type BadgeTone } from './ui/Badge'
@@ -24,6 +24,10 @@ interface Props {
   mistakes: number
   /** Modo escribir: cómo se juzgó lo escrito. */
   typedVerdict: TypedVerdict | undefined
+  /** Modo tarjetas: la traducción ya se mostró. */
+  revealed: boolean
+  /** Modo tarjetas: la nota que se puso el estudiante. */
+  rating: SelfRating | null
   canReplay: boolean
   onReplay: () => void
   onListenSlowly: () => void
@@ -43,6 +47,8 @@ const PROMPT_LABEL: Record<Mode, string> = {
   listen: 'Escucha',
   type: 'Español',
   cloze: 'Completa la frase',
+  flash: 'Inglés',
+  dictation: 'Escucha',
 }
 
 const INSTRUCTION: Record<Mode, string> = {
@@ -51,6 +57,15 @@ const INSTRUCTION: Record<Mode, string> = {
   listen: 'Elige lo que oíste',
   type: 'Escríbela en inglés',
   cloze: 'Elige la palabra que falta',
+  flash: 'Piensa la traducción y muéstrala',
+  dictation: 'Escribe lo que oíste',
+}
+
+const RATED: Record<SelfRating, { text: string; tone: string }> = {
+  again: { text: 'Volverá en unas rondas.', tone: 'text-bad' },
+  hard: { text: 'Anotado: volverá pronto.', tone: 'text-ok' },
+  good: { text: '¡Bien!', tone: 'text-ok' },
+  easy: { text: '¡Fácil! Se aleja más.', tone: 'text-ok' },
 }
 
 /** Tamaño de letra según la longitud, para que "straightforward" o "encogimiento de hombros" quepan en un móvil. */
@@ -61,7 +76,16 @@ function sizeFor(text: string): string {
   return 'text-4xl sm:text-5xl md:text-6xl short:text-4xl'
 }
 
-function statusOf(mode: Mode, solved: boolean, mistakes: number, verdict: TypedVerdict | undefined) {
+function statusOf(
+  mode: Mode,
+  solved: boolean,
+  mistakes: number,
+  verdict: TypedVerdict | undefined,
+  revealed: boolean,
+  rating: SelfRating | null,
+) {
+  if (rating) return RATED[rating]
+  if (mode === 'flash' && revealed) return { text: '¿Qué tal te salió?', tone: 'text-muted' }
   // La corrección letra por letra aparece bajo el campo de texto.
   if (verdict === 'almost') return { text: '¡Casi!', tone: 'text-ok' }
   if (verdict === 'wrong') return { text: 'No era esa.', tone: 'text-bad' }
@@ -80,13 +104,15 @@ export function WordScreen({
   expanded,
   mistakes,
   typedVerdict,
+  revealed,
+  rating,
   canReplay,
   onReplay,
   onListenSlowly,
   onExpand,
 }: Props) {
   const badge = REASON_BADGE[reason]
-  const status = statusOf(mode, solved, mistakes, typedVerdict)
+  const status = statusOf(mode, solved, mistakes, typedVerdict, revealed, rating)
 
   return (
     <Surface as="section" className="px-5 pt-4 pb-5 sm:px-7 md:px-8 md:pb-7 short:pb-4">
@@ -172,7 +198,7 @@ function Prompt({
     </h1>
   )
 
-  if (mode === 'listen' && !solved) {
+  if ((mode === 'listen' || mode === 'dictation') && !solved) {
     return (
       <div className="mt-3 flex flex-col items-center md:mt-5">
         <h1 className="sr-only">Escucha la palabra</h1>
@@ -215,7 +241,8 @@ function Prompt({
     )
   }
 
-  const english = mode === 'en-es' || mode === 'listen'
+  // Al resolver escuchar o dictado, la palabra que sonaba aparece escrita.
+  const english = mode === 'en-es' || mode === 'listen' || mode === 'flash' || mode === 'dictation'
   const text = english ? word.en : word.es
   return heading(text, english ? 'en' : 'es', sizeFor(text))
 }
@@ -223,8 +250,9 @@ function Prompt({
 /** Lo que aparece bajo la pregunta: pronunciación, la palabra inglesa al acertar o la traducción de la frase. */
 function Reveal({ word, mode, ipa, example, solved }: Pick<Props, 'word' | 'mode' | 'ipa' | 'example' | 'solved'>) {
   if (mode === 'cloze') return example ? <span lang="es">{example.es}</span> : null
-  if (mode === 'en-es' || (mode === 'listen' && solved)) return ipa ? <span className="animate-rise">{ipa}</span> : null
-  if ((mode === 'es-en' || mode === 'type') && solved) {
+  if (mode === 'en-es' || mode === 'flash' || (mode === 'listen' && solved))
+    return ipa ? <span className="animate-rise">{ipa}</span> : null
+  if ((mode === 'es-en' || isTypedMode(mode)) && solved) {
     return (
       <span className="animate-rise" lang="en">
         <span className="font-semibold text-ink">{word.en}</span>

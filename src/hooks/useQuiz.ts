@@ -4,6 +4,8 @@ import { assessLearner, modeOf, pickCoach } from '@/lib/coach'
 import { type Deck, distractorPool, LEVEL_SIZE } from '@/lib/decks'
 import { getEvents } from '@/lib/events'
 import {
+  type Answer,
+  answerFromRating,
   cardKey,
   cardLookup,
   getProgress,
@@ -13,10 +15,18 @@ import {
   todayStats,
 } from '@/lib/progress'
 import { buildOptions, CONFUSABLE_STABILITY } from '@/lib/quiz'
-import { advanceSession, createSession, isMastered, pickNext, type PickReason, type Session } from '@/lib/scheduler'
+import {
+  advanceSession,
+  createSession,
+  isMastered,
+  pickNext,
+  type PickReason,
+  type SelfRating,
+  type Session,
+} from '@/lib/scheduler'
 import { feedback } from '@/lib/feedback'
 import { getSettings } from '@/lib/settings'
-import { type Mode, type Round, type Track, trackOf, type Word } from '@/lib/types'
+import { isTypedMode, type Mode, type Round, type Track, trackOf, type Word } from '@/lib/types'
 import { judgeTyped, type TypedVerdict } from '@/lib/typing'
 
 /** Tiempo que se muestra el acierto antes de pasar a la siguiente palabra. */
@@ -54,6 +64,10 @@ interface State {
   wrong: string[]
   /** Modo escribir: lo que se escribió y cómo se juzgó. */
   typed: { text: string; verdict: TypedVerdict } | null
+  /** Modo tarjetas: la traducción ya está a la vista, falta calificarse. */
+  revealed: boolean
+  /** Modo tarjetas: la nota que se puso el estudiante. */
+  rating: SelfRating | null
   solved: boolean
   /** Tras responder, la partida se detiene con el detalle de la palabra a la vista. */
   expanded: boolean
@@ -67,7 +81,9 @@ interface State {
 }
 
 /** Modos en que la palabra suena al aparecer: la pregunta es la palabra inglesa, oída o leída. */
-const soundsOnShow = (mode: Mode) => mode === 'en-es' || mode === 'listen'
+const soundsOnShow = (mode: Mode) => mode === 'en-es' || mode === 'listen' || mode === 'flash' || mode === 'dictation'
+/** Modos en que el audio es la pregunta: suena aunque la pronunciación automática esté apagada. */
+const audioIsPrompt = (mode: Mode) => mode === 'listen' || mode === 'dictation'
 
 /**
  * La siguiente ronda. En la sesión inteligente la decide el entrenador (palabra y modo); en los
@@ -103,9 +119,11 @@ function buildRound(
   // Con la palabra ya afianzada, distractores parecidos: sigue exigiendo atención.
   const card = progress.cards[cardKey(trackOf(mode), word.id)]
   const confusable = card !== undefined && card.stability >= CONFUSABLE_STABILITY
-  // En escribir no hay teclas: la respuesta se escribe.
+  // En escribir y dictado la respuesta se escribe; en tarjetas, uno mismo se califica: sin teclas.
   const options =
-    mode === 'type' ? [] : buildOptions(word, distractorPool(deck, word), undefined, undefined, { confusable })
+    isTypedMode(mode) || mode === 'flash'
+      ? []
+      : buildOptions(word, distractorPool(deck, word), undefined, undefined, { confusable })
   return { word, mode, reason, options, ...(trusted ? { trusted } : {}) }
 }
 
@@ -127,7 +145,19 @@ const deckMastered = (deck: Deck, track: Track) => {
 }
 
 const withNext = (s: State): State =>
-  s.next ? { ...s, round: s.next, next: null, wrong: [], typed: null, solved: false, expanded: false } : s
+  s.next
+    ? {
+        ...s,
+        round: s.next,
+        next: null,
+        wrong: [],
+        typed: null,
+        revealed: false,
+        rating: null,
+        solved: false,
+        expanded: false,
+      }
+    : s
 
 export interface QuizOptions {
   /** Modo concentración: al pasar este momento (ms), la siguiente ronda es el resumen. */
@@ -142,6 +172,8 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
     next: null,
     wrong: [],
     typed: null,
+    revealed: false,
+    rating: null,
     solved: false,
     expanded: false,
     goalReached: false,
@@ -157,6 +189,8 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
   const deadline = useRef(endsAt)
   // Momento en que apareció la palabra: lo que se tarda en acertar afina el repaso espaciado.
   const shownAt = useRef(0)
+  // Modo tarjetas: cuándo se mostró la traducción (lo que se tardó en decidirse a verla).
+  const revealedAt = useRef(0)
   // El modo es de cada ronda: en la sesión inteligente cambia de una a otra.
   const roundMode = state.round.mode
   const onShow = soundsOnShow(roundMode)
@@ -168,8 +202,7 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
   }, [state.round])
 
   useEffect(() => {
-    // En escuchar, el audio es la pregunta: suena aunque la pronunciación automática esté apagada.
-    if (roundMode === 'listen' || (onShow && getSettings().autoplay)) void playPronunciation(state.round.word.id)
+    if (audioIsPrompt(roundMode) || (onShow && getSettings().autoplay)) void playPronunciation(state.round.word.id)
     else preloadPronunciation(state.round.word.id)
   }, [state.round, roundMode, onShow])
 
@@ -228,24 +261,23 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
     setState((s) => (s.solved ? { ...s, expanded: true } : s))
   }
 
+  /** Milisegundos desde que apareció la palabra. */
+  const elapsed = () => performance.now() - shownAt.current
+
   /**
    * Cierra la ronda: registra la respuesta, avanza la sesión, calcula la siguiente palabra y decide
    * si la partida se detiene para mostrar el detalle.
    */
-  function solve(clean: boolean, extra: Partial<State> = {}, { almost = false } = {}) {
+  function solve(result: Answer, extra: Partial<State> = {}) {
     const { round, stats } = state
+    const { clean } = result
     const track = trackOf(round.mode)
     resolving.current = true
     const isNew = !cardLookup(getProgress(), track)(round.word.id)
     const { dailyGoal, detailsPause } = getSettings()
     const answeredBefore = todayStats(getProgress()).answers
     const levelWasDone = deck.kind === 'level' && deckMastered(deck, track)
-    recordAnswer(track, round.word.id, {
-      clean,
-      almost,
-      ms: performance.now() - shownAt.current,
-      trusted: round.trusted,
-    })
+    recordAnswer(track, round.word.id, { ...result, trusted: round.trusted })
     feedback(clean ? 'correct' : 'wrong')
     advanceSession(session, sessionKey(deck, round), clean)
     const streak = clean ? stats.streak + 1 : 0
@@ -284,7 +316,7 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
       })
       return
     }
-    solve(wrong.length === 0)
+    solve({ clean: wrong.length === 0, ms: elapsed() })
   }
 
   /**
@@ -294,12 +326,25 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
   function submitTyped(text: string) {
     if (resolving.current || state.solved || !text.trim()) return
     const verdict = judgeTyped(text, state.round.word.en)
-    solve(verdict !== 'wrong', { typed: { text, verdict } }, { almost: verdict === 'almost' })
+    solve({ clean: verdict !== 'wrong', almost: verdict === 'almost', ms: elapsed() }, { typed: { text, verdict } })
+  }
+
+  /** Modo tarjetas: muestra la traducción para calificarse. El tiempo de respuesta se mide hasta aquí. */
+  function reveal() {
+    if (state.solved || state.revealed) return
+    revealedAt.current = performance.now()
+    setState((s) => ({ ...s, revealed: true }))
+  }
+
+  /** Modo tarjetas: la nota que uno se pone, tal cual, para el repaso espaciado. */
+  function rate(rating: SelfRating) {
+    if (resolving.current || state.solved || !state.revealed) return
+    solve(answerFromRating(rating, revealedAt.current - shownAt.current), { rating })
   }
 
   function replay({ slow = false }: { slow?: boolean } = {}) {
     if (canReplay) void playPronunciation(state.round.word.id, { slow })
   }
 
-  return { ...state, canReplay, answer, submitTyped, replay, expand, advance, resume, requestExit }
+  return { ...state, canReplay, answer, submitTyped, reveal, rate, replay, expand, advance, resume, requestExit }
 }

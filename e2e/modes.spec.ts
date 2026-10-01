@@ -6,6 +6,8 @@ import { expectAccessible, expectNoHorizontalScroll, optionKey } from './helpers
 
 const byId = new Map(words.map((w) => [w.id, w]))
 const byEs = new Map(words.map((w) => [w.es, w]))
+const byEn = new Map(words.map((w) => [w.en, w]))
+const byEnglish = (text: string | null) => byEn.get(text?.trim() ?? '')
 const examples: Record<string, { example?: { en: string } }> = details
 
 async function useMode(page: Page, mode: string) {
@@ -20,7 +22,7 @@ async function useMode(page: Page, mode: string) {
 test('el selector de modo cambia cómo se practica y se recuerda', async ({ page }) => {
   await page.goto('./')
   const picker = page.getByRole('group', { name: 'Cómo practicar' })
-  await picker.getByText('Escribir').click()
+  await picker.getByText('Escribir', { exact: true }).click()
   await expect(picker.getByRole('radio', { name: /Escribir/ })).toBeChecked()
   await page.reload()
   await expect(page.getByRole('radio', { name: /Escribir/ })).toBeChecked()
@@ -87,4 +89,44 @@ test('completar: se elige la palabra que falta en la frase de ejemplo', async ({
     .first()
     .click()
   await expect(heading.locator('mark')).toHaveText(new RegExp(`^${answer?.en}$`, 'i'))
+})
+
+test('tarjetas: se piensa, se muestra la traducción y uno se califica con las notas del repaso', async ({ page }) => {
+  await useMode(page, 'flash')
+  await page.goto('./#/nivel/1')
+  const heading = page.getByRole('heading', { level: 1 })
+  const word = byEnglish(await heading.textContent())
+  // Antes de mostrar no hay teclas: solo pensar.
+  await expect(page.getByRole('group', { name: 'Respuestas' })).toHaveCount(0)
+  await page.getByRole('button', { name: /Mostrar la traducción/ }).click()
+  const ratings = page.getByRole('group', { name: 'Qué tal te salió' })
+  await expect(ratings.getByText(word?.es ?? '—')).toHaveCount(0)
+  await expect(page.getByText(word?.es ?? '—', { exact: true })).toBeVisible()
+  await expect(ratings.getByRole('button')).toHaveCount(4)
+  // Cada nota dice cuándo volvería la palabra.
+  await expect(ratings.getByRole('button', { name: /Otra vez/ })).toContainText(/min|h|d/)
+  await expectAccessible(page)
+  await ratings.getByRole('button', { name: /Fácil/ }).click()
+  await expect(page.getByText('¡Fácil! Se aleja más.')).toBeVisible()
+  await expect(heading).not.toHaveText(word?.en ?? '', { timeout: 3000 })
+})
+
+test('dictado: suena la palabra sin mostrarla y se escribe', async ({ page, browserName }) => {
+  test.skip(
+    browserName === 'webkit' && process.platform === 'win32',
+    'El WebKit de Playwright para Windows no tiene audio: no pide el MP3 (Safari real y WebKit en Linux sí)',
+  )
+  await useMode(page, 'dictation')
+  const request = page.waitForRequest((r) => r.url().includes('/audio/'))
+  await page.goto('./#/nivel/1')
+  await expect(page.getByRole('heading', { name: 'Escucha la palabra' })).toBeAttached()
+  const id = /\/audio\/([a-z0-9-]+)\.mp3/.exec((await request).url())?.[1] ?? ''
+  const word = byId.get(id)
+  expect(word).toBeDefined()
+  const input = page.getByLabel('La palabra que oíste')
+  await input.fill(word?.en ?? '')
+  await input.press('Enter')
+  // Al acertar, la palabra que sonaba aparece escrita (y la partida sigue sola enseguida).
+  await expect(page.getByRole('heading', { level: 1, name: word?.en })).toBeVisible()
+  await expect(page.getByRole('progressbar', { name: 'Meta de hoy' })).toHaveAttribute('aria-valuenow', '1')
 })

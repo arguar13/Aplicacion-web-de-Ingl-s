@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
+  answerFromRating,
   cardLookup,
   currentStreak,
   MAX_FREEZES,
@@ -50,6 +51,23 @@ describe('historial diario', () => {
       },
     })
     expect(parsed.history).toEqual({ '2026-09-26': { answers: 4, clean: 4, fresh: 1, ms: 1000 } })
+  })
+})
+
+describe('autoevaluación (modo tarjetas)', () => {
+  it('«otra vez» es un fallo, «difícil» cuenta como casi y «bien» o «fácil» son aciertos limpios', () => {
+    expect(answerFromRating('again', 1000)).toMatchObject({ clean: false, almost: false, rating: 'again' })
+    expect(answerFromRating('hard', 1000)).toMatchObject({ clean: true, almost: true, rating: 'hard' })
+    expect(answerFromRating('good', 1000)).toMatchObject({ clean: true, almost: false })
+    expect(answerFromRating('easy', 1000)).toMatchObject({ clean: true, almost: false })
+  })
+
+  it('la nota manda sobre el tiempo: «fácil» aleja la palabra más que «bien»', () => {
+    recordAnswer('en-es', 'the', answerFromRating('easy', 20_000), NOW)
+    recordAnswer('en-es', 'water', answerFromRating('good', 20_000), NOW)
+    const lookup = cardLookup(getProgress(), 'en-es')
+    expect(lookup('the')?.due).toBeGreaterThan(lookup('water')?.due ?? Infinity)
+    expect(todayStats(getProgress(), NOW)).toMatchObject({ answers: 2, clean: 2 })
   })
 })
 

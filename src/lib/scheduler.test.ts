@@ -13,6 +13,7 @@ import {
   MINUTE,
   parseCard,
   pickNext,
+  previewIntervals,
   REQUEUE_AFTER,
   review,
   SLOW_ANSWER_MS,
@@ -47,6 +48,24 @@ describe('nota de cada respuesta', () => {
 
   it('escrita con un error de tecleo es "difícil", aunque sea rápida', () => {
     expect(gradeAnswer({ clean: true, almost: true, ms: 900, isNew: false })).toBe(Rating.Hard)
+  })
+
+  it('en tarjetas manda la nota que se pone el estudiante, tarde lo que tarde', () => {
+    expect(gradeAnswer({ clean: true, ms: 100, isNew: true, rating: 'again' })).toBe(Rating.Again)
+    expect(gradeAnswer({ clean: true, ms: 100, isNew: true, rating: 'hard' })).toBe(Rating.Hard)
+    expect(gradeAnswer({ clean: true, ms: 100, isNew: true, rating: 'good' })).toBe(Rating.Good)
+    expect(gradeAnswer({ clean: false, ms: 99_000, isNew: false, rating: 'easy' })).toBe(Rating.Easy)
+  })
+
+  it('la vista previa de intervalos crece de "otra vez" a "fácil" y coincide con el repaso real', () => {
+    const known = card(10, NOW)
+    const preview = previewIntervals(known, NOW)
+    expect(preview.again).toBeLessThan(preview.hard)
+    expect(preview.hard).toBeLessThan(preview.good)
+    expect(preview.good).toBeLessThan(preview.easy)
+    expect(preview.good).toBe(review(known, Rating.Good, NOW).due - NOW)
+    // Una palabra nueva empieza por pasos cortos: "otra vez" vuelve en minutos.
+    expect(previewIntervals(undefined, NOW).again).toBeLessThan(DAY)
   })
 
   it('una palabra nueva acertada rápido no salta a "fácil": podría ser suerte', () => {

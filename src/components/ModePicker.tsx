@@ -1,7 +1,7 @@
 import { type ComponentType, type SVGProps, useId } from 'react'
 import { cn } from '@/lib/cn'
 import type { Mode } from '@/lib/types'
-import { ClozeIcon, HeadphonesIcon, KeyboardIcon, ReverseIcon, TranslateIcon } from './icons'
+import { CardsIcon, ClozeIcon, DictationIcon, HeadphonesIcon, KeyboardIcon, ReverseIcon, TranslateIcon } from './icons'
 
 const MODE_INFO: Record<Mode, { label: string; hint: string; Icon: ComponentType<SVGProps<SVGSVGElement>> }> = {
   'en-es': { label: 'Traducir', hint: 'Inglés → español', Icon: TranslateIcon },
@@ -9,9 +9,11 @@ const MODE_INFO: Record<Mode, { label: string; hint: string; Icon: ComponentType
   listen: { label: 'Escuchar', hint: 'Solo el audio', Icon: HeadphonesIcon },
   type: { label: 'Escribir', hint: 'Con el teclado', Icon: KeyboardIcon },
   cloze: { label: 'Completar', hint: 'En una frase', Icon: ClozeIcon },
+  flash: { label: 'Tarjetas', hint: 'Tú te calificas', Icon: CardsIcon },
+  dictation: { label: 'Dictado', hint: 'Oír y escribir', Icon: DictationIcon },
 }
 
-const ORDER: readonly Mode[] = ['en-es', 'es-en', 'listen', 'type', 'cloze']
+const ORDER: readonly Mode[] = ['en-es', 'es-en', 'listen', 'type', 'cloze', 'flash', 'dictation']
 
 /**
  * Cómo practicar. Radios nativos: flechas para moverse, foco y anuncio a lectores de pantalla los
@@ -36,8 +38,8 @@ export function ModePicker({
           <label
             key={mode}
             className={cn(
-              // Tres por fila en el móvil (la segunda, centrada) y las cinco en una fila desde sm.
-              'group relative flex basis-[calc((100%-1rem)/3)] cursor-pointer flex-col items-center gap-1 rounded-2xl border border-line bg-surface/70 px-2 pt-3 pb-2.5 text-center sm:flex-1 sm:basis-0',
+              // Tres por fila en el móvil y cuatro desde sm; la última fila queda centrada.
+              'group relative flex basis-[calc((100%-1rem)/3)] cursor-pointer flex-col items-center gap-1 rounded-2xl border border-line bg-surface/70 px-2 pt-3 pb-2.5 text-center sm:basis-[calc((100%-1.5rem)/4)]',
               'transition-[background-color,border-color,box-shadow,color] duration-200 hover:border-accent/40',
               'has-checked:border-accent has-checked:bg-raised has-checked:shadow-key-hover',
               'has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-accent',

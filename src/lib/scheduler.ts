@@ -91,6 +91,17 @@ function fromFsrs(card: Card): CardState {
   }
 }
 
+/** Nota que uno mismo se pone en el modo tarjetas: las cuatro de FSRS, con su nombre. */
+export type SelfRating = 'again' | 'hard' | 'good' | 'easy'
+export const SELF_RATINGS: readonly SelfRating[] = ['again', 'hard', 'good', 'easy']
+
+const SELF_GRADE: Record<SelfRating, Grade> = {
+  again: Rating.Again,
+  hard: Rating.Hard,
+  good: Rating.Good,
+  easy: Rating.Easy,
+}
+
 /** Nota de la respuesta para FSRS según si hubo fallos y lo que tardó. */
 export function gradeAnswer({
   clean,
@@ -98,6 +109,7 @@ export function gradeAnswer({
   isNew,
   almost = false,
   trusted = false,
+  rating,
 }: {
   clean: boolean
   ms: number
@@ -109,7 +121,10 @@ export function gradeAnswer({
    * nueva es que ya la sabía (no suerte), así que se aleja como fácil. Lo decide el entrenador.
    */
   trusted?: boolean
+  /** Modo tarjetas: la nota la pone el propio estudiante y manda sobre todo lo demás. */
+  rating?: SelfRating
 }): Grade {
+  if (rating) return SELF_GRADE[rating]
   if (!clean) return Rating.Again
   if (almost || ms >= SLOW_ANSWER_MS) return Rating.Hard
   // Una palabra nueva acertada podría ser suerte (1 de 4): pasa por un paso de aprendizaje, salvo
@@ -127,6 +142,19 @@ export function review(
 ): CardState {
   const current = card ? toFsrs(card) : createEmptyCard(new Date(now))
   return fromFsrs(schedulerFor(retention).next(current, new Date(now), grade).card)
+}
+
+/**
+ * Cuánto se alejaría la palabra con cada nota (ms desde `now`), para mostrarlo en las tarjetas antes
+ * de calificarse, como hacen las apps de repaso espaciado.
+ */
+export function previewIntervals(
+  card: CardState | undefined,
+  now: number,
+  retention = DEFAULT_RETENTION,
+): Record<SelfRating, number> {
+  const interval = (rating: SelfRating) => Math.max(0, review(card, SELF_GRADE[rating], now, retention).due - now)
+  return { again: interval('again'), hard: interval('hard'), good: interval('good'), easy: interval('easy') }
 }
 
 // --- Migración desde Leitner (progreso v1) --------------------------------------------------------

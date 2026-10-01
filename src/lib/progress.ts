@@ -1,6 +1,6 @@
 /** Progreso del usuario: estado de cada palabra, días practicados y récord. */
 import { appendEvent, clearEvents } from './events'
-import { type CardState, fromLeitner, gradeAnswer, isMastered, parseCard, review } from './scheduler'
+import { type CardState, fromLeitner, gradeAnswer, isMastered, parseCard, review, type SelfRating } from './scheduler'
 import { getSettings, RETENTION } from './settings'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { TRACKS, type Track } from './types'
@@ -217,7 +217,20 @@ export interface Answer {
   almost?: boolean
   /** El entrenador confía en que una nueva acertada al instante ya se sabía (ver gradeAnswer). */
   trusted?: boolean
+  /** Modo tarjetas: la nota que se puso el propio estudiante. */
+  rating?: SelfRating
 }
+
+/**
+ * Respuesta equivalente a una autoevaluación: «otra vez» es un fallo, «difícil» cuenta como «casi»
+ * (se sabía, pero costó) y «bien» o «fácil» son aciertos limpios.
+ */
+export const answerFromRating = (rating: SelfRating, ms: number): Answer => ({
+  clean: rating !== 'again',
+  almost: rating === 'hard',
+  ms,
+  rating,
+})
 
 export function recordAnswer(track: Track, id: string, answer: Answer, now = Date.now()): CardState {
   const data = store.get()
