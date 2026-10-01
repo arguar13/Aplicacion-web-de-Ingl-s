@@ -7,6 +7,7 @@
  * relativos se buscarían en `/nivel/assets/…`. Con el hash, el servidor siempre sirve index.html, el
  * service worker no necesita reglas extra y los enlaces directos funcionan sin conexión.
  */
+import { type CourseLevelId, courseLevelInfo, isCourseLevelId } from './courseMeta'
 import { ALL_DECK, ALL_WORDS, type Deck, LEVELS } from './decks'
 import type { SmartDeckKind } from './smartDecks'
 import { isTopicId, topicInfo, type TopicId } from './topicMeta'
@@ -17,6 +18,7 @@ export type Panel = 'settings' | 'shortcuts' | { word: string }
 /** Pantallas sin parámetros: su ruta y el título de la pestaña. */
 const SIMPLE_SCREENS = {
   coach: { path: '/sesion', title: 'Sesión inteligente' },
+  course: { path: '/curso', title: 'Curso de inglés' },
   focus: { path: '/enfoque', title: 'Modo concentración' },
   topics: { path: '/colecciones', title: 'Colecciones' },
   blitz: { path: '/relampago', title: 'Relámpago' },
@@ -31,6 +33,9 @@ export type Screen =
   | { name: 'deck'; deck: Deck }
   | { name: 'smart'; kind: SmartDeckKind }
   | { name: 'topic'; topic: TopicId }
+  | { name: 'courseLevel'; level: CourseLevelId }
+  | { name: 'lesson'; level: CourseLevelId; lesson: string }
+  | { name: 'exam'; level: CourseLevelId }
   | { name: SimpleScreen }
 
 export interface Route {
@@ -74,6 +79,13 @@ function parseScreen(path: string): Screen | null {
   if (smart) return { name: 'smart', kind: smart }
   const topic = /^\/tema\/([a-z]+)$/.exec(path)?.[1]
   if (topic) return isTopicId(topic) ? { name: 'topic', topic } : null
+  const course = /^\/curso\/([a-z0-9]+)(?:\/([a-z0-9-]+))?$/.exec(path)
+  if (course) {
+    const [, level, rest] = course
+    if (!isCourseLevelId(level)) return null
+    if (rest === undefined) return { name: 'courseLevel', level }
+    return rest === 'examen' ? { name: 'exam', level } : { name: 'lesson', level, lesson: rest }
+  }
   const deck = deckFromPath(path)
   return deck ? { name: 'deck', deck } : null
 }
@@ -96,7 +108,14 @@ function screenPath(screen: Screen): string {
       return SMART[screen.kind].path
     case 'topic':
       return `/tema/${screen.topic}`
+    case 'courseLevel':
+      return `/curso/${screen.level}`
+    case 'lesson':
+      return `/curso/${screen.level}/${screen.lesson}`
+    case 'exam':
+      return `/curso/${screen.level}/examen`
     case 'coach':
+    case 'course':
     case 'focus':
     case 'topics':
     case 'blitz':
@@ -129,7 +148,14 @@ export function titleOf(route: Route): string {
       return `${SMART[screen.kind].title} — Tecla`
     case 'topic':
       return `${topicInfo(screen.topic).name} — Tecla`
+    case 'courseLevel':
+      return `Curso ${courseLevelInfo(screen.level).name} — Tecla`
+    case 'lesson':
+      return `Lección ${courseLevelInfo(screen.level).name} — Tecla`
+    case 'exam':
+      return `Examen ${courseLevelInfo(screen.level).name} — Tecla`
     case 'coach':
+    case 'course':
     case 'focus':
     case 'topics':
     case 'blitz':

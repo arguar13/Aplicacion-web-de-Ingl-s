@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { lazy, Suspense, useId, useState } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
 import { formatCount, plural } from '@/lib/format'
 import { currentStreak, todayStats, useProgress } from '@/lib/progress'
+import type { CourseLevelId } from '@/lib/courseMeta'
 import type { DeckSummary } from '@/lib/scheduler'
 import { updateSettings, useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
@@ -15,6 +16,8 @@ import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
 import { CoachCard } from './CoachCard'
+/** El curso trae su cargador y su progreso: fuera del paquete inicial, llega un instante después. */
+const CourseCard = lazy(() => import('./CourseCard').then((module) => ({ default: module.CourseCard })))
 import { MissionsCard } from './MissionsCard'
 import { WordOfDayCard } from './WordOfDayCard'
 import { StreakBanner } from './StreakBanner'
@@ -49,6 +52,9 @@ interface Props {
   onOpenSmart: (kind: SmartDeckKind) => void
   onOpenBlitz: () => void
   onOpenTopics: () => void
+  onOpenCourse: () => void
+  onOpenLesson: (level: CourseLevelId, lesson: string) => void
+  onOpenExam: (level: CourseLevelId) => void
   onOpenStats: () => void
   onOpenDictionary: () => void
   onOpenSettings: () => void
@@ -63,6 +69,9 @@ export function DeckPicker({
   onOpenSmart,
   onOpenBlitz,
   onOpenTopics,
+  onOpenCourse,
+  onOpenLesson,
+  onOpenExam,
   onOpenStats,
   onOpenDictionary,
   onOpenSettings,
@@ -149,6 +158,11 @@ export function DeckPicker({
         <StreakBanner progress={progress} now={now} />
         <BackupReminder onOpenSettings={onOpenSettings} />
         <MissionsCard now={now} />
+        <Suspense
+          fallback={<div className="mt-4 min-h-44 rounded-3xl border border-line bg-surface shadow-card" aria-hidden />}
+        >
+          <CourseCard onOpenCourse={onOpenCourse} onOpenLesson={onOpenLesson} onOpenExam={onOpenExam} />
+        </Suspense>
         {anyProgress && (
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <ReviewCard

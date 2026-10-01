@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { ALL_DECK, LEVELS } from './decks'
-import { formatHash, HOME, parseHash, type Route } from './routes'
+import { formatHash, HOME, parseHash, type Route, titleOf } from './routes'
 
 describe('rutas', () => {
   it('reconoce el inicio con o sin hash', () => {
@@ -12,6 +12,19 @@ describe('rutas', () => {
       expect(parseHash(`#/nivel/${deck.level}`)).toEqual({ screen: { name: 'deck', deck }, panel: null })
     }
     expect(parseHash('#/todas/')).toEqual({ screen: { name: 'deck', deck: ALL_DECK }, panel: null })
+  })
+
+  it('reconoce el curso, sus niveles, lecciones y exámenes', () => {
+    expect(parseHash('#/curso').screen).toEqual({ name: 'course' })
+    expect(parseHash('#/curso/a1').screen).toEqual({ name: 'courseLevel', level: 'a1' })
+    expect(parseHash('#/curso/b2/examen').screen).toEqual({ name: 'exam', level: 'b2' })
+    expect(parseHash('#/curso/a1/verbo-to-be').screen).toEqual({ name: 'lesson', level: 'a1', lesson: 'verbo-to-be' })
+    expect(parseHash('#/curso/z9')).toEqual(HOME)
+    expect(parseHash('#/curso/a1/Mal Id')).toEqual(HOME)
+    expect(formatHash({ screen: { name: 'lesson', level: 'a1', lesson: 'verbo-to-be' }, panel: null })).toBe(
+      '#/curso/a1/verbo-to-be',
+    )
+    expect(titleOf({ screen: { name: 'exam', level: 'c1' }, panel: null })).toBe('Examen C1 — Tecla')
   })
 
   it('reconoce el panel de ajustes sobre cualquier pantalla', () => {

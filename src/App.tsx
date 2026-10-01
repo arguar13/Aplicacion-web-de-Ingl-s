@@ -22,6 +22,7 @@ import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
 import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
 import { updateSettings, useSettings } from '@/lib/settings'
+import type { CourseLevelId } from '@/lib/courseMeta'
 import type { SmartDeckKind } from '@/lib/smartDecks'
 import type { Mode } from '@/lib/types'
 
@@ -43,6 +44,18 @@ const TopicsScreen = lazy(() =>
   import('@/components/TopicsScreen').then((module) => ({ default: module.TopicsScreen })),
 )
 const TopicGame = lazy(() => import('@/components/TopicsScreen').then((module) => ({ default: module.TopicGame })))
+const CourseScreen = lazy(() =>
+  import('@/components/course/CourseScreens').then((module) => ({ default: module.CourseScreen })),
+)
+const LevelScreen = lazy(() =>
+  import('@/components/course/CourseScreens').then((module) => ({ default: module.LevelScreen })),
+)
+const LessonScreen = lazy(() =>
+  import('@/components/course/CourseScreens').then((module) => ({ default: module.LessonScreen })),
+)
+const ExamScreen = lazy(() =>
+  import('@/components/course/CourseScreens').then((module) => ({ default: module.ExamScreen })),
+)
 const DictionaryScreen = lazy(() =>
   import('@/components/DictionaryScreen').then((module) => ({ default: module.DictionaryScreen })),
 )
@@ -71,6 +84,13 @@ function openDeck(deck: Deck) {
 }
 
 const openSmart = (kind: SmartDeckKind) => go({ name: 'smart', kind })
+const openCourse = () => go({ name: 'course' })
+const openLevel = (level: CourseLevelId) => go({ name: 'courseLevel', level })
+const openLesson = (level: CourseLevelId, lesson: string) => go({ name: 'lesson', level, lesson })
+const openExam = (level: CourseLevelId) => go({ name: 'exam', level })
+/** Volver de un nivel al curso, o de una lección a su nivel: por el historial si se llegó desde ahí. */
+const backToCourse = () => goBack({ screen: { name: 'course' }, panel: null })
+const backToLevel = (level: CourseLevelId) => goBack({ screen: { name: 'courseLevel', level }, panel: null })
 const startCoach = () => go({ name: 'coach' })
 /** Duración del modo concentración. */
 const FOCUS_MINUTES = 5
@@ -96,6 +116,9 @@ function Home() {
       onOpenSmart={openSmart}
       onOpenBlitz={() => go({ name: 'blitz' })}
       onOpenTopics={() => go({ name: 'topics' })}
+      onOpenCourse={openCourse}
+      onOpenLesson={openLesson}
+      onOpenExam={openExam}
       onOpenWord={openWord}
       onOpenStats={() => go({ name: 'stats' })}
       onOpenDictionary={() => go({ name: 'dictionary' })}
@@ -144,6 +167,32 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
       return <StatsScreen onExit={exitToHome} onOpenWord={openWord} />
     case 'dictionary':
       return <DictionaryScreen onExit={exitToHome} onOpenWord={openWord} />
+    case 'course':
+      return <CourseScreen onExit={exitToHome} onOpenLevel={openLevel} />
+    case 'courseLevel':
+      return (
+        <LevelScreen
+          level={screen.level}
+          onExit={backToCourse}
+          onOpenLesson={(lesson) => openLesson(screen.level, lesson)}
+          onOpenExam={() => openExam(screen.level)}
+        />
+      )
+    case 'lesson':
+      return (
+        <LessonScreen
+          key={`${screen.level}/${screen.lesson}`}
+          level={screen.level}
+          lesson={screen.lesson}
+          onExit={() => backToLevel(screen.level)}
+          onOpenLesson={(lesson) =>
+            navigate({ screen: { name: 'lesson', level: screen.level, lesson }, panel: null }, { replace: true })
+          }
+          onOpenExam={() => navigate({ screen: { name: 'exam', level: screen.level }, panel: null }, { replace: true })}
+        />
+      )
+    case 'exam':
+      return <ExamScreen key={screen.level} level={screen.level} onExit={() => backToLevel(screen.level)} />
   }
 }
 

@@ -4,6 +4,7 @@ import {
   getCourseProgress,
   levelSummary,
   mergeCourseProgress,
+  nextStep,
   parseCourseProgress,
   recordExam,
   recordLesson,
@@ -57,6 +58,32 @@ describe('progreso del curso', () => {
       total: 2,
       passed: true,
     })
+    // Las lecciones terminadas se cuentan por su clave completa (nivel/lección).
+    recordLesson('a1', 'to-be', 5, 1, NOW + 3)
+    expect(levelSummary(getCourseProgress(), 'a1', ['to-be', 'articles'])).toMatchObject({ done: 1, total: 2 })
+    expect(levelSummary(getCourseProgress(), 'a2', ['to-be'])).toMatchObject({ done: 0, passed: false })
+  })
+
+  it('el siguiente paso es la primera lección pendiente del primer nivel sin aprobar, o su examen', () => {
+    const levels = [
+      {
+        id: 'a1' as const,
+        lessons: [
+          { id: 'x', title: 'X' },
+          { id: 'y', title: 'Y' },
+        ],
+      },
+      { id: 'a2' as const, lessons: [{ id: 'z', title: 'Z' }] },
+    ]
+    expect(nextStep({ lessons: {}, exams: {} }, levels)).toEqual({
+      level: 'a1',
+      lesson: { id: 'x', title: 'X', index: 0 },
+    })
+    const done = { lessons: { 'a1/x': { best: 1, at: 1 }, 'a1/y': { best: 1, at: 1 } }, exams: {} }
+    expect(nextStep(done, levels)).toEqual({ level: 'a1', lesson: null })
+    const passed = { ...done, exams: { a1: { best: 0.9, at: 1 } } }
+    expect(nextStep(passed, levels)).toEqual({ level: 'a2', lesson: { id: 'z', title: 'Z', index: 0 } })
+    expect(nextStep({ ...passed, exams: { a1: { best: 1, at: 1 }, a2: { best: 1, at: 1 } } }, levels)).toBeNull()
   })
 
   it('combinar dos progresos se queda con la mejor nota de cada cosa', () => {

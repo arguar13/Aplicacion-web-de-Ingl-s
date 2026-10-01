@@ -121,6 +121,20 @@ export function mergeCourseProgress(current: CourseProgress, incoming: CoursePro
 
 /** Resumen de un nivel: lecciones terminadas y si el examen está aprobado. */
 export function levelSummary(progress: CourseProgress, level: CourseLevelId, lessonIds: readonly string[]) {
-  const done = lessonIds.filter((id) => id in progress.lessons).length
+  const done = lessonIds.filter((id) => lessonKey(level, id) in progress.lessons).length
   return { done, total: lessonIds.length, passed: examPassed(progress, level), exam: progress.exams[level] ?? null }
+}
+
+/** Siguiente paso que conviene: la primera lección sin terminar del primer nivel sin aprobar, o su examen. */
+export function nextStep(
+  progress: CourseProgress,
+  levels: ReadonlyArray<{ id: CourseLevelId; lessons: ReadonlyArray<{ id: string; title: string }> }>,
+): { level: CourseLevelId; lesson: { id: string; title: string; index: number } | null } | null {
+  for (const level of levels) {
+    if (examPassed(progress, level.id)) continue
+    const index = level.lessons.findIndex((lesson) => !(lessonKey(level.id, lesson.id) in progress.lessons))
+    if (index === -1) return { level: level.id, lesson: null }
+    return { level: level.id, lesson: { ...level.lessons[index], index } }
+  }
+  return null
 }

@@ -329,3 +329,14 @@ export function ExportIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Birrete: el curso y sus exámenes. */
+export function GraduationIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m2.5 9 9.5-4.5L21.5 9 12 13.5 2.5 9Z" />
+      <path d="M6.5 11v4.5c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3V11" />
+      <path d="M21.5 9v5" />
+    </svg>
+  )
+}
