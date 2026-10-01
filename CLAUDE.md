@@ -1,8 +1,9 @@
 # Guía para el agente
 
 Lo esencial para trabajar en este repositorio. La app se llama **OpenSpeak** (antes Tecla): los
-nombres internos `tecla*` (claves de `localStorage`, formato de copias, runner) no se renombran. El detalle técnico está en el [README](README.md) y
-la historia de cada fase en [docs/MASTERPROMPT.md](docs/MASTERPROMPT.md) (§7, registro de avance).
+nombres internos `tecla*` (claves de `localStorage`, formato de copias, runner) no se renombran. El
+detalle técnico está en el [README](README.md) y la historia de cada fase en
+[docs/MASTERPROMPT.md](docs/MASTERPROMPT.md) (§7, registro de avance).
 
 ## Despliegue: cómo funciona
 
