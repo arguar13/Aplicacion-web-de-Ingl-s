@@ -496,6 +496,18 @@ guardado sin compatibilidad y test; presupuesto de tamaño respetado; axe en ver
 
 ---
 
+### Fase 21 · Un curso con el rigor de las certificaciones (pedido del 01-10-2026)
+
+> "Crea los audios grabados y enriquece los niveles: que el temario cumpla con la rigurosidad de las
+> certificaciones y enseñe todo. Agrega quizzes, comprensión lectora y auditiva, y que el pipeline
+> esté en verde y se despliegue de verdad."
+
+- Temario completo por nivel (74 lecciones, ocho ejercicios cada una, exámenes de 23 o 24),
+  quizzes por nivel y mixto, comprensión lectora y auditiva, y pipeline de audio grabado para las
+  frases del curso. CI y despliegue comprobados en local paso a paso.
+
+---
+
 ## 6. Definición de terminado (para cada fase)
 
 - [ ] Todo lo pedido en la fase implementado y verificado, o explicado por qué no.
@@ -741,3 +753,24 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
 - Bug encontrado por el e2e: `levelSummary` contaba lecciones por id sin el nivel (siempre 0).
 - Pendiente: audio grabado de los ejemplos del curso (hoy, voz del navegador); más lecciones en
   B2–C2; ejercicios de comprensión lectora y auditiva; logros del curso.
+
+### Fase 21 · cerrada el 01-10-2026 · versión 2.3.0
+
+- Contenido: temario alineado con el de los exámenes oficiales (A1–B2: 13 lecciones; C1–C2: 11),
+  cada lección con más ejemplos y ocho ejercicios; generado desde scripts locales y validado por
+  test (cada ejercicio se resuelve con su respuesta, opciones distintas, mínimos por lección).
+- Quizzes (`courseQuiz.ts`): preguntas al azar con semilla por momento e intento, repartidas por
+  tipo; quiz mixto en turnos por nivel. Mejor nota en `tecla:course`, con copia y combinación.
+- Audio grabado (`courseAudio.ts` + `scripts/generate_course_audio.py`): id por hash FNV-1a del
+  texto, calculado igual en Python y en la app, con test de paridad. El plugin de versiones recorre
+  `course/`, la caché no borra esas grabaciones y la descarga sin conexión las incluye. La red del
+  entorno de desarrollo bloquea `speech.platform.bing.com`: las grabaciones se generan en local.
+- Comprensión (`reading` y `listening`): preguntas corregidas en bloque (todas bien, una mal entre
+  tres o más = casi); la escucha reproduce grabación o voz del navegador y enseña la transcripción
+  al corregir. Ocho pasajes por nivel y dos por examen.
+- Presupuesto: `SettingRow` a su propio módulo (Ajustes arrastraba la descarga de audio al inicio).
+- Workflows: los YAML son correctos; los runs fallan en segundos sin pasos porque GitHub no arranca
+  jobs con la cuenta bloqueada por un pago pendiente. Todo el pipeline (check, build, presupuesto,
+  e2e en Chromium y Lighthouse) se ejecutó en local en verde; el README explica cómo desbloquearlo.
+- Pendiente: generar y subir las grabaciones del curso; logros del curso; WebKit en los e2e locales
+  (solo corre en la CI).

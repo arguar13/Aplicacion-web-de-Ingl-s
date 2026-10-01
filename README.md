@@ -3,7 +3,7 @@
 Aprende vocabulario en inglés con una idea simple: aparece una palabra, suena su pronunciación y
 pulsas la tecla con su traducción. Más de 8000 palabras (8461), de las más usadas a las más
 difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un **curso
-de gramática de A1 a C2** con lecciones, ejercicios y exámenes. Gratis, sin cuentas, sin anuncios y
+de gramática de A1 a C2** con 74 lecciones, comprensión lectora y auditiva, exámenes y quizzes. Gratis, sin cuentas, sin anuncios y
 sin conexión.
 
 ## La sesión inteligente
@@ -53,30 +53,51 @@ navegador** donde tenga una voz en inglés (síntesis de voz, sin servidor).
 
 ## El curso: de A1 a C2
 
-**Curso de inglés** (#/curso): seis niveles del Marco Común Europeo, 38 lecciones y un examen por
-nivel. Cada lección explica un tema en español con ejemplos en inglés (que se pueden oír con la voz
-del navegador), tablas y un consejo sobre el error típico, y termina con seis ejercicios de cuatro
-tipos: **elegir** la opción, **completar** el hueco, **ordenar** las palabras de una frase y
+**Curso de inglés** (#/curso): seis niveles del Marco Común Europeo con 74 lecciones, un examen
+por nivel y quizzes. Cada lección explica un tema en español con muchos ejemplos en inglés (con
+voz), tablas y un consejo sobre el error típico, y termina con ocho ejercicios de cuatro tipos:
+**elegir** la opción, **completar** el hueco, **ordenar** las palabras de una frase y
 **traducir**. Lo escrito se corrige con tolerancia (mayúsculas, puntuación, un error de tecleo en
-frases largas cuenta como «casi»); al fallar se ve la respuesta y la explicación.
+frases largas cuenta como «casi»); al fallar se ve la respuesta y la explicación. El temario sigue
+el de las certificaciones oficiales de cada nivel.
 
-- **A1** (8): to be, artículos y plurales, presente simple, preguntas y negaciones, there is y
-  lugar, can, presente continuo, pasado simple.
-- **A2** (8): pasado irregular, comparativos, going to y will, contable e incontable, presente
-  perfecto, adverbios, should/must/have to, pasado continuo.
-- **B1** (8): perfecto frente a pasado, condicionales 0, 1 y 2, modales de deducción, pasiva,
-  relativo, gerundio e infinitivo, estilo indirecto.
-- **B2** (6): perfecto continuo, condicional 3 y mixtos, pasiva avanzada y have something done,
-  phrasal verbs, conectores, wish y would rather.
-- **C1** (4): inversión, oraciones hendidas, modales perfectos, registro y colocaciones.
-- **C2** (4): subjuntivo y estructuras formales, modismos, participios y oraciones reducidas,
-  precisión y matices.
+- **A1** (13): to be, artículos y plural, presente simple, preguntas y negaciones, there is y lugar,
+  can, presente continuo, pasado simple, posesivos, demostrativos y have got, imperativo y would
+  like, la hora y la fecha.
+- **A2** (13): pasado a fondo, comparativos, going to y will, contable e incontable, presente
+  perfecto, adverbios, should/must/have to, pasado continuo, used to, too y enough, indefinidos y
+  reflexivos, question tags.
+- **B1** (13): perfecto frente a pasado, condicionales 0, 1 y 2, modales de deducción, pasiva,
+  relativo, gerundio e infinitivo, estilo indirecto, pasado perfecto, formas de futuro,
+  determinantes, describir con matices.
+- **B2** (13): perfecto continuo, condicional 3 y mixtos, pasiva avanzada, phrasal verbs,
+  conectores, wish y would rather, futuro perfecto y continuo, verbos de reporte, obligación en el
+  pasado, be/get used to, comparación avanzada, tiempo y finalidad.
+- **C1** (11): inversión, oraciones hendidas, modales perfectos, registro y colocaciones, elipsis,
+  verbos que cambian de sentido, graduar la probabilidad, fronting, nominalización, preposiciones
+  dependientes.
+- **C2** (11): subjuntivo, modismos, participios y oraciones reducidas, precisión y matices,
+  concesivas avanzadas, lo hipotético, cohesión, binomios y énfasis formal, percepción y
+  causativos, puntuación y estilo.
 
-El **examen** de cada nivel (15 o 16 preguntas) se aprueba con el 80 %; cada lección y examen guarda
-su mejor nota, suma experiencia (más la primera vez) y el inicio sugiere el siguiente paso. El
-contenido vive en `src/data/course/<nivel>.json`, se carga al abrir el nivel y un test comprueba que
-cada ejercicio se resuelve con su propia respuesta. El progreso del curso viaja en la copia de
-seguridad.
+Cada nivel termina con una lección de **comprensión lectora y auditiva**: estrategias y ocho
+pasajes (cuatro para leer y cuatro para escuchar) con preguntas de opción múltiple. En los de
+escucha el texto no se ve: se oye (con la grabación si existe, o con la voz del navegador) y la
+transcripción aparece al corregir.
+
+El **examen** de cada nivel (23 o 24 preguntas, con un pasaje de lectura y otro de escucha) se
+aprueba con el 80 %. El **quiz** de cada nivel (`#/curso/<nivel>/quiz`) saca diez preguntas al azar
+de sus lecciones y su examen, distintas en cada intento; el **quiz mixto** (`#/curso/quiz`) mezcla
+doce de todos los niveles. Cada lección, examen y quiz guarda su mejor nota, suma experiencia (más
+la primera vez; un quiz sin fallos da un extra) y el inicio sugiere el siguiente paso. El contenido
+vive en `src/data/course/<nivel>.json`, se carga al abrir el nivel y un test comprueba que cada
+ejercicio se resuelve con su propia respuesta. El progreso del curso viaja en la copia de seguridad.
+
+**Audio grabado del curso:** `python scripts/generate_course_audio.py` graba cada frase del curso
+(ejemplos, respuestas y pasajes de escucha) con la misma voz neuronal que las palabras, en
+`public/audio/course/<hash>.mp3`. El hash sale del texto, calculado igual en el script y en la app,
+así cada frase sabe si tiene grabación sin ninguna lista; si no la tiene, se lee con la voz del
+navegador. Necesita red hacia `speech.platform.bing.com`.
 
 ## Misiones, experiencia y rangos
 
@@ -143,6 +164,12 @@ Calidad: cada commit pasa por `npm run check` (hook de pre-commit con simple-git
 por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build con su presupuesto
 de tamaño, los e2e en Chromium y WebKit (con axe en todas las pantallas, en los dos temas) y
 Lighthouse en móvil (rendimiento ≥ 85; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
+
+Si un run de la CI termina en pocos segundos **sin ejecutar ningún paso**, el problema no está en
+el código ni en los workflows: GitHub no arranca los jobs cuando la cuenta tiene un pago pendiente
+(«The job was not started because your account is locked due to a billing issue»). Se arregla en
+**Settings → Billing and plans** de la cuenta de GitHub; al resolverlo, basta con volver a lanzar el
+run (**Re-run all jobs**) y el despliegue se encadena solo.
 
 Atajos: `?` muestra la lista completa en cualquier pantalla · `1`–`9` o `0` para elegir nivel ·
 `1`–`4` para responder (en tarjetas, `Enter` muestra la traducción y `1`–`4` califican) · `Espacio`
@@ -232,8 +259,11 @@ src/data/course/<nivel>.json Curso: lecciones, ejercicios y examen de cada nivel
 src/lib/courseMeta.ts     Niveles del curso (nombre, descripción) y nota de aprobado
 src/lib/course.ts         Contenido del curso: tipos, validación y carga diferida por nivel
 src/lib/exercises.ts      Corrección tolerante de los ejercicios y baraja estable de «ordenar»
-src/lib/courseProgress.ts Progreso del curso: mejor nota por lección y examen, experiencia, siguiente paso
-src/components/course/    Pantallas del curso: niveles, nivel, lección, examen y el corredor de ejercicios
+src/lib/courseProgress.ts Progreso del curso: mejor nota por lección, examen y quiz, experiencia, siguiente paso
+src/lib/courseQuiz.ts     Quizzes del curso: preguntas al azar por nivel y quiz mixto (semilla por intento)
+src/lib/courseAudio.ts    Audio grabado de las frases del curso: id por hash del texto, igual que el script
+src/components/course/    Pantallas del curso: niveles, nivel, lección, examen, quiz y el corredor de ejercicios
+scripts/generate_course_audio.py Graba las frases del curso en public/audio/course/ (ver «El curso»)
 src/lib/events.ts         Historial de respuestas (últimas 5000)
 src/lib/stats.ts          Cálculos de las estadísticas
 src/lib/dictionary.ts     Búsqueda y filtros del diccionario

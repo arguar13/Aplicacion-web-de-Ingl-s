@@ -5,6 +5,28 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## 2.3.0 · 2026-10-01 · Un curso con el rigor de las certificaciones (Fase 21)
+
+### Añadido
+
+- **Temario ampliado** con el programa de los exámenes oficiales de cada nivel: de 38 a 74
+  lecciones (A1, A2, B1 y B2 con 13; C1 y C2 con 11), cada una con más ejemplos y ocho ejercicios;
+  los exámenes pasan a 23 o 24 preguntas.
+- **Comprensión lectora y auditiva:** dos tipos de ejercicio nuevos (texto o audio con preguntas
+  de opción múltiple), una lección de estrategias con ocho pasajes en cada nivel y un pasaje de
+  cada tipo en cada examen. La escucha oculta el texto hasta corregir y muestra la transcripción.
+- **Quizzes:** quiz rápido por nivel (`#/curso/<nivel>/quiz`, diez preguntas al azar, distintas
+  en cada intento) y quiz mixto (`#/curso/quiz`, doce de todos los niveles). Mejor nota guardada
+  (también en la copia), experiencia por acierto y 25 XP extra por un quiz perfecto.
+- **Audio grabado del curso:** `scripts/generate_course_audio.py` graba cada frase con la misma voz
+  neuronal que las palabras; la app prefiere la grabación y cae a la voz del navegador si no
+  existe. Las grabaciones entran en la descarga sin conexión y en las versiones por contenido.
+
+### Cambiado
+
+- La fila de Ajustes (`SettingRow`) vive en su propio módulo, para que la copia de seguridad no
+  arrastre a la carga inicial la descarga de audio del curso (paquete inicial en 124,8 KB).
+
 ## 2.2.0 · 2026-10-01 · El curso de A1 a C2 (Fase 20)
 
 ### Añadido
