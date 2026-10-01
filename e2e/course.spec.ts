@@ -81,7 +81,7 @@ test('el curso lista los niveles, cada nivel sus lecciones, y una lección se le
   await card.getByRole('button', { name: 'Ver el curso' }).click()
   await expect(page).toHaveURL(/#\/curso$/)
   await expect(page.getByRole('heading', { name: 'Curso de inglés' })).toBeVisible()
-  await expect(page.getByRole('button', { name: /Nivel A1/ })).toContainText('0 de 8 lecciones')
+  await expect(page.getByRole('button', { name: /Nivel A1/ })).toContainText(`0 de ${a1.lessons.length} lecciones`)
   await expectNoHorizontalScroll(page)
   await expectAccessible(page)
 

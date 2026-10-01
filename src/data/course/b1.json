@@ -1,11 +1,14 @@
 {
-  "intro": "En B1 ya te manejas: ahora toca precisar. Distingues lo que empezó en el pasado y sigue, imaginas condiciones, deduces, cuentas lo que dijeron otros y describes con oraciones de relativo. Es el nivel de la conversación con soltura.",
+  "intro": "En B1 ya te manejas: ahora toca precisar. Distingues lo que empezó en el pasado y sigue, ordenas una narración con el pasado perfecto, imaginas condiciones, deduces, cuentas lo que dijeron otros y describes con oraciones de relativo. Doce lecciones y un examen con el temario de los exámenes oficiales de nivel B1.",
   "goals": [
     "Elegir entre presente perfecto y pasado simple, con for y since.",
     "Hablar de condiciones reales e imaginarias (condicionales 0, 1 y 2).",
     "Deducir y expresar probabilidad con might, may, could, must y can't.",
     "Usar la voz pasiva y las oraciones de relativo.",
-    "Combinar verbos con gerundio o infinitivo y contar lo que dijo alguien."
+    "Combinar verbos con gerundio o infinitivo y contar lo que dijo alguien.",
+    "Ordenar una historia con el pasado perfecto.",
+    "Elegir la forma de futuro adecuada y usar when, as soon as y until con presente.",
+    "Precisar con artículos, each, every, both, either y neither."
   ],
   "lessons": [
     {
@@ -35,6 +38,14 @@
             {
               "en": "We haven't seen each other since March.",
               "es": "No nos vemos desde marzo."
+            },
+            {
+              "en": "It's the best film I've ever seen.",
+              "es": "Es la mejor película que he visto nunca."
+            },
+            {
+              "en": "I haven't spoken to him for ages.",
+              "es": "Hace siglos que no hablo con él."
             }
           ],
           "table": {
@@ -119,6 +130,17 @@
           "type": "translate",
           "es": "Vivo aquí desde hace cinco años.",
           "answers": ["I have lived here for five years.", "I've lived here for five years."]
+        },
+        {
+          "type": "choice",
+          "prompt": "How long ___ each other?",
+          "options": ["do you know", "have you known", "did you know"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Hace tres años que no la veo.",
+          "answers": ["I haven't seen her for three years.", "I have not seen her for three years."]
         }
       ]
     },
@@ -169,6 +191,14 @@
             {
               "en": "If you're tired, take a break.",
               "es": "Si estás cansado, tómate un descanso."
+            },
+            {
+              "en": "You'll get wet if you don't take a coat.",
+              "es": "Te mojarás si no llevas abrigo."
+            },
+            {
+              "en": "If I finish early, I might go to the gym.",
+              "es": "Si termino pronto, quizá vaya al gimnasio."
             }
           ],
           "table": {
@@ -240,6 +270,22 @@
             "If you don't hurry, you will miss the bus.",
             "If you don't hurry you'll miss the bus."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "I won't go ___ you come with me.",
+          "options": ["if", "unless", "in case"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Si llueve, nos quedaremos en casa.",
+          "answers": [
+            "If it rains, we'll stay at home.",
+            "If it rains, we will stay at home.",
+            "If it rains we'll stay at home.",
+            "If it rains, we'll stay home."
+          ]
         }
       ]
     },
@@ -270,6 +316,14 @@
             {
               "en": "If I were you, I wouldn't do that.",
               "es": "Si yo fuera tú, no haría eso."
+            },
+            {
+              "en": "If people drove more carefully, there would be fewer accidents.",
+              "es": "Si la gente condujera con más cuidado, habría menos accidentes."
+            },
+            {
+              "en": "I'd buy it if it were cheaper.",
+              "es": "Lo compraría si fuera más barato."
             }
           ]
         },
@@ -357,6 +411,17 @@
           "type": "translate",
           "es": "Ojalá tuviera más tiempo.",
           "answers": ["I wish I had more time."]
+        },
+        {
+          "type": "choice",
+          "prompt": "If I ___ the answer, I would tell you.",
+          "options": ["know", "knew", "would know"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "¿Qué harías si perdieras el trabajo?",
+          "answers": ["What would you do if you lost your job?"]
         }
       ]
     },
@@ -406,6 +471,14 @@
             {
               "en": "They must know each other.",
               "es": "Seguro que se conocen."
+            },
+            {
+              "en": "That must be the new teacher.",
+              "es": "Esa debe de ser la profesora nueva."
+            },
+            {
+              "en": "You can't be hungry; you've just eaten!",
+              "es": "No puedes tener hambre; ¡acabas de comer!"
             }
           ],
           "table": {
@@ -469,6 +542,17 @@
           "type": "translate",
           "es": "Debes de estar cansado.",
           "answers": ["You must be tired."]
+        },
+        {
+          "type": "choice",
+          "prompt": "He's been working all night. He ___ be exhausted.",
+          "options": ["might", "must", "can't"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Puede que llueva más tarde.",
+          "answers": ["It might rain later.", "It may rain later.", "It could rain later."]
         }
       ]
     },
@@ -528,6 +612,14 @@
             {
               "en": "The results will be announced on Friday.",
               "es": "Los resultados se anunciarán el viernes."
+            },
+            {
+              "en": "This cheese is made in France.",
+              "es": "Este queso se hace en Francia."
+            },
+            {
+              "en": "The thief was caught by the police.",
+              "es": "El ladrón fue atrapado por la policía."
             }
           ],
           "tip": "La pasiva pide el participio: was build o is make son errores; was built, is made."
@@ -582,6 +674,17 @@
           "type": "translate",
           "es": "Aquí se habla inglés.",
           "answers": ["English is spoken here."]
+        },
+        {
+          "type": "choice",
+          "prompt": "The new museum ___ next month.",
+          "options": ["will open", "will be opened", "is opened"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Esta casa fue construida en 1950.",
+          "answers": ["This house was built in 1950."]
         }
       ]
     },
@@ -612,6 +715,14 @@
             {
               "en": "I know a girl whose father is a pilot.",
               "es": "Conozco a una chica cuyo padre es piloto."
+            },
+            {
+              "en": "I don't like people who talk during films.",
+              "es": "No me gusta la gente que habla durante las películas."
+            },
+            {
+              "en": "Do you remember the day when we met?",
+              "es": "¿Recuerdas el día en que nos conocimos?"
             }
           ],
           "table": {
@@ -704,6 +815,17 @@
             "That's the movie we saw yesterday.",
             "That's the film which we saw yesterday."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "The hotel ___ we stayed was lovely.",
+          "options": ["which", "where", "who"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Conozco a una chica que habla cinco idiomas.",
+          "answers": ["I know a girl who speaks five languages.", "I know a girl that speaks five languages."]
         }
       ]
     },
@@ -757,6 +879,14 @@
             {
               "en": "I'd like to book a table.",
               "es": "Quisiera reservar una mesa."
+            },
+            {
+              "en": "I'm thinking of moving abroad.",
+              "es": "Estoy pensando en irme al extranjero."
+            },
+            {
+              "en": "He refused to answer.",
+              "es": "Él se negó a contestar."
             }
           ],
           "table": {
@@ -824,6 +954,22 @@
           "type": "translate",
           "es": "¿Te importaría cerrar la puerta?",
           "answers": ["Would you mind closing the door?", "Do you mind closing the door?"]
+        },
+        {
+          "type": "choice",
+          "prompt": "She suggested ___ a taxi.",
+          "options": ["to take", "taking", "take"],
+          "answer": 1,
+          "explanation": "Suggest + -ing."
+        },
+        {
+          "type": "translate",
+          "es": "Dejó de fumar hace dos años.",
+          "answers": [
+            "He stopped smoking two years ago.",
+            "She stopped smoking two years ago.",
+            "He gave up smoking two years ago."
+          ]
         }
       ]
     },
@@ -854,6 +1000,14 @@
             {
               "en": "'I can't come.' → She said she couldn't come.",
               "es": "«No puedo venir.» → Dijo que no podía venir."
+            },
+            {
+              "en": "'I don't like it.' → He said he didn't like it.",
+              "es": "«No me gusta.» → Dijo que no le gustaba."
+            },
+            {
+              "en": "'We're leaving tomorrow.' → They said they were leaving the next day.",
+              "es": "«Nos vamos mañana.» → Dijeron que se iban al día siguiente."
             }
           ],
           "table": {
@@ -945,6 +1099,519 @@
           "type": "translate",
           "es": "Dijo que estaba cansado.",
           "answers": ["He said he was tired.", "He said that he was tired."]
+        },
+        {
+          "type": "choice",
+          "prompt": "'I have finished.' → She said she ___.",
+          "options": ["has finished", "had finished", "finished"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Me pidió que esperara.",
+          "answers": ["He asked me to wait.", "She asked me to wait."]
+        }
+      ]
+    },
+    {
+      "id": "pasado-perfecto",
+      "title": "El pasado perfecto: lo que había pasado antes",
+      "summary": "Cuando llegué, el tren ya había salido.",
+      "sections": [
+        {
+          "heading": "Formar el pasado perfecto",
+          "body": [
+            "Had + participio pasado, igual para todas las personas: I had left, she had seen. Negación: hadn't. Pregunta: Had you…? Sitúa una acción antes de otra del pasado: When I arrived, the film had already started (empezó antes de que yo llegara)."
+          ],
+          "examples": [
+            {
+              "en": "By the time we got there, the shop had closed.",
+              "es": "Para cuando llegamos, la tienda había cerrado."
+            },
+            {
+              "en": "She had never flown before that trip.",
+              "es": "Nunca había volado antes de ese viaje."
+            },
+            {
+              "en": "I didn't recognise him because he had changed a lot.",
+              "es": "No lo reconocí porque había cambiado mucho."
+            },
+            {
+              "en": "Had you met her before the party?",
+              "es": "¿La conocías de antes de la fiesta?"
+            }
+          ]
+        },
+        {
+          "heading": "Pasado perfecto y pasado simple",
+          "body": [
+            "Si los hechos van en orden, basta el pasado simple: I got up, had breakfast and left. El pasado perfecto se usa para «saltar atrás»: cuando contamos algo y queremos aclarar que otra cosa ocurrió antes. Palabras típicas: already, just, never, before, by the time, after, when, because."
+          ],
+          "examples": [
+            {
+              "en": "After she had finished work, she went home.",
+              "es": "Después de terminar el trabajo, se fue a casa."
+            },
+            {
+              "en": "He was tired because he hadn't slept.",
+              "es": "Estaba cansado porque no había dormido."
+            },
+            {
+              "en": "I had just closed the door when the phone rang.",
+              "es": "Acababa de cerrar la puerta cuando sonó el teléfono."
+            }
+          ],
+          "table": {
+            "headers": ["Antes", "Después"],
+            "rows": [
+              ["pasado perfecto (had done)", "pasado simple (did)"],
+              ["The train had left", "when I arrived."]
+            ]
+          },
+          "tip": "No hace falta pasado perfecto en todas las frases de una historia: solo cuando el orden no está claro."
+        },
+        {
+          "heading": "En el estilo indirecto y el tercer condicional",
+          "body": [
+            "El pasado simple del estilo directo pasa a pasado perfecto en el indirecto: 'I saw it' → She said she had seen it. Y el tercer condicional lo usa en la condición: If I had known… (lo verás en B2)."
+          ],
+          "examples": [
+            {
+              "en": "He told me he had lost his wallet.",
+              "es": "Me dijo que había perdido la cartera."
+            },
+            {
+              "en": "They said they had never been there.",
+              "es": "Dijeron que nunca habían estado allí."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "When we arrived at the station, the train ___.",
+          "options": ["already left", "had already left", "has already left"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ Chinese before she moved to Beijing.",
+          "options": ["didn't study", "hadn't studied", "hasn't studied"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "After he ___ the email, he called her.",
+          "options": ["had read", "has read", "reads"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "I ___ (never / see) snow before I went to Canada.",
+          "answers": ["had never seen"]
+        },
+        {
+          "type": "fill",
+          "prompt": "By the time I got home, everyone ___ (go) to bed.",
+          "answers": ["had gone"]
+        },
+        {
+          "type": "order",
+          "es": "Cuando llegué, la película ya había empezado.",
+          "words": ["When", "I", "arrived,", "the", "film", "had", "already", "started."]
+        },
+        {
+          "type": "translate",
+          "es": "Nunca había estado en Londres antes.",
+          "answers": ["I had never been to London before.", "I'd never been to London before."]
+        },
+        {
+          "type": "translate",
+          "es": "Dijo que había perdido las llaves.",
+          "answers": [
+            "She said she had lost her keys.",
+            "He said he had lost his keys.",
+            "She said that she had lost her keys.",
+            "He said that he had lost his keys."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formas-de-futuro",
+      "title": "Las formas de futuro y when, as soon as, until",
+      "summary": "Will, going to, presente continuo, presente simple… y «cuando llegue».",
+      "sections": [
+        {
+          "heading": "Cuatro formas, cuatro usos",
+          "body": [
+            "Will: predicciones, decisiones del momento, promesas. Going to: planes e intenciones, predicciones con pruebas. Presente continuo: citas y planes ya organizados (I'm meeting Ana at six). Presente simple: horarios y programas (The train leaves at 9:15)."
+          ],
+          "examples": [
+            {
+              "en": "I think it'll be a great match.",
+              "es": "Creo que será un gran partido."
+            },
+            {
+              "en": "We're going to repaint the kitchen.",
+              "es": "Vamos a volver a pintar la cocina."
+            },
+            {
+              "en": "I'm flying to Rome on Friday.",
+              "es": "Vuelo a Roma el viernes."
+            },
+            {
+              "en": "The exam starts at ten.",
+              "es": "El examen empieza a las diez."
+            }
+          ],
+          "table": {
+            "headers": ["Forma", "Uso principal", "Ejemplo"],
+            "rows": [
+              ["will", "predicción, decisión, promesa", "I'll call you."],
+              ["going to", "plan, intención, predicción con pruebas", "I'm going to study law."],
+              ["presente continuo", "cita fija", "We're having dinner with Sam tonight."],
+              ["presente simple", "horario", "The shop opens at nine."]
+            ]
+          }
+        },
+        {
+          "heading": "Cuando llegue, en cuanto termine: presente tras when",
+          "body": [
+            "Tras when, as soon as, until, before, after y once, el futuro se expresa con presente simple (o presente perfecto), nunca con will: I'll call you when I arrive. We'll wait until she comes."
+          ],
+          "examples": [
+            {
+              "en": "Call me as soon as you get home.",
+              "es": "Llámame en cuanto llegues a casa."
+            },
+            {
+              "en": "I'll stay here until the rain stops.",
+              "es": "Me quedaré aquí hasta que pare la lluvia."
+            },
+            {
+              "en": "Once you've finished, we can leave.",
+              "es": "Una vez que hayas terminado, podemos irnos."
+            }
+          ],
+          "tip": "When I will arrive es un error; en inglés es when I arrive."
+        },
+        {
+          "heading": "Futuro con probabilidad",
+          "body": [
+            "Will probably, will definitely, I'm sure…, I doubt…, I expect…; may/might para lo posible: We might go out later. Be likely to: It's likely to rain."
+          ],
+          "examples": [
+            {
+              "en": "I'll probably be late.",
+              "es": "Probablemente llegue tarde."
+            },
+            {
+              "en": "She definitely won't agree.",
+              "es": "Ella seguro que no estará de acuerdo."
+            },
+            {
+              "en": "It's likely to be crowded.",
+              "es": "Es probable que esté lleno de gente."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Look at the time! We ___ the bus.",
+          "options": ["will miss", "are going to miss", "miss"],
+          "answer": 1,
+          "explanation": "Predicción con pruebas: going to."
+        },
+        {
+          "type": "choice",
+          "prompt": "I'll let you know when I ___.",
+          "options": ["will arrive", "arrive", "am arriving"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "The concert ___ at 8 p.m.",
+          "options": ["is starting", "starts", "will be start"],
+          "answer": 1,
+          "explanation": "Horario: presente simple."
+        },
+        {
+          "type": "fill",
+          "prompt": "We'll wait here ___ she comes back. (hasta que)",
+          "answers": ["until"]
+        },
+        {
+          "type": "fill",
+          "prompt": "I'm ___ (meet) my boss tomorrow at nine. (cita fija, presente continuo)",
+          "answers": ["meeting"]
+        },
+        {
+          "type": "order",
+          "es": "Te llamaré en cuanto llegue.",
+          "words": ["I", "will", "call", "you", "as", "soon", "as", "I", "arrive."]
+        },
+        {
+          "type": "translate",
+          "es": "Probablemente llueva mañana.",
+          "answers": [
+            "It will probably rain tomorrow.",
+            "It'll probably rain tomorrow.",
+            "It's likely to rain tomorrow."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "¿Qué vas a hacer este fin de semana?",
+          "answers": ["What are you going to do this weekend?", "What are you doing this weekend?"]
+        }
+      ]
+    },
+    {
+      "id": "articulos-y-determinantes",
+      "title": "Artículos y determinantes: the, each, every, both, either",
+      "summary": "Cuándo no hay artículo, y cómo hablar de dos o de todos.",
+      "sections": [
+        {
+          "heading": "The y el artículo cero",
+          "body": [
+            "Sin artículo para hablar en general (Life is short; Dogs are loyal), con comidas, idiomas, deportes y la mayoría de países (breakfast, English, football, Spain). Con the: lo único o ya conocido (the sun, the government), ríos, mares, cordilleras y países en plural (the Nile, the Alps, the Netherlands), superlativos y ordinales (the best, the first)."
+          ],
+          "examples": [
+            {
+              "en": "I love music, but I don't like the music in this bar.",
+              "es": "Me encanta la música, pero no la música de este bar."
+            },
+            {
+              "en": "She plays tennis on Saturdays.",
+              "es": "Ella juega al tenis los sábados."
+            },
+            {
+              "en": "We visited the Andes last year.",
+              "es": "Visitamos los Andes el año pasado."
+            }
+          ],
+          "table": {
+            "headers": ["Sin artículo", "Con the"],
+            "rows": [
+              ["Spain, France", "the United States, the UK"],
+              ["Lake Titicaca", "the Amazon, the Pacific"],
+              ["school, work, bed (en general)", "the school on the corner"],
+              ["breakfast, lunch", "the lunch we had yesterday"]
+            ]
+          }
+        },
+        {
+          "heading": "Each, every, all",
+          "body": [
+            "Every y each + singular: every student, each student (each enfoca uno por uno). All + plural o incontable: all students, all the time. All of + pronombre: all of them."
+          ],
+          "examples": [
+            {
+              "en": "Every room has a balcony.",
+              "es": "Cada habitación tiene balcón."
+            },
+            {
+              "en": "Each child received a gift.",
+              "es": "Cada niño recibió un regalo."
+            },
+            {
+              "en": "All the shops were closed.",
+              "es": "Todas las tiendas estaban cerradas."
+            }
+          ]
+        },
+        {
+          "heading": "Both, either, neither",
+          "body": [
+            "Para dos: both (ambos), either (uno u otro, cualquiera de los dos), neither (ninguno de los dos). Both + plural (both brothers); either/neither + singular (either option, neither answer). Either… or (o… o), neither… nor (ni… ni)."
+          ],
+          "examples": [
+            {
+              "en": "Both answers are correct.",
+              "es": "Ambas respuestas son correctas."
+            },
+            {
+              "en": "You can take either road.",
+              "es": "Puedes tomar cualquiera de las dos carreteras."
+            },
+            {
+              "en": "Neither of us likes coffee.",
+              "es": "A ninguno de los dos nos gusta el café."
+            },
+            {
+              "en": "Either you apologise, or you leave.",
+              "es": "O te disculpas, o te vas."
+            }
+          ],
+          "tip": "Neither ya es negativo: neither of them came, no «neither of them didn't come»."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ children need to play.",
+          "options": ["The", "—", "Every"],
+          "answer": 1,
+          "explanation": "En general: sin artículo."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ Nile is the longest river in Africa.",
+          "options": ["—", "The", "A"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "___ of my parents are doctors.",
+          "options": ["Both", "Either", "Each"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "___ student has to bring a dictionary. (cada, con singular)",
+          "answers": ["Every", "Each"]
+        },
+        {
+          "type": "fill",
+          "prompt": "I like ___ tea nor coffee. (ni… ni)",
+          "answers": ["neither"]
+        },
+        {
+          "type": "order",
+          "es": "Ninguna de las dos respuestas es correcta.",
+          "words": ["Neither", "answer", "is", "correct."]
+        },
+        {
+          "type": "translate",
+          "es": "Me encanta el chocolate.",
+          "answers": ["I love chocolate."],
+          "explanation": "En general: sin artículo."
+        },
+        {
+          "type": "translate",
+          "es": "Ambos hermanos viven en Londres.",
+          "answers": ["Both brothers live in London."]
+        }
+      ]
+    },
+    {
+      "id": "comparar-y-describir",
+      "title": "Describir y comparar con matices",
+      "summary": "Un poco más alto, mucho más caro, cada vez mejor, no tan… como.",
+      "sections": [
+        {
+          "heading": "Modificar la comparación",
+          "body": [
+            "Much, far, a lot + comparativo (mucho más): much better, far more expensive. A bit, a little, slightly (un poco más): a bit cheaper. Even (incluso más): even bigger. Con el superlativo: by far the best (con diferencia)."
+          ],
+          "examples": [
+            {
+              "en": "This hotel is much more comfortable.",
+              "es": "Este hotel es mucho más cómodo."
+            },
+            {
+              "en": "The second test was slightly harder.",
+              "es": "El segundo examen fue un poco más difícil."
+            },
+            {
+              "en": "She's by far the best player.",
+              "es": "Es, con diferencia, la mejor jugadora."
+            }
+          ]
+        },
+        {
+          "heading": "Cada vez más y cuanto más",
+          "body": [
+            "Comparativo + and + comparativo: colder and colder, more and more expensive (cada vez más). The + comparativo…, the + comparativo: The more you practise, the better you get (cuanto más…, más…)."
+          ],
+          "examples": [
+            {
+              "en": "The days are getting shorter and shorter.",
+              "es": "Los días son cada vez más cortos."
+            },
+            {
+              "en": "The sooner we leave, the better.",
+              "es": "Cuanto antes salgamos, mejor."
+            },
+            {
+              "en": "The more I read, the more I learn.",
+              "es": "Cuanto más leo, más aprendo."
+            }
+          ]
+        },
+        {
+          "heading": "Orden de los adjetivos y -ed / -ing",
+          "body": [
+            "Cuando hay varios adjetivos: opinión, tamaño, edad, forma, color, origen, material: a beautiful old Italian leather bag. Los adjetivos en -ed describen cómo se siente alguien (bored, interested, tired); los en -ing describen lo que causa esa sensación (boring, interesting, tiring)."
+          ],
+          "examples": [
+            {
+              "en": "I'm bored because this lesson is boring.",
+              "es": "Estoy aburrido porque esta clase es aburrida."
+            },
+            {
+              "en": "What an exciting match!",
+              "es": "¡Qué partido tan emocionante!"
+            },
+            {
+              "en": "She bought a small round wooden table.",
+              "es": "Compró una mesita redonda de madera."
+            }
+          ],
+          "tip": "I'm interesting significa «soy interesante»; «estoy interesado» es I'm interested."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "This phone is ___ more expensive than that one.",
+          "options": ["very", "much", "more"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "The weather is getting ___.",
+          "options": ["hotter and hotter", "more hot", "hottest"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "I was ___ by the film. It was so ___.",
+          "options": ["bored / boring", "boring / bored", "bored / bored"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "The ___ you start, the sooner you finish. (comparativo de early)",
+          "answers": ["earlier"]
+        },
+        {
+          "type": "fill",
+          "prompt": "He's a ___ taller than me. (un poco)",
+          "answers": ["bit", "little"]
+        },
+        {
+          "type": "order",
+          "es": "Cuanto más practicas, mejor hablas.",
+          "words": ["The", "more", "you", "practise,", "the", "better", "you", "speak."]
+        },
+        {
+          "type": "translate",
+          "es": "Esta película es mucho más interesante.",
+          "answers": [
+            "This film is much more interesting.",
+            "This movie is much more interesting.",
+            "This film is far more interesting."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "Estoy muy interesado en la historia.",
+          "answers": ["I'm very interested in history.", "I am very interested in history."]
         }
       ]
     }
@@ -1046,6 +1713,40 @@
         "He told me that he would call me.",
         "He said he would call me."
       ]
+    },
+    {
+      "type": "choice",
+      "prompt": "When I got to the party, most people ___.",
+      "options": ["left", "had left", "have left"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "I'll send you the photos when I ___ home.",
+      "options": ["get", "will get", "got"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "___ of my sisters live abroad.",
+      "options": ["Both", "Either", "Every"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "The book was much ___ than the film.",
+      "options": ["good", "better", "best"],
+      "answer": 1
+    },
+    {
+      "type": "fill",
+      "prompt": "She told me she ___ (lose) her phone.",
+      "answers": ["had lost"]
+    },
+    {
+      "type": "translate",
+      "es": "Cuanto más estudias, más aprendes.",
+      "answers": ["The more you study, the more you learn."]
     }
   ]
 }

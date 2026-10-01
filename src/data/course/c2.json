@@ -1,10 +1,14 @@
 {
-  "intro": "C2 es la maestría: estructuras que solo usan los hablantes cultos, modismos que no se traducen, participios que condensan ideas y la precisión de quien elige cada palabra. Aquí se afina, no se aprende de cero.",
+  "intro": "C2 es la maestría: estructuras que solo usan los hablantes cultos, modismos que no se traducen, participios que condensan ideas, concesivas y hipotéticas de matiz, cohesión de texto y la precisión de quien elige cada palabra. Diez lecciones y un examen con el temario de los exámenes oficiales de nivel C2.",
   "goals": [
     "Usar el subjuntivo y las estructuras formales (I suggest that he be…, lest, whether… or not).",
     "Entender y emplear modismos y lenguaje figurado frecuentes.",
     "Condensar ideas con participios y oraciones reducidas (Having finished…, Seen from above…).",
-    "Elegir con precisión: matices entre sinónimos y lenguaje académico."
+    "Elegir con precisión: matices entre sinónimos y lenguaje académico.",
+    "Conceder con much as, however hard y no matter.",
+    "Hablar de lo hipotético con it's time, would sooner, as if y as though.",
+    "Dar cohesión a un texto con referencia y sustitución formal.",
+    "Usar binomios, colocaciones avanzadas y énfasis formal (the very, whatsoever)."
   ],
   "lessons": [
     {
@@ -34,6 +38,14 @@
             {
               "en": "I insist that he not be told.",
               "es": "Insisto en que no se le diga."
+            },
+            {
+              "en": "The judge ordered that the evidence be sealed.",
+              "es": "El juez ordenó que las pruebas se sellaran."
+            },
+            {
+              "en": "It is imperative that we act now.",
+              "es": "Es imperativo que actuemos ya."
             }
           ],
           "table": {
@@ -126,6 +138,21 @@
             "Whether or not you like it, we have to leave.",
             "Whether or not you like it, we have to go."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "The board insisted that the CEO ___ immediately.",
+          "options": ["resigns", "resign", "resigned"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Es esencial que todos estén presentes.",
+          "answers": [
+            "It is essential that everyone be present.",
+            "It's essential that everyone be present.",
+            "It is essential that everybody be present."
+          ]
         }
       ]
     },
@@ -192,6 +219,14 @@
             {
               "en": "I bit the bullet and told him the truth.",
               "es": "Me armé de valor y le dije la verdad."
+            },
+            {
+              "en": "We'll cross that bridge when we come to it.",
+              "es": "Ya nos ocuparemos de eso cuando llegue el momento."
+            },
+            {
+              "en": "He let the cat out of the bag.",
+              "es": "Se le escapó el secreto."
             }
           ],
           "tip": "Los modismos no se modifican: a piece of cake, nunca «a slice of cake» con este sentido."
@@ -253,6 +288,17 @@
             "In the long run it will save time.",
             "In the long run, it'll save time."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Don't worry about next year. We'll ___ when we come to it.",
+          "options": ["cross that bridge", "bite the bullet", "learn the ropes"],
+          "answer": 0
+        },
+        {
+          "type": "translate",
+          "es": "Te toca a ti decidir.",
+          "answers": ["The ball is in your court.", "It's your call.", "The ball's in your court."]
         }
       ]
     },
@@ -299,6 +345,14 @@
             {
               "en": "Having been warned twice, he finally stopped.",
               "es": "Tras haber sido advertido dos veces, por fin paró."
+            },
+            {
+              "en": "Having been delayed twice, the flight finally took off.",
+              "es": "Tras haberse retrasado dos veces, el vuelo por fin despegó."
+            },
+            {
+              "en": "Exhausted by the climb, they rested.",
+              "es": "Agotados por la subida, descansaron."
             }
           ],
           "table": {
@@ -366,6 +420,22 @@
           "type": "translate",
           "es": "Al sentirme cansada, me fui a la cama.",
           "answers": ["Feeling tired, I went to bed."]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ by the news, she sat down in silence.",
+          "options": ["Shocking", "Shocked", "Having shocked"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Al no tener dinero, se quedó en casa.",
+          "answers": [
+            "Having no money, he stayed at home.",
+            "Having no money, she stayed at home.",
+            "Not having any money, he stayed at home.",
+            "Not having any money, she stayed at home."
+          ]
         }
       ]
     },
@@ -431,6 +501,14 @@
             {
               "en": "The food was utterly delicious.",
               "es": "La comida estaba absolutamente deliciosa."
+            },
+            {
+              "en": "The hotel was fairly cheap, and the room was absolutely spotless.",
+              "es": "El hotel era bastante barato y la habitación estaba impecable."
+            },
+            {
+              "en": "His remark was utterly ridiculous.",
+              "es": "Su comentario fue completamente ridículo."
             }
           ],
           "tip": "Very freezing y very exhausted suenan mal: los adjetivos extremos ya llevan el grado dentro."
@@ -494,6 +572,809 @@
           "type": "translate",
           "es": "Hacía un frío espantoso.",
           "answers": ["It was absolutely freezing.", "It was freezing.", "It was utterly freezing."]
+        },
+        {
+          "type": "choice",
+          "prompt": "The view from the top was ___ breathtaking.",
+          "options": ["very", "absolutely", "rather"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Los resultados indican una tendencia clara.",
+          "answers": [
+            "The results indicate a clear trend.",
+            "The findings indicate a clear trend.",
+            "The data indicate a clear trend."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concesivas-avanzadas",
+      "title": "Concesivas avanzadas: much as, however hard, no matter",
+      "summary": "Por mucho que, por más que, pase lo que pase.",
+      "sections": [
+        {
+          "heading": "Much as, try as, adjetivo + as",
+          "body": [
+            "Much as I admire him, I disagree (por mucho que lo admire). Try as she might, she couldn't open it (por más que lo intentó). Adjetivo + as + sujeto + verbo: Tired as I was, I kept going (cansado como estaba). Son formas literarias o enfáticas de although."
+          ],
+          "examples": [
+            {
+              "en": "Much as I'd like to help, I can't.",
+              "es": "Por mucho que me gustaría ayudar, no puedo."
+            },
+            {
+              "en": "Try as they might, they never found the treasure.",
+              "es": "Por más que lo intentaron, nunca encontraron el tesoro."
+            },
+            {
+              "en": "Strange as it may seem, he enjoys exams.",
+              "es": "Por extraño que parezca, disfruta con los exámenes."
+            }
+          ]
+        },
+        {
+          "heading": "However, whatever, no matter",
+          "body": [
+            "However + adjetivo/adverbio + sujeto + verbo: However hard you try, you'll never beat him (por mucho que). Whatever, whoever, wherever, whenever: Whatever happens, stay calm. No matter + how/what/where: No matter what he says, don't believe him."
+          ],
+          "examples": [
+            {
+              "en": "However expensive it is, I'll buy it.",
+              "es": "Por caro que sea, lo compraré."
+            },
+            {
+              "en": "Whoever calls, tell them I'm out.",
+              "es": "Quien sea que llame, dile que no estoy."
+            },
+            {
+              "en": "No matter how late it is, call me.",
+              "es": "Por tarde que sea, llámame."
+            },
+            {
+              "en": "Wherever you go, I'll follow.",
+              "es": "Vayas donde vayas, te seguiré."
+            }
+          ],
+          "table": {
+            "headers": ["Estructura", "Significado"],
+            "rows": [
+              ["much as + oración", "por mucho que"],
+              ["try as + sujeto + might", "por más que intentara"],
+              ["adjetivo + as + sujeto + verbo", "por … que"],
+              ["however + adjetivo/adverbio", "por muy … que"],
+              ["no matter + how/what/when", "sin importar"],
+              ["whatever / whoever / wherever", "lo que sea / quien sea / donde sea"]
+            ]
+          }
+        },
+        {
+          "heading": "Even if, even though, albeit, notwithstanding",
+          "body": [
+            "Even if (aunque, hipotético): Even if it rains, we'll go. Even though (aunque, real): Even though it rained, we went. Albeit (si bien, formal, + adjetivo o frase sin verbo): a good result, albeit a late one. Notwithstanding (a pesar de, muy formal) puede ir antes o después del sustantivo."
+          ],
+          "examples": [
+            {
+              "en": "Even if you apologise, she won't forgive you.",
+              "es": "Aunque te disculpes, no te perdonará."
+            },
+            {
+              "en": "He accepted, albeit reluctantly.",
+              "es": "Aceptó, si bien a regañadientes."
+            },
+            {
+              "en": "Notwithstanding the cost, the plan went ahead.",
+              "es": "A pesar del coste, el plan siguió adelante."
+            }
+          ],
+          "tip": "Even if y even though no son intercambiables: even if plantea una hipótesis; even though, un hecho."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ hard I try, I can't remember his name.",
+          "options": ["However", "Whatever", "Although"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "___ as I respect her, I think she's wrong.",
+          "options": ["Much", "Even", "So"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "___ happens, don't open the door.",
+          "options": ["However", "Whatever", "No matter"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "Try ___ he might, he couldn't lift it.",
+          "answers": ["as"]
+        },
+        {
+          "type": "fill",
+          "prompt": "No ___ what you say, I won't change my mind. (matter)",
+          "answers": ["matter"]
+        },
+        {
+          "type": "order",
+          "es": "Por tarde que sea, llámame.",
+          "words": ["No", "matter", "how", "late", "it", "is,", "call", "me."]
+        },
+        {
+          "type": "translate",
+          "es": "Por extraño que parezca, le gusta el frío.",
+          "answers": [
+            "Strange as it may seem, he likes the cold.",
+            "Strange as it may seem, she likes the cold.",
+            "Strange as it seems, he likes the cold.",
+            "Odd as it may seem, he likes the cold."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "Aunque llueva, iremos.",
+          "answers": ["Even if it rains, we'll go.", "Even if it rains, we will go.", "Even if it rains we'll go."]
+        }
+      ]
+    },
+    {
+      "id": "hipotetico-avanzado",
+      "title": "Lo hipotético: it's time, would sooner, as if, as though",
+      "summary": "Ya es hora de que, preferiría que, como si.",
+      "sections": [
+        {
+          "heading": "It's time y would rather / would sooner",
+          "body": [
+            "It's (high / about) time + sujeto + pasado simple: It's time we left (ya es hora de que nos vayamos). Would rather / would sooner + sujeto + pasado simple para preferencias sobre otra persona: I'd sooner you didn't mention it. Sobre el pasado: I'd rather you hadn't told him."
+          ],
+          "examples": [
+            {
+              "en": "It's high time the government did something.",
+              "es": "Ya va siendo hora de que el gobierno haga algo."
+            },
+            {
+              "en": "I'd rather we stayed in tonight.",
+              "es": "Preferiría que nos quedáramos en casa esta noche."
+            },
+            {
+              "en": "I'd sooner you hadn't invited him.",
+              "es": "Habría preferido que no lo invitaras."
+            }
+          ]
+        },
+        {
+          "heading": "As if y as though",
+          "body": [
+            "Comparan con algo irreal: He talks as if he knew everything (pasado simple para el presente irreal). She looked as though she had seen a ghost (pasado perfecto para el pasado irreal). Si la comparación puede ser real, el tiempo es normal: It looks as if it's going to rain."
+          ],
+          "examples": [
+            {
+              "en": "He acts as if he owned the place.",
+              "es": "Se comporta como si el sitio fuera suyo."
+            },
+            {
+              "en": "They treated me as though I were a child.",
+              "es": "Me trataron como si fuera un niño."
+            },
+            {
+              "en": "You look as if you haven't slept.",
+              "es": "Parece que no has dormido (puede ser verdad)."
+            }
+          ],
+          "table": {
+            "headers": ["Estructura", "Tiempo", "Ejemplo"],
+            "rows": [
+              ["it's time", "pasado simple", "It's time you went to bed."],
+              ["would rather / sooner + sujeto", "pasado simple / perfecto", "I'd rather you paid now."],
+              ["as if / as though (irreal)", "pasado simple / perfecto", "as if he were rich"],
+              ["suppose / what if / imagine", "pasado simple", "Suppose we missed the train?"]
+            ]
+          }
+        },
+        {
+          "heading": "Suppose, what if, if only y wish con could",
+          "body": [
+            "Suppose / supposing / what if + pasado: What if we told them the truth? (¿y si…?). Wish / if only + could: I wish I could fly. Wish + would para quejas. Otherwise y or else expresan la alternativa hipotética: Hurry up, otherwise we'll be late."
+          ],
+          "examples": [
+            {
+              "en": "Suppose you won the lottery: what would you do?",
+              "es": "Supón que ganaras la lotería: ¿qué harías?"
+            },
+            {
+              "en": "If only I could speak to her once more.",
+              "es": "Si pudiera hablar con ella una vez más."
+            },
+            {
+              "en": "Take an umbrella; otherwise you'll get soaked.",
+              "es": "Lleva paraguas; si no, te empaparás."
+            }
+          ],
+          "tip": "It's time to go (infinitivo) es neutro; it's time we went (pasado) sugiere que ya vamos tarde."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "It's time you ___ a decision.",
+          "options": ["make", "made", "will make"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "He spends money as if he ___ a millionaire.",
+          "options": ["is", "were", "had been"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "I'd rather you ___ smoke in here.",
+          "options": ["don't", "didn't", "wouldn't"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "She looked as though she ___ (see) a ghost. (irreal, pasado)",
+          "answers": ["had seen", "'d seen"]
+        },
+        {
+          "type": "fill",
+          "prompt": "It's high time we ___ (leave).",
+          "answers": ["left"]
+        },
+        {
+          "type": "order",
+          "es": "¿Y si perdiéramos el último tren?",
+          "words": ["What", "if", "we", "missed", "the", "last", "train?"]
+        },
+        {
+          "type": "translate",
+          "es": "Ya es hora de que te vayas a la cama.",
+          "answers": ["It's time you went to bed.", "It is time you went to bed.", "It's high time you went to bed."]
+        },
+        {
+          "type": "translate",
+          "es": "Me trata como si fuera un niño.",
+          "answers": [
+            "He treats me as if I were a child.",
+            "She treats me as if I were a child.",
+            "He treats me as though I were a child.",
+            "She treats me as though I were a child."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cohesion-y-referencia",
+      "title": "Cohesión y referencia en el texto",
+      "summary": "The former, the latter, respectively, hence, the above.",
+      "sections": [
+        {
+          "heading": "Referirse a lo ya dicho",
+          "body": [
+            "The former / the latter (el primero / el último de dos mencionados), respectively (respectivamente), the above / the aforementioned (lo anterior, formal), this / that / these / those + sustantivo resumen (this approach, these findings), such (de tal tipo): Such behaviour is unacceptable."
+          ],
+          "examples": [
+            {
+              "en": "Tea and coffee are popular; the former in Britain, the latter in Italy.",
+              "es": "El té y el café son populares: el primero en Gran Bretaña, el segundo en Italia."
+            },
+            {
+              "en": "Lucy and Tom are 12 and 15 respectively.",
+              "es": "Lucy y Tom tienen 12 y 15 años, respectivamente."
+            },
+            {
+              "en": "All of the above applies to part-time staff.",
+              "es": "Todo lo anterior se aplica al personal a tiempo parcial."
+            }
+          ]
+        },
+        {
+          "heading": "Conectores de consecuencia y contraste formales",
+          "body": [
+            "Hence / thus / thereby (de ahí, así, con ello), accordingly (en consecuencia), whereby (mediante el cual), conversely (a la inversa), by contrast, on the contrary (al contrario, para negar), in turn (a su vez), that is to say / namely (es decir)."
+          ],
+          "examples": [
+            {
+              "en": "Sales fell; hence the decision to close two branches.",
+              "es": "Las ventas cayeron; de ahí la decisión de cerrar dos sucursales."
+            },
+            {
+              "en": "The new system, whereby staff work from home, has been a success.",
+              "es": "El nuevo sistema, por el cual el personal trabaja desde casa, ha sido un éxito."
+            },
+            {
+              "en": "It's not a failure; on the contrary, it's a first step.",
+              "es": "No es un fracaso; al contrario, es un primer paso."
+            }
+          ],
+          "table": {
+            "headers": ["Conector", "Función"],
+            "rows": [
+              ["hence / thus / thereby", "consecuencia"],
+              ["conversely / by contrast", "contraste"],
+              ["on the contrary", "negar lo anterior"],
+              ["namely / that is to say", "precisar"],
+              ["in turn", "a su vez"],
+              ["whereby", "mediante el cual"]
+            ]
+          }
+        },
+        {
+          "heading": "Sustitución y elipsis en textos",
+          "body": [
+            "Para no repetir: do so, the same, likewise, so (I think so), one(s), that/those of, el verbo omitido tras auxiliar (as they should). Likewise y similarly abren frases paralelas; the same goes for / applies to extiende una afirmación."
+          ],
+          "examples": [
+            {
+              "en": "The north voted against the plan; the south did likewise.",
+              "es": "El norte votó contra el plan; el sur hizo lo mismo."
+            },
+            {
+              "en": "The same applies to foreign students.",
+              "es": "Lo mismo se aplica a los estudiantes extranjeros."
+            },
+            {
+              "en": "Those who wish to object may do so in writing.",
+              "es": "Quienes deseen objetar pueden hacerlo por escrito."
+            }
+          ],
+          "tip": "On the contrary niega lo anterior; by contrast solo compara. No son intercambiables."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Ana and Luis study law and medicine ___.",
+          "options": ["respectively", "likewise", "namely"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Two options were discussed: the ___ was cheaper, the latter faster.",
+          "options": ["former", "first", "previous"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Demand rose; ___ the increase in prices.",
+          "options": ["hence", "whereby", "conversely"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "It wasn't a waste of time. ___ the contrary, we learned a lot.",
+          "answers": ["On"]
+        },
+        {
+          "type": "fill",
+          "prompt": "Only two people came, ___ Marta and her brother. (es decir)",
+          "answers": ["namely"]
+        },
+        {
+          "type": "order",
+          "es": "Lo mismo se aplica a los visitantes.",
+          "words": ["The", "same", "applies", "to", "visitors."]
+        },
+        {
+          "type": "translate",
+          "es": "Quienes deseen participar pueden hacerlo en línea.",
+          "answers": [
+            "Those who wish to participate may do so online.",
+            "Those who wish to take part may do so online.",
+            "Those wishing to participate may do so online."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "El norte votó en contra; el sur hizo lo mismo.",
+          "answers": [
+            "The north voted against; the south did likewise.",
+            "The north voted against it; the south did likewise.",
+            "The north voted against; the south did the same."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binomios-y-enfasis-formal",
+      "title": "Binomios, colocaciones avanzadas y énfasis formal",
+      "summary": "Safe and sound, by and large, the very idea, no reason whatsoever.",
+      "sections": [
+        {
+          "heading": "Binomios: pares fijos",
+          "body": [
+            "Expresiones de dos palabras unidas por and u or, siempre en el mismo orden: safe and sound (sano y salvo), by and large (en general), sooner or later, more or less, give and take (ceder por ambas partes), odds and ends (cosas sueltas), pros and cons, wear and tear (desgaste), peace and quiet, now and then (de vez en cuando), sick and tired (harto)."
+          ],
+          "examples": [
+            {
+              "en": "They arrived home safe and sound.",
+              "es": "Llegaron a casa sanos y salvos."
+            },
+            {
+              "en": "By and large, the plan worked.",
+              "es": "En general, el plan funcionó."
+            },
+            {
+              "en": "I'm sick and tired of waiting.",
+              "es": "Estoy harto de esperar."
+            },
+            {
+              "en": "Every relationship needs some give and take.",
+              "es": "Toda relación necesita ceder por ambas partes."
+            }
+          ],
+          "table": {
+            "headers": ["Binomio", "Significado"],
+            "rows": [
+              ["safe and sound", "sano y salvo"],
+              ["by and large", "en general"],
+              ["more or less", "más o menos"],
+              ["sooner or later", "tarde o temprano"],
+              ["now and then", "de vez en cuando"],
+              ["wear and tear", "desgaste por el uso"],
+              ["trial and error", "ensayo y error"],
+              ["sick and tired", "harto"]
+            ]
+          }
+        },
+        {
+          "heading": "Énfasis formal",
+          "body": [
+            "The very + sustantivo (el mismísimo, precisamente): the very idea, at the very least. Whatsoever / at all tras un negativo: no reason whatsoever, nothing at all. In no way, by no means (de ninguna manera). Not in the least (en absoluto). Indeed refuerza: It was indeed a surprise. The + adjetivo en -est + ever: the best ever."
+          ],
+          "examples": [
+            {
+              "en": "The very thought of it makes me nervous.",
+              "es": "Solo pensarlo me pone nervioso."
+            },
+            {
+              "en": "There is no evidence whatsoever.",
+              "es": "No hay ninguna prueba en absoluto."
+            },
+            {
+              "en": "This is by no means the end.",
+              "es": "Esto no es, ni mucho menos, el final."
+            },
+            {
+              "en": "I'm not in the least surprised.",
+              "es": "No me sorprende en absoluto."
+            }
+          ]
+        },
+        {
+          "heading": "Colocaciones avanzadas",
+          "body": [
+            "Adverbio + adjetivo: bitterly disappointed, painfully shy, highly regarded, vastly overrated, blissfully unaware, perfectly reasonable. Verbo + sustantivo: strike a balance, pose a threat, draw a conclusion, foot the bill, meet a deadline, bear a resemblance to, run the risk of."
+          ],
+          "examples": [
+            {
+              "en": "We need to strike a balance between work and rest.",
+              "es": "Hay que encontrar el equilibrio entre trabajo y descanso."
+            },
+            {
+              "en": "He was bitterly disappointed with the result.",
+              "es": "Quedó amargamente decepcionado con el resultado."
+            },
+            {
+              "en": "They ran the risk of losing everything.",
+              "es": "Corrían el riesgo de perderlo todo."
+            }
+          ],
+          "tip": "Las colocaciones no se improvisan: «make a balance» no existe; se dice strike a balance."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The children came back ___.",
+          "options": ["sound and safe", "safe and sound", "safe and well"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "There's no reason ___ to worry.",
+          "options": ["whatsoever", "at least", "indeed"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "He was ___ disappointed when he lost.",
+          "options": ["bitterly", "highly", "blissfully"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "___ and large, the reviews were positive. (binomio)",
+          "answers": ["By"]
+        },
+        {
+          "type": "fill",
+          "prompt": "We must ___ a balance between cost and quality. (verbo)",
+          "answers": ["strike"]
+        },
+        {
+          "type": "order",
+          "es": "Estoy harto de esperar.",
+          "words": ["I", "am", "sick", "and", "tired", "of", "waiting."]
+        },
+        {
+          "type": "translate",
+          "es": "Tarde o temprano lo sabrán.",
+          "answers": [
+            "Sooner or later they will find out.",
+            "Sooner or later they'll find out.",
+            "Sooner or later they will know."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "De ninguna manera es esto el final.",
+          "answers": ["This is by no means the end.", "This is in no way the end."]
+        }
+      ]
+    },
+    {
+      "id": "percepcion-y-causativos",
+      "title": "Verbos de percepción, causativos y make, let, have",
+      "summary": "See him go, make him wait, let it be, get it done.",
+      "sections": [
+        {
+          "heading": "Verbos de percepción",
+          "body": [
+            "See, hear, watch, notice, feel + objeto + verbo base (la acción completa): I saw her leave. + -ing (en curso, parcial): I saw her leaving. En pasiva, el verbo base pasa a to: She was seen to leave."
+          ],
+          "examples": [
+            {
+              "en": "I heard the door slam.",
+              "es": "Oí la puerta cerrarse de golpe."
+            },
+            {
+              "en": "We watched them playing in the garden.",
+              "es": "Los vimos jugando en el jardín."
+            },
+            {
+              "en": "He was seen to enter the building at nine.",
+              "es": "Se le vio entrar en el edificio a las nueve."
+            }
+          ]
+        },
+        {
+          "heading": "Make, let, have, get",
+          "body": [
+            "Make + objeto + verbo base (obligar): They made us wait. Let + objeto + verbo base (permitir): Let him go. Have + objeto + verbo base (encargar a alguien): I'll have my assistant call you. Get + objeto + to + verbo (convencer): I got him to help. En pasiva, make lleva to: We were made to wait."
+          ],
+          "examples": [
+            {
+              "en": "The teacher made us rewrite the essay.",
+              "es": "El profesor nos hizo reescribir el ensayo."
+            },
+            {
+              "en": "My parents let me stay out late.",
+              "es": "Mis padres me dejaron volver tarde."
+            },
+            {
+              "en": "I'll have the porter bring your bags.",
+              "es": "Haré que el botones suba sus maletas."
+            },
+            {
+              "en": "She got her brother to fix the bike.",
+              "es": "Consiguió que su hermano arreglara la bici."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Estructura", "Significado"],
+            "rows": [
+              ["make", "make + obj + verbo", "obligar"],
+              ["let", "let + obj + verbo", "permitir"],
+              ["have", "have + obj + verbo", "encargar"],
+              ["get", "get + obj + to + verbo", "convencer, conseguir que"],
+              ["help", "help + obj + (to) verbo", "ayudar a"]
+            ]
+          },
+          "tip": "Make en pasiva recupera el to: They made me sign → I was made to sign."
+        },
+        {
+          "heading": "Have / get something done y get + -ing",
+          "body": [
+            "Have / get + objeto + participio: que otro haga algo (We had the roof repaired) o algo que te ocurre (He had his car stolen). Get + -ing: ponerse a (Let's get going). Get + objeto + -ing: poner en marcha (She got the engine running)."
+          ],
+          "examples": [
+            {
+              "en": "We got the documents translated.",
+              "es": "Hicimos traducir los documentos."
+            },
+            {
+              "en": "She had her bag stolen on the train.",
+              "es": "Le robaron el bolso en el tren."
+            },
+            {
+              "en": "It's late; let's get moving.",
+              "es": "Es tarde; pongámonos en marcha."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I saw him ___ the road and disappear.",
+          "options": ["cross", "crossing", "to cross"],
+          "answer": 0,
+          "explanation": "Acción completa: verbo base."
+        },
+        {
+          "type": "choice",
+          "prompt": "They made me ___ for two hours.",
+          "options": ["to wait", "wait", "waiting"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "I finally got him ___ the truth.",
+          "options": ["tell", "to tell", "telling"],
+          "answer": 1,
+          "explanation": "Get + objeto + to."
+        },
+        {
+          "type": "fill",
+          "prompt": "We were made ___ (sign) a contract. (pasiva de make)",
+          "answers": ["to sign"]
+        },
+        {
+          "type": "fill",
+          "prompt": "Let me ___ (help) you with that.",
+          "answers": ["help"]
+        },
+        {
+          "type": "order",
+          "es": "Mis padres me dejaron ir a la fiesta.",
+          "words": ["My", "parents", "let", "me", "go", "to", "the", "party."]
+        },
+        {
+          "type": "translate",
+          "es": "Oí sonar el teléfono.",
+          "answers": ["I heard the phone ring.", "I heard the phone ringing."]
+        },
+        {
+          "type": "translate",
+          "es": "Le robaron la bici.",
+          "answers": [
+            "He had his bike stolen.",
+            "She had her bike stolen.",
+            "His bike was stolen.",
+            "Her bike was stolen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "puntuacion-y-estilo",
+      "title": "Puntuación y estilo en inglés",
+      "summary": "Comas, punto y coma, guiones y las diferencias con el español.",
+      "sections": [
+        {
+          "heading": "La coma",
+          "body": [
+            "Separa elementos de una lista (a veces con la coma de Oxford antes de and: red, white, and blue), oraciones subordinadas al inicio (If you're tired, rest), oraciones explicativas (My brother, who lives in Lima, …) y conectores (However, …). No se usa coma entre sujeto y verbo ni antes de that."
+          ],
+          "examples": [
+            {
+              "en": "After the meeting, we went for lunch.",
+              "es": "Después de la reunión, fuimos a almorzar."
+            },
+            {
+              "en": "She said that she was tired.",
+              "es": "Dijo que estaba cansada (sin coma antes de that)."
+            },
+            {
+              "en": "We bought apples, pears and plums.",
+              "es": "Compramos manzanas, peras y ciruelas."
+            }
+          ]
+        },
+        {
+          "heading": "Punto y coma, dos puntos y guion largo",
+          "body": [
+            "El punto y coma une dos oraciones completas relacionadas (The rain stopped; the sun came out) y separa elementos largos de una lista. Los dos puntos introducen una explicación o una lista (There's one problem: money). El guion largo (—) marca un inciso enfático en estilo informal o periodístico."
+          ],
+          "examples": [
+            {
+              "en": "I have two passions: music and cooking.",
+              "es": "Tengo dos pasiones: la música y la cocina."
+            },
+            {
+              "en": "The results were clear; nobody argued.",
+              "es": "Los resultados fueron claros; nadie discutió."
+            },
+            {
+              "en": "She finally arrived — two hours late.",
+              "es": "Por fin llegó, dos horas tarde."
+            }
+          ],
+          "table": {
+            "headers": ["Signo", "Uso principal"],
+            "rows": [
+              [",", "listas, incisos, subordinadas al inicio"],
+              [";", "dos oraciones relacionadas"],
+              [":", "explicación o lista"],
+              ["—", "inciso enfático"],
+              ["'", "contracciones y posesivo"]
+            ]
+          }
+        },
+        {
+          "heading": "Diferencias con el español",
+          "body": [
+            "En inglés no hay signos de apertura (¿ ¡). Las mayúsculas van en días, meses, idiomas, nacionalidades y en I. Las comillas suelen ser dobles en inglés americano y la puntuación va dentro: \"Come in,\" she said. Los números: 1,000 (miles con coma) y 3.5 (decimal con punto)."
+          ],
+          "examples": [
+            {
+              "en": "\"Where are you going?\" he asked.",
+              "es": "«¿Adónde vas?», preguntó."
+            },
+            {
+              "en": "The population is 2,500,000.",
+              "es": "La población es de 2.500.000."
+            },
+            {
+              "en": "I speak Spanish and English.",
+              "es": "Hablo español e inglés (idiomas con mayúscula)."
+            }
+          ],
+          "tip": "Its sin apóstrofo es posesivo; it's es it is o it has. Es el error de puntuación más común entre nativos."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Which is correct?",
+          "options": ["She said, that she was late.", "She said that she was late.", "She said that, she was late."],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "I love three things ___ coffee, books and rain. (¿qué signo va?)",
+          "options": ["dos puntos (:)", "punto y coma (;)", "coma (,)"],
+          "answer": 0,
+          "explanation": "Los dos puntos introducen una lista."
+        },
+        {
+          "type": "choice",
+          "prompt": "The dog wagged ___ tail.",
+          "options": ["it's", "its", "its'"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "The number two thousand five hundred is written 2___500 in English. (signo)",
+          "answers": [","]
+        },
+        {
+          "type": "fill",
+          "prompt": "\"Come in___\" she said. (signo dentro de las comillas)",
+          "answers": [","]
+        },
+        {
+          "type": "order",
+          "es": "Hablo francés, inglés y portugués.",
+          "words": ["I", "speak", "French,", "English", "and", "Portuguese."]
+        },
+        {
+          "type": "translate",
+          "es": "Tengo un problema: el dinero.",
+          "answers": ["I have one problem: money.", "I have a problem: money."]
+        },
+        {
+          "type": "translate",
+          "es": "Hablo español e inglés.",
+          "answers": ["I speak Spanish and English."]
         }
       ]
     }
@@ -586,6 +1467,45 @@
       "type": "translate",
       "es": "Exigieron que el director dimitiera.",
       "answers": ["They demanded that the manager resign.", "They demanded that the director resign."]
+    },
+    {
+      "type": "choice",
+      "prompt": "___ hard it is, don't give up.",
+      "options": ["However", "Whatever", "Although"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "It's time we ___ home.",
+      "options": ["go", "went", "will go"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "Two candidates applied; the ___ was clearly better.",
+      "options": ["latter", "last", "later"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "They arrived ___ after the storm.",
+      "options": ["safe and sound", "sound and safe", "safely and sound"],
+      "answer": 0
+    },
+    {
+      "type": "fill",
+      "prompt": "The teacher made us ___ (stay) after class.",
+      "answers": ["stay"]
+    },
+    {
+      "type": "translate",
+      "es": "Se comporta como si fuera el jefe.",
+      "answers": [
+        "He acts as if he were the boss.",
+        "She acts as if she were the boss.",
+        "He behaves as if he were the boss.",
+        "He acts as though he were the boss."
+      ]
     }
   ]
 }

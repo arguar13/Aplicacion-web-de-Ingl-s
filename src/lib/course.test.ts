@@ -102,14 +102,17 @@ describe('contenido del curso', () => {
     const problems: string[] = []
     for (const level of WRITTEN) {
       if (level.intro === '') problems.push(`${level.id}: sin presentación`)
-      if (level.goals.length < 3) problems.push(`${level.id}: menos de tres objetivos`)
-      if (level.lessons.length < 4) problems.push(`${level.id}: menos de cuatro lecciones`)
-      if (level.exam.length < 10) problems.push(`${level.id}: examen de menos de diez ejercicios`)
+      if (level.goals.length < 5) problems.push(`${level.id}: menos de cinco objetivos`)
+      if (level.lessons.length < 10) problems.push(`${level.id}: menos de diez lecciones`)
+      if (level.exam.length < 20) problems.push(`${level.id}: examen de menos de veinte ejercicios`)
       for (const lesson of level.lessons) {
         const where = `${level.id}/${lesson.id}`
-        if (lesson.sections.length < 2) problems.push(`${where}: menos de dos secciones`)
-        if (lesson.exercises.length < 5) problems.push(`${where}: menos de cinco ejercicios`)
-        if (!lesson.sections.some((s) => s.examples && s.examples.length > 0)) problems.push(`${where}: sin ejemplos`)
+        if (lesson.sections.length < 3) problems.push(`${where}: menos de tres secciones`)
+        if (lesson.exercises.length < 8) problems.push(`${where}: menos de ocho ejercicios`)
+        const examples = lesson.sections.reduce((n, s) => n + (s.examples?.length ?? 0), 0)
+        if (examples < 7) problems.push(`${where}: menos de siete ejemplos`)
+        const types = new Set(lesson.exercises.map((exercise) => exercise.type))
+        if (types.size < 4) problems.push(`${where}: no usa los cuatro tipos de ejercicio`)
       }
     }
     expect(problems).toEqual([])

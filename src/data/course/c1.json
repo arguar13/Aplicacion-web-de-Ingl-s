@@ -1,10 +1,15 @@
 {
-  "intro": "En C1 el inglés deja de ser una traducción del español: aprendes a dar énfasis como un nativo, a deducir sobre el pasado, a elegir el registro adecuado y a combinar palabras como lo hacen los hablantes cultos.",
+  "intro": "En C1 el inglés deja de ser una traducción del español: aprendes a dar énfasis como un nativo, a deducir sobre el pasado, a elegir el registro adecuado, a evitar repeticiones con elipsis y a combinar palabras como lo hacen los hablantes cultos. Diez lecciones y un examen con el temario de los exámenes oficiales de nivel C1.",
   "goals": [
     "Dar énfasis con la inversión (Not only…, Rarely…, Never…).",
     "Destacar una parte de la frase con oraciones hendidas (It was… who, What I need is…).",
     "Deducir sobre el pasado con must have, can't have, might have y should have.",
-    "Elegir el registro: formal e informal, y las colocaciones que suenan naturales."
+    "Elegir el registro: formal e informal, y las colocaciones que suenan naturales.",
+    "Evitar repeticiones con elipsis y sustitución (so do I, do so, neither).",
+    "Dominar los verbos que cambian de sentido con -ing o infinitivo.",
+    "Graduar la probabilidad (bound to, likely to, may well).",
+    "Adelantar elementos para dar énfasis (fronting) y nominalizar en textos formales.",
+    "Usar preposiciones dependientes y expresiones fijas con naturalidad."
   ],
   "lessons": [
     {
@@ -34,6 +39,14 @@
             {
               "en": "Under no circumstances should you open this door.",
               "es": "Bajo ninguna circunstancia debes abrir esta puerta."
+            },
+            {
+              "en": "Little did they know what was coming.",
+              "es": "Poco sabían lo que se avecinaba."
+            },
+            {
+              "en": "At no time was the public in danger.",
+              "es": "En ningún momento estuvo el público en peligro."
             }
           ],
           "table": {
@@ -130,6 +143,17 @@
             "Had I known, I'd have warned you.",
             "Had I known, I'd have told you."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Little ___ that it was the last time.",
+          "options": ["she knew", "did she know", "knew she"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "En ningún momento estuvo en peligro.",
+          "answers": ["At no time was he in danger.", "At no time was she in danger.", "At no time was it in danger."]
         }
       ]
     },
@@ -179,6 +203,14 @@
             {
               "en": "The reason I'm late is that the train was cancelled.",
               "es": "La razón por la que llego tarde es que cancelaron el tren."
+            },
+            {
+              "en": "What matters is that you tried.",
+              "es": "Lo que importa es que lo intentaste."
+            },
+            {
+              "en": "It's not the money that bothers me; it's the attitude.",
+              "es": "No es el dinero lo que me molesta; es la actitud."
             }
           ],
           "table": {
@@ -241,6 +273,21 @@
           "type": "translate",
           "es": "Fue Ana quien rompió el jarrón.",
           "answers": ["It was Ana who broke the vase.", "It was Ana that broke the vase."]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ really annoyed me was his silence.",
+          "options": ["What", "That", "It"],
+          "answer": 0
+        },
+        {
+          "type": "translate",
+          "es": "Es la actitud lo que me molesta.",
+          "answers": [
+            "It's the attitude that bothers me.",
+            "It is the attitude that bothers me.",
+            "It's the attitude that annoys me."
+          ]
         }
       ]
     },
@@ -270,6 +317,14 @@
             {
               "en": "They could have taken the wrong exit.",
               "es": "Podrían haber tomado la salida equivocada."
+            },
+            {
+              "en": "She might have missed the train; she's usually on time.",
+              "es": "Puede que haya perdido el tren; suele ser puntual."
+            },
+            {
+              "en": "You must have been very proud.",
+              "es": "Debiste de sentirte muy orgulloso."
             }
           ],
           "table": {
@@ -361,6 +416,17 @@
             "I should've listened to my mother.",
             "I should have listened to my mum."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ my keys at the office; I can't find them anywhere.",
+          "options": ["must have left", "can't have left", "needn't have left"],
+          "answer": 0
+        },
+        {
+          "type": "translate",
+          "es": "No deberías haber dicho eso.",
+          "answers": ["You shouldn't have said that.", "You should not have said that."]
         }
       ]
     },
@@ -423,6 +489,14 @@
             {
               "en": "I'm fully aware of the risks.",
               "es": "Soy plenamente consciente de los riesgos."
+            },
+            {
+              "en": "We need to take responsibility for our mistakes.",
+              "es": "Tenemos que asumir la responsabilidad de nuestros errores."
+            },
+            {
+              "en": "The talks made little progress.",
+              "es": "Las conversaciones avanzaron poco."
             }
           ],
           "table": {
@@ -492,6 +566,796 @@
           "type": "translate",
           "es": "Tomé una decisión difícil.",
           "answers": ["I made a difficult decision.", "I made a hard decision.", "I made a tough decision."]
+        },
+        {
+          "type": "choice",
+          "prompt": "I'd like to ___ a complaint about the service.",
+          "options": ["do", "make", "take"],
+          "answer": 1
+        },
+        {
+          "type": "translate",
+          "es": "Hizo un gran esfuerzo.",
+          "answers": ["He made a great effort.", "She made a great effort.", "He made a big effort."]
+        }
+      ]
+    },
+    {
+      "id": "elipsis-y-sustitucion",
+      "title": "Elipsis y sustitución: so do I, neither, do so",
+      "summary": "Decir lo mismo sin repetirlo.",
+      "sections": [
+        {
+          "heading": "Yo también, yo tampoco",
+          "body": [
+            "So + auxiliar + sujeto para sumarse a una afirmación (I love jazz. So do I.); neither / nor + auxiliar + sujeto para una negativa (I can't swim. Neither can I.). El auxiliar copia el de la frase: so am I, so did we, neither have they."
+          ],
+          "examples": [
+            {
+              "en": "She's left-handed, and so is her brother.",
+              "es": "Ella es zurda, y su hermano también."
+            },
+            {
+              "en": "I didn't enjoy it, and neither did Tom.",
+              "es": "No me gustó, y a Tom tampoco."
+            },
+            {
+              "en": "We've already eaten. So have we.",
+              "es": "Ya hemos comido. Nosotros también."
+            }
+          ],
+          "table": {
+            "headers": ["Frase", "Sumarse"],
+            "rows": [
+              ["I am…", "So am I."],
+              ["I don't…", "Neither do I. / Nor do I."],
+              ["I can…", "So can I."],
+              ["I won't…", "Neither will I."]
+            ]
+          }
+        },
+        {
+          "heading": "Evitar repetir el verbo",
+          "body": [
+            "Tras un auxiliar se omite lo repetido: Can you come? I'd love to (= to come). Have you finished? I have. Do so sustituye a una acción completa en registro formal: Those who wish to leave may do so. So y not sustituyen oraciones tras think, hope, expect, suppose, be afraid: I think so. I hope not."
+          ],
+          "examples": [
+            {
+              "en": "Will it rain? I hope not.",
+              "es": "¿Lloverá? Espero que no."
+            },
+            {
+              "en": "Did she pass? I believe so.",
+              "es": "¿Aprobó? Creo que sí."
+            },
+            {
+              "en": "You can keep the book if you want to.",
+              "es": "Puedes quedarte el libro si quieres."
+            },
+            {
+              "en": "Anyone wishing to apply should do so before Friday.",
+              "es": "Quien desee presentarse debe hacerlo antes del viernes."
+            }
+          ]
+        },
+        {
+          "heading": "One, ones y that of",
+          "body": [
+            "One / ones evitan repetir un sustantivo contable: I need a pen. Have you got one? The red ones are nicer. En registro formal, that of / those of: The climate here is milder than that of the north."
+          ],
+          "examples": [
+            {
+              "en": "Which shoes? The black ones.",
+              "es": "¿Qué zapatos? Los negros."
+            },
+            {
+              "en": "Our results were better than those of last year.",
+              "es": "Nuestros resultados fueron mejores que los del año pasado."
+            }
+          ],
+          "tip": "Ones no sustituye incontables: «some sugar… the brown one» es un error; se dice the brown kind o the brown sugar."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I've never been to Japan. ___",
+          "options": ["So have I.", "Neither have I.", "Neither I have."],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "She works from home, and ___.",
+          "options": ["so do I", "so I do", "I do so"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Is he coming? I ___.",
+          "options": ["think so", "think it", "think yes"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "I can't cook. ___ can I. (tampoco)",
+          "answers": ["Neither", "Nor"]
+        },
+        {
+          "type": "fill",
+          "prompt": "Which bag do you want? The small ___.",
+          "answers": ["one"]
+        },
+        {
+          "type": "order",
+          "es": "A mí tampoco me gustó la película.",
+          "words": ["I", "didn't", "like", "the", "film", "either."]
+        },
+        {
+          "type": "translate",
+          "es": "Yo también estoy cansado.",
+          "answers": ["So am I.", "I'm tired too.", "I am tired too.", "Me too."]
+        },
+        {
+          "type": "translate",
+          "es": "¿Vendrá? Espero que sí.",
+          "answers": ["Will he come? I hope so.", "Will she come? I hope so.", "Is he coming? I hope so."]
+        }
+      ]
+    },
+    {
+      "id": "verbos-con-dos-sentidos",
+      "title": "Verbos que cambian de sentido: remember, stop, try, regret",
+      "summary": "Remember to lock no es remember locking.",
+      "sections": [
+        {
+          "heading": "Remember, forget, regret",
+          "body": [
+            "Remember / forget + to: acordarse de hacer algo (futuro respecto al recuerdo): Remember to buy milk. Remember / forget + -ing: recordar haber hecho algo (pasado): I remember locking the door. Regret + to: lamentar comunicar algo (formal): We regret to inform you. Regret + -ing: arrepentirse de algo hecho: I regret saying that."
+          ],
+          "examples": [
+            {
+              "en": "Did you remember to post the letter?",
+              "es": "¿Te acordaste de enviar la carta?"
+            },
+            {
+              "en": "I'll never forget meeting her.",
+              "es": "Nunca olvidaré el día que la conocí."
+            },
+            {
+              "en": "We regret to inform you that the flight is cancelled.",
+              "es": "Lamentamos informarle de que el vuelo está cancelado."
+            },
+            {
+              "en": "He regrets leaving school so early.",
+              "es": "Se arrepiente de haber dejado los estudios tan pronto."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "+ to", "+ -ing"],
+            "rows": [
+              ["remember", "acordarse de hacer", "recordar haber hecho"],
+              ["forget", "olvidar hacer", "olvidar haber hecho"],
+              ["regret", "lamentar comunicar", "arrepentirse de"],
+              ["stop", "parar para hacer otra cosa", "dejar de hacer"],
+              ["try", "intentar (esfuerzo)", "probar (a ver si funciona)"],
+              ["mean", "tener la intención", "implicar, suponer"],
+              ["go on", "pasar a hacer otra cosa", "seguir haciendo"]
+            ]
+          }
+        },
+        {
+          "heading": "Stop, try, mean, go on",
+          "body": [
+            "Stop + -ing: dejar de hacer (She stopped smoking). Stop + to: parar para hacer (She stopped to smoke). Try + to: intentar algo difícil (I tried to open it). Try + -ing: probar una alternativa (Try turning it off and on). Mean + to: tener intención (I didn't mean to hurt you). Mean + -ing: implicar (Moving means leaving my friends). Go on + -ing: seguir; go on + to: pasar a lo siguiente."
+          ],
+          "examples": [
+            {
+              "en": "I tried to call you, but there was no signal.",
+              "es": "Intenté llamarte, pero no había cobertura."
+            },
+            {
+              "en": "If the door won't open, try pushing it.",
+              "es": "Si la puerta no abre, prueba a empujarla."
+            },
+            {
+              "en": "Taking the job would mean moving to Berlin.",
+              "es": "Aceptar el trabajo supondría mudarse a Berlín."
+            },
+            {
+              "en": "After the song, she went on to talk about her new album.",
+              "es": "Tras la canción, pasó a hablar de su nuevo disco."
+            }
+          ],
+          "tip": "Stop to smoke y stop smoking significan lo contrario: elige bien."
+        },
+        {
+          "heading": "Need, want y verbos de percepción",
+          "body": [
+            "Need + -ing con sentido pasivo: The car needs washing (= needs to be washed). See, hear, watch, feel + objeto + verbo base (acción completa) o + -ing (en curso): I saw him cross the road / I saw him crossing the road."
+          ],
+          "examples": [
+            {
+              "en": "These shirts need ironing.",
+              "es": "Estas camisas necesitan planchado."
+            },
+            {
+              "en": "I heard someone knock at the door.",
+              "es": "Oí a alguien llamar a la puerta."
+            },
+            {
+              "en": "We watched the sun setting over the sea.",
+              "es": "Vimos el sol poniéndose sobre el mar."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Please remember ___ the lights when you leave.",
+          "options": ["turning off", "to turn off", "turn off"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "I'll never forget ___ the Grand Canyon for the first time.",
+          "options": ["to see", "seeing", "see"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "We stopped ___ some petrol.",
+          "options": ["getting", "to get", "get"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "Try ___ (restart) the computer; that usually works.",
+          "answers": ["restarting"],
+          "explanation": "Probar una alternativa: try + -ing."
+        },
+        {
+          "type": "fill",
+          "prompt": "I didn't mean ___ (upset) you.",
+          "answers": ["to upset"]
+        },
+        {
+          "type": "order",
+          "es": "Lamentamos informarle de que la tienda cierra.",
+          "words": ["We", "regret", "to", "inform", "you", "that", "the", "shop", "is", "closing."]
+        },
+        {
+          "type": "translate",
+          "es": "Dejó de fumar hace años.",
+          "answers": [
+            "She stopped smoking years ago.",
+            "He stopped smoking years ago.",
+            "She gave up smoking years ago."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "Me arrepiento de haberle gritado.",
+          "answers": ["I regret shouting at him.", "I regret shouting at her.", "I regret having shouted at him."]
+        }
+      ]
+    },
+    {
+      "id": "probabilidad-graduada",
+      "title": "Likely, bound to, may well: graduar la probabilidad",
+      "summary": "De «seguro que» a «difícilmente».",
+      "sections": [
+        {
+          "heading": "Escala de certeza",
+          "body": [
+            "De más a menos seguro: be bound to / be sure to / be certain to (seguro que), will definitely, be likely to / probably, may well (es muy posible), may / might / could, be unlikely to, there's little chance (of), won't possibly (de ninguna manera)."
+          ],
+          "examples": [
+            {
+              "en": "He's bound to be late; he always is.",
+              "es": "Seguro que llega tarde; siempre lo hace."
+            },
+            {
+              "en": "Prices are likely to rise next year.",
+              "es": "Es probable que los precios suban el año que viene."
+            },
+            {
+              "en": "She may well change her mind.",
+              "es": "Es muy posible que cambie de opinión."
+            },
+            {
+              "en": "It's highly unlikely that they'll agree.",
+              "es": "Es muy poco probable que accedan."
+            }
+          ],
+          "table": {
+            "headers": ["Grado", "Expresiones"],
+            "rows": [
+              ["certeza", "be bound to, be sure to, definitely"],
+              ["probable", "be likely to, probably, I expect"],
+              ["posible", "may well, may, might, could, possibly"],
+              ["improbable", "be unlikely to, I doubt, there's little chance"],
+              ["imposible", "can't possibly, there's no way"]
+            ]
+          }
+        },
+        {
+          "heading": "Likely y unlikely en frases",
+          "body": [
+            "It is likely that + oración / sujeto + be likely to + verbo: It's likely that she'll win = She's likely to win. Con grados: quite likely, very likely, highly unlikely, more than likely."
+          ],
+          "examples": [
+            {
+              "en": "The meeting is likely to be postponed.",
+              "es": "Es probable que la reunión se posponga."
+            },
+            {
+              "en": "It's quite unlikely that he saw us.",
+              "es": "Es bastante improbable que nos viera."
+            },
+            {
+              "en": "They're more than likely to accept.",
+              "es": "Es más que probable que acepten."
+            }
+          ]
+        },
+        {
+          "heading": "Hablar con cautela",
+          "body": [
+            "Para no comprometerse: I'd say…, I'd imagine…, as far as I know, presumably, apparently, it seems, chances are (lo más probable es que), the odds are."
+          ],
+          "examples": [
+            {
+              "en": "Chances are he's already heard the news.",
+              "es": "Lo más probable es que ya se haya enterado."
+            },
+            {
+              "en": "Presumably they'll send a confirmation.",
+              "es": "Es de suponer que enviarán una confirmación."
+            },
+            {
+              "en": "As far as I know, the shop is still open.",
+              "es": "Que yo sepa, la tienda sigue abierta."
+            }
+          ],
+          "tip": "Probably va después de will y antes de won't: She'll probably come; she probably won't come."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Look at the queue. We ___ wait at least an hour.",
+          "options": ["are bound to", "may", "are unlikely to"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "It's ___ that the match will be cancelled; the pitch is flooded.",
+          "options": ["unlikely", "highly likely", "impossible that"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "They ___ well have left already.",
+          "options": ["should", "may", "are"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "She's ___ to be promoted this year. (probable)",
+          "answers": ["likely"]
+        },
+        {
+          "type": "fill",
+          "prompt": "___ are he won't notice. (lo más probable es que)",
+          "answers": ["Chances"]
+        },
+        {
+          "type": "order",
+          "es": "Es muy poco probable que vengan.",
+          "words": ["They", "are", "very", "unlikely", "to", "come."]
+        },
+        {
+          "type": "translate",
+          "es": "Seguro que llueve mañana.",
+          "answers": ["It's bound to rain tomorrow.", "It is bound to rain tomorrow.", "It's sure to rain tomorrow."]
+        },
+        {
+          "type": "translate",
+          "es": "Es probable que el tren llegue tarde.",
+          "answers": [
+            "The train is likely to be late.",
+            "It's likely that the train will be late.",
+            "The train will probably be late."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fronting-y-orden-marcado",
+      "title": "Fronting y orden marcado",
+      "summary": "Here comes the bus; off we go; this I cannot accept.",
+      "sections": [
+        {
+          "heading": "Adelantar para enfatizar",
+          "body": [
+            "En inglés el orden normal es sujeto-verbo-objeto, pero se puede adelantar un elemento para destacarlo o para enlazar con lo anterior: This I cannot accept. That much is clear. Some things you never forget. Suele ser enfático o literario."
+          ],
+          "examples": [
+            {
+              "en": "Some mistakes you only make once.",
+              "es": "Algunos errores solo se cometen una vez."
+            },
+            {
+              "en": "That I can believe.",
+              "es": "Eso sí me lo creo."
+            },
+            {
+              "en": "Most of the money they spent on the house.",
+              "es": "La mayor parte del dinero la gastaron en la casa."
+            }
+          ]
+        },
+        {
+          "heading": "Here, there y adverbios de lugar",
+          "body": [
+            "Con here, there y adverbios de lugar o movimiento al inicio, el verbo va antes del sujeto cuando el sujeto es un sustantivo: Here comes the bus. There goes my train. Up went the balloon. Con un pronombre no hay inversión: Here it comes. Off we go."
+          ],
+          "examples": [
+            {
+              "en": "Here comes the teacher!",
+              "es": "¡Ahí viene el profesor!"
+            },
+            {
+              "en": "There stood an old castle on the hill.",
+              "es": "Allí se alzaba un viejo castillo en la colina."
+            },
+            {
+              "en": "Down came the rain.",
+              "es": "Y se puso a llover a cántaros."
+            },
+            {
+              "en": "Away they went.",
+              "es": "Y se marcharon."
+            }
+          ],
+          "table": {
+            "headers": ["Inicio", "Sujeto sustantivo", "Sujeto pronombre"],
+            "rows": [
+              ["Here", "Here comes the bus.", "Here it comes."],
+              ["There", "There goes the bell.", "There it goes."],
+              ["Off / Away", "Off went the alarm.", "Off it went."]
+            ]
+          }
+        },
+        {
+          "heading": "Participios y adjetivos al inicio",
+          "body": [
+            "En descripciones formales o literarias un participio o adjetivo puede abrir la frase con inversión: Attached is the report you requested. Standing in the doorway was a tall man. Equally important is the cost."
+          ],
+          "examples": [
+            {
+              "en": "Enclosed are the documents you asked for.",
+              "es": "Adjuntos van los documentos que solicitó."
+            },
+            {
+              "en": "Sitting on the bench was an old woman.",
+              "es": "Sentada en el banco había una anciana."
+            },
+            {
+              "en": "Also present at the meeting were two lawyers.",
+              "es": "También estaban presentes en la reunión dos abogados."
+            }
+          ],
+          "tip": "El fronting es un recurso puntual: usado en cada frase, el texto suena artificial."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Here ___ the bus!",
+          "options": ["comes", "is coming", "come"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Here ___! (pronombre)",
+          "options": ["comes it", "it comes", "come it"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "___ is the invoice for your order.",
+          "options": ["Attached", "Attaching", "Attach"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "Off ___ went, without saying goodbye. (ellos)",
+          "answers": ["they"]
+        },
+        {
+          "type": "fill",
+          "prompt": "Standing at the door ___ a policeman. (verbo)",
+          "answers": ["was", "stood"]
+        },
+        {
+          "type": "order",
+          "es": "Algunas cosas nunca se olvidan.",
+          "words": ["Some", "things", "you", "never", "forget."]
+        },
+        {
+          "type": "translate",
+          "es": "Ahí va mi tren.",
+          "answers": ["There goes my train."]
+        },
+        {
+          "type": "translate",
+          "es": "Adjunto va el informe.",
+          "answers": ["Attached is the report.", "Enclosed is the report."]
+        }
+      ]
+    },
+    {
+      "id": "nominalizacion",
+      "title": "Nominalización y estilo académico",
+      "summary": "De «decidieron» a «la decisión»: el inglés de los informes.",
+      "sections": [
+        {
+          "heading": "Verbos y adjetivos que se vuelven sustantivos",
+          "body": [
+            "En textos formales las acciones se expresan como sustantivos: They decided → their decision; it failed → its failure; we analysed → our analysis; grew rapidly → rapid growth. Permite frases más densas e impersonales."
+          ],
+          "examples": [
+            {
+              "en": "The company's decision to expand surprised investors.",
+              "es": "La decisión de la empresa de expandirse sorprendió a los inversores."
+            },
+            {
+              "en": "A thorough analysis of the data is needed.",
+              "es": "Se necesita un análisis exhaustivo de los datos."
+            },
+            {
+              "en": "The rapid growth of the city has caused problems.",
+              "es": "El rápido crecimiento de la ciudad ha causado problemas."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo / adjetivo", "Sustantivo"],
+            "rows": [
+              ["decide", "decision"],
+              ["fail", "failure"],
+              ["analyse", "analysis"],
+              ["grow", "growth"],
+              ["improve", "improvement"],
+              ["reduce", "reduction"],
+              ["able", "ability"],
+              ["significant", "significance"]
+            ]
+          }
+        },
+        {
+          "heading": "Verbos ligeros con nominalizaciones",
+          "body": [
+            "Las nominalizaciones van con verbos como make, carry out, conduct, reach, undergo, give: carry out research, conduct a survey, reach a conclusion, undergo a transformation, give consideration to."
+          ],
+          "examples": [
+            {
+              "en": "The team carried out an investigation.",
+              "es": "El equipo llevó a cabo una investigación."
+            },
+            {
+              "en": "No agreement was reached.",
+              "es": "No se alcanzó ningún acuerdo."
+            },
+            {
+              "en": "The building underwent extensive renovation.",
+              "es": "El edificio fue sometido a una amplia reforma."
+            }
+          ]
+        },
+        {
+          "heading": "Impersonalidad y cautela académica",
+          "body": [
+            "It is widely believed that…, It could be argued that…, There is evidence to suggest…, This would appear to indicate… Sujetos abstractos: The findings suggest…, Figure 2 shows…"
+          ],
+          "examples": [
+            {
+              "en": "It could be argued that the policy has failed.",
+              "es": "Podría argumentarse que la política ha fracasado."
+            },
+            {
+              "en": "The findings suggest a link between diet and mood.",
+              "es": "Los resultados sugieren una relación entre dieta y estado de ánimo."
+            },
+            {
+              "en": "There is little evidence to support this claim.",
+              "es": "Hay pocas pruebas que respalden esta afirmación."
+            }
+          ],
+          "tip": "Las nominalizaciones en exceso oscurecen: en un correo normal, «we decided» es mejor que «a decision was made»."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The ___ of the bridge took five years. (construct)",
+          "options": ["construct", "construction", "constructing"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "Scientists ___ an experiment to test the theory.",
+          "options": ["made", "conducted", "did"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "There has been a significant ___ in sales.",
+          "options": ["improve", "improvement", "improving"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "Their ___ (fail) to act cost them the contract. (sustantivo)",
+          "answers": ["failure"]
+        },
+        {
+          "type": "fill",
+          "prompt": "The committee ___ a conclusion after three hours. (verbo ligero, pasado)",
+          "answers": ["reached"]
+        },
+        {
+          "type": "order",
+          "es": "Podría argumentarse que el plan ha fracasado.",
+          "words": ["It", "could", "be", "argued", "that", "the", "plan", "has", "failed."]
+        },
+        {
+          "type": "translate",
+          "es": "Se necesita un análisis más detallado.",
+          "answers": [
+            "A more detailed analysis is needed.",
+            "A more detailed analysis is required.",
+            "More detailed analysis is needed."
+          ]
+        },
+        {
+          "type": "translate",
+          "es": "Los resultados sugieren una relación entre ambos.",
+          "answers": [
+            "The findings suggest a link between the two.",
+            "The results suggest a link between the two.",
+            "The findings suggest a connection between the two.",
+            "The results suggest a connection between the two."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preposiciones-dependientes",
+      "title": "Preposiciones dependientes y expresiones fijas",
+      "summary": "Depend on, interested in, on behalf of, in terms of.",
+      "sections": [
+        {
+          "heading": "Verbo + preposición",
+          "body": [
+            "Muchos verbos exigen una preposición concreta: depend on, rely on, insist on, apologise for, blame for, accuse of, approve of, consist of, belong to, object to, succeed in, participate in, result in, lead to, cope with, deal with."
+          ],
+          "examples": [
+            {
+              "en": "It all depends on the weather.",
+              "es": "Todo depende del tiempo."
+            },
+            {
+              "en": "She was accused of lying.",
+              "es": "La acusaron de mentir."
+            },
+            {
+              "en": "The talks resulted in an agreement.",
+              "es": "Las conversaciones desembocaron en un acuerdo."
+            },
+            {
+              "en": "I can't cope with so much pressure.",
+              "es": "No puedo con tanta presión."
+            }
+          ],
+          "table": {
+            "headers": ["Preposición", "Verbos"],
+            "rows": [
+              ["on", "depend, rely, insist, concentrate, comment"],
+              ["of", "accuse, approve, consist, remind, think"],
+              ["for", "apologise, blame, be responsible, wait"],
+              ["in", "succeed, participate, believe, result"],
+              ["to", "belong, object, refer, lead, respond"],
+              ["with", "cope, deal, agree, provide"]
+            ]
+          }
+        },
+        {
+          "heading": "Adjetivo + preposición",
+          "body": [
+            "Interested in, good/bad at, afraid of, fond of, aware of, capable of, keen on, proud of, responsible for, famous for, different from, similar to, married to, dependent on."
+          ],
+          "examples": [
+            {
+              "en": "I'm not very good at maths.",
+              "es": "No se me dan muy bien las matemáticas."
+            },
+            {
+              "en": "She's keen on photography.",
+              "es": "A ella le apasiona la fotografía."
+            },
+            {
+              "en": "He is fully aware of the consequences.",
+              "es": "Él es plenamente consciente de las consecuencias."
+            }
+          ],
+          "tip": "Depende de = depend on (no «depend of»); consistir en = consist of (no «consist in»)."
+        },
+        {
+          "heading": "Expresiones fijas de registro formal",
+          "body": [
+            "On behalf of (en nombre de), in terms of (en cuanto a), with regard to / regarding (respecto a), in the light of (a la luz de), in accordance with (de acuerdo con), at the expense of (a costa de), on the grounds that (alegando que), by means of (mediante)."
+          ],
+          "examples": [
+            {
+              "en": "On behalf of the team, thank you.",
+              "es": "En nombre del equipo, gracias."
+            },
+            {
+              "en": "In terms of cost, the second option is better.",
+              "es": "En cuanto al coste, la segunda opción es mejor."
+            },
+            {
+              "en": "The request was refused on the grounds that it was late.",
+              "es": "La solicitud fue rechazada alegando que llegó tarde."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The success of the project depends ___ funding.",
+          "options": ["of", "on", "in"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "She apologised ___ the delay.",
+          "options": ["of", "for", "about"],
+          "answer": 1
+        },
+        {
+          "type": "choice",
+          "prompt": "He's very fond ___ his grandchildren.",
+          "options": ["of", "in", "with"],
+          "answer": 0
+        },
+        {
+          "type": "fill",
+          "prompt": "The menu consists ___ five courses.",
+          "answers": ["of"]
+        },
+        {
+          "type": "fill",
+          "prompt": "___ behalf of the company, I would like to thank you. (preposición)",
+          "answers": ["On"]
+        },
+        {
+          "type": "order",
+          "es": "En cuanto al precio, es la mejor opción.",
+          "words": ["In", "terms", "of", "price,", "it", "is", "the", "best", "option."]
+        },
+        {
+          "type": "translate",
+          "es": "Soy consciente del problema.",
+          "answers": ["I'm aware of the problem.", "I am aware of the problem."]
+        },
+        {
+          "type": "translate",
+          "es": "Todo depende de ti.",
+          "answers": ["It all depends on you.", "Everything depends on you.", "It depends on you."]
         }
       ]
     }
@@ -589,6 +1453,40 @@
       "type": "translate",
       "es": "Lo que necesito es tiempo.",
       "answers": ["What I need is time."]
+    },
+    {
+      "type": "choice",
+      "prompt": "I don't like horror films. ___",
+      "options": ["So do I.", "Neither do I.", "Neither I do."],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "Remember ___ the door when you leave.",
+      "options": ["locking", "to lock", "lock"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "He's ___ to be late; he always is.",
+      "options": ["bound", "likely that", "possible"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "Here ___ the bride!",
+      "options": ["comes", "is coming", "come"],
+      "answer": 0
+    },
+    {
+      "type": "fill",
+      "prompt": "The ___ (reduce) in costs was significant. (sustantivo)",
+      "answers": ["reduction"]
+    },
+    {
+      "type": "translate",
+      "es": "La solución depende de ustedes.",
+      "answers": ["The solution depends on you."]
     }
   ]
 }
