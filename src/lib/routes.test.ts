@@ -18,6 +18,8 @@ describe('rutas', () => {
     expect(parseHash('#/?panel=ajustes')).toEqual({ ...HOME, panel: 'settings' })
     expect(parseHash('#/nivel/2?panel=ajustes').panel).toBe('settings')
     expect(parseHash('#/nivel/2?panel=otro').panel).toBeNull()
+    expect(parseHash('#/nivel/2?panel=atajos').panel).toBe('shortcuts')
+    expect(formatHash({ ...HOME, panel: 'shortcuts' })).toBe('#/?panel=atajos')
   })
 
   it('la ficha de una palabra solo se abre si la palabra existe', () => {

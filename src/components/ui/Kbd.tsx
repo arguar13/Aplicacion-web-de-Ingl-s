@@ -11,24 +11,28 @@ const SIZES = { md: 'h-6 min-w-6', sm: 'h-5 min-w-5' }
 
 /**
  * Atajo de teclado. Solo se muestra con un puntero fino (ratón o trackpad, y con ellos un teclado):
- * en una pantalla táctil sería una instrucción imposible de seguir. `className` es para colocarlo,
- * no para cambiar su aspecto: para eso están `tone` y `size`.
+ * en una pantalla táctil sería una instrucción imposible de seguir. `always` lo muestra siempre
+ * (la lista de atajos, que el usuario abre a propósito). `className` es para colocarlo, no para
+ * cambiar su aspecto: para eso están `tone` y `size`.
  */
 export function Kbd({
   children,
   tone = 'default',
   size = 'md',
+  always = false,
   className,
 }: {
   children: ReactNode
   tone?: keyof typeof TONES
   size?: keyof typeof SIZES
+  always?: boolean
   className?: string
 }) {
   return (
     <kbd
       className={cn(
-        'hidden items-center justify-center rounded-md border px-1.5 font-sans text-[11px] font-semibold pointer-fine:inline-flex',
+        'items-center justify-center rounded-md border px-1.5 font-sans text-[11px] font-semibold',
+        always ? 'inline-flex' : 'hidden pointer-fine:inline-flex',
         TONES[tone],
         SIZES[size],
         className,

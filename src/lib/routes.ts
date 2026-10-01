@@ -11,8 +11,8 @@ import { ALL_DECK, ALL_WORDS, type Deck, LEVELS } from './decks'
 import type { SmartDeckKind } from './smartDecks'
 import { isTopicId, topicInfo, type TopicId } from './topicMeta'
 
-/** Panel sobre la pantalla: los ajustes o la ficha de una palabra. */
-export type Panel = 'settings' | { word: string }
+/** Panel sobre la pantalla: los ajustes, los atajos de teclado o la ficha de una palabra. */
+export type Panel = 'settings' | 'shortcuts' | { word: string }
 
 /** Pantallas sin parámetros: su ruta y el título de la pestaña. */
 const SIMPLE_SCREENS = {
@@ -61,6 +61,7 @@ function deckFromPath(path: string): Deck | undefined {
 function parsePanel(query: string): Panel | null {
   const params = new URLSearchParams(query)
   if (params.get('panel') === 'ajustes') return 'settings'
+  if (params.get('panel') === 'atajos') return 'shortcuts'
   const word = params.get('palabra')
   return word && WORD_IDS.has(word) ? { word } : null
 }
@@ -107,7 +108,9 @@ function screenPath(screen: Screen): string {
 
 function panelQuery(panel: Panel | null): string {
   if (panel === null) return ''
-  return panel === 'settings' ? '?panel=ajustes' : `?palabra=${panel.word}`
+  if (panel === 'settings') return '?panel=ajustes'
+  if (panel === 'shortcuts') return '?panel=atajos'
+  return `?palabra=${panel.word}`
 }
 
 export function formatHash(route: Route): string {

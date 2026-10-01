@@ -5,8 +5,10 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Onboarding } from '@/components/Onboarding'
 import { MissionToast } from '@/components/MissionToast'
 import { loadSettingsContent, SettingsDialog } from '@/components/SettingsDialog'
+import { ShortcutsSheet } from '@/components/ShortcutsSheet'
 import { UpdateToast } from '@/components/UpdateToast'
 import { WordSheet } from '@/components/WordSheet'
+import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { useProtectOnceThereIsProgress } from '@/hooks/useProtectOnceThereIsProgress'
 import { ALL_WORDS, COACH_DECK, type Deck } from '@/lib/decks'
@@ -54,6 +56,7 @@ function prefetchLikelyScreens() {
 
 const go = (screen: Screen) => navigate({ screen, panel: null })
 const openSettings = () => navigate({ ...getRoute(), panel: 'settings' })
+const openShortcuts = () => navigate({ ...getRoute(), panel: 'shortcuts' })
 const openWord = (word: string) => navigate({ ...getRoute(), panel: { word } })
 
 /** Los paneles también se cierran solos (Esc, tocar fuera): solo se navega si la ruta aún tiene uno. */
@@ -97,6 +100,7 @@ function Home() {
       onOpenStats={() => go({ name: 'stats' })}
       onOpenDictionary={() => go({ name: 'dictionary' })}
       onOpenSettings={openSettings}
+      onOpenShortcuts={openShortcuts}
     />
   )
 }
@@ -156,6 +160,11 @@ export default function App() {
 
   useProtectOnceThereIsProgress()
 
+  // «?» abre la lista de atajos desde cualquier pantalla (con un panel abierto, el teclado es suyo).
+  useKeyDown((event) => {
+    if (event.key === '?') openShortcuts()
+  })
+
   useEffect(() => {
     void pruneStaleAudio(ALL_WORDS.map((word) => word.id))
   }, [])
@@ -189,7 +198,8 @@ export default function App() {
         </div>
       </ErrorBoundary>
       <SettingsDialog open={panel === 'settings'} onClose={closePanel} />
-      <WordSheet id={panel !== null && panel !== 'settings' ? panel.word : null} onClose={closePanel} />
+      <ShortcutsSheet open={panel === 'shortcuts'} onClose={closePanel} />
+      <WordSheet id={typeof panel === 'object' && panel !== null ? panel.word : null} onClose={closePanel} />
       <UpdateToast />
       <AchievementToast />
       <MissionToast />

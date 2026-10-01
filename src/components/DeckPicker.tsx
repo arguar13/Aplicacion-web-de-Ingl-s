@@ -52,6 +52,7 @@ interface Props {
   onOpenStats: () => void
   onOpenDictionary: () => void
   onOpenSettings: () => void
+  onOpenShortcuts: () => void
   onOpenWord: (id: string) => void
 }
 
@@ -65,6 +66,7 @@ export function DeckPicker({
   onOpenStats,
   onOpenDictionary,
   onOpenSettings,
+  onOpenShortcuts,
   onOpenWord,
 }: Props) {
   const progress = useProgress()
@@ -197,6 +199,13 @@ export function DeckPicker({
             </Button>
           </div>
         )}
+        {/* Solo con teclado tiene sentido; en una pantalla táctil no se muestra. */}
+        <div className="mt-10 hidden justify-center pointer-fine:flex">
+          <Button variant="ghost" size="sm" onClick={onOpenShortcuts} aria-keyshortcuts="?">
+            Atajos de teclado
+            <Kbd>?</Kbd>
+          </Button>
+        </div>
       </main>
     </>
   )
