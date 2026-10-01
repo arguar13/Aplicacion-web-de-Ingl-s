@@ -3,16 +3,19 @@ import { useKeyDown } from '@/hooks/useKeyDown'
 import { useWindowVirtualizer } from '@/hooks/useWindowVirtualizer'
 import { cn } from '@/lib/cn'
 import { LEVELS } from '@/lib/decks'
-import { POS_LABEL } from '@/lib/details'
+import { loadDetails, POS_LABEL } from '@/lib/details'
 import { type DictionaryFilters, searchWords, type StatusFilter } from '@/lib/dictionary'
+import { saveTextFile } from '@/lib/download'
+import { csvFileName, exportWordsCsv } from '@/lib/exportCsv'
 import { plural } from '@/lib/format'
-import { cardKey, useProgress } from '@/lib/progress'
+import { cardKey, dayKey, useProgress } from '@/lib/progress'
 import { statusOf } from '@/lib/scheduler'
 import { useSettings } from '@/lib/settings'
 import { isHard } from '@/lib/smartDecks'
 import { PARTS_OF_SPEECH, trackOf, type Word } from '@/lib/types'
 import { Header } from './Header'
-import { ArrowLeftIcon, StarIcon } from './icons'
+import { ArrowLeftIcon, ExportIcon, StarIcon } from './icons'
+import { Button } from './ui/Button'
 import { Select } from './ui/controls'
 
 const ROW_HEIGHT = 64
@@ -49,6 +52,13 @@ export function DictionaryScreen({ onExit, onOpenWord }: { onExit: () => void; o
   })
 
   const update = (patch: Partial<DictionaryFilters>) => setFilters((current) => ({ ...current, ...patch }))
+
+  /** Descarga la lista que se ve (con los filtros de ahora) como CSV, con IPA y ejemplos si ya cargaron. */
+  async function exportCsv() {
+    // Sin conexión y sin caché puede fallar: se exporta igual, sin esas columnas.
+    const details = await loadDetails().catch(() => null)
+    saveTextFile(csvFileName(dayKey(Date.now())), exportWordsCsv(results, details, progress, track), 'text/csv')
+  }
 
   return (
     <>
@@ -121,10 +131,25 @@ export function DictionaryScreen({ onExit, onOpenWord }: { onExit: () => void; o
           </div>
         </div>
 
-        <p aria-live="polite" className="mt-3 text-xs text-muted">
-          {plural(results.length, 'palabra')}
-          {filters.status !== 'all' && filters.status !== 'favorite' && ` · según tu progreso en ${TRACK_NAME[track]}`}
-        </p>
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <p aria-live="polite" className="text-xs text-muted">
+            {plural(results.length, 'palabra')}
+            {filters.status !== 'all' &&
+              filters.status !== 'favorite' &&
+              ` · según tu progreso en ${TRACK_NAME[track]}`}
+          </p>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => void exportCsv()}
+            disabled={results.length === 0}
+            title="Descarga esta lista como CSV, para una hoja de cálculo o Anki"
+            className="-mr-3"
+          >
+            <ExportIcon width={16} height={16} />
+            Exportar CSV
+          </Button>
+        </div>
 
         {results.length === 0 ? (
           <p className="py-16 text-center text-[15px] text-muted">

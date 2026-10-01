@@ -11,6 +11,7 @@ import { useSettings } from '@/lib/settings'
 import { type Track, trackOf, TRACKS, type Word } from '@/lib/types'
 import { SlowIcon, SpeakerIcon, StarIcon } from './icons'
 import { PronounceRow } from './PronounceRow'
+import { SpeakExampleButton } from './SpeakExampleButton'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
@@ -89,21 +90,24 @@ function WordSheetContent({ word }: { word: Word }) {
       <PronounceRow word={word.en} />
 
       {example && (
-        <figure className="mt-4 border-l-2 border-accent/60 pl-4">
-          <blockquote lang="en" className="text-lg leading-snug font-medium tracking-[-0.01em]">
-            {parts ? (
-              <>
-                {parts[0]}
-                <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
-                {parts[2]}
-              </>
-            ) : (
-              example.en
-            )}
-          </blockquote>
-          <figcaption lang="es" className="mt-1 text-sm text-muted">
-            {example.es}
-          </figcaption>
+        <figure className="mt-4 flex items-start gap-2 border-l-2 border-accent/60 pl-4">
+          <div className="min-w-0 flex-1">
+            <blockquote lang="en" className="text-lg leading-snug font-medium tracking-[-0.01em]">
+              {parts ? (
+                <>
+                  {parts[0]}
+                  <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
+                  {parts[2]}
+                </>
+              ) : (
+                example.en
+              )}
+            </blockquote>
+            <figcaption lang="es" className="mt-1 text-sm text-muted">
+              {example.es}
+            </figcaption>
+          </div>
+          <SpeakExampleButton text={example.en} className="-mt-1" />
         </figure>
       )}
 

@@ -1,6 +1,14 @@
+import { readFile } from 'node:fs/promises'
 import words from '../src/data/words.json' with { type: 'json' }
 import { expect, test } from './fixtures'
 import { expectAccessible, expectNoHorizontalScroll } from './helpers'
+
+declare global {
+  interface Window {
+    /** Lo último que "dijo" la síntesis de voz simulada. */
+    spokenText?: string
+  }
+}
 
 /** Así lo escribe la app (sin separador de miles en español hasta 9999). */
 const TOTAL = `${words.length} palabras`
@@ -49,4 +57,47 @@ test('la lista de todas las palabras solo pinta lo visible', async ({ page }) =>
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
   await expect(rows.first()).not.toContainText(/^.*\bthe\b/)
   expect(await rows.count()).toBeLessThan(60)
+})
+
+test('la lista filtrada se exporta como CSV con cabecera, detalles y estado', async ({ page }) => {
+  await page.goto('./#/diccionario')
+  await page.getByLabel('Buscar en inglés o en español').fill('water')
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button', { name: 'Exportar CSV' }).click(),
+  ])
+  expect(download.suggestedFilename()).toMatch(/^tecla-vocabulario-\d{4}-\d{2}-\d{2}\.csv$/)
+  const file = await download.path()
+  const text = await readFile(file, 'utf8')
+  const lines = text.replace('\uFEFF', '').trimEnd().split('\r\n')
+  expect(lines[0]).toBe('ingles,espanol,categoria,ipa,ejemplo,ejemplo_es,estado,favorita')
+  expect(lines[1]).toMatch(/^water,agua,sustantivo,\/.+\/,.+water.+,.+,nueva,$/)
+})
+
+test('la frase de ejemplo se puede oír con la voz del navegador cuando hay una voz en inglés', async ({ page }) => {
+  // Síntesis de voz simulada con una voz en inglés: lo dicho queda en window.spokenText.
+  await page.addInitScript(() => {
+    const voices = [{ name: 'Samantha', lang: 'en-US', default: true, localService: true, voiceURI: 'Samantha' }]
+    const synthesis = Object.assign(new EventTarget(), {
+      getVoices: () => voices,
+      speak: (utterance: { text: string }) => {
+        Object.assign(window, { spokenText: utterance.text })
+      },
+      cancel: () => undefined,
+    })
+    Object.defineProperty(window, 'speechSynthesis', { value: synthesis })
+    // La clase real rechaza una voz que no sea suya: la simulación trae la suya, que guarda el texto.
+    class FakeUtterance {
+      voice: unknown = null
+      lang = ''
+      rate = 1
+      constructor(public text: string) {}
+    }
+    Object.assign(window, { SpeechSynthesisUtterance: FakeUtterance })
+  })
+  await page.goto('./#/diccionario?palabra=water')
+  const sheet = page.getByRole('dialog', { name: 'water' })
+  const example = (await sheet.locator('blockquote').textContent())?.trim() ?? ''
+  await sheet.getByRole('button', { name: 'Escuchar la frase' }).click()
+  await expect.poll(() => page.evaluate(() => window.spokenText)).toBe(example)
 })

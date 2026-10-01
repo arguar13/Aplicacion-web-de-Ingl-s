@@ -309,3 +309,23 @@ export function FlagIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/** Leer en voz alta: líneas de texto con ondas de sonido. */
+export function ReadAloudIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 7h9M4 12h7M4 17h5" />
+      <path d="M16.5 9.5a4 4 0 0 1 0 5M19.5 7a8 8 0 0 1 0 10" />
+    </svg>
+  )
+}
+
+/** Exportar: una hoja con una flecha hacia fuera. */
+export function ExportIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 4v11M8 8l4-4 4 4" />
+      <path d="M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+    </svg>
+  )
+}

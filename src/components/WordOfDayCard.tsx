@@ -7,6 +7,7 @@ import { SpeakerIcon } from './icons'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
+import { SpeakExampleButton } from './SpeakExampleButton'
 
 /**
  * Palabra del día: una palabra nueva un poco más adelante de por donde vas, con su pronunciación y
@@ -47,12 +48,15 @@ export function WordOfDayCard({ now, onOpenWord }: { now: number; onOpenWord: (i
         </IconButton>
       </div>
       {details?.example && (
-        <p className="mt-4 border-l-2 border-accent/40 pl-3 text-sm leading-relaxed">
-          <span lang="en" className="block font-medium">
-            {details.example.en}
-          </span>
-          <span className="block text-muted">{details.example.es}</span>
-        </p>
+        <div className="mt-4 flex items-start gap-2 border-l-2 border-accent/40 pl-3">
+          <p className="min-w-0 flex-1 text-sm leading-relaxed">
+            <span lang="en" className="block font-medium">
+              {details.example.en}
+            </span>
+            <span className="block text-muted">{details.example.es}</span>
+          </p>
+          <SpeakExampleButton text={details.example.en} className="-mt-1" />
+        </div>
       )}
       <Button size="sm" onClick={() => onOpenWord(word.id)} className="mt-4">
         Ver ficha

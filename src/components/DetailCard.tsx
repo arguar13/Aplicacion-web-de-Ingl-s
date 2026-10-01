@@ -2,6 +2,7 @@ import { useEffect, useId, useRef } from 'react'
 import { formsText, POS_LABEL, splitAround, type WordDetails } from '@/lib/details'
 import type { Mode, Word } from '@/lib/types'
 import { SlowIcon } from './icons'
+import { SpeakExampleButton } from './SpeakExampleButton'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
@@ -71,24 +72,27 @@ export function DetailCard({ word, mode, details, onContinue, onListenSlowly }: 
         </div>
       ) : (
         example && (
-          <figure className="mt-4 border-l-2 border-accent/60 pl-4">
-            <blockquote
-              lang="en"
-              className="text-[1.2rem] leading-snug font-medium tracking-[-0.01em] sm:text-[1.35rem]"
-            >
-              {parts ? (
-                <>
-                  {parts[0]}
-                  <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
-                  {parts[2]}
-                </>
-              ) : (
-                example.en
-              )}
-            </blockquote>
-            <figcaption lang="es" className="mt-1 text-sm text-muted">
-              {example.es}
-            </figcaption>
+          <figure className="mt-4 flex items-start gap-2 border-l-2 border-accent/60 pl-4">
+            <div className="min-w-0 flex-1">
+              <blockquote
+                lang="en"
+                className="text-[1.2rem] leading-snug font-medium tracking-[-0.01em] sm:text-[1.35rem]"
+              >
+                {parts ? (
+                  <>
+                    {parts[0]}
+                    <mark className="rounded-md bg-accent-soft px-1 text-accent">{parts[1]}</mark>
+                    {parts[2]}
+                  </>
+                ) : (
+                  example.en
+                )}
+              </blockquote>
+              <figcaption lang="es" className="mt-1 text-sm text-muted">
+                {example.es}
+              </figcaption>
+            </div>
+            <SpeakExampleButton text={example.en} className="-mt-1 -mr-2" />
           </figure>
         )
       )}
