@@ -43,8 +43,9 @@ export const HOME: Route = { screen: { name: 'home' }, panel: null }
 const SMART: Record<SmartDeckKind, { path: string; title: string }> = {
   review: { path: '/repaso', title: 'Repaso del día' },
   hard: { path: '/dificiles', title: 'Mis difíciles' },
+  favorites: { path: '/favoritas', title: 'Favoritas' },
 }
-const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard']
+const SMART_KINDS: readonly SmartDeckKind[] = ['review', 'hard', 'favorites']
 const WORD_IDS = new Set(ALL_WORDS.map((word) => word.id))
 
 function deckPath(deck: Deck): string {

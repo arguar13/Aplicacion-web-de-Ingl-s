@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { diffAgainst, editDistance, judgeTyped } from './typing'
+import { diffAgainst, editDistance, hintFor, judgeTyped } from './typing'
 
 /** La respuesta correcta con las letras que no coinciden en mayúscula. */
 const marks = (input: string, target: string) =>
@@ -32,5 +32,20 @@ describe('respuestas escritas', () => {
     expect(marks('watr', 'water')).toBe('watEr')
     expect(marks('water', 'water')).toBe('water')
     expect(marks('', 'go')).toBe('GO')
+  })
+})
+
+describe('pistas', () => {
+  it('destapa las letras de una en una y nunca la última', () => {
+    expect(hintFor('water', 0)).toEqual({ shown: '', hidden: '_____', complete: false })
+    expect(hintFor('water', 1)).toEqual({ shown: 'w', hidden: '____', complete: false })
+    expect(hintFor('water', 4)).toEqual({ shown: 'wate', hidden: '_', complete: true })
+    expect(hintFor('water', 9)).toEqual({ shown: 'wate', hidden: '_', complete: true })
+  })
+
+  it('los espacios y apóstrofos se ven siempre: no son letras que adivinar', () => {
+    expect(hintFor("don't", 3)).toEqual({ shown: 'don', hidden: "'_", complete: true })
+    expect(hintFor('in addition', 2)).toEqual({ shown: 'in', hidden: ' ________', complete: false })
+    expect(hintFor('a', 1)).toEqual({ shown: '', hidden: '_', complete: true })
   })
 })

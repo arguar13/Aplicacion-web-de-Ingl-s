@@ -6,7 +6,7 @@ export const ALL_WORDS = vocabulary()
 
 export const LEVEL_SIZE = 500
 
-export type DeckKind = 'level' | 'all' | 'review' | 'hard' | 'coach' | 'topic'
+export type DeckKind = 'level' | 'all' | 'review' | 'hard' | 'favorites' | 'coach' | 'topic'
 
 export interface Deck {
   id: string

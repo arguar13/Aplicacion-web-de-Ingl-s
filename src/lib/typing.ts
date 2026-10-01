@@ -82,3 +82,25 @@ export function diffAgainst(input: string, target: string): LetterDiff[] {
   // Por unidades de texto, igual que la tabla (las palabras del vocabulario son ASCII).
   return Array.from({ length: b.length }, (_letter, position) => ({ position, char: b[position], ok: ok[position] }))
 }
+
+/**
+ * Pista con las primeras `letters` letras de la palabra y el resto como huecos ("wa___"). Los
+ * espacios y apóstrofos se muestran siempre: no son letras que adivinar. Nunca se destapa la última
+ * letra: con todas a la vista no habría nada que escribir.
+ */
+export function hintFor(target: string, letters: number): { shown: string; hidden: string; complete: boolean } {
+  const max = Math.max(0, target.replace(/[^A-Za-z]/g, '').length - 1)
+  const reveal = Math.min(Math.max(letters, 0), max)
+  let shown = ''
+  let revealed = 0
+  let index = 0
+  for (; index < target.length && revealed < reveal; index++) {
+    shown += target[index]
+    if (/[A-Za-z]/.test(target[index])) revealed++
+  }
+  const hidden = target
+    .slice(index)
+    .replace(/[A-Za-z]/g, '_')
+    .replace(/\s/g, ' ')
+  return { shown, hidden, complete: reveal >= max }
+}

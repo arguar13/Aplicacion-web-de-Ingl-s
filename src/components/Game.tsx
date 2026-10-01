@@ -157,7 +157,7 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
                   reason={round.reason}
                   ipa={details?.ipa}
                   example={details === null ? null : details.example}
-                  typedVerdict={quiz.typed?.verdict}
+                  typed={quiz.typed}
                   revealed={quiz.revealed}
                   rating={quiz.rating}
                   solved={quiz.solved}

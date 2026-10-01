@@ -28,6 +28,7 @@ import {
   LayersIcon,
   SettingsIcon,
   ShuffleIcon,
+  StarIcon,
   TimerIcon,
 } from './icons'
 import { Kbd } from './ui/Kbd'
@@ -84,12 +85,14 @@ export function DeckPicker({
 
   const due = anyProgress ? dueToday(progress, track, now).length : 0
   const hard = anyProgress ? hardWords(progress, track).length : 0
+  const favorites = progress.favorites.length
 
   useKeyDown((event) => {
     if (event.key === 'Enter') return onStartCoach()
     const key = event.key.toLowerCase()
     if (key === 'r' && due > 0) return onOpenSmart('review')
     if (key === 'd' && hard > 0) return onOpenSmart('hard')
+    if (key === 'f' && favorites > 0) return onOpenSmart('favorites')
     const deck = DECKS.find((d) => shortcutOf(d) === event.key)
     if (deck) onPick(deck)
   })
@@ -151,6 +154,7 @@ export function DeckPicker({
               onOpen={() => onOpenSmart('review')}
             />
             <HardCard count={hard} onOpen={() => onOpenSmart('hard')} />
+            <FavoritesCard count={favorites} onOpen={() => onOpenSmart('favorites')} />
             <BlitzCard best={progress.blitzBest} onOpen={onOpenBlitz} />
           </div>
         )}
@@ -286,7 +290,40 @@ function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
   )
 }
 
-/** Relámpago: el juego contrarreloj, con el récord. */
+/** Favoritas: las palabras marcadas con la estrella, para practicarlas juntas. */
+function FavoritesCard({ count, onOpen }: { count: number; onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      disabled={count === 0}
+      aria-keyshortcuts={count > 0 ? 'F' : undefined}
+      className={cn(
+        cardBase,
+        'flex items-center gap-4 border-line bg-surface p-5 shadow-card',
+        'hover:border-accent/40 hover:shadow-key-hover',
+        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
+      )}
+    >
+      <span
+        className={cn(
+          'grid size-11 shrink-0 place-items-center rounded-full transition-transform group-hover:-rotate-12',
+          count > 0 ? 'bg-accent-soft text-accent' : 'bg-bg text-muted',
+        )}
+      >
+        <StarIcon filled={count > 0} />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[17px] font-semibold">Favoritas</span>
+        <span className="block text-sm text-muted">
+          {count > 0 ? `${plural(count, 'palabra')} con estrella` : 'Márcalas desde la ficha de cada palabra'}
+        </span>
+      </span>
+      {count > 0 && <Kbd>F</Kbd>}
+    </button>
+  )
+}
+
 /** Acceso a las colecciones temáticas (comida, animales, viajes…). */
 function TopicsCard({ onOpen }: { onOpen: () => void }) {
   return (
@@ -318,7 +355,7 @@ function BlitzCard({ best, onOpen }: { best: number; onOpen: () => void }) {
       onClick={onOpen}
       className={cn(
         cardBase,
-        'flex items-center gap-4 border-line bg-surface p-5 shadow-card sm:col-span-2',
+        'flex items-center gap-4 border-line bg-surface p-5 shadow-card',
         'hover:border-accent/40 hover:shadow-key-hover',
       )}
     >

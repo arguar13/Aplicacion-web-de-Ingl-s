@@ -1,13 +1,14 @@
 /**
  * Mazos que se arman con el progreso del usuario: el repaso del día (todo lo que toca repasar hoy,
- * de todos los niveles) y "Mis difíciles" (lo que más se olvida). También la previsión de repasos.
+ * de todos los niveles), "Mis difíciles" (lo que más se olvida) y las favoritas. También la
+ * previsión de repasos.
  */
 import { ALL_WORDS, type Deck } from './decks'
 import { cardKey, type ProgressData } from './progress'
 import type { CardState } from './scheduler'
 import type { Track, Word } from './types'
 
-export type SmartDeckKind = 'review' | 'hard'
+export type SmartDeckKind = 'review' | 'hard' | 'favorites'
 
 /** Olvidos a partir de los cuales una palabra cuenta como difícil. */
 export const HARD_LAPSES = 2
@@ -66,14 +67,30 @@ export function forecast(progress: ProgressData, track: Track, now: number, days
   return counts
 }
 
+const BY_ID = new Map(ALL_WORDS.map((word) => [word.id, word]))
+
+/** Las favoritas, en el orden en que se marcaron (las que ya no estén en el vocabulario se ignoran). */
+export function favoriteWords(progress: ProgressData): Word[] {
+  return progress.favorites.flatMap((id) => {
+    const word = BY_ID.get(id)
+    return word ? [word] : []
+  })
+}
+
 const SMART_INFO: Record<SmartDeckKind, { name: string; description: string }> = {
   review: { name: 'Repaso del día', description: 'Todo lo que toca repasar hoy, de todos los niveles.' },
   hard: { name: 'Mis difíciles', description: 'Las palabras que más se te olvidan.' },
+  favorites: { name: 'Favoritas', description: 'Las palabras que marcaste con la estrella.' },
 }
 
 /** Arma el mazo con las palabras de este momento: no cambia mientras se juega. */
 export function buildSmartDeck(kind: SmartDeckKind, progress: ProgressData, track: Track, now: number): Deck {
-  const words = kind === 'review' ? dueToday(progress, track, now) : hardWords(progress, track)
+  const words =
+    kind === 'review'
+      ? dueToday(progress, track, now)
+      : kind === 'hard'
+        ? hardWords(progress, track)
+        : favoriteWords(progress)
   return {
     id: kind,
     kind,

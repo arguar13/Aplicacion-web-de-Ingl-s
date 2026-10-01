@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/cn'
 import type { Word } from '@/lib/types'
-import { diffAgainst, type TypedVerdict } from '@/lib/typing'
+import { diffAgainst, hintFor, type TypedVerdict } from '@/lib/typing'
 import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Surface } from './ui/Surface'
@@ -12,18 +12,21 @@ interface Props {
   mode: 'type' | 'dictation'
   solved: boolean
   typed: { text: string; verdict: TypedVerdict } | null
-  onSubmit: (text: string) => void
+  onSubmit: (text: string, options: { hinted: boolean }) => void
   /** Tras comprobar, Enter en el campo pasa a la siguiente palabra. */
   onContinue: () => void
 }
 
 /**
  * Modo escribir: un campo para la palabra inglesa. Al comprobar, muestra la respuesta correcta con
- * las letras que no coinciden marcadas.
+ * las letras que no coinciden marcadas. Una pista destapa las letras de una en una (y la respuesta
+ * cuenta como «casi»).
  */
 export function TypeAnswer({ word, mode, solved, typed, onSubmit, onContinue }: Props) {
   const [text, setText] = useState('')
+  const [hints, setHints] = useState(0)
   const input = useRef<HTMLInputElement>(null)
+  const hint = hintFor(word.en, hints)
 
   // Cada palabra empieza con el campo vacío y enfocado (en el móvil, con el teclado abierto).
   useEffect(() => {
@@ -33,7 +36,12 @@ export function TypeAnswer({ word, mode, solved, typed, onSubmit, onContinue }: 
   function submit(event: FormEvent) {
     event.preventDefault()
     if (solved) onContinue()
-    else onSubmit(text)
+    else onSubmit(text, { hinted: hints > 0 })
+  }
+
+  function revealMore() {
+    setHints((n) => n + 1)
+    input.current?.focus({ preventScroll: true })
   }
 
   return (
@@ -68,6 +76,23 @@ export function TypeAnswer({ word, mode, solved, typed, onSubmit, onContinue }: 
           </Button>
         )}
       </form>
+
+      {!solved && (
+        <div className="mt-3 flex min-h-8 items-center justify-between gap-3">
+          <p lang="en" aria-live="polite" className="font-display text-xl tracking-[0.2em] text-muted">
+            {hints > 0 && (
+              <>
+                <span className="sr-only">Pista: </span>
+                {hint.shown}
+                <span aria-hidden>{hint.hidden}</span>
+              </>
+            )}
+          </p>
+          <Button variant="ghost" size="sm" onClick={revealMore} disabled={hint.complete} className="-mr-2">
+            {hints === 0 ? 'Pista' : 'Otra letra'}
+          </Button>
+        </div>
+      )}
 
       {typed && typed.verdict !== 'exact' && (
         <p className="mt-4 animate-rise text-center text-[15px] text-muted">

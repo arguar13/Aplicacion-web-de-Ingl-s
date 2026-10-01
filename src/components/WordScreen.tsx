@@ -22,8 +22,8 @@ interface Props {
   /** La partida está detenida con el detalle a la vista. */
   expanded: boolean
   mistakes: number
-  /** Modo escribir: cómo se juzgó lo escrito. */
-  typedVerdict: TypedVerdict | undefined
+  /** Modo escribir: cómo se juzgó lo escrito y si hubo pista. */
+  typed: { verdict: TypedVerdict; hinted: boolean } | null
   /** Modo tarjetas: la traducción ya se mostró. */
   revealed: boolean
   /** Modo tarjetas: la nota que se puso el estudiante. */
@@ -80,15 +80,16 @@ function statusOf(
   mode: Mode,
   solved: boolean,
   mistakes: number,
-  verdict: TypedVerdict | undefined,
+  typed: { verdict: TypedVerdict; hinted: boolean } | null,
   revealed: boolean,
   rating: SelfRating | null,
 ) {
   if (rating) return RATED[rating]
   if (mode === 'flash' && revealed) return { text: '¿Qué tal te salió?', tone: 'text-muted' }
   // La corrección letra por letra aparece bajo el campo de texto.
-  if (verdict === 'almost') return { text: '¡Casi!', tone: 'text-ok' }
-  if (verdict === 'wrong') return { text: 'No era esa.', tone: 'text-bad' }
+  if (typed?.verdict === 'almost') return { text: '¡Casi!', tone: 'text-ok' }
+  if (typed?.verdict === 'wrong') return { text: 'No era esa.', tone: 'text-bad' }
+  if (typed?.hinted) return { text: 'Correcto, con pista.', tone: 'text-ok' }
   if (solved) return { text: mistakes === 0 ? '¡Correcto!' : 'Eso es.', tone: 'text-ok' }
   if (mistakes > 0) return { text: 'No es esa. Prueba otra.', tone: 'text-bad' }
   return { text: INSTRUCTION[mode], tone: 'text-muted' }
@@ -103,7 +104,7 @@ export function WordScreen({
   solved,
   expanded,
   mistakes,
-  typedVerdict,
+  typed,
   revealed,
   rating,
   canReplay,
@@ -112,7 +113,7 @@ export function WordScreen({
   onExpand,
 }: Props) {
   const badge = REASON_BADGE[reason]
-  const status = statusOf(mode, solved, mistakes, typedVerdict, revealed, rating)
+  const status = statusOf(mode, solved, mistakes, typed, revealed, rating)
 
   return (
     <Surface as="section" className="px-5 pt-4 pb-5 sm:px-7 md:px-8 md:pb-7 short:pb-4">

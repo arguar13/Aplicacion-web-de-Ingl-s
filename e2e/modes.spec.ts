@@ -130,3 +130,16 @@ test('dictado: suena la palabra sin mostrarla y se escribe', async ({ page, brow
   await expect(page.getByRole('heading', { level: 1, name: word?.en })).toBeVisible()
   await expect(page.getByRole('progressbar', { name: 'Meta de hoy' })).toHaveAttribute('aria-valuenow', '1')
 })
+
+test('escribir: una pista destapa letras y la respuesta cuenta como «casi»', async ({ page }) => {
+  await useMode(page, 'type')
+  await page.goto('./#/nivel/2')
+  const heading = page.getByRole('heading', { level: 1 })
+  const word = byEs.get((await heading.textContent())?.trim() ?? '')
+  await page.getByRole('button', { name: 'Pista' }).click()
+  await expect(page.getByText(`Pista: ${word?.en.charAt(0) ?? ''}`)).toBeAttached()
+  await page.getByRole('button', { name: 'Otra letra' }).click()
+  await page.getByLabel('La palabra en inglés').fill(word?.en ?? '')
+  await page.getByRole('button', { name: /Comprobar/ }).click()
+  await expect(page.getByText('Correcto, con pista.')).toBeVisible()
+})

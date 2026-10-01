@@ -65,3 +65,21 @@ test('sin nada que repasar, el mazo muestra "Todo al día" y las difíciles est�
   await page.getByRole('button', { name: 'Volver a los niveles' }).click()
   await expect(page).toHaveURL(/#\/$/)
 })
+
+test('las favoritas se practican juntas desde el inicio', async ({ page }) => {
+  await seed(page)
+  // Sin favoritas, la tarjeta explica cómo marcarlas y no se puede abrir.
+  const card = page.getByRole('button', { name: /Favoritas/ })
+  await expect(card).toBeDisabled()
+  await page.goto('./#/favoritas')
+  await expect(page.getByRole('heading', { name: 'Aún no tienes favoritas' })).toBeVisible()
+
+  await page.goto('./#/diccionario?palabra=tree')
+  await page.getByRole('dialog', { name: 'tree' }).getByRole('button', { name: 'Marcar favorita' }).click()
+  await page.goto('./')
+  await expect(card).toContainText('1 palabra con estrella')
+  await card.click()
+  await expect(page).toHaveURL(/#\/favoritas$/)
+  await expect(page).toHaveTitle('Favoritas — Tecla')
+  expect((await currentWord(page)).id).toBe('tree')
+})

@@ -62,8 +62,8 @@ interface State {
   next: Round | null
   /** Ids de las teclas que el usuario ya pulsó mal en esta ronda. */
   wrong: string[]
-  /** Modo escribir: lo que se escribió y cómo se juzgó. */
-  typed: { text: string; verdict: TypedVerdict } | null
+  /** Modo escribir: lo que se escribió, cómo se juzgó y si se pidió una pista. */
+  typed: { text: string; verdict: TypedVerdict; hinted: boolean } | null
   /** Modo tarjetas: la traducción ya está a la vista, falta calificarse. */
   revealed: boolean
   /** Modo tarjetas: la nota que se puso el estudiante. */
@@ -321,12 +321,16 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
 
   /**
    * Modo escribir: exacta o "casi" (un error de tecleo) cuentan como acierto, "casi" con nota más
-   * baja; incorrecta muestra la respuesta y cuenta como fallo.
+   * baja; incorrecta muestra la respuesta y cuenta como fallo. Con una pista, la nota es como mucho
+   * la de "casi": se sabía, pero no del todo.
    */
-  function submitTyped(text: string) {
+  function submitTyped(text: string, { hinted = false } = {}) {
     if (resolving.current || state.solved || !text.trim()) return
     const verdict = judgeTyped(text, state.round.word.en)
-    solve({ clean: verdict !== 'wrong', almost: verdict === 'almost', ms: elapsed() }, { typed: { text, verdict } })
+    solve(
+      { clean: verdict !== 'wrong', almost: verdict === 'almost' || (hinted && verdict === 'exact'), ms: elapsed() },
+      { typed: { text, verdict, hinted } },
+    )
   }
 
   /** Modo tarjetas: muestra la traducción para calificarse. El tiempo de respuesta se mide hasta aquí. */
