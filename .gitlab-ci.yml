@@ -1,0 +1,41 @@
+# Pipeline de GitLab: comprobaciones, build y despliegue a Hostinger.
+# Corre en el runner propio del dueño (etiqueta "tecla"): GitLab Runner en Docker Desktop, que
+# ejecuta cada job en un contenedor Linux con Node 24, aislado del PC. Ver "Despliegue" en el README.
+
+default:
+  image: node:24
+  tags: [tecla]
+  cache:
+    key:
+      files: [package-lock.json]
+    paths: [.npm/]
+  before_script:
+    - npm ci --cache .npm --prefer-offline --no-audit --no-fund
+
+stages: [check, deploy]
+
+check:
+  stage: check
+  script:
+    - npm run check
+    - bash scripts/test_check_deploy_target.sh
+    - npm run build
+    - npm run budget
+
+# Solo en main y cuando las variables del FTP están configuradas (Settings → CI/CD → Variables,
+# marcadas como Protected: GitLab solo las entrega a ramas protegidas como main).
+deploy:
+  stage: deploy
+  needs: [check]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $FTP_SERVER
+  # Un despliegue a la vez, en orden.
+  resource_group: produccion
+  environment:
+    name: produccion
+    url: $SITE_URL
+  script:
+    # El build lleva SITE_URL (URL canónica, sitemap e imagen para compartir).
+    - npm run build
+    - npm run budget
+    - bash scripts/deploy.sh

@@ -161,7 +161,8 @@ su propio build) y probarían una versión vieja. Para una vista previa manual, 
 La primera vez, los tests e2e necesitan los navegadores: `npx playwright install chromium webkit`.
 
 Calidad: cada commit pasa por `npm run check` (hook de pre-commit con simple-git-hooks) y cada push
-por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build con su presupuesto
+por el pipeline de GitLab (`.gitlab-ci.yml`: check, build y despliegue) y la CI de GitHub Actions
+(`.github/workflows/ci.yml`): el check, el build con su presupuesto
 de tamaño, los e2e en Chromium y WebKit (con axe en todas las pantallas, en los dos temas) y
 Lighthouse en móvil (rendimiento ≥ 85; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
@@ -184,22 +185,46 @@ creado en hPanel en **Dominios → Subdominios** con su propia carpeta, como `pu
 Si el dominio ya tiene otro sitio en `public_html` (p. ej. un blog), Tecla va siempre en la carpeta
 del subdominio: no hace falta tocar ese sitio ni su modo mantenimiento.
 
-### Despliegue automático (recomendado)
+### Despliegue automático con GitLab (recomendado)
 
-`.github/workflows/deploy.yml` publica en Hostinger por FTPS cada vez que el CI pasa en `main`
-(y a mano desde la pestaña **Actions → Despliegue → Run workflow**). Sube solo los archivos que
-cambiaron. Mientras no esté configurado, se salta sin fallar. Para activarlo, en GitHub:
-**Settings → Secrets and variables → Actions**:
+El código vive en GitHub y en GitLab (cada `git push` va a los dos). En GitLab, `.gitlab-ci.yml`
+pasa las comprobaciones, hace el build y, en `main`, publica en Hostinger por FTPS con
+`scripts/deploy.sh`, que sube solo los archivos que cambiaron. Los jobs corren en un **runner
+propio**: GitLab Runner dentro de Docker Desktop, en el PC del dueño, que ejecuta cada job en un
+contenedor Linux con Node 24 (aislado del PC y sin gastar minutos de GitLab). Docker Desktop tiene
+que estar abierto para que corra el pipeline (**Settings → General → Start Docker Desktop when you
+sign in**).
 
-| Tipo     | Nombre           | Valor                                                                           |
-| -------- | ---------------- | ------------------------------------------------------------------------------- |
-| Secreto  | `FTP_SERVER`     | Servidor FTP de hPanel (**Archivos → Cuentas FTP**), p. ej. `ftp.tudominio.com` |
-| Secreto  | `FTP_USERNAME`   | Usuario FTP                                                                     |
-| Secreto  | `FTP_PASSWORD`   | Contraseña FTP                                                                  |
-| Variable | `SITE_URL`       | Dirección pública, p. ej. `https://tudominio.com/`                              |
-| Variable | `DEPLOY_ENABLED` | `true`                                                                          |
-| Variable | `FTP_SERVER_DIR` | Obligatoria. Carpeta de Tecla, p. ej. `public_html/ingles/` (ver abajo)         |
-| Variable | `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
+**Runner (una vez).** En GitLab, **Settings → CI/CD → Runners → New project runner**, con la
+etiqueta `tecla` y marcado como **Protected** (solo corre en ramas protegidas). Copia el token
+(`glrt-…`) y, con Docker Desktop abierto:
+
+```sh
+docker run -d --name gitlab-runner --restart always \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v gitlab-runner-config:/etc/gitlab-runner \
+  gitlab/gitlab-runner:latest
+docker exec gitlab-runner gitlab-runner register --non-interactive \
+  --url https://gitlab.com --token glrt-TU-TOKEN \
+  --executor docker --docker-image node:24 --docker-pull-policy if-not-present
+```
+
+Para que Docker no llene el disco, una tarea programada de Windows (`Tecla: limpieza de Docker`,
+semanal) borra los contenedores parados y las imágenes sin usar de más de una semana:
+`docker container prune -f` y `docker image prune -af --filter until=168h`.
+
+**Variables.** En GitLab, **Settings → CI/CD → Variables**, todas como **Protected** (GitLab solo
+las entrega a ramas protegidas como `main`) y la contraseña además como **Masked**. Sin
+`FTP_SERVER`, el job de despliegue no se crea.
+
+| Nombre           | Valor                                                                           |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `FTP_SERVER`     | Servidor FTP de hPanel (**Archivos → Cuentas FTP**), p. ej. `ftp.tudominio.com` |
+| `FTP_USERNAME`   | Usuario FTP                                                                     |
+| `FTP_PASSWORD`   | Contraseña FTP                                                                  |
+| `FTP_SERVER_DIR` | Obligatoria. Carpeta de Tecla, p. ej. `public_html/ingles/` (ver abajo)         |
+| `SITE_URL`       | Dirección pública, p. ej. `https://ingles.tudominio.com/`                       |
+| `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
 
 Con `SITE_URL`, el build añade la URL canónica, las URLs absolutas de la imagen para compartir y
 `sitemap.xml`. Sin ella todo funciona, pero sin esos extras.
@@ -215,9 +240,9 @@ del hosting.
 ### Despliegue manual
 
 1. `SITE_URL=https://tudominio.com/ npm run build` (o solo `npm run build`).
-2. Sube **el contenido** de `dist/` (no la carpeta en sí) a la carpeta de Tecla (`public_html/` si
-   el dominio es solo para Tecla; si no, la del subdominio), con el Administrador de archivos de
-   hPanel o por FTP. Incluye el archivo oculto `.htaccess`.
+2. Desde Git Bash, con las mismas variables de entorno, `bash scripts/deploy.sh`. O sube **el
+   contenido** de `dist/` (no la carpeta en sí) a la carpeta de Tecla con el Administrador de
+   archivos de hPanel, incluido el archivo oculto `.htaccess`.
 
 ### Servidor
 

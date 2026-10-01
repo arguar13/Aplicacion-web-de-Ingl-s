@@ -10,16 +10,17 @@
 # Entrada (variables de entorno): FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (relativa
 # a la carpeta inicial de la cuenta FTP; "./" es esa misma carpeta) y FTP_PROTOCOL (ftps por
 # defecto, ftps-legacy o ftp, como FTP-Deploy-Action).
-# Salida: dir=<carpeta terminada en "/"> en $GITHUB_OUTPUT, que es lo que espera FTP-Deploy-Action.
+# Salida: la carpeta terminada en "/" (lo que espera ftp-deploy) como única línea de stdout; los
+# mensajes van a stderr. La usa scripts/deploy.sh.
 set -euo pipefail
 
 fail() {
-  echo "::error title=Despliegue cancelado::$1"
+  echo "Despliegue cancelado: $1" >&2
   exit 1
 }
 
 dir="${FTP_SERVER_DIR:-}"
-[[ -n "$dir" ]] || fail "Falta la variable FTP_SERVER_DIR (Settings → Secrets and variables → Actions). Indica la carpeta del sitio de Tecla, p. ej. public_html/ingles/, o ./ si la cuenta FTP ya empieza en ella."
+[[ -n "$dir" ]] || fail "Falta la variable FTP_SERVER_DIR (en GitLab: Settings → CI/CD → Variables). Indica la carpeta del sitio de Tecla, p. ej. public_html/ingles/, o ./ si la cuenta FTP ya empieza en ella."
 [[ "$dir" == */ ]] || dir="$dir/"
 
 case "${FTP_PROTOCOL:-ftps}" in
@@ -67,5 +68,5 @@ if ((${#others[@]})); then
   fail "La carpeta $dir contiene otro sitio (${others[*]:0:5}). Elige la carpeta del sitio de Tecla en FTP_SERVER_DIR o usa una cuenta FTP limitada a ella."
 fi
 
-echo "Destino comprobado: $dir no contiene otro sitio."
-echo "dir=$dir" >>"${GITHUB_OUTPUT:-/dev/null}"
+echo "Destino comprobado: $dir no contiene otro sitio." >&2
+echo "$dir"

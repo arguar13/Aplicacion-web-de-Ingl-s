@@ -5,6 +5,16 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## Sin publicar
+
+### Cambiado
+
+- **El despliegue pasa de GitHub Actions a GitLab CI** (`.gitlab-ci.yml`), con un runner propio en
+  Docker Desktop: cada job corre en un contenedor Linux con Node 24, sin gastar minutos. El código
+  se publica en GitHub y GitLab a la vez. Se retira `.github/workflows/deploy.yml`.
+- El despliegue es un script independiente de la CI (`scripts/deploy.sh`): comprueba el destino y
+  sube solo lo que cambió con ftp-deploy, verificando el certificado del servidor FTPS.
+
 ## 2.3.0 · 2026-10-01 · Un curso con el rigor de las certificaciones (Fase 21)
 
 ### Añadido
