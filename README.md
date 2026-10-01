@@ -2,8 +2,9 @@
 
 Aprende vocabulario en inglés con una idea simple: aparece una palabra, suena su pronunciación y
 pulsas la tecla con su traducción. Más de 8000 palabras (8461), de las más usadas a las más
-difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un camino
-de A1 a C2. Gratis, sin cuentas, sin anuncios y sin conexión.
+difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un **curso
+de gramática de A1 a C2** con lecciones, ejercicios y exámenes. Gratis, sin cuentas, sin anuncios y
+sin conexión.
 
 ## La sesión inteligente
 
@@ -49,6 +50,33 @@ cuenta atrás.
 Cada palabra tiene pronunciación con voz neuronal (se puede escuchar despacio sin cambiar el tono),
 IPA, formas irregulares y una frase de ejemplo traducida, que se puede **oír con la voz del
 navegador** donde tenga una voz en inglés (síntesis de voz, sin servidor).
+
+## El curso: de A1 a C2
+
+**Curso de inglés** (#/curso): seis niveles del Marco Común Europeo, 38 lecciones y un examen por
+nivel. Cada lección explica un tema en español con ejemplos en inglés (que se pueden oír con la voz
+del navegador), tablas y un consejo sobre el error típico, y termina con seis ejercicios de cuatro
+tipos: **elegir** la opción, **completar** el hueco, **ordenar** las palabras de una frase y
+**traducir**. Lo escrito se corrige con tolerancia (mayúsculas, puntuación, un error de tecleo en
+frases largas cuenta como «casi»); al fallar se ve la respuesta y la explicación.
+
+- **A1** (8): to be, artículos y plurales, presente simple, preguntas y negaciones, there is y
+  lugar, can, presente continuo, pasado simple.
+- **A2** (8): pasado irregular, comparativos, going to y will, contable e incontable, presente
+  perfecto, adverbios, should/must/have to, pasado continuo.
+- **B1** (8): perfecto frente a pasado, condicionales 0, 1 y 2, modales de deducción, pasiva,
+  relativo, gerundio e infinitivo, estilo indirecto.
+- **B2** (6): perfecto continuo, condicional 3 y mixtos, pasiva avanzada y have something done,
+  phrasal verbs, conectores, wish y would rather.
+- **C1** (4): inversión, oraciones hendidas, modales perfectos, registro y colocaciones.
+- **C2** (4): subjuntivo y estructuras formales, modismos, participios y oraciones reducidas,
+  precisión y matices.
+
+El **examen** de cada nivel (15 o 16 preguntas) se aprueba con el 80 %; cada lección y examen guarda
+su mejor nota, suma experiencia (más la primera vez) y el inicio sugiere el siguiente paso. El
+contenido vive en `src/data/course/<nivel>.json`, se carga al abrir el nivel y un test comprueba que
+cada ejercicio se resuelve con su propia respuesta. El progreso del curso viaja en la copia de
+seguridad.
 
 ## Misiones, experiencia y rangos
 
@@ -200,6 +228,12 @@ src/lib/journey.ts        Tu camino: nivel A1–C2 por dominadas, ritmo y fecha 
 src/lib/seed.ts           Números estables a partir de la fecha (palabra del día, misiones)
 src/lib/tts.ts            Leer en voz alta con la voz del navegador (síntesis de voz)
 src/lib/exportCsv.ts      Exportar palabras a CSV (hoja de cálculo o Anki)
+src/data/course/<nivel>.json Curso: lecciones, ejercicios y examen de cada nivel (A1–C2)
+src/lib/courseMeta.ts     Niveles del curso (nombre, descripción) y nota de aprobado
+src/lib/course.ts         Contenido del curso: tipos, validación y carga diferida por nivel
+src/lib/exercises.ts      Corrección tolerante de los ejercicios y baraja estable de «ordenar»
+src/lib/courseProgress.ts Progreso del curso: mejor nota por lección y examen, experiencia, siguiente paso
+src/components/course/    Pantallas del curso: niveles, nivel, lección, examen y el corredor de ejercicios
 src/lib/events.ts         Historial de respuestas (últimas 5000)
 src/lib/stats.ts          Cálculos de las estadísticas
 src/lib/dictionary.ts     Búsqueda y filtros del diccionario

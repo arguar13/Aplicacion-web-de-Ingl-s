@@ -5,6 +5,25 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## 2.2.0 · 2026-10-01 · El curso de A1 a C2 (Fase 20)
+
+### Añadido
+
+- **Curso de inglés** (#/curso): seis niveles del Marco Común Europeo con 38 lecciones (A1 y A2
+  con 8, B1 con 8, B2 con 6, C1 y C2 con 4) y un examen por nivel. Cada lección explica el tema en
+  español con ejemplos (con voz), tablas y un consejo, y lo practica con seis ejercicios.
+- **Ejercicios de cuatro tipos:** elegir, completar, ordenar las palabras y traducir, con corrección
+  tolerante, respuesta correcta y explicación al fallar, y teclado (1–4, Enter, Retroceso).
+- **Examen por nivel** (15 o 16 preguntas), aprobado con el 80 %, con lo fallado para repasar.
+- **Progreso del curso:** mejor nota por lección y examen, experiencia (ejercicio, lección la
+  primera vez, examen al aprobar), siguiente paso sugerido en el inicio y copia de seguridad.
+- Rutas `#/curso`, `#/curso/<nivel>`, `#/curso/<nivel>/<lección>` y `#/curso/<nivel>/examen`.
+
+### Cambiado
+
+- La tarjeta del curso en el inicio se carga aparte, para que el paquete inicial siga dentro del
+  presupuesto.
+
 ## 2.1.0 · 2026-10-01 · Funciones profesionales de aprendizaje (Fase 19)
 
 ### Añadido

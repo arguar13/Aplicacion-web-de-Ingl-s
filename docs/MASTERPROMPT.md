@@ -485,6 +485,17 @@ guardado sin compatibilidad y test; presupuesto de tamaño respetado; axe en ver
 
 ---
 
+### Fase 20 · El curso de A1 a C2 (pedido del 01-10-2026)
+
+> "Agrega fases de aprendizaje A2, B1 y así, fases reales y con el conocimiento para aprender, y
+> evaluaciones y ejercicios."
+
+- Seis niveles con lecciones (explicación, ejemplos, tablas, consejo) y ejercicios de cuatro tipos;
+  examen por nivel aprobado con el 80 %. Contenido en JSON por nivel, validado al cargarlo y por
+  test; progreso con mejor nota, experiencia y copia de seguridad.
+
+---
+
 ## 6. Definición de terminado (para cada fase)
 
 - [ ] Todo lo pedido en la fase implementado y verificado, o explicado por qué no.
@@ -712,3 +723,21 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   montado (esperar el `h1` antes de pulsar).
 - Pendiente: audio grabado de las frases de ejemplo (hoy, voz del navegador); e2e en WebKit sin
   red para descargar navegadores; sincronización entre dispositivos (sigue pendiente de decisión).
+
+### Fase 20 · cerrada el 01-10-2026 · versión 2.2.0
+
+- Modelo: `course.ts` (tipos, parseo que descarta lo dañado sin arrastrar al resto, carga diferida
+  por nivel con un almacén externo como el de los detalles), `exercises.ts` (corrección: frases
+  normalizadas, un error de tecleo por cada 12 letras hasta 2 como «casi»; baraja estable de
+  «ordenar» que nunca sale en el orden correcto) y `courseProgress.ts` (almacén aparte
+  `tecla:course`, mejor nota manda, premio por lección y por aprobar solo la primera vez).
+- Contenido: 38 lecciones y 6 exámenes escritos a mano (A1 a C2), generados a JSON desde scripts
+  locales para garantizar la sintaxis. El test de contenido comprueba que cada ejercicio se
+  resuelve con su propia respuesta, que las opciones no se repiten y que nada se pierde al validar.
+- UI: una sola pantalla diferida (`CourseScreens.tsx`, 7 KB) con lista de niveles, nivel, lección
+  (leer → practicar → resultado) y examen; `ExerciseRunner` resuelve los cuatro tipos con teclado.
+  La tarjeta del inicio va en su propio chunk (el inicial había quedado 1 KB por encima del
+  presupuesto).
+- Bug encontrado por el e2e: `levelSummary` contaba lecciones por id sin el nivel (siempre 0).
+- Pendiente: audio grabado de los ejemplos del curso (hoy, voz del navegador); más lecciones en
+  B2–C2; ejercicios de comprensión lectora y auditiva; logros del curso.
