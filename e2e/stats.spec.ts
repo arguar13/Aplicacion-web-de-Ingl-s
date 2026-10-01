@@ -32,3 +32,12 @@ test('la precisión se recorre con el teclado', async ({ page }) => {
   await expect(chart).toHaveAttribute('aria-valuenow', '6')
   await expect(chart).toHaveAttribute('aria-valuetext', /Semana del .*sin práctica/)
 })
+
+test('"Tu camino" sitúa el nivel A1–C2 por las dominadas y estima cuándo llega el siguiente', async ({ page }) => {
+  await page.goto('./#/estadisticas')
+  const section = page.getByRole('region', { name: 'Tu camino' })
+  await expect(section).toContainText('nivel orientativo A1')
+  await expect(section.getByRole('progressbar', { name: 'Camino de A1 a C2' })).toHaveAttribute('aria-valuenow', '0')
+  await expect(section).toContainText('Para A2 faltan 750')
+  await expect(section).toContainText('El ritmo se calcula')
+})

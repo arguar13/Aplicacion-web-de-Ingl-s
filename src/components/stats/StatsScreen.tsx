@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useId, useState } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
@@ -16,6 +16,7 @@ import { ArrowLeftIcon } from '../icons'
 import { Segmented } from '../ui/controls'
 import { Surface } from '../ui/Surface'
 import { AccuracyChart, ActivityHeatmap, MasteredChart } from './charts'
+import { JourneyCard } from './JourneyCard'
 import { WeekReport } from './WeekReport'
 
 const TRACK_OPTIONS: Array<{ value: Track; label: string }> = [
@@ -73,6 +74,10 @@ export function StatsScreen({ onExit, onOpenWord }: { onExit: () => void; onOpen
             </div>
           ))}
         </dl>
+
+        <Section title="Tu camino" subtitle="De A1 a C2 según tus palabras dominadas, y cuándo llegarías a tu ritmo.">
+          <JourneyCard progress={progress} now={now} />
+        </Section>
 
         <Section title="Actividad" subtitle="Palabras respondidas cada día, según tu meta diaria.">
           <ActivityHeatmap weeks={activityWeeks(progress.history, now, 26, dailyGoal)} />
@@ -132,9 +137,12 @@ export function StatsScreen({ onExit, onOpenWord }: { onExit: () => void; onOpen
 }
 
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
+  const id = useId()
   return (
-    <Surface as="section" className="mt-4 px-5 pt-5 pb-6 sm:px-6">
-      <h2 className="text-[17px] font-semibold">{title}</h2>
+    <Surface as="section" aria-labelledby={id} className="mt-4 px-5 pt-5 pb-6 sm:px-6">
+      <h2 id={id} className="text-[17px] font-semibold">
+        {title}
+      </h2>
       {subtitle && <p className="mt-0.5 text-[13px] text-muted">{subtitle}</p>}
       <div className="mt-5">{children}</div>
     </Surface>
