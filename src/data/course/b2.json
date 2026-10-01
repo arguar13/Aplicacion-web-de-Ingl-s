@@ -1,1 +1,805 @@
-{ "intro": "", "goals": [], "lessons": [], "exam": [] }
+{
+  "intro": "B2 es el nivel de la precisión: distingues matices del tiempo, imaginas el pasado de otra manera, manejas los verbos con partícula que llenan la conversación real y conectas ideas como un hablante experimentado.",
+  "goals": [
+    "Diferenciar el presente perfecto simple del continuo.",
+    "Imaginar un pasado distinto con el tercer condicional y los mixtos.",
+    "Usar la pasiva en todos los tiempos y «have something done».",
+    "Entender y usar phrasal verbs frecuentes.",
+    "Conectar ideas con however, although, despite y otros conectores.",
+    "Expresar deseos y arrepentimientos con wish, if only y would rather."
+  ],
+  "lessons": [
+    {
+      "id": "perfecto-continuo",
+      "title": "Presente perfecto simple o continuo",
+      "summary": "He trabajado mucho frente a llevo trabajando dos horas.",
+      "sections": [
+        {
+          "heading": "El presente perfecto continuo",
+          "body": [
+            "Have/has been + -ing. Pone el foco en la duración o en una actividad reciente que sigue o acaba de terminar: I've been studying for three hours (y sigo o acabo de parar). Suele ir con for, since, all day, how long."
+          ],
+          "examples": [
+            {
+              "en": "I've been waiting for an hour.",
+              "es": "Llevo una hora esperando."
+            },
+            {
+              "en": "She has been working here since May.",
+              "es": "Ella lleva trabajando aquí desde mayo."
+            },
+            {
+              "en": "How long have you been learning English?",
+              "es": "¿Cuánto tiempo llevas aprendiendo inglés?"
+            },
+            {
+              "en": "It's been raining all morning.",
+              "es": "Lleva lloviendo toda la mañana."
+            }
+          ]
+        },
+        {
+          "heading": "Simple o continuo",
+          "body": [
+            "El simple mira el resultado o la cantidad: I've written three emails. El continuo mira la actividad: I've been writing emails all morning. Con verbos de estado (know, have, be, like) solo el simple: I've known her for years.",
+            "Para explicar una evidencia presente (estás colorado, el suelo está mojado) se usa el continuo: You've been running!"
+          ],
+          "examples": [
+            {
+              "en": "I've read the book. / I've been reading the book.",
+              "es": "He leído el libro (lo terminé). / He estado leyendo el libro (sigo)."
+            },
+            {
+              "en": "They've painted two rooms. / They've been painting all day.",
+              "es": "Han pintado dos habitaciones. / Han estado pintando todo el día."
+            },
+            {
+              "en": "Your eyes are red. Have you been crying?",
+              "es": "Tienes los ojos rojos. ¿Has estado llorando?"
+            }
+          ],
+          "table": {
+            "headers": ["Foco", "Forma", "Ejemplo"],
+            "rows": [
+              ["resultado, cantidad", "simple", "I've finished the report."],
+              ["actividad, duración", "continuo", "I've been working on the report."],
+              ["verbos de estado", "simple", "I've had this car for years."]
+            ]
+          },
+          "tip": "Con how many, el simple; con how long, suele ir el continuo."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I ___ for the bus for twenty minutes.",
+          "options": ["have waited", "have been waiting", "am waiting"],
+          "answer": 1,
+          "explanation": "Duración de una actividad: continuo."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ three novels this year.",
+          "options": ["has written", "has been writing", "is writing"],
+          "answer": 0,
+          "explanation": "Cantidad terminada: simple."
+        },
+        {
+          "type": "fill",
+          "prompt": "How long have you ___ (learn) Chinese? (continuo)",
+          "answers": ["been learning"],
+          "explanation": "Have you been learning: duración de una actividad."
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (know) each other for ten years.",
+          "answers": ["have known", "'ve known"],
+          "explanation": "Know es de estado: simple."
+        },
+        {
+          "type": "order",
+          "es": "Llevo dos horas estudiando.",
+          "words": ["I", "have", "been", "studying", "for", "two", "hours."]
+        },
+        {
+          "type": "translate",
+          "es": "Ha estado lloviendo todo el día.",
+          "answers": ["It has been raining all day.", "It's been raining all day."]
+        }
+      ]
+    },
+    {
+      "id": "condicional-3-y-mixtos",
+      "title": "Tercer condicional y condicionales mixtos",
+      "summary": "Si hubiera sabido… Lo que habría pasado si el pasado hubiera sido distinto.",
+      "sections": [
+        {
+          "heading": "Tercer condicional: el pasado imaginado",
+          "body": [
+            "If + pasado perfecto (had + participio), would have + participio. Habla de algo que no ocurrió y de su consecuencia imaginaria: If I had studied, I would have passed (no estudié, no aprobé). Contracciones: I'd studied, I'd have passed, wouldn't have."
+          ],
+          "examples": [
+            {
+              "en": "If you had called me, I would have helped you.",
+              "es": "Si me hubieras llamado, te habría ayudado."
+            },
+            {
+              "en": "She wouldn't have missed the flight if she had left earlier.",
+              "es": "Ella no habría perdido el vuelo si hubiera salido antes."
+            },
+            {
+              "en": "If we'd known, we'd have come.",
+              "es": "Si lo hubiéramos sabido, habríamos venido."
+            }
+          ],
+          "tip": "Dos had seguidos no es un error: If I had had time… (had = auxiliar + had = tener)."
+        },
+        {
+          "heading": "Condicionales mixtos",
+          "body": [
+            "Mezclan pasado y presente. Condición pasada, resultado presente: If I had taken the job, I would be rich now. Condición presente (permanente), resultado pasado: If I were taller, I would have become a basketball player."
+          ],
+          "examples": [
+            {
+              "en": "If she had studied medicine, she would be a doctor now.",
+              "es": "Si hubiera estudiado medicina, ahora sería médica."
+            },
+            {
+              "en": "If I weren't so shy, I would have talked to him.",
+              "es": "Si no fuera tan tímido, le habría hablado."
+            }
+          ],
+          "table": {
+            "headers": ["Condicional", "If…", "Consecuencia"],
+            "rows": [
+              ["tercero", "had + participio", "would have + participio"],
+              ["mixto (pasado → presente)", "had + participio", "would + verbo"],
+              ["mixto (presente → pasado)", "pasado simple", "would have + participio"]
+            ]
+          }
+        },
+        {
+          "heading": "Could have y might have",
+          "body": [
+            "En la consecuencia también caben could have (habría podido) y might have (quizá habría): If you'd asked, I could have lent you the money."
+          ],
+          "examples": [
+            {
+              "en": "If we had left earlier, we might have caught the train.",
+              "es": "Si hubiéramos salido antes, quizá habríamos cogido el tren."
+            },
+            {
+              "en": "You could have hurt yourself!",
+              "es": "¡Podrías haberte hecho daño!"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "If I ___ about the party, I would have come.",
+          "options": ["knew", "had known", "have known"],
+          "answer": 1,
+          "explanation": "Tercer condicional: had + participio."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ the exam if she had studied.",
+          "options": ["would pass", "would have passed", "passed"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "If they ___ (not / miss) the bus, they would have arrived on time.",
+          "answers": ["hadn't missed", "had not missed"]
+        },
+        {
+          "type": "fill",
+          "prompt": "If I had saved money, I ___ (would / be) rich now. (mixto)",
+          "answers": ["would be"],
+          "explanation": "Consecuencia presente: would + verbo."
+        },
+        {
+          "type": "order",
+          "es": "Si lo hubiera sabido, te habría llamado.",
+          "words": ["If", "I", "had", "known,", "I", "would", "have", "called", "you."]
+        },
+        {
+          "type": "translate",
+          "es": "Si hubieras estudiado, habrías aprobado.",
+          "answers": [
+            "If you had studied, you would have passed.",
+            "If you'd studied, you would have passed.",
+            "If you had studied, you'd have passed.",
+            "If you'd studied, you'd have passed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pasiva-avanzada",
+      "title": "Pasiva avanzada y have something done",
+      "summary": "Me están arreglando el coche: cuando otro lo hace por ti.",
+      "sections": [
+        {
+          "heading": "La pasiva en todos los tiempos",
+          "body": [
+            "Presente continuo: The road is being repaired. Pasado continuo: was being repaired. Presente perfecto: has been repaired. Pasado perfecto: had been repaired. Futuro: will be repaired. Con modales: should be repaired, must have been repaired."
+          ],
+          "examples": [
+            {
+              "en": "The house is being painted this week.",
+              "es": "Están pintando la casa esta semana."
+            },
+            {
+              "en": "The documents have been sent.",
+              "es": "Los documentos han sido enviados."
+            },
+            {
+              "en": "By the time we arrived, the tickets had been sold.",
+              "es": "Cuando llegamos, las entradas ya se habían vendido."
+            },
+            {
+              "en": "The problem should have been solved by now.",
+              "es": "El problema ya debería haberse resuelto."
+            }
+          ],
+          "table": {
+            "headers": ["Tiempo", "Pasiva"],
+            "rows": [
+              ["presente continuo", "is / are being + participio"],
+              ["pasado continuo", "was / were being + participio"],
+              ["presente perfecto", "has / have been + participio"],
+              ["pasado perfecto", "had been + participio"],
+              ["modal perfecto", "must / should have been + participio"]
+            ]
+          }
+        },
+        {
+          "heading": "Have something done",
+          "body": [
+            "Have (o get) + objeto + participio: alguien hace algo por ti. I had my hair cut (me cortaron el pelo) frente a I cut my hair (me lo corté yo). Se conjuga have: I'm having the car repaired, she had her phone fixed, we need to get the roof checked."
+          ],
+          "examples": [
+            {
+              "en": "I'm having my kitchen renovated.",
+              "es": "Me están reformando la cocina."
+            },
+            {
+              "en": "She had her eyes tested last week.",
+              "es": "Le revisaron la vista la semana pasada."
+            },
+            {
+              "en": "We got the windows cleaned.",
+              "es": "Nos limpiaron las ventanas."
+            },
+            {
+              "en": "Where do you get your hair done?",
+              "es": "¿Dónde te arreglas el pelo?"
+            }
+          ],
+          "tip": "I cut my hair significa que te lo cortaste tú mismo; con peluquería es I had my hair cut."
+        },
+        {
+          "heading": "Verbos con dos objetos y «it is said that»",
+          "body": [
+            "Con give, send, offer, show, tell, el objeto persona suele ser el sujeto de la pasiva: I was given a prize. She was told the news. Para opiniones generales: It is said that… / He is said to be…"
+          ],
+          "examples": [
+            {
+              "en": "We were offered a discount.",
+              "es": "Nos ofrecieron un descuento."
+            },
+            {
+              "en": "I was sent the wrong order.",
+              "es": "Me enviaron el pedido equivocado."
+            },
+            {
+              "en": "He is said to be very rich.",
+              "es": "Se dice que es muy rico."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The bridge ___ at the moment.",
+          "options": ["is repaired", "is being repaired", "repairs"],
+          "answer": 1,
+          "explanation": "Presente continuo pasivo."
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ my car ___ yesterday.",
+          "options": ["had / repaired", "have / repair", "had / repair"],
+          "answer": 0,
+          "explanation": "Have + objeto + participio."
+        },
+        {
+          "type": "fill",
+          "prompt": "The report ___ (has / finish) already. (pasiva)",
+          "answers": ["has been finished"]
+        },
+        {
+          "type": "fill",
+          "prompt": "She is going to have her hair ___ (cut).",
+          "answers": ["cut"]
+        },
+        {
+          "type": "order",
+          "es": "Nos dijeron que esperáramos.",
+          "words": ["We", "were", "told", "to", "wait."]
+        },
+        {
+          "type": "translate",
+          "es": "Me están arreglando el ordenador.",
+          "answers": [
+            "I'm having my computer repaired.",
+            "I am having my computer repaired.",
+            "I'm having my computer fixed.",
+            "I'm getting my computer repaired.",
+            "I'm getting my computer fixed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phrasal-verbs",
+      "title": "Phrasal verbs que se usan de verdad",
+      "summary": "Give up, look after, turn down: verbo más partícula, nuevo significado.",
+      "sections": [
+        {
+          "heading": "Qué son y cómo se usan",
+          "body": [
+            "Un phrasal verb es un verbo más una o dos partículas (up, on, off, out, after…) con un significado propio: give up (rendirse, dejar), find out (averiguar), look after (cuidar). Hay que aprenderlos como palabras nuevas.",
+            "Algunos son separables: el objeto puede ir en medio (turn the TV off / turn off the TV), y con un pronombre debe ir en medio (turn it off, nunca turn off it). Los inseparables llevan el objeto después: look after the kids, look after them."
+          ],
+          "examples": [
+            {
+              "en": "I need to find out what happened.",
+              "es": "Necesito averiguar qué pasó."
+            },
+            {
+              "en": "Can you look after my dog this weekend?",
+              "es": "¿Puedes cuidar a mi perro este fin de semana?"
+            },
+            {
+              "en": "Turn it off, please.",
+              "es": "Apágalo, por favor."
+            },
+            {
+              "en": "She gave up smoking.",
+              "es": "Ella dejó de fumar."
+            }
+          ],
+          "table": {
+            "headers": ["Phrasal verb", "Significado", "Separable"],
+            "rows": [
+              ["turn on / off", "encender / apagar", "sí"],
+              ["put on / take off", "ponerse / quitarse", "sí"],
+              ["pick up", "recoger, aprender", "sí"],
+              ["give up", "dejar, rendirse", "sí"],
+              ["look after", "cuidar", "no"],
+              ["look for", "buscar", "no"],
+              ["get on with", "llevarse bien con", "no"],
+              ["run out of", "quedarse sin", "no"]
+            ]
+          }
+        },
+        {
+          "heading": "Phrasal verbs de la vida diaria",
+          "body": [
+            "Get up (levantarse), wake up (despertarse), go out (salir), come back (volver), set off (ponerse en camino), carry on (continuar), put off (posponer), turn down (rechazar, bajar el volumen), bring up (criar, sacar un tema), come across (encontrarse con algo por casualidad)."
+          ],
+          "examples": [
+            {
+              "en": "We set off at dawn.",
+              "es": "Nos pusimos en camino al amanecer."
+            },
+            {
+              "en": "They put off the meeting until Monday.",
+              "es": "Pospusieron la reunión hasta el lunes."
+            },
+            {
+              "en": "He turned down the job offer.",
+              "es": "Él rechazó la oferta de trabajo."
+            },
+            {
+              "en": "I came across an old photo.",
+              "es": "Me encontré una foto antigua."
+            }
+          ],
+          "tip": "Con pronombre, los separables obligan a separar: pick it up, put them off, turn it down."
+        },
+        {
+          "heading": "Phrasal verbs de tres partes",
+          "body": [
+            "Algunos llevan dos partículas y son inseparables: look forward to (tener ganas de; va con -ing), get on with (llevarse bien), put up with (aguantar), run out of (quedarse sin), catch up with (ponerse al día con)."
+          ],
+          "examples": [
+            {
+              "en": "I'm looking forward to seeing you.",
+              "es": "Tengo ganas de verte."
+            },
+            {
+              "en": "I can't put up with this noise.",
+              "es": "No aguanto este ruido."
+            },
+            {
+              "en": "We've run out of milk.",
+              "es": "Nos hemos quedado sin leche."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Could you ___ the music? It's too loud.",
+          "options": ["turn down", "turn up", "turn off"],
+          "answer": 0,
+          "explanation": "Bajar el volumen: turn down."
+        },
+        {
+          "type": "choice",
+          "prompt": "I'm looking forward to ___ you.",
+          "options": ["see", "seeing", "to see"],
+          "answer": 1,
+          "explanation": "Look forward to + -ing."
+        },
+        {
+          "type": "fill",
+          "prompt": "We've run ___ of coffee. (quedarse sin)",
+          "answers": ["out"]
+        },
+        {
+          "type": "fill",
+          "prompt": "Please pick ___ up before five. (recógelo)",
+          "answers": ["it"],
+          "explanation": "Con pronombre, separable: pick it up."
+        },
+        {
+          "type": "order",
+          "es": "Ella dejó de fumar el año pasado.",
+          "words": ["She", "gave", "up", "smoking", "last", "year."]
+        },
+        {
+          "type": "translate",
+          "es": "Necesito averiguar qué pasó.",
+          "answers": ["I need to find out what happened."]
+        }
+      ]
+    },
+    {
+      "id": "conectores",
+      "title": "Conectores: however, although, despite, in spite of",
+      "summary": "Contrastar, añadir, concluir: el hilo de un texto.",
+      "sections": [
+        {
+          "heading": "Contrastar",
+          "body": [
+            "Although / even though + oración (aunque): Although it was raining, we went out. However (sin embargo) une dos frases y va con coma: It was raining. However, we went out. Despite / in spite of + sustantivo o -ing (a pesar de): Despite the rain, we went out. Despite the fact that + oración."
+          ],
+          "examples": [
+            {
+              "en": "Although she was tired, she kept working.",
+              "es": "Aunque estaba cansada, siguió trabajando."
+            },
+            {
+              "en": "The hotel was expensive. However, it was worth it.",
+              "es": "El hotel era caro. Sin embargo, valió la pena."
+            },
+            {
+              "en": "In spite of the traffic, we arrived on time.",
+              "es": "A pesar del tráfico, llegamos a tiempo."
+            },
+            {
+              "en": "Despite being ill, he went to work.",
+              "es": "A pesar de estar enfermo, fue a trabajar."
+            }
+          ],
+          "table": {
+            "headers": ["Conector", "Va con", "Ejemplo"],
+            "rows": [
+              ["although / even though", "oración", "Although it was late, …"],
+              ["however", "frase nueva, con coma", "…. However, …"],
+              ["despite / in spite of", "sustantivo o -ing", "Despite the cost, …"],
+              ["whereas / while", "contraste entre dos", "I like tea, whereas he likes coffee."]
+            ]
+          },
+          "tip": "Despite y in spite of no admiten una oración con sujeto y verbo: despite it rained es un error; despite the rain o despite the fact that it rained."
+        },
+        {
+          "heading": "Añadir y dar razones",
+          "body": [
+            "Añadir: in addition, moreover, furthermore (además), as well as (además de), besides. Causa: because of + sustantivo, due to, since, as (ya que). Consecuencia: therefore, as a result, consequently, so."
+          ],
+          "examples": [
+            {
+              "en": "The flat is small. Moreover, it's noisy.",
+              "es": "El piso es pequeño. Además, es ruidoso."
+            },
+            {
+              "en": "The match was cancelled because of the storm.",
+              "es": "El partido se canceló por la tormenta."
+            },
+            {
+              "en": "He didn't study. As a result, he failed.",
+              "es": "No estudió. Como consecuencia, suspendió."
+            }
+          ]
+        },
+        {
+          "heading": "Ordenar y concluir",
+          "body": [
+            "First of all, secondly, then, finally. Para resumir: in conclusion, to sum up, overall, all in all. Para ejemplificar: for instance, such as."
+          ],
+          "examples": [
+            {
+              "en": "To sum up, the project was a success.",
+              "es": "En resumen, el proyecto fue un éxito."
+            },
+            {
+              "en": "I like outdoor sports, such as hiking and cycling.",
+              "es": "Me gustan los deportes al aire libre, como el senderismo y el ciclismo."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ the bad weather, the concert went ahead.",
+          "options": ["Although", "Despite", "However"],
+          "answer": 1,
+          "explanation": "Delante de un sustantivo: despite."
+        },
+        {
+          "type": "choice",
+          "prompt": "It was cold. ___, we went swimming.",
+          "options": ["Although", "Despite", "However"],
+          "answer": 2,
+          "explanation": "Frase nueva con coma: however."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ he was tired, he finished the race. (aunque)",
+          "answers": ["Although", "Even though", "Though"]
+        },
+        {
+          "type": "fill",
+          "prompt": "The road was closed ___ of the snow. (a causa)",
+          "answers": ["because"]
+        },
+        {
+          "type": "order",
+          "es": "Aunque llovía, salimos a correr.",
+          "words": ["Although", "it", "was", "raining,", "we", "went", "running."]
+        },
+        {
+          "type": "translate",
+          "es": "A pesar del tráfico, llegamos a tiempo.",
+          "answers": [
+            "Despite the traffic, we arrived on time.",
+            "In spite of the traffic, we arrived on time.",
+            "Despite the traffic we arrived on time."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wish-y-would-rather",
+      "title": "Wish, if only y would rather",
+      "summary": "Ojalá, preferiría: deseos, arrepentimientos y preferencias.",
+      "sections": [
+        {
+          "heading": "Deseos sobre el presente y el pasado",
+          "body": [
+            "Wish / if only + pasado simple: deseo sobre el presente (algo que no es así): I wish I had a bigger flat. Wish / if only + pasado perfecto: arrepentimiento sobre el pasado: I wish I had studied harder. If only es más enfático."
+          ],
+          "examples": [
+            {
+              "en": "I wish I knew the answer.",
+              "es": "Ojalá supiera la respuesta."
+            },
+            {
+              "en": "If only we had more time!",
+              "es": "¡Si tuviéramos más tiempo!"
+            },
+            {
+              "en": "She wishes she hadn't said that.",
+              "es": "Ella desearía no haber dicho eso."
+            },
+            {
+              "en": "If only I had listened to you.",
+              "es": "Ojalá te hubiera hecho caso."
+            }
+          ],
+          "table": {
+            "headers": ["Deseo sobre…", "Forma", "Ejemplo"],
+            "rows": [
+              ["el presente", "wish + pasado simple", "I wish I lived by the sea."],
+              ["el pasado", "wish + pasado perfecto", "I wish I had gone."],
+              ["una molestia", "wish + would", "I wish you would stop shouting."]
+            ]
+          }
+        },
+        {
+          "heading": "Wish + would: quejas",
+          "body": [
+            "Wish + sujeto + would + verbo expresa fastidio por algo que otro hace (o no hace) y que querrías que cambiara: I wish it would stop raining. I wish he would answer his phone."
+          ],
+          "examples": [
+            {
+              "en": "I wish you wouldn't interrupt me.",
+              "es": "Me gustaría que no me interrumpieras."
+            },
+            {
+              "en": "I wish they would turn the music down.",
+              "es": "Ojalá bajaran la música."
+            }
+          ],
+          "tip": "No se usa wish + would con uno mismo: I wish I would… es un error; se dice I wish I could…"
+        },
+        {
+          "heading": "Would rather y had better",
+          "body": [
+            "Would rather + verbo base = preferir: I'd rather stay at home. Con otra persona: I'd rather you didn't smoke here (pasado simple). Had better + verbo base = más vale que, es un consejo urgente: You'd better hurry."
+          ],
+          "examples": [
+            {
+              "en": "I'd rather walk than take the bus.",
+              "es": "Prefiero caminar a tomar el autobús."
+            },
+            {
+              "en": "I'd rather you came tomorrow.",
+              "es": "Preferiría que vinieras mañana."
+            },
+            {
+              "en": "We'd better leave now or we'll be late.",
+              "es": "Más vale que nos vayamos ya o llegaremos tarde."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "I wish I ___ taller.",
+          "options": ["am", "were", "had been"],
+          "answer": 1,
+          "explanation": "Deseo sobre el presente: pasado simple."
+        },
+        {
+          "type": "choice",
+          "prompt": "I wish I ___ to the party last night. It was great.",
+          "options": ["went", "had gone", "would go"],
+          "answer": 1,
+          "explanation": "Arrepentimiento: pasado perfecto."
+        },
+        {
+          "type": "fill",
+          "prompt": "I'd rather ___ (stay) at home tonight.",
+          "answers": ["stay"],
+          "explanation": "Would rather + verbo base."
+        },
+        {
+          "type": "fill",
+          "prompt": "You ___ better see a doctor. (más vale)",
+          "answers": ["had", "'d"]
+        },
+        {
+          "type": "order",
+          "es": "Ojalá viviera cerca del mar.",
+          "words": ["I", "wish", "I", "lived", "near", "the", "sea."]
+        },
+        {
+          "type": "translate",
+          "es": "Ojalá no hubiera dicho eso.",
+          "answers": ["I wish I hadn't said that.", "I wish I had not said that.", "If only I hadn't said that."]
+        }
+      ]
+    }
+  ],
+  "exam": [
+    {
+      "type": "choice",
+      "prompt": "I ___ this book since Monday and I'm still not finished.",
+      "options": ["have read", "have been reading", "read"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "If she had left earlier, she ___ the train.",
+      "options": ["would catch", "would have caught", "caught"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "The office ___ at the moment.",
+      "options": ["is being cleaned", "is cleaned", "cleans"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "I had my phone ___ yesterday.",
+      "options": ["repair", "repaired", "repairing"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "Could you ___ the lights? It's dark in here.",
+      "options": ["turn off", "turn on", "turn down"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "___ the rain, the match went ahead.",
+      "options": ["Although", "However", "Despite"],
+      "answer": 2
+    },
+    {
+      "type": "choice",
+      "prompt": "I wish I ___ more languages.",
+      "options": ["speak", "spoke", "had spoken"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "I'd rather ___ by train.",
+      "options": ["travel", "to travel", "travelling"],
+      "answer": 0
+    },
+    {
+      "type": "fill",
+      "prompt": "How many emails have you ___ (write) today?",
+      "answers": ["written"]
+    },
+    {
+      "type": "fill",
+      "prompt": "If I ___ (know), I would have told you.",
+      "answers": ["had known", "'d known"]
+    },
+    {
+      "type": "fill",
+      "prompt": "We've run out ___ sugar.",
+      "answers": ["of"]
+    },
+    {
+      "type": "fill",
+      "prompt": "It was late. ___, we decided to go out. (sin embargo)",
+      "answers": ["However"]
+    },
+    {
+      "type": "order",
+      "es": "Llevo tres horas esperando.",
+      "words": ["I", "have", "been", "waiting", "for", "three", "hours."]
+    },
+    {
+      "type": "order",
+      "es": "Nos dieron un descuento.",
+      "words": ["We", "were", "given", "a", "discount."]
+    },
+    {
+      "type": "translate",
+      "es": "Si hubiera sabido, habría venido.",
+      "answers": [
+        "If I had known, I would have come.",
+        "If I'd known, I would have come.",
+        "If I had known, I'd have come.",
+        "If I'd known, I'd have come."
+      ]
+    },
+    {
+      "type": "translate",
+      "es": "Tengo ganas de verte.",
+      "answers": [
+        "I'm looking forward to seeing you.",
+        "I am looking forward to seeing you.",
+        "I look forward to seeing you."
+      ]
+    }
+  ]
+}

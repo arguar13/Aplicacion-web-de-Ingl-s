@@ -1,1 +1,591 @@
-{ "intro": "", "goals": [], "lessons": [], "exam": [] }
+{
+  "intro": "C2 es la maestría: estructuras que solo usan los hablantes cultos, modismos que no se traducen, participios que condensan ideas y la precisión de quien elige cada palabra. Aquí se afina, no se aprende de cero.",
+  "goals": [
+    "Usar el subjuntivo y las estructuras formales (I suggest that he be…, lest, whether… or not).",
+    "Entender y emplear modismos y lenguaje figurado frecuentes.",
+    "Condensar ideas con participios y oraciones reducidas (Having finished…, Seen from above…).",
+    "Elegir con precisión: matices entre sinónimos y lenguaje académico."
+  ],
+  "lessons": [
+    {
+      "id": "subjuntivo-y-formal",
+      "title": "El subjuntivo y las estructuras formales",
+      "summary": "I suggest that he be informed: el verbo en forma base tras ciertos verbos y adjetivos.",
+      "sections": [
+        {
+          "heading": "El subjuntivo tras suggest, demand, insist",
+          "body": [
+            "Tras verbos como suggest, recommend, demand, insist, request, propose y tras adjetivos como essential, vital, important, se usa that + sujeto + verbo en forma base (sin -s ni to): I suggest that he see a doctor. It is essential that every member be present. La negación es not + verbo: that she not be disturbed.",
+            "En inglés británico se oye también should: I suggest that he should see a doctor."
+          ],
+          "examples": [
+            {
+              "en": "The doctor recommended that she rest for a week.",
+              "es": "El médico recomendó que descansara una semana."
+            },
+            {
+              "en": "It is vital that the report be finished today.",
+              "es": "Es vital que el informe se termine hoy."
+            },
+            {
+              "en": "They demanded that the manager resign.",
+              "es": "Exigieron que el director dimitiera."
+            },
+            {
+              "en": "I insist that he not be told.",
+              "es": "Insisto en que no se le diga."
+            }
+          ],
+          "table": {
+            "headers": ["Desencadenante", "Ejemplo"],
+            "rows": [
+              ["suggest / recommend / propose", "I propose that we leave now."],
+              ["demand / insist / require", "They require that applicants be over 18."],
+              ["It is essential / vital / crucial that", "It is crucial that she attend."],
+              ["ask / request", "We ask that you remain seated."]
+            ]
+          }
+        },
+        {
+          "heading": "Fórmulas fijas y were",
+          "body": [
+            "Expresiones hechas con subjuntivo: so be it (que así sea), God save the King, be that as it may (sea como sea), far be it from me (lejos de mí), come what may (pase lo que pase). Were en hipótesis formales: if I were, were he to accept (si aceptara), as it were (por así decirlo)."
+          ],
+          "examples": [
+            {
+              "en": "Be that as it may, we must continue.",
+              "es": "Sea como sea, debemos continuar."
+            },
+            {
+              "en": "Were he to resign, the company would struggle.",
+              "es": "Si él dimitiera, la empresa sufriría."
+            },
+            {
+              "en": "Come what may, I'll be there.",
+              "es": "Pase lo que pase, estaré allí."
+            }
+          ]
+        },
+        {
+          "heading": "Lest, whether… or not, so as to",
+          "body": [
+            "Lest = por si, para que no (formal, con subjuntivo): He left early lest he miss the train. Whether or not expresa indiferencia ante la condición: Whether or not you agree, the decision is final. So as to / in order to expresan finalidad formal; so as not to, la negativa."
+          ],
+          "examples": [
+            {
+              "en": "Write it down lest you forget.",
+              "es": "Anótalo, no sea que lo olvides."
+            },
+            {
+              "en": "Whether you like it or not, it's the law.",
+              "es": "Te guste o no, es la ley."
+            },
+            {
+              "en": "She spoke softly so as not to wake the baby.",
+              "es": "Habló bajo para no despertar al bebé."
+            }
+          ],
+          "tip": "El subjuntivo no cambia con la persona: that he go, that she be, that it remain."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The committee recommended that the proposal ___ accepted.",
+          "options": ["is", "be", "was"],
+          "answer": 1,
+          "explanation": "Subjuntivo: forma base del verbo be."
+        },
+        {
+          "type": "choice",
+          "prompt": "It is essential that everyone ___ on time.",
+          "options": ["arrives", "arrive", "arrived"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "I suggest that he ___ (apologise) immediately.",
+          "answers": ["apologise", "apologize"]
+        },
+        {
+          "type": "fill",
+          "prompt": "They demanded that she ___ (not / leave) the building.",
+          "answers": ["not leave"]
+        },
+        {
+          "type": "order",
+          "es": "Pase lo que pase, estaré aquí.",
+          "words": ["Come", "what", "may,", "I", "will", "be", "here."]
+        },
+        {
+          "type": "translate",
+          "es": "Te guste o no, tenemos que irnos.",
+          "answers": [
+            "Whether you like it or not, we have to leave.",
+            "Whether you like it or not, we have to go.",
+            "Whether or not you like it, we have to leave.",
+            "Whether or not you like it, we have to go."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modismos",
+      "title": "Modismos y lenguaje figurado",
+      "summary": "Break the ice, hit the nail on the head: lo que no se traduce palabra por palabra.",
+      "sections": [
+        {
+          "heading": "Modismos de conversación",
+          "body": [
+            "Un modismo tiene un significado distinto del literal. Los más frecuentes aparecen en series, reuniones y charlas: break the ice (romper el hielo), hit the nail on the head (dar en el clavo), on the same page (de acuerdo), a piece of cake (pan comido), once in a blue moon (muy de vez en cuando), cost an arm and a leg (costar un ojo de la cara), under the weather (pachucho)."
+          ],
+          "examples": [
+            {
+              "en": "Let's play a game to break the ice.",
+              "es": "Juguemos a algo para romper el hielo."
+            },
+            {
+              "en": "You hit the nail on the head.",
+              "es": "Diste en el clavo."
+            },
+            {
+              "en": "Are we all on the same page?",
+              "es": "¿Estamos todos de acuerdo?"
+            },
+            {
+              "en": "That car cost an arm and a leg.",
+              "es": "Ese coche costó un ojo de la cara."
+            }
+          ],
+          "table": {
+            "headers": ["Modismo", "Significado"],
+            "rows": [
+              ["break the ice", "romper el hielo"],
+              ["a piece of cake", "pan comido"],
+              ["once in a blue moon", "muy de vez en cuando"],
+              ["under the weather", "indispuesto"],
+              ["the ball is in your court", "te toca decidir"],
+              ["beat around the bush", "andarse con rodeos"],
+              ["get the hang of something", "pillarle el truco"],
+              ["call it a day", "dar por terminado el día"]
+            ]
+          }
+        },
+        {
+          "heading": "Modismos del trabajo y de la vida",
+          "body": [
+            "Think outside the box (pensar de forma creativa), cut corners (hacer las cosas a medias para ahorrar), go the extra mile (esforzarse más de lo exigido), in the long run (a la larga), learn the ropes (aprender cómo funciona algo), the last straw (la gota que colma el vaso), bite the bullet (afrontar lo inevitable)."
+          ],
+          "examples": [
+            {
+              "en": "We need to think outside the box.",
+              "es": "Necesitamos pensar de forma creativa."
+            },
+            {
+              "en": "In the long run, it will save money.",
+              "es": "A la larga, ahorrará dinero."
+            },
+            {
+              "en": "That was the last straw.",
+              "es": "Esa fue la gota que colmó el vaso."
+            },
+            {
+              "en": "I bit the bullet and told him the truth.",
+              "es": "Me armé de valor y le dije la verdad."
+            }
+          ],
+          "tip": "Los modismos no se modifican: a piece of cake, nunca «a slice of cake» con este sentido."
+        },
+        {
+          "heading": "Metáforas y lenguaje figurado habitual",
+          "body": [
+            "Muchas palabras corrientes tienen un uso figurado: a flood of complaints (una avalancha de quejas), to weigh up the options (sopesar), a bright idea, a heated argument (una discusión acalorada), to shed light on (arrojar luz sobre), the heart of the matter (el meollo)."
+          ],
+          "examples": [
+            {
+              "en": "The report sheds light on the causes.",
+              "es": "El informe arroja luz sobre las causas."
+            },
+            {
+              "en": "They had a heated argument.",
+              "es": "Tuvieron una discusión acalorada."
+            },
+            {
+              "en": "Let's get to the heart of the matter.",
+              "es": "Vayamos al meollo del asunto."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The exam was ___: I finished in twenty minutes.",
+          "options": ["a piece of cake", "the last straw", "under the weather"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Stop ___ and tell me what happened.",
+          "options": ["breaking the ice", "beating around the bush", "calling it a day"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "I only go to the cinema once in a ___ moon.",
+          "answers": ["blue"]
+        },
+        {
+          "type": "fill",
+          "prompt": "It's been a long day. Let's call it a ___.",
+          "answers": ["day"]
+        },
+        {
+          "type": "order",
+          "es": "Diste en el clavo.",
+          "words": ["You", "hit", "the", "nail", "on", "the", "head."]
+        },
+        {
+          "type": "translate",
+          "es": "A la larga, ahorrará tiempo.",
+          "answers": [
+            "In the long run, it will save time.",
+            "In the long run it will save time.",
+            "In the long run, it'll save time."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "participios-y-reduccion",
+      "title": "Participios y oraciones reducidas",
+      "summary": "Having finished the report, she left: condensar dos ideas en una.",
+      "sections": [
+        {
+          "heading": "Oraciones de participio presente",
+          "body": [
+            "Un participio en -ing puede sustituir una oración con el mismo sujeto: Feeling tired, I went to bed (= Because I felt tired…). Walking home, I saw an accident (= While I was walking home…). El sujeto de las dos partes debe ser el mismo."
+          ],
+          "examples": [
+            {
+              "en": "Knowing the area well, she offered to guide us.",
+              "es": "Como conocía bien la zona, se ofreció a guiarnos."
+            },
+            {
+              "en": "Looking out of the window, I noticed the snow.",
+              "es": "Al mirar por la ventana, me fijé en la nieve."
+            },
+            {
+              "en": "Not wanting to disturb him, I left quietly.",
+              "es": "Como no quería molestarlo, me fui en silencio."
+            }
+          ],
+          "tip": "Participio colgante: Walking home, the rain started es un error (la lluvia no camina). El sujeto del participio debe ser el de la oración principal."
+        },
+        {
+          "heading": "Having + participio y los participios pasados",
+          "body": [
+            "Having + participio pasado marca que una acción terminó antes que la otra: Having finished the report, she left. El participio pasado solo tiene sentido pasivo: Seen from above, the city looks tiny (= When it is seen…). Built in 1900, the bridge is still in use."
+          ],
+          "examples": [
+            {
+              "en": "Having lost his keys, he couldn't get in.",
+              "es": "Como había perdido las llaves, no pudo entrar."
+            },
+            {
+              "en": "Written in a hurry, the letter was full of mistakes.",
+              "es": "Escrita con prisa, la carta estaba llena de errores."
+            },
+            {
+              "en": "Having been warned twice, he finally stopped.",
+              "es": "Tras haber sido advertido dos veces, por fin paró."
+            }
+          ],
+          "table": {
+            "headers": ["Forma", "Relación", "Ejemplo"],
+            "rows": [
+              ["-ing", "simultánea o causa", "Feeling ill, she stayed home."],
+              ["having + participio", "anterior", "Having eaten, we left."],
+              ["participio pasado", "pasiva", "Taken daily, the pill works."],
+              ["having been + participio", "anterior y pasiva", "Having been told, he understood."]
+            ]
+          }
+        },
+        {
+          "heading": "Reducir oraciones de relativo",
+          "body": [
+            "La oración de relativo se acorta con un participio: The man who is talking to Ana → The man talking to Ana. The houses that were built in the 60s → The houses built in the 60s. También con infinitivo: the first person to arrive, the best place to eat."
+          ],
+          "examples": [
+            {
+              "en": "The people waiting outside are journalists.",
+              "es": "Las personas que esperan fuera son periodistas."
+            },
+            {
+              "en": "The documents sent yesterday have arrived.",
+              "es": "Los documentos enviados ayer han llegado."
+            },
+            {
+              "en": "She was the last to leave.",
+              "es": "Fue la última en irse."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ the report, she sent it to her boss.",
+          "options": ["Having finished", "Finished", "Having been finished"],
+          "answer": 0,
+          "explanation": "Acción anterior y activa: having + participio."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ in 1850, the house needs a lot of work.",
+          "options": ["Building", "Built", "Having built"],
+          "answer": 1,
+          "explanation": "Sentido pasivo: participio pasado."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ (not / know) what to say, I stayed silent.",
+          "answers": ["Not knowing"]
+        },
+        {
+          "type": "fill",
+          "prompt": "The woman ___ (talk) to the manager is my aunt.",
+          "answers": ["talking"]
+        },
+        {
+          "type": "order",
+          "es": "Tras haber perdido las llaves, no pudo entrar.",
+          "words": ["Having", "lost", "his", "keys,", "he", "could", "not", "get", "in."]
+        },
+        {
+          "type": "translate",
+          "es": "Al sentirme cansada, me fui a la cama.",
+          "answers": ["Feeling tired, I went to bed."]
+        }
+      ]
+    },
+    {
+      "id": "precision-y-matices",
+      "title": "Precisión y matices",
+      "summary": "Big, large o huge; say, tell o state: elegir la palabra exacta.",
+      "sections": [
+        {
+          "heading": "Sinónimos que no son iguales",
+          "body": [
+            "Big es neutro y cotidiano; large es más formal y para cantidades (a large amount); huge y enormous intensifican. Say introduce palabras (he said hello), tell lleva receptor (he told me), state es formal y afirmativo, claim sugiere duda (he claims to be an expert), mention es de paso.",
+            "Walk, stroll (pasear sin prisa), march (con decisión), wander (vagar), stride (a zancadas): el verbo preciso ahorra adverbios."
+          ],
+          "examples": [
+            {
+              "en": "The company reported a large loss.",
+              "es": "La empresa comunicó una gran pérdida."
+            },
+            {
+              "en": "He claims he was at home, but nobody saw him.",
+              "es": "Él asegura que estaba en casa, pero nadie lo vio."
+            },
+            {
+              "en": "We strolled along the beach.",
+              "es": "Paseamos por la playa."
+            },
+            {
+              "en": "She strode into the room and demanded an answer.",
+              "es": "Entró a zancadas en la sala y exigió una respuesta."
+            }
+          ],
+          "table": {
+            "headers": ["Palabra", "Matiz"],
+            "rows": [
+              ["say", "palabras dichas, sin receptor"],
+              ["tell", "con receptor; también ordenar"],
+              ["state", "declarar formalmente"],
+              ["claim", "afirmar algo dudoso"],
+              ["mention", "decir de paso"],
+              ["remark", "comentar, observar"]
+            ]
+          }
+        },
+        {
+          "heading": "Intensificadores y gradación",
+          "body": [
+            "No todo admite very: con adjetivos extremos (freezing, exhausted, furious, brilliant) se usa absolutely, utterly, completely; con los graduables (cold, tired, angry, good), very, extremely, rather, fairly. Rather suaviza; quite puede significar «bastante» o, con adjetivos extremos, «completamente» (quite impossible)."
+          ],
+          "examples": [
+            {
+              "en": "It was absolutely freezing.",
+              "es": "Hacía un frío espantoso."
+            },
+            {
+              "en": "I'm rather tired, to be honest.",
+              "es": "Estoy bastante cansado, la verdad."
+            },
+            {
+              "en": "That's quite impossible.",
+              "es": "Eso es completamente imposible."
+            },
+            {
+              "en": "The food was utterly delicious.",
+              "es": "La comida estaba absolutamente deliciosa."
+            }
+          ],
+          "tip": "Very freezing y very exhausted suenan mal: los adjetivos extremos ya llevan el grado dentro."
+        },
+        {
+          "heading": "Lenguaje académico y preciso",
+          "body": [
+            "Verbos: analyse, assess, demonstrate, indicate, imply, account for (explicar), attribute to. Nombres: evidence (incontable), findings, approach, framework. Conectores: hence, thus, thereby, whereby, notwithstanding (a pesar de, formal). Precisar: in terms of, with regard to, as opposed to."
+          ],
+          "examples": [
+            {
+              "en": "The data indicate a clear trend.",
+              "es": "Los datos indican una tendencia clara."
+            },
+            {
+              "en": "This accounts for the difference in results.",
+              "es": "Esto explica la diferencia en los resultados."
+            },
+            {
+              "en": "The method was flawed; hence, the study was repeated.",
+              "es": "El método era defectuoso; de ahí que se repitiera el estudio."
+            },
+            {
+              "en": "Quality, as opposed to quantity, is what matters.",
+              "es": "La calidad, no la cantidad, es lo que importa."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "She ___ me that the meeting was cancelled.",
+          "options": ["said", "told", "stated"],
+          "answer": 1,
+          "explanation": "Con receptor: tell."
+        },
+        {
+          "type": "choice",
+          "prompt": "The soup was ___ delicious.",
+          "options": ["very", "absolutely", "fairly"],
+          "answer": 1,
+          "explanation": "Adjetivo extremo: absolutely."
+        },
+        {
+          "type": "fill",
+          "prompt": "He ___ to be a doctor, but he has no degree. (afirma, con duda)",
+          "answers": ["claims"]
+        },
+        {
+          "type": "fill",
+          "prompt": "The evidence ___ (be) inconclusive. (evidence es incontable)",
+          "answers": ["is"]
+        },
+        {
+          "type": "order",
+          "es": "Esto explica la diferencia.",
+          "words": ["This", "accounts", "for", "the", "difference."]
+        },
+        {
+          "type": "translate",
+          "es": "Hacía un frío espantoso.",
+          "answers": ["It was absolutely freezing.", "It was freezing.", "It was utterly freezing."]
+        }
+      ]
+    }
+  ],
+  "exam": [
+    {
+      "type": "choice",
+      "prompt": "The judge ordered that the prisoner ___ released.",
+      "options": ["is", "be", "was"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "It is important that she ___ the truth.",
+      "options": ["know", "knows", "knew"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "Learning to ski was ___.",
+      "options": ["a piece of cake", "the ball in my court", "under the weather"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "___ the letter, he realised his mistake.",
+      "options": ["Having read", "Read", "Being read"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "___ by experts, the painting was declared genuine.",
+      "options": ["Examining", "Examined", "Having examined"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "He ___ that he had never been there, but we knew he had.",
+      "options": ["told", "claimed", "mentioned"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "The film was ___ brilliant.",
+      "options": ["very", "absolutely", "fairly"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "___ you agree or not, the rules apply.",
+      "options": ["Whether", "If", "Unless"],
+      "answer": 0
+    },
+    {
+      "type": "fill",
+      "prompt": "I propose that the meeting ___ (be) postponed.",
+      "answers": ["be"]
+    },
+    {
+      "type": "fill",
+      "prompt": "We only meet once in a ___ moon.",
+      "answers": ["blue"]
+    },
+    {
+      "type": "fill",
+      "prompt": "Not ___ (want) to be late, she took a taxi.",
+      "answers": ["wanting"]
+    },
+    {
+      "type": "fill",
+      "prompt": "The report ___ (shed) light on the causes of the crisis.",
+      "answers": ["sheds", "shed"]
+    },
+    {
+      "type": "order",
+      "es": "Sea como sea, debemos continuar.",
+      "words": ["Be", "that", "as", "it", "may,", "we", "must", "continue."]
+    },
+    {
+      "type": "order",
+      "es": "La gente que espera fuera son periodistas.",
+      "words": ["The", "people", "waiting", "outside", "are", "journalists."]
+    },
+    {
+      "type": "translate",
+      "es": "Tras haber terminado el informe, se fue.",
+      "answers": ["Having finished the report, she left.", "Having finished the report, he left."]
+    },
+    {
+      "type": "translate",
+      "es": "Exigieron que el director dimitiera.",
+      "answers": ["They demanded that the manager resign.", "They demanded that the director resign."]
+    }
+  ]
+}

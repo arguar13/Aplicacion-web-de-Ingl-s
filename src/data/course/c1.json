@@ -1,1 +1,594 @@
-{ "intro": "", "goals": [], "lessons": [], "exam": [] }
+{
+  "intro": "En C1 el inglés deja de ser una traducción del español: aprendes a dar énfasis como un nativo, a deducir sobre el pasado, a elegir el registro adecuado y a combinar palabras como lo hacen los hablantes cultos.",
+  "goals": [
+    "Dar énfasis con la inversión (Not only…, Rarely…, Never…).",
+    "Destacar una parte de la frase con oraciones hendidas (It was… who, What I need is…).",
+    "Deducir sobre el pasado con must have, can't have, might have y should have.",
+    "Elegir el registro: formal e informal, y las colocaciones que suenan naturales."
+  ],
+  "lessons": [
+    {
+      "id": "inversion",
+      "title": "La inversión: Not only…, Rarely…, Never…",
+      "summary": "Cuando el adverbio negativo va primero, el verbo se adelanta al sujeto.",
+      "sections": [
+        {
+          "heading": "Adverbios negativos al principio",
+          "body": [
+            "Para dar énfasis, una expresión negativa o restrictiva puede ir al inicio; entonces el auxiliar se coloca delante del sujeto, como en una pregunta: Never have I seen such a mess (= I have never seen…). Rarely do we eat out. Not only did she win, but she also broke the record.",
+            "Si no hay auxiliar, se añade do/does/did: Seldom does he complain."
+          ],
+          "examples": [
+            {
+              "en": "Never have I been so embarrassed.",
+              "es": "Nunca me he sentido tan avergonzado."
+            },
+            {
+              "en": "Rarely do we get such good weather in March.",
+              "es": "Rara vez tenemos tan buen tiempo en marzo."
+            },
+            {
+              "en": "Not only did he apologise, but he also offered to pay.",
+              "es": "No solo se disculpó, sino que también se ofreció a pagar."
+            },
+            {
+              "en": "Under no circumstances should you open this door.",
+              "es": "Bajo ninguna circunstancia debes abrir esta puerta."
+            }
+          ],
+          "table": {
+            "headers": ["Expresión", "Ejemplo con inversión"],
+            "rows": [
+              ["never", "Never had she felt so free."],
+              ["rarely / seldom", "Seldom do they visit."],
+              ["not only … but also", "Not only is it cheap, but it's also fast."],
+              ["no sooner … than", "No sooner had I sat down than the phone rang."],
+              ["hardly … when", "Hardly had we left when it started to rain."],
+              ["under no circumstances", "Under no circumstances must you tell him."],
+              ["only then / only when", "Only then did I understand."]
+            ]
+          }
+        },
+        {
+          "heading": "No sooner, hardly y only",
+          "body": [
+            "No sooner had… than y hardly had… when cuentan dos hechos casi simultáneos, con pasado perfecto en la primera parte. Only after, only when, only then también invierten, pero en la oración principal: Only when she left did I notice the note."
+          ],
+          "examples": [
+            {
+              "en": "No sooner had the show started than the lights went out.",
+              "es": "Apenas había empezado el espectáculo cuando se fueron las luces."
+            },
+            {
+              "en": "Hardly had I arrived when they asked me to leave.",
+              "es": "Apenas había llegado cuando me pidieron que me fuera."
+            },
+            {
+              "en": "Only after the meeting did we realise the mistake.",
+              "es": "Solo después de la reunión nos dimos cuenta del error."
+            }
+          ],
+          "tip": "La inversión es formal o literaria: en una charla relajada se dice I've never seen…; en un discurso o un texto, Never have I seen…."
+        },
+        {
+          "heading": "Inversión en condicionales formales",
+          "body": [
+            "En registro formal, if puede desaparecer con inversión: Had I known (= If I had known), Should you need help (= If you need help), Were it not for (= If it weren't for)."
+          ],
+          "examples": [
+            {
+              "en": "Had we known about the delay, we would have taken another route.",
+              "es": "De haber sabido del retraso, habríamos tomado otra ruta."
+            },
+            {
+              "en": "Should you have any questions, please contact us.",
+              "es": "Si tiene alguna pregunta, contáctenos."
+            },
+            {
+              "en": "Were I in your position, I would accept.",
+              "es": "Si yo estuviera en tu posición, aceptaría."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Never ___ such a beautiful sunset.",
+          "options": ["I have seen", "have I seen", "I saw"],
+          "answer": 1,
+          "explanation": "Tras never al inicio, el auxiliar va delante del sujeto."
+        },
+        {
+          "type": "choice",
+          "prompt": "Not only ___ late, but he also forgot the documents.",
+          "options": ["he arrived", "did he arrive", "he did arrive"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "Rarely ___ we see him these days. (auxiliar)",
+          "answers": ["do"],
+          "explanation": "Sin auxiliar propio, se añade do."
+        },
+        {
+          "type": "fill",
+          "prompt": "No sooner ___ I closed the door than I remembered the keys. (auxiliar)",
+          "answers": ["had"]
+        },
+        {
+          "type": "order",
+          "es": "Solo entonces entendí el problema.",
+          "words": ["Only", "then", "did", "I", "understand", "the", "problem."]
+        },
+        {
+          "type": "translate",
+          "es": "De haberlo sabido, te habría avisado.",
+          "answers": [
+            "Had I known, I would have warned you.",
+            "Had I known, I would have told you.",
+            "Had I known, I'd have warned you.",
+            "Had I known, I'd have told you."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oraciones-hendidas",
+      "title": "Oraciones hendidas: It was… who, What I need is…",
+      "summary": "Mover el foco a la parte de la frase que importa.",
+      "sections": [
+        {
+          "heading": "It + be + … + who / that",
+          "body": [
+            "Para destacar un elemento se envuelve con it was… that/who: Ana broke the vase → It was Ana who broke the vase (fue Ana, no otra persona). It was yesterday that I saw him (fue ayer, no otro día)."
+          ],
+          "examples": [
+            {
+              "en": "It was my sister who told me.",
+              "es": "Fue mi hermana quien me lo dijo."
+            },
+            {
+              "en": "It's the price that worries me, not the quality.",
+              "es": "Es el precio lo que me preocupa, no la calidad."
+            },
+            {
+              "en": "It was in Lisbon that we first met.",
+              "es": "Fue en Lisboa donde nos conocimos."
+            }
+          ]
+        },
+        {
+          "heading": "What + oración + be",
+          "body": [
+            "What I need is a holiday (lo que necesito son vacaciones). What + sujeto + verbo + be + lo destacado. También con all: All I want is some peace (lo único que quiero es paz). Y con the reason / the place / the thing: The reason I called is that…"
+          ],
+          "examples": [
+            {
+              "en": "What she loves most is travelling.",
+              "es": "Lo que más le gusta es viajar."
+            },
+            {
+              "en": "What happened was that the car broke down.",
+              "es": "Lo que pasó fue que el coche se averió."
+            },
+            {
+              "en": "All we need is a little more time.",
+              "es": "Lo único que necesitamos es un poco más de tiempo."
+            },
+            {
+              "en": "The reason I'm late is that the train was cancelled.",
+              "es": "La razón por la que llego tarde es que cancelaron el tren."
+            }
+          ],
+          "table": {
+            "headers": ["Estructura", "Qué destaca", "Ejemplo"],
+            "rows": [
+              ["It was X who/that…", "una persona, cosa, momento, lugar", "It was John who paid."],
+              ["What … is …", "una acción o cosa", "What I need is sleep."],
+              ["All … is …", "lo único", "All he does is complain."],
+              ["The reason … is that …", "una causa", "The reason is that it's cheap."]
+            ]
+          }
+        },
+        {
+          "heading": "Énfasis con do y con repetición",
+          "body": [
+            "Do/does/did delante del verbo refuerza una afirmación: I do like your idea. She did call, but you were out. Y en respuestas a una duda: It does work."
+          ],
+          "examples": [
+            {
+              "en": "I do understand your concern.",
+              "es": "Sí que entiendo tu preocupación."
+            },
+            {
+              "en": "He did try to help.",
+              "es": "Él sí intentó ayudar."
+            }
+          ],
+          "tip": "El do enfático se pronuncia con fuerza: I DO like it."
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "___ my brother who fixed the computer.",
+          "options": ["It was", "What was", "That was"],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "___ I really want is a quiet weekend.",
+          "options": ["That", "What", "It"],
+          "answer": 1
+        },
+        {
+          "type": "fill",
+          "prompt": "It was in 2010 ___ we moved here. (that)",
+          "answers": ["that"]
+        },
+        {
+          "type": "fill",
+          "prompt": "All she ___ was listen. (verbo en pasado)",
+          "answers": ["did"]
+        },
+        {
+          "type": "order",
+          "es": "Lo que necesito es un café.",
+          "words": ["What", "I", "need", "is", "a", "coffee."]
+        },
+        {
+          "type": "translate",
+          "es": "Fue Ana quien rompió el jarrón.",
+          "answers": ["It was Ana who broke the vase.", "It was Ana that broke the vase."]
+        }
+      ]
+    },
+    {
+      "id": "modales-perfectos",
+      "title": "Modales perfectos: must have, can't have, should have",
+      "summary": "Deducir, lamentar y criticar sobre el pasado.",
+      "sections": [
+        {
+          "heading": "Deducir sobre el pasado",
+          "body": [
+            "Modal + have + participio. Must have: casi seguro que pasó (She must have missed the bus). Can't have / couldn't have: casi seguro que no pasó (He can't have forgotten: it was his idea). Might have / may have / could have: es posible que pasara (They might have got lost)."
+          ],
+          "examples": [
+            {
+              "en": "The ground is wet. It must have rained last night.",
+              "es": "El suelo está mojado. Debió de llover anoche."
+            },
+            {
+              "en": "She can't have seen me; she didn't say hello.",
+              "es": "No puede haberme visto; no saludó."
+            },
+            {
+              "en": "He may have left already.",
+              "es": "Puede que ya se haya ido."
+            },
+            {
+              "en": "They could have taken the wrong exit.",
+              "es": "Podrían haber tomado la salida equivocada."
+            }
+          ],
+          "table": {
+            "headers": ["Seguridad", "Forma", "Significado"],
+            "rows": [
+              ["casi seguro que sí", "must have + participio", "debió de"],
+              ["posible", "might / may / could have + participio", "puede que"],
+              ["casi seguro que no", "can't / couldn't have + participio", "no puede haber"]
+            ]
+          }
+        },
+        {
+          "heading": "Lamentar y criticar: should have y needn't have",
+          "body": [
+            "Should have + participio: algo que era lo correcto y no se hizo (I should have called you), o lo contrario con shouldn't have (You shouldn't have said that). Needn't have + participio: se hizo sin necesidad (You needn't have brought a gift). Could have + participio también sirve de reproche: You could have told me!"
+          ],
+          "examples": [
+            {
+              "en": "I should have studied more.",
+              "es": "Debería haber estudiado más."
+            },
+            {
+              "en": "You shouldn't have spent so much.",
+              "es": "No deberías haber gastado tanto."
+            },
+            {
+              "en": "We needn't have hurried; the train was late.",
+              "es": "No hacía falta que corriéramos; el tren llegó tarde."
+            },
+            {
+              "en": "You could have warned me!",
+              "es": "¡Podrías haberme avisado!"
+            }
+          ],
+          "tip": "Should have se contrae en la lengua hablada a should've: nunca se escribe «should of»."
+        },
+        {
+          "heading": "Would have: lo que habría pasado",
+          "body": [
+            "Would have + participio es la consecuencia del tercer condicional y también expresa suposición sobre el pasado: I would have helped, but I wasn't there. Con otros modales: would rather have (habría preferido)."
+          ],
+          "examples": [
+            {
+              "en": "I would have come, but nobody told me.",
+              "es": "Habría venido, pero nadie me avisó."
+            },
+            {
+              "en": "She would have been about thirty then.",
+              "es": "Ella tendría unos treinta años entonces."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "The lights were on all night. They ___ forgotten to switch them off.",
+          "options": ["must have", "can't have", "should have"],
+          "answer": 0,
+          "explanation": "Deducción positiva sobre el pasado."
+        },
+        {
+          "type": "choice",
+          "prompt": "You ___ told me earlier! Now it's too late.",
+          "options": ["must have", "should have", "can't have"],
+          "answer": 1,
+          "explanation": "Reproche: should have."
+        },
+        {
+          "type": "fill",
+          "prompt": "He ___ (can't / forget) the meeting; I reminded him twice.",
+          "answers": ["can't have forgotten", "couldn't have forgotten"]
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (needn't / bring) food; there was plenty.",
+          "answers": ["needn't have brought"]
+        },
+        {
+          "type": "order",
+          "es": "Ella debió de perder el tren.",
+          "words": ["She", "must", "have", "missed", "the", "train."]
+        },
+        {
+          "type": "translate",
+          "es": "Debería haber escuchado a mi madre.",
+          "answers": [
+            "I should have listened to my mother.",
+            "I should've listened to my mother.",
+            "I should have listened to my mum."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "registro-y-colocaciones",
+      "title": "Registro y colocaciones",
+      "summary": "Decir lo mismo en formal y en informal, y combinar palabras como un nativo.",
+      "sections": [
+        {
+          "heading": "Formal e informal",
+          "body": [
+            "El inglés formal prefiere verbos de origen latino (purchase, require, inform) frente a los phrasal verbs del habla cotidiana (buy, need, let know); evita contracciones y usa pasivas y estructuras impersonales (It is recommended that…). Un correo a una empresa y un mensaje a un amigo no comparten vocabulario."
+          ],
+          "examples": [
+            {
+              "en": "I would be grateful if you could send me the invoice. / Can you send me the bill?",
+              "es": "Le agradecería que me enviara la factura. / ¿Me pasas la cuenta?"
+            },
+            {
+              "en": "We regret to inform you that… / Sorry, but…",
+              "es": "Lamentamos comunicarle que… / Lo siento, pero…"
+            },
+            {
+              "en": "Please do not hesitate to contact us. / Just give us a shout.",
+              "es": "No dude en contactarnos. / Avísanos sin problema."
+            }
+          ],
+          "table": {
+            "headers": ["Informal", "Formal"],
+            "rows": [
+              ["get", "receive / obtain"],
+              ["ask for", "request"],
+              ["find out", "discover / ascertain"],
+              ["put off", "postpone"],
+              ["set up", "establish"],
+              ["a lot of", "a great deal of / numerous"],
+              ["kids", "children"],
+              ["thanks", "I appreciate / thank you"]
+            ]
+          }
+        },
+        {
+          "heading": "Colocaciones: palabras que van juntas",
+          "body": [
+            "Una colocación es una combinación habitual: make a decision (no «take a decision»), heavy rain (no «strong rain»), fast food pero quick meal, do homework, make a mistake, pay attention, catch a cold, keep a promise, highly unlikely, deeply sorry, fully aware."
+          ],
+          "examples": [
+            {
+              "en": "She made a quick decision.",
+              "es": "Ella tomó una decisión rápida."
+            },
+            {
+              "en": "We had heavy rain all week.",
+              "es": "Tuvimos lluvias fuertes toda la semana."
+            },
+            {
+              "en": "Pay attention to the details.",
+              "es": "Presta atención a los detalles."
+            },
+            {
+              "en": "I'm fully aware of the risks.",
+              "es": "Soy plenamente consciente de los riesgos."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Colocaciones"],
+            "rows": [
+              ["make", "a decision, a mistake, an effort, progress, friends"],
+              ["do", "homework, business, research, your best, the shopping"],
+              ["take", "a photo, a break, a risk, responsibility, place"],
+              ["have", "a look, a rest, an argument, fun, a go"],
+              ["keep", "a promise, a secret, in touch, calm"]
+            ]
+          },
+          "tip": "Make o do: make crea algo o decide (make a plan, make a decision); do es la actividad en sí (do the dishes, do research)."
+        },
+        {
+          "heading": "Suavizar y precisar: hedging",
+          "body": [
+            "Para no sonar tajante: It seems that…, It appears…, This may suggest…, to some extent, arguably, perhaps, I would argue that…. Para precisar: in particular, specifically, namely."
+          ],
+          "examples": [
+            {
+              "en": "It seems that the figures are incomplete.",
+              "es": "Parece que las cifras están incompletas."
+            },
+            {
+              "en": "This is, to some extent, a matter of taste.",
+              "es": "Esto es, en cierta medida, cuestión de gustos."
+            },
+            {
+              "en": "Arguably, the second film is better.",
+              "es": "Podría decirse que la segunda película es mejor."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "type": "choice",
+          "prompt": "Formal: We ___ the meeting until next week.",
+          "options": ["put off", "postponed", "moved"],
+          "answer": 1,
+          "explanation": "Registro formal: postpone."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ a serious mistake.",
+          "options": ["did", "made", "took"],
+          "answer": 1,
+          "explanation": "Make a mistake."
+        },
+        {
+          "type": "fill",
+          "prompt": "Please ___ attention to the instructions. (verbo)",
+          "answers": ["pay"]
+        },
+        {
+          "type": "fill",
+          "prompt": "It's ___ unlikely that they will come. (muy, con un adverbio que colocaciona con unlikely)",
+          "answers": ["highly"]
+        },
+        {
+          "type": "order",
+          "es": "Le agradecería que me enviara la factura.",
+          "words": ["I", "would", "be", "grateful", "if", "you", "could", "send", "me", "the", "invoice."]
+        },
+        {
+          "type": "translate",
+          "es": "Tomé una decisión difícil.",
+          "answers": ["I made a difficult decision.", "I made a hard decision.", "I made a tough decision."]
+        }
+      ]
+    }
+  ],
+  "exam": [
+    {
+      "type": "choice",
+      "prompt": "Seldom ___ such talent.",
+      "options": ["we see", "do we see", "we do see"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "___ he won the race, but he also set a record.",
+      "options": ["Not only", "Only", "Never"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "___ was the manager who made the decision.",
+      "options": ["What", "It", "That"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "___ I need now is a long holiday.",
+      "options": ["What", "It", "That"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "The road is wet. It ___ rained.",
+      "options": ["must have", "can't have", "should have"],
+      "answer": 0
+    },
+    {
+      "type": "choice",
+      "prompt": "You ___ told me! I would have helped.",
+      "options": ["can't have", "should have", "might have"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "Formal: Please ___ the attached form.",
+      "options": ["fill in", "complete", "do"],
+      "answer": 1
+    },
+    {
+      "type": "choice",
+      "prompt": "He ___ a great effort to finish on time.",
+      "options": ["did", "made", "took"],
+      "answer": 1
+    },
+    {
+      "type": "fill",
+      "prompt": "Hardly ___ we arrived when the storm began. (auxiliar)",
+      "answers": ["had"]
+    },
+    {
+      "type": "fill",
+      "prompt": "It was in Rome ___ they got married. (that)",
+      "answers": ["that"]
+    },
+    {
+      "type": "fill",
+      "prompt": "She ___ (might / leave) early; her bag isn't here.",
+      "answers": ["might have left", "may have left", "could have left"]
+    },
+    {
+      "type": "fill",
+      "prompt": "Let's ___ a break. (verbo)",
+      "answers": ["take", "have"]
+    },
+    {
+      "type": "order",
+      "es": "Nunca he visto algo así.",
+      "words": ["Never", "have", "I", "seen", "anything", "like", "it."]
+    },
+    {
+      "type": "order",
+      "es": "Fue mi hermana quien me llamó.",
+      "words": ["It", "was", "my", "sister", "who", "called", "me."]
+    },
+    {
+      "type": "translate",
+      "es": "No puede haberlo olvidado.",
+      "answers": [
+        "He can't have forgotten it.",
+        "He couldn't have forgotten it.",
+        "She can't have forgotten it.",
+        "He can't have forgotten."
+      ]
+    },
+    {
+      "type": "translate",
+      "es": "Lo que necesito es tiempo.",
+      "answers": ["What I need is time."]
+    }
+  ]
+}
