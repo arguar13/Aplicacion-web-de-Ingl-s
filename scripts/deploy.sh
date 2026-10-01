@@ -12,3 +12,6 @@ cd "$(dirname "$0")/.."
 
 dir="$(bash scripts/check-deploy-target.sh)"
 FTP_DEPLOY_DIR="$dir" node scripts/ftp-upload.mjs
+
+# Con el sitio ya publicado, se avisa a los buscadores (IndexNow). Si falla, el despliegue sigue bien.
+node scripts/indexnow.mjs || echo "IndexNow: no se pudo avisar a los buscadores; el despliegue está completo." >&2

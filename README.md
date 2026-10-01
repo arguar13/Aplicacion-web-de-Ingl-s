@@ -251,6 +251,14 @@ sin tocar nada. Lo más seguro es crear en **Archivos → Cuentas FTP** una cuen
 carpeta de la app y usar `FTP_SERVER_DIR` = `./`: así el despliegue no puede llegar a otros sitios
 del hosting.
 
+### Buscadores
+
+Tras cada despliegue, `scripts/indexnow.mjs` avisa por IndexNow a Bing (que también alimenta a Yahoo
+y DuckDuckGo), Yandex, Seznam y Naver. La clave es pública: `public/<clave>.txt`, publicada en la raíz
+del sitio, demuestra que es nuestro. Google no usa IndexNow: el sitio se da de alta en Google Search
+Console (propiedad «Prefijo de URL», verificación con la etiqueta `google-site-verification` en
+`index.html`), y allí se envía `sitemap.xml`, que genera el build con `SITE_URL`.
+
 ### Despliegue manual
 
 1. `SITE_URL=https://tudominio.com/ npm run build` (o solo `npm run build`).
