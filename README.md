@@ -196,22 +196,22 @@ que estar abierto para que corra el pipeline (**Settings → General → Start D
 sign in**).
 
 **Runner (una vez).** En GitLab, **Settings → CI/CD → Runners → New project runner**, con la
-etiqueta `tecla` y marcado como **Protected** (solo corre en ramas protegidas). Copia el token
-(`glrt-…`) y, con Docker Desktop abierto:
+etiqueta `tecla`. Copia el token (`glrt-…`) y, con Docker Desktop abierto, crea un runner propio
+para Tecla (su contenedor y su volumen, separados de cualquier otro runner del PC):
 
 ```sh
-docker run -d --name gitlab-runner --restart always \
+docker run -d --name tecla-runner --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v gitlab-runner-config:/etc/gitlab-runner \
-  gitlab/gitlab-runner:latest
-docker exec gitlab-runner gitlab-runner register --non-interactive \
-  --url https://gitlab.com --token glrt-TU-TOKEN \
+  -v tecla-runner-config:/etc/gitlab-runner \
+  gitlab/gitlab-runner:v19.4.1
+docker exec tecla-runner gitlab-runner register --non-interactive \
+  --url https://gitlab.com --token glrt-TU-TOKEN --name "Tecla (PC)" \
   --executor docker --docker-image node:24 --docker-pull-policy if-not-present
 ```
 
-Para que Docker no llene el disco, una tarea programada de Windows (`Tecla: limpieza de Docker`,
-semanal) borra los contenedores parados y las imágenes sin usar de más de una semana:
-`docker container prune -f` y `docker image prune -af --filter until=168h`.
+Para que el disco no crezca, la tarea programada de Windows `Tecla - mantenimiento del runner`
+(domingos a las 12:00) ejecuta `scripts/runner-maintenance.ps1`: renueva `node:24` con sus parches
+y borra la versión anterior. Solo toca esa imagen; las de otros proyectos no se tocan.
 
 **Variables.** En GitLab, **Settings → CI/CD → Variables**, todas como **Protected** (GitLab solo
 las entrega a ramas protegidas como `main`) y la contraseña además como **Masked**. Sin

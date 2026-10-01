@@ -14,6 +14,8 @@ Todos los cambios importantes de Tecla. El formato sigue
   se publica en GitHub y GitLab a la vez. Se retira `.github/workflows/deploy.yml`.
 - El despliegue es un script independiente de la CI (`scripts/deploy.sh`): comprueba el destino y
   sube solo lo que cambió con ftp-deploy, verificando el certificado del servidor FTPS.
+- Mantenimiento semanal del runner (`scripts/runner-maintenance.ps1`): renueva `node:24` y borra la
+  versión anterior, sin tocar las imágenes de otros proyectos.
 
 ## 2.3.0 · 2026-10-01 · Un curso con el rigor de las certificaciones (Fase 21)
 
