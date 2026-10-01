@@ -1,4 +1,6 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react'
+import { loadAudioVersions } from '@/lib/audioUrl'
+import { recordedCourseIds } from '@/lib/courseAudio'
 import { ALL_WORDS } from '@/lib/decks'
 import {
   countCachedAudio,
@@ -60,19 +62,29 @@ export function InstallRow() {
   return null
 }
 
-const ALL_IDS = ALL_WORDS.map((w) => w.id)
-const TOTAL = ALL_IDS.length
+const WORD_IDS = ALL_WORDS.map((w) => w.id)
 const APPROX_MB = import.meta.env.AUDIO_MB
 
+/** Todo el audio publicado: las pronunciaciones y las frases grabadas del curso (si las hay). */
+async function allAudioIds(): Promise<string[]> {
+  return [...WORD_IDS, ...recordedCourseIds(await loadAudioVersions())]
+}
+
 export function OfflineAudioRow() {
+  const [ids, setIds] = useState<string[]>(WORD_IDS)
   const [cached, setCached] = useState<number | null>(null)
   const [progress, setProgress] = useState<number | null>(null)
   const controller = useRef<AbortController | null>(null)
+  const TOTAL = ids.length
 
   const supported = useOfflineAudioSupported()
 
   useEffect(() => {
-    if (supported) void countCachedAudio(ALL_IDS).then(setCached)
+    if (!supported) return
+    void allAudioIds().then(async (all) => {
+      setIds(all)
+      setCached(await countCachedAudio(all))
+    })
   }, [supported])
 
   useEffect(() => () => controller.current?.abort(), [])
@@ -82,9 +94,9 @@ export function OfflineAudioRow() {
   async function start() {
     controller.current = new AbortController()
     setProgress(0)
-    await downloadAudio(ALL_IDS, setProgress, controller.current.signal)
+    await downloadAudio(ids, setProgress, controller.current.signal)
     setProgress(null)
-    setCached(await countCachedAudio(ALL_IDS))
+    setCached(await countCachedAudio(ids))
   }
 
   const downloading = progress !== null
@@ -99,7 +111,7 @@ export function OfflineAudioRow() {
             ? 'Todas las pronunciaciones están guardadas en este dispositivo.'
             : downloading
               ? `Descargando… ${progress.toLocaleString('es')} de ${TOTAL.toLocaleString('es')}`
-              : `Guarda las ${TOTAL.toLocaleString('es')} pronunciaciones (~${APPROX_MB} MB) para estudiar sin internet.`
+              : `Guarda los ${TOTAL.toLocaleString('es')} audios (pronunciaciones y frases del curso, ~${APPROX_MB} MB) para estudiar sin internet.`
         }
       >
         {complete ? (

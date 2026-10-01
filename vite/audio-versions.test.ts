@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -26,5 +26,14 @@ describe('versiones de audio', () => {
     const after = computeAudioVersions(dir)
     expect(after.hello).not.toBe(before.hello)
     expect(after.world).toBe(before.world)
+  })
+
+  it('las frases grabadas del curso (carpeta course/) llevan su prefijo', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'tecla-audio-'))
+    temps.push(dir)
+    writeFileSync(join(dir, 'hello.mp3'), 'uno')
+    mkdirSync(join(dir, 'course'))
+    writeFileSync(join(dir, 'course', 'd542072491814dd3.mp3'), 'frase')
+    expect(Object.keys(computeAudioVersions(dir))).toEqual(['hello', 'course/d542072491814dd3'])
   })
 })

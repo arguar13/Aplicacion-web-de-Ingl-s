@@ -12,10 +12,13 @@ import pkg from './package.json' with { type: 'json' }
 
 const AUDIO_DIR = fileURLToPath(new URL('./public/audio', import.meta.url))
 /** Megas de todas las pronunciaciones: lo que cuesta descargarlas para estudiar sin conexión. */
-const audioMegabytes = Math.max(
-  1,
-  Math.round(readdirSync(AUDIO_DIR).reduce((sum, file) => sum + statSync(`${AUDIO_DIR}/${file}`).size, 0) / 1e6),
-)
+function folderBytes(dir: string): number {
+  return readdirSync(dir).reduce((sum, file) => {
+    const stat = statSync(`${dir}/${file}`)
+    return sum + (stat.isDirectory() ? folderBytes(`${dir}/${file}`) : stat.size)
+  }, 0)
+}
+const audioMegabytes = Math.max(1, Math.round(folderBytes(AUDIO_DIR) / 1e6))
 
 export default defineConfig({
   define: {

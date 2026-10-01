@@ -95,7 +95,8 @@ export async function countCachedAudio(ids: readonly string[]): Promise<number> 
 export async function pruneStaleAudio(ids: readonly string[]): Promise<number> {
   if (!('caches' in window) || !(await caches.has(AUDIO_CACHE))) return 0
   const [cache, versions] = await Promise.all([caches.open(AUDIO_CACHE), loadAudioVersions()])
-  const current = new Set(ids.map((id) => versionedAudioUrl(id, versions)))
+  // Vale lo pedido y toda grabación publicada (las frases del curso no están en la lista de palabras).
+  const current = new Set([...ids, ...Object.keys(versions)].map((id) => versionedAudioUrl(id, versions)))
   const stale = (await cache.keys()).filter((request) => !current.has(request.url))
   await Promise.all(stale.map((request) => cache.delete(request)))
   return stale.length

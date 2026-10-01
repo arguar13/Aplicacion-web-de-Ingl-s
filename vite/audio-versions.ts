@@ -6,7 +6,7 @@
  * caché del navegador o del service worker. Así los MP3 pueden cachearse como inmutables.
  */
 import { createHash } from 'node:crypto'
-import { readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join, normalize } from 'node:path'
 import type { Plugin } from 'vite'
 
@@ -17,15 +17,23 @@ const HASH_LENGTH = 8
 /** Calma tras el último cambio de audio antes de recalcular las versiones (en desarrollo). */
 const REFRESH_DELAY_MS = 1500
 
+/** Subcarpetas con audio propio: las frases del curso van en `course/` (ver scripts/generate_course_audio.py). */
+const SUBDIRS = ['course']
+
 export function computeAudioVersions(dir: string): Record<string, string> {
   const versions: Record<string, string> = {}
-  for (const file of readdirSync(dir).toSorted()) {
-    if (!file.endsWith('.mp3')) continue
-    const hash = createHash('sha256')
-      .update(readFileSync(join(dir, file)))
-      .digest('hex')
-    versions[file.slice(0, -'.mp3'.length)] = hash.slice(0, HASH_LENGTH)
+  const scan = (folder: string, prefix: string) => {
+    if (!existsSync(folder)) return
+    for (const file of readdirSync(folder).toSorted()) {
+      if (!file.endsWith('.mp3')) continue
+      const hash = createHash('sha256')
+        .update(readFileSync(join(folder, file)))
+        .digest('hex')
+      versions[`${prefix}${file.slice(0, -'.mp3'.length)}`] = hash.slice(0, HASH_LENGTH)
+    }
   }
+  scan(dir, '')
+  for (const sub of SUBDIRS) scan(join(dir, sub), `${sub}/`)
   return versions
 }
 
