@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Pruebas de check-deploy-target.sh con un curl falso que devuelve el listado de cada caso.
 set -euo pipefail
+# En la CI llegan las variables reales del despliegue: cada caso fija las suyas.
+unset FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR FTP_PROTOCOL FTP_TLS_NAME
 
 script="$(cd "$(dirname "$0")" && pwd)/check-deploy-target.sh"
 bin="$(mktemp -d)"
