@@ -159,7 +159,7 @@ export function SettingsContent() {
         </SettingRow>
       </Group>
 
-      <p className="mt-6 text-center text-xs text-muted">Tecla {import.meta.env.APP_VERSION}</p>
+      <p className="mt-6 text-center text-xs text-muted">OpenSpeak {import.meta.env.APP_VERSION}</p>
     </div>
   )
 }

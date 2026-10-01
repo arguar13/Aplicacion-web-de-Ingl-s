@@ -148,21 +148,21 @@ export function titleOf(route: Route): string {
   const { screen } = route
   switch (screen.name) {
     case 'home':
-      return 'Tecla · Vocabulario en inglés'
+      return 'OpenSpeak · Aprende inglés de A1 a C2'
     case 'deck':
-      return `${screen.deck.level === null ? screen.deck.name : `Nivel ${screen.deck.level} · ${screen.deck.name}`} — Tecla`
+      return `${screen.deck.level === null ? screen.deck.name : `Nivel ${screen.deck.level} · ${screen.deck.name}`} — OpenSpeak`
     case 'smart':
-      return `${SMART[screen.kind].title} — Tecla`
+      return `${SMART[screen.kind].title} — OpenSpeak`
     case 'topic':
-      return `${topicInfo(screen.topic).name} — Tecla`
+      return `${topicInfo(screen.topic).name} — OpenSpeak`
     case 'courseLevel':
-      return `Curso ${courseLevelInfo(screen.level).name} — Tecla`
+      return `Curso ${courseLevelInfo(screen.level).name} — OpenSpeak`
     case 'lesson':
-      return `Lección ${courseLevelInfo(screen.level).name} — Tecla`
+      return `Lección ${courseLevelInfo(screen.level).name} — OpenSpeak`
     case 'exam':
-      return `Examen ${courseLevelInfo(screen.level).name} — Tecla`
+      return `Examen ${courseLevelInfo(screen.level).name} — OpenSpeak`
     case 'quiz':
-      return screen.level === null ? 'Quiz mixto — Tecla' : `Quiz ${courseLevelInfo(screen.level).name} — Tecla`
+      return screen.level === null ? 'Quiz mixto — OpenSpeak' : `Quiz ${courseLevelInfo(screen.level).name} — OpenSpeak`
     case 'coach':
     case 'course':
     case 'focus':
@@ -170,7 +170,7 @@ export function titleOf(route: Route): string {
     case 'blitz':
     case 'stats':
     case 'dictionary':
-      return `${SIMPLE_SCREENS[screen.name].title} — Tecla`
+      return `${SIMPLE_SCREENS[screen.name].title} — OpenSpeak`
   }
 }
 

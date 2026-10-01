@@ -4,7 +4,7 @@
  * Una web sin servidor no puede avisar a una hora de forma fiable: Notification Triggers se
  * abandonó, Periodic Background Sync solo existe en Chromium con la app instalada y sin hora
  * garantizada, y iOS no tiene nada equivalente. El calendario del dispositivo sí: un evento diario
- * recurrente, con aviso, que abre Tecla. Funciona igual en iPhone, Android y escritorio.
+ * recurrente, con aviso, que abre OpenSpeak. Funciona igual en iPhone, Android y escritorio.
  */
 
 /** "HH:MM" válida. */
@@ -53,7 +53,7 @@ export function buildReminderIcs({ time, url, now = Date.now() }: ReminderOption
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Tecla//Recordatorio diario//ES',
+    'PRODID:-//OpenSpeak//Recordatorio diario//ES',
     'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
     `UID:tecla-recordatorio-${stamp}@tecla`,
@@ -61,13 +61,13 @@ export function buildReminderIcs({ time, url, now = Date.now() }: ReminderOption
     `DTSTART:${local}`,
     'DURATION:PT10M',
     'RRULE:FREQ=DAILY',
-    `SUMMARY:${escapeText('Practicar inglés con Tecla')}`,
+    `SUMMARY:${escapeText('Practicar inglés con OpenSpeak')}`,
     `DESCRIPTION:${escapeText(`Unos minutos de vocabulario: ${url}`)}`,
     `URL:${url}`,
     'BEGIN:VALARM',
     'TRIGGER:PT0M',
     'ACTION:DISPLAY',
-    `DESCRIPTION:${escapeText('Hora de practicar inglés con Tecla')}`,
+    `DESCRIPTION:${escapeText('Hora de practicar inglés con OpenSpeak')}`,
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR',

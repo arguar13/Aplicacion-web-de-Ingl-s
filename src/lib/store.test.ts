@@ -64,6 +64,17 @@ describe('almacén persistido', () => {
     })
   })
 
+  it('el tema por defecto es el claro, y el automático de la versión 1 (su valor por defecto) pasa a claro', () => {
+    expect(parseSettings({}).theme).toBe('light')
+    const storage = new MemoryStorage()
+    storage.setItem(SETTINGS_KEY, JSON.stringify({ version: 1, theme: 'system' }))
+    expect(settingsStore(storage).get().theme).toBe('light')
+    // Elegido de nuevo tras la versión 2, el automático se respeta.
+    const chosen = new MemoryStorage()
+    chosen.setItem(SETTINGS_KEY, JSON.stringify({ version: 2, theme: 'system' }))
+    expect(settingsStore(chosen).get().theme).toBe('system')
+  })
+
   it('guarda con número de versión y conserva el tema en la raíz (index.html lo lee antes de pintar)', () => {
     const storage = new MemoryStorage()
     const store = settingsStore(storage)

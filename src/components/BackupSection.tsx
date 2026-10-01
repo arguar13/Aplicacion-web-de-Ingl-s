@@ -86,7 +86,7 @@ export function BackupSection() {
           onChange={(event) => void onFile(event)}
           className="sr-only"
           tabIndex={-1}
-          aria-label="Archivo de copia de Tecla"
+          aria-label="Archivo de copia de OpenSpeak"
         />
       </div>
       <p className="mt-2 text-xs text-muted">
@@ -154,7 +154,7 @@ export function BackupSummary({ backup }: { backup: Backup }) {
   return (
     <>
       <p className="text-sm font-semibold">
-        {backup.exportedAt ? `Copia del ${formatLongDate(backup.exportedAt)}` : 'Copia de Tecla'}
+        {backup.exportedAt ? `Copia del ${formatLongDate(backup.exportedAt)}` : 'Copia de OpenSpeak'}
       </p>
       <p className="mt-1 text-[13px] text-balance text-muted">{facts.join(' · ')}</p>
     </>

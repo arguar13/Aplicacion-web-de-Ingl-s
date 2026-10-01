@@ -28,7 +28,7 @@ export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam, onOpenQuiz 
   return (
     <section
       aria-labelledby="curso-de-ingles"
-      className="mt-4 animate-rise rounded-3xl border border-line bg-surface p-5 shadow-card sm:p-6"
+      className="h-full animate-rise rounded-3xl border border-line bg-surface spotlight p-5 shadow-card sm:p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">

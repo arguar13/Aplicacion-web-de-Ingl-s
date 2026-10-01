@@ -25,7 +25,7 @@ export function BackupReminder({ onOpenSettings }: { onOpenSettings: () => void 
   return (
     <aside
       aria-labelledby="backup-reminder-title"
-      className="relative mt-6 flex animate-rise gap-3.5 rounded-2xl border border-line bg-surface p-4 pr-12 shadow-card sm:p-5 sm:pr-14"
+      className="relative flex animate-rise gap-3.5 rounded-2xl border border-line bg-surface p-4 pr-12 shadow-card sm:p-5 sm:pr-14"
     >
       <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
         <ShieldIcon />
@@ -41,7 +41,7 @@ export function BackupReminder({ onOpenSettings }: { onOpenSettings: () => void 
             onClick={onOpenSettings}
             className="cursor-pointer font-medium text-accent underline-offset-2 hover:underline"
           >
-            agrega Tecla a tu inicio
+            agrega OpenSpeak a tu inicio
           </button>
           .
         </p>

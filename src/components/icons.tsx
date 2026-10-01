@@ -85,13 +85,19 @@ export function LogoMark(props: SVGProps<SVGSVGElement>) {
       <defs>
         <linearGradient id={gradient} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" style={{ stopColor: 'var(--accent)' }} />
-          <stop offset="1" style={{ stopColor: 'var(--accent-2)' }} />
+          <stop offset="0.58" style={{ stopColor: 'var(--accent-2)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--accent-3)' }} />
         </linearGradient>
       </defs>
       <rect x="2" y="2" width="60" height="60" rx="18" fill={`url(#${gradient})`} />
-      <rect x="17" y="17" width="30" height="8" rx="4" style={{ fill: 'var(--accent-ink)' }} />
-      <rect x="28" y="17" width="8" height="30" rx="4" style={{ fill: 'var(--accent-ink)' }} />
-      <circle cx="45" cy="43" r="4" style={{ fill: 'var(--accent-ink)' }} opacity="0.75" />
+      {/* Globo de diálogo con una onda de voz: hablar. */}
+      <path
+        d="M32 14.5c9.4 0 17 6.9 17 15.5S41.4 45.5 32 45.5c-2.1 0-4.1-.3-6-1L17.6 48.4c-.9.4-1.8-.5-1.4-1.4l2.9-6.6C16.5 37.6 15 34 15 30c0-8.6 7.6-15.5 17-15.5Z"
+        style={{ fill: 'var(--accent-ink)' }}
+      />
+      <rect x="24.2" y="26" width="4.2" height="8" rx="2.1" fill={`url(#${gradient})`} />
+      <rect x="29.9" y="22" width="4.2" height="16" rx="2.1" fill={`url(#${gradient})`} />
+      <rect x="35.6" y="26" width="4.2" height="8" rx="2.1" fill={`url(#${gradient})`} />
     </svg>
   )
 }

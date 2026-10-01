@@ -31,7 +31,7 @@ export function UpdateToast() {
           </>
         }
       >
-        Hay una versión nueva de Tecla.
+        Hay una versión nueva de OpenSpeak.
       </Toast>
     )
   }

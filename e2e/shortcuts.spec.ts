@@ -13,7 +13,7 @@ test('los atajos de teclado se ven con ratón y nunca en una pantalla táctil', 
 
   // El inicio con progreso tiene atajos en la tarjeta de continuar y en el repaso del día.
   await page.goto('./')
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   if (touch) await expect(shortcuts).toHaveCount(0)
   else await expect(shortcuts.filter({ hasText: 'Enter' })).toBeVisible()
 })

@@ -18,6 +18,7 @@ import { getSettings, replaceSettings, SETTINGS_SCHEMA, type Settings } from './
 import { readVersioned } from './store'
 import { isRecord } from './validate'
 
+/** Identificador del formato (del nombre anterior de la app): no cambiar, lo llevan las copias. */
 const FORMAT = 'tecla-copia'
 const FORMAT_VERSION = 1
 /** Una copia real ocupa como mucho unos cientos de KB; esto descarta archivos equivocados. */
@@ -71,18 +72,19 @@ export const currentBackup = (now = Date.now()): string =>
     now,
   )
 
-export const backupFileName = (now = Date.now()) => `tecla-copia-${dayKey(now)}.json`
+export const backupFileName = (now = Date.now()) => `openspeak-copia-${dayKey(now)}.json`
 
-const NEWER = 'Esta copia es de una versión más nueva de Tecla. Actualiza la app para restaurarla.'
+const NEWER = 'Esta copia es de una versión más nueva de OpenSpeak. Actualiza la app para restaurarla.'
 
 export function parseBackup(text: string): ParsedBackup {
   let data: unknown
   try {
     data = JSON.parse(text)
   } catch {
-    return { ok: false, error: 'El archivo está dañado o no es una copia de Tecla.' }
+    return { ok: false, error: 'El archivo está dañado o no es una copia de OpenSpeak.' }
   }
-  if (!isRecord(data) || data.format !== FORMAT) return { ok: false, error: 'Este archivo no es una copia de Tecla.' }
+  if (!isRecord(data) || data.format !== FORMAT)
+    return { ok: false, error: 'Este archivo no es una copia de OpenSpeak.' }
   if (typeof data.version !== 'number' || data.version > FORMAT_VERSION) return { ok: false, error: NEWER }
 
   const progress = readVersioned(data.progress, PROGRESS_SCHEMA)
@@ -107,7 +109,7 @@ export function parseBackup(text: string): ParsedBackup {
 /** Lee el archivo que eligió el usuario (descarta de entrada lo que no puede ser una copia). */
 export async function readBackupFile(file: Blob): Promise<ParsedBackup> {
   if (file.size > MAX_BACKUP_BYTES) {
-    return { ok: false, error: 'Ese archivo es demasiado grande para ser una copia de Tecla.' }
+    return { ok: false, error: 'Ese archivo es demasiado grande para ser una copia de OpenSpeak.' }
   }
   return parseBackup(await file.text())
 }
@@ -132,7 +134,7 @@ export function restoreBackup(backup: Backup, mode: RestoreMode) {
     replaceProgress(backup.progress)
     replaceEvents(backup.events)
   }
-  // Quien restaura una copia ya conoce Tecla: la bienvenida no vuelve a aparecer.
+  // Quien restaura una copia ya conoce OpenSpeak: la bienvenida no vuelve a aparecer.
   finishOnboarding()
 }
 

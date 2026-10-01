@@ -17,7 +17,7 @@ export function StreakBanner({ progress, now }: { progress: ProgressData; now: n
   return (
     <aside
       aria-labelledby="streak-banner-title"
-      className="mt-4 flex animate-rise items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 sm:p-5"
+      className="flex animate-rise items-center gap-3.5 rounded-2xl border border-line bg-surface p-4 shadow-card sm:p-5"
     >
       <span className="grid size-11 shrink-0 place-items-center rounded-full bg-bad-soft text-bad">
         <FlameIcon />

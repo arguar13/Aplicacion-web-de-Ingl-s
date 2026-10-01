@@ -1,5 +1,5 @@
 /**
- * Plugin de Vite: lo que necesitan los buscadores y las redes para mostrar Tecla.
+ * Plugin de Vite: lo que necesitan los buscadores y las redes para mostrar OpenSpeak.
  *
  * La dirección pública llega en `SITE_URL` al hacer el build (la pone el despliegue). Con ella se
  * generan la URL canónica, las URLs absolutas de la imagen para compartir y `sitemap.xml`, que
@@ -10,7 +10,7 @@ import type { HtmlTagDescriptor, Plugin } from 'vite'
 
 /** Imagen para compartir (public/og.png, generada con `npm run og-image`). */
 export const OG_IMAGE = { path: 'og.png', width: 1200, height: 630 }
-const OG_ALT = 'Tecla: una palabra en inglés sobre un teclado de respuestas en español.'
+const OG_ALT = 'OpenSpeak: aprende inglés con voz nativa, de A1 a C2.'
 
 /** Normaliza la dirección pública: con protocolo http(s) y barra final, o `null` si no hay. */
 export function parseSiteUrl(raw: string | undefined): string | null {

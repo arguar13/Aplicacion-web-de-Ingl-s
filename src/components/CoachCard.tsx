@@ -41,17 +41,26 @@ export function CoachCard({ now, onStart }: { now: number; onStart: () => void }
       onClick={onStart}
       aria-keyshortcuts="Enter"
       className={cn(
-        'group relative mt-9 flex w-full animate-rise cursor-pointer items-center gap-4 overflow-hidden rounded-3xl p-5 text-left text-accent-ink sm:mt-10 sm:gap-6 sm:p-7',
-        'bg-brand shadow-glow transition-[translate,scale,box-shadow] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]',
+        'group ring-epic flex h-full w-full animate-rise cursor-pointer items-center gap-4 rounded-[1.75rem] text-left text-accent-ink sm:gap-6',
+        'shadow-hero transition-[translate,scale,box-shadow] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
       )}
     >
-      {/* Brillo decorativo: un resplandor claro en la esquina, sin información. */}
+      {/* Fondo con el degradado de marca, brillos y una trama de ondas: decorativo, sin información.
+          Va en su propia capa recortada para que el borde de luz (ring-epic) quede por fuera. */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-16 size-64 rounded-full bg-accent-ink/15 blur-3xl"
-      />
-      <span className="relative min-w-0 flex-1">
+        className="shine pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] bg-brand"
+      >
+        <span className="absolute -top-24 -right-16 size-72 rounded-full bg-white/20 blur-3xl" />
+        <span className="absolute -bottom-28 -left-10 size-64 rounded-full bg-accent-3/40 blur-3xl" />
+        <svg className="absolute -right-10 -bottom-16 size-80 opacity-[0.14]" viewBox="0 0 200 200" fill="none">
+          {[30, 50, 70, 90].map((r) => (
+            <circle key={r} cx="150" cy="150" r={r} stroke="#fff" strokeWidth="1.5" />
+          ))}
+        </svg>
+      </span>
+      <span className="relative min-w-0 flex-1 py-6 pl-6 sm:py-8 sm:pl-8">
         <span className="flex flex-wrap items-center gap-2">
           <span className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] uppercase opacity-80">
             <SparkIcon width={14} height={14} />
@@ -63,7 +72,7 @@ export function CoachCard({ now, onStart }: { now: number; onStart: () => void }
             </span>
           )}
         </span>
-        <span className="mt-2 block font-display text-3xl leading-tight sm:text-4xl">
+        <span className="mt-2 block font-display text-3xl leading-tight sm:text-[2.6rem]">
           {started ? 'Tu práctica de hoy' : 'Empieza aquí'}
         </span>
         <span className="mt-1.5 block text-sm opacity-85">
@@ -78,8 +87,8 @@ export function CoachCard({ now, onStart }: { now: number; onStart: () => void }
           </span>
         )}
       </span>
-      <span className="relative flex shrink-0 flex-col items-center gap-2">
-        <span className="grid size-12 place-items-center rounded-full bg-accent-ink text-accent transition-transform group-hover:translate-x-0.5 sm:size-14">
+      <span className="relative flex shrink-0 flex-col items-center gap-2 pr-6 sm:pr-8">
+        <span className="grid size-12 place-items-center rounded-full bg-accent-ink text-accent shadow-float transition-transform group-hover:translate-x-1 sm:size-16">
           <ArrowRightIcon />
         </span>
         <Kbd tone="accent">Enter</Kbd>

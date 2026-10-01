@@ -22,13 +22,13 @@ describe('rutas', () => {
     expect(parseHash('#/curso/b1/quiz').screen).toEqual({ name: 'quiz', level: 'b1' })
     expect(parseHash('#/curso/quiz').screen).toEqual({ name: 'quiz', level: null })
     expect(formatHash({ screen: { name: 'quiz', level: null }, panel: null })).toBe('#/curso/quiz')
-    expect(titleOf({ screen: { name: 'quiz', level: 'c2' }, panel: null })).toBe('Quiz C2 — Tecla')
+    expect(titleOf({ screen: { name: 'quiz', level: 'c2' }, panel: null })).toBe('Quiz C2 — OpenSpeak')
     expect(parseHash('#/curso/z9')).toEqual(HOME)
     expect(parseHash('#/curso/a1/Mal Id')).toEqual(HOME)
     expect(formatHash({ screen: { name: 'lesson', level: 'a1', lesson: 'verbo-to-be' }, panel: null })).toBe(
       '#/curso/a1/verbo-to-be',
     )
-    expect(titleOf({ screen: { name: 'exam', level: 'c1' }, panel: null })).toBe('Examen C1 — Tecla')
+    expect(titleOf({ screen: { name: 'exam', level: 'c1' }, panel: null })).toBe('Examen C1 — OpenSpeak')
   })
 
   it('reconoce el panel de ajustes sobre cualquier pantalla', () => {

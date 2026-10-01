@@ -28,7 +28,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ref?: Ref<HTMLButtonElement>
 }
 
-/** Botón de acción con las variantes del sistema visual de Tecla. */
+/** Botón de acción con las variantes del sistema visual de OpenSpeak. */
 export function Button({ variant = 'secondary', size = 'md', className, type = 'button', ...props }: ButtonProps) {
   return (
     <button

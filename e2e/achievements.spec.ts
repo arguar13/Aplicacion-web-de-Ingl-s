@@ -30,6 +30,6 @@ test('quien ya tenía progreso no recibe una lluvia de avisos al actualizar', as
     )
   })
   await page.goto('./')
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   await expect(page.getByText(/logros? desbloqueados?/i)).toHaveCount(0)
 })

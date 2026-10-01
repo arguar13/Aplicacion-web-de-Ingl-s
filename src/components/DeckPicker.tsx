@@ -1,49 +1,45 @@
-import { lazy, Suspense, useId, useState } from 'react'
+import { lazy, type ReactNode, Suspense } from 'react'
 import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { cn } from '@/lib/cn'
-import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
+import { ALL_DECK, type Deck, LEVELS } from '@/lib/decks'
 import { formatCount, plural } from '@/lib/format'
-import { currentStreak, todayStats, useProgress } from '@/lib/progress'
+import { useProgress } from '@/lib/progress'
 import type { CourseLevelId } from '@/lib/courseMeta'
-import type { DeckSummary } from '@/lib/scheduler'
-import { updateSettings, useSettings } from '@/lib/settings'
+import { useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
 import { trackOf } from '@/lib/types'
-import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
 import { CoachCard } from './CoachCard'
+import { StreakBanner } from './StreakBanner'
+import { Header } from './Header'
+import { TodayCard } from './TodayCard'
+import { cardBase, shortcutOf } from './homeCards'
+import { BoltIcon, BookIcon, ChartIcon, FlameIcon, LayersIcon, SettingsIcon, StarIcon, TimerIcon } from './icons'
+import { Kbd } from './ui/Kbd'
+
+/** «Practica por tu cuenta» y los niveles, al final de la página: llegan un instante después. */
+const PracticeSection = lazy(() => import('./PracticeSection').then((module) => ({ default: module.PracticeSection })))
 /** El curso trae su cargador y su progreso: fuera del paquete inicial, llega un instante después. */
 const CourseCard = lazy(() => import('./CourseCard').then((module) => ({ default: module.CourseCard })))
-import { MissionsCard } from './MissionsCard'
-import { WordOfDayCard } from './WordOfDayCard'
-import { StreakBanner } from './StreakBanner'
-import { ForecastChart } from './ForecastChart'
-import { ModePicker } from './ModePicker'
-import { GoalStat, Header, Stat } from './Header'
-import {
-  ArrowRightIcon,
-  BoltIcon,
-  BookIcon,
-  ChartIcon,
-  LayersIcon,
-  SettingsIcon,
-  ShuffleIcon,
-  StarIcon,
-  TimerIcon,
-} from './icons'
-import { Kbd } from './ui/Kbd'
-import { ProgressBar } from './ProgressBar'
+/** Tarjetas de más abajo: tampoco hacen falta para el primer pintado. */
+const MissionsCard = lazy(() => import('./MissionsCard').then((module) => ({ default: module.MissionsCard })))
+const WordOfDayCard = lazy(() => import('./WordOfDayCard').then((module) => ({ default: module.WordOfDayCard })))
+const ForecastChart = lazy(() => import('./ForecastChart').then((module) => ({ default: module.ForecastChart })))
 
 const DECKS = [...LEVELS, ALL_DECK]
-/** Niveles que se ven de entrada en el inicio. */
-const LEVELS_SHOWN = 6
 
-/** Tecla para elegir cada mazo: 1–9 para los niveles, 0 para todas las palabras. */
-const shortcutOf = (deck: Deck) => (deck.level === null ? '0' : deck.level <= 9 ? String(deck.level) : null)
+const longDate = new Intl.DateTimeFormat('es', { weekday: 'long', day: 'numeric', month: 'long' })
+
+/** Saludo según la hora del día, con la fecha: «Buenas tardes · miércoles, 1 de octubre». */
+function greeting(now: number): string {
+  const hour = new Date(now).getHours()
+  const hello = hour < 6 ? 'Buenas noches' : hour < 12 ? 'Buenos días' : hour < 20 ? 'Buenas tardes' : 'Buenas noches'
+  return `${hello} · ${longDate.format(now)}`
+}
 
 interface Props {
   onStartCoach: () => void
@@ -81,7 +77,7 @@ export function DeckPicker({
   onOpenWord,
 }: Props) {
   const progress = useProgress()
-  const { mode, dailyGoal } = useSettings()
+  const { mode } = useSettings()
   const track = trackOf(mode)
   const now = useNow()
   const summaryOf = useDeckSummaries(track)
@@ -89,13 +85,6 @@ export function DeckPicker({
   const suggested = DECKS.find((d) => d.id === progress.lastDeckId) ?? LEVELS[0]
   const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
-
-  // Los primeros niveles y el que se está practicando; el resto, a un toque (son 17).
-  const [showAllLevels, setShowAllLevels] = useState(false)
-  const levelsId = useId()
-  const visibleLevels = showAllLevels
-    ? LEVELS
-    : LEVELS.filter((deck, index) => index < LEVELS_SHOWN || deck.id === suggested.id)
 
   const due = anyProgress ? dueToday(progress, track, now).length : 0
   const hard = anyProgress ? hardWords(progress, track).length : 0
@@ -114,6 +103,7 @@ export function DeckPicker({
   return (
     <>
       <Header
+        wide
         action={
           <span className="-mr-2 flex items-center">
             <IconButton label="Diccionario" onClick={onOpenDictionary}>
@@ -127,99 +117,137 @@ export function DeckPicker({
             </IconButton>
           </span>
         }
-      >
-        {anyProgress && (
-          <>
-            {/* En pantallas estrechas solo cabe la meta de hoy; el resto está en "Tu progreso". */}
-            <Stat label="Días" value={currentStreak(progress, now)} className="max-[27.5rem]:hidden" />
-            <Stat label="Dominadas" value={total.mastered.toLocaleString('es')} className="max-[27.5rem]:hidden" />
-            <GoalStat done={todayStats(progress, now).answers} goal={dailyGoal} />
-          </>
-        )}
-      </Header>
+      />
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-10 sm:px-6 sm:py-14">
-        <div className="animate-rise text-center">
-          <p className="text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Vocabulario en inglés</p>
-          <h1 className="mt-4 font-display text-5xl leading-[1.02] sm:text-6xl">
-            Escucha, <span className="text-brand">piensa</span>, pulsa.
-          </h1>
-          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted">
-            {total.total.toLocaleString('es')} palabras, de las más usadas a las más difíciles. Tecla decide qué
-            practicar y te lo vuelve a preguntar justo antes de que lo olvides.
-          </p>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 pt-7 pb-14 sm:px-6 sm:pt-10">
+        {/* Saludo y la acción principal, con el resumen de hoy al lado. */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+          <div className="flex flex-col lg:col-span-2">
+            <div className="animate-rise">
+              <p className="text-sm font-medium text-muted first-letter:uppercase">{greeting(now)}</p>
+              <h1 className="mt-1.5 font-display text-4xl leading-[1.05] sm:text-5xl">
+                Tu inglés, <span className="text-brand">hoy</span>.
+              </h1>
+            </div>
+            <div className="mt-6 flex-1">
+              <CoachCard now={now} onStart={onStartCoach} />
+            </div>
+          </div>
+          <TodayCard now={now} mastered={total.mastered} />
         </div>
 
-        <CoachCard now={now} onStart={onStartCoach} />
-        <div className="mt-3 flex justify-center">
-          <Button variant="ghost" size="sm" onClick={onStartFocus}>
-            <TimerIcon width={16} height={16} />
-            Modo concentración · 5 min
-          </Button>
+        <div className="mt-4 grid grid-cols-1 gap-4 empty:hidden lg:grid-cols-2 lg:[&>:only-child]:col-span-2">
+          <StreakBanner progress={progress} now={now} />
+          <BackupReminder onOpenSettings={onOpenSettings} />
         </div>
-        <StreakBanner progress={progress} now={now} />
-        <BackupReminder onOpenSettings={onOpenSettings} />
-        <MissionsCard now={now} />
-        <Suspense
-          fallback={<div className="mt-4 min-h-44 rounded-3xl border border-line bg-surface shadow-card" aria-hidden />}
-        >
-          <CourseCard
-            onOpenCourse={onOpenCourse}
-            onOpenLesson={onOpenLesson}
-            onOpenExam={onOpenExam}
-            onOpenQuiz={onOpenQuiz}
-          />
-        </Suspense>
-        {anyProgress && (
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+
+        {/* Accesos rápidos: cada modo de práctica a un toque. */}
+        <section aria-label="Accesos rápidos" className="mt-8">
+          <ul
+            className={cn('grid grid-cols-2 gap-3', anyProgress ? 'sm:grid-cols-3 lg:grid-cols-6' : 'sm:grid-cols-4')}
+          >
+            {anyProgress && (
+              <li>
+                <QuickTile
+                  icon={<FlameIcon />}
+                  tone="bad"
+                  title="Mis difíciles"
+                  detail={hard > 0 ? plural(hard, 'palabra') : 'Ninguna por ahora'}
+                  shortcut={hard > 0 ? 'D' : undefined}
+                  disabled={hard === 0}
+                  onClick={() => onOpenSmart('hard')}
+                />
+              </li>
+            )}
+            {anyProgress && (
+              <li>
+                <QuickTile
+                  icon={<StarIcon filled={favorites > 0} />}
+                  tone="gold"
+                  title="Favoritas"
+                  detail={favorites > 0 ? plural(favorites, 'palabra') : 'Márcalas con la estrella'}
+                  shortcut={favorites > 0 ? 'F' : undefined}
+                  disabled={favorites === 0}
+                  onClick={() => onOpenSmart('favorites')}
+                />
+              </li>
+            )}
+            <li>
+              <QuickTile
+                icon={<BoltIcon />}
+                tone="accent"
+                title="Relámpago"
+                detail={progress.blitzBest > 0 ? `Récord: ${formatCount(progress.blitzBest)}` : '60 segundos'}
+                onClick={onOpenBlitz}
+              />
+            </li>
+            <li>
+              <QuickTile
+                icon={<TimerIcon />}
+                tone="ok"
+                title="Concentración"
+                detail="5 minutos sin pausa"
+                onClick={onStartFocus}
+              />
+            </li>
+            <li>
+              <QuickTile
+                icon={<LayersIcon />}
+                tone="accent"
+                title="Colecciones"
+                detail="Comida, viajes y más"
+                onClick={onOpenTopics}
+              />
+            </li>
+            <li>
+              <QuickTile
+                icon={<BookIcon />}
+                tone="accent"
+                title="Diccionario"
+                detail={`${formatCount(total.total)} palabras`}
+                onClick={onOpenDictionary}
+              />
+            </li>
+          </ul>
+        </section>
+
+        {/* El curso, las misiones, el repaso y la palabra del día. */}
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+          <div className="md:col-span-2">
+            <Suspense fallback={<CardPlaceholder className="min-h-44" />}>
+              <CourseCard
+                onOpenCourse={onOpenCourse}
+                onOpenLesson={onOpenLesson}
+                onOpenExam={onOpenExam}
+                onOpenQuiz={onOpenQuiz}
+              />
+            </Suspense>
+          </div>
+          {/* En tablet, las misiones van al final a todo el ancho; en escritorio, en su columna. */}
+          <div className="md:order-last md:col-span-2 lg:order-none lg:col-span-1 lg:row-span-2">
+            <Suspense fallback={<CardPlaceholder className="min-h-96" />}>
+              <MissionsCard now={now} />
+            </Suspense>
+          </div>
+          {anyProgress && (
             <ReviewCard
               due={due}
               forecast={forecast(progress, track, now)}
               now={now}
               onOpen={() => onOpenSmart('review')}
             />
-            <HardCard count={hard} onOpen={() => onOpenSmart('hard')} />
-            <FavoritesCard count={favorites} onOpen={() => onOpenSmart('favorites')} />
-            <BlitzCard best={progress.blitzBest} onOpen={onOpenBlitz} />
+          )}
+          <div className={cn(!anyProgress && 'md:col-span-2')}>
+            <Suspense fallback={<CardPlaceholder className="min-h-64" />}>
+              <WordOfDayCard now={now} onOpenWord={onOpenWord} />
+            </Suspense>
           </div>
-        )}
-        <WordOfDayCard now={now} onOpenWord={onOpenWord} />
-        <TopicsCard onOpen={onOpenTopics} />
+        </div>
 
-        <section aria-labelledby="por-tu-cuenta" className="mt-12 sm:mt-14">
-          <h2 id="por-tu-cuenta" className="font-display text-2xl">
-            Practica por tu cuenta
-          </h2>
-          <p className="mt-1 text-sm text-muted">Elige cómo practicar y por dónde: un nivel o todas las palabras.</p>
-          <ModePicker value={mode} onChange={(next) => updateSettings({ mode: next })} className="mt-5" />
-          <ContinueCard deck={suggested} summary={summaryOf(suggested)} resuming={hasProgress} onPick={onPick} />
-        </section>
+        <Suspense fallback={<div className="mt-14 min-h-[60rem] sm:mt-16" aria-hidden />}>
+          <PracticeSection mode={mode} suggested={suggested} resuming={hasProgress} onPick={onPick} />
+        </Suspense>
 
-        <h2 className="mt-10 mb-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Todos los niveles</h2>
-        <ul id={levelsId} className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-          {visibleLevels.map((deck, index) => (
-            <li
-              key={deck.id}
-              className="animate-rise"
-              style={{ animationDelay: `${index * 40}ms`, animationFillMode: 'both' }}
-            >
-              <LevelCard deck={deck} summary={summaryOf(deck)} onPick={onPick} />
-            </li>
-          ))}
-          <li
-            className="animate-rise sm:col-span-2"
-            style={{ animationDelay: `${visibleLevels.length * 40}ms`, animationFillMode: 'both' }}
-          >
-            <AllWordsCard summary={total} onPick={onPick} />
-          </li>
-        </ul>
-        {!showAllLevels && (
-          <div className="mt-4 flex justify-center">
-            <Button onClick={() => setShowAllLevels(true)} aria-controls={levelsId} aria-expanded={false}>
-              Ver los {LEVELS.length} niveles
-            </Button>
-          </div>
-        )}
         {/* Solo con teclado tiene sentido; en una pantalla táctil no se muestra. */}
         <div className="mt-10 hidden justify-center pointer-fine:flex">
           <Button variant="ghost" size="sm" onClick={onOpenShortcuts} aria-keyshortcuts="?">
@@ -232,12 +260,67 @@ export function DeckPicker({
   )
 }
 
-const cardBase = cn(
-  'group relative w-full cursor-pointer rounded-3xl border text-left',
-  'transition-[translate,scale,box-shadow,border-color] duration-200',
-  'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]',
-  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
-)
+/** Hueco con el aspecto de una tarjeta mientras llega una diferida: nada salta al cargar. */
+function CardPlaceholder({ className }: { className: string }) {
+  return <div aria-hidden className={cn('h-full rounded-3xl border border-line bg-surface shadow-card', className)} />
+}
+
+const disabledCard =
+  'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card'
+
+const TILE_TONES = {
+  accent: 'bg-accent-soft text-accent',
+  ok: 'bg-ok-soft text-ok',
+  bad: 'bg-bad-soft text-bad',
+  gold: 'bg-gold-soft text-gold',
+} as const
+
+/** Acceso rápido: icono, nombre y un detalle (cuántas hay, el récord…), con su atajo si lo tiene. */
+function QuickTile({
+  icon,
+  tone,
+  title,
+  detail,
+  shortcut,
+  disabled = false,
+  onClick,
+}: {
+  icon: ReactNode
+  tone: keyof typeof TILE_TONES
+  title: string
+  detail: string
+  shortcut?: string
+  disabled?: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-keyshortcuts={shortcut}
+      className={cn(
+        cardBase,
+        'flex h-full flex-col border-line bg-surface p-4 shadow-card hover:border-accent/40 hover:shadow-key-hover',
+        disabledCard,
+      )}
+    >
+      <span className="flex w-full items-start justify-between gap-2">
+        <span
+          className={cn(
+            'grid size-10 place-items-center rounded-2xl transition-transform group-hover:-rotate-6 group-disabled:rotate-0',
+            disabled ? 'bg-bg text-muted' : TILE_TONES[tone],
+          )}
+        >
+          {icon}
+        </span>
+        {shortcut && <Kbd>{shortcut}</Kbd>}
+      </span>
+      <span className="mt-4 block text-[15px] font-semibold">{title}</span>
+      <span className="mt-0.5 block text-xs text-muted">{detail}</span>
+    </button>
+  )
+}
 
 /** Repaso del día: cuántas palabras tocan hoy en todos los niveles y la previsión de la semana. */
 function ReviewCard({
@@ -260,9 +343,9 @@ function ReviewCard({
       aria-keyshortcuts={due > 0 ? 'R' : undefined}
       className={cn(
         cardBase,
-        'flex h-full flex-col border-line bg-surface p-5 shadow-card',
+        'flex h-full flex-col border-line bg-surface p-5 shadow-card sm:p-6',
         'hover:border-accent/40 hover:shadow-key-hover',
-        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
+        disabledCard,
       )}
     >
       <span className="flex w-full items-start justify-between gap-3">
@@ -274,270 +357,12 @@ function ReviewCard({
         </span>
         {due > 0 && <Kbd>R</Kbd>}
       </span>
-      <ForecastChart counts={counts} now={now} className="mt-5 w-full" />
+      <Suspense fallback={<span className="mt-5 block h-24 w-full" aria-hidden />}>
+        <ForecastChart counts={counts} now={now} className="mt-5 w-full" />
+      </Suspense>
       <span className="mt-2 block text-[11px] text-muted">
         {upcoming > 0 ? `${plural(upcoming, 'repaso')} en los próximos 6 días` : 'Sin repasos en los próximos días'}
       </span>
-    </button>
-  )
-}
-
-/** Mis difíciles: las palabras que más se olvidan, para practicarlas aparte. */
-function HardCard({ count, onOpen }: { count: number; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      disabled={count === 0}
-      aria-keyshortcuts={count > 0 ? 'D' : undefined}
-      className={cn(
-        cardBase,
-        'flex h-full flex-col border-line bg-surface p-5 shadow-card',
-        'hover:border-bad/40 hover:shadow-[0_14px_30px_-14px_color-mix(in_oklab,var(--bad)_45%,transparent)]',
-        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
-      )}
-    >
-      <span className="flex w-full items-start justify-between gap-3">
-        <span>
-          <span className="block text-[17px] font-semibold">Mis difíciles</span>
-          <span className="mt-0.5 block text-sm text-muted">
-            {count > 0 ? 'Las que más se te olvidan' : 'Por ahora, ninguna'}
-          </span>
-        </span>
-        {count > 0 && <Kbd>D</Kbd>}
-      </span>
-      <span className="mt-auto pt-5">
-        <span
-          className={cn('block font-display text-5xl leading-none tabular-nums', count > 0 ? 'text-bad' : 'text-muted')}
-        >
-          {formatCount(count)}
-        </span>
-        <span className="mt-2 block text-[11px] text-muted">
-          {count > 0
-            ? 'Olvidadas dos veces o más, o de dificultad alta'
-            : 'Aparecerán aquí las que olvides más de una vez'}
-        </span>
-      </span>
-    </button>
-  )
-}
-
-/** Favoritas: las palabras marcadas con la estrella, para practicarlas juntas. */
-function FavoritesCard({ count, onOpen }: { count: number; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      disabled={count === 0}
-      aria-keyshortcuts={count > 0 ? 'F' : undefined}
-      className={cn(
-        cardBase,
-        'flex items-center gap-4 border-line bg-surface p-5 shadow-card',
-        'hover:border-accent/40 hover:shadow-key-hover',
-        'disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-line disabled:hover:shadow-card',
-      )}
-    >
-      <span
-        className={cn(
-          'grid size-11 shrink-0 place-items-center rounded-full transition-transform group-hover:-rotate-12',
-          count > 0 ? 'bg-accent-soft text-accent' : 'bg-bg text-muted',
-        )}
-      >
-        <StarIcon filled={count > 0} />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-[17px] font-semibold">Favoritas</span>
-        <span className="block text-sm text-muted">
-          {count > 0 ? `${plural(count, 'palabra')} con estrella` : 'Márcalas desde la ficha de cada palabra'}
-        </span>
-      </span>
-      {count > 0 && <Kbd>F</Kbd>}
-    </button>
-  )
-}
-
-/** Acceso a las colecciones temáticas (comida, animales, viajes…). */
-function TopicsCard({ onOpen }: { onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className={cn(
-        cardBase,
-        'mt-4 flex items-center gap-4 border-line bg-surface p-5 shadow-card',
-        'hover:border-accent/40 hover:shadow-key-hover',
-      )}
-    >
-      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:-rotate-6">
-        <LayersIcon />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-[17px] font-semibold">Colecciones</span>
-        <span className="block text-sm text-muted">Practica por temas: comida, viajes, emociones y más</span>
-      </span>
-      <ArrowRightIcon className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
-    </button>
-  )
-}
-
-function BlitzCard({ best, onOpen }: { best: number; onOpen: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className={cn(
-        cardBase,
-        'flex items-center gap-4 border-line bg-surface p-5 shadow-card',
-        'hover:border-accent/40 hover:shadow-key-hover',
-      )}
-    >
-      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform group-hover:rotate-12">
-        <BoltIcon />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-[17px] font-semibold">Relámpago</span>
-        <span className="block text-sm text-muted">60 segundos, todas las que puedas</span>
-      </span>
-      <span className="shrink-0 text-right">
-        <span className="block text-[10px] font-medium tracking-[0.14em] text-muted uppercase">Récord</span>
-        <span className="block font-display text-3xl leading-none tabular-nums">{formatCount(best)}</span>
-      </span>
-    </button>
-  )
-}
-
-function DueBadge({ count }: { count: number }) {
-  if (count === 0) return null
-  return <Badge tone="accent">{count.toLocaleString('es')} por repasar</Badge>
-}
-
-function deckLabel(deck: Deck) {
-  return deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`
-}
-
-function ContinueCard({
-  deck,
-  summary,
-  resuming,
-  onPick,
-}: {
-  deck: Deck
-  summary: DeckSummary
-  resuming: boolean
-  onPick: (deck: Deck) => void
-}) {
-  const detail = !resuming
-    ? `Tus primeras ${summary.total} palabras, las más usadas del inglés.`
-    : summary.due > 0
-      ? `${summary.due.toLocaleString('es')} palabras esperan repaso.`
-      : summary.fresh > 0
-        ? `${summary.fresh.toLocaleString('es')} palabras nuevas por descubrir.`
-        : 'Todo al día. Practica para afianzar.'
-
-  return (
-    <button
-      type="button"
-      onClick={() => onPick(deck)}
-      className={cn(
-        cardBase,
-        'mt-5 flex items-center gap-4 border-line bg-surface p-5 shadow-card sm:gap-5',
-        'hover:border-accent/40 hover:shadow-key-hover',
-      )}
-    >
-      <span className="min-w-0 flex-1">
-        <span className="block text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">
-          {resuming ? 'Continuar' : 'Empieza por un nivel'}
-        </span>
-        <span className="mt-1 block font-display text-2xl leading-tight">{deckLabel(deck)}</span>
-        <span className="mt-0.5 block text-sm text-muted">{detail}</span>
-        {resuming && (
-          <span className="mt-3 flex items-center gap-3">
-            <ProgressBar summary={summary} className="flex-1" />
-            <span className="text-xs font-medium text-muted tabular-nums">
-              {Math.round((summary.mastered / summary.total) * 100)}%
-            </span>
-          </span>
-        )}
-      </span>
-      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-brand text-accent-ink transition-transform group-hover:translate-x-0.5">
-        <ArrowRightIcon />
-      </span>
-    </button>
-  )
-}
-
-function LevelCard({ deck, summary, onPick }: { deck: Deck; summary: DeckSummary; onPick: (deck: Deck) => void }) {
-  const shortcut = shortcutOf(deck)
-  const started = summary.fresh < summary.total
-  const details = useId()
-  return (
-    // Nombre corto y preciso ("Nivel 13, Erudito"); el resto de la tarjeta queda como descripción.
-    // Sin esto, el nombre sería todo su texto ("…sin diccionario") y chocaría con otros botones.
-    <button
-      type="button"
-      onClick={() => onPick(deck)}
-      aria-label={`Nivel ${deck.level}, ${deck.name}`}
-      aria-describedby={details}
-      aria-keyshortcuts={shortcut ?? undefined}
-      className={cn(
-        cardBase,
-        'flex h-full gap-4 border-line bg-surface p-5 shadow-card',
-        'hover:border-accent/40 hover:shadow-key-hover',
-      )}
-    >
-      <span className="w-9 shrink-0 text-brand font-display text-5xl leading-[0.9] tabular-nums">{deck.level}</span>
-      <span id={details} className="flex min-w-0 flex-1 flex-col">
-        <span className="flex flex-wrap items-center gap-x-2 gap-y-1 pr-8">
-          <span className="text-[17px] font-semibold">{deck.name}</span>
-          <DueBadge count={summary.due} />
-        </span>
-        <span className="block text-xs text-muted tabular-nums">
-          Palabras {deck.from.toLocaleString('es')}–{deck.to.toLocaleString('es')}
-        </span>
-        <span className="mt-2 hidden text-sm leading-snug text-muted sm:block">{deck.description}</span>
-        <span lang="en" className="mt-2 block truncate text-[15px] font-medium text-ink/70 sm:mt-3">
-          {samplePreview(deck)
-            .map((w) => w.en)
-            .join(' · ')}
-        </span>
-        <span className="mt-auto pt-3">
-          <ProgressBar summary={summary} />
-          <span className="mt-1.5 block text-[11px] text-muted tabular-nums">
-            {started
-              ? `${summary.mastered} dominadas · ${summary.learning} aprendiendo`
-              : `${summary.total} palabras por descubrir`}
-          </span>
-        </span>
-      </span>
-      {shortcut && <Kbd className="absolute top-4 right-4">{shortcut}</Kbd>}
-    </button>
-  )
-}
-
-function AllWordsCard({ summary, onPick }: { summary: DeckSummary; onPick: (deck: Deck) => void }) {
-  return (
-    <button
-      type="button"
-      onClick={() => onPick(ALL_DECK)}
-      aria-keyshortcuts="0"
-      className={cn(
-        cardBase,
-        'flex items-center gap-4 border-accent/25 bg-accent-soft p-5 hover:border-accent/50 hover:shadow-key-hover',
-      )}
-    >
-      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand text-accent-ink">
-        <ShuffleIcon width={18} height={18} />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <span className="text-[17px] font-semibold">{ALL_DECK.name}</span>
-          <DueBadge count={summary.due} />
-        </span>
-        <span className="block text-sm text-muted">
-          Las {summary.total.toLocaleString('es')}, {ALL_DECK.description.toLowerCase()}
-        </span>
-      </span>
-      <Kbd>0</Kbd>
     </button>
   )
 }

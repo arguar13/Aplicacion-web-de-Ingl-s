@@ -15,7 +15,7 @@ const TOTAL = `${words.length} palabras`
 
 test('el diccionario busca en los dos idiomas y abre la ficha de cada palabra', async ({ page }) => {
   await page.goto('./')
-  await page.getByRole('button', { name: 'Diccionario' }).click()
+  await page.getByRole('button', { name: 'Diccionario', exact: true }).click()
   await expect(page).toHaveURL(/#\/diccionario$/)
   await expect(page.getByText(TOTAL, { exact: true })).toBeVisible()
   await expectNoHorizontalScroll(page)

@@ -7,7 +7,7 @@ test('el tema elegido se aplica y se recuerda', async ({ page }) => {
   await page.goto('./#/?panel=ajustes')
   const dialog = page.getByRole('dialog', { name: 'Ajustes' })
   // La versión de package.json, al pie (para saber qué versión tiene quien cuenta un problema).
-  await expect(dialog.getByText(/^Tecla \d+\.\d+\.\d+$/)).toBeVisible()
+  await expect(dialog.getByText(/^OpenSpeak \d+\.\d+\.\d+$/)).toBeVisible()
   await dialog.getByText('Oscuro', { exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await page.reload()
@@ -27,7 +27,7 @@ test('guardar una copia, borrar el progreso y restaurarlo', async ({ page }) => 
     page.waitForEvent('download'),
     dialog.getByRole('button', { name: 'Guardar copia' }).click(),
   ])
-  expect(download.suggestedFilename()).toMatch(/^tecla-copia-\d{4}-\d{2}-\d{2}\.json$/)
+  expect(download.suggestedFilename()).toMatch(/^openspeak-copia-\d{4}-\d{2}-\d{2}\.json$/)
   await expect(dialog.getByText('Última copia: hoy.')).toBeVisible()
   const file = await download.path()
 
@@ -81,7 +81,7 @@ test('una copia pasa el progreso a otro dispositivo, desde su bienvenida y sin r
   const context = await browser.newContext({ baseURL, viewport, userAgent, deviceScaleFactor, isMobile, hasTouch })
   const other = await context.newPage()
   await other.goto('./')
-  await expect(other.getByRole('heading', { name: /Inglés, tecla a tecla/ })).toBeVisible()
+  await expect(other.getByRole('heading', { name: /Habla inglés con confianza/ })).toBeVisible()
   await expect(other.getByRole('button', { name: 'Restaura tu copia' })).toBeVisible()
   await other.locator('input[type="file"]').setInputFiles(file)
 
@@ -90,7 +90,7 @@ test('una copia pasa el progreso a otro dispositivo, desde su bienvenida y sin r
   await expectAccessible(other)
   await other.getByRole('button', { name: 'Restaurar', exact: true }).click()
 
-  await expect(other.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(other.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   expect(await stored(other)).toEqual(original)
   await expect(other.getByRole('status').filter({ hasText: 'Logro desbloqueado' })).toHaveCount(0)
   await context.close()
@@ -117,7 +117,7 @@ test('donde el sistema comparte archivos, la copia se envía con su hoja de comp
   await expect(dialog.getByText('Última copia: hoy.')).toBeVisible()
 
   const [file] = await page.evaluate(() => window.sharedFiles ?? [])
-  expect(file.name).toMatch(/^tecla-copia-\d{4}-\d{2}-\d{2}\.json$/)
+  expect(file.name).toMatch(/^openspeak-copia-\d{4}-\d{2}-\d{2}\.json$/)
   expect(JSON.parse(file.text)).toMatchObject({
     format: 'tecla-copia',
     progress: { cards: { [`en-es:${word.id}`]: {} } },
@@ -131,8 +131,8 @@ test('en la bienvenida, un archivo que no es una copia se explica y no avanza', 
   await page
     .locator('input[type="file"]')
     .setInputFiles({ name: 'otra.json', mimeType: 'application/json', buffer: Buffer.from('{"hola": 1}') })
-  await expect(page.getByRole('alert')).toHaveText('Este archivo no es una copia de Tecla.')
-  await expect(page.getByRole('heading', { name: /Inglés, tecla a tecla/ })).toBeVisible()
+  await expect(page.getByRole('alert')).toHaveText('Este archivo no es una copia de OpenSpeak.')
+  await expect(page.getByRole('heading', { name: /Habla inglés con confianza/ })).toBeVisible()
   await context.close()
 })
 
@@ -142,14 +142,14 @@ test('un archivo que no es una copia muestra un error y no toca el progreso', as
   await dialog
     .locator('input[type="file"]')
     .setInputFiles({ name: 'otra.json', mimeType: 'application/json', buffer: Buffer.from('{"hola": 1}') })
-  await expect(dialog.getByRole('alert')).toHaveText('Este archivo no es una copia de Tecla.')
+  await expect(dialog.getByRole('alert')).toHaveText('Este archivo no es una copia de OpenSpeak.')
   expect(await storedProgress(page)).toBeNull()
 })
 
 test('un progreso guardado dañado no rompe la app', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('tecla:progress:v1', '{"cards": {"en-es:the": '))
   await page.goto('./')
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   expect(await page.evaluate(() => localStorage.getItem('tecla:progress:v1:respaldo'))).toBe('{"cards": {"en-es:the": ')
 })
 

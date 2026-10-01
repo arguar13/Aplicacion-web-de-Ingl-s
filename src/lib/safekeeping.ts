@@ -86,7 +86,7 @@ if (typeof navigator !== 'undefined') {
 }
 
 /**
- * Pide al navegador que no borre los datos de Tecla cuando necesite liberar espacio. Chrome, Edge y
+ * Pide al navegador que no borre los datos de OpenSpeak cuando necesite liberar espacio. Chrome, Edge y
  * Safari deciden sin preguntar; Firefox muestra un permiso, así que ahí solo se pide cuando el
  * usuario lo solicita (`interactive`).
  */

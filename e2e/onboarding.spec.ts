@@ -25,10 +25,10 @@ test('primer uso: meta diaria y prueba de nivel que recomienda por dónde empeza
   // Recorre la prueba de nivel entera (una docena de respuestas y un análisis de axe): más margen.
   test.slow()
   await page.goto('./')
-  await expect(page.getByRole('heading', { name: /Inglés, tecla a tecla/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Habla inglés con confianza/ })).toBeVisible()
   await expectNoHorizontalScroll(page)
   await expectAccessible(page)
-  await page.getByRole('button', { name: 'Empezar' }).click()
+  await page.getByRole('button', { name: 'Empezar gratis' }).click()
 
   await page.getByText('En serio').click()
   await page.getByRole('button', { name: 'Continuar' }).click()
@@ -53,11 +53,11 @@ test('primer uso: meta diaria y prueba de nivel que recomienda por dónde empeza
   // Terminada, no vuelve a aparecer.
   await page.goto('./')
   await page.reload()
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
 })
 
 test('primer uso: se puede saltar', async ({ page }) => {
   await page.goto('./')
-  await page.getByRole('button', { name: 'Saltar' }).click()
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await page.getByRole('button', { name: 'Explorar sin guía' }).click()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
 })

@@ -21,7 +21,7 @@ export function WordOfDayCard({ now, onOpenWord }: { now: number; onOpenWord: (i
   return (
     <section
       aria-labelledby="palabra-del-dia"
-      className="mt-4 animate-rise rounded-3xl border border-line bg-surface p-5 shadow-card sm:p-6"
+      className="h-full animate-rise rounded-3xl border border-line bg-surface spotlight p-5 shadow-card sm:p-6"
     >
       <div className="flex items-center justify-between gap-3">
         <h2 id="palabra-del-dia" className="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">

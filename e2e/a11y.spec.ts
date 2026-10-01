@@ -4,7 +4,7 @@ import { answerManyCorrectly, expectAccessible, expectNoHorizontalScroll } from 
 
 /** Todas las pantallas y paneles, con el título que confirma que ya están pintados. */
 const SCREENS: Array<{ path: string; ready: (page: Page) => ReturnType<Page['getByRole']> }> = [
-  { path: './', ready: (page) => page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' }) },
+  { path: './', ready: (page) => page.getByRole('heading', { name: 'Tu inglés, hoy.' }) },
   { path: './#/sesion', ready: (page) => page.getByRole('group', { name: 'Respuestas' }) },
   { path: './#/nivel/1', ready: (page) => page.getByRole('group', { name: 'Respuestas' }) },
   { path: './#/repaso', ready: (page) => page.getByRole('heading', { level: 1 }) },
@@ -48,7 +48,7 @@ async function auditScreens(page: Page, theme: string, screens: typeof SCREENS):
 test('solo con el teclado: foco visible, Ajustes lo recibe y lo devuelve al cerrarse', async ({ page }, testInfo) => {
   test.skip(testInfo.project.use.hasTouch === true, 'Con teclado físico (escritorio)')
   await page.goto('./')
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
 
   const settings = page.getByRole('button', { name: 'Ajustes' })
   // Tab hasta el botón de Ajustes: se llega con el teclado, y el foco se ve.

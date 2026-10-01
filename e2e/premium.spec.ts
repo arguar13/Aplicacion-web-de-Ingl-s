@@ -73,7 +73,7 @@ test('pronunciar: el navegador reconoce la palabra dicha', async ({ page }) => {
 test('modo concentración: 5 minutos con cuenta atrás y resumen al terminar', async ({ page }) => {
   await page.clock.install()
   await page.goto('./')
-  await page.getByRole('button', { name: /Modo concentración/ }).click()
+  await page.getByRole('button', { name: /Concentración/ }).click()
   await expect(page).toHaveURL(/#\/enfoque$/)
   await expect(page.getByRole('progressbar', { name: 'Tiempo de concentración' })).toHaveAttribute(
     'aria-valuetext',

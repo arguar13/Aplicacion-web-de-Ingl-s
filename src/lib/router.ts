@@ -1,6 +1,6 @@
 /**
  * Enrutador sobre el historial del navegador: el botón atrás (también el de Android con la app
- * instalada) recorre las pantallas de Tecla en vez de salir de la app.
+ * instalada) recorre las pantallas de la app en vez de salir de la app.
  */
 import { useSyncExternalStore } from 'react'
 import { formatHash, parseHash, type Route, sameScreen } from './routes'
@@ -52,7 +52,7 @@ export function navigate(next: Route, { replace = false }: { replace?: boolean }
 
 /**
  * Vuelve atrás dentro de la app. Si se entró directamente por un enlace y no hay adonde volver,
- * sustituye la entrada actual por `fallback` en lugar de sacar al usuario de Tecla.
+ * sustituye la entrada actual por `fallback` en lugar de sacar al usuario de la app.
  */
 export function goBack(fallback: Route) {
   if (depth() > 0) history.back()

@@ -2,18 +2,39 @@ import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 import { LogoMark } from './icons'
 
-export function Header({ children, action }: { children?: ReactNode; action?: ReactNode }) {
+/** Logo y nombre de la app. Con `compact`, en pantallas estrechas queda solo el logo. */
+export function Brand({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className="flex shrink-0 items-center gap-2.5">
+      <LogoMark className="drop-shadow-[0_6px_14px_rgb(124_58_237_/_0.35)]" />
+      <span className={cn('font-display text-[21px] leading-none', compact && 'max-[26rem]:sr-only')}>
+        Open<span className="text-brand">Speak</span>
+      </span>
+    </div>
+  )
+}
+
+export function Header({
+  children,
+  action,
+  wide = false,
+}: {
+  children?: ReactNode
+  action?: ReactNode
+  /** A lo ancho del panel de inicio (en escritorio usa más columnas que el resto de pantallas). */
+  wide?: boolean
+}) {
   return (
     // Cabecera fija de vidrio esmerilado: queda a mano al desplazarse sin tapar el contenido.
     <header className="sticky top-0 z-30 border-b border-line/60 bg-bg/70 backdrop-blur-xl backdrop-saturate-150">
-      <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4 short:max-w-4xl short:py-2">
-        <div className="flex shrink-0 items-center gap-2.5">
-          <LogoMark />
-          {/* En pantallas estrechas con estadísticas no cabe el nombre: queda el icono (y el nombre para lectores de pantalla). */}
-          <span className={cn('font-display text-[21px] leading-none', children ? 'max-[23.5rem]:sr-only' : false)}>
-            Tecla
-          </span>
-        </div>
+      <div
+        className={cn(
+          'mx-auto flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4 short:py-2',
+          wide ? 'max-w-6xl' : 'max-w-3xl short:max-w-4xl',
+        )}
+      >
+        {/* En pantallas estrechas con estadísticas no cabe el nombre: queda el logo (y el nombre para lectores de pantalla). */}
+        <Brand compact={Boolean(children)} />
         <div className="flex items-center gap-3 max-[25rem]:gap-2 sm:gap-5">
           {children && <dl className="flex items-center gap-4 max-[25rem]:gap-2.5 sm:gap-7">{children}</dl>}
           {action}

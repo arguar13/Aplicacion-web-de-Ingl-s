@@ -42,7 +42,8 @@ export const SETTINGS_KEY = 'tecla:settings:v1'
 const DEFAULTS: Settings = {
   mode: 'en-es',
   autoplay: true,
-  theme: 'system',
+  // El claro es la cara de la app; el oscuro y el automático se eligen en Ajustes.
+  theme: 'light',
   detailsPause: 'mistakes',
   dailyGoal: 20,
   newPerDay: 20,
@@ -55,14 +56,14 @@ const DEFAULTS: Settings = {
 const oneOf = <T extends number>(options: readonly T[], value: unknown, fallback: T): T =>
   options.find((option) => option === value) ?? fallback
 
-export const SETTINGS_VERSION = 1
+export const SETTINGS_VERSION = 2
 
 export function parseSettings(raw: Record<string, unknown>): Settings {
   return {
     // Hasta la Fase 8 se guardaba `direction` ('en-es' | 'es-en'): sigue valiendo como modo.
     mode: MODES.find((mode) => mode === raw.mode) ?? (raw.direction === 'es-en' ? 'es-en' : DEFAULTS.mode),
     autoplay: typeof raw.autoplay === 'boolean' ? raw.autoplay : DEFAULTS.autoplay,
-    theme: raw.theme === 'light' || raw.theme === 'dark' ? raw.theme : 'system',
+    theme: raw.theme === 'system' || raw.theme === 'dark' ? raw.theme : DEFAULTS.theme,
     // Campo nuevo en la Fase 7: lo guardado antes no lo tiene y toma el valor por defecto.
     detailsPause:
       raw.detailsPause === 'always' || raw.detailsPause === 'never' ? raw.detailsPause : DEFAULTS.detailsPause,
@@ -83,7 +84,11 @@ export function parseSettings(raw: Record<string, unknown>): Settings {
 
 export const SETTINGS_SCHEMA: VersionedSchema<Settings> = {
   version: SETTINGS_VERSION,
-  migrations: {},
+  migrations: {
+    // Versión 2: el tema por defecto pasa de automático a claro. «Automático» era el valor por
+    // defecto, así que casi nadie lo eligió: pasa a claro (se puede volver a elegir en Ajustes).
+    1: (raw) => ({ ...raw, theme: raw.theme === 'system' ? 'light' : raw.theme }),
+  },
   parse: parseSettings,
 }
 

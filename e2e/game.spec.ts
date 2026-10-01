@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('el inicio se ve completo, sin desbordes y accesible', async ({ page }) => {
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Nivel 1, Esenciales' })).toBeVisible()
   await expect(page.getByRole('button', { name: /Sesión inteligente/ })).toBeVisible()
   await expectNoHorizontalScroll(page)
@@ -63,7 +63,7 @@ test('elegir un nivel, acertar y fallar', async ({ page }) => {
 test('se juega con el teclado', async ({ page, isMobile }) => {
   test.skip(isMobile, 'Atajos de teclado: solo en escritorio')
   // Enter abre la acción principal: la sesión inteligente (con el inicio ya a la vista).
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/#\/sesion$/)
   const word = await currentWord(page)

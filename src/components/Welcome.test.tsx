@@ -1,9 +1,19 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { WelcomeShell } from './Welcome'
+import words from '@/data/words.json'
+import { COURSE_LEVELS } from '@/lib/courseMeta'
+import { TOPICS } from '@/lib/topicMeta'
+import { isRecord } from '@/lib/validate'
+import { SHOWCASE, WelcomeShell } from './Welcome'
 
 const INDEX = new URL('../../index.html', import.meta.url)
+
+/** Lecciones de un nivel del curso, leídas de sus datos. */
+function lessonsIn(id: string): number {
+  const data: unknown = JSON.parse(readFileSync(new URL(`../data/course/${id}.json`, import.meta.url), 'utf8'))
+  return isRecord(data) && Array.isArray(data.lessons) ? data.lessons.length : 0
+}
 
 describe('bienvenida pintada desde el HTML', () => {
   // Tras cambiar la bienvenida: WRITE_WELCOME=1 npx vitest run src/components/Welcome.test.tsx
@@ -20,8 +30,18 @@ describe('bienvenida pintada desde el HTML', () => {
     expect(template).toBe(renderToStaticMarkup(<WelcomeShell />))
   })
 
-  it('sus botones se anuncian como inactivos hasta que llega la app', () => {
+  it('todos sus botones se anuncian como inactivos hasta que llega la app', () => {
     const markup = renderToStaticMarkup(<WelcomeShell />)
-    expect(markup.match(/aria-disabled="true"/g)).toHaveLength(3)
+    const buttons = markup.match(/<button[\s>]/g) ?? []
+    expect(buttons.length).toBeGreaterThan(3)
+    expect(markup.match(/aria-disabled="true"/g)).toHaveLength(buttons.length)
+  })
+
+  it('las cifras que muestra coinciden con los datos de la app', () => {
+    expect(SHOWCASE.words).toBe(words.length)
+    expect(SHOWCASE.levels).toBe(COURSE_LEVELS.length)
+    expect(SHOWCASE.topics).toBe(TOPICS.length)
+    const lessons = COURSE_LEVELS.reduce((sum, level) => sum + lessonsIn(level.id), 0)
+    expect(SHOWCASE.lessons).toBe(lessons)
   })
 })

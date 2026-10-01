@@ -4,11 +4,11 @@ test('el botón atrás vuelve a los niveles en vez de salir de la app', async ({
   await page.goto('./')
   await page.getByRole('button', { name: 'Nivel 3, Cotidiano' }).click()
   await expect(page).toHaveURL(/#\/nivel\/3$/)
-  await expect(page).toHaveTitle('Nivel 3 · Cotidiano — Tecla')
+  await expect(page).toHaveTitle('Nivel 3 · Cotidiano — OpenSpeak')
 
   await page.goBack()
   await expect(page).toHaveURL(/#\/$/)
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
 
   await page.goForward()
   await expect(page).toHaveURL(/#\/nivel\/3$/)
@@ -44,5 +44,5 @@ test('ajustes se abre como panel y atrás lo cierra sin salir de la partida', as
 test('una ruta desconocida lleva al inicio', async ({ page }) => {
   await page.goto('./#/nivel/99')
   await expect(page).toHaveURL(/#\/$/)
-  await expect(page.getByRole('heading', { name: 'Escucha, piensa, pulsa.' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Tu inglés, hoy.' })).toBeVisible()
 })

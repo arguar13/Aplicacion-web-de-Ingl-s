@@ -4,7 +4,7 @@ import { buildReminderIcs, isTime } from '@/lib/reminder'
 import { Button } from './ui/Button'
 
 /**
- * Recordatorio diario: un evento en el calendario del dispositivo, a la hora elegida, que abre Tecla
+ * Recordatorio diario: un evento en el calendario del dispositivo, a la hora elegida, que abre OpenSpeak
  * (una web sin servidor no puede avisar a una hora de forma fiable; el calendario sí).
  */
 export function ReminderRow() {
@@ -22,7 +22,7 @@ export function ReminderRow() {
     <div className="py-4">
       <p className="text-[15px] font-medium">Recordatorio diario</p>
       <p className="mt-0.5 text-[13px] leading-snug text-muted">
-        Un aviso diario en tu calendario que abre Tecla. Lo gestiona tu calendario: puedes cambiarlo o borrarlo ahí.
+        Un aviso diario en tu calendario que abre OpenSpeak. Lo gestiona tu calendario: puedes cambiarlo o borrarlo ahí.
       </p>
       <div className="mt-3 flex items-center gap-2">
         <label htmlFor={id} className="sr-only">

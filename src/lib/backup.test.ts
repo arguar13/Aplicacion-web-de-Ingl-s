@@ -89,7 +89,7 @@ describe('copias de seguridad', () => {
   })
 
   it('nombra el archivo con la fecha local', () => {
-    expect(backupFileName(NOW)).toBe('tecla-copia-2026-09-27.json')
+    expect(backupFileName(NOW)).toBe('openspeak-copia-2026-09-27.json')
   })
 
   it('rechaza con un mensaje claro lo que no es una copia válida', () => {

@@ -1,7 +1,11 @@
-# Tecla
+# OpenSpeak
 
-Aprende vocabulario en inglés con una idea simple: aparece una palabra, suena su pronunciación y
-pulsas la tecla con su traducción. Más de 8000 palabras (8461), de las más usadas a las más
+> Antes se llamaba **Tecla**. Los nombres internos (claves `tecla:*` de `localStorage`, el formato
+> `tecla-copia` de las copias, el runner `tecla-runner`) se mantienen: el progreso de los usuarios
+> depende de ellos.
+
+Aprende inglés con una idea simple: aparece una palabra, suena su pronunciación y pulsas su
+traducción. Más de 8000 palabras (8461), de las más usadas a las más
 difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un **curso
 de gramática de A1 a C2** con 74 lecciones, comprensión lectora y auditiva, exámenes y quizzes. Gratis, sin cuentas, sin anuncios y
 sin conexión.
@@ -182,7 +186,7 @@ continuar · `R` repaso del día · `D` mis difíciles · `F` favoritas · `Esc`
 El build es un sitio estático: no necesita Node en el servidor. Las rutas son relativas, así que
 funciona en la raíz del dominio, en una subcarpeta o en un subdominio (p. ej. `ingles.tudominio.com`,
 creado en hPanel en **Dominios → Subdominios** con su propia carpeta, como `public_html/ingles/`).
-Si el dominio ya tiene otro sitio en `public_html` (p. ej. un blog), Tecla va siempre en la carpeta
+Si el dominio ya tiene otro sitio en `public_html` (p. ej. un blog), la app va siempre en la carpeta
 del subdominio: no hace falta tocar ese sitio ni su modo mantenimiento.
 
 ### Despliegue automático con GitLab (recomendado)
@@ -197,7 +201,7 @@ sign in**).
 
 **Runner (una vez).** En GitLab, **Settings → CI/CD → Runners → New project runner**, con la
 etiqueta `tecla`. Copia el token (`glrt-…`) y, con Docker Desktop abierto, crea un runner propio
-para Tecla (su contenedor y su volumen, separados de cualquier otro runner del PC):
+para la app (su contenedor y su volumen, separados de cualquier otro runner del PC):
 
 ```sh
 docker run -d --name tecla-runner --restart always \
@@ -222,7 +226,7 @@ las entrega a ramas protegidas como `main`) y la contraseña además como **Mask
 | `FTP_SERVER`     | Servidor FTP de hPanel (**Archivos → Cuentas FTP**), p. ej. `ftp.tudominio.com` |
 | `FTP_USERNAME`   | Usuario FTP                                                                     |
 | `FTP_PASSWORD`   | Contraseña FTP                                                                  |
-| `FTP_SERVER_DIR` | Obligatoria. Carpeta de Tecla, p. ej. `public_html/ingles/` (ver abajo)         |
+| `FTP_SERVER_DIR` | Obligatoria. Carpeta de la app, p. ej. `public_html/ingles/` (ver abajo)        |
 | `SITE_URL`       | Dirección pública, p. ej. `https://ingles.tudominio.com/`                       |
 | `FTP_TLS_NAME`   | En Hostinger, `hstgr.io` (ver abajo)                                            |
 | `FTP_PROTOCOL`   | Opcional. `ftps` por defecto; `ftp` solo si el plan no admite FTPS              |
@@ -238,16 +242,16 @@ Con `SITE_URL`, el build añade la URL canónica, las URLs absolutas de la image
 `FTP_SERVER_DIR` es relativa a la carpeta en la que empieza la cuenta FTP (`./` es esa misma
 carpeta). No tiene valor por defecto, y antes de subir nada `scripts/check-deploy-target.sh`
 lista el destino: si contiene otro sitio (algún `.php` salvo `default.php`, la bienvenida de
-Hostinger, carpetas `wp-*` o un `index.html` sin el manifiesto de Tecla), el despliegue se cancela
+Hostinger, carpetas `wp-*` o un `index.html` sin el manifiesto de la app), el despliegue se cancela
 sin tocar nada. Lo más seguro es crear en **Archivos → Cuentas FTP** una cuenta limitada a la
-carpeta de Tecla y usar `FTP_SERVER_DIR` = `./`: así el despliegue no puede llegar a otros sitios
+carpeta de la app y usar `FTP_SERVER_DIR` = `./`: así el despliegue no puede llegar a otros sitios
 del hosting.
 
 ### Despliegue manual
 
 1. `SITE_URL=https://tudominio.com/ npm run build` (o solo `npm run build`).
 2. Desde Git Bash, con las mismas variables de entorno, `bash scripts/deploy.sh`. O sube **el
-   contenido** de `dist/` (no la carpeta en sí) a la carpeta de Tecla con el Administrador de
+   contenido** de `dist/` (no la carpeta en sí) a la carpeta de la app con el Administrador de
    archivos de hPanel, incluido el archivo oculto `.htaccess`.
 
 ### Servidor

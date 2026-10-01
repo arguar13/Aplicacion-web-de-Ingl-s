@@ -13,7 +13,7 @@ test('funciona sin conexión tras la primera visita', async ({ page, context, br
   await context.setOffline(true)
   await page.goto('./#/nivel/1')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-  await expect(page).toHaveTitle('Nivel 1 · Esenciales — Tecla')
+  await expect(page).toHaveTitle('Nivel 1 · Esenciales — OpenSpeak')
 })
 
 test('las pronunciaciones se piden con la versión de su contenido', async ({ page }) => {

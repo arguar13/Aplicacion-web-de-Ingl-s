@@ -1,13 +1,42 @@
 # Cambios
 
-Todos los cambios importantes de Tecla. El formato sigue
+Todos los cambios importantes de OpenSpeak (antes Tecla). El formato sigue
 [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y las versiones,
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
-## Sin publicar
+## 2.4.0 · 2026-10-01 · OpenSpeak: rediseño premium
 
 ### Cambiado
+
+- **Nuevo nombre: OpenSpeak** (antes Tecla), con logo nuevo (un globo de diálogo con una onda de
+  voz), iconos, imagen para compartir y manifiesto. Las claves internas y el formato de las copias
+  no cambian: nadie pierde su progreso, y las copias antiguas se siguen restaurando.
+- **Tema claro por defecto**, «porcelana luminosa»: aurora de índigo, violeta y rosa, trama de
+  puntos y grano sutil, degradado de marca en tres tonos. Quien tenía «Automático» (el valor por
+  defecto anterior) pasa a claro; el oscuro y el automático siguen en Ajustes.
+- **Bienvenida nueva**, como la portada de una app profesional: titular, llamadas a la acción,
+  una demo interactiva («Pruébalo ahora», con audio), tarjetas flotantes de vidrio, las cifras de la
+  app (comprobadas contra los datos por un test) y sus tres razones.
+- **Inicio convertido en panel**: saludo, la sesión inteligente con un borde de luz que gira, la
+  tarjeta «Hoy» (anillo de la meta, racha, dominadas y rango), accesos rápidos en mosaico y una
+  cuadrícula de curso, misiones, repaso y palabra del día. En escritorio usa todo el ancho (hasta
+  tres columnas), en tablet se reorganiza en dos y en el móvil en una.
+- Detalles: destello en los botones principales, luz que sigue al cursor en las tarjetas y
+  elementos que flotan; todo respeta «reducir movimiento».
+
+### Corregido
+
+- En «Todos los niveles», los números de dos cifras (10 a 17) se cortaban: la ficha del número
+  crece con él.
+
+### Rendimiento
+
+- El JS inicial baja de 124,8 a 123,7 KB pese a todo lo nuevo: las tarjetas de más abajo del
+  inicio, «Practica por tu cuenta» y los pasos de la bienvenida tras la portada se cargan aparte
+  (los pasos, mientras se lee la portada).
+
+### Despliegue
 
 - **El despliegue pasa de GitHub Actions a GitLab CI** (`.gitlab-ci.yml`), con un runner propio en
   Docker Desktop: cada job corre en un contenedor Linux con Node 24, sin gastar minutos. El código
@@ -17,9 +46,6 @@ Todos los cambios importantes de Tecla. El formato sigue
   verificando el certificado del servidor FTPS.
 - Mantenimiento semanal del runner (`scripts/runner-maintenance.ps1`): renueva `node:24` y borra la
   versión anterior, sin tocar las imágenes de otros proyectos.
-
-### Corregido
-
 - **Despliegue por FTPS en Hostinger:** su certificado está emitido para `*.hstgr.io`, no para
   `ftp.<dominio>`, y la conexión fallaba al verificarlo. Con `FTP_TLS_NAME` = `hstgr.io` se
   conecta al servidor de siempre y el certificado se verifica contra ese nombre, sin desactivar

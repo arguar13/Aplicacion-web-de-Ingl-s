@@ -4,10 +4,12 @@ import '@fontsource-variable/inter'
 import '@fontsource-variable/geist'
 import './index.css'
 import { ErrorBoundary, ErrorScreen } from './components/ErrorBoundary'
+import { initSpotlight } from './lib/spotlight'
 import { initTheme } from './lib/theme'
 import { loadVocabulary } from './lib/vocabulary'
 
 initTheme()
+initSpotlight()
 
 const container = document.getElementById('root')
 if (!container) throw new Error('Falta el elemento #root en index.html')

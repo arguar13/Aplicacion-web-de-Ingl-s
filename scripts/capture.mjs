@@ -27,17 +27,18 @@ const [geist, inter] = await Promise.all([
   fontUrl('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2'),
 ])
 
-/** Logo (igual que public/favicon.svg): una "T" con un punto sobre el degradado de marca. */
+/** Logo (igual que public/favicon.svg): un globo de diálogo con una onda de voz sobre el degradado de marca. */
 const logo = (id, { bleed = false, glyphScale = 1 } = {}) => `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
   <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/>
+    <stop offset="0" stop-color="#4f46e5"/><stop offset=".58" stop-color="#7c3aed"/><stop offset="1" stop-color="#c026d3"/>
   </linearGradient></defs>
   ${bleed ? `<rect width="64" height="64" fill="url(#${id})"/>` : `<rect x="2" y="2" width="60" height="60" rx="18" fill="url(#${id})"/>`}
   <g transform="translate(32 32) scale(${glyphScale}) translate(-32 -32)">
-    <rect x="17" y="17" width="30" height="8" rx="4" fill="#fff"/>
-    <rect x="28" y="17" width="8" height="30" rx="4" fill="#fff"/>
-    <circle cx="45" cy="43" r="4" fill="#fff" opacity=".75"/>
+    <path d="M32 14.5c9.4 0 17 6.9 17 15.5S41.4 45.5 32 45.5c-2.1 0-4.1-.3-6-1L17.6 48.4c-.9.4-1.8-.5-1.4-1.4l2.9-6.6C16.5 37.6 15 34 15 30c0-8.6 7.6-15.5 17-15.5Z" fill="#fff"/>
+    <rect x="24.2" y="26" width="4.2" height="8" rx="2.1" fill="url(#${id})"/>
+    <rect x="29.9" y="22" width="4.2" height="16" rx="2.1" fill="url(#${id})"/>
+    <rect x="35.6" y="26" width="4.2" height="8" rx="2.1" fill="url(#${id})"/>
   </g>
 </svg>`
 
@@ -52,29 +53,29 @@ body { width: 1200px; height: 630px; overflow: hidden; font-family: Inter; color
   display: grid; grid-template-columns: 1fr 470px; align-items: center; gap: 56px; padding: 0 84px; }
 .brand { display: flex; align-items: center; gap: 14px; font-family: Geist; font-size: 28px; font-weight: 600; letter-spacing: -0.03em; }
 .logo { width: 52px; height: 52px; }
-h1 { font-family: Geist; font-weight: 650; font-size: 92px; line-height: .98; letter-spacing: -0.045em; margin-top: 40px; }
-h1 span { background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h1 { font-family: Geist; font-weight: 650; font-size: 80px; line-height: .98; letter-spacing: -0.045em; margin-top: 40px; }
+h1 span, .speak { background: linear-gradient(120deg, #4f46e5, #7c3aed 50%, #c026d3); -webkit-background-clip: text; background-clip: text; color: transparent; }
 p { margin-top: 26px; font-size: 26px; line-height: 1.4; color: #5d6070; max-width: 520px; text-wrap: pretty; }
 .card { background: #fff; border: 1px solid #e6e6ee; border-radius: 32px; padding: 38px 34px 34px;
   box-shadow: 0 1px 2px rgb(15 15 35 / .04), 0 40px 80px -30px rgb(79 70 229 / .35); }
 .eyebrow { text-align: center; font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #5d6070; }
-.word { text-align: center; font-family: Geist; font-weight: 650; letter-spacing: -0.04em; font-size: 88px; line-height: 1; margin: 18px 0 32px; }
+.word { text-align: center; font-family: Geist; font-weight: 650; letter-spacing: -0.04em; font-size: 72px; line-height: 1; margin: 18px 0 32px; }
 .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .key { display: flex; align-items: center; justify-content: center; border: 1px solid #e6e6ee; border-radius: 20px; padding: 22px 16px;
   font-size: 22px; font-weight: 550; background: #fff; box-shadow: 0 1px 2px rgb(15 15 35 / .06), 0 4px 12px -6px rgb(15 15 35 / .08); }
 .key.ok { border-color: #047857; background: #047857; color: #fff; box-shadow: 0 16px 36px -16px #047857; }
 </style></head><body>
 <div>
-  <div class="brand"><span class="logo">${logo('og')}</span>Tecla</div>
-  <h1>Inglés, <span>tecla</span><br>a tecla</h1>
-  <p>Las palabras más usadas del inglés, con repaso espaciado inteligente. Gratis.</p>
+  <div class="brand"><span class="logo">${logo('og')}</span><span>Open<span class="speak">Speak</span></span></div>
+  <h1>Habla inglés<br>con <span>confianza</span>.</h1>
+  <p>8461 palabras con voz nativa, un curso de A1 a C2 y repaso inteligente. Gratis.</p>
 </div>
 <div class="card">
-  <div class="eyebrow">¿Qué significa?</div>
-  <div class="word" lang="en">water</div>
+  <div class="eyebrow">Pruébalo ahora</div>
+  <div class="word" lang="en">beautiful</div>
   <div class="keys">
-    <div class="key">fuego</div><div class="key ok">agua</div>
-    <div class="key">tierra</div><div class="key">aire</div>
+    <div class="key">valiente</div><div class="key ok">hermoso</div>
+    <div class="key">rápido</div><div class="key">tranquilo</div>
   </div>
 </div>
 </body></html>`
@@ -139,7 +140,10 @@ async function capture(shot) {
   })
   await context.addInitScript(() => {
     localStorage.setItem('tecla:onboarding', JSON.stringify({ version: 1, done: true }))
-    localStorage.setItem('tecla:settings:v1', JSON.stringify({ version: 1, autoplay: false, sounds: false }))
+    localStorage.setItem(
+      'tecla:settings:v1',
+      JSON.stringify({ version: 2, theme: 'light', autoplay: false, sounds: false }),
+    )
   })
   const page = await context.newPage()
   await page.goto(`${APP}#/nivel/1`)
