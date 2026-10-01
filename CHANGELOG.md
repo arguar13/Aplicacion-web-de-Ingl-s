@@ -5,7 +5,36 @@ Todos los cambios importantes de Tecla. El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
-## Sin publicar
+## 2.1.0 · 2026-10-01 · Funciones profesionales de aprendizaje (Fase 19)
+
+### Añadido
+
+- **Modo tarjetas:** se piensa la traducción, se muestra y uno mismo se califica con las cuatro
+  notas de FSRS (otra vez, difícil, bien, fácil); cada nota dice cuándo volvería la palabra. La
+  nota manda sobre el tiempo de respuesta. Comparte progreso con traducir.
+- **Modo dictado:** suena la palabra sin mostrarla y se escribe en inglés (comparte progreso con
+  escribir).
+- **Pista** en escribir y dictado: destapa las letras de una en una (nunca la última); usarla deja
+  la respuesta como «casi».
+- **Favoritas como mazo** (#/favoritas), con tarjeta en el inicio y atajo `F`.
+- **Experiencia y rangos:** cada respuesta suma XP (más a la primera y con palabras nuevas; también
+  Relámpago); ocho rangos de Novato a Leyenda. Quien ya practicaba arranca con la experiencia de su
+  historial. El resumen de sesión muestra la ganada.
+- **Misiones del día:** tres por día, elegidas por la fecha (las mismas en cualquier dispositivo),
+  medidas de lo practicado hoy y premiadas una sola vez, con aviso.
+- **Tu camino** en Tu progreso: la escala A1–C2 según las dominadas, el ritmo de los últimos 30
+  días y cuándo se llegaría a cada nivel.
+- **La frase de ejemplo en voz alta** con la voz del navegador (síntesis de voz; sin servidor), en
+  el detalle tras responder, en la ficha y en la palabra del día, donde haya una voz en inglés.
+- **Exportar a CSV** la lista filtrada del diccionario (inglés, español, categoría, IPA, ejemplo,
+  estado, favorita), con BOM para Excel y listo para Anki.
+- **Panel de atajos de teclado** con `?` desde cualquier pantalla (`?panel=atajos`).
+
+### Cambiado
+
+- El progreso guarda `xp` y `missions` (campos nuevos; las copias anteriores y combinar copias
+  siguen funcionando: la XP se calcula del historial si falta y al combinar se queda el máximo).
+- Las secciones de Tu progreso son regiones con nombre; Relámpago comparte fila con Favoritas.
 
 ### Seguridad
 

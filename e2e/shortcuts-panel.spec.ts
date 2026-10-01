@@ -14,9 +14,13 @@ test('«?» abre la lista de atajos sobre cualquier pantalla y el botón atrás 
   await page.goBack()
   await expect(sheet).toBeHidden()
   await expect(page).toHaveURL(/#\/nivel\/1$/)
-  // Y por enlace directo, con Esc para cerrar.
+})
+
+test('el panel de atajos se abre por enlace directo y Esc lo cierra', async ({ page }) => {
   await page.goto('./#/?panel=atajos')
+  const sheet = page.getByRole('dialog', { name: 'Atajos de teclado' })
   await expect(sheet).toBeVisible()
   await page.keyboard.press('Escape')
   await expect(sheet).toBeHidden()
+  await expect(page).toHaveURL(/#\/$/)
 })

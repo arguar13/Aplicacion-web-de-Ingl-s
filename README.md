@@ -2,7 +2,8 @@
 
 Aprende vocabulario en inglés con una idea simple: aparece una palabra, suena su pronunciación y
 pulsas la tecla con su traducción. Más de 8000 palabras (8461), de las más usadas a las más
-difíciles, con repaso espaciado inteligente. Gratis, sin cuentas, sin anuncios y sin conexión.
+difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un camino
+de A1 a C2. Gratis, sin cuentas, sin anuncios y sin conexión.
 
 ## La sesión inteligente
 
@@ -29,29 +30,45 @@ cuenta atrás.
 
 ## Más formas de practicar
 
-- **Por tu cuenta:** 17 niveles de 500 palabras y cinco modos: **traducir**, **inverso**,
+- **Por tu cuenta:** 17 niveles de 500 palabras y siete modos: **traducir**, **inverso**,
   **escuchar** (solo el audio), **escribir** (un error de tecleo es «¡casi!», con la corrección
-  letra por letra) y **completar** (la frase de ejemplo con un hueco). Las opciones de cada ronda
-  son de la misma categoría gramatical que la respuesta.
+  letra por letra y una **pista** que destapa letras de una en una), **completar** (la frase de
+  ejemplo con un hueco), **tarjetas** (piensas la traducción, la muestras y te calificas con las
+  cuatro notas del repaso espaciado: otra vez, difícil, bien o fácil, cada una con cuándo volvería
+  la palabra) y **dictado** (oyes la palabra y la escribes). Las opciones de cada ronda son de la
+  misma categoría gramatical que la respuesta.
 - **Colecciones** (#/colecciones): 19 temas (comida, animales, cuerpo, emociones, ropa,
   transporte…) generados a partir de WordNet con el sentido de la traducción. En una colección las
   opciones son del mismo tema: hay que saber la palabra exacta.
-- **Repaso del día**, **Mis difíciles** y **Relámpago** (60 segundos contra el reloj).
+- **Repaso del día**, **Mis difíciles**, **Favoritas** (las palabras con estrella, juntas) y
+  **Relámpago** (60 segundos contra el reloj).
 - **Palabra del día:** una palabra nueva un poco más adelante de por donde vas, con su ejemplo.
 - **Pronúnciala:** en la ficha de cada palabra, dices la palabra y el reconocimiento de voz del
   navegador te dice si se entiende (Chrome, Edge y Safari; Chrome lo hace con su servicio en línea).
 
 Cada palabra tiene pronunciación con voz neuronal (se puede escuchar despacio sin cambiar el tono),
-IPA, formas irregulares y una frase de ejemplo traducida.
+IPA, formas irregulares y una frase de ejemplo traducida, que se puede **oír con la voz del
+navegador** donde tenga una voz en inglés (síntesis de voz, sin servidor).
+
+## Misiones, experiencia y rangos
+
+Cada respuesta suma **experiencia** (más a la primera y con palabras nuevas; también en Relámpago)
+y con ella se sube de **rango**: Novato, Aprendiz, Explorador, Viajero, Hablante, Experto, Maestro
+y Leyenda. Cada día hay **tres misiones** (responde 25, aprende 5 nuevas, 10 seguidas sin fallar,
+8 de oído, 10 minutos, 90 % de acierto…), las mismas en cualquier dispositivo porque salen de la
+fecha; cumplirlas da experiencia extra y se anuncia. Todo sale de lo practicado: en el progreso
+solo se guardan la experiencia y qué misiones se premiaron hoy.
 
 ## Tu progreso
 
 **Tu progreso** (#/estadisticas) empieza por **Tu semana**: respuestas, acierto, nuevas, dominadas
-ganadas, a qué hora rindes mejor y las palabras que más te costaron. Luego racha, tiempo, mapa de
-calor, evolución de las dominadas, precisión semanal, avance por nivel, previsión de repasos y la
-vitrina de **trece logros**. El **diccionario** (#/diccionario) busca en inglés y español y abre la
-ficha de cada palabra: pronunciación, ejemplo, progreso por habilidad, últimas respuestas, favorita
-y «ya la sé».
+ganadas, a qué hora rindes mejor y las palabras que más te costaron. Sigue **Tu camino**: la escala
+A1–C2 según tus palabras dominadas, el ritmo de los últimos 30 días y cuándo llegarías a cada nivel
+si lo mantienes. Luego racha, tiempo, mapa de calor, evolución de las dominadas, precisión semanal,
+avance por nivel, previsión de repasos y la vitrina de **trece logros**. El **diccionario**
+(#/diccionario) busca en inglés y español, abre la ficha de cada palabra (pronunciación, ejemplo,
+progreso por habilidad, últimas respuestas, favorita y «ya la sé») y **exporta la lista filtrada a
+CSV** (inglés, español, categoría, IPA, ejemplo, estado), listo para una hoja de cálculo o Anki.
 
 Hay meta diaria, límite de palabras nuevas, **protectores de racha** (uno cada 7 días con la meta
 cumplida) y celebraciones proporcionales (sonido, vibración en Android, confeti) que respetan el
@@ -99,9 +116,10 @@ por la CI de GitHub Actions (`.github/workflows/ci.yml`): el check, el build con
 de tamaño, los e2e en Chromium y WebKit (con axe en todas las pantallas, en los dos temas) y
 Lighthouse en móvil (rendimiento ≥ 85; accesibilidad, buenas prácticas y SEO al 100). El linter es oxlint porque typescript-eslint aún no soporta TypeScript 7.
 
-Atajos: `1`–`8` o `0` para elegir nivel · `1`–`4` para responder · `Espacio` para volver a escuchar ·
-`L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para continuar · `R` repaso del día ·
-`D` mis difíciles · `Esc` para volver a los niveles.
+Atajos: `?` muestra la lista completa en cualquier pantalla · `1`–`9` o `0` para elegir nivel ·
+`1`–`4` para responder (en tarjetas, `Enter` muestra la traducción y `1`–`4` califican) · `Espacio`
+para volver a escuchar · `L` para escuchar despacio · `E` para ver el ejemplo · `Enter` para
+continuar · `R` repaso del día · `D` mis difíciles · `F` favoritas · `Esc` para volver.
 
 ## Despliegue en Hostinger
 
@@ -174,13 +192,19 @@ src/lib/weekly.ts         Informe de la semana
 src/lib/speech.ts         Pronunciar con la voz (reconocimiento de voz del navegador)
 src/lib/decks.ts          Niveles (bloques de 500 palabras) y de dónde salen los distractores
 src/lib/details.ts        Detalles de cada palabra: carga diferida, validación y textos
-src/lib/scheduler.ts      Repaso espaciado (FSRS): notas, calendario, migración desde Leitner y siguiente palabra
-src/lib/smartDecks.ts     Repaso del día, "Mis difíciles" y previsión de repasos
+src/lib/scheduler.ts      Repaso espaciado (FSRS): notas (también las de tarjetas), calendario, migración desde Leitner y siguiente palabra
+src/lib/smartDecks.ts     Repaso del día, "Mis difíciles", favoritas y previsión de repasos
+src/lib/xp.ts             Experiencia por respuesta y rangos
+src/lib/missions.ts       Misiones del día: catálogo, elección por fecha, avance, premios y avisos
+src/lib/journey.ts        Tu camino: nivel A1–C2 por dominadas, ritmo y fecha estimada de cada nivel
+src/lib/seed.ts           Números estables a partir de la fecha (palabra del día, misiones)
+src/lib/tts.ts            Leer en voz alta con la voz del navegador (síntesis de voz)
+src/lib/exportCsv.ts      Exportar palabras a CSV (hoja de cálculo o Anki)
 src/lib/events.ts         Historial de respuestas (últimas 5000)
 src/lib/stats.ts          Cálculos de las estadísticas
 src/lib/dictionary.ts     Búsqueda y filtros del diccionario
 src/lib/quiz.ts           Opciones de cada ronda (misma categoría, sin sentidos repetidos)
-src/lib/typing.ts         Respuestas escritas: comparación tolerante y corrección letra por letra
+src/lib/typing.ts         Respuestas escritas: comparación tolerante, corrección letra por letra y pistas
 src/lib/blitz.ts          Relámpago: palabras vistas y baraja sin repetir
 src/lib/store.ts          Almacén en localStorage: versión, migraciones, validación y respaldo
 src/lib/progress.ts       Progreso (tarjetas por sentido, historial diario, récord) y cómo combinar dos

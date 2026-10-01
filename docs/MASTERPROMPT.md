@@ -463,6 +463,28 @@ avanzado, irregular) que demuestran la adaptación; e2e de una sesión inteligen
 
 ---
 
+### Tercera etapa · pedido del dueño del 01-10-2026
+
+> "Analiza la aplicación y agrégale más funcionalidades profesionales que le hagan falta, cosas que
+> la potencien a la hora de aprender inglés y la hagan más premium y completa."
+
+### Fase 19 · Funciones profesionales de aprendizaje
+
+**Objetivo:** lo que distingue a una app de pago, sin cuentas, pagos ni servicios externos.
+
+- **Tarjetas** (autoevaluación con las cuatro notas de FSRS y vista previa de intervalos) y
+  **dictado** (oír y escribir), con la escalera de habilidades intacta.
+- **Pista** en escribir (cuenta como «casi») y **favoritas** como mazo.
+- **Experiencia, rangos y misiones del día** (deterministas por fecha, premiadas una sola vez).
+- **Tu camino:** proyección A1–C2 con el ritmo de los últimos 30 días.
+- **Frase de ejemplo en voz alta** (síntesis de voz del navegador) y **exportar a CSV** (Anki).
+- **Panel de atajos** con `?`.
+
+**Criterios de aceptación:** cada función con tests unitarios y e2e; sin cambios de formato
+guardado sin compatibilidad y test; presupuesto de tamaño respetado; axe en verde.
+
+---
+
 ## 6. Definición de terminado (para cada fase)
 
 - [ ] Todo lo pedido en la fase implementado y verificado, o explicado por qué no.
@@ -667,3 +689,26 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   pintado. La CI exige ≥ 85 hasta entonces.
 - Lecciones: Tailwind escaneaba los datos y `public/`; los temporales de audio no deben vivir en la
   carpeta que copia el build; el servidor de desarrollo necesita agrupar los cambios masivos de audio.
+
+### Fase 19 · cerrada el 01-10-2026 · versión 2.1.0
+
+- Modos tarjetas y dictado: `Mode` pasa a 7 valores y `trackOf` a una tabla; la nota propia
+  (`SelfRating`) entra en `gradeAnswer` y manda sobre el tiempo. `previewIntervals` calcula con el
+  mismo planificador lo que mostrará cada botón. `isTypedMode` agrupa escribir y dictado.
+- XP y misiones en el progreso como campos nuevos sin subir la versión del esquema: `parseProgress`
+  rellena `xp` desde el historial y `missions` vacío; `mergeProgress` toma el máximo (como el
+  historial). Las misiones se vigilan como los logros (`watchMissions`) y se premian en una sola
+  escritura (`completeMissions`).
+- `seed.ts` reúne la semilla por fecha (palabra del día y misiones comparten `daySeed`; las misiones
+  barajan con `seededRng`).
+- Tu camino usa las dominadas del historial (`mastered`), que es lo único con serie temporal; el
+  "nivel orientativo" de la tarjeta del inicio sigue usando las reconocidas (`known`).
+- Síntesis de voz: `englishVoices` ordena por naturalidad (neuronales primero) y acento
+  estadounidense; el botón solo aparece cuando hay voz (`voiceschanged`).
+- Lecciones: `tsc` incluye `e2e/`, así que un test con un import sin usar deja el build sin
+  regenerar `dist` (los e2e probaban una versión vieja: se vio al depurar en el navegador);
+  Playwright 1.63 pide Chromium 1243 y la máquina trae 1194: un `playwright.local.config.ts` con
+  `executablePath` (ignorado por git) permite correr los e2e; la tecla `?` necesita que la app haya
+  montado (esperar el `h1` antes de pulsar).
+- Pendiente: audio grabado de las frases de ejemplo (hoy, voz del navegador); e2e en WebKit sin
+  red para descargar navegadores; sincronización entre dispositivos (sigue pendiente de decisión).
