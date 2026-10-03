@@ -18,7 +18,8 @@ test('la sesión inteligente se abre desde el inicio, vuelve a preguntar lo fall
   await page.getByRole('button', { name: /Sesión inteligente/ }).click()
   await expect(page).toHaveURL(/#\/sesion$/)
   await expect(page.getByText('Sesión inteligente')).toBeVisible()
-  await expect(page.getByText('Nueva', { exact: true })).toBeVisible()
+  // La primera palabra es nueva y la más usada: la nº 1 del recorrido.
+  await expect(page.getByText(/^Nueva · nº 1$/)).toBeVisible()
   await expectNoHorizontalScroll(page)
   await expectAccessible(page)
 
@@ -43,4 +44,6 @@ test('la sesión inteligente se abre desde el inicio, vuelve a preguntar lo fall
     .click()
   await expect(page.getByRole('button', { name: /Tu práctica de hoy/ })).toBeVisible()
   await expect(page.getByText(/Ritmo normal|Afianzando|Acelerando/)).toBeVisible()
+  // El recorrido es secuencial: dice por qué palabra va.
+  await expect(page.getByText(/Siguiente: palabra nº \d+ de/)).toBeVisible()
 })

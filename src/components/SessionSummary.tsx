@@ -15,6 +15,10 @@ interface Props {
   /** Nombre del mazo ("Nivel 3 · Cotidiano"), para celebrar un nivel completo. */
   deckLabel: string
   wordCount: number
+  /** El nivel que sigue ("Nivel 4 · Conversación"), si lo hay. */
+  nextDeckLabel?: string | null
+  /** Pasar al nivel siguiente (el recorrido sigue en orden). */
+  onNextDeck?: () => void
   onContinue: () => void
   onFinish: () => void
 }
@@ -23,11 +27,23 @@ interface Props {
 const MISSED_SHOWN = 8
 
 /** Resumen de la sesión: al cumplir la meta del día o al salir de la partida. */
-export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount, onContinue, onFinish }: Props) {
+export function SessionSummary({
+  reason,
+  stats,
+  dailyGoal,
+  deckLabel,
+  wordCount,
+  nextDeckLabel = null,
+  onNextDeck,
+  onContinue,
+  onFinish,
+}: Props) {
   const titleId = useId()
   const primary = useRef<HTMLButtonElement>(null)
-  // La meta, el nivel completo y el tiempo de concentración se celebran; salir es un resumen tranquilo.
-  const goal = reason === 'goal' || reason === 'level' || reason === 'time'
+  // La meta, el nivel completo o visto y el tiempo de concentración se celebran; salir es un resumen tranquilo.
+  const goal = reason === 'goal' || reason === 'level' || reason === 'time' || reason === 'seen'
+  // Al terminar un nivel, lo natural es seguir con el siguiente.
+  const advance = (reason === 'seen' || reason === 'level') && onNextDeck && nextDeckLabel
   const accuracy = stats.solved ? Math.round((stats.firstTry / stats.solved) * 100) : 0
   const missed = stats.missed.slice(0, MISSED_SHOWN)
   const more = stats.missed.length - missed.length
@@ -51,11 +67,13 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
       <h1 id={titleId} className="font-display text-4xl leading-tight sm:text-5xl">
         {reason === 'level'
           ? '¡Nivel completo!'
-          : reason === 'goal'
-            ? '¡Meta cumplida!'
-            : reason === 'time'
-              ? '¡Tiempo cumplido!'
-              : 'Buen trabajo'}
+          : reason === 'seen'
+            ? '¡Nivel recorrido!'
+            : reason === 'goal'
+              ? '¡Meta cumplida!'
+              : reason === 'time'
+                ? '¡Tiempo cumplido!'
+                : 'Buen trabajo'}
       </h1>
       {stats.xp > 0 && (
         <Badge tone="accent-soft" className="mt-3 animate-pop px-3 py-1 text-sm">
@@ -65,11 +83,13 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
       <p className="mx-auto mt-2 max-w-sm text-[15px] leading-relaxed text-muted">
         {reason === 'level'
           ? `Dominas las ${plural(wordCount, 'palabra')} de ${deckLabel}. Un paso enorme.`
-          : reason === 'goal'
-            ? `Respondiste ${plural(dailyGoal, 'palabra')} hoy. Lo que aprendiste vuelve justo antes de que lo olvides.`
-            : reason === 'time'
-              ? 'Cinco minutos de concentración. Pocos minutos cada día son los que más rinden.'
-              : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
+          : reason === 'seen'
+            ? `Ya viste las ${plural(wordCount, 'palabra')} de ${deckLabel} y no tienes repasos pendientes. El repaso espaciado te las traerá cuando toque.`
+            : reason === 'goal'
+              ? `Respondiste ${plural(dailyGoal, 'palabra')} hoy. Lo que aprendiste vuelve justo antes de que lo olvides.`
+              : reason === 'time'
+                ? 'Cinco minutos de concentración. Pocos minutos cada día son los que más rinden.'
+                : 'Esto es lo que hiciste en esta sesión. Tu progreso ya está guardado.'}
       </p>
 
       <dl className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -103,7 +123,17 @@ export function SessionSummary({ reason, stats, dailyGoal, deckLabel, wordCount,
       )}
 
       <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center">
-        {goal ? (
+        {advance ? (
+          <>
+            <Button size="lg" onClick={onContinue}>
+              Seguir en este nivel
+            </Button>
+            <Button ref={primary} variant="primary" size="lg" onClick={onNextDeck}>
+              Seguir con el {nextDeckLabel}
+              <Kbd tone="accent">Enter</Kbd>
+            </Button>
+          </>
+        ) : goal ? (
           <>
             <Button size="lg" onClick={onFinish}>
               Terminar por hoy

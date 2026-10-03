@@ -96,6 +96,12 @@ export const DISTRACTOR_WINDOW = LEVEL_SIZE
 
 const rankOf = new Map(ALL_WORDS.map((word, index) => [word.id, index]))
 
+/** Posición de una palabra en la lista de frecuencia (desde 1): «la palabra nº 313». */
+export const wordNumber = (id: string) => (rankOf.get(id) ?? 0) + 1
+
+/** El nivel que sigue a otro, para continuar el recorrido en orden; null tras el último. */
+export const nextLevel = (deck: Deck): Deck | null => (deck.level === null ? null : (LEVELS[deck.level] ?? null))
+
 /**
  * Palabras de las que salen los distractores de `word`. En un nivel, el propio nivel (todas son de
  * frecuencia parecida). En los demás mazos (todas, repaso del día, difíciles), las del vocabulario

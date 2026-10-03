@@ -1,7 +1,8 @@
 import { useCourseLevel } from '@/lib/course'
 import { cn } from '@/lib/cn'
 import { COURSE_LEVELS, type CourseLevelId, courseLevelInfo } from '@/lib/courseMeta'
-import { examPassed, nextStep, useCourseProgress } from '@/lib/courseProgress'
+import { examPassed, lessonKey, nextStep, useCourseProgress } from '@/lib/courseProgress'
+import { runOf, useResume } from '@/lib/resume'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 import { ArrowRightIcon, GraduationIcon } from './icons'
@@ -24,6 +25,14 @@ export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam, onOpenQuiz 
   const step =
     current && state.status === 'ready' ? nextStep(progress, [{ id: current.id, lessons: state.level.lessons }]) : null
   const passed = COURSE_LEVELS.filter((level) => examPassed(progress, level.id)).length
+  // La lección que toca, si se dejó a medias o si ya se intentó sin superarla.
+  const resume = useResume()
+  const lesson = current && step?.lesson ? step.lesson : null
+  const run = current && lesson ? runOf(resume, { kind: 'lesson', level: current.id, lesson: lesson.id }) : null
+  const midway = run?.step === 'practice' && run.index > 0 ? run.index : null
+  const tried = current && lesson ? progress.lessons[lessonKey(current.id, lesson.id)] : undefined
+  const lessonTotal =
+    state.status === 'ready' && lesson ? (state.level.lessons[lesson.index]?.exercises.length ?? null) : null
 
   return (
     <section
@@ -45,9 +54,13 @@ export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam, onOpenQuiz 
                   : `Nivel ${current.name} · ${courseLevelInfo(current.id).title}`}
           </p>
           <p className="mt-0.5 text-sm text-muted">
-            {passed > 0
-              ? `${passed} de ${COURSE_LEVELS.length} niveles aprobados`
-              : 'Lecciones con explicación y ejercicios; un examen por nivel.'}
+            {midway !== null
+              ? `Te quedaste en el ejercicio ${midway + 1}${lessonTotal ? ` de ${lessonTotal}` : ''}.`
+              : tried
+                ? `Tu mejor nota: ${Math.round(tried.best * 100)} %. Repítela para superarla.`
+                : passed > 0
+                  ? `${passed} de ${COURSE_LEVELS.length} niveles aprobados`
+                  : 'Lecciones con explicación y ejercicios; un examen por nivel.'}
           </p>
         </div>
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
@@ -79,9 +92,9 @@ export function CourseCard({ onOpenCourse, onOpenLesson, onOpenExam, onOpenQuiz 
         })}
       </ol>
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        {current && step?.lesson && (
-          <Button variant="primary" onClick={() => onOpenLesson(current.id, step.lesson?.id ?? '')}>
-            Seguir con la lección
+        {current && lesson && (
+          <Button variant="primary" onClick={() => onOpenLesson(current.id, lesson.id)}>
+            {midway !== null ? 'Continuar donde lo dejaste' : tried ? 'Repetir la lección' : 'Seguir con la lección'}
             <ArrowRightIcon width={16} height={16} />
           </Button>
         )}

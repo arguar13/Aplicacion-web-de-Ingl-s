@@ -21,10 +21,21 @@ La acción principal del inicio. Un entrenador decide qué practicar en cada ron
   95 %). Primero lo que más riesgo tiene de olvidarse.
 - **Escalera de habilidades:** cada palabra se aprende primero reconociéndola (inglés → español),
   luego recordándola (español → inglés), después de oído y por último escribiéndola.
-- **Dificultad que se adapta:** las nuevas llegan en orden de frecuencia, a un ritmo que depende de
-  cómo vas. Quien acierta casi todo y rápido **acelera**: las nuevas vienen de más adelante en la
-  lista (más difíciles) y lo que ya sabía se aleja. Con errores **afianza**: menos palabras a la vez
-  hasta consolidar. Con palabras ya afianzadas, las opciones se parecen más entre sí.
+- **Recorrido secuencial:** las nuevas llegan en orden de frecuencia, una tras otra desde el nivel
+  de partida, y cada una lleva su número («Nueva · nº 313»). La tarjeta del inicio dice por cuál va
+  el recorrido y en qué nivel cae.
+- **Dificultad que se adapta:** el ritmo depende de cómo vas. Quien acierta casi todo y rápido
+  **acelera** (más palabras a la vez, y lo que ya sabía se aleja como fácil); con errores
+  **afianza** (menos palabras a la vez hasta consolidar). Con palabras ya afianzadas, las opciones
+  se parecen más entre sí.
+- **Siempre avanza, nunca da vueltas sobre lo sabido:** la sesión abre con unos repasos y luego
+  intercala algo nuevo cada pocos (2, 3 o 5 según el ritmo), así una pila de repasos no tapa lo
+  nuevo. Si no cabe nada nuevo, adelanta las palabras que se están aprendiendo; lo dominado solo
+  vuelve cuando toca su repaso. Una palabra sube de escalón tras superar un repaso espaciado, no
+  en el acto.
+- **Cupo de nuevas por palabra, no por habilidad:** practicar en otra habilidad una palabra ya
+  conocida no gasta el cupo diario. Al cumplirlo, la partida lo dice y ofrece «+10 nuevas» solo
+  por hoy.
 - La tarjeta del inicio resume la práctica de hoy (repasos, nuevas, minutos), el ritmo y el
   vocabulario que ya reconoces con su nivel orientativo (A1–C2).
 
@@ -35,7 +46,13 @@ cuenta atrás.
 
 ## Más formas de practicar
 
-- **Por tu cuenta:** 17 niveles de 500 palabras y siete modos: **traducir**, **inverso**,
+- **Continúa donde lo dejaste:** el inicio ofrece retomar lo último del curso (la lección, el
+  examen o el quiz, en el ejercicio en que te quedaste) y la última práctica por tu cuenta (nivel y
+  modo), a un toque.
+- **Por tu cuenta:** cada modo empieza al tocarlo, en el nivel por el que vas en esa habilidad (el
+  último elegido mientras le quede algo; si no, el siguiente con palabras por ver). Al ver todas
+  las palabras de un nivel, la partida propone seguir con el siguiente. Son 17 niveles de 500
+  palabras y siete modos: **traducir**, **inverso**,
   **escuchar** (solo el audio), **escribir** (un error de tecleo es «¡casi!», con la corrección
   letra por letra y una **pista** que destapa letras de una en una), **completar** (la frase de
   ejemplo con un hueco), **tarjetas** (piensas la traducción, la muestras y te calificas con las
@@ -59,11 +76,21 @@ navegador** donde tenga una voz en inglés (síntesis de voz, sin servidor).
 
 **Curso de inglés** (#/curso): seis niveles del Marco Común Europeo con 74 lecciones, un examen
 por nivel y quizzes. Cada lección explica un tema en español con muchos ejemplos en inglés (con
-voz), tablas y un consejo sobre el error típico, y termina con ocho ejercicios de cuatro tipos:
-**elegir** la opción, **completar** el hueco, **ordenar** las palabras de una frase y
-**traducir**. Lo escrito se corrige con tolerancia (mayúsculas, puntuación, un error de tecleo en
-frases largas cuenta como «casi»); al fallar se ve la respuesta y la explicación. El temario sigue
-el de las certificaciones oficiales de cada nivel.
+voz), tablas, consejos y un apartado de **errores típicos de hispanohablantes** (con su causa),
+con un índice para ir a cada apartado. Son seis apartados y unos 25 ejemplos por lección, y luego
+unos 20 ejercicios de seis tipos, de menos a más: **elegir** la opción, **completar** el hueco,
+**ordenar** las palabras, **traducir**, **encontrar el error** y **transformar** la frase con una
+palabra clave (la parte 4 de los exámenes de Cambridge, obligatoria desde B1). Lo escrito se
+corrige con tolerancia (mayúsculas, puntuación, contracciones sin ambigüedad como «can't» y
+«cannot», un error de tecleo en frases largas cuenta como «casi»). Las opciones se muestran
+barajadas, siempre igual para la misma pregunta, para que la posición no delate la respuesta. Al
+fallar se ve la respuesta y la explicación. El temario sigue el de las certificaciones oficiales
+de cada nivel.
+
+Una lección se **supera con el 70 %**; por debajo, el curso propone repetirla antes de seguir. Todo
+**se retoma donde lo dejaste**: la lección vuelve al mismo ejercicio con lo ya respondido, y el
+examen y el quiz también (el quiz, con las mismas preguntas), aunque se cierre la app. Ese punto
+vive en `tecla:resume`, en el dispositivo (ver `src/lib/resume.ts`).
 
 - **A1** (13): to be, artículos y plural, presente simple, preguntas y negaciones, there is y lugar,
   can, presente continuo, pasado simple, posesivos, demostrativos y have got, imperativo y would
@@ -84,13 +111,15 @@ el de las certificaciones oficiales de cada nivel.
   concesivas avanzadas, lo hipotético, cohesión, binomios y énfasis formal, percepción y
   causativos, puntuación y estilo.
 
-Cada nivel termina con una lección de **comprensión lectora y auditiva**: estrategias y ocho
-pasajes (cuatro para leer y cuatro para escuchar) con preguntas de opción múltiple. En los de
+Cada nivel termina con una lección de **comprensión lectora y auditiva**: estrategias y doce
+pasajes (seis para leer y seis para escuchar) con preguntas de opción múltiple. En los de
 escucha el texto no se ve: se oye (con la grabación si existe, o con la voz del navegador) y la
 transcripción aparece al corregir.
 
-El **examen** de cada nivel (23 o 24 preguntas, con un pasaje de lectura y otro de escucha) se
-aprueba con el 80 %. El **quiz** de cada nivel (`#/curso/<nivel>/quiz`) saca diez preguntas al azar
+El **examen** de cada nivel (de 50 a 54 preguntas, con dos pasajes de lectura y dos de escucha,
+transformaciones y errores que encontrar) se aprueba con el 80 %. Antes de empezar dice cuánto dura
+y qué destrezas evalúa, y al terminar da la nota por destreza (gramática y uso, escritura, lectura y
+escucha). El **quiz** de cada nivel (`#/curso/<nivel>/quiz`) saca diez preguntas al azar
 de sus lecciones y su examen, distintas en cada intento; el **quiz mixto** (`#/curso/quiz`) mezcla
 doce de todos los niveles. Cada lección, examen y quiz guarda su mejor nota, suma experiencia (más
 la primera vez; un quiz sin fallos da un extra) y el inicio sugiere el siguiente paso. El contenido
@@ -287,7 +316,7 @@ src/data/details.json     IPA, formas y ejemplo de cada palabra (JSON aparte, en
 src/data/topics.json      Colecciones temáticas: ids por tema (lo genera scripts/build_topics.py)
 src/lib/vocabulary.ts     Carga del vocabulario (y cómo lo fijan los tests)
 src/lib/words.ts          Valida el vocabulario al cargarlo
-src/lib/coach.ts          Entrenador de la sesión inteligente: qué toca, ritmo y escalera de habilidades
+src/lib/coach.ts          Entrenador de la sesión inteligente: qué toca, ritmo, escalera de habilidades y recorrido
 src/lib/topicMeta.ts      Nombres de las colecciones; topics.ts, sus palabras y mazos
 src/lib/wordOfDay.ts      Palabra del día
 src/lib/weekly.ts         Informe de la semana
@@ -306,10 +335,13 @@ src/data/course/<nivel>.json Curso: lecciones, ejercicios y examen de cada nivel
 src/lib/courseMeta.ts     Niveles del curso (nombre, descripción) y nota de aprobado
 src/lib/course.ts         Contenido del curso: tipos, validación y carga diferida por nivel
 src/lib/exercises.ts      Corrección tolerante de los ejercicios y baraja estable de «ordenar»
-src/lib/courseProgress.ts Progreso del curso: mejor nota por lección, examen y quiz, experiencia, siguiente paso
+src/lib/courseProgress.ts Progreso del curso: mejor nota por lección, examen y quiz, lección superada, experiencia, siguiente paso
+src/lib/resume.ts         Dónde lo dejaste: la última práctica y cada tanda del curso a medias (tecla:resume)
 src/lib/courseQuiz.ts     Quizzes del curso: preguntas al azar por nivel y quiz mixto (semilla por intento)
 src/lib/courseAudio.ts    Audio grabado de las frases del curso: id por hash del texto, igual que el script
 src/components/course/    Pantallas del curso: niveles, nivel, lección, examen, quiz y el corredor de ejercicios
+src/components/ResumeSection.tsx «Continúa donde lo dejaste» en el inicio
+src/components/PracticeSection.tsx «Practica por tu cuenta»: un modo, un toque; y todos los niveles
 scripts/generate_course_audio.py Graba las frases del curso en public/audio/course/ (ver «El curso»)
 src/lib/events.ts         Historial de respuestas (últimas 5000)
 src/lib/stats.ts          Cálculos de las estadísticas

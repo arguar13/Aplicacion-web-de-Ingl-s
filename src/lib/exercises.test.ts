@@ -6,8 +6,10 @@ import {
   judgeQuestions,
   judgeSentence,
   normalizeSentence,
+  optionOrder,
   scoreOf,
   shuffledWords,
+  skillBreakdown,
 } from './exercises'
 
 describe('corrección de ejercicios', () => {
@@ -23,6 +25,13 @@ describe('corrección de ejercicios', () => {
     expect(judgeSentence("I've lived here for ten years!", answers)).toBe('correct')
     expect(judgeSentence('I have lived here for ten yeers.', answers)).toBe('almost')
     expect(judgeSentence('I live here.', answers)).toBe('wrong')
+    // Las contracciones sin ambigüedad valen igual que la forma completa, en los dos sentidos.
+    expect(judgeSentence('You should have booked earlier.', ["You should've booked earlier."])).toBe('correct')
+    expect(judgeSentence("I can't swim", ['I cannot swim.'])).toBe('correct')
+    expect(judgeSentence("They won't come", ['They will not come.'])).toBe('correct')
+    expect(judgeSentence("She doesn't know", ['She does not know.'])).toBe('correct')
+    // «'s» puede ser is, has o posesivo: no se desarrolla, así que no se confunde con otra cosa.
+    expect(judgeSentence("He's gone", ['He is gone.'])).toBe('wrong')
     expect(judgeSentence('', answers)).toBe('wrong')
     // En frases cortas no se perdona nada: un error cambia la palabra.
     expect(judgeSentence('I am her', ['I am here'])).toBe('wrong')
@@ -72,6 +81,54 @@ describe('corrección de ejercicios', () => {
     expect(first.toSorted()).toEqual(words.toSorted())
     for (let seed = 0; seed < 50; seed++) expect(shuffledWords(words, seed).join(' ')).not.toBe(words.join(' '))
     expect(shuffledWords(['a', 'b'], 3)).toEqual(['b', 'a'])
+  })
+
+  it('transformación: vale la respuesta con o sin contracción; la corrección muestra la frase entera', () => {
+    const transform: Exercise = {
+      type: 'transform',
+      original: "It wasn't necessary for you to come.",
+      keyword: 'NEED',
+      prompt: 'You ___ come.',
+      answers: ["needn't have", 'need not have'],
+    }
+    expect(judgeExercise(transform, 'need not have')).toBe('correct')
+    expect(judgeExercise(transform, 'Needn’t have')).toBe('correct')
+    expect(judgeExercise(transform, "didn't need to")).toBe('wrong')
+    expect(correctAnswer(transform)).toBe("You needn't have come.")
+  })
+
+  it('encuentra el error: vale la parte equivocada, y la corrección deja la frase bien', () => {
+    const spot: Exercise = {
+      type: 'spot',
+      parts: ['My sister', "don't", 'like', 'horror films.'],
+      answer: 1,
+      correction: "doesn't",
+    }
+    expect(judgeExercise(spot, 1)).toBe('correct')
+    expect(judgeExercise(spot, 0)).toBe('wrong')
+    expect(correctAnswer(spot)).toBe("My sister doesn't like horror films.")
+  })
+
+  it('las opciones se muestran barajadas, siempre igual para la misma pregunta', () => {
+    const options = ['go', 'goes', 'going', 'gone']
+    const order = optionOrder(options, 'She ___ to work.')
+    expect(order.toSorted((a, b) => a - b)).toEqual([0, 1, 2, 3])
+    expect(optionOrder(options, 'She ___ to work.')).toEqual(order)
+    // Con muchas preguntas, la correcta (aquí la 1) cae en todas las posiciones.
+    const positions = new Set(Array.from({ length: 40 }, (_, i) => optionOrder(options, `Pregunta ${i}`).indexOf(1)))
+    expect(positions.size).toBe(4)
+  })
+
+  it('el desglose por destrezas cuenta cada tipo en la suya', () => {
+    const exercises: Exercise[] = [
+      { type: 'choice', prompt: 'a', options: ['x', 'y', 'z'], answer: 0 },
+      { type: 'translate', es: 'b', answers: ['b'] },
+      { type: 'spot', parts: ['a', 'b', 'c'], answer: 0, correction: 'd' },
+    ]
+    expect(skillBreakdown(exercises, ['correct', 'wrong', 'almost'])).toEqual([
+      { skill: 'use', correct: 2, total: 2, ratio: 1 },
+      { skill: 'writing', correct: 0, total: 1, ratio: 0 },
+    ])
   })
 
   it('la nota cuenta los «casi» como aciertos', () => {

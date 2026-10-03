@@ -5,6 +5,8 @@ export type Exercise =
   | { type: 'fill'; prompt: string; answers: string[] }
   | { type: 'translate'; es: string; answers: string[] }
   | { type: 'order'; es: string; words: string[] }
+  | { type: 'transform'; original: string; prompt: string; answers: string[] }
+  | { type: 'spot'; parts: string[]; answer: number }
   | ({ type: 'reading' } & Passage)
   | ({ type: 'listening' } & Passage)
 
@@ -13,6 +15,9 @@ interface Passage {
   title: string
   questions: Array<{ options: string[]; answer: number }>
 }
+
+/** Letra de cada parte en «encuentra el error». */
+const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
 
 const isStrings = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'string')
@@ -34,6 +39,10 @@ export function toExercise(raw: unknown): Exercise {
   if (entry.type === 'translate' && isStrings(entry.answers))
     return { type: 'translate', es: text('es'), answers: entry.answers }
   if (entry.type === 'order' && isStrings(entry.words)) return { type: 'order', es: text('es'), words: entry.words }
+  if (entry.type === 'transform' && isStrings(entry.answers))
+    return { type: 'transform', original: text('original'), prompt: text('prompt'), answers: entry.answers }
+  if (entry.type === 'spot' && isStrings(entry.parts) && typeof entry.answer === 'number')
+    return { type: 'spot', parts: entry.parts, answer: entry.answer }
   if ((entry.type === 'reading' || entry.type === 'listening') && Array.isArray(entry.questions)) {
     const questions = entry.questions.map((question: unknown) => {
       if (typeof question !== 'object' || question === null) throw new Error('Pregunta sin forma')
@@ -84,8 +93,16 @@ export async function solve(page: Page, exercise: Exercise) {
         .getByRole('button', { name: exercise.options[exercise.answer], exact: true })
         .click()
       break
+    case 'spot':
+      // Cada parte se nombra con su letra: «B: don't».
+      await page
+        .getByRole('group', { name: 'Partes de la frase' })
+        .getByRole('button', { name: `${LETTERS[exercise.answer]}: ${exercise.parts[exercise.answer]}`, exact: true })
+        .click()
+      break
     case 'fill':
-    case 'translate': {
+    case 'translate':
+    case 'transform': {
       const input = page.getByRole('textbox')
       await input.fill(exercise.answers[0])
       await input.press('Enter')
@@ -118,6 +135,8 @@ const TYPE_BY_LABEL: Record<string, Exercise['type']> = {
   'Completa el hueco': 'fill',
   'Ordena las palabras': 'order',
   'Traduce al inglés': 'translate',
+  'Transforma la frase': 'transform',
+  'Encuentra el error': 'spot',
   'Comprensión lectora': 'reading',
   'Comprensión auditiva': 'listening',
 }
@@ -129,14 +148,27 @@ const shownText = (exercise: Exercise) =>
     ? squash(exercise.prompt.replace('___', ' '))
     : exercise.type === 'reading' || exercise.type === 'listening'
       ? squash(exercise.title)
-      : squash(exercise.es)
+      : exercise.type === 'transform'
+        ? squash(exercise.original)
+        : exercise.type === 'spot'
+          ? squash(exercise.parts.join(' '))
+          : squash(exercise.es)
 
 /** Reconoce el ejercicio que está en pantalla entre los del fondo, por su tipo y su enunciado. */
 export async function shownExercise(page: Page, pool: readonly Exercise[]): Promise<Exercise> {
   const section = page.locator('section[aria-label*="ejercicio"]')
   const label = squash((await section.locator('span.uppercase').first().textContent()) ?? '')
   const type = TYPE_BY_LABEL[label]
-  const prompt = squash((await section.locator('p[lang], h3[lang]').first().textContent()) ?? '')
+  // En «encuentra el error», la frase son botones con su letra: se lee del nombre de cada uno.
+  const parts = section.getByRole('group', { name: 'Partes de la frase' }).getByRole('button')
+  const prompt =
+    type === 'spot'
+      ? squash(
+          (await parts.evaluateAll((buttons) => buttons.map((b) => b.getAttribute('aria-label') ?? '')))
+            .map((name) => name.replace(/^[A-Z]: /, ''))
+            .join(' '),
+        )
+      : squash((await section.locator('p[lang], h3[lang]').first().textContent()) ?? '')
   const found = pool.find((exercise) => exercise.type === type && shownText(exercise) === prompt)
   if (!found) throw new Error(`Ejercicio no reconocido: ${label} · ${prompt}`)
   return found
@@ -147,4 +179,49 @@ export async function solveShown(page: Page, pool: readonly Exercise[], count: n
   if (count <= 0) return
   await solve(page, await shownExercise(page, pool))
   return solveShown(page, pool, count - 1)
+}
+
+/**
+ * Responde mal el ejercicio en pantalla (donde se puede: elegir, escribir o señalar) y pasa al
+ * siguiente. Ordenar y comprensión se resuelven bien: en ellos no hay «una respuesta mal» obvia.
+ */
+export async function fail(page: Page, exercise: Exercise) {
+  switch (exercise.type) {
+    case 'choice': {
+      const wrong = exercise.options.findIndex((_, i) => i !== exercise.answer)
+      await page
+        .getByRole('group', { name: 'Opciones' })
+        .getByRole('button', { name: exercise.options[wrong], exact: true })
+        .click()
+      break
+    }
+    case 'fill':
+    case 'translate':
+    case 'transform':
+      await page.getByRole('textbox').fill('zzz')
+      await page.getByRole('textbox').press('Enter')
+      break
+    case 'spot': {
+      const wrong = exercise.answer === 0 ? 1 : 0
+      await page
+        .getByRole('group', { name: 'Partes de la frase' })
+        .getByRole('button', { name: `${LETTERS[wrong]}: ${exercise.parts[wrong]}`, exact: true })
+        .click()
+      break
+    }
+    case 'order':
+    case 'reading':
+    case 'listening':
+      return solve(page, exercise)
+  }
+  await expect(page.getByText('No es así.')).toBeVisible()
+  await page.getByRole('button', { name: /Continuar|Ver el resultado/ }).click()
+}
+
+/** Falla todos los ejercicios que se puedan fallar, uno tras otro. */
+export async function failAll(page: Page, exercises: readonly Exercise[]): Promise<void> {
+  const [first, ...rest] = exercises
+  if (!first) return
+  await fail(page, first)
+  return failAll(page, rest)
 }

@@ -1,11 +1,14 @@
 /** Números estables a partir de una fecha: mismo día, mismo resultado en cualquier dispositivo. */
 
-/** Número estable a partir de la fecha ("2026-09-29") (FNV-1a de 32 bits). */
-export function daySeed(day: string): number {
+/** Número estable a partir de un texto (FNV-1a de 32 bits). */
+export function stringSeed(text: string): number {
   let hash = 2166136261
-  for (const char of day) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619)
+  for (const char of text) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619)
   return hash >>> 0
 }
+
+/** Número estable a partir de la fecha ("2026-09-29"). */
+export const daySeed = (day: string): number => stringSeed(day)
 
 /** Generador de números pseudoaleatorios (0–1) determinista a partir de una semilla (mulberry32). */
 export function seededRng(seed: number): () => number {

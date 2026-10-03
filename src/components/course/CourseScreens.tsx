@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { cn } from '@/lib/cn'
 import {
@@ -10,7 +10,7 @@ import {
   useAllCourseLevels,
   useCourseLevel,
 } from '@/lib/course'
-import { COURSE_LEVELS, type CourseLevelId, courseLevelInfo, EXAM_PASS } from '@/lib/courseMeta'
+import { COURSE_LEVELS, type CourseLevelId, courseLevelInfo, EXAM_PASS, LESSON_PASS } from '@/lib/courseMeta'
 import {
   examPassed,
   lessonKey,
@@ -26,7 +26,7 @@ import {
   XP_QUIZ_PERFECT,
 } from '@/lib/courseProgress'
 import { buildMixedQuiz, buildQuiz, MIXED_QUIZ_SIZE, QUIZ_SIZE, quizPool, quizSeed } from '@/lib/courseQuiz'
-import { correctAnswer, scoreOf, type Verdict } from '@/lib/exercises'
+import { correctAnswer, scoreOf, SKILL_LABEL, skillBreakdown, type SkillScore, type Verdict } from '@/lib/exercises'
 import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
 import { Confetti } from '../Confetti'
@@ -37,7 +37,8 @@ import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Kbd } from '../ui/Kbd'
 import { Surface } from '../ui/Surface'
-import { ExerciseRunner } from './ExerciseRunner'
+import { clearRun, type CourseRun, getResume, runOf, type RunTarget, saveRun, useResume } from '@/lib/resume'
+import { ExerciseRunner, validStart } from './ExerciseRunner'
 
 function BackLink({ label, onClick }: { label: string; onClick: () => void }) {
   return (
@@ -226,7 +227,7 @@ function LevelCard({ id, passed, onOpen }: { id: CourseLevelId; passed: boolean;
               ? 'Cargando…'
               : summary.total === 0
                 ? 'Contenido en camino'
-                : `${summary.done} de ${summary.total} lecciones`}
+                : `${summary.done} de ${summary.total} lecciones superadas`}
           </span>
         </span>
       </span>
@@ -280,6 +281,7 @@ function LevelContent({
   onOpenExam: () => void
   onOpenQuiz: () => void
 }) {
+  const resume = useResume()
   const summary = levelSummary(
     progress,
     level.id,
@@ -310,38 +312,48 @@ function LevelContent({
       </Surface>
 
       <h2 className="mt-8 mb-3 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">
-        Lecciones · {summary.done} de {summary.total}
+        Lecciones superadas · {summary.done} de {summary.total}
       </h2>
       <ol className="space-y-2.5">
         {level.lessons.map((lesson, index) => {
           const attempt = progress.lessons[lessonKey(level.id, lesson.id)]
+          const passed = attempt !== undefined && attempt.best >= LESSON_PASS
+          const run = runOf(resume, { kind: 'lesson', level: level.id, lesson: lesson.id })
+          const midway = run?.step === 'practice' && run.index > 0 ? run.index : null
           return (
             <li key={lesson.id}>
               <button
                 type="button"
                 onClick={() => onOpenLesson(lesson.id)}
                 className={cn(
-                  'group flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-line bg-surface px-4 py-3.5 text-left shadow-card',
+                  'group flex w-full cursor-pointer items-center gap-4 rounded-2xl border bg-surface px-4 py-3.5 text-left shadow-card',
                   'transition-[translate,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-key-hover',
                   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+                  midway !== null ? 'border-accent/40' : 'border-line',
                 )}
               >
                 <span
                   className={cn(
                     'grid size-9 shrink-0 place-items-center rounded-full text-sm font-semibold tabular-nums',
-                    attempt ? 'bg-ok-soft text-ok' : 'bg-accent-soft text-accent',
+                    passed ? 'bg-ok-soft text-ok' : attempt ? 'bg-gold-soft text-gold' : 'bg-accent-soft text-accent',
                   )}
                 >
-                  {attempt ? <CheckCircleIcon width={18} height={18} /> : index + 1}
+                  {passed ? <CheckCircleIcon width={18} height={18} /> : index + 1}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[16px] font-semibold">{lesson.title}</span>
                   <span className="block text-[13px] leading-snug text-muted">{lesson.summary}</span>
-                  {attempt && (
-                    <span className="mt-0.5 block text-[11px] text-ok tabular-nums">
-                      Mejor nota: {pct(attempt.best)}
+                  {midway !== null ? (
+                    <span className="mt-0.5 block text-[11px] font-medium text-accent tabular-nums">
+                      En curso · ejercicio {midway + 1} de {lesson.exercises.length}
                     </span>
-                  )}
+                  ) : attempt ? (
+                    <span className={cn('mt-0.5 block text-[11px] tabular-nums', passed ? 'text-ok' : 'text-gold')}>
+                      {passed
+                        ? `Superada · mejor nota ${pct(attempt.best)}`
+                        : `Por superar · ${pct(attempt.best)} (hace falta ${pct(LESSON_PASS)})`}
+                    </span>
+                  ) : null}
                 </span>
                 <ArrowRightIcon className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5" />
               </button>
@@ -445,6 +457,17 @@ export function LessonScreen({ level, lesson: lessonId, onExit, onOpenLesson, on
 
 type Phase = { step: 'read' } | { step: 'practice' } | { step: 'done'; verdicts: Verdict[]; first: boolean }
 
+/** Desplazamiento suave hasta una sección (sin animación con movimiento reducido). */
+function scrollToId(id: string) {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  document.getElementById(id)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+}
+
+/** Una tanda a medio hacer, si cuadra con los ejercicios de ahora: el ejercicio y lo respondido. */
+function savedStart(run: CourseRun | null, total: number) {
+  return run?.step === 'practice' ? validStart(run, total) : null
+}
+
 function LessonView({
   level,
   lesson,
@@ -462,18 +485,43 @@ function LessonView({
   nextLabel: string
   onExit: () => void
 }) {
-  const [phase, setPhase] = useState<Phase>({ step: 'read' })
+  const [target] = useState<RunTarget>(() => ({ kind: 'lesson', level, lesson: lesson.id }))
+  const exercises = lesson.exercises
+  // Si se dejó a mitad de los ejercicios, se vuelve directamente a ellos, en el mismo punto.
+  const [start, setStart] = useState(() => savedStart(runOf(getResume(), target), exercises.length))
+  const [phase, setPhase] = useState<Phase>(() => (start ? { step: 'practice' } : { step: 'read' }))
+  // Cambia al empezar de cero: vuelve a montar el corredor desde el primer ejercicio.
+  const [attemptId, setAttemptId] = useState(0)
+  const resume = useResume()
+  const pending = savedStart(runOf(resume, target), exercises.length)
   const progress = useCourseProgress()
   const attempt = progress.lessons[lessonKey(level, lesson.id)]
+
+  // Abrirla ya cuenta como «por aquí ibas», aunque aún no se haya hecho ningún ejercicio.
+  useEffect(() => {
+    if (!runOf(getResume(), target)) saveRun(target, { step: 'read', index: 0, verdicts: [] })
+  }, [target])
+
+  function practice(from: 'saved' | 'scratch') {
+    const resumeFrom = from === 'saved' ? pending : null
+    if (!resumeFrom) saveRun(target, { step: 'practice', index: 0, verdicts: [] })
+    setStart(resumeFrom)
+    setAttemptId((id) => id + 1)
+    setPhase({ step: 'practice' })
+    window.scrollTo({ top: 0 })
+  }
 
   function finish(verdicts: Verdict[]) {
     const score = scoreOf(verdicts)
     const first = attempt === undefined
     recordLesson(level, lesson.id, score.correct + score.almost, score.ratio)
-    feedback('goal')
+    clearRun(target)
+    feedback(score.ratio >= LESSON_PASS ? 'goal' : 'wrong')
     setPhase({ step: 'done', verdicts, first })
     window.scrollTo({ top: 0 })
   }
+
+  const examples = lesson.sections.reduce((sum, section) => sum + (section.examples?.length ?? 0), 0)
 
   return (
     <>
@@ -485,76 +533,59 @@ function LessonView({
 
       {phase.step === 'read' && (
         <>
-          {lesson.sections.map((section) => (
-            <Surface as="section" key={section.heading} className="mt-5 px-5 py-5 sm:px-6">
-              <h2 className="text-[19px] font-semibold">{section.heading}</h2>
-              {section.body.map((paragraph) => (
-                <p key={paragraph} className="mt-2.5 text-[15px] leading-relaxed">
-                  {paragraph}
-                </p>
+          {/* Índice: la lección es larga; cada apartado a un toque, y los ejercicios al final. */}
+          <nav aria-label="Contenido de la lección" className="mt-5">
+            <p className="text-xs text-muted">
+              {plural(lesson.sections.length, 'apartado')} · {plural(examples, 'ejemplo')} ·{' '}
+              {plural(exercises.length, 'ejercicio')}
+            </p>
+            <ol className="mt-2 flex flex-wrap gap-2">
+              {lesson.sections.map((section, i) => (
+                <li key={section.heading}>
+                  <button
+                    type="button"
+                    onClick={() => scrollToId(`apartado-${i + 1}`)}
+                    className="cursor-pointer rounded-full border border-line bg-surface px-3 py-1 text-[13px] text-muted transition-colors hover:border-accent/40 hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
+                  >
+                    <span className="text-accent tabular-nums">{i + 1}.</span> {section.heading}
+                  </button>
+                </li>
               ))}
-              {section.table && (
-                <div className="mt-4 overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr>
-                        {section.table.headers.map((header) => (
-                          <th
-                            key={header}
-                            className="border-b border-line-strong px-2 py-1.5 text-left text-[11px] font-semibold tracking-wide text-muted uppercase"
-                          >
-                            {header}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {section.table.rows.map((row) => (
-                        <tr key={row.join('|')} className="border-b border-line last:border-0">
-                          {row.map((cell, i) => (
-                            <td
-                              key={`${section.table?.headers[i] ?? i}:${cell}`}
-                              lang={i === row.length - 1 && /[a-záéíóú]{3}/.test(cell) ? undefined : 'en'}
-                              className="px-2 py-1.5"
-                            >
-                              {cell}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-              {section.examples && (
-                <ul className="mt-4 space-y-2.5">
-                  {section.examples.map((example) => (
-                    <li key={example.en} className="flex items-start gap-2 border-l-2 border-accent/60 pl-3">
-                      <span className="min-w-0 flex-1">
-                        <span lang="en" className="block text-[16px] font-medium">
-                          {example.en}
-                        </span>
-                        <span className="block text-[13px] text-muted">{example.es}</span>
-                      </span>
-                      <SpeakExampleButton text={example.en} className="-mt-1.5" />
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {section.tip && (
-                <p className="mt-4 rounded-2xl bg-accent-soft px-4 py-3 text-[14px] leading-snug text-accent">
-                  <span className="font-semibold">Ojo: </span>
-                  {section.tip}
-                </p>
-              )}
-            </Surface>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollToId('a-practicar')}
+                  className="cursor-pointer rounded-full bg-accent-soft px-3 py-1 text-[13px] font-medium text-accent transition-colors hover:bg-brand hover:text-accent-ink focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  Ir a los ejercicios
+                </button>
+              </li>
+            </ol>
+          </nav>
+          {lesson.sections.map((section, i) => (
+            <SectionView key={section.heading} id={`apartado-${i + 1}`} number={i + 1} section={section} />
           ))}
-          <div className="mt-6 flex flex-col items-center gap-2">
-            <Button variant="primary" size="lg" onClick={() => setPhase({ step: 'practice' })}>
-              Practicar · {plural(lesson.exercises.length, 'ejercicio')}
-            </Button>
+          <div id="a-practicar" className="mt-6 flex scroll-mt-6 flex-col items-center gap-2">
+            {pending ? (
+              <>
+                <Button variant="primary" size="lg" onClick={() => practice('saved')}>
+                  Seguir con los ejercicios · {pending.index + 1} de {exercises.length}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => practice('scratch')}>
+                  Empezar de cero
+                </Button>
+              </>
+            ) : (
+              <Button variant="primary" size="lg" onClick={() => practice('scratch')}>
+                Practicar · {plural(exercises.length, 'ejercicio')}
+              </Button>
+            )}
             {attempt && (
-              <p className="text-xs text-muted">Ya la hiciste con un {pct(attempt.best)}. Repetirla afianza.</p>
+              <p className="text-xs text-muted">
+                {attempt.best >= LESSON_PASS
+                  ? `Superada con un ${pct(attempt.best)}. Repetirla afianza.`
+                  : `Tu mejor nota es ${pct(attempt.best)}: se supera con el ${pct(LESSON_PASS)}.`}
+              </p>
             )}
           </div>
         </>
@@ -562,37 +593,189 @@ function LessonView({
 
       {phase.step === 'practice' && (
         <div className="mt-6">
-          <ExerciseRunner exercises={lesson.exercises} label={`Lección ${number}`} onFinish={finish} />
+          {start && (
+            <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-accent/25 bg-accent-soft px-4 py-2.5 text-[13px]">
+              <span className="min-w-0 basis-full text-ink sm:flex-1 sm:basis-0">
+                Retomas donde lo dejaste: ejercicio {start.index + 1} de {exercises.length}.
+              </span>
+              <Button variant="ghost" size="sm" onClick={() => setPhase({ step: 'read' })}>
+                Ver la teoría
+              </Button>
+              <Button variant="ghost" size="sm" onClick={() => practice('scratch')}>
+                Empezar de cero
+              </Button>
+            </div>
+          )}
+          <ExerciseRunner
+            key={attemptId}
+            exercises={exercises}
+            label={`Lección ${number}`}
+            initial={start}
+            onProgress={(index, verdicts) => saveRun(target, { step: 'practice', index, verdicts })}
+            onFinish={finish}
+          />
         </div>
       )}
 
       {phase.step === 'done' && (
-        <Result
-          title="¡Lección completada!"
+        <LessonResult
           verdicts={phase.verdicts}
-          exercises={lesson.exercises}
-          xp={
-            scoreOf(phase.verdicts).correct * XP_EXERCISE +
-            scoreOf(phase.verdicts).almost * XP_EXERCISE +
-            (phase.first ? XP_LESSON : 0)
-          }
-          detail={phase.first ? `Primera vez: +${XP_LESSON} XP por terminarla.` : 'Repetir afianza lo aprendido.'}
-          actions={
-            <>
-              <Button size="lg" onClick={() => setPhase({ step: 'read' })}>
-                Repasar la lección
-              </Button>
-              <Button variant="primary" size="lg" onClick={onNext}>
-                {nextLabel}
-                <Kbd tone="accent">Enter</Kbd>
-              </Button>
-            </>
-          }
-          onEnter={onNext}
+          exercises={exercises}
+          first={phase.first}
+          nextLabel={nextLabel}
+          onRetry={() => practice('scratch')}
+          onReview={() => {
+            setPhase({ step: 'read' })
+            window.scrollTo({ top: 0 })
+          }}
+          onNext={onNext}
           onExit={onExit}
         />
       )}
     </>
+  )
+}
+
+/** Un apartado de la teoría: explicación, tabla, ejemplos con voz y el consejo. */
+function SectionView({ id, number, section }: { id: string; number: number; section: Lesson['sections'][number] }) {
+  return (
+    <Surface as="section" id={id} aria-labelledby={`${id}-titulo`} className="mt-5 scroll-mt-6 px-5 py-5 sm:px-6">
+      <h2 id={`${id}-titulo`} className="text-[19px] font-semibold">
+        <span className="mr-1.5 text-accent tabular-nums">{number}.</span>
+        {section.heading}
+      </h2>
+      {section.body.map((paragraph) => (
+        <p key={paragraph} className="mt-2.5 text-[15px] leading-relaxed">
+          {paragraph}
+        </p>
+      ))}
+      {section.table && (
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr>
+                {section.table.headers.map((header) => (
+                  <th
+                    key={header}
+                    className="border-b border-line-strong px-2 py-1.5 text-left text-[11px] font-semibold tracking-wide text-muted uppercase"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {section.table.rows.map((row) => (
+                <tr key={row.join('|')} className="border-b border-line last:border-0">
+                  {row.map((cell, i) => (
+                    <td
+                      key={`${section.table?.headers[i] ?? i}:${cell}`}
+                      lang={i === row.length - 1 && /[a-záéíóú]{3}/.test(cell) ? undefined : 'en'}
+                      className="px-2 py-1.5"
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {section.examples && (
+        <ul className="mt-4 space-y-2.5">
+          {section.examples.map((example) => (
+            <li key={example.en} className="flex items-start gap-2 border-l-2 border-accent/60 pl-3">
+              <span className="min-w-0 flex-1">
+                <span lang="en" className="block text-[16px] font-medium">
+                  {example.en}
+                </span>
+                <span className="block text-[13px] text-muted">{example.es}</span>
+              </span>
+              <SpeakExampleButton text={example.en} className="-mt-1.5" />
+            </li>
+          ))}
+        </ul>
+      )}
+      {section.tip && (
+        <p className="mt-4 rounded-2xl bg-accent-soft px-4 py-3 text-[14px] leading-snug text-accent">
+          <span className="font-semibold">Ojo: </span>
+          {section.tip}
+        </p>
+      )}
+    </Surface>
+  )
+}
+
+/**
+ * El resultado de una lección. Con LESSON_PASS o más está superada y se sigue; por debajo, lo
+ * natural es repetir los ejercicios (también se puede seguir igualmente).
+ */
+function LessonResult({
+  verdicts,
+  exercises,
+  first,
+  nextLabel,
+  onRetry,
+  onReview,
+  onNext,
+  onExit,
+}: {
+  verdicts: Verdict[]
+  exercises: readonly Exercise[]
+  first: boolean
+  nextLabel: string
+  onRetry: () => void
+  onReview: () => void
+  onNext: () => void
+  onExit: () => void
+}) {
+  const score = scoreOf(verdicts)
+  const passed = score.ratio >= LESSON_PASS
+  const xp = (score.correct + score.almost) * XP_EXERCISE + (first ? XP_LESSON : 0)
+  return (
+    <Result
+      title={passed ? '¡Lección superada!' : 'Casi: un repaso más'}
+      verdicts={verdicts}
+      exercises={exercises}
+      xp={xp}
+      detail={
+        passed
+          ? first
+            ? `Primera vez: +${XP_LESSON} XP por terminarla.`
+            : 'Repetir afianza lo aprendido.'
+          : `Se supera con el ${pct(LESSON_PASS)}. Repasa lo que fallaste (abajo) y vuelve a intentarlo: cada intento afianza.`
+      }
+      celebrate={passed}
+      actions={
+        passed ? (
+          <>
+            <Button size="lg" onClick={onReview}>
+              Repasar la lección
+            </Button>
+            <Button variant="primary" size="lg" onClick={onNext}>
+              {nextLabel}
+              <Kbd tone="accent">Enter</Kbd>
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="ghost" size="lg" onClick={onNext}>
+              Seguir igualmente
+            </Button>
+            <Button size="lg" onClick={onReview}>
+              Repasar la teoría
+            </Button>
+            <Button variant="primary" size="lg" onClick={onRetry}>
+              Repetir los ejercicios
+              <Kbd tone="accent">Enter</Kbd>
+            </Button>
+          </>
+        )
+      }
+      onEnter={passed ? onNext : onRetry}
+      onExit={onExit}
+    />
   )
 }
 
@@ -605,11 +788,29 @@ interface ExamProps {
 
 type ExamPhase = { step: 'intro' } | { step: 'running' } | { step: 'done'; verdicts: Verdict[]; passed: boolean }
 
+/** Minutos orientativos de un examen: lo que suele llevar cada tipo de pregunta. */
+function examMinutes(exercises: readonly Exercise[]): number {
+  const seconds = exercises.reduce(
+    (sum, exercise) =>
+      sum +
+      (exercise.type === 'reading' || exercise.type === 'listening'
+        ? 150
+        : exercise.type === 'translate' || exercise.type === 'transform'
+          ? 60
+          : 30),
+    0,
+  )
+  return Math.max(5, Math.round(seconds / 300) * 5)
+}
+
 export function ExamScreen({ level, onExit }: ExamProps) {
   const info = courseLevelInfo(level)
   const state = useCourseLevel(level)
   const progress = useCourseProgress()
+  const [target] = useState<RunTarget>(() => ({ kind: 'exam', level }))
+  const resume = useResume()
   const [phase, setPhase] = useState<ExamPhase>({ step: 'intro' })
+  const [start, setStart] = useState<ReturnType<typeof validStart>>(null)
   const back = { label: `Nivel ${info.name}`, onClick: onExit }
   if (state.status !== 'ready') {
     return (
@@ -620,10 +821,23 @@ export function ExamScreen({ level, onExit }: ExamProps) {
   }
   const exam = state.level.exam
   const previous = progress.exams[level]
+  const pending = savedStart(runOf(resume, target), exam.length)
+  const skills = skillBreakdown(
+    exam,
+    exam.map(() => 'correct'),
+  )
+
+  function begin(from: 'saved' | 'scratch') {
+    const resumeFrom = from === 'saved' ? pending : null
+    if (!resumeFrom) saveRun(target, { step: 'practice', index: 0, verdicts: [] })
+    setStart(resumeFrom)
+    setPhase({ step: 'running' })
+  }
 
   function finish(verdicts: Verdict[]) {
     const score = scoreOf(verdicts)
     const passed = recordExam(level, score.correct + score.almost, score.ratio)
+    clearRun(target)
     feedback(passed ? 'goal' : 'wrong')
     setPhase({ step: 'done', verdicts, passed })
     window.scrollTo({ top: 0 })
@@ -639,19 +853,48 @@ export function ExamScreen({ level, onExit }: ExamProps) {
           <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent-soft text-accent">
             <GraduationIcon width={30} height={30} />
           </span>
-          <p className="mx-auto mt-5 max-w-sm text-[15px] leading-relaxed text-muted">
-            {plural(exam.length, 'pregunta')} de todo el nivel, sin pistas. Se aprueba con el {pct(EXAM_PASS)}.
+          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted">
+            {plural(exam.length, 'pregunta')} de todo el nivel, sin pistas, como en un examen oficial: unos{' '}
+            {examMinutes(exam)} minutos. Se aprueba con el {pct(EXAM_PASS)}.
             {previous && ` Tu mejor nota: ${pct(previous.best)}.`}
           </p>
-          <Button variant="primary" size="lg" onClick={() => setPhase({ step: 'running' })} className="mt-7">
-            Empezar el examen
-          </Button>
+          <ul className="mx-auto mt-5 flex max-w-md flex-wrap justify-center gap-2" aria-label="Partes del examen">
+            {skills.map((skill) => (
+              <li key={skill.skill}>
+                <Badge tone="accent-soft">
+                  {SKILL_LABEL[skill.skill]} · {skill.total}
+                </Badge>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 flex flex-col items-center gap-2">
+            {pending ? (
+              <>
+                <Button variant="primary" size="lg" onClick={() => begin('saved')}>
+                  Continuar el examen · {pending.index + 1} de {exam.length}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => begin('scratch')}>
+                  Empezar de nuevo
+                </Button>
+              </>
+            ) : (
+              <Button variant="primary" size="lg" onClick={() => begin('scratch')}>
+                Empezar el examen
+              </Button>
+            )}
+          </div>
         </Surface>
       )}
 
       {phase.step === 'running' && (
         <div className="mt-6">
-          <ExerciseRunner exercises={exam} label={`Examen ${info.name}`} onFinish={finish} />
+          <ExerciseRunner
+            exercises={exam}
+            label={`Examen ${info.name}`}
+            initial={start}
+            onProgress={(index, verdicts) => saveRun(target, { step: 'practice', index, verdicts })}
+            onFinish={finish}
+          />
         </div>
       )}
 
@@ -660,6 +903,7 @@ export function ExamScreen({ level, onExit }: ExamProps) {
           title={phase.passed ? `¡Nivel ${info.name} aprobado!` : 'Esta vez no, pero casi'}
           verdicts={phase.verdicts}
           exercises={exam}
+          breakdown={skillBreakdown(exam, phase.verdicts)}
           xp={
             (scoreOf(phase.verdicts).correct + scoreOf(phase.verdicts).almost) * XP_EXERCISE +
             (phase.passed && !(previous && previous.best >= EXAM_PASS) ? XP_EXAM : 0)
@@ -667,7 +911,7 @@ export function ExamScreen({ level, onExit }: ExamProps) {
           detail={
             phase.passed
               ? 'Ya puedes pasar al siguiente nivel. Repetir el examen afianza lo aprendido.'
-              : `Repasa las lecciones de lo que fallaste y vuelve a intentarlo: se aprueba con el ${pct(EXAM_PASS)}.`
+              : `Mira qué destreza flojeó, repasa las lecciones de lo que fallaste y vuelve a intentarlo: se aprueba con el ${pct(EXAM_PASS)}.`
           }
           celebrate={phase.passed}
           actions={
@@ -701,6 +945,10 @@ function missedLabel(exercise: Exercise): string {
     case 'order':
     case 'translate':
       return exercise.es
+    case 'transform':
+      return `${exercise.original} (${exercise.keyword})`
+    case 'spot':
+      return exercise.parts.join(' ')
   }
 }
 
@@ -712,6 +960,7 @@ function Result({
   exercises,
   xp,
   detail,
+  breakdown,
   celebrate = true,
   actions,
   onEnter,
@@ -721,6 +970,8 @@ function Result({
   exercises: readonly Exercise[]
   xp: number
   detail: string
+  /** Nota por destreza (exámenes): dónde está fuerte y qué conviene repasar. */
+  breakdown?: SkillScore[]
   celebrate?: boolean
   actions: ReactNode
   onEnter: () => void
@@ -748,25 +999,64 @@ function Result({
         +{formatCount(xp)} XP
       </Badge>
       <p className="mx-auto mt-3 max-w-sm text-[15px] leading-relaxed text-muted">{detail}</p>
+      {breakdown && breakdown.length > 1 && (
+        <div className="mt-6 text-left">
+          <h3 className="text-[11px] font-medium tracking-[0.18em] text-muted uppercase">Por destrezas</h3>
+          <dl className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {breakdown.map((skill) => (
+              <div key={skill.skill} className="rounded-2xl border border-line bg-bg px-4 py-3">
+                <dt className="flex items-baseline justify-between gap-2 text-sm">
+                  <span className="font-medium">{SKILL_LABEL[skill.skill]}</span>
+                  <span className="text-xs text-muted tabular-nums">
+                    {skill.correct}/{skill.total}
+                  </span>
+                </dt>
+                <dd className="mt-2 flex items-center gap-2.5">
+                  <span
+                    role="progressbar"
+                    aria-label={SKILL_LABEL[skill.skill]}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={Math.round(skill.ratio * 100)}
+                    className="h-1.5 flex-1 overflow-hidden rounded-full bg-line"
+                  >
+                    <span
+                      className={cn(
+                        'block h-full rounded-full transition-[width] duration-700',
+                        skill.ratio >= EXAM_PASS ? 'bg-ok' : skill.ratio >= 0.6 ? 'bg-accent' : 'bg-bad',
+                      )}
+                      style={{ width: `${skill.ratio * 100}%` }}
+                    />
+                  </span>
+                  <span className="w-11 text-right text-sm font-semibold tabular-nums">{pct(skill.ratio)}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
       {missed.length > 0 && (
         <div className="mt-6 text-left">
           <h3 className="text-[11px] font-medium tracking-[0.18em] text-muted uppercase">Para repasar</h3>
           <ul className="mt-2 space-y-2">
             {missed.map(({ exercise }) => (
               <li
-                key={`${exercise.type}:${correctAnswer(exercise)}`}
+                key={`${exercise.type}:${missedLabel(exercise)}`}
                 className="rounded-2xl border border-line bg-bg px-4 py-2.5 text-sm"
               >
                 <span className="block text-muted">{missedLabel(exercise)}</span>
                 <span lang="en" className="block font-semibold">
                   {correctAnswer(exercise)}
                 </span>
+                {exercise.explanation && (
+                  <span className="mt-0.5 block text-[13px] leading-snug text-muted">{exercise.explanation}</span>
+                )}
               </li>
             ))}
           </ul>
         </div>
       )}
-      <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-center">{actions}</div>
+      <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:flex-wrap sm:justify-center">{actions}</div>
     </Surface>
   )
 }
@@ -785,10 +1075,13 @@ type QuizPhase = { step: 'intro' } | { step: 'running' } | { step: 'done'; verdi
 export function QuizScreen({ level, onExit }: QuizProps) {
   const states = useAllCourseLevels()
   const progress = useCourseProgress()
+  const resume = useResume()
+  const [target] = useState<RunTarget>(() => ({ kind: 'quiz', level }))
   const [phase, setPhase] = useState<QuizPhase>({ step: 'intro' })
   const [attempt, setAttempt] = useState(0)
-  // La semilla se fija al empezar cada intento: el quiz no cambia a mitad de camino.
-  const [seed, setSeed] = useState(() => quizSeed(Date.now(), 0))
+  // La semilla se fija al empezar cada intento: el quiz no cambia a mitad de camino (ni al retomarlo).
+  const [seed, setSeed] = useState(() => runOf(getResume(), target)?.seed ?? quizSeed(Date.now(), 0))
+  const [start, setStart] = useState<ReturnType<typeof validStart>>(null)
   const key: QuizKey = level ?? 'mixto'
   const name = level ? `Quiz ${courseLevelInfo(level).name}` : 'Quiz mixto'
   const back = level
@@ -804,23 +1097,36 @@ export function QuizScreen({ level, onExit }: QuizProps) {
     )
   }
   const ready = needed.flatMap((state) => (state.status === 'ready' ? [state.level] : []))
-  const exercises = level
-    ? buildQuiz(quizPool(ready[0]), seed)
-    : buildMixedQuiz(
-        ready.filter((entry) => entry.lessons.length > 0),
-        seed,
-      )
+  const build = (from: number) =>
+    level
+      ? buildQuiz(quizPool(ready[0]), from)
+      : buildMixedQuiz(
+          ready.filter((entry) => entry.lessons.length > 0),
+          from,
+        )
+  const exercises = build(seed)
   const previous = progress.quizzes[key]
+  const saved = runOf(resume, target)
+  const resumable = saved?.seed === seed ? savedStart(saved, exercises.length) : null
 
-  function start(next: number) {
+  function begin(next: number) {
+    const fresh = quizSeed(Date.now(), next)
     setAttempt(next)
-    setSeed(quizSeed(Date.now(), next))
+    setSeed(fresh)
+    setStart(null)
+    saveRun(target, { step: 'practice', index: 0, verdicts: [], seed: fresh })
+    setPhase({ step: 'running' })
+  }
+
+  function resumeSaved() {
+    setStart(resumable)
     setPhase({ step: 'running' })
   }
 
   function finish(verdicts: Verdict[]) {
     const score = scoreOf(verdicts)
     recordQuiz(key, score.correct + score.almost, score.ratio)
+    clearRun(target)
     feedback(score.ratio >= 0.7 ? 'goal' : 'wrong')
     setPhase({ step: 'done', verdicts })
     window.scrollTo({ top: 0 })
@@ -844,16 +1150,37 @@ export function QuizScreen({ level, onExit }: QuizProps) {
             quiz sin fallos da {XP_QUIZ_PERFECT} XP extra.
             {previous && ` Tu mejor nota: ${pct(previous.best)}.`}
           </p>
-          <Button variant="primary" size="lg" onClick={() => start(attempt)} className="mt-7">
-            Empezar el quiz
-            <Kbd tone="accent">Enter</Kbd>
-          </Button>
+          <div className="mt-7 flex flex-col items-center gap-2">
+            {resumable ? (
+              <>
+                <Button variant="primary" size="lg" onClick={resumeSaved}>
+                  Continuar el quiz · {resumable.index + 1} de {exercises.length}
+                  <Kbd tone="accent">Enter</Kbd>
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => begin(attempt + 1)}>
+                  Uno nuevo
+                </Button>
+              </>
+            ) : (
+              <Button variant="primary" size="lg" onClick={() => begin(attempt)}>
+                Empezar el quiz
+                <Kbd tone="accent">Enter</Kbd>
+              </Button>
+            )}
+          </div>
         </Surface>
       )}
 
       {phase.step === 'running' && (
         <div className="mt-6">
-          <ExerciseRunner key={seed} exercises={exercises} label={name} onFinish={finish} />
+          <ExerciseRunner
+            key={seed}
+            exercises={exercises}
+            label={name}
+            initial={start}
+            onProgress={(index, verdicts) => saveRun(target, { step: 'practice', index, verdicts, seed })}
+            onFinish={finish}
+          />
         </div>
       )}
 
@@ -873,13 +1200,13 @@ export function QuizScreen({ level, onExit }: QuizProps) {
               <Button size="lg" onClick={onExit}>
                 {back.label}
               </Button>
-              <Button variant="primary" size="lg" onClick={() => start(attempt + 1)}>
+              <Button variant="primary" size="lg" onClick={() => begin(attempt + 1)}>
                 Otro quiz
                 <Kbd tone="accent">Enter</Kbd>
               </Button>
             </>
           }
-          onEnter={() => start(attempt + 1)}
+          onEnter={() => begin(attempt + 1)}
           onExit={onExit}
         />
       )}

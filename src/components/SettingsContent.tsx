@@ -1,6 +1,7 @@
 import { type ReactNode, useId, useState } from 'react'
 import { resetAchievements } from '@/lib/achievements'
 import { resetCourseProgress } from '@/lib/courseProgress'
+import { resetResume } from '@/lib/resume'
 import { LEVELS } from '@/lib/decks'
 import { canVibrate } from '@/lib/feedback'
 import { resetProgress } from '@/lib/progress'
@@ -146,6 +147,7 @@ export function SettingsContent() {
                 resetProgress()
                 resetAchievements()
                 resetCourseProgress()
+                resetResume()
                 setConfirmReset(false)
               }}
             >

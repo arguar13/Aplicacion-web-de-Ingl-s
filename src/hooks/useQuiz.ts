@@ -9,6 +9,8 @@ import {
   cardKey,
   cardLookup,
   getProgress,
+  isNewWord,
+  newWordsLeft,
   type ProgressData,
   recordAnswer,
   recordStreak,
@@ -52,10 +54,11 @@ export interface QuizStats {
 }
 
 /**
- * Por qué se muestra el resumen: se completó el nivel, se cumplió la meta del día, se acabó el tiempo
- * del modo concentración o se quiere salir.
+ * Por qué se muestra el resumen: se completó el nivel (todo dominado), se vieron todas sus palabras
+ * (toca pasar al siguiente), se cumplió la meta del día, se acabó el tiempo del modo concentración o
+ * se quiere salir.
  */
-export type SummaryReason = 'level' | 'goal' | 'time' | 'exit'
+export type SummaryReason = 'level' | 'seen' | 'goal' | 'time' | 'exit'
 
 const EMPTY_STATS: QuizStats = { solved: 0, firstTry: 0, streak: 0, bestStreak: 0, fresh: 0, missed: [], xp: 0 }
 
@@ -78,6 +81,11 @@ interface State {
   goalReached: boolean
   /** Esta respuesta dejó dominadas todas las palabras del nivel: al avanzar se celebra. */
   levelDone: boolean
+  /**
+   * En un nivel, ya no quedan palabras por ver ni repasos: al avanzar se propone el siguiente nivel
+   * (el recorrido sigue en orden) en vez de dar vueltas sobre lo ya visto.
+   */
+  levelSeen: boolean
   /** Resumen de la sesión a la vista (la partida está detenida). */
   summary: SummaryReason | null
   stats: QuizStats
@@ -95,8 +103,7 @@ const audioIsPrompt = (mode: Mode) => mode === 'listen' || mode === 'dictation'
 function nextRound(deck: Deck, mode: Mode, session: Session): Round {
   const progress = getProgress()
   const now = Date.now()
-  const { newPerDay } = getSettings()
-  const allowNew = newPerDay === 0 || todayStats(progress, now).fresh < newPerDay
+  const allowNew = newWordsLeft(progress, getSettings().newPerDay, now) !== 0
   if (deck.kind === 'coach') {
     const learner = assessLearner(getEvents())
     const startRank = (getSettings().startLevel - 1) * LEVEL_SIZE
@@ -107,6 +114,7 @@ function nextRound(deck: Deck, mode: Mode, session: Session): Round {
   const pick = pickNext(deck.words, cardLookup(progress, trackOf(mode)), session, now, {
     newOrder: deck.newOrder,
     allowNew,
+    isNewWord: (word) => isNewWord(progress, word.id),
   })
   return buildRound(deck, pick.word, mode, pick.reason, progress, false)
 }
@@ -137,6 +145,12 @@ const sessionKey = (deck: Deck, round: Round) =>
 /** Falladas de la sesión con `word` añadida (una sola vez). */
 const missedWith = (stats: QuizStats, word: Word) =>
   stats.missed.some((w) => w.id === word.id) ? stats.missed : [...stats.missed, word]
+
+/** Ninguna palabra del mazo por ver en esa habilidad. */
+const deckSeen = (deck: Deck, track: Track) => {
+  const lookup = cardLookup(getProgress(), track)
+  return deck.words.every((word) => lookup(word.id) !== undefined)
+}
 
 /** Todas las palabras del mazo dominadas en esa habilidad. */
 const deckMastered = (deck: Deck, track: Track) => {
@@ -181,9 +195,12 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
     expanded: false,
     goalReached: false,
     levelDone: false,
+    levelSeen: false,
     summary: null,
     stats: EMPTY_STATS,
   }))
+  // Lo de pasar al siguiente nivel se propone una vez: quien prefiere seguir aquí, sigue sin avisos.
+  const seenShown = useRef(false)
   // Evita registrar dos veces un acierto si llegan dos toques antes de volver a pintar.
   const resolving = useRef(false)
   // El resumen de "tiempo cumplido" sale una vez: si se sigue practicando, ya no interrumpe.
@@ -235,6 +252,7 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
       }
       // Completar un nivel es más raro (y más grande) que la meta del día: se celebra primero.
       if (s.levelDone) return { ...s, levelDone: false, goalReached: false, expanded: false, summary: 'level' }
+      if (s.levelSeen) return { ...s, levelSeen: false, goalReached: false, expanded: false, summary: 'seen' }
       // En el modo concentración la meta no interrumpe: se celebra al terminar.
       if (s.goalReached && deadline.current === null)
         return { ...s, goalReached: false, expanded: false, summary: 'goal' }
@@ -276,24 +294,29 @@ export function useQuiz(deck: Deck, mode: Mode, { endsAt = null }: QuizOptions =
     const { clean } = result
     const track = trackOf(round.mode)
     resolving.current = true
-    const isNew = !cardLookup(getProgress(), track)(round.word.id)
+    const isNew = isNewWord(getProgress(), round.word.id)
     const { dailyGoal, detailsPause } = getSettings()
     const answeredBefore = todayStats(getProgress()).answers
     const levelWasDone = deck.kind === 'level' && deckMastered(deck, track)
     recordAnswer(track, round.word.id, { ...result, trusted: round.trusted })
     feedback(clean ? 'correct' : 'wrong')
-    advanceSession(session, sessionKey(deck, round), clean)
+    advanceSession(session, sessionKey(deck, round), clean, round.reason === 'new' || round.reason === 'skill')
     const streak = clean ? stats.streak + 1 : 0
     recordStreak(streak)
+    const next = nextRound(deck, mode, session)
+    // Sin nada por ver ni por repasar en el nivel, la siguiente sería práctica de lo ya visto.
+    const levelSeen = deck.kind === 'level' && !seenShown.current && next.reason === 'practice' && deckSeen(deck, track)
+    if (levelSeen) seenShown.current = true
     setState({
       ...state,
       ...extra,
       solved: true,
       // Tras un fallo es cuando más ayuda ver el ejemplo; quien va rápido no se detiene.
       expanded: detailsPause === 'always' || (detailsPause === 'mistakes' && !clean),
-      next: nextRound(deck, mode, session),
+      next,
       goalReached: answeredBefore < dailyGoal && answeredBefore + 1 >= dailyGoal,
       levelDone: deck.kind === 'level' && !levelWasDone && deckMastered(deck, track),
+      levelSeen,
       stats: {
         ...stats,
         solved: stats.solved + 1,

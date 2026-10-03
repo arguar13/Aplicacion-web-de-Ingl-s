@@ -5,15 +5,17 @@ import { useEvents } from '@/lib/events'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { useNow } from '@/hooks/useNow'
 import { useQuiz } from '@/hooks/useQuiz'
-import type { Deck } from '@/lib/decks'
+import { type Deck, nextLevel, wordNumber } from '@/lib/decks'
 import { useWordDetails } from '@/lib/details'
-import { cardKey, todayStats, useProgress } from '@/lib/progress'
+import { addExtraNew, cardKey, EXTRA_NEW_STEP, newWordsLeft, todayStats, useProgress } from '@/lib/progress'
 import { previewIntervals, SELF_RATINGS } from '@/lib/scheduler'
+import { rememberPractice } from '@/lib/resume'
 import { RETENTION, useSettings } from '@/lib/settings'
 import { answerLanguage, isTypedMode, type Mode, trackOf } from '@/lib/types'
 import { IconButton } from './ui/IconButton'
 import { GoalStat, Header, Stat } from './Header'
-import { ArrowLeftIcon, SettingsIcon } from './icons'
+import { ArrowLeftIcon, SettingsIcon, SparkIcon } from './icons'
+import { Button } from './ui/Button'
 import { Kbd } from './ui/Kbd'
 import { Keypad } from './Keypad'
 import { ProgressBar } from './ProgressBar'
@@ -30,9 +32,11 @@ interface Props {
   focusMinutes?: number
   onExit: () => void
   onOpenSettings: () => void
+  /** Pasar al nivel siguiente cuando ya se vieron todas las palabras de este. */
+  onNextDeck?: (deck: Deck) => void
 }
 
-export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props) {
+export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings, onNextDeck }: Props) {
   const [endsAt] = useState(() => (focusMinutes ? Date.now() + focusMinutes * 60_000 : null))
   const quiz = useQuiz(deck, mode, { endsAt })
   const { round, stats, answer, submitTyped, reveal, rate, replay, expand, advance, resume, requestExit } = quiz
@@ -47,7 +51,14 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
   const details = useWordDetails(round.word.id)
   const progress = useProgress()
   const today = todayStats(progress)
-  const { dailyGoal, intensity } = useSettings()
+  const { dailyGoal, intensity, newPerDay } = useSettings()
+  const following = nextLevel(deck)
+  // Sin cupo de nuevas, la partida repasa y afianza: se dice por qué y se ofrecen unas cuantas más.
+  // Solo donde lo nuevo sale del recorrido (sesión, niveles, todas) y cuando la ronda no es nueva.
+  const quotaSpent =
+    (coach || deck.kind === 'level' || deck.kind === 'all') &&
+    (round.reason === 'practice' || round.reason === 'learning') &&
+    newWordsLeft(progress, newPerDay) === 0
   // Modo tarjetas: cuándo volvería la palabra con cada nota (al minuto: un minuto de más no cambia nada).
   const now = useNow()
   const flashCard = roundMode === 'flash' ? progress.cards[cardKey('en-es', round.word.id)] : undefined
@@ -56,6 +67,11 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
     [roundMode, flashCard, now, intensity],
   )
   const showDetail = quiz.solved && quiz.expanded
+
+  // La práctica por tu cuenta queda anotada para «continuar donde lo dejaste».
+  useEffect(() => {
+    if (deck.kind === 'level' || deck.kind === 'all' || deck.kind === 'topic') rememberPractice(deck.id, mode)
+  }, [deck, mode])
   const listenSlowly = () => replay({ slow: true })
 
   // Salir con palabras respondidas muestra antes el resumen de la sesión.
@@ -146,15 +162,19 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
                 dailyGoal={dailyGoal}
                 deckLabel={deck.level === null ? deck.name : `Nivel ${deck.level} · ${deck.name}`}
                 wordCount={deck.words.length}
+                nextDeckLabel={following ? `Nivel ${following.level} · ${following.name}` : null}
+                onNextDeck={following && onNextDeck ? () => onNextDeck(following) : undefined}
                 onContinue={resume}
                 onFinish={onExit}
               />
             ) : (
               <div className="flex flex-col gap-5 sm:gap-6 short:grid short:grid-cols-2 short:items-center short:gap-4">
+                {quotaSpent && <QuotaNotice newPerDay={newPerDay} />}
                 <WordScreen
                   word={round.word}
                   mode={roundMode}
                   reason={round.reason}
+                  number={round.reason === 'new' && deck.kind !== 'topic' ? wordNumber(round.word.id) : null}
                   ipa={details?.ipa}
                   example={details === null ? null : details.example}
                   typed={quiz.typed}
@@ -258,7 +278,28 @@ export function Game({ deck, mode, focusMinutes, onExit, onOpenSettings }: Props
 const PACE_INFO: Record<Pace, { label: string; hint: string }> = {
   steady: { label: 'Afianzando', hint: 'Menos palabras nuevas a la vez hasta que las de ahora se asienten.' },
   normal: { label: 'Ritmo normal', hint: 'Repasos y palabras nuevas en orden de frecuencia.' },
-  fast: { label: 'Acelerando', hint: 'Vas muy bien: las nuevas llegan antes y son más difíciles.' },
+  fast: { label: 'Acelerando', hint: 'Vas muy bien: más palabras nuevas a la vez, y lo que ya sabías se aleja.' },
+}
+
+/**
+ * Aviso de cupo cumplido: hoy ya se vieron las palabras nuevas del límite, así que la partida repasa
+ * y afianza lo aprendido. Un toque suma unas cuantas más solo por hoy.
+ */
+function QuotaNotice({ newPerDay }: { newPerDay: number }) {
+  return (
+    <div
+      role="status"
+      className="flex animate-rise flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-accent/25 bg-accent-soft px-4 py-2.5 short:col-span-2"
+    >
+      <SparkIcon width={16} height={16} className="shrink-0 text-accent" />
+      <p className="min-w-0 flex-1 text-[13px] leading-snug text-ink">
+        Ya viste tus {newPerDay} palabras nuevas de hoy: ahora afianzas lo aprendido.
+      </p>
+      <Button size="sm" variant="primary" onClick={() => addExtraNew()}>
+        +{EXTRA_NEW_STEP} nuevas
+      </Button>
+    </div>
+  )
 }
 
 /** Barra de la sesión inteligente: el ritmo que decidió el entrenador y el avance de la meta del día. */

@@ -27,3 +27,8 @@ export const courseLevelInfo = (id: CourseLevelId) => COURSE_LEVELS.find((level)
 
 /** Acierto mínimo para aprobar el examen de un nivel. */
 export const EXAM_PASS = 0.8
+/**
+ * Acierto mínimo para superar una lección. Por debajo, la lección cuenta como hecha pero no como
+ * superada: el curso propone repetirla antes de seguir, como haría un buen profesor.
+ */
+export const LESSON_PASS = 0.7

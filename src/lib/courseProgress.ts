@@ -3,7 +3,7 @@
  * de vocabulario (otra forma de practicar, otro ritmo) y viaja en la copia de seguridad.
  */
 import { addXp } from './progress'
-import { COURSE_LEVELS, type CourseLevelId, EXAM_PASS, isCourseLevelId } from './courseMeta'
+import { COURSE_LEVELS, type CourseLevelId, EXAM_PASS, isCourseLevelId, LESSON_PASS } from './courseMeta'
 import { createPersistedStore, useStore, type VersionedSchema } from './store'
 import { isFiniteNumber, isRecord } from './validate'
 
@@ -121,6 +121,10 @@ export function recordQuiz(key: QuizKey, correct: number, ratio: number, now = D
 export const examPassed = (progress: CourseProgress, level: CourseLevelId) =>
   (progress.exams[level]?.best ?? 0) >= EXAM_PASS
 
+/** Una lección está superada con su mejor nota en LESSON_PASS o más. */
+export const lessonPassed = (progress: CourseProgress, level: CourseLevelId, lesson: string) =>
+  (progress.lessons[lessonKey(level, lesson)]?.best ?? 0) >= LESSON_PASS
+
 export function replaceCourseProgress(next: CourseProgress) {
   store.set(next)
 }
@@ -145,20 +149,23 @@ export function mergeCourseProgress(current: CourseProgress, incoming: CoursePro
   return { lessons, exams, quizzes }
 }
 
-/** Resumen de un nivel: lecciones terminadas y si el examen está aprobado. */
+/** Resumen de un nivel: lecciones superadas y si el examen está aprobado. */
 export function levelSummary(progress: CourseProgress, level: CourseLevelId, lessonIds: readonly string[]) {
-  const done = lessonIds.filter((id) => lessonKey(level, id) in progress.lessons).length
+  const done = lessonIds.filter((id) => lessonPassed(progress, level, id)).length
   return { done, total: lessonIds.length, passed: examPassed(progress, level), exam: progress.exams[level] ?? null }
 }
 
-/** Siguiente paso que conviene: la primera lección sin terminar del primer nivel sin aprobar, o su examen. */
+/**
+ * Siguiente paso que conviene: la primera lección sin superar (sin hacer, o por debajo de
+ * LESSON_PASS) del primer nivel sin aprobar, o su examen.
+ */
 export function nextStep(
   progress: CourseProgress,
   levels: ReadonlyArray<{ id: CourseLevelId; lessons: ReadonlyArray<{ id: string; title: string }> }>,
 ): { level: CourseLevelId; lesson: { id: string; title: string; index: number } | null } | null {
   for (const level of levels) {
     if (examPassed(progress, level.id)) continue
-    const index = level.lessons.findIndex((lesson) => !(lessonKey(level.id, lesson.id) in progress.lessons))
+    const index = level.lessons.findIndex((lesson) => !lessonPassed(progress, level.id, lesson.id))
     if (index === -1) return { level: level.id, lesson: null }
     return { level: level.id, lesson: { ...level.lessons[index], index } }
   }

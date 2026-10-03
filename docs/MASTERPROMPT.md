@@ -787,3 +787,27 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   (configurado en `playwright.config.ts`). Sus títulos se ven más finos que en Safari real porque el
   WebKit de Windows no aplica el eje de grosor de las fuentes variables.
 - Pendiente: el bloqueo de GitHub (el dueño indica que es un cobro de GitHub Copilot).
+
+### Versión 2.5.0 · 02-10-2026 · Entrenador secuencial y curso que se retoma (fuera de las fases)
+
+- Pedido del dueño: que la sesión no se quede en bucle con palabras conocidas, que el recorrido de
+  palabras avance en orden sin tener que elegir, que «Practica por tu cuenta» empiece al tocar un
+  modo, una sección de «continúa donde lo dejaste», retomar el curso en el mismo punto, y más teoría,
+  ejemplos, ejercicios y evaluaciones con rigor real. Detalle en el CHANGELOG.
+- Causa del bucle (tres a la vez): `fresh` contaba tarjetas, no palabras, así que subir de escalón
+  gastaba el cupo de nuevas; con el conjunto de trabajo lleno, la práctica libre elegía al azar
+  entre todo lo visto (casi todo dominado); y los repasos vencidos iban siempre antes que lo nuevo.
+  Arreglos: `isNewWord` en `progress.ts`; «aprender por adelantado» (`LEARN_AHEAD_MS`) y práctica de
+  lo más frágil con `topBy` en `coach.ts`; `introducedAt` y `newSlotOpen` en la sesión
+  (`scheduler.ts`), también en los niveles. Se quitó `FAST_JUMP`: el recorrido es secuencial.
+- Un escalón está afianzado (`rungSettled`) tras superar un repaso espaciado, no solo con
+  estabilidad: un «fácil» en una nueva da 8 días de golpe y la subía de escalón en el acto.
+- Contenido del curso ampliado por nivel en paralelo y validado por test (mínimos por lección y
+  examen, tipos obligatorios, sin ejercicios repetidos): 445 apartados, 2.057 ejemplos, 1.529
+  ejercicios y 314 preguntas de examen. Tipos nuevos `transform` y `spot`.
+- Las opciones se barajan al mostrarse (`optionOrder`, semilla por pregunta): el contenido tenía la
+  correcta casi siempre en la posición 1. Las contracciones sin ambigüedad cuentan igual al corregir.
+- Estado nuevo `tecla:resume` (solo en el dispositivo, fuera de las copias): última práctica y tandas
+  del curso a medias. No toca las claves ni el formato de copia existentes.
+- Pendiente: grabar el audio del curso (las frases nuevas se leen con la voz del navegador); el JS
+  inicial queda en 124,7 de 125 KB, sin margen para otra cosa en el paquete inicial.

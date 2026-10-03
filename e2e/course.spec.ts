@@ -1,5 +1,5 @@
 import a1 from '../src/data/course/a1.json' with { type: 'json' }
-import { solveAll, toExercise } from './courseHelpers'
+import { failAll, solveAll, toExercise } from './courseHelpers'
 import { expect, test } from './fixtures'
 import { expectAccessible, expectNoHorizontalScroll } from './helpers'
 
@@ -20,7 +20,7 @@ test('el curso lista los niveles, cada nivel sus lecciones, y una lección se le
   await page.getByRole('button', { name: /Nivel A1/ }).click()
   await expect(page).toHaveURL(/#\/curso\/a1$/)
   await expect(page.getByRole('heading', { name: 'Principiante' })).toBeVisible()
-  await expect(page.getByText(`Lecciones · 0 de ${a1.lessons.length}`)).toBeVisible()
+  await expect(page.getByText(`Lecciones superadas · 0 de ${a1.lessons.length}`)).toBeVisible()
   await expectAccessible(page)
 
   await page.getByRole('button', { name: new RegExp(lesson.title) }).click()
@@ -31,15 +31,15 @@ test('el curso lista los niveles, cada nivel sus lecciones, y una lección se le
 
   await page.getByRole('button', { name: /Practicar/ }).click()
   await solveAll(page, lesson.exercises.map(toExercise))
-  await expect(page.getByRole('heading', { name: '¡Lección completada!' })).toBeVisible()
-  await expect(page.getByText('100 %')).toBeVisible()
+  await expect(page.getByRole('heading', { name: '¡Lección superada!' })).toBeVisible()
+  await expect(page.getByText('100 %', { exact: true })).toBeVisible()
   await expect(page.getByText(/^\+\d+ XP$/)).toBeVisible()
   await expectAccessible(page)
 
   // Queda anotada: en el nivel y en el inicio.
   await page.getByRole('button', { name: 'Nivel A1' }).click()
-  await expect(page.getByText(`Lecciones · 1 de ${a1.lessons.length}`)).toBeVisible()
-  await expect(page.getByText('Mejor nota: 100 %')).toBeVisible()
+  await expect(page.getByText(`Lecciones superadas · 1 de ${a1.lessons.length}`)).toBeVisible()
+  await expect(page.getByText('Superada · mejor nota 100 %')).toBeVisible()
   await page.goto('./')
   await expect(card).toContainText(`Nivel A1: lección 2, ${a1.lessons[1].title}`)
 })
@@ -89,5 +89,42 @@ test('comprensión lectora y auditiva: texto o audio, preguntas, corrección y t
   // Sin elegir todas las preguntas no se puede comprobar; con una mal, se ve la respuesta correcta.
   await expect(page.getByRole('button', { name: /Comprobar/ })).toBeDisabled()
   await solveAll(page, exercises)
-  await expect(page.getByRole('heading', { name: '¡Lección completada!' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '¡Lección superada!' })).toBeVisible()
+})
+
+test('una lección a medias se retoma en el mismo ejercicio, desde el inicio o desde el nivel', async ({ page }) => {
+  test.slow()
+  const exercises = lesson.exercises.map(toExercise)
+  await page.goto(`./#/curso/a1/${lesson.id}`)
+  await page.getByRole('button', { name: /Practicar/ }).click()
+  await solveAll(page, exercises.slice(0, 2))
+
+  // Se sale a mitad: el inicio ofrece seguir justo ahí.
+  await page.goto('./')
+  const resume = page.getByRole('region', { name: 'Continúa donde lo dejaste' })
+  await expect(resume).toContainText(`Lección 1: ${lesson.title}`)
+  await expect(resume).toContainText(`Ejercicio 3 de ${exercises.length}`)
+  await expectAccessible(page)
+  await resume.getByRole('button', { name: new RegExp(lesson.title) }).click()
+  await expect(page.getByText(`Retomas donde lo dejaste: ejercicio 3 de ${exercises.length}.`)).toBeVisible()
+
+  // El nivel también lo marca en curso.
+  await page.goto('./#/curso/a1')
+  await expect(page.getByText(`En curso · ejercicio 3 de ${exercises.length}`)).toBeVisible()
+  await page.getByRole('button', { name: new RegExp(lesson.title) }).click()
+  await solveAll(page, exercises.slice(2))
+  await expect(page.getByRole('heading', { name: '¡Lección superada!' })).toBeVisible()
+  await expect(page.getByText('100 %', { exact: true })).toBeVisible()
+})
+
+test('una lección por debajo del 70 % propone repetirla antes de seguir', async ({ page }) => {
+  test.slow()
+  await page.goto(`./#/curso/a1/${lesson.id}`)
+  await page.getByRole('button', { name: /Practicar/ }).click()
+  await failAll(page, lesson.exercises.map(toExercise))
+  await expect(page.getByRole('heading', { name: 'Casi: un repaso más' })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Repetir los ejercicios/ })).toBeVisible()
+  await expectAccessible(page)
+  await page.goto('./#/curso/a1')
+  await expect(page.getByText(/^Por superar · \d+ %/)).toBeVisible()
 })

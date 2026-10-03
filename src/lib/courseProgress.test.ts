@@ -14,7 +14,9 @@ import {
   XP_EXERCISE,
   XP_LESSON,
   XP_QUIZ_PERFECT,
+  lessonPassed,
 } from './courseProgress'
+import { LESSON_PASS } from './courseMeta'
 import { getProgress, resetProgress } from './progress'
 
 const NOW = new Date(2026, 9, 1, 10).getTime()
@@ -93,6 +95,25 @@ describe('progreso del curso', () => {
     const passed = { ...done, exams: { a1: { best: 0.9, at: 1 } } }
     expect(nextStep(passed, levels)).toEqual({ level: 'a2', lesson: { id: 'z', title: 'Z', index: 0 } })
     expect(nextStep({ ...passed, exams: { a1: { best: 1, at: 1 }, a2: { best: 1, at: 1 } } }, levels)).toBeNull()
+  })
+
+  it('una lección hecha por debajo del umbral no está superada: el siguiente paso es repetirla', () => {
+    const levels = [
+      {
+        id: 'a1' as const,
+        lessons: [
+          { id: 'x', title: 'X' },
+          { id: 'y', title: 'Y' },
+        ],
+      },
+    ]
+    const low = { lessons: { 'a1/x': { best: LESSON_PASS - 0.1, at: 1 } }, exams: {}, quizzes: {} }
+    expect(lessonPassed(low, 'a1', 'x')).toBe(false)
+    expect(nextStep(low, levels)).toEqual({ level: 'a1', lesson: { id: 'x', title: 'X', index: 0 } })
+    expect(levelSummary(low, 'a1', ['x', 'y'])).toMatchObject({ done: 0 })
+    const enough = { lessons: { 'a1/x': { best: LESSON_PASS, at: 1 } }, exams: {}, quizzes: {} }
+    expect(lessonPassed(enough, 'a1', 'x')).toBe(true)
+    expect(nextStep(enough, levels)).toEqual({ level: 'a1', lesson: { id: 'y', title: 'Y', index: 1 } })
   })
 
   it('un quiz guarda su mejor nota y un quiz perfecto da experiencia extra', () => {

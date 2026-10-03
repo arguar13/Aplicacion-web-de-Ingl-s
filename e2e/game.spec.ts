@@ -21,7 +21,7 @@ test('el inicio se ve completo, sin desbordes y accesible', async ({ page }) => 
 })
 
 test('elegir un nivel, acertar y fallar', async ({ page }) => {
-  await page.getByRole('button', { name: /Empieza por un nivel/ }).click()
+  await page.getByRole('button', { name: 'Traducir: practicar nivel 1' }).click()
   await expect(page).toHaveURL(/#\/nivel\/1$/)
   await expectNoHorizontalScroll(page)
   await expectAccessible(page)

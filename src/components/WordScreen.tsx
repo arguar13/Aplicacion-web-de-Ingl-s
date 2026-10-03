@@ -14,6 +14,8 @@ interface Props {
   word: Word
   mode: Mode
   reason: PickReason
+  /** Palabra nueva: su número en la lista de frecuencia, para ver el avance del recorrido. */
+  number?: number | null
   /** Pronunciación en IPA, si ya cargó. */
   ipa: string | undefined
   /** Frase de ejemplo (modo completar); `null` mientras cargan los detalles. */
@@ -39,6 +41,7 @@ const REASON_BADGE: Partial<Record<PickReason, { label: string; tone: BadgeTone 
   review: { label: 'Repaso', tone: 'ok-soft' },
   relearn: { label: 'Otra vez', tone: 'bad-soft' },
   skill: { label: 'Nueva habilidad', tone: 'accent-soft' },
+  learning: { label: 'Afianzando', tone: 'ok-soft' },
 }
 
 const PROMPT_LABEL: Record<Mode, string> = {
@@ -99,6 +102,7 @@ export function WordScreen({
   word,
   mode,
   reason,
+  number = null,
   ipa,
   example,
   solved,
@@ -123,6 +127,7 @@ export function WordScreen({
           {badge && (
             <Badge key={word.id} tone={badge.tone} caps className="animate-rise">
               {badge.label}
+              {number !== null && <span className="tabular-nums"> · nº {number.toLocaleString('es')}</span>}
             </Badge>
           )}
         </div>

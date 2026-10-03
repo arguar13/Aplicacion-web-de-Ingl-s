@@ -1,8 +1,9 @@
-import { assessLearner, coachOverview, type Pace } from '@/lib/coach'
+import { assessLearner, coachFrontier, coachOverview, type Pace } from '@/lib/coach'
+import { ALL_WORDS, LEVEL_SIZE, LEVELS } from '@/lib/decks'
 import { cn } from '@/lib/cn'
 import { useEvents } from '@/lib/events'
 import { plural } from '@/lib/format'
-import { todayStats, useProgress } from '@/lib/progress'
+import { newWordsLeft, todayStats, useProgress } from '@/lib/progress'
 import { useSettings } from '@/lib/settings'
 import { endOfDay } from '@/lib/smartDecks'
 import { ArrowRightIcon, SparkIcon } from './icons'
@@ -20,18 +21,21 @@ const PACE_LABEL: Record<Pace, string> = { steady: 'Afianzando', normal: 'Ritmo 
 export function CoachCard({ now, onStart }: { now: number; onStart: () => void }) {
   const progress = useProgress()
   const events = useEvents()
-  const { dailyGoal, newPerDay } = useSettings()
+  const { dailyGoal, newPerDay, startLevel } = useSettings()
   const overview = coachOverview(progress, endOfDay(now))
   const today = todayStats(progress, now)
   const started = Object.keys(progress.cards).length > 0
   const pace = assessLearner(events).pace
-  const newLeft = newPerDay === 0 ? null : Math.max(0, newPerDay - today.fresh)
+  const newLeft = newWordsLeft(progress, newPerDay, now)
+  // El recorrido es secuencial: por qué palabra va y en qué nivel cae.
+  const frontier = coachFrontier(progress, (startLevel - 1) * LEVEL_SIZE)
+  const frontierLevel = frontier.rank === null ? null : LEVELS[Math.floor(frontier.rank / LEVEL_SIZE)]
   const remaining = Math.max(dailyGoal - today.answers, 0)
   const minutes = Math.max(1, Math.round(((remaining || dailyGoal) * SECONDS_PER_ANSWER) / 60))
 
   const plan = [
     overview.dueToday > 0 && plural(overview.dueToday, 'repaso'),
-    newLeft === null ? 'palabras nuevas' : newLeft > 0 && plural(newLeft, 'nueva'),
+    newLeft === null ? 'palabras nuevas' : newLeft > 0 ? plural(newLeft, 'nueva') : 'nuevas de hoy: hechas',
     `unos ${minutes} min`,
   ].filter(Boolean)
 
@@ -80,10 +84,20 @@ export function CoachCard({ now, onStart }: { now: number; onStart: () => void }
             ? plan.join(' · ')
             : 'Te guía palabra a palabra: de las más usadas a las más difíciles, repasando justo a tiempo.'}
         </span>
-        {overview.known > 0 && (
-          <span className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-accent-ink/12 px-3 py-1.5 text-xs font-medium">
-            Reconoces {overview.known.toLocaleString('es')} {overview.known === 1 ? 'palabra' : 'palabras'} · nivel
-            orientativo {overview.cefr}
+        {started && (
+          <span className="mt-4 flex flex-wrap gap-2">
+            {frontier.rank !== null && frontierLevel && (
+              <span className="inline-flex items-center gap-2 rounded-2xl bg-accent-ink/12 px-3 py-1.5 text-xs font-medium tabular-nums">
+                Siguiente: palabra nº {(frontier.rank + 1).toLocaleString('es')} de{' '}
+                {ALL_WORDS.length.toLocaleString('es')} · nivel {frontierLevel.level}
+              </span>
+            )}
+            {overview.known > 0 && (
+              <span className="inline-flex items-center gap-2 rounded-2xl bg-accent-ink/12 px-3 py-1.5 text-xs font-medium">
+                Reconoces {overview.known.toLocaleString('es')} {overview.known === 1 ? 'palabra' : 'palabras'} · nivel
+                orientativo {overview.cefr}
+              </span>
+            )}
           </span>
         )}
       </span>

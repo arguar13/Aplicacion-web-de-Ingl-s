@@ -9,7 +9,7 @@ import { useProgress } from '@/lib/progress'
 import type { CourseLevelId } from '@/lib/courseMeta'
 import { useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
-import { trackOf } from '@/lib/types'
+import { type Mode, trackOf } from '@/lib/types'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
 import { BackupReminder } from './BackupReminder'
@@ -23,6 +23,8 @@ import { Kbd } from './ui/Kbd'
 
 /** «Practica por tu cuenta» y los niveles, al final de la página: llegan un instante después. */
 const PracticeSection = lazy(() => import('./PracticeSection').then((module) => ({ default: module.PracticeSection })))
+/** «Continúa donde lo dejaste»: lo último del curso y de la práctica, a un toque. */
+const ResumeSection = lazy(() => import('./ResumeSection').then((module) => ({ default: module.ResumeSection })))
 /** El curso trae su cargador y su progreso: fuera del paquete inicial, llega un instante después. */
 const CourseCard = lazy(() => import('./CourseCard').then((module) => ({ default: module.CourseCard })))
 /** Tarjetas de más abajo: tampoco hacen falta para el primer pintado. */
@@ -45,6 +47,8 @@ interface Props {
   onStartCoach: () => void
   onStartFocus: () => void
   onPick: (deck: Deck) => void
+  /** Empezar a practicar ya, con un modo y en un mazo. */
+  onPractice: (deck: Deck, mode: Mode) => void
   onOpenSmart: (kind: SmartDeckKind) => void
   onOpenBlitz: () => void
   onOpenTopics: () => void
@@ -63,6 +67,7 @@ export function DeckPicker({
   onStartCoach,
   onStartFocus,
   onPick,
+  onPractice,
   onOpenSmart,
   onOpenBlitz,
   onOpenTopics,
@@ -82,8 +87,6 @@ export function DeckPicker({
   const now = useNow()
   const summaryOf = useDeckSummaries(track)
   const total = summaryOf(ALL_DECK)
-  const suggested = DECKS.find((d) => d.id === progress.lastDeckId) ?? LEVELS[0]
-  const hasProgress = total.fresh < total.total
   const anyProgress = Object.keys(progress.cards).length > 0
 
   const due = anyProgress ? dueToday(progress, track, now).length : 0
@@ -140,6 +143,16 @@ export function DeckPicker({
           <StreakBanner progress={progress} now={now} />
           <BackupReminder onOpenSettings={onOpenSettings} />
         </div>
+
+        <Suspense fallback={null}>
+          <ResumeSection
+            now={now}
+            onPractice={onPractice}
+            onOpenLesson={onOpenLesson}
+            onOpenExam={onOpenExam}
+            onOpenQuiz={onOpenQuiz}
+          />
+        </Suspense>
 
         {/* Accesos rápidos: cada modo de práctica a un toque. */}
         <section aria-label="Accesos rápidos" className="mt-8">
@@ -245,7 +258,7 @@ export function DeckPicker({
         </div>
 
         <Suspense fallback={<div className="mt-14 min-h-[60rem] sm:mt-16" aria-hidden />}>
-          <PracticeSection mode={mode} suggested={suggested} resuming={hasProgress} onPick={onPick} />
+          <PracticeSection mode={mode} lastDeckId={progress.lastDeckId} onPractice={onPractice} onPick={onPick} />
         </Suspense>
 
         {/* Solo con teclado tiene sentido; en una pantalla táctil no se muestra. */}

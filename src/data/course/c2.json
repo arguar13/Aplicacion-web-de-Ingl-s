@@ -46,6 +46,14 @@
             {
               "en": "It is imperative that we act now.",
               "es": "Es imperativo que actuemos ya."
+            },
+            {
+              "en": "The landlord requested that the rent be paid by the fifth of each month.",
+              "es": "El propietario pidió que el alquiler se pagara antes del día cinco de cada mes."
+            },
+            {
+              "en": "Is it really necessary that he attend every single meeting?",
+              "es": "¿De verdad es necesario que asista a todas y cada una de las reuniones?"
             }
           ],
           "table": {
@@ -75,6 +83,14 @@
             {
               "en": "Come what may, I'll be there.",
               "es": "Pase lo que pase, estaré allí."
+            },
+            {
+              "en": "Far be it from me to criticise, but the plan has serious flaws.",
+              "es": "Lejos de mí criticar, pero el plan tiene fallas graves."
+            },
+            {
+              "en": "He is, as it were, the brains behind the whole operation.",
+              "es": "Él es, por así decirlo, el cerebro de toda la operación."
             }
           ]
         },
@@ -95,9 +111,122 @@
             {
               "en": "She spoke softly so as not to wake the baby.",
               "es": "Habló bajo para no despertar al bebé."
+            },
+            {
+              "en": "They spoke in whispers lest anyone overhear them.",
+              "es": "Hablaban en susurros para que nadie los oyera."
             }
           ],
           "tip": "El subjuntivo no cambia con la persona: that he go, that she be, that it remain."
+        },
+        {
+          "heading": "La inversión condicional: should, were, had",
+          "body": [
+            "En el registro formal (cartas, contratos, avisos oficiales, discursos) se suprime if y se invierte el orden sujeto-auxiliar. Should + sujeto + verbo plantea una posibilidad poco probable o cortés: Should you need help… (si necesitara ayuda). Were + sujeto + to + verbo, una hipótesis sobre el presente o el futuro: Were the bank to collapse… Had + sujeto + participio, una condición irreal en el pasado: Had I known… (de haberlo sabido).",
+            "Con were también se invierte la fórmula if it were not for (si no fuera por): Were it not for… Y en pasado: Had it not been for… (de no haber sido por). En la versión negativa invertida no se contrae nunca el not: Had it not been, jamás «Hadn't it been»."
+          ],
+          "examples": [
+            {
+              "en": "Should you require any assistance, do not hesitate to ask.",
+              "es": "Si necesitara ayuda, no dude en pedirla."
+            },
+            {
+              "en": "Had I known about the strike, I would have taken the train.",
+              "es": "De haber sabido lo de la huelga, habría tomado el tren."
+            },
+            {
+              "en": "Were it not for her support, the project would collapse.",
+              "es": "Si no fuera por su apoyo, el proyecto se vendría abajo."
+            },
+            {
+              "en": "Had it not been for the rain, we would have won the final.",
+              "es": "De no haber sido por la lluvia, habríamos ganado la final."
+            },
+            {
+              "en": "Were the government to raise taxes, consumer spending would fall.",
+              "es": "Si el gobierno subiera los impuestos, el consumo caería."
+            }
+          ],
+          "table": {
+            "headers": ["Condicional con if", "Inversión formal"],
+            "rows": [
+              ["If you should need help…", "Should you need help…"],
+              ["If he were to resign…", "Were he to resign…"],
+              ["If I had known…", "Had I known…"],
+              ["If it were not for…", "Were it not for…"],
+              ["If it had not been for…", "Had it not been for…"]
+            ]
+          },
+          "tip": "Solo se invierten should, were y had. Con otros verbos no hay inversión condicional: «Did I know…» o «Came he…» con sentido de if son incorrectos."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes con el subjuntivo inglés",
+          "body": [
+            "El español marca el subjuntivo con desinencias (que él venga, que ella sea), y eso lleva a pensar que en inglés hace falta algo parecido: una -s, un pasado o un to. Pero el subjuntivo inglés es simplemente la forma base, igual para todas las personas y sin cambio de tiempo: They insisted that he leave (no left), aunque la frase esté en pasado.",
+            "El segundo error es el calco de «sugerir a alguien que haga algo»: suggest, demand e insist no admiten objeto + to (I suggest you to go es incorrecto). Se dice I suggest (that) you go o I suggest going. Ojo, en cambio, con el doble sentido: insist y suggest también pueden afirmar un hecho, y entonces llevan el tiempo normal: She insisted that she had paid (aseguró que ya había pagado)."
+          ],
+          "examples": [
+            {
+              "en": "I suggest you take a taxi; it's getting late.",
+              "es": "Te sugiero que tomes un taxi; se está haciendo tarde."
+            },
+            {
+              "en": "She insisted that we stay for dinner.",
+              "es": "Insistió en que nos quedáramos a cenar."
+            },
+            {
+              "en": "The union demanded that wages be raised by five per cent.",
+              "es": "El sindicato exigió que se subieran los salarios un cinco por ciento."
+            },
+            {
+              "en": "I suggest going by train rather than driving.",
+              "es": "Sugiero ir en tren en lugar de manejar."
+            },
+            {
+              "en": "He insisted that he had never seen the documents.",
+              "es": "Aseguró que nunca había visto los documentos."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto", "Correcto", "Por qué"],
+            "rows": [
+              ["I suggest you to go.", "I suggest (that) you go.", "suggest no admite objeto + to"],
+              ["They demanded him to leave.", "They demanded that he leave.", "demand + that + forma base"],
+              ["She insisted him to pay.", "She insisted that he pay.", "insist + that + forma base"],
+              [
+                "The board proposed that she was promoted.",
+                "The board proposed that she be promoted.",
+                "el subjuntivo no retrocede al pasado"
+              ]
+            ]
+          },
+          "tip": "Si dudas, usa should: I suggest that he should go es correcto (sobre todo en inglés británico) y siempre te saca del apuro."
+        },
+        {
+          "heading": "Registro: británico, americano y fórmulas fosilizadas",
+          "body": [
+            "En inglés americano el subjuntivo tras suggest, recommend o insist es lo normal incluso en la conversación. En inglés británico informal se oye a menudo should + infinitivo o incluso el indicativo (It's important that she knows), pero en un examen de nivel C2 y en la escritura formal el subjuntivo es la opción segura.",
+            "Quedan además fórmulas fosilizadas que conviene reconocer: if need be (si hace falta), suffice it to say (baste decir), heaven forbid (Dios no quiera), long live… (larga vida a…), be it… or… (ya sea… o…)."
+          ],
+          "examples": [
+            {
+              "en": "Suffice it to say that the meeting did not go well.",
+              "es": "Baste decir que la reunión no salió bien."
+            },
+            {
+              "en": "We can work through the weekend, if need be.",
+              "es": "Podemos trabajar todo el fin de semana, si hace falta."
+            },
+            {
+              "en": "Heaven forbid that anything should happen to them.",
+              "es": "Dios no quiera que les pase algo."
+            },
+            {
+              "en": "The school recommends that every student should bring a laptop.",
+              "es": "La escuela recomienda que cada estudiante traiga una computadora portátil."
+            }
+          ],
+          "tip": "Should en estas frases no significa «debería»: es solo el sustituto británico del subjuntivo."
         }
       ],
       "exercises": [
@@ -153,6 +282,99 @@
             "It's essential that everyone be present.",
             "It is essential that everybody be present."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ you require further assistance, please contact our customer service team.",
+          "options": ["Would", "Had", "Were", "Should"],
+          "answer": 3,
+          "explanation": "Inversión condicional formal: Should you require = If you should require. Would y had no encajan con el presente, y were exigiría to (Were you to require)."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ it not been for the lifeguard, the boy would have drowned.",
+          "options": ["Were", "Should", "Had", "Unless"],
+          "answer": 2,
+          "explanation": "Condición irreal en el pasado (would have drowned): Had it not been for = If it hadn't been for."
+        },
+        {
+          "type": "fill",
+          "prompt": "The committee proposed that the new rules ___ (come) into force in January.",
+          "answers": ["come", "should come"],
+          "explanation": "Tras propose that va la forma base (come), aunque el verbo principal esté en pasado. Should come también es correcto."
+        },
+        {
+          "type": "order",
+          "es": "De haber sabido la verdad, me habría quedado.",
+          "words": ["Had", "I", "known", "the", "truth,", "I", "would", "have", "stayed."],
+          "explanation": "Had + sujeto + participio sustituye a If I had known."
+        },
+        {
+          "type": "translate",
+          "es": "Si necesitara algo, no dude en llamarnos.",
+          "answers": [
+            "Should you need anything, do not hesitate to call us.",
+            "Should you need anything, don't hesitate to call us.",
+            "Should you need anything, do not hesitate to contact us.",
+            "Should you need anything, don't hesitate to contact us.",
+            "If you need anything, do not hesitate to call us.",
+            "If you need anything, don't hesitate to call us.",
+            "If you should need anything, do not hesitate to call us.",
+            "If you should need anything, don't hesitate to call us."
+          ],
+          "explanation": "En registro formal lo más natural es la inversión con should."
+        },
+        {
+          "type": "spot",
+          "parts": ["Hadn't it been", "for your help,", "we would never", "have finished", "on time."],
+          "answer": 0,
+          "correction": "Had it not been",
+          "explanation": "En la inversión condicional negativa el not no se contrae: Had it not been for…"
+        },
+        {
+          "type": "spot",
+          "parts": ["I suggest", "you to", "book", "your tickets", "well in advance."],
+          "answer": 1,
+          "correction": "you",
+          "explanation": "Suggest no admite objeto + to: I suggest (that) you book o I suggest booking."
+        },
+        {
+          "type": "spot",
+          "parts": ["She double-checked", "the address", "lest the parcel", "goes", "astray."],
+          "answer": 3,
+          "correction": "go",
+          "explanation": "Lest va con subjuntivo (forma base) o con should: lest the parcel go / should go astray."
+        },
+        {
+          "type": "transform",
+          "original": "If you need any help, please ask a member of staff.",
+          "keyword": "SHOULD",
+          "prompt": "___ any help, please ask a member of staff.",
+          "answers": ["Should you need", "Should you require"],
+          "explanation": "If you need → Should you need: inversión formal, sin if."
+        },
+        {
+          "type": "transform",
+          "original": "My advice is that you apologise to her immediately.",
+          "keyword": "SUGGEST",
+          "prompt": "I ___ to her immediately.",
+          "answers": [
+            "suggest you apologise",
+            "suggest that you apologise",
+            "suggest you apologize",
+            "suggest that you apologize",
+            "suggest you should apologise",
+            "suggest that you should apologise"
+          ],
+          "explanation": "Suggest + (that) + sujeto + forma base; nunca suggest you to apologise."
+        },
+        {
+          "type": "transform",
+          "original": "If it hadn't been for the map, we would have got lost.",
+          "keyword": "HAD",
+          "prompt": "___ the map, we would have got lost.",
+          "answers": ["Had it not been for"],
+          "explanation": "If it hadn't been for → Had it not been for, con el not sin contraer."
         }
       ]
     },
@@ -164,7 +386,7 @@
         {
           "heading": "Modismos de conversación",
           "body": [
-            "Un modismo tiene un significado distinto del literal. Los más frecuentes aparecen en series, reuniones y charlas: break the ice (romper el hielo), hit the nail on the head (dar en el clavo), on the same page (de acuerdo), a piece of cake (pan comido), once in a blue moon (muy de vez en cuando), cost an arm and a leg (costar un ojo de la cara), under the weather (pachucho)."
+            "Un modismo tiene un significado distinto del literal. Los más frecuentes aparecen en series, reuniones y charlas: break the ice (romper el hielo), hit the nail on the head (dar en el clavo), on the same page (de acuerdo), a piece of cake (pan comido), once in a blue moon (muy de vez en cuando), cost an arm and a leg (costar un ojo de la cara), under the weather (indispuesto, algo enfermo)."
           ],
           "examples": [
             {
@@ -181,7 +403,15 @@
             },
             {
               "en": "That car cost an arm and a leg.",
-              "es": "Ese coche costó un ojo de la cara."
+              "es": "Ese auto costó un ojo de la cara."
+            },
+            {
+              "en": "I've been feeling a bit under the weather since Monday.",
+              "es": "Me siento algo indispuesto desde el lunes."
+            },
+            {
+              "en": "Once you get the hang of it, it's actually quite easy.",
+              "es": "Cuando le tomas el truco, en realidad es bastante fácil."
             }
           ],
           "table": {
@@ -193,7 +423,7 @@
               ["under the weather", "indispuesto"],
               ["the ball is in your court", "te toca decidir"],
               ["beat around the bush", "andarse con rodeos"],
-              ["get the hang of something", "pillarle el truco"],
+              ["get the hang of something", "tomarle el truco a algo"],
               ["call it a day", "dar por terminado el día"]
             ]
           }
@@ -227,6 +457,14 @@
             {
               "en": "He let the cat out of the bag.",
               "es": "Se le escapó el secreto."
+            },
+            {
+              "en": "She always goes the extra mile for her clients.",
+              "es": "Siempre hace más de lo que se le pide por sus clientes."
+            },
+            {
+              "en": "If you cut corners now, you'll pay for it later.",
+              "es": "Si haces las cosas a medias ahora, lo pagarás después."
             }
           ],
           "tip": "Los modismos no se modifican: a piece of cake, nunca «a slice of cake» con este sentido."
@@ -248,8 +486,128 @@
             {
               "en": "Let's get to the heart of the matter.",
               "es": "Vayamos al meollo del asunto."
+            },
+            {
+              "en": "The announcement triggered a flood of complaints.",
+              "es": "El anuncio provocó una avalancha de quejas."
             }
           ]
+        },
+        {
+          "heading": "Registro: cuándo usar un modismo y cuándo no",
+          "body": [
+            "La mayoría de los modismos son informales o neutros: funcionan en una conversación, un correo a un colega o un artículo de opinión, pero chirrían en un informe técnico o un ensayo académico. Allí se prefiere el equivalente literal: the argument does not hold water → the argument is unconvincing.",
+            "Además, algunos modismos que aparecen en todos los libros de texto suenan anticuados a un nativo: it's raining cats and dogs casi no se oye (se dice it's pouring o it's chucking it down en Gran Bretaña). En C2 se nota quién usa los modismos vivos y en su contexto, no quién sabe más."
+          ],
+          "examples": [
+            {
+              "en": "It's absolutely pouring down out there.",
+              "es": "Está lloviendo a cántaros allá afuera."
+            },
+            {
+              "en": "Let's not jump the gun; we don't have the results yet.",
+              "es": "No nos adelantemos; todavía no tenemos los resultados."
+            },
+            {
+              "en": "The new manager has ruffled a few feathers.",
+              "es": "El nuevo gerente ha molestado a más de uno."
+            },
+            {
+              "en": "Quite frankly, the proposal doesn't hold water.",
+              "es": "Francamente, la propuesta no se sostiene."
+            },
+            {
+              "en": "The thief was caught red-handed.",
+              "es": "Atraparon al ladrón con las manos en la masa."
+            }
+          ],
+          "table": {
+            "headers": ["Modismo", "Significado", "Registro"],
+            "rows": [
+              ["jump the gun", "precipitarse", "neutro"],
+              ["ruffle feathers", "molestar, incomodar", "neutro"],
+              ["not hold water", "no sostenerse (un argumento)", "neutro, también escrito"],
+              ["catch someone red-handed", "atrapar con las manos en la masa", "neutro"],
+              ["be over the moon", "estar feliz", "informal, sobre todo británico"],
+              ["rain cats and dogs", "llover a cántaros", "anticuado; suena a libro de texto"]
+            ]
+          },
+          "tip": "En un ensayo, sustituye el modismo por su equivalente neutro: cost an arm and a leg → be extremely expensive."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes: el calco del modismo español",
+          "body": [
+            "El error más delator es traducir palabra por palabra un modismo español: «tomar el pelo» no es take someone's hair, sino pull someone's leg; «meter la pata» no es put the leg, sino put one's foot in it. El nativo no entiende el calco o, peor, entiende otra cosa.",
+            "A veces los dos idiomas coinciden (romper el hielo = break the ice; dar en el clavo = hit the nail on the head), pero es casualidad. Antes de arriesgarte, comprueba que el modismo existe en inglés con esas mismas palabras, y fíjate también en la preposición: get the hang of it, no «on it»."
+          ],
+          "examples": [
+            {
+              "en": "Are you pulling my leg?",
+              "es": "¿Me estás tomando el pelo?"
+            },
+            {
+              "en": "I really put my foot in it when I mentioned his ex-wife.",
+              "es": "Metí la pata hasta el fondo cuando mencioné a su exesposa."
+            },
+            {
+              "en": "She doesn't mince her words.",
+              "es": "No tiene pelos en la lengua."
+            },
+            {
+              "en": "First the car broke down, then I lost my job: when it rains, it pours.",
+              "es": "Primero se descompuso el auto, luego perdí el trabajo: llueve sobre mojado."
+            }
+          ],
+          "table": {
+            "headers": ["Español", "Calco (incorrecto)", "Inglés idiomático"],
+            "rows": [
+              ["tomar el pelo", "take someone's hair", "pull someone's leg"],
+              ["meter la pata", "put the leg", "put one's foot in it"],
+              ["estar en las nubes", "be in the clouds", "have one's head in the clouds"],
+              ["no tener pelos en la lengua", "not have hairs on the tongue", "not mince one's words"],
+              ["llover sobre mojado", "rain on the wet", "when it rains, it pours"],
+              ["costar un ojo de la cara", "cost an eye of the face", "cost an arm and a leg"]
+            ]
+          },
+          "tip": "Que un modismo coincida en los dos idiomas es la excepción, no la regla: no lo des por hecho."
+        },
+        {
+          "heading": "Británico frente a americano, y modismos en la prensa",
+          "body": [
+            "Varios modismos cambian de un lado del Atlántico al otro: touch wood (británico) y knock on wood (americano) para «tocar madera»; a storm in a teacup frente a a tempest in a teapot; a skeleton in the cupboard frente a in the closet; sweep something under the carpet frente a under the rug.",
+            "La prensa y los discursos juegan con los modismos y los dan por sabidos: the elephant in the room (el tema que todos evitan), open a can of worms (destapar un problema mayor), a double-edged sword (un arma de doble filo). Reconocerlos es clave en las preguntas de comprensión de C2."
+          ],
+          "examples": [
+            {
+              "en": "Touch wood, we'll finish the project on time.",
+              "es": "Toco madera, terminaremos el proyecto a tiempo."
+            },
+            {
+              "en": "Knock on wood, the weather will hold until Sunday.",
+              "es": "Toco madera, el buen tiempo aguantará hasta el domingo."
+            },
+            {
+              "en": "In the end, the whole row was a storm in a teacup.",
+              "es": "Al final, toda la discusión fue una tormenta en un vaso de agua."
+            },
+            {
+              "en": "Nobody dared to mention the elephant in the room: the budget.",
+              "es": "Nadie se atrevió a mencionar el tema que todos evitaban: el presupuesto."
+            },
+            {
+              "en": "They tried to sweep the scandal under the carpet.",
+              "es": "Intentaron tapar el escándalo."
+            }
+          ],
+          "table": {
+            "headers": ["Británico", "Americano", "Significado"],
+            "rows": [
+              ["touch wood", "knock on wood", "tocar madera"],
+              ["a storm in a teacup", "a tempest in a teapot", "una tormenta en un vaso de agua"],
+              ["a skeleton in the cupboard", "a skeleton in the closet", "un secreto vergonzoso"],
+              ["sweep under the carpet", "sweep under the rug", "ocultar un problema"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -298,7 +656,103 @@
         {
           "type": "translate",
           "es": "Te toca a ti decidir.",
-          "answers": ["The ball is in your court.", "It's your call.", "The ball's in your court."]
+          "answers": [
+            "The ball is in your court.",
+            "It's your call.",
+            "The ball's in your court.",
+            "It's up to you.",
+            "It's up to you to decide.",
+            "It is up to you to decide.",
+            "It is your call.",
+            "The decision is yours."
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "I didn't mean to upset her; I'm afraid I really put my ___ in it.",
+          "options": ["leg", "hand", "foot", "mouth"],
+          "answer": 2,
+          "explanation": "Put one's foot in it = meter la pata. El calco «put the leg» no existe."
+        },
+        {
+          "type": "choice",
+          "prompt": "His argument sounds convincing at first, but it doesn't really ___.",
+          "options": ["break the ice", "cut corners", "ring a bell", "hold water"],
+          "answer": 3,
+          "explanation": "Not hold water = no sostenerse, de un argumento o una explicación."
+        },
+        {
+          "type": "fill",
+          "prompt": "Don't believe a word he says; he's just pulling your ___.",
+          "answers": ["leg"],
+          "explanation": "Pull someone's leg = tomarle el pelo a alguien."
+        },
+        {
+          "type": "order",
+          "es": "¿Me estás tomando el pelo?",
+          "words": ["Are", "you", "pulling", "my", "leg?"]
+        },
+        {
+          "type": "translate",
+          "es": "No tiene pelos en la lengua.",
+          "answers": [
+            "She doesn't mince her words.",
+            "He doesn't mince his words.",
+            "She does not mince her words.",
+            "He does not mince his words.",
+            "She never minces her words.",
+            "He never minces his words.",
+            "She's very outspoken.",
+            "He's very outspoken.",
+            "She is very outspoken.",
+            "He is very outspoken."
+          ],
+          "explanation": "Not mince one's words o be outspoken; nunca el calco con hairs y tongue."
+        },
+        {
+          "type": "spot",
+          "parts": ["It was", "a piece of a cake,", "to be honest."],
+          "answer": 1,
+          "correction": "a piece of cake,",
+          "explanation": "El modismo es fijo: a piece of cake, sin artículo delante de cake."
+        },
+        {
+          "type": "spot",
+          "parts": ["Stop", "pulling", "my hair;", "I know", "you're joking."],
+          "answer": 2,
+          "correction": "my leg;",
+          "explanation": "Calco de «tomar el pelo»: en inglés es pull my leg."
+        },
+        {
+          "type": "spot",
+          "parts": ["I'm sure", "you'll get", "the hang", "on it", "after a few days."],
+          "answer": 3,
+          "correction": "of it",
+          "explanation": "Get the hang of something: la preposición del modismo es of."
+        },
+        {
+          "type": "transform",
+          "original": "He finally told me the truth, although it was very hard for him.",
+          "keyword": "BULLET",
+          "prompt": "He finally ___ and told me the truth.",
+          "answers": ["bit the bullet"],
+          "explanation": "Bite the bullet = armarse de valor para hacer algo desagradable. Pasado: bit."
+        },
+        {
+          "type": "transform",
+          "original": "I very rarely eat out these days.",
+          "keyword": "MOON",
+          "prompt": "I eat out ___ these days.",
+          "answers": ["once in a blue moon"],
+          "explanation": "Once in a blue moon = muy de vez en cuando."
+        },
+        {
+          "type": "transform",
+          "original": "He accidentally revealed the secret about the surprise party.",
+          "keyword": "CAT",
+          "prompt": "He ___ of the bag about the surprise party.",
+          "answers": ["let the cat out"],
+          "explanation": "Let the cat out of the bag = revelar un secreto sin querer."
         }
       ]
     },
@@ -324,6 +778,14 @@
             {
               "en": "Not wanting to disturb him, I left quietly.",
               "es": "Como no quería molestarlo, me fui en silencio."
+            },
+            {
+              "en": "Arriving at the station, we found that the train had already left.",
+              "es": "Al llegar a la estación, vimos que el tren ya había salido."
+            },
+            {
+              "en": "Being a doctor, she knew exactly what to do.",
+              "es": "Como era médica, sabía exactamente qué hacer."
             }
           ],
           "tip": "Participio colgante: Walking home, the rain started es un error (la lluvia no camina). El sujeto del participio debe ser el de la oración principal."
@@ -353,6 +815,10 @@
             {
               "en": "Exhausted by the climb, they rested.",
               "es": "Agotados por la subida, descansaron."
+            },
+            {
+              "en": "Having spent ten years abroad, he found it hard to settle back home.",
+              "es": "Tras haber pasado diez años en el extranjero, le costó volver a adaptarse a su país."
             }
           ],
           "table": {
@@ -382,8 +848,114 @@
             {
               "en": "She was the last to leave.",
               "es": "Fue la última en irse."
+            },
+            {
+              "en": "Anyone wishing to leave early should inform the teacher.",
+              "es": "Quien desee salir antes debe avisar al profesor."
             }
           ]
+        },
+        {
+          "heading": "El participio colgante: el error que delata",
+          "body": [
+            "En español es aceptable «Al llegar a casa, el perro me recibió»: el infinitivo puede tener un sujeto distinto del de la oración principal. En inglés no: el sujeto implícito del participio tiene que ser el sujeto de la oración principal. Arriving home, the dog greeted me dice literalmente que el perro llegó a casa. Es el dangling participle, y en un texto de C2 penaliza.",
+            "Hay una excepción: algunas expresiones fijas pueden «colgar» porque se refieren al hablante, no al sujeto: generally speaking, strictly speaking, judging by, considering, given (that), provided (that), assuming (that)."
+          ],
+          "examples": [
+            {
+              "en": "Walking into the room, I noticed a strange smell.",
+              "es": "Al entrar en la sala, noté un olor extraño."
+            },
+            {
+              "en": "Generally speaking, the reviews were positive.",
+              "es": "En términos generales, las críticas fueron positivas."
+            },
+            {
+              "en": "Judging by his accent, he must be from Glasgow.",
+              "es": "A juzgar por su acento, debe de ser de Glasgow."
+            },
+            {
+              "en": "Considering the circumstances, the team did remarkably well.",
+              "es": "Teniendo en cuenta las circunstancias, el equipo lo hizo notablemente bien."
+            }
+          ],
+          "table": {
+            "headers": ["Colgante (incorrecto)", "Correcto"],
+            "rows": [
+              ["Arriving late, the doors were closed.", "Arriving late, we found the doors closed."],
+              ["Having finished dinner, the dishes were washed.", "Having finished dinner, we washed the dishes."],
+              ["Driving to work, a deer ran across the road.", "As I was driving to work, a deer ran across the road."]
+            ]
+          },
+          "tip": "Prueba rápida: pregunta «¿quién hace la acción del participio?». La respuesta tiene que ser el sujeto que viene justo después de la coma."
+        },
+        {
+          "heading": "Participios con conjunción y construcciones absolutas",
+          "body": [
+            "Muchas conjunciones admiten un participio en lugar de la oración completa: after/before/since/while/when + -ing (After leaving school, she travelled) y once/if/unless/until/when + participio pasado (Once opened, keep refrigerated; If asked, say nothing). Es el estilo de las instrucciones, las normas y la prensa.",
+            "La construcción absoluta lleva su propio sujeto y es claramente formal o literaria: The work done, they went home (terminado el trabajo). Weather permitting (si el tiempo lo permite) y all things considered (considerándolo todo) son fórmulas fijas. Con with se forma una variante muy frecuente: With prices rising, people are spending less."
+          ],
+          "examples": [
+            {
+              "en": "Once opened, the product should be kept in the fridge.",
+              "es": "Una vez abierto, el producto debe guardarse en el refrigerador."
+            },
+            {
+              "en": "If asked, just say you don't know.",
+              "es": "Si te preguntan, di que no sabes."
+            },
+            {
+              "en": "Weather permitting, the ceremony will be held outdoors.",
+              "es": "Si el tiempo lo permite, la ceremonia se celebrará al aire libre."
+            },
+            {
+              "en": "The contract signed, the two sides shook hands.",
+              "es": "Firmado el contrato, las dos partes se dieron la mano."
+            },
+            {
+              "en": "With interest rates rising, many families are cutting back.",
+              "es": "Con las tasas de interés subiendo, muchas familias están recortando gastos."
+            },
+            {
+              "en": "All things considered, it was a successful year.",
+              "es": "Considerándolo todo, fue un año exitoso."
+            }
+          ],
+          "tip": "Después de once, if, unless y until, el participio pasado tiene sentido pasivo: Once opened = once it has been opened."
+        },
+        {
+          "heading": "Registro y posición: dónde suena bien un participio",
+          "body": [
+            "Los participios condensan, y por eso abundan en la escritura (narrativa, prensa, informes). En la conversación suenan rígidos: nadie dice «Having eaten, we left» en una cena con amigos, sino After we'd eaten, we left. Reserva los participios para escribir o para hablar en registro formal.",
+            "Algunos participios y adjetivos cambian de significado según vayan delante o detrás del sustantivo: concerned parents (padres preocupados) frente a the parents concerned (los padres afectados); an involved story (una historia enrevesada) frente a the people involved (las personas implicadas); the present situation (la situación actual) frente a the people present (los presentes)."
+          ],
+          "examples": [
+            {
+              "en": "The people involved have been informed.",
+              "es": "Las personas implicadas han sido informadas."
+            },
+            {
+              "en": "It was a long and rather involved explanation.",
+              "es": "Fue una explicación larga y bastante enrevesada."
+            },
+            {
+              "en": "All the students present signed the petition.",
+              "es": "Todos los estudiantes presentes firmaron la petición."
+            },
+            {
+              "en": "Concerned parents contacted the school.",
+              "es": "Padres preocupados se pusieron en contacto con la escuela."
+            }
+          ],
+          "table": {
+            "headers": ["Delante del sustantivo", "Detrás del sustantivo"],
+            "rows": [
+              ["concerned parents (preocupados)", "the parents concerned (afectados)"],
+              ["an involved story (enrevesada)", "the people involved (implicados)"],
+              ["the present situation (actual)", "the people present (presentes)"],
+              ["a responsible person (sensata)", "the person responsible (el culpable, el encargado)"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -419,7 +991,12 @@
         {
           "type": "translate",
           "es": "Al sentirme cansada, me fui a la cama.",
-          "answers": ["Feeling tired, I went to bed."]
+          "answers": [
+            "Feeling tired, I went to bed.",
+            "As I felt tired, I went to bed.",
+            "Because I felt tired, I went to bed.",
+            "Feeling tired, I went to sleep."
+          ]
         },
         {
           "type": "choice",
@@ -434,8 +1011,101 @@
             "Having no money, he stayed at home.",
             "Having no money, she stayed at home.",
             "Not having any money, he stayed at home.",
-            "Not having any money, she stayed at home."
+            "Not having any money, she stayed at home.",
+            "Having no money, he stayed home.",
+            "Having no money, she stayed home.",
+            "As he had no money, he stayed at home.",
+            "As she had no money, she stayed at home."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ the instructions carefully, he assembled the bookcase in ten minutes.",
+          "options": ["Having been read", "Being read", "Having read", "Read"],
+          "answer": 2,
+          "explanation": "Acción activa y anterior: having + participio. Having been read y read serían pasivas (las instrucciones no montan nada)."
+        },
+        {
+          "type": "choice",
+          "prompt": "Which sentence avoids a dangling participle?",
+          "options": [
+            "Having missed the bus, a taxi was the only option.",
+            "Walking through the park, the trees looked beautiful.",
+            "Exhausted after the match, a hot bath was all I wanted.",
+            "Having missed the bus, we had to take a taxi."
+          ],
+          "answer": 3,
+          "explanation": "Solo en la última el sujeto de la principal (we) es quien perdió el autobús. En las demás, el taxi, los árboles o el baño «hacen» la acción del participio."
+        },
+        {
+          "type": "fill",
+          "prompt": "Weather ___ (permit), we'll have lunch in the garden.",
+          "answers": ["permitting"],
+          "explanation": "Construcción absoluta fija: weather permitting = si el tiempo lo permite."
+        },
+        {
+          "type": "order",
+          "es": "Una vez abierto, consúmase en un plazo de tres días.",
+          "words": ["Once", "opened,", "consume", "within", "three", "days."],
+          "explanation": "Once + participio pasado: sentido pasivo (once it has been opened)."
+        },
+        {
+          "type": "translate",
+          "es": "Los estudiantes implicados serán sancionados.",
+          "answers": [
+            "The students involved will be punished.",
+            "The students involved will be disciplined.",
+            "The students involved will be sanctioned.",
+            "The students concerned will be punished.",
+            "The students concerned will be disciplined.",
+            "The students involved are going to be punished."
+          ],
+          "explanation": "Involved y concerned van detrás del sustantivo con el sentido de «implicados»."
+        },
+        {
+          "type": "spot",
+          "parts": ["Having been finishing", "the report,", "she sent it", "to the board."],
+          "answer": 0,
+          "correction": "Having finished",
+          "explanation": "La forma perfecta del participio es having + participio pasado: Having finished."
+        },
+        {
+          "type": "spot",
+          "parts": ["He sat", "in silence,", "knowing not", "what to say."],
+          "answer": 2,
+          "correction": "not knowing",
+          "explanation": "La negación va delante del participio: not knowing."
+        },
+        {
+          "type": "spot",
+          "parts": ["Once", "opening,", "the jar", "must be kept", "in the fridge."],
+          "answer": 1,
+          "correction": "opened,",
+          "explanation": "El frasco no abre nada: sentido pasivo, participio pasado (once opened)."
+        },
+        {
+          "type": "transform",
+          "original": "After she had read the letter, she burst into tears.",
+          "keyword": "HAVING",
+          "prompt": "___ the letter, she burst into tears.",
+          "answers": ["Having read"],
+          "explanation": "Acción anterior con el mismo sujeto: having + participio."
+        },
+        {
+          "type": "transform",
+          "original": "Because he didn't want to wake anyone, he took off his shoes.",
+          "keyword": "WANTING",
+          "prompt": "___ anyone, he took off his shoes.",
+          "answers": ["Not wanting to wake", "Not wanting to wake up"],
+          "explanation": "Causa negativa: not + -ing al principio de la frase."
+        },
+        {
+          "type": "transform",
+          "original": "When you view it from the hill, the town looks tiny.",
+          "keyword": "SEEN",
+          "prompt": "___ the hill, the town looks tiny.",
+          "answers": ["Seen from", "When seen from", "If seen from"],
+          "explanation": "El pueblo es visto: participio pasado con sentido pasivo."
         }
       ]
     },
@@ -466,6 +1136,14 @@
             {
               "en": "She strode into the room and demanded an answer.",
               "es": "Entró a zancadas en la sala y exigió una respuesta."
+            },
+            {
+              "en": "The minister stated that no decision had yet been made.",
+              "es": "El ministro declaró que aún no se había tomado ninguna decisión."
+            },
+            {
+              "en": "She mentioned in passing that she might be late.",
+              "es": "Mencionó de pasada que quizá llegaría tarde."
             }
           ],
           "table": {
@@ -509,6 +1187,10 @@
             {
               "en": "His remark was utterly ridiculous.",
               "es": "Su comentario fue completamente ridículo."
+            },
+            {
+              "en": "I was absolutely furious when I saw the bill.",
+              "es": "Estaba furiosísimo cuando vi la cuenta."
             }
           ],
           "tip": "Very freezing y very exhausted suenan mal: los adjetivos extremos ya llevan el grado dentro."
@@ -534,8 +1216,125 @@
             {
               "en": "Quality, as opposed to quantity, is what matters.",
               "es": "La calidad, no la cantidad, es lo que importa."
+            },
+            {
+              "en": "The findings imply that further research is needed.",
+              "es": "Los resultados dan a entender que hace falta más investigación."
             }
           ]
+        },
+        {
+          "heading": "Falsos amigos de nivel avanzado",
+          "body": [
+            "En C2 ya no fallan los falsos amigos evidentes (embarrassed, carpet), sino los que parecen inofensivos porque el contexto casi encaja. Eventually no es «eventualmente», sino «finalmente, con el tiempo»; actually no es «actualmente», sino «en realidad»; sensible significa «sensato», y «sensible» se dice sensitive.",
+            "Otros clásicos: assist (ayudar; «asistir a» es attend), realise (darse cuenta; «realizar» es carry out), deception (engaño; «decepción» es disappointment), compromise (concesión mutua; «compromiso» suele ser commitment), sympathetic (comprensivo; «simpático» es nice o friendly)."
+          ],
+          "examples": [
+            {
+              "en": "Eventually, after months of talks, they reached an agreement.",
+              "es": "Finalmente, tras meses de conversaciones, llegaron a un acuerdo."
+            },
+            {
+              "en": "It would be sensible to wait until the results are in.",
+              "es": "Sería sensato esperar a que estén los resultados."
+            },
+            {
+              "en": "She's extremely sensitive to criticism.",
+              "es": "Es extremadamente sensible a las críticas."
+            },
+            {
+              "en": "The survey was carried out in two phases.",
+              "es": "La encuesta se realizó en dos fases."
+            },
+            {
+              "en": "Both sides had to make compromises.",
+              "es": "Ambas partes tuvieron que hacer concesiones."
+            }
+          ],
+          "table": {
+            "headers": ["Inglés", "Significa", "No significa"],
+            "rows": [
+              ["eventually", "finalmente, con el tiempo", "eventualmente (possibly)"],
+              ["actually", "en realidad", "actualmente (currently)"],
+              ["sensible", "sensato", "sensible (sensitive)"],
+              ["assist", "ayudar", "asistir a (attend)"],
+              ["deception", "engaño", "decepción (disappointment)"],
+              ["realise", "darse cuenta", "realizar (carry out)"],
+              ["compromise", "acuerdo con concesiones", "compromiso (commitment)"],
+              ["sympathetic", "comprensivo", "simpático (nice, friendly)"]
+            ]
+          },
+          "tip": "Actually corrige o matiza lo anterior: I thought he was Irish; actually, he's Scottish. Para «actualmente», usa currently o at present."
+        },
+        {
+          "heading": "Hedging: matizar con precisión académica",
+          "body": [
+            "Un texto académico o periodístico serio rara vez afirma de forma tajante. Se matiza (hedging) con verbos como appear, seem, tend, suggest, indicate; con modales (may, might, could); con adverbios (arguably, presumably, apparently, relatively, somewhat) y con expresiones como to some extent, it could be argued that o there is some evidence that.",
+            "Lo contrario, reforzar (boosting), se hace con clearly, undoubtedly, it is evident that. El dominio de C2 consiste en elegir el grado exacto: cambiar proves por suggests no es inseguridad, es precisión."
+          ],
+          "examples": [
+            {
+              "en": "These results appear to support the hypothesis.",
+              "es": "Estos resultados parecen respaldar la hipótesis."
+            },
+            {
+              "en": "Arguably, it is the finest novel of the decade.",
+              "es": "Podría decirse que es la mejor novela de la década."
+            },
+            {
+              "en": "To some extent, the policy has worked.",
+              "es": "Hasta cierto punto, la política ha funcionado."
+            },
+            {
+              "en": "Older users tend to prefer printed manuals.",
+              "es": "Los usuarios mayores tienden a preferir los manuales impresos."
+            }
+          ],
+          "table": {
+            "headers": ["Afirmación tajante", "Con matiz (hedging)"],
+            "rows": [
+              ["This proves that…", "This suggests that…"],
+              ["Diet causes the disease.", "Diet may contribute to the disease."],
+              ["Everyone agrees.", "There is broad agreement."],
+              ["It is the best solution.", "It is arguably the best solution."]
+            ]
+          },
+          "tip": "Evidence, data y research no «prueban» casi nunca en un texto prudente: suggest, indicate o point to son lo habitual."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes con la precisión léxica",
+          "body": [
+            "Muchos errores persistentes nacen de que un verbo español cubre lo que en inglés son dos: decir = say y tell (He said me ✗ → He told me); explicar lleva el pronombre sin preposición en español (explícame), pero en inglés es explain something to someone (Explain me ✗). Discutir algo no lleva preposición: discuss the plan, no discuss about the plan.",
+            "Otros vienen de contar lo incontable: advice, information, evidence, research y furniture no tienen plural ni llevan a/an (an advice ✗ → some advice, a piece of advice). Y del verbo robar: steal se aplica a la cosa robada (They stole my phone) y rob a la persona o el lugar (I was robbed)."
+          ],
+          "examples": [
+            {
+              "en": "Could you explain to me how the system works?",
+              "es": "¿Podrías explicarme cómo funciona el sistema?"
+            },
+            {
+              "en": "We discussed the proposal at length.",
+              "es": "Discutimos la propuesta a fondo."
+            },
+            {
+              "en": "She gave me some very useful advice.",
+              "es": "Me dio unos consejos muy útiles."
+            },
+            {
+              "en": "Someone stole my wallet; I was robbed on the bus.",
+              "es": "Alguien me robó la billetera; me asaltaron en el autobús."
+            }
+          ],
+          "table": {
+            "headers": ["Error típico", "Correcto", "Causa"],
+            "rows": [
+              ["He said me the truth.", "He told me the truth.", "decir = say y tell"],
+              ["Explain me the problem.", "Explain the problem to me.", "explícame, sin preposición"],
+              ["We discussed about it.", "We discussed it.", "discutir sobre algo"],
+              ["I need an advice.", "I need some advice.", "consejo es contable en español"],
+              ["I assisted to the conference.", "I attended the conference.", "asistir a = attend"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -587,6 +1386,94 @@
             "The findings indicate a clear trend.",
             "The data indicate a clear trend."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "The negotiations dragged on for months, but ___ both sides signed the agreement.",
+          "options": ["actually", "currently", "eventually", "lately"],
+          "answer": 2,
+          "explanation": "Eventually = finalmente, tras mucho tiempo. Actually es «en realidad» y currently, «actualmente»."
+        },
+        {
+          "type": "choice",
+          "prompt": "The data ___ that the treatment may be effective, although further trials are needed.",
+          "options": ["prove", "establish", "demonstrate", "suggest"],
+          "answer": 3,
+          "explanation": "La frase es prudente (may, further trials are needed): pide un verbo matizado, suggest. Prove, establish y demonstrate son tajantes."
+        },
+        {
+          "type": "fill",
+          "prompt": "Could you explain the procedure ___ me again, please?",
+          "answers": ["to"],
+          "explanation": "Explain something to someone: el receptor va con to."
+        },
+        {
+          "type": "order",
+          "es": "Hasta cierto punto, la política ha funcionado.",
+          "words": ["To", "some", "extent,", "the", "policy", "has", "worked."]
+        },
+        {
+          "type": "translate",
+          "es": "Sería sensato reservar con antelación.",
+          "answers": [
+            "It would be sensible to book in advance.",
+            "It'd be sensible to book in advance.",
+            "It would be sensible to book ahead.",
+            "It would be sensible to book early.",
+            "It would be sensible to reserve in advance.",
+            "It would be wise to book in advance."
+          ],
+          "explanation": "Sensato = sensible (falso amigo). Sensible en español se diría sensitive."
+        },
+        {
+          "type": "spot",
+          "parts": ["He", "said me", "that the train", "had been cancelled."],
+          "answer": 1,
+          "correction": "told me",
+          "explanation": "Con receptor, tell: He told me (that)… Say no lleva el receptor sin to."
+        },
+        {
+          "type": "spot",
+          "parts": ["I'd like to", "thank everyone", "who assisted to", "the conference", "last week."],
+          "answer": 2,
+          "correction": "who attended",
+          "explanation": "Asistir a = attend, sin preposición. Assist significa ayudar."
+        },
+        {
+          "type": "spot",
+          "parts": ["After the earthquake,", "the old town", "was", "very devastated."],
+          "answer": 3,
+          "correction": "completely devastated.",
+          "explanation": "Devastated es un adjetivo extremo: completely, utterly o totally, no very."
+        },
+        {
+          "type": "transform",
+          "original": "It is possible to argue that this is her best film.",
+          "keyword": "ARGUABLY",
+          "prompt": "This is ___ film.",
+          "answers": ["arguably her best"],
+          "explanation": "Arguably = podría decirse que; matiza una afirmación."
+        },
+        {
+          "type": "transform",
+          "original": "Prices have risen, and that explains why demand has fallen.",
+          "keyword": "ACCOUNTS",
+          "prompt": "The rise in prices ___ in demand.",
+          "answers": [
+            "accounts for the fall",
+            "accounts for the drop",
+            "accounts for the decrease",
+            "accounts for the decline"
+          ],
+          "explanation": "Account for = explicar, ser la causa de."
+        },
+        {
+          "type": "transform",
+          "original": "In the end, they managed to find a solution.",
+          "keyword": "EVENTUALLY",
+          "prompt": "They ___ a solution.",
+          "answers": ["eventually found", "eventually managed to find", "were eventually able to find"],
+          "explanation": "In the end = eventually (finalmente), nunca «eventualmente»."
         }
       ]
     },
@@ -612,6 +1499,14 @@
             {
               "en": "Strange as it may seem, he enjoys exams.",
               "es": "Por extraño que parezca, disfruta con los exámenes."
+            },
+            {
+              "en": "Hard as she tried, she couldn't hide her disappointment.",
+              "es": "Por mucho que lo intentó, no pudo ocultar su decepción."
+            },
+            {
+              "en": "Talented though he is, he lacks discipline.",
+              "es": "Por talentoso que sea, le falta disciplina."
             }
           ]
         },
@@ -636,6 +1531,10 @@
             {
               "en": "Wherever you go, I'll follow.",
               "es": "Vayas donde vayas, te seguiré."
+            },
+            {
+              "en": "However much you earn, you'll always want more.",
+              "es": "Por mucho que ganes, siempre querrás más."
             }
           ],
           "table": {
@@ -666,10 +1565,118 @@
             },
             {
               "en": "Notwithstanding the cost, the plan went ahead.",
-              "es": "A pesar del coste, el plan siguió adelante."
+              "es": "A pesar del costo, el plan siguió adelante."
+            },
+            {
+              "en": "Even though he had been warned, he went ahead with the plan.",
+              "es": "Aunque le habían advertido, siguió adelante con el plan."
             }
           ],
           "tip": "Even if y even though no son intercambiables: even if plantea una hipótesis; even though, un hecho."
+        },
+        {
+          "heading": "Contraste con las concesivas básicas: although, despite, nevertheless",
+          "body": [
+            "Las estructuras de esta lección son variantes enfáticas o formales de las básicas, y conviene tener estas bien firmes. Although y even though van seguidas de una oración. Despite e in spite of van seguidas de un sustantivo o de -ing; si quieres una oración, necesitas despite the fact that.",
+            "Nevertheless, nonetheless, even so y all the same conectan dos oraciones separadas (aun así). Though al final de la frase es coloquial y equivale a «pero» o «de todos modos»: It was expensive. It was worth it, though."
+          ],
+          "examples": [
+            {
+              "en": "Despite having trained for months, she didn't finish the race.",
+              "es": "A pesar de haber entrenado durante meses, no terminó la carrera."
+            },
+            {
+              "en": "In spite of the fact that it was raining, the match went ahead.",
+              "es": "A pesar de que llovía, el partido se jugó."
+            },
+            {
+              "en": "The hotel was expensive. It was worth every penny, though.",
+              "es": "El hotel era caro. Pero valió cada centavo."
+            },
+            {
+              "en": "The evidence was weak; nonetheless, he was convicted.",
+              "es": "Las pruebas eran débiles; aun así, lo condenaron."
+            },
+            {
+              "en": "I know it's risky. Even so, I want to try.",
+              "es": "Sé que es arriesgado. Aun así, quiero intentarlo."
+            }
+          ],
+          "table": {
+            "headers": ["Conector", "Lo que sigue", "Ejemplo"],
+            "rows": [
+              ["although / even though", "oración", "Although it was late, we stayed."],
+              ["despite / in spite of", "sustantivo o -ing", "Despite the delay, we arrived."],
+              ["despite the fact that", "oración", "Despite the fact that it rained, we went."],
+              ["nevertheless / nonetheless", "nueva oración", "It was hard. Nevertheless, we won."],
+              ["though (al final)", "cierra la frase; informal", "It was cheap, though."]
+            ]
+          },
+          "tip": "Despite nunca lleva of: «despite of» es el error más frecuente. In spite of sí lo lleva."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes con las concesivas",
+          "body": [
+            "El español usa una sola conjunción, «aunque», y el modo verbal marca el matiz: «aunque llueve» (hecho) frente a «aunque llueva» (hipótesis). El inglés cambia de conector: although / even though para los hechos, even if para las hipótesis. Traducir siempre «aunque» por although borra esa diferencia.",
+            "Otro calco frecuente es el doble conector: «Aunque estaba cansada, pero siguió» es incorrecto ya en español, y en inglés aún más: Although she was tired, she kept going (sin but). Y however en sentido concesivo necesita un adjetivo o adverbio: However hard I try, no «However I try» con el sentido de «por mucho que»."
+          ],
+          "examples": [
+            {
+              "en": "Although she was exhausted, she kept working.",
+              "es": "Aunque estaba agotada, siguió trabajando."
+            },
+            {
+              "en": "However much I practise, my accent hardly improves.",
+              "es": "Por mucho que practique, mi acento apenas mejora."
+            },
+            {
+              "en": "Even if they offered me double, I wouldn't take the job.",
+              "es": "Aunque me ofrecieran el doble, no aceptaría el trabajo."
+            },
+            {
+              "en": "No matter how carefully you plan, something always goes wrong.",
+              "es": "Por muy bien que lo planees, siempre sale algo mal."
+            }
+          ],
+          "table": {
+            "headers": ["Español", "Inglés", "Matiz"],
+            "rows": [
+              ["Aunque llueve, salgo.", "Although it's raining, I'm going out.", "hecho real"],
+              ["Aunque llueva, saldré.", "Even if it rains, I'll go out.", "hipótesis posible"],
+              ["Aunque lloviera, saldría.", "Even if it rained, I'd go out.", "hipótesis improbable"],
+              ["Por mucho que lo intente…", "However hard I try… / No matter how hard I try…", "intensidad"]
+            ]
+          },
+          "tip": "«Aunque…, pero» no se traduce con los dos conectores: en inglés va although o but, nunca los dos."
+        },
+        {
+          "heading": "Concesivas formales y literarias: for all, be it, admittedly, that said",
+          "body": [
+            "For all + sustantivo equivale a «con todo su…, a pesar de todo su…»: For all his money, he was lonely. Be it… or… (sea… o…) es subjuntivo fosilizado: every citizen, be they rich or poor. Admittedly y granted reconocen un punto débil antes de rebatirlo.",
+            "That said y having said that matizan lo que se acaba de afirmar (dicho esto). While y whilst (británico, formal) al principio de la frase también pueden ser concesivos: While I understand your concerns, I cannot agree."
+          ],
+          "examples": [
+            {
+              "en": "For all his wealth, he was a lonely man.",
+              "es": "Con todo su dinero, era un hombre solitario."
+            },
+            {
+              "en": "Every decision, be it large or small, must be recorded.",
+              "es": "Toda decisión, sea grande o pequeña, debe quedar registrada."
+            },
+            {
+              "en": "Admittedly, the plan has its weaknesses.",
+              "es": "Hay que reconocer que el plan tiene sus puntos débiles."
+            },
+            {
+              "en": "The film is far too long. That said, the acting is superb.",
+              "es": "La película es demasiado larga. Dicho esto, la actuación es magnífica."
+            },
+            {
+              "en": "Granted, he made a mistake, but he did apologise.",
+              "es": "De acuerdo, cometió un error, pero sí se disculpó."
+            }
+          ]
         }
       ],
       "exercises": [
@@ -720,6 +1727,92 @@
           "type": "translate",
           "es": "Aunque llueva, iremos.",
           "answers": ["Even if it rains, we'll go.", "Even if it rains, we will go.", "Even if it rains we'll go."]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ his fame, he remained a remarkably modest man.",
+          "options": ["Although", "Even though", "Despite of", "For all"],
+          "answer": 3,
+          "explanation": "For all + sustantivo = a pesar de todo su… Although y even though piden una oración, y «despite of» no existe."
+        },
+        {
+          "type": "choice",
+          "prompt": "Every applicant, ___ they local or international, must submit the same documents.",
+          "options": ["are", "being", "be", "were"],
+          "answer": 2,
+          "explanation": "Be they… or… es subjuntivo fosilizado: sean locales o internacionales."
+        },
+        {
+          "type": "fill",
+          "prompt": "Talented ___ she is, she still needs to work harder. (concesiva con adjetivo)",
+          "answers": ["as", "though"],
+          "explanation": "Adjetivo + as/though + sujeto + verbo = por… que sea."
+        },
+        {
+          "type": "order",
+          "es": "Por mucho que lo admire, no estoy de acuerdo con él.",
+          "words": ["Much", "as", "I", "admire", "him,", "I", "disagree", "with", "him."]
+        },
+        {
+          "type": "translate",
+          "es": "Aunque me lo pidieran, no lo haría.",
+          "answers": [
+            "Even if they asked me, I wouldn't do it.",
+            "Even if they asked me, I would not do it.",
+            "Even if they asked me to, I wouldn't do it.",
+            "Even if they asked me to, I would not do it.",
+            "Even if I were asked, I wouldn't do it.",
+            "Even if I was asked, I wouldn't do it.",
+            "I wouldn't do it even if they asked me.",
+            "I wouldn't do it even if they asked me to.",
+            "I would not do it even if they asked me."
+          ],
+          "explanation": "Hipótesis improbable: even if + pasado, would en la principal."
+        },
+        {
+          "type": "spot",
+          "parts": ["Despite of", "the heavy traffic,", "we arrived", "on time."],
+          "answer": 0,
+          "correction": "Despite",
+          "explanation": "Despite no lleva of (in spite of sí)."
+        },
+        {
+          "type": "spot",
+          "parts": ["Although the hotel", "was expensive,", "but the service", "was excellent."],
+          "answer": 2,
+          "correction": "the service",
+          "explanation": "Doble conector: con although sobra but."
+        },
+        {
+          "type": "spot",
+          "parts": ["Tired", "as was I,", "I", "kept going."],
+          "answer": 1,
+          "correction": "as I was,",
+          "explanation": "En adjetivo + as no hay inversión: Tired as I was."
+        },
+        {
+          "type": "transform",
+          "original": "Although he is very rich, he is deeply unhappy.",
+          "keyword": "FOR",
+          "prompt": "___, he is deeply unhappy.",
+          "answers": ["For all his wealth", "For all his money", "For all his riches"],
+          "explanation": "For all + sustantivo = a pesar de (todo) su…"
+        },
+        {
+          "type": "transform",
+          "original": "It doesn't matter how often I explain it; he never understands.",
+          "keyword": "HOWEVER",
+          "prompt": "___ it, he never understands.",
+          "answers": ["However often I explain", "However many times I explain", "However much I explain"],
+          "explanation": "However + adverbio + sujeto + verbo = por mucho que."
+        },
+        {
+          "type": "transform",
+          "original": "I really admire her, but I cannot support her decision.",
+          "keyword": "MUCH",
+          "prompt": "___, I cannot support her decision.",
+          "answers": ["Much as I admire her", "Much as I really admire her"],
+          "explanation": "Much as + oración = por mucho que."
         }
       ]
     },
@@ -744,7 +1837,15 @@
             },
             {
               "en": "I'd sooner you hadn't invited him.",
-              "es": "Habría preferido que no lo invitaras."
+              "es": "Habría preferido que no lo hubieras invitado."
+            },
+            {
+              "en": "Isn't it about time you found a proper job?",
+              "es": "¿No va siendo hora de que encuentres un trabajo como es debido?"
+            },
+            {
+              "en": "I'd rather you didn't tell anyone yet.",
+              "es": "Preferiría que no se lo dijeras a nadie todavía."
             }
           ]
         },
@@ -765,6 +1866,14 @@
             {
               "en": "You look as if you haven't slept.",
               "es": "Parece que no has dormido (puede ser verdad)."
+            },
+            {
+              "en": "It sounds as though they're having a party next door.",
+              "es": "Parece que están de fiesta en la casa de al lado."
+            },
+            {
+              "en": "She spoke to me as if we had never met.",
+              "es": "Me habló como si nunca nos hubiéramos visto."
             }
           ],
           "table": {
@@ -794,9 +1903,126 @@
             {
               "en": "Take an umbrella; otherwise you'll get soaked.",
               "es": "Lleva paraguas; si no, te empaparás."
+            },
+            {
+              "en": "What if the plane had been delayed?",
+              "es": "¿Y si el avión se hubiera retrasado?"
             }
           ],
           "tip": "It's time to go (infinitivo) es neutro; it's time we went (pasado) sugiere que ya vamos tarde."
+        },
+        {
+          "heading": "Wish e if only: presente, pasado y quejas",
+          "body": [
+            "Wish + pasado simple expresa un deseo irreal sobre el presente (I wish I had more time: no lo tengo). Wish + pasado perfecto, un arrepentimiento sobre el pasado (I wish I had listened: no escuché). Wish + would expresa queja o impaciencia por la conducta de otro (I wish you would stop): no se usa con el propio sujeto (I wish I would ✗).",
+            "If only es igual pero más intenso o dramático: If only we had left earlier! Para un deseo sobre el futuro posible, el inglés no usa wish sino hope: «Ojalá apruebes» = I hope you pass. Es un error muy típico, porque «ojalá» cubre los dos casos en español."
+          ],
+          "examples": [
+            {
+              "en": "I wish I had more free time.",
+              "es": "Ojalá tuviera más tiempo libre."
+            },
+            {
+              "en": "I wish I hadn't said that.",
+              "es": "Ojalá no hubiera dicho eso."
+            },
+            {
+              "en": "I wish you would stop interrupting me.",
+              "es": "Ojalá dejaras de interrumpirme."
+            },
+            {
+              "en": "I hope it doesn't rain tomorrow.",
+              "es": "Ojalá no llueva mañana."
+            },
+            {
+              "en": "If only we'd left ten minutes earlier!",
+              "es": "¡Si hubiéramos salido diez minutos antes!"
+            }
+          ],
+          "table": {
+            "headers": ["Estructura", "Uso", "Ejemplo"],
+            "rows": [
+              ["wish + pasado simple", "deseo irreal sobre el presente", "I wish I knew."],
+              ["wish + pasado perfecto", "arrepentimiento sobre el pasado", "I wish I'd known."],
+              ["wish + would", "queja sobre la conducta de otro", "I wish he would listen."],
+              ["hope + presente", "deseo sobre un futuro posible", "I hope you win."]
+            ]
+          },
+          "tip": "«Ojalá» + futuro posible se traduce con hope, no con wish: «Ojalá te guste» = I hope you like it."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes: el pasado que no es pasado",
+          "body": [
+            "Para un hispanohablante, un verbo en pasado habla del pasado. Pero en estas estructuras el pasado es irreal: habla del presente o del futuro. Por eso se oyen errores como It's time we go o I'd rather you don't come, en lugar de It's time we went e I'd rather you didn't come.",
+            "También se confunden would rather y prefer: I'd rather + verbo base (I'd rather walk, sin to), pero I'd prefer + to + verbo (I'd prefer to walk). Con otra persona: I'd rather you stayed, I'd prefer you to stay o I'd prefer it if you stayed. En if I were / was, were es la forma recomendada en registro formal y la única posible en If I were you."
+          ],
+          "examples": [
+            {
+              "en": "I'd prefer you to stay here tonight.",
+              "es": "Preferiría que te quedaras aquí esta noche."
+            },
+            {
+              "en": "I'd prefer it if you didn't smoke in the car.",
+              "es": "Preferiría que no fumaras en el auto."
+            },
+            {
+              "en": "I'd rather stay at home than go out tonight.",
+              "es": "Prefiero quedarme en casa a salir esta noche."
+            },
+            {
+              "en": "If I were you, I'd accept the offer.",
+              "es": "Yo que tú, aceptaría la oferta."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto", "Correcto"],
+            "rows": [
+              ["It's time we go.", "It's time we went."],
+              ["I'd rather you don't come.", "I'd rather you didn't come."],
+              ["I'd rather to walk.", "I'd rather walk."],
+              ["I wish it doesn't rain tomorrow.", "I hope it doesn't rain tomorrow."],
+              ["I wish I would be taller.", "I wish I were taller."]
+            ]
+          },
+          "tip": "Si dudas, pregúntate: ¿es real o imaginario? Si es imaginario, el verbo retrocede un tiempo."
+        },
+        {
+          "heading": "Condicionales mixtas y condiciones sin if",
+          "body": [
+            "Las condicionales mixtas cruzan los tiempos. Condición pasada con resultado presente: If I had taken that job, I would be living in Tokyo now. Condición presente (un rasgo permanente) con resultado pasado: If she weren't so stubborn, she would have apologised.",
+            "Otras formas de plantear la condición: but for + sustantivo (de no ser por), otherwise (si no), assuming / supposing (suponiendo que), provided / providing / on condition that (siempre que, con la condición de que)."
+          ],
+          "examples": [
+            {
+              "en": "If I had taken that job, I would be living in Tokyo now.",
+              "es": "Si hubiera aceptado ese trabajo, ahora estaría viviendo en Tokio."
+            },
+            {
+              "en": "If she weren't so stubborn, she would have apologised by now.",
+              "es": "Si no fuera tan terca, ya se habría disculpado."
+            },
+            {
+              "en": "But for your advice, I would have made a terrible mistake.",
+              "es": "De no ser por tu consejo, habría cometido un error terrible."
+            },
+            {
+              "en": "Assuming the train is on time, we'll arrive at six.",
+              "es": "Suponiendo que el tren llegue a tiempo, llegaremos a las seis."
+            },
+            {
+              "en": "You can borrow the car on condition that you fill it up.",
+              "es": "Puedes llevarte el auto con la condición de que le llenes el tanque."
+            }
+          ],
+          "table": {
+            "headers": ["Tipo", "Condición", "Resultado"],
+            "rows": [
+              ["pasado → presente", "If I had studied medicine,", "I would be a doctor now."],
+              ["presente → pasado", "If I spoke Russian,", "I would have understood the film."],
+              ["but for + sustantivo", "But for the rain,", "we would have won."]
+            ]
+          },
+          "tip": "But for equivale a if it hadn't been for / if it weren't for, y solo va seguido de un sustantivo."
         }
       ],
       "exercises": [
@@ -847,6 +2073,108 @@
             "He treats me as though I were a child.",
             "She treats me as though I were a child."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "I wish my neighbours ___ their music down at night.",
+          "options": ["turn", "will turn", "would turn", "have turned"],
+          "answer": 2,
+          "explanation": "Queja sobre la conducta de otros: wish + would."
+        },
+        {
+          "type": "choice",
+          "prompt": "If I ___ that course last year, I'd be fully qualified by now.",
+          "options": ["took", "would take", "have taken", "had taken"],
+          "answer": 3,
+          "explanation": "Condicional mixta: condición pasada (last year) y resultado presente (now)."
+        },
+        {
+          "type": "fill",
+          "prompt": "I'd prefer it if you ___ (not / tell) anyone about this.",
+          "answers": ["didn't tell", "did not tell"],
+          "explanation": "I'd prefer it if + pasado irreal, como I'd rather."
+        },
+        {
+          "type": "order",
+          "es": "Ojalá me hubieras llamado antes.",
+          "words": ["I", "wish", "you", "had", "called", "me", "earlier."],
+          "explanation": "Arrepentimiento sobre el pasado: wish + pasado perfecto."
+        },
+        {
+          "type": "translate",
+          "es": "Yo que tú, no le diría nada.",
+          "answers": [
+            "If I were you, I wouldn't tell him anything.",
+            "If I were you, I wouldn't tell her anything.",
+            "If I were you, I would not tell him anything.",
+            "If I were you, I would not tell her anything.",
+            "If I were you, I wouldn't say anything to him.",
+            "If I were you, I wouldn't say anything to her.",
+            "If I were you, I'd tell him nothing.",
+            "If I were you, I'd tell her nothing.",
+            "If I were you, I wouldn't tell him a thing.",
+            "If I was you, I wouldn't tell him anything."
+          ],
+          "explanation": "«Yo que tú» = If I were you, con were."
+        },
+        {
+          "type": "spot",
+          "parts": ["I wish", "it doesn't rain", "on the day", "of the wedding."],
+          "answer": 0,
+          "correction": "I hope",
+          "explanation": "Deseo sobre un futuro posible: hope, no wish."
+        },
+        {
+          "type": "spot",
+          "parts": ["It's high time", "the council", "does something", "about the potholes."],
+          "answer": 2,
+          "correction": "did something",
+          "explanation": "It's (high) time + pasado simple irreal."
+        },
+        {
+          "type": "spot",
+          "parts": ["She talks about Paris as if", "she has lived there", "for years, but", "she's never been."],
+          "answer": 1,
+          "correction": "she had lived there",
+          "explanation": "Comparación irreal (nunca ha estado): as if + pasado perfecto."
+        },
+        {
+          "type": "transform",
+          "original": "I regret not going to the concert.",
+          "keyword": "WISH",
+          "prompt": "I ___ to the concert.",
+          "answers": ["wish I had gone", "wish I'd gone"],
+          "explanation": "Arrepentimiento sobre el pasado: wish + pasado perfecto."
+        },
+        {
+          "type": "transform",
+          "original": "You really should start revising for your exams now.",
+          "keyword": "TIME",
+          "prompt": "It's ___ revising for your exams.",
+          "answers": [
+            "time you started",
+            "high time you started",
+            "about time you started",
+            "time you began",
+            "high time you began"
+          ],
+          "explanation": "It's (high / about) time + sujeto + pasado simple."
+        },
+        {
+          "type": "transform",
+          "original": "If you hadn't helped me, I would have failed.",
+          "keyword": "BUT",
+          "prompt": "___, I would have failed.",
+          "answers": ["But for your help"],
+          "explanation": "But for + sustantivo = if it hadn't been for."
+        },
+        {
+          "type": "transform",
+          "original": "I'd prefer you not to smoke in the car.",
+          "keyword": "RATHER",
+          "prompt": "I'd ___ in the car.",
+          "answers": ["rather you didn't smoke", "rather you did not smoke"],
+          "explanation": "Would rather + otra persona + pasado irreal: I'd rather you didn't."
         }
       ]
     },
@@ -872,6 +2200,14 @@
             {
               "en": "All of the above applies to part-time staff.",
               "es": "Todo lo anterior se aplica al personal a tiempo parcial."
+            },
+            {
+              "en": "Such a decision cannot be taken lightly.",
+              "es": "Una decisión así no puede tomarse a la ligera."
+            },
+            {
+              "en": "These findings challenge earlier assumptions.",
+              "es": "Estos hallazgos cuestionan supuestos anteriores."
             }
           ]
         },
@@ -892,6 +2228,14 @@
             {
               "en": "It's not a failure; on the contrary, it's a first step.",
               "es": "No es un fracaso; al contrario, es un primer paso."
+            },
+            {
+              "en": "The rules have changed, and we have adjusted our policy accordingly.",
+              "es": "Las normas han cambiado y hemos ajustado nuestra política en consecuencia."
+            },
+            {
+              "en": "Some students thrive on exams; conversely, others do better with coursework.",
+              "es": "Algunos estudiantes rinden mejor en los exámenes; a la inversa, a otros les va mejor con los trabajos."
             }
           ],
           "table": {
@@ -923,9 +2267,127 @@
             {
               "en": "Those who wish to object may do so in writing.",
               "es": "Quienes deseen objetar pueden hacerlo por escrito."
+            },
+            {
+              "en": "If you haven't paid yet, please do so by Friday.",
+              "es": "Si todavía no has pagado, hazlo antes del viernes."
             }
           ],
           "tip": "On the contrary niega lo anterior; by contrast solo compara. No son intercambiables."
+        },
+        {
+          "heading": "Therefore, thus, hence, thereby: diferencias finas",
+          "body": [
+            "Los cuatro expresan consecuencia, pero no se construyen igual. Therefore es el neutro y va con una oración completa. Thus es más formal y, además de una oración, admite -ing con el sentido de «con lo cual»: The engine uses less fuel, thus reducing emissions.",
+            "Hence suele ir con un sintagma nominal, sin verbo: hence the delay, hence its name (de ahí el retraso, de ahí su nombre). Thereby va con -ing y significa «con ello, de ese modo»: They cut prices, thereby attracting new customers."
+          ],
+          "examples": [
+            {
+              "en": "The council closed the bridge, thereby forcing drivers to take a long detour.",
+              "es": "La municipalidad cerró el puente, con lo cual obligó a los conductores a dar un largo rodeo."
+            },
+            {
+              "en": "The town was built on a hill; hence its name, Highbury.",
+              "es": "El pueblo se construyó sobre una colina; de ahí su nombre, Highbury."
+            },
+            {
+              "en": "The new engine uses less fuel, thus reducing emissions.",
+              "es": "El nuevo motor consume menos combustible, con lo que reduce las emisiones."
+            },
+            {
+              "en": "He was not present at the meeting and therefore cannot be blamed.",
+              "es": "No estuvo presente en la reunión y, por lo tanto, no se le puede culpar."
+            }
+          ],
+          "table": {
+            "headers": ["Conector", "Va seguido de", "Ejemplo"],
+            "rows": [
+              ["therefore", "oración (neutro)", "It is late; therefore, we must hurry."],
+              ["thus", "oración o -ing (formal)", "…, thus saving time."],
+              ["hence", "sintagma nominal, sin verbo", "…; hence the delay."],
+              ["thereby", "-ing (con ello)", "…, thereby losing support."],
+              ["consequently / as a result", "oración", "Consequently, prices rose."]
+            ]
+          },
+          "tip": "Hence the delay (sin verbo) es perfecto; si necesitas un verbo conjugado, usa therefore o as a result."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes en la cohesión",
+          "body": [
+            "«Por otro lado» en español sirve tanto para contrastar como para añadir («es barato; por otro lado, está cerca»). On the other hand solo contrasta; para añadir se usa moreover, furthermore, what is more o besides. Además, la preposición es fija: on the other hand, nunca «in the other hand».",
+            "«Al final» tiene dos traducciones: in the end (finalmente, tras un proceso) y at the end of (al final de algo concreto: at the end of the film). Besides no lleva of (besides that), y the former / the latter solo sirven cuando se han mencionado exactamente dos elementos."
+          ],
+          "examples": [
+            {
+              "en": "The flat is small; on the other hand, it's very central.",
+              "es": "El departamento es pequeño; por otro lado, es muy céntrico."
+            },
+            {
+              "en": "The flat is cheap. Moreover, it's close to the station.",
+              "es": "El departamento es barato. Además, está cerca de la estación."
+            },
+            {
+              "en": "In the end, we decided to stay.",
+              "es": "Al final, decidimos quedarnos."
+            },
+            {
+              "en": "At the end of the film, everyone was in tears.",
+              "es": "Al final de la película, todos lloraban."
+            },
+            {
+              "en": "Unemployment rose sharply. This trend worried economists.",
+              "es": "El desempleo subió mucho. Esta tendencia preocupó a los economistas."
+            }
+          ],
+          "table": {
+            "headers": ["Error", "Correcto", "Por qué"],
+            "rows": [
+              ["On the other hand (para añadir)", "Moreover / Furthermore", "on the other hand solo contrasta"],
+              ["In the other hand", "On the other hand", "la preposición es fija"],
+              ["At the end, we agreed.", "In the end, we agreed.", "in the end = finalmente"],
+              ["Besides of that…", "Besides that… / Apart from that…", "besides no lleva of"],
+              ["The former of the three…", "The first of the three…", "the former / the latter solo con dos"]
+            ]
+          },
+          "tip": "Un this suelto al principio de la frase puede ser ambiguo: añade un sustantivo resumen (this trend, this decision) y el texto gana claridad."
+        },
+        {
+          "heading": "Sustitución en la conversación: so, not y la elipsis",
+          "body": [
+            "En la conversación, so y not sustituyen una oración entera tras think, hope, expect, suppose, be afraid: I think so, I hope not, I'm afraid so. Con think, expect y suppose la negativa natural es I don't think so; I think not existe, pero suena formal o tajante. Con hope y be afraid solo cabe not: I hope not, I'm afraid not.",
+            "La elipsis tras auxiliar evita repetir el verbo: She said she would call, and she did. I didn't enjoy it, and neither did my sister. Es una marca de inglés natural: repetir el verbo entero suena mecánico."
+          ],
+          "examples": [
+            {
+              "en": "\"Will it rain tomorrow?\" \"I'm afraid so.\"",
+              "es": "—¿Lloverá mañana? —Me temo que sí."
+            },
+            {
+              "en": "\"Is the shop open on Sundays?\" \"I don't think so.\"",
+              "es": "—¿La tienda abre los domingos? —Creo que no."
+            },
+            {
+              "en": "\"Are we late?\" \"I hope not.\"",
+              "es": "—¿Llegamos tarde? —Espero que no."
+            },
+            {
+              "en": "She said she'd call, and she did.",
+              "es": "Dijo que llamaría, y lo hizo."
+            },
+            {
+              "en": "I didn't enjoy the film, and neither did my sister.",
+              "es": "No me gustó la película, y a mi hermana tampoco."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Afirmativa", "Negativa"],
+            "rows": [
+              ["think", "I think so.", "I don't think so."],
+              ["hope", "I hope so.", "I hope not."],
+              ["be afraid", "I'm afraid so.", "I'm afraid not."],
+              ["suppose", "I suppose so.", "I don't suppose so. / I suppose not."]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -979,6 +2441,90 @@
             "The north voted against it; the south did likewise.",
             "The north voted against; the south did the same."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "The factory switched to solar power, ___ cutting its energy bills by half.",
+          "options": ["hence", "whereby", "thereby", "conversely"],
+          "answer": 2,
+          "explanation": "Thereby + -ing = con ello, de ese modo. Hence iría con un sustantivo (hence the savings)."
+        },
+        {
+          "type": "choice",
+          "prompt": "The village lies at the foot of three hills; ___ its name, Threehills.",
+          "options": ["thereby", "thus", "therefore", "hence"],
+          "answer": 3,
+          "explanation": "Hence + sintagma nominal sin verbo: hence its name (de ahí su nombre)."
+        },
+        {
+          "type": "fill",
+          "prompt": "\"Will the shops be open on Monday?\" \"I'm afraid ___. It's a public holiday.\"",
+          "answers": ["not"],
+          "explanation": "Respuesta negativa con be afraid: I'm afraid not."
+        },
+        {
+          "type": "order",
+          "es": "Al final, aceptamos su oferta.",
+          "words": ["In", "the", "end,", "we", "accepted", "their", "offer."],
+          "explanation": "Al final = finalmente: in the end."
+        },
+        {
+          "type": "translate",
+          "es": "Las ventas cayeron; de ahí los recortes.",
+          "answers": [
+            "Sales fell; hence the cuts.",
+            "Sales fell, hence the cuts.",
+            "Sales dropped; hence the cuts.",
+            "Sales dropped, hence the cuts.",
+            "Sales fell; hence the job cuts.",
+            "Sales went down; hence the cuts."
+          ],
+          "explanation": "De ahí + sustantivo = hence + sustantivo, sin verbo."
+        },
+        {
+          "type": "spot",
+          "parts": ["The house is lovely;", "in the other hand,", "it's far", "from the station."],
+          "answer": 1,
+          "correction": "on the other hand,",
+          "explanation": "La expresión fija es on the other hand."
+        },
+        {
+          "type": "spot",
+          "parts": ["At the end,", "after hours of discussion,", "the committee", "approved the plan."],
+          "answer": 0,
+          "correction": "In the end,",
+          "explanation": "Finalmente, tras un proceso: in the end. At the end necesita of + algo."
+        },
+        {
+          "type": "spot",
+          "parts": ["The rent", "is cheap", "and the area is safe;", "on the other hand,", "it's close to the metro."],
+          "answer": 3,
+          "correction": "moreover,",
+          "explanation": "Se añade otra ventaja, no se contrasta: moreover o furthermore. On the other hand solo contrasta."
+        },
+        {
+          "type": "transform",
+          "original": "There were two proposals, and the second one was cheaper.",
+          "keyword": "LATTER",
+          "prompt": "There were two proposals, ___ cheaper.",
+          "answers": ["the latter being", "and the latter was", "of which the latter was"],
+          "explanation": "The latter = el segundo de dos elementos mencionados."
+        },
+        {
+          "type": "transform",
+          "original": "The company cut its prices and, as a result, attracted new customers.",
+          "keyword": "THEREBY",
+          "prompt": "The company cut its prices, ___ new customers.",
+          "answers": ["thereby attracting"],
+          "explanation": "Thereby + -ing expresa la consecuencia directa de la acción."
+        },
+        {
+          "type": "transform",
+          "original": "Anyone who wants to complain can complain in writing.",
+          "keyword": "DO",
+          "prompt": "Anyone who wants to complain ___ in writing.",
+          "answers": ["can do so", "may do so"],
+          "explanation": "Do so sustituye al verbo ya mencionado y evita repetirlo."
         }
       ]
     },
@@ -1008,6 +2554,14 @@
             {
               "en": "Every relationship needs some give and take.",
               "es": "Toda relación necesita ceder por ambas partes."
+            },
+            {
+              "en": "We had to learn by trial and error.",
+              "es": "Tuvimos que aprender por ensayo y error."
+            },
+            {
+              "en": "Let's weigh up the pros and cons before we decide.",
+              "es": "Sopesemos los pros y los contras antes de decidir."
             }
           ],
           "table": {
@@ -1045,6 +2599,10 @@
             {
               "en": "I'm not in the least surprised.",
               "es": "No me sorprende en absoluto."
+            },
+            {
+              "en": "He had no intention whatsoever of apologising.",
+              "es": "No tenía la menor intención de disculparse."
             }
           ]
         },
@@ -1065,9 +2623,147 @@
             {
               "en": "They ran the risk of losing everything.",
               "es": "Corrían el riesgo de perderlo todo."
+            },
+            {
+              "en": "The new law poses a serious threat to privacy.",
+              "es": "La nueva ley supone una grave amenaza para la privacidad."
+            },
+            {
+              "en": "Who is going to foot the bill for the repairs?",
+              "es": "¿Quién va a correr con los gastos de las reparaciones?"
             }
           ],
           "tip": "Las colocaciones no se improvisan: «make a balance» no existe; se dice strike a balance."
+        },
+        {
+          "heading": "Más binomios y trinomios: el orden no se toca",
+          "body": [
+            "Los binomios son irreversibles: el orden está fijado por el uso, y a veces es el contrario del español. «Papel y lápiz» es pen and paper; «de un lado a otro», back and forth; «de carne y hueso», flesh and blood. Ups and downs (altibajos), first and foremost (ante todo) y odds and ends (cosas sueltas) completan la lista de los más frecuentes.",
+            "Los trinomios son aún más idiomáticos: ready, willing and able (dispuesto y preparado), lock, stock and barrel (con todo, por completo), hook, line and sinker (tragarse algo por completo), tall, dark and handsome. Se usan sobre todo en la conversación y en la prensa."
+          ],
+          "examples": [
+            {
+              "en": "He paced back and forth outside the office.",
+              "es": "Caminaba de un lado a otro frente a la oficina."
+            },
+            {
+              "en": "All you need for this test is pen and paper.",
+              "es": "Para esta prueba solo necesitas papel y lápiz."
+            },
+            {
+              "en": "They're my own flesh and blood.",
+              "es": "Son de mi propia sangre."
+            },
+            {
+              "en": "The family business was sold lock, stock and barrel.",
+              "es": "El negocio familiar se vendió con todo incluido."
+            },
+            {
+              "en": "She fell for his story hook, line and sinker.",
+              "es": "Se tragó su historia por completo."
+            },
+            {
+              "en": "I'm ready, willing and able to start on Monday.",
+              "es": "Estoy listo y dispuesto para empezar el lunes."
+            }
+          ],
+          "table": {
+            "headers": ["Inglés (orden fijo)", "Español"],
+            "rows": [
+              ["pen and paper", "papel y lápiz"],
+              ["back and forth", "de un lado a otro"],
+              ["flesh and blood", "de carne y hueso"],
+              ["ups and downs", "altibajos"],
+              ["first and foremost", "ante todo"],
+              ["lock, stock and barrel", "con todo, por completo"],
+              ["hook, line and sinker", "por completo (creerse algo)"]
+            ]
+          },
+          "tip": "Si inviertes un binomio, el nativo lo nota al instante: «sound and safe» o «cons and pros» suenan a error."
+        },
+        {
+          "heading": "Énfasis con la estructura: oraciones escindidas e inversión",
+          "body": [
+            "Las oraciones escindidas (cleft sentences) ponen el foco en un elemento: It was the noise that kept me awake (fue el ruido lo que…). What I need is time (lo que necesito es tiempo). All I want is… (lo único que quiero es…). Tras What… did / All… did va el infinitivo sin to: All I did was ask.",
+            "La inversión tras un adverbio negativo o restrictivo es el énfasis formal por excelencia: Never have I seen…, Little did they know…, Under no circumstances should you…, Not only is it…, but…, Hardly had we… when…, No sooner had we… than…"
+          ],
+          "examples": [
+            {
+              "en": "It was the noise that kept me awake, not the heat.",
+              "es": "Fue el ruido lo que no me dejó dormir, no el calor."
+            },
+            {
+              "en": "What really annoys me is his attitude.",
+              "es": "Lo que de verdad me molesta es su actitud."
+            },
+            {
+              "en": "All I want is a bit of peace and quiet.",
+              "es": "Lo único que quiero es un poco de paz y tranquilidad."
+            },
+            {
+              "en": "Never have I seen such chaos.",
+              "es": "Nunca he visto semejante caos."
+            },
+            {
+              "en": "Little did they know what was about to happen.",
+              "es": "Poco sabían lo que estaba a punto de pasar."
+            },
+            {
+              "en": "Under no circumstances should you open this door.",
+              "es": "Bajo ningún concepto debes abrir esta puerta."
+            }
+          ],
+          "table": {
+            "headers": ["Estructura", "Ejemplo"],
+            "rows": [
+              ["It is/was … that/who", "It was Tom who broke it."],
+              ["What … is/was", "What I need is time."],
+              ["All … is/was", "All I did was ask."],
+              ["Adverbio negativo + inversión", "Never have I been so tired."],
+              ["Not only … but also", "Not only is it cheap, but it's also fast."]
+            ]
+          },
+          "tip": "Hardly va con when y no sooner con than: Hardly had I arrived when…, No sooner had I arrived than…"
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes con el énfasis y las colocaciones",
+          "body": [
+            "El español enfatiza con «mismo» o «mismísimo» («el mismo presidente lo admitió»), y el calco the same president dice otra cosa: «el mismo presidente (no otro)». En inglés el énfasis se hace con el pronombre reflexivo: The president himself admitted it.",
+            "Las colocaciones verbales son el otro gran foco de calcos: hacer una pregunta = ask a question; decir una mentira = tell a lie; cometer un error = make a mistake; dar un paso = take a step; lluvia fuerte = heavy rain. Ninguna se deduce: hay que aprenderlas como bloque."
+          ],
+          "examples": [
+            {
+              "en": "The president himself admitted the mistake.",
+              "es": "El mismísimo presidente admitió el error."
+            },
+            {
+              "en": "Can I ask you a question?",
+              "es": "¿Puedo hacerte una pregunta?"
+            },
+            {
+              "en": "She told a white lie to protect him.",
+              "es": "Dijo una mentira piadosa para protegerlo."
+            },
+            {
+              "en": "There was heavy rain throughout the night.",
+              "es": "Llovió muchísimo durante toda la noche."
+            },
+            {
+              "en": "It was the first step towards a solution.",
+              "es": "Fue el primer paso hacia una solución."
+            }
+          ],
+          "table": {
+            "headers": ["Calco del español", "Colocación correcta"],
+            "rows": [
+              ["make a question", "ask a question"],
+              ["say a lie", "tell a lie"],
+              ["strong rain", "heavy rain"],
+              ["do a mistake", "make a mistake"],
+              ["give a step", "take a step"],
+              ["the same president said", "the president himself said"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1117,6 +2813,98 @@
           "type": "translate",
           "es": "De ninguna manera es esto el final.",
           "answers": ["This is by no means the end.", "This is in no way the end."]
+        },
+        {
+          "type": "choice",
+          "prompt": "First and ___, I'd like to thank my family for their support.",
+          "options": ["finally", "mainly", "foremost", "firstly"],
+          "answer": 2,
+          "explanation": "Binomio fijo: first and foremost (ante todo)."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ did we suspect that he had been lying to us all along.",
+          "options": ["No sooner", "Not until", "Only after", "Little"],
+          "answer": 3,
+          "explanation": "Little + inversión = en absoluto, poco. No sooner exige than, y not until / only after necesitan un complemento."
+        },
+        {
+          "type": "fill",
+          "prompt": "All I did ___ (be) ask a simple question.",
+          "answers": ["was"],
+          "explanation": "All I did was + infinitivo sin to."
+        },
+        {
+          "type": "order",
+          "es": "Lo que necesito es un poco de paz y tranquilidad.",
+          "words": ["What", "I", "need", "is", "a", "bit", "of", "peace", "and", "quiet."]
+        },
+        {
+          "type": "translate",
+          "es": "Bajo ningún concepto debes firmar ese contrato.",
+          "answers": [
+            "Under no circumstances should you sign that contract.",
+            "Under no circumstances must you sign that contract.",
+            "On no account should you sign that contract.",
+            "On no account must you sign that contract.",
+            "You should not sign that contract under any circumstances.",
+            "You must not sign that contract under any circumstances.",
+            "You mustn't sign that contract under any circumstances."
+          ],
+          "explanation": "Under no circumstances / On no account + inversión."
+        },
+        {
+          "type": "spot",
+          "parts": ["Let's", "discuss the", "cons and pros", "before we decide."],
+          "answer": 2,
+          "correction": "pros and cons",
+          "explanation": "Los binomios tienen orden fijo: pros and cons."
+        },
+        {
+          "type": "spot",
+          "parts": ["Never", "I have seen", "such a", "beautiful sunset."],
+          "answer": 1,
+          "correction": "have I seen",
+          "explanation": "Tras un adverbio negativo al principio, inversión: Never have I seen."
+        },
+        {
+          "type": "spot",
+          "parts": ["The match", "was cancelled", "because of", "the strong rain."],
+          "answer": 3,
+          "correction": "the heavy rain.",
+          "explanation": "Colocación: heavy rain, no strong rain."
+        },
+        {
+          "type": "transform",
+          "original": "I have absolutely no idea where she went.",
+          "keyword": "WHATSOEVER",
+          "prompt": "I have ___ where she went.",
+          "answers": ["no idea whatsoever"],
+          "explanation": "Whatsoever refuerza un negativo: no idea whatsoever."
+        },
+        {
+          "type": "transform",
+          "original": "I only wanted to help you.",
+          "keyword": "ALL",
+          "prompt": "___ to help you.",
+          "answers": ["All I wanted was", "All I wanted to do was"],
+          "explanation": "All … was = lo único que…"
+        },
+        {
+          "type": "transform",
+          "original": "The heat didn't keep me awake; the noise did.",
+          "keyword": "WAS",
+          "prompt": "It ___ kept me awake, not the heat.",
+          "answers": ["was the noise that", "was the noise which"],
+          "explanation": "Oración escindida: It was + foco + that."
+        },
+        {
+          "type": "transform",
+          "original": "I have never seen such a mess in my life.",
+          "keyword": "NEVER",
+          "prompt": "___ such a mess in my life.",
+          "answers": ["Never have I seen", "Never before have I seen"],
+          "explanation": "Never al principio + inversión del auxiliar."
         }
       ]
     },
@@ -1142,6 +2930,14 @@
             {
               "en": "He was seen to enter the building at nine.",
               "es": "Se le vio entrar en el edificio a las nueve."
+            },
+            {
+              "en": "Did you notice anyone acting suspiciously?",
+              "es": "¿Notaste a alguien comportándose de forma sospechosa?"
+            },
+            {
+              "en": "I felt the ground shake beneath my feet.",
+              "es": "Sentí temblar el suelo bajo mis pies."
             }
           ]
         },
@@ -1166,6 +2962,14 @@
             {
               "en": "She got her brother to fix the bike.",
               "es": "Consiguió que su hermano arreglara la bici."
+            },
+            {
+              "en": "She wouldn't let me pay for dinner.",
+              "es": "No me dejó pagar la cena."
+            },
+            {
+              "en": "What made you change your mind?",
+              "es": "¿Qué te hizo cambiar de opinión?"
             }
           ],
           "table": {
@@ -1197,8 +3001,121 @@
             {
               "en": "It's late; let's get moving.",
               "es": "Es tarde; pongámonos en marcha."
+            },
+            {
+              "en": "I need to get my eyes tested.",
+              "es": "Tengo que hacerme un examen de la vista."
             }
           ]
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes con hacer y dejar",
+          "body": [
+            "«Hacer + infinitivo» se reparte en inglés entre make (obligar o provocar: The film made me cry), have (encargar: I had the car serviced) y get (conseguir: I got him to help). El calco más común es añadir to a make en activa (He made me to wait ✗) o usar make para un servicio (I made my hair cut ✗ → I had my hair cut).",
+            "«Dejar» también se divide: let es permitir (Let me go) y leave es abandonar o no tocar (Leave me alone). Let nunca lleva to (Let me to explain ✗), mientras que allow y permit sí lo llevan: They allowed us to go."
+          ],
+          "examples": [
+            {
+              "en": "I'm having my hair cut on Saturday.",
+              "es": "Me voy a cortar el pelo el sábado (en la peluquería)."
+            },
+            {
+              "en": "The ending of the film made me cry.",
+              "es": "El final de la película me hizo llorar."
+            },
+            {
+              "en": "They didn't allow us to take photos inside.",
+              "es": "No nos permitieron tomar fotos adentro."
+            },
+            {
+              "en": "Leave me alone!",
+              "es": "¡Déjame en paz!"
+            },
+            {
+              "en": "Let me know when you arrive.",
+              "es": "Avísame cuando llegues."
+            }
+          ],
+          "table": {
+            "headers": ["Error", "Correcto", "Por qué"],
+            "rows": [
+              ["He made me to wait.", "He made me wait.", "make + objeto + verbo base (en activa)"],
+              ["Let me to explain.", "Let me explain.", "let nunca lleva to"],
+              ["I cut my hair (lo hizo el peluquero).", "I had my hair cut.", "servicio: have + objeto + participio"],
+              ["They allowed us go.", "They allowed us to go.", "allow y permit sí llevan to"],
+              ["Leave me go!", "Let me go!", "dejar = permitir → let"]
+            ]
+          },
+          "tip": "Si en español dices «me corté el pelo» pero lo hizo el peluquero, en inglés es I had (o got) my hair cut."
+        },
+        {
+          "heading": "Más causativos: cause, force, have someone doing",
+          "body": [
+            "En registro formal, cause + objeto + to + verbo expresa una causa sin intención: The storm caused the river to burst its banks. Force, compel y oblige (obligar con más fuerza que make) y persuade, convince (convencer) también llevan to. Help admite las dos formas: help me (to) move.",
+            "Have + objeto + -ing significa «conseguir que alguien acabe haciendo algo»: I'll have you speaking English in six months. En negativa, won't have + objeto + -ing expresa que no se tolerará algo: I won't have you talking to me like that."
+          ],
+          "examples": [
+            {
+              "en": "The storm caused the river to burst its banks.",
+              "es": "La tormenta hizo que el río se desbordara."
+            },
+            {
+              "en": "The scandal forced the minister to resign.",
+              "es": "El escándalo obligó al ministro a renunciar."
+            },
+            {
+              "en": "I'll have you speaking fluent English in six months.",
+              "es": "En seis meses haré que hables un inglés fluido."
+            },
+            {
+              "en": "I won't have you speaking to your mother like that.",
+              "es": "No voy a permitir que le hables así a tu madre."
+            },
+            {
+              "en": "Can you smell something burning?",
+              "es": "¿Hueles a quemado?"
+            },
+            {
+              "en": "She helped me move the furniture.",
+              "es": "Me ayudó a mover los muebles."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Estructura", "Matiz"],
+            "rows": [
+              ["cause", "cause + obj + to + verbo", "formal, sin intención"],
+              ["force / compel", "force + obj + to + verbo", "obligar con fuerza"],
+              ["persuade / convince", "persuade + obj + to + verbo", "convencer"],
+              ["have + obj + -ing", "I'll have you laughing.", "lograr un efecto"],
+              ["won't have + obj + -ing", "I won't have you shouting.", "no tolerar"]
+            ]
+          }
+        },
+        {
+          "heading": "Get frente a have: registro y pasivas con get",
+          "body": [
+            "Get something done es más coloquial que have something done y a veces sugiere esfuerzo: I must get this report finished by noon (terminarlo yo mismo, por fin). Get también forma una pasiva informal para hechos inesperados o negativos: get fired, get hurt, get stolen.",
+            "En inglés británico need + -ing tiene sentido pasivo: The windows need cleaning (= need to be cleaned). Es una forma natural de hablar de tareas pendientes sin decir quién las hará."
+          ],
+          "examples": [
+            {
+              "en": "I must get this report finished by noon.",
+              "es": "Tengo que terminar este informe antes del mediodía."
+            },
+            {
+              "en": "He got fired for being late too often.",
+              "es": "Lo despidieron por llegar tarde demasiadas veces."
+            },
+            {
+              "en": "You should get that cough looked at.",
+              "es": "Deberías hacerte ver esa tos."
+            },
+            {
+              "en": "The windows really need cleaning.",
+              "es": "Las ventanas necesitan una buena limpieza."
+            }
+          ],
+          "tip": "Get + participio suena coloquial; en un escrito formal prefiere have something done o la pasiva con be."
         }
       ],
       "exercises": [
@@ -1251,6 +3168,101 @@
             "His bike was stolen.",
             "Her bike was stolen."
           ]
+        },
+        {
+          "type": "choice",
+          "prompt": "The heavy rain caused the match ___ abandoned.",
+          "options": ["be", "being", "been", "to be"],
+          "answer": 3,
+          "explanation": "Cause + objeto + to + verbo (aquí, infinitivo pasivo: to be abandoned)."
+        },
+        {
+          "type": "choice",
+          "prompt": "I won't have you ___ to me in that tone of voice!",
+          "options": ["to speak", "spoke", "speaking", "spoken"],
+          "answer": 2,
+          "explanation": "Won't have + objeto + -ing = no voy a tolerar que…"
+        },
+        {
+          "type": "fill",
+          "prompt": "I'm going to have my eyes ___ (test) next week.",
+          "answers": ["tested"],
+          "explanation": "Have + objeto + participio: un servicio que te hacen."
+        },
+        {
+          "type": "order",
+          "es": "Hizo que el técnico revisara la caldera.",
+          "words": ["She", "had", "the", "technician", "check", "the", "boiler."],
+          "explanation": "Have + persona + verbo base: encargar algo a alguien."
+        },
+        {
+          "type": "translate",
+          "es": "Ayer me corté el pelo en la peluquería.",
+          "answers": [
+            "I had my hair cut at the hairdresser's yesterday.",
+            "I got my hair cut at the hairdresser's yesterday.",
+            "Yesterday I had my hair cut at the hairdresser's.",
+            "Yesterday I got my hair cut at the hairdresser's.",
+            "I had a haircut at the hairdresser's yesterday.",
+            "I had my hair cut at the hairdresser yesterday.",
+            "I got my hair cut at the salon yesterday.",
+            "I had my hair cut at the salon yesterday.",
+            "I had my hair cut at the barber's yesterday."
+          ],
+          "explanation": "Lo hizo otra persona: have / get + objeto + participio."
+        },
+        {
+          "type": "spot",
+          "parts": ["The teacher made us to rewrite", "the whole essay", "before Friday."],
+          "answer": 0,
+          "correction": "The teacher made us rewrite",
+          "explanation": "En activa, make + objeto + verbo base, sin to."
+        },
+        {
+          "type": "spot",
+          "parts": ["The suspect", "was seen", "leave", "the building", "at midnight."],
+          "answer": 2,
+          "correction": "to leave",
+          "explanation": "En pasiva, los verbos de percepción recuperan el to: was seen to leave (o was seen leaving)."
+        },
+        {
+          "type": "spot",
+          "parts": ["I need", "to cut my hair", "at the hairdresser's", "this week."],
+          "answer": 1,
+          "correction": "to have my hair cut",
+          "explanation": "Si lo hace el peluquero, es un servicio: have / get my hair cut."
+        },
+        {
+          "type": "transform",
+          "original": "A mechanic is going to repair my car tomorrow.",
+          "keyword": "HAVING",
+          "prompt": "I'm ___ tomorrow.",
+          "answers": ["having my car repaired", "having my car fixed"],
+          "explanation": "Have + objeto + participio para un servicio; aquí en presente continuo con valor de futuro."
+        },
+        {
+          "type": "transform",
+          "original": "They forced us to wait for hours at the border.",
+          "keyword": "MADE",
+          "prompt": "We ___ for hours at the border.",
+          "answers": ["were made to wait"],
+          "explanation": "Pasiva de make: be made to + verbo."
+        },
+        {
+          "type": "transform",
+          "original": "Somebody saw him enter the bank at nine.",
+          "keyword": "SEEN",
+          "prompt": "He ___ the bank at nine.",
+          "answers": ["was seen to enter", "was seen entering", "was seen to go into"],
+          "explanation": "Pasiva de see + verbo base: be seen to + verbo."
+        },
+        {
+          "type": "transform",
+          "original": "I persuaded my brother to lend me his car.",
+          "keyword": "GOT",
+          "prompt": "I ___ me his car.",
+          "answers": ["got my brother to lend"],
+          "explanation": "Get + persona + to + verbo = conseguir que alguien haga algo."
         }
       ]
     },
@@ -1276,6 +3288,14 @@
             {
               "en": "We bought apples, pears and plums.",
               "es": "Compramos manzanas, peras y ciruelas."
+            },
+            {
+              "en": "My sister, who lives in Lima, is a doctor.",
+              "es": "Mi hermana, que vive en Lima, es médica."
+            },
+            {
+              "en": "However, the results were disappointing.",
+              "es": "Sin embargo, los resultados fueron decepcionantes."
             }
           ]
         },
@@ -1296,6 +3316,10 @@
             {
               "en": "She finally arrived — two hours late.",
               "es": "Por fin llegó, dos horas tarde."
+            },
+            {
+              "en": "The panel included Ana Ruiz, a lawyer; Tom Hill, an architect; and Mei Chen, a nurse.",
+              "es": "El jurado estaba formado por Ana Ruiz, abogada; Tom Hill, arquitecto; y Mei Chen, enfermera."
             }
           ],
           "table": {
@@ -1326,9 +3350,116 @@
             {
               "en": "I speak Spanish and English.",
               "es": "Hablo español e inglés (idiomas con mayúscula)."
+            },
+            {
+              "en": "Classes start on Monday, 3 September.",
+              "es": "Las clases empiezan el lunes 3 de septiembre."
             }
           ],
           "tip": "Its sin apóstrofo es posesivo; it's es it is o it has. Es el error de puntuación más común entre nativos."
+        },
+        {
+          "heading": "Relativas especificativas y explicativas: la coma cambia el sentido",
+          "body": [
+            "Una relativa especificativa (defining) restringe el sustantivo y va sin comas: The students who passed received a certificate (solo los que aprobaron). Una explicativa (non-defining) añade información sobre algo ya identificado y va entre comas: The students, who passed, received a certificate (todos aprobaron).",
+            "En las explicativas no se puede usar that: Madrid, which is the capital…, nunca «Madrid, that is…». Y cuando which se refiere a toda la oración anterior (lo cual), también va tras coma: He lied, which upset everyone."
+          ],
+          "examples": [
+            {
+              "en": "The students who passed the exam received a certificate.",
+              "es": "Los estudiantes que aprobaron el examen recibieron un certificado (solo esos)."
+            },
+            {
+              "en": "The students, who passed the exam, received a certificate.",
+              "es": "Los estudiantes, que aprobaron el examen, recibieron un certificado (todos aprobaron)."
+            },
+            {
+              "en": "He failed his driving test again, which surprised nobody.",
+              "es": "Volvió a reprobar el examen de manejo, lo cual no sorprendió a nadie."
+            },
+            {
+              "en": "Paris, which I visited last spring, is beautiful at that time of year.",
+              "es": "París, que visité la primavera pasada, es preciosa en esa época del año."
+            }
+          ],
+          "table": {
+            "headers": ["Tipo", "Comas", "¿Admite that?", "Ejemplo"],
+            "rows": [
+              ["especificativa", "no", "sí", "The book that I lent you is rare."],
+              ["explicativa", "sí", "no", "This book, which I love, is rare."],
+              ["which = lo cual", "sí", "no", "He lied, which upset me."]
+            ]
+          },
+          "tip": "Nunca uses that justo después de una coma en una relativa: tras la coma va which, who o whom."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes: la coma que une oraciones",
+          "body": [
+            "En español informal es frecuente unir dos oraciones completas con una coma («Era tarde, nos fuimos»). En inglés es un error con nombre propio, el comma splice, y en un texto de C2 se penaliza. Se corrige con un punto, un punto y coma, una conjunción (and, but, so) o una subordinada.",
+            "El caso más frecuente es however entre dos oraciones: no basta con comas, porque however no es una conjunción sino un adverbio. Va con punto y coma antes y coma después: I agree; however, there is a problem. También es un calco poner coma entre el sujeto y el verbo cuando el sujeto es largo: The students who passed the exam, received… ✗."
+          ],
+          "examples": [
+            {
+              "en": "It was late; however, nobody wanted to leave.",
+              "es": "Era tarde; sin embargo, nadie quería irse."
+            },
+            {
+              "en": "It was late, but nobody wanted to leave.",
+              "es": "Era tarde, pero nadie quería irse."
+            },
+            {
+              "en": "The shop was closed, so we went home.",
+              "es": "La tienda estaba cerrada, así que nos fuimos a casa."
+            },
+            {
+              "en": "Everyone who attended the course received a certificate.",
+              "es": "Todos los que asistieron al curso recibieron un certificado."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto (comma splice)", "Correcto"],
+            "rows": [
+              ["It was late, we went home.", "It was late, so we went home."],
+              ["I agree, however, there is a problem.", "I agree; however, there is a problem."],
+              ["She's clever, she never studies.", "She's clever, but she never studies."]
+            ]
+          },
+          "tip": "However entre dos oraciones completas pide punto y coma antes y coma después: …; however, …"
+        },
+        {
+          "heading": "Estilo: paralelismo, concisión y diferencias británico-americanas",
+          "body": [
+            "El paralelismo exige que los elementos de una lista tengan la misma forma gramatical: She enjoys swimming, reading and cycling (no «swimming, to read and cycling»). La concisión elimina redundancias (past history → history, free gift → gift) y prefiere la voz activa cuando el agente importa: The committee rejected the proposal es más claro que The proposal was rejected by the committee.",
+            "El inglés británico y el americano difieren en ortografía (colour / color, centre / center, organise / organize) y en puntuación: el británico suele usar comillas simples y Mr o Dr sin punto; el americano, comillas dobles y Mr. o Dr. Al citar un fragmento, el británico deja el punto fuera de las comillas si no forma parte de la cita; el americano lo pone siempre dentro."
+          ],
+          "examples": [
+            {
+              "en": "She enjoys swimming, reading and cycling.",
+              "es": "Le gusta nadar, leer y andar en bicicleta."
+            },
+            {
+              "en": "The committee rejected the proposal.",
+              "es": "El comité rechazó la propuesta."
+            },
+            {
+              "en": "The minister described the plan as 'unworkable'.",
+              "es": "El ministro calificó el plan de «inviable»."
+            },
+            {
+              "en": "To finish on time, we cut the introduction.",
+              "es": "Para terminar a tiempo, recortamos la introducción."
+            }
+          ],
+          "table": {
+            "headers": ["Británico", "Americano"],
+            "rows": [
+              ["colour, centre, organise", "color, center, organize"],
+              ["'comillas simples'", "\"comillas dobles\""],
+              ["Mr, Dr (sin punto)", "Mr., Dr. (con punto)"],
+              ["He called it 'unworkable'.", "He called it \"unworkable.\""]
+            ]
+          },
+          "tip": "Elige una variedad (británica o americana) y sé coherente en todo el texto: mezclar colour con organize se nota."
         }
       ],
       "exercises": [
@@ -1369,12 +3500,103 @@
         {
           "type": "translate",
           "es": "Tengo un problema: el dinero.",
-          "answers": ["I have one problem: money.", "I have a problem: money."]
+          "answers": [
+            "I have one problem: money.",
+            "I have a problem: money.",
+            "I've got a problem: money.",
+            "I've got one problem: money."
+          ]
         },
         {
           "type": "translate",
           "es": "Hablo español e inglés.",
           "answers": ["I speak Spanish and English."]
+        },
+        {
+          "type": "choice",
+          "prompt": "Which sentence is punctuated correctly?",
+          "options": [
+            "It was late, we went home.",
+            "It was late, however, we stayed.",
+            "It was late however we stayed.",
+            "It was late; however, we stayed."
+          ],
+          "answer": 3,
+          "explanation": "However une dos oraciones completas: punto y coma antes y coma después."
+        },
+        {
+          "type": "choice",
+          "prompt": "My grandmother, ___ was born in 1930, still swims every day.",
+          "options": ["that", "which", "who", "whom"],
+          "answer": 2,
+          "explanation": "Relativa explicativa (entre comas) referida a una persona en función de sujeto: who. That no va tras coma."
+        },
+        {
+          "type": "fill",
+          "prompt": "Madrid, ___ is the capital of Spain, has over three million inhabitants. (pronombre relativo)",
+          "answers": ["which"],
+          "explanation": "Relativa explicativa referida a una cosa: which, nunca that."
+        },
+        {
+          "type": "order",
+          "es": "Llovía; sin embargo, salimos a correr.",
+          "words": ["It", "was", "raining;", "however,", "we", "went", "for", "a", "run."]
+        },
+        {
+          "type": "translate",
+          "es": "Mi hermano, que vive en Londres, es abogado.",
+          "answers": [
+            "My brother, who lives in London, is a lawyer.",
+            "My brother, who lives in London, is a solicitor.",
+            "My brother, who lives in London, is an attorney.",
+            "My brother, who lives in London, is a barrister."
+          ],
+          "explanation": "Relativa explicativa: entre comas y con who."
+        },
+        {
+          "type": "spot",
+          "parts": ["Paris, that", "I visited last year,", "is beautiful", "in spring."],
+          "answer": 0,
+          "correction": "Paris, which",
+          "explanation": "En una relativa explicativa (entre comas) no se usa that: which."
+        },
+        {
+          "type": "spot",
+          "parts": ["She enjoys swimming,", "going to the theatre", "and to read", "in her free time."],
+          "answer": 2,
+          "correction": "and reading",
+          "explanation": "Paralelismo: todos los elementos de la lista en -ing."
+        },
+        {
+          "type": "spot",
+          "parts": ["Everyone agreed", "that, the proposal", "was unworkable."],
+          "answer": 1,
+          "correction": "that the proposal",
+          "explanation": "No se pone coma después de that cuando introduce una completiva."
+        },
+        {
+          "type": "transform",
+          "original": "The manager rejected the proposal, and this surprised everyone.",
+          "keyword": "WHICH",
+          "prompt": "The manager rejected the proposal, ___ everyone.",
+          "answers": ["which surprised"],
+          "explanation": "Which tras coma puede referirse a toda la oración anterior (lo cual)."
+        },
+        {
+          "type": "transform",
+          "original": "Although I agree with you, there is one problem.",
+          "keyword": "HOWEVER",
+          "prompt": "I agree with you; ___ one problem.",
+          "answers": ["however, there is", "however, there's", "however there is", "however there's"],
+          "explanation": "However tras punto y coma, seguido de coma."
+        },
+        {
+          "type": "transform",
+          "original": "I have only one brother. He lives in Lima and works as a doctor.",
+          "keyword": "WHO",
+          "prompt": "My brother, ___ Lima, works as a doctor.",
+          "answers": ["who lives in"],
+          "explanation": "Un solo hermano: relativa explicativa, entre comas, con who."
         }
       ]
     },
@@ -1400,6 +3622,10 @@
             {
               "en": "The town, such as it was, consisted of a church and a petrol station.",
               "es": "El pueblo, si así podía llamarse, consistía en una iglesia y una gasolinera."
+            },
+            {
+              "en": "Only later did she understand what he had meant.",
+              "es": "Solo más tarde entendió lo que él había querido decir."
             }
           ]
         },
@@ -1420,6 +3646,10 @@
             {
               "en": "She still believes the letter was genuine.",
               "es": "Ella sigue creyendo que la carta era auténtica."
+            },
+            {
+              "en": "He only just made it to the airport.",
+              "es": "Llegó al aeropuerto por un pelo."
             }
           ]
         },
@@ -1440,8 +3670,131 @@
             {
               "en": "If I may, the figures tell a less flattering story.",
               "es": "Si me permite, las cifras cuentan una historia menos halagüeña."
+            },
+            {
+              "en": "That is a fair point, but it rather misses the bigger picture.",
+              "es": "Es un argumento válido, pero deja de lado el panorama general."
             }
           ]
+        },
+        {
+          "heading": "Tono y actitud del autor: ironía y distancia",
+          "body": [
+            "Muchas preguntas de C2 piden la actitud del autor, que casi nunca se declara. Se deduce de señales: so-called y las comillas de distancia (the «improvements») marcan escepticismo; la litote o understatement (not exactly a triumph) critica con suavidad; la hipérbole y la comparación incongruente suelen ser irónicas.",
+            "Los verbos introductorios también toman partido: claim y allege indican que el autor no da algo por cierto; concede y admit, que alguien reconoce algo en su contra; insist sugiere que otros dudan. Lee el verbo, no solo lo que se dice."
+          ],
+          "examples": [
+            {
+              "en": "The so-called reforms have changed very little.",
+              "es": "Las llamadas reformas han cambiado muy poco."
+            },
+            {
+              "en": "The minister insists, somewhat implausibly, that nothing went wrong.",
+              "es": "El ministro insiste, de forma poco creíble, en que nada salió mal."
+            },
+            {
+              "en": "It was not, it must be said, his finest hour.",
+              "es": "No fue, hay que decirlo, su mejor momento."
+            },
+            {
+              "en": "The 'improvements' made the service even slower.",
+              "es": "Las «mejoras» hicieron el servicio aún más lento."
+            },
+            {
+              "en": "She conceded that the figures were disappointing.",
+              "es": "Admitió que las cifras eran decepcionantes."
+            }
+          ],
+          "table": {
+            "headers": ["Señal", "Efecto", "Ejemplo"],
+            "rows": [
+              ["so-called", "distancia, escepticismo", "the so-called experts"],
+              ["comillas de distancia", "ironía", "the 'improvements'"],
+              ["understatement", "crítica suave o irónica", "not exactly a triumph"],
+              ["claim / allege", "el autor no lo da por cierto", "He claims to be innocent."],
+              ["concede / admit", "reconocer algo en contra", "She conceded the point."]
+            ]
+          },
+          "tip": "En las preguntas de actitud, la respuesta casi nunca está en una sola palabra: suma el tono de todo el párrafo."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes al leer y escuchar",
+          "body": [
+            "Los falsos amigos siguen tendiendo trampas incluso en C2: eventually (finalmente), actually (en realidad), sensible (sensato). Igual de peligrosos son los usos menos conocidos de palabras corrientes: would para hábitos del pasado (He would sit there for hours = solía), while concesivo (While I agree… = aunque), hardly y barely como negaciones (apenas).",
+            "En las preguntas de opción múltiple, desconfía de la opción que repite palabras exactas del texto: en C2 la respuesta correcta suele ser una paráfrasis, y los distractores reutilizan el vocabulario del texto con otro sentido. En la escucha, atiende a los giros que cambian la dirección: but, actually, to be fair, having said that."
+          ],
+          "examples": [
+            {
+              "en": "He would sit by the window for hours.",
+              "es": "Solía sentarse junto a la ventana durante horas."
+            },
+            {
+              "en": "I could barely hear what she was saying.",
+              "es": "Apenas podía oír lo que decía."
+            },
+            {
+              "en": "The offer was not unattractive.",
+              "es": "La oferta no carecía de atractivo."
+            },
+            {
+              "en": "She turned down the promotion.",
+              "es": "Rechazó el ascenso."
+            },
+            {
+              "en": "While I understand your concerns, I can't agree.",
+              "es": "Aunque entiendo tu preocupación, no puedo estar de acuerdo."
+            }
+          ],
+          "table": {
+            "headers": ["Trampa", "Lo que parece", "Lo que significa"],
+            "rows": [
+              ["eventually", "eventualmente", "finalmente"],
+              ["He would walk for hours.", "condicional", "hábito pasado (solía)"],
+              ["hardly any", "duramente", "casi ningún"],
+              ["not unlike", "distinto de", "bastante parecido a"],
+              ["while (al inicio)", "mientras", "aunque (concesivo)"],
+              ["turn down", "bajar", "rechazar (una oferta)"]
+            ]
+          },
+          "tip": "Desconfía de la opción que copia palabras del texto: la correcta suele decir lo mismo con otras palabras."
+        },
+        {
+          "heading": "El examen C2: partes y estrategia",
+          "body": [
+            "En un examen de nivel C2 (como el C2 Proficiency de Cambridge), la lectura incluye opción múltiple sobre textos largos (detalle, actitud, inferencia), un texto con párrafos eliminados que hay que reponer (cohesión) y preguntas de emparejar con varios textos breves. La escucha incluye fragmentos breves, una entrevista o debate con opción múltiple y una tarea de emparejar opiniones de varios hablantes.",
+            "La destreza común es la paráfrasis: reconocer la misma idea dicha con otras palabras. Practica reformulando: results fell short of expectations = the results were worse than expected; few would dispute that = almost everyone agrees."
+          ],
+          "examples": [
+            {
+              "en": "Results fell short of expectations.",
+              "es": "Los resultados no estuvieron a la altura de las expectativas."
+            },
+            {
+              "en": "The proposal met with fierce opposition.",
+              "es": "La propuesta se topó con una oposición feroz."
+            },
+            {
+              "en": "Few would dispute that the plan was rushed.",
+              "es": "Pocos negarían que el plan se hizo con prisas."
+            },
+            {
+              "en": "His reply was, to put it mildly, evasive.",
+              "es": "Su respuesta fue, por decirlo suavemente, evasiva."
+            }
+          ],
+          "table": {
+            "headers": ["Tarea", "Qué evalúa", "Estrategia"],
+            "rows": [
+              [
+                "Opción múltiple sobre un texto largo",
+                "detalle, actitud, inferencia",
+                "localiza el pasaje y compara paráfrasis"
+              ],
+              ["Texto con párrafos eliminados", "cohesión entre párrafos", "busca referencias: this, such, the latter"],
+              ["Emparejar con varios textos", "localizar información", "subraya palabras clave y busca sinónimos"],
+              ["Entrevista o debate (escucha)", "opinión y actitud", "atiende al matiz: but, actually, to be fair"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1656,6 +4009,174 @@
               "answer": 1
             }
           ]
+        },
+        {
+          "type": "reading",
+          "title": "Book review: a composer's life",
+          "text": "There is a particular kind of biography that mistakes thoroughness for insight, and Margaret Hale's life of the composer Edward Lane, at nearly eight hundred pages, comes perilously close to being one. Every letter, invoice and lunch appointment seems to have been dutifully recorded. And yet, buried beneath the inventory, is a genuinely original argument: that Lane's famous silence in the last decade of his life was not a creative crisis but a deliberate refusal to repeat himself. Hale makes this case with quiet conviction, though she might have made it in half the space. Readers with patience will be rewarded; others may wish to start at chapter twelve.",
+          "questions": [
+            {
+              "prompt": "What is the reviewer's main criticism of the biography?",
+              "options": [
+                "It contains factual errors",
+                "It ignores Lane's final years",
+                "It includes too much detail at the expense of insight"
+              ],
+              "answer": 2
+            },
+            {
+              "prompt": "What does Hale argue about Lane's last decade?",
+              "options": [
+                "He chose not to repeat himself",
+                "He was suffering a creative crisis",
+                "He was secretly working on a new piece"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What does 'comes perilously close to being one' suggest?",
+              "options": [
+                "The book entirely avoids this fault",
+                "The book nearly falls into this category",
+                "The book is the best example of this kind"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "Why does the reviewer mention chapter twelve?",
+              "options": [
+                "It contains the most mistakes",
+                "It is the shortest chapter",
+                "It is probably where the most valuable part of the book begins"
+              ],
+              "answer": 2
+            }
+          ]
+        },
+        {
+          "type": "reading",
+          "title": "Opinion: the myth of the 'digital native'",
+          "text": "The phrase 'digital native' has always flattered the young and excused the old. It suggests that anyone born after a certain date absorbs technological fluency the way children absorb a first language, without effort or instruction. The evidence, such as it is, points elsewhere. Teenagers are adept at the handful of applications they use daily, but surprisingly helpless when asked to evaluate a source, protect their data or write a formal email. Fluency in consumption, in other words, is not fluency in understanding. If schools continue to assume otherwise, they will produce a generation that can do everything with a phone except question what it is told.",
+          "questions": [
+            {
+              "prompt": "According to the writer, who does the phrase 'digital native' benefit?",
+              "options": [
+                "Only technology companies",
+                "Teachers, who can teach less",
+                "Young people, who are flattered, and older people, who are excused"
+              ],
+              "answer": 2
+            },
+            {
+              "prompt": "What does 'The evidence, such as it is' suggest?",
+              "options": [
+                "The evidence is limited, but it contradicts the popular view",
+                "The evidence is overwhelming",
+                "The evidence confirms the popular view"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "Which skill does the writer say many teenagers lack?",
+              "options": ["Using everyday apps", "Judging whether a source is reliable", "Typing quickly"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is the writer's main warning?",
+              "options": [
+                "Phones should be banned from schools",
+                "Young people use technology too little",
+                "Schools must teach critical understanding rather than assume it"
+              ],
+              "answer": 2
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Podcast: the translator",
+          "text": "Today I'm talking to Lucía Ortega, who translates novels from Spanish into English. Lucía, is a translation ever finished? Honestly, no. It's abandoned. There comes a point where the publisher needs the text and you have to let it go, even though you know that on page two hundred there's a joke that didn't quite survive the crossing. Does that keep you awake at night? It used to. Now I think of it rather like raising a child: you do your best, and then it goes out into the world and makes its own friends. Some readers will love a sentence I hated, and that's humbling.",
+          "questions": [
+            {
+              "prompt": "What does Lucía mean when she says a translation is 'abandoned'?",
+              "options": [
+                "She stops when the publisher needs it, not when it is perfect",
+                "She loses interest in it halfway through",
+                "The publisher usually rejects it"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What does she say about the joke on page two hundred?",
+              "options": [
+                "The publisher removed it",
+                "It did not work as well in English",
+                "It was her favourite part of the book"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "How has her attitude changed over time?",
+              "options": [
+                "She worries more than she used to",
+                "She has stopped translating jokes",
+                "She has learned to accept imperfection"
+              ],
+              "answer": 2
+            },
+            {
+              "prompt": "Why does she find readers' reactions humbling?",
+              "options": [
+                "They rarely notice the translator",
+                "They sometimes love what she considered weak",
+                "They often complain about her choices"
+              ],
+              "answer": 1
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Radio discussion: planting trees",
+          "text": "The council plans to plant ten thousand trees across the city. Doctor Patel, is this good news? In principle, yes. Trees cool the streets, absorb rainwater and, frankly, make people happier. But planting is the easy part. What do you mean? I mean that a young tree needs watering for three summers, and the budget covers one. The last time this was tried, nearly half the saplings died within two years. So you'd rather they planted fewer? I'd rather they planted the number they can actually look after. A thousand healthy trees are worth more than ten thousand dead ones, though they make a less impressive headline.",
+          "questions": [
+            {
+              "prompt": "What is Doctor Patel's overall view of the plan?",
+              "options": [
+                "She rejects it completely",
+                "She supports the idea but doubts how it will be carried out",
+                "She thinks it is the council's best idea in years"
+              ],
+              "answer": 1
+            },
+            {
+              "prompt": "What is the main problem she identifies?",
+              "options": [
+                "Trees make the streets darker",
+                "There is not enough space for the trees",
+                "The budget does not cover enough years of care"
+              ],
+              "answer": 2
+            },
+            {
+              "prompt": "What happened the last time a similar scheme was tried?",
+              "options": [
+                "Almost half the young trees died",
+                "It was cancelled before it started",
+                "It won a national prize"
+              ],
+              "answer": 0
+            },
+            {
+              "prompt": "What does her final comment imply about the council?",
+              "options": [
+                "It has no real interest in trees",
+                "It may care more about publicity than results",
+                "It has planted too few trees in the past"
+              ],
+              "answer": 1
+            }
+          ]
         }
       ]
     }
@@ -1736,18 +4257,31 @@
     },
     {
       "type": "order",
-      "es": "La gente que espera fuera son periodistas.",
+      "es": "Las personas que esperan afuera son periodistas.",
       "words": ["The", "people", "waiting", "outside", "are", "journalists."]
     },
     {
       "type": "translate",
       "es": "Tras haber terminado el informe, se fue.",
-      "answers": ["Having finished the report, she left.", "Having finished the report, he left."]
+      "answers": [
+        "Having finished the report, she left.",
+        "Having finished the report, he left.",
+        "After finishing the report, she left.",
+        "After finishing the report, he left.",
+        "Having finished the report, she went.",
+        "Having finished the report, he went."
+      ]
     },
     {
       "type": "translate",
       "es": "Exigieron que el director dimitiera.",
-      "answers": ["They demanded that the manager resign.", "They demanded that the director resign."]
+      "answers": [
+        "They demanded that the manager resign.",
+        "They demanded that the director resign.",
+        "They demanded that the director step down.",
+        "They demanded that the manager step down.",
+        "They demanded that the manager should resign."
+      ]
     },
     {
       "type": "choice",
@@ -1785,7 +4319,12 @@
         "He acts as if he were the boss.",
         "She acts as if she were the boss.",
         "He behaves as if he were the boss.",
-        "He acts as though he were the boss."
+        "He acts as though he were the boss.",
+        "She behaves as if she were the boss.",
+        "She acts as though she were the boss.",
+        "He behaves as though he were the boss.",
+        "He acts as if he was the boss.",
+        "She acts as if she was the boss."
       ]
     },
     {
@@ -1833,6 +4372,368 @@
           "prompt": "What is his attitude to habits?",
           "options": ["They are hopeless", "They can be examined and changed", "They are always good"],
           "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "prompt": "The inspectors recommended that the bridge ___ to heavy traffic until further notice.",
+      "options": ["is closed", "was closed", "will be closed", "be closed"],
+      "answer": 3,
+      "explanation": "Recommend that + subjuntivo: forma base (be closed), aunque el verbo principal esté en pasado."
+    },
+    {
+      "type": "choice",
+      "prompt": "When Tom mentioned the redundancies over dinner, he really put the cat among the ___.",
+      "options": ["dogs", "mice", "pigeons", "birds"],
+      "answer": 2,
+      "explanation": "Put the cat among the pigeons (británico) = provocar un alboroto al decir algo polémico."
+    },
+    {
+      "type": "choice",
+      "prompt": "The minister's speech ___ that further tax rises were inevitable, though he never said so directly.",
+      "options": ["inferred", "stated", "implied", "mentioned"],
+      "answer": 2,
+      "explanation": "Imply = dar a entender (lo hace quien habla); infer = deducir (lo hace quien escucha). Stated y mentioned contradicen «never said so directly»."
+    },
+    {
+      "type": "choice",
+      "prompt": "If she ___ more attention in class last term, she wouldn't be struggling now.",
+      "options": ["paid", "would pay", "has paid", "had paid"],
+      "answer": 3,
+      "explanation": "Condicional mixta: condición pasada (last term) con resultado presente (now)."
+    },
+    {
+      "type": "choice",
+      "prompt": "Not only ___ the deadline, but they also went over budget.",
+      "options": ["they missed", "did they miss", "they did miss", "missed they"],
+      "answer": 1,
+      "explanation": "Not only al principio de la frase exige inversión con auxiliar: did they miss."
+    },
+    {
+      "type": "choice",
+      "prompt": "The guests ___ at the back of the hall could barely hear the speeches.",
+      "options": ["seated", "seating", "having seated", "were sitting"],
+      "answer": 0,
+      "explanation": "Relativa reducida con sentido pasivo: the guests (who were) seated."
+    },
+    {
+      "type": "fill",
+      "prompt": "Two routes were proposed: one along the coast and one through the mountains. The ___ was rejected because of the risk of landslides. (la segunda de las dos)",
+      "answers": ["latter"],
+      "explanation": "The latter = el segundo de dos elementos mencionados."
+    },
+    {
+      "type": "fill",
+      "prompt": "I'd sooner you ___ (not / mention) this to anyone until it's official.",
+      "answers": ["didn't mention", "did not mention"],
+      "explanation": "Would sooner / would rather + otra persona + pasado irreal."
+    },
+    {
+      "type": "fill",
+      "prompt": "___ his many faults, he was a loyal friend. (for + una palabra)",
+      "answers": ["For all"],
+      "explanation": "For all + sustantivo = a pesar de todos sus…"
+    },
+    {
+      "type": "order",
+      "es": "Volvió a llegar tarde, lo cual no sorprendió a nadie.",
+      "words": ["He", "was", "late", "again,", "which", "surprised", "nobody."],
+      "explanation": "Which tras coma se refiere a toda la oración anterior (lo cual)."
+    },
+    {
+      "type": "translate",
+      "es": "Haré que mi asistente te envíe el informe.",
+      "answers": [
+        "I'll have my assistant send you the report.",
+        "I will have my assistant send you the report.",
+        "I'll have my assistant send the report to you.",
+        "I will have my assistant send the report to you.",
+        "I'll get my assistant to send you the report.",
+        "I will get my assistant to send you the report.",
+        "I'll get my assistant to send the report to you.",
+        "I will get my assistant to send the report to you."
+      ],
+      "explanation": "Have + persona + verbo base, o get + persona + to + verbo."
+    },
+    {
+      "type": "translate",
+      "es": "De haberlo sabido, no habría venido.",
+      "answers": [
+        "Had I known, I wouldn't have come.",
+        "Had I known, I would not have come.",
+        "Had I known that, I wouldn't have come.",
+        "Had I known it, I wouldn't have come.",
+        "If I had known, I wouldn't have come.",
+        "If I had known, I would not have come.",
+        "If I'd known, I wouldn't have come.",
+        "If I had known that, I wouldn't have come."
+      ],
+      "explanation": "«De haberlo sabido» = Had I known (inversión formal) o If I had known."
+    },
+    {
+      "type": "spot",
+      "parts": ["The shareholders", "demanded", "that the chairman", "resigns", "with immediate effect."],
+      "answer": 3,
+      "correction": "resign",
+      "explanation": "Demand that + subjuntivo: forma base, sin -s."
+    },
+    {
+      "type": "spot",
+      "parts": ["Built", "in 1890 and", "restoring", "in 2005,", "the station is now a museum."],
+      "answer": 2,
+      "correction": "restored",
+      "explanation": "La estación fue restaurada: participio pasado con sentido pasivo, paralelo a built."
+    },
+    {
+      "type": "spot",
+      "parts": ["The museum,", "that opened", "last year,", "has already had a million visitors."],
+      "answer": 1,
+      "correction": "which opened",
+      "explanation": "Relativa explicativa (entre comas): which, nunca that."
+    },
+    {
+      "type": "spot",
+      "parts": ["I'd rather", "you", "don't", "smoke", "in the house."],
+      "answer": 2,
+      "correction": "didn't",
+      "explanation": "Would rather + otra persona + pasado irreal: I'd rather you didn't smoke."
+    },
+    {
+      "type": "spot",
+      "parts": ["Hardly had we sat down", "than", "the phone rang."],
+      "answer": 1,
+      "correction": "when",
+      "explanation": "Hardly… when; no sooner… than. No se mezclan."
+    },
+    {
+      "type": "spot",
+      "parts": ["The match went ahead", "despite", "it was raining", "heavily."],
+      "answer": 2,
+      "correction": "the fact that it was raining",
+      "explanation": "Despite va con sustantivo o -ing; para una oración, despite the fact that."
+    },
+    {
+      "type": "transform",
+      "original": "If the company went bankrupt, hundreds of jobs would be lost.",
+      "keyword": "WERE",
+      "prompt": "___ bankrupt, hundreds of jobs would be lost.",
+      "answers": ["Were the company to go"],
+      "explanation": "Inversión condicional formal: Were + sujeto + to + verbo."
+    },
+    {
+      "type": "transform",
+      "original": "Although the task was difficult, she refused to give up.",
+      "keyword": "AS",
+      "prompt": "___, she refused to give up.",
+      "answers": ["Difficult as the task was", "Difficult as it was"],
+      "explanation": "Adjetivo + as + sujeto + verbo = por… que fuera."
+    },
+    {
+      "type": "transform",
+      "original": "You should have started looking for a job long ago.",
+      "keyword": "HIGH",
+      "prompt": "It's ___ for a job.",
+      "answers": ["high time you started looking", "high time you began looking", "high time you looked"],
+      "explanation": "It's high time + pasado irreal: ya deberías haberlo hecho."
+    },
+    {
+      "type": "transform",
+      "original": "The police made the protesters leave the square.",
+      "keyword": "MADE",
+      "prompt": "The protesters ___ the square by the police.",
+      "answers": ["were made to leave"],
+      "explanation": "En pasiva, make recupera el to: be made to + verbo."
+    },
+    {
+      "type": "transform",
+      "original": "I'll deal with that problem if and when it actually happens.",
+      "keyword": "BRIDGE",
+      "prompt": "I'll ___ when I come to it.",
+      "answers": ["cross that bridge"],
+      "explanation": "Cross that bridge when you come to it = ocuparse de un problema cuando llegue."
+    },
+    {
+      "type": "transform",
+      "original": "It is the first time I have ever heard such nonsense.",
+      "keyword": "NEVER",
+      "prompt": "___ such nonsense.",
+      "answers": ["Never have I heard", "Never before have I heard", "I have never heard", "I've never heard"],
+      "explanation": "It is the first time I have… = Never have I… (con inversión enfática)."
+    },
+    {
+      "type": "transform",
+      "original": "Because she had been told the truth, she felt betrayed.",
+      "keyword": "HAVING",
+      "prompt": "___ the truth, she felt betrayed.",
+      "answers": ["Having been told"],
+      "explanation": "Participio perfecto pasivo: having been + participio."
+    },
+    {
+      "type": "transform",
+      "original": "The government raised taxes, and as a result it lost a great deal of support.",
+      "keyword": "THEREBY",
+      "prompt": "The government raised taxes, ___ a great deal of support.",
+      "answers": ["thereby losing"],
+      "explanation": "Thereby + -ing = con ello, como consecuencia."
+    },
+    {
+      "type": "reading",
+      "title": "Memoir: the receipts",
+      "text": "My father kept every receipt he was ever given. When he died, we found them in shoeboxes, sorted by year, the earliest dating from a bicycle bought in 1958. My brother saw in this a symptom of the anxiety that had shadowed our father's life, the fear that one day someone would demand proof and he would be unable to provide it. I was less sure. Leafing through the boxes, I began to read them as a diary written by a man who distrusted diaries: here the hotel on the honeymoon he never spoke of, there the hospital car park, paid for every day for three weeks in 1983. He had not been keeping evidence, I decided. He had been keeping time.",
+      "questions": [
+        {
+          "prompt": "How did the narrator's brother interpret the receipts?",
+          "options": [
+            "As a sign of their father's lifelong anxiety",
+            "As a record of family holidays",
+            "As evidence of financial problems"
+          ],
+          "answer": 0
+        },
+        {
+          "prompt": "What does the narrator suggest about the father's attitude to diaries?",
+          "options": [
+            "He wrote one in secret",
+            "He thought they were a waste of money",
+            "He distrusted them, yet the receipts served a similar purpose"
+          ],
+          "answer": 2
+        },
+        {
+          "prompt": "What can be inferred from the hospital car park receipts?",
+          "options": [
+            "The father worked at the hospital",
+            "Someone close to him was in hospital for a long period",
+            "He often had trouble finding a parking space"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "What does the final sentence imply?",
+          "options": [
+            "The receipts were a way of preserving his memories",
+            "The father was obsessed with punctuality",
+            "The receipts proved that he had always been honest"
+          ],
+          "answer": 0
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "title": "Feature: the return of repair",
+      "text": "For most of the twentieth century, repairing things was not a hobby but a necessity, and the skills involved were handed down as unremarkably as recipes. That chain has largely been broken. Products are now designed to be replaced rather than mended, their cases glued rather than screwed, their spare parts available, if at all, at a price that makes a new purchase look sensible. Against this background, the spread of volunteer 'repair cafés', where residents bring broken toasters and lamps to be fixed for free, might be dismissed as nostalgia. It would be a mistake to do so. The organisers are less interested in saving individual appliances than in changing what people expect of the things they buy, and in that, the recent wave of 'right to repair' laws suggests, they are beginning to succeed.",
+      "questions": [
+        {
+          "prompt": "How were repair skills passed on in the past, according to the writer?",
+          "options": [
+            "Through formal training courses",
+            "As naturally as everyday knowledge such as recipes",
+            "Mainly through manufacturers' manuals"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "Why does buying a new product often 'look sensible'?",
+          "options": [
+            "Because spare parts are expensive or impossible to find",
+            "Because new products are of better quality",
+            "Because home repairs are now illegal"
+          ],
+          "answer": 0
+        },
+        {
+          "prompt": "What is the writer's view of dismissing repair cafés as nostalgia?",
+          "options": ["It is a fair description", "It is partly true", "It is a mistake"],
+          "answer": 2
+        },
+        {
+          "prompt": "What does the final sentence suggest about the organisers?",
+          "options": [
+            "Their main aim is to save residents money",
+            "They want to change expectations, and new laws suggest they are succeeding",
+            "They hope to open their own repair shops"
+          ],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Interview with a mountain guide",
+      "text": "Elena, you've guided climbers in the Andes for twenty years. What's the most dangerous thing on a mountain? People assume it's the weather or the altitude, and those are serious, of course. But in my experience the real danger is the summit itself, or rather, the idea of it. How do you mean? Clients have paid a lot of money and trained for months, so when I say we're turning back two hundred metres from the top, they hear failure. Some argue; one or two have even tried to continue alone. Have you ever regretted turning back? Never. I've regretted a few of the times I didn't. The mountain will still be there next year. The question is whether we will.",
+      "questions": [
+        {
+          "prompt": "What does Elena consider the greatest danger?",
+          "options": ["The altitude", "Climbers' determination to reach the top", "Sudden changes in the weather"],
+          "answer": 1
+        },
+        {
+          "prompt": "Why do some clients react badly when she decides to turn back?",
+          "options": [
+            "They have invested so much that they see it as failure",
+            "They think she lacks experience",
+            "They are afraid of the descent"
+          ],
+          "answer": 0
+        },
+        {
+          "prompt": "What does Elena imply when she says she has regretted some of the times she 'didn't'?",
+          "options": [
+            "She once failed to reach a summit",
+            "She wishes she had climbed more mountains",
+            "Carrying on when she should have turned back had bad consequences"
+          ],
+          "answer": 2
+        },
+        {
+          "prompt": "What is the point of her final remark?",
+          "options": [
+            "Mountains change from year to year",
+            "Staying alive matters more than reaching the summit",
+            "Climbing will be cheaper next year"
+          ],
+          "answer": 1
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "title": "Lecture extract: how memory works",
+      "text": "We like to think of memory as a kind of archive, in which events are stored and later retrieved, more or less intact. The research of the last fifty years suggests otherwise. Each time we recall an event, we rebuild it, and in rebuilding it we change it, borrowing details from later experiences, from photographs, even from other people's accounts. This is why two siblings can remember the same childhood holiday in incompatible ways, both with complete conviction. None of this means that memory is worthless. It means that confidence is a poor guide to accuracy, which is a lesson the courts have been remarkably slow to learn.",
+      "questions": [
+        {
+          "prompt": "What view of memory does the lecturer challenge?",
+          "options": [
+            "That memory is a fixed record that can be retrieved intact",
+            "That memory improves with age",
+            "That children remember more than adults"
+          ],
+          "answer": 0
+        },
+        {
+          "prompt": "According to the lecturer, what happens when we recall an event?",
+          "options": ["We retrieve the original version", "We forget most of it", "We reconstruct it and alter it"],
+          "answer": 2
+        },
+        {
+          "prompt": "Why does the lecturer mention the two siblings?",
+          "options": [
+            "To show that families often argue about holidays",
+            "To illustrate that sincere memories can contradict each other",
+            "To prove that one of them is lying"
+          ],
+          "answer": 1
+        },
+        {
+          "prompt": "What criticism of the courts is implied?",
+          "options": [
+            "They rely too much on how confident witnesses seem",
+            "They ignore witnesses completely",
+            "They punish people too harshly"
+          ],
+          "answer": 0
         }
       ]
     }

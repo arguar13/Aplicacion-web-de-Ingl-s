@@ -212,22 +212,44 @@ export interface Session {
   requeue: Map<string, number>
   /** Últimas palabras mostradas, para no repetirlas seguidas. */
   recent: string[]
+  /** Ronda en que se introdujo algo nuevo por última vez (una palabra o una habilidad). */
+  introducedAt: number
 }
 
 export function createSession(): Session {
-  return { step: 0, requeue: new Map(), recent: [] }
+  // Como si acabara de entrar algo nuevo: la sesión abre con unos repasos (lo que más urge) y luego intercala.
+  return { step: 0, requeue: new Map(), recent: [], introducedAt: 0 }
 }
 
-/** Registra en la sesión el resultado de una ronda. */
-export function advanceSession(session: Session, id: string, clean: boolean): void {
+/**
+ * Registra en la sesión el resultado de una ronda. `introduced`: la ronda presentó algo nuevo (una
+ * palabra o, en la sesión inteligente, una habilidad), para repartir lo nuevo entre los repasos.
+ */
+export function advanceSession(session: Session, id: string, clean: boolean, introduced = false): void {
   session.step++
+  if (introduced) session.introducedAt = session.step
   if (clean) session.requeue.delete(id)
   else session.requeue.set(id, session.step + REQUEUE_AFTER)
   session.recent = [id, ...session.recent.filter((r) => r !== id)].slice(0, RECENT_WINDOW)
 }
 
-/** Por qué sale una palabra. `skill`: sube de escalón en la sesión inteligente (ver coach.ts). */
-export type PickReason = 'relearn' | 'review' | 'new' | 'practice' | 'skill'
+/**
+ * Con repasos pendientes, cuántos seguidos como mucho antes de dar paso a algo nuevo. Sin esto, una
+ * pila de repasos (p. ej. tras unos días sin practicar) taparía las palabras nuevas durante días: el
+ * estudiante solo vería palabras que ya conoce.
+ */
+export const REVIEWS_PER_NEW = 3
+
+/** ¿Toca algo nuevo aunque haya repasos? Sí si no los hay, o si ya hubo `every` rondas sin nada nuevo. */
+export const newSlotOpen = (session: Session, hasDue: boolean, every = REVIEWS_PER_NEW) =>
+  !hasDue || session.step - session.introducedAt >= every
+
+/**
+ * Por qué sale una palabra. `skill`: sube de escalón en la sesión inteligente (ver coach.ts).
+ * `learning`: una palabra que se está aprendiendo, adelantada para afianzarla mientras no cabe nada
+ * nuevo (como el «aprender por adelantado» de las apps de repaso espaciado).
+ */
+export type PickReason = 'relearn' | 'review' | 'new' | 'practice' | 'skill' | 'learning'
 
 export interface Pick {
   word: Word
@@ -239,14 +261,19 @@ export interface PickOptions {
   newOrder: 'frequency' | 'random'
   /** false cuando ya se alcanzó el límite de palabras nuevas del día. */
   allowNew?: boolean
+  /**
+   * Si una palabra sin tarjeta en esta habilidad es nueva de verdad (no se vio en ninguna). Las que
+   * ya se conocen por otra habilidad no gastan el cupo diario de nuevas. Por defecto, todas lo son.
+   */
+  isNewWord?: (word: Word) => boolean
 }
 
 export type CardLookup = (id: string) => CardState | undefined
 
 /**
  * Decide la siguiente palabra. Prioridad: falladas en la sesión que ya toca repetir, repasos
- * vencidos, palabras nuevas (si quedan del límite diario) y, si no queda nada, práctica libre
- * favoreciendo las más frágiles (menor estabilidad).
+ * vencidos (con una nueva cada pocos, ver REVIEWS_PER_NEW), palabras nuevas (si quedan del límite
+ * diario) y, si no queda nada, práctica libre favoreciendo las más frágiles.
  */
 export function pickNext(
   words: readonly Word[],
@@ -286,15 +313,20 @@ export function pickNext(
     }
   }
 
+  // Nuevas que se pueden introducir: todas con cupo; sin cupo, solo las ya conocidas en otra habilidad.
+  const isNewWord = options.isNewWord ?? (() => true)
+  const introducible = (options.allowNew ?? true) ? fresh : fresh.filter((word) => !isNewWord(word))
+  const pickFresh = (): Pick => {
+    // Por frecuencia, pero con algo de variedad entre las siguientes.
+    const pool = options.newOrder === 'frequency' ? introducible.slice(0, 3) : introducible
+    return { word: pickAmong(pool), reason: 'new' }
+  }
+
+  if (introducible.length > 0 && newSlotOpen(session, due.length > 0)) return pickFresh()
+
   if (due.length > 0) {
     due.sort((a, b) => a.due - b.due)
     return { word: pickAmong(due.slice(0, 3)).word, reason: 'review' }
-  }
-
-  if (fresh.length > 0 && (options.allowNew ?? true)) {
-    // Por frecuencia, pero con algo de variedad entre las siguientes.
-    const pool = options.newOrder === 'frequency' ? fresh.slice(0, 3) : fresh
-    return { word: pickAmong(pool), reason: 'new' }
   }
 
   // Nada pendiente: torneo entre unas cuantas ya vistas, gana la más frágil. Si no hay ninguna

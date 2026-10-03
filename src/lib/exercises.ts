@@ -5,7 +5,7 @@
  */
 import type { Exercise } from './course'
 import { shuffle } from './quiz'
-import { seededRng } from './seed'
+import { seededRng, stringSeed } from './seed'
 import { editDistance, judgeTyped, normalizeTyped } from './typing'
 
 export type Verdict = 'correct' | 'almost' | 'wrong'
@@ -40,16 +40,39 @@ export function normalizeSentence(text: string): string {
     .trim()
 }
 
+/**
+ * Contracciones sin ambigüedad, desarrolladas: «should've» y «should have», «don't» y «do not» son la
+ * misma respuesta. «'s» (is / has / posesivo) y «'d» (would / had) no se tocan: no se sabe cuál es.
+ */
+const CONTRACTIONS: ReadonlyArray<[RegExp, string]> = [
+  [/\bcan't\b/g, 'can not'],
+  [/\bcannot\b/g, 'can not'],
+  [/\bwon't\b/g, 'will not'],
+  [/\bshan't\b/g, 'shall not'],
+  [/n't\b/g, ' not'],
+  [/'ve\b/g, ' have'],
+  [/'ll\b/g, ' will'],
+  [/'re\b/g, ' are'],
+  [/\bi'm\b/g, 'i am'],
+]
+
+/** Frase normalizada y con las contracciones desarrolladas, para comparar respuestas escritas. */
+export function comparableSentence(text: string): string {
+  let out = normalizeSentence(text)
+  for (const [pattern, full] of CONTRACTIONS) out = out.replace(pattern, full)
+  return out.replace(/\s+/g, ' ')
+}
+
 /** Errores de tecleo que se perdonan en una frase según su longitud (uno cada 12 letras, hasta 2). */
 const typosAllowed = (expected: string) => Math.min(2, Math.floor(expected.length / 12))
 
 /** Compara una frase escrita con las respuestas válidas. */
 export function judgeSentence(input: string, answers: readonly string[]): Verdict {
-  const typed = normalizeSentence(input)
+  const typed = comparableSentence(input)
   if (!typed) return 'wrong'
   let best: Verdict = 'wrong'
   for (const answer of answers) {
-    const expected = normalizeSentence(answer)
+    const expected = comparableSentence(answer)
     if (typed === expected) return 'correct'
     const allowed = typosAllowed(expected)
     if (allowed > 0 && editDistance(typed, expected) <= allowed) best = 'almost'
@@ -75,7 +98,10 @@ export function judgeExercise(exercise: Exercise, response: Response): Verdict {
     case 'fill':
       return typeof response === 'string' ? judgeFill(response, exercise.answers) : 'wrong'
     case 'translate':
+    case 'transform':
       return typeof response === 'string' ? judgeSentence(response, exercise.answers) : 'wrong'
+    case 'spot':
+      return response === exercise.answer ? 'correct' : 'wrong'
     case 'order':
       return isStrings(response) && response.join(' ') === exercise.words.join(' ') ? 'correct' : 'wrong'
     case 'reading':
@@ -93,12 +119,33 @@ export function correctAnswer(exercise: Exercise): string {
       return exercise.prompt.replace('___', exercise.answers[0])
     case 'translate':
       return exercise.answers[0]
+    case 'transform':
+      return exercise.prompt.replace('___', exercise.answers[0])
+    case 'spot':
+      return correctedSentence(exercise)
     case 'order':
       return exercise.words.join(' ')
     case 'reading':
     case 'listening':
       return exercise.questions.map((question, i) => `${i + 1}. ${question.options[question.answer]}`).join(' · ')
   }
+}
+
+/**
+ * Orden en que se muestran las opciones de una pregunta: barajado, pero siempre igual para la misma
+ * pregunta (al volver a ella o al retomarla). Así la posición de la correcta no delata nada, la
+ * escriba quien la escriba, y tampoco se aprende de memoria.
+ */
+export function optionOrder(options: readonly string[], question: string): number[] {
+  return shuffle(
+    options.map((_, i) => i),
+    seededRng(stringSeed(`${question}|${options.join('|')}`)),
+  )
+}
+
+/** La frase de «encuentra el error» ya corregida. */
+export function correctedSentence(exercise: Extract<Exercise, { type: 'spot' }>): string {
+  return exercise.parts.map((part, i) => (i === exercise.answer ? exercise.correction : part)).join(' ')
 }
 
 /**
@@ -111,6 +158,54 @@ export function shuffledWords(words: readonly string[], seed: number): string[] 
   for (let attempt = 0; attempt < 10 && out.join(' ') === words.join(' '); attempt++) out = shuffle(words, rng)
   if (out.join(' ') === words.join(' ')) out = [...words.slice(1), words[0]]
   return out
+}
+
+/** Destrezas que evalúa un examen, como en los exámenes oficiales. */
+export type Skill = 'use' | 'writing' | 'reading' | 'listening'
+
+const SKILLS: readonly Skill[] = ['use', 'writing', 'reading', 'listening']
+
+export const SKILL_LABEL: Record<Skill, string> = {
+  use: 'Gramática y uso',
+  writing: 'Escritura',
+  reading: 'Lectura',
+  listening: 'Escucha',
+}
+
+const SKILL_OF: Record<Exercise['type'], Skill> = {
+  choice: 'use',
+  fill: 'use',
+  spot: 'use',
+  transform: 'use',
+  order: 'writing',
+  translate: 'writing',
+  reading: 'reading',
+  listening: 'listening',
+}
+
+export interface SkillScore {
+  skill: Skill
+  correct: number
+  total: number
+  ratio: number
+}
+
+/** Nota por destreza: dónde está fuerte y qué conviene repasar. Solo las destrezas que aparecen. */
+export function skillBreakdown(exercises: readonly Exercise[], verdicts: readonly Verdict[]): SkillScore[] {
+  const scores = new Map<Skill, { correct: number; total: number }>()
+  for (const [i, exercise] of exercises.entries()) {
+    const verdict = verdicts[i]
+    if (verdict === undefined) continue
+    const skill = SKILL_OF[exercise.type]
+    const score = scores.get(skill) ?? { correct: 0, total: 0 }
+    score.total++
+    if (verdict !== 'wrong') score.correct++
+    scores.set(skill, score)
+  }
+  return SKILLS.flatMap((skill) => {
+    const score = scores.get(skill)
+    return score ? [{ skill, ...score, ratio: score.correct / score.total }] : []
+  })
 }
 
 export interface Score {

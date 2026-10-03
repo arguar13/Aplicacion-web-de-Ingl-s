@@ -5,6 +5,65 @@ Todos los cambios importantes de OpenSpeak (antes Tecla). El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## 2.5.0 · 2026-10-02 · Un entrenador que avanza y un curso que se retoma
+
+### Corregido
+
+- **La sesión inteligente se quedaba en bucle con palabras ya conocidas.** Tenía tres causas, y
+  las tres están arregladas de raíz:
+  - El cupo diario de nuevas contaba cada habilidad como una palabra nueva. Subir de escalón una
+    palabra ya sabida («recordarla», «de oído», «escribirla») gastaba el cupo, y a media sesión ya
+    no entraba nada nuevo. Ahora «nueva» es una palabra nunca vista en ninguna habilidad: así lo
+    cuentan el cupo, el resumen, las misiones y la experiencia.
+  - Con las palabras en aprendizaje esperando su siguiente paso (minutos), el entrenador rellenaba
+    con palabras al azar de todo lo visto, casi siempre dominadas. Ahora adelanta las que se están
+    aprendiendo y vencen pronto; si no hay, practica lo más frágil sin dominar, y lo dominado solo
+    si no queda otra cosa.
+  - Una pila de repasos tapaba lo nuevo durante días. Ahora la sesión abre con unos repasos y luego
+    intercala algo nuevo cada pocos (2, 3 o 5 según el ritmo). Los niveles hacen lo mismo.
+- Una palabra recién vista no sube de escalón en el acto: necesita superar antes un repaso
+  espaciado. Así la sesión no se llena de palabras de hace un minuto en otra habilidad.
+- Las opciones de los ejercicios del curso se muestran barajadas, siempre igual para la misma
+  pregunta. Antes la correcta casi nunca era la última y en comprensión casi siempre era la segunda,
+  así que se podía acertar por la posición.
+- El corrector acepta las contracciones sin ambigüedad en cualquier sentido: «should've» y «should
+  have», «can't» y «cannot», «won't» y «will not». «'s» y «'d» no se desarrollan, porque pueden ser
+  dos cosas distintas.
+
+### Añadido
+
+- **Recorrido secuencial y a la vista.** Las palabras nuevas llegan en orden, una tras otra,
+  también al acelerar (antes se saltaban doce puestos). La etiqueta de cada nueva dice su número
+  («Nueva · nº 313»), y la tarjeta de la sesión, por cuál va el recorrido y en qué nivel cae.
+- **Cupo cumplido, explicado:** al acabar las nuevas del día, la partida lo dice y ofrece «+10
+  nuevas» solo por hoy.
+- **«Continúa donde lo dejaste»** en el inicio: la lección, el examen o el quiz a medio hacer
+  (con el ejercicio en que te quedaste) y la última práctica por tu cuenta (nivel y modo), a un
+  toque.
+- **El curso se retoma exactamente donde lo dejaste**, aunque cierres la app: la lección vuelve al
+  mismo ejercicio con lo ya respondido, y el examen y el quiz también (el quiz, con las mismas
+  preguntas). Siempre se puede empezar de cero.
+- **«Practica por tu cuenta» empieza al tocar.** Cada modo (traducir, inverso, escuchar, escribir,
+  completar, tarjetas, dictado) abre la práctica al instante, en el nivel por el que vas en esa
+  habilidad, con su avance a la vista. Al ver todas las palabras de un nivel, la partida propone
+  seguir con el siguiente.
+- **Curso mucho más completo:** de 788 a 2.057 ejemplos, de 222 a 445 apartados de teoría (con uno
+  de errores típicos de hispanohablantes en cada lección), de 592 a 1.529 ejercicios en las
+  lecciones y de 143 a 314 preguntas de examen: cada examen tiene ahora de 50 a 54 (antes 23 o
+  24), con un texto más de lectura y otro de escucha.
+- **Dos tipos de ejercicio con el formato de los exámenes oficiales:** transformación con palabra
+  clave (la parte 4 de Cambridge, obligatoria desde B1) y «encuentra el error».
+- **Rigor académico:** una lección se supera con el 70 %. Por debajo, el curso propone repetirla
+  antes de seguir. El examen muestra la nota por destrezas (gramática y uso, escritura, lectura y
+  escucha) y su duración orientativa. Cada error se repasa con su explicación.
+- Lecciones con índice: cada apartado y los ejercicios, a un toque.
+
+### Cambiado
+
+- El contenido existente se revisó: se corrigieron ejercicios con dos respuestas válidas,
+  traducciones correctas que se rechazaban y palabras de España («coche», «conducir», «móvil»…)
+  que no eran de español latinoamericano neutro.
+
 ## 2.4.0 · 2026-10-01 · OpenSpeak: rediseño premium
 
 ### Cambiado

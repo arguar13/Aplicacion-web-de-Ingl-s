@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
+  addExtraNew,
   answerFromRating,
   cardLookup,
+  EXTRA_NEW_STEP,
+  isNewWord,
+  newWordsLeft,
   currentStreak,
   MAX_FREEZES,
   settleStreak,
@@ -37,8 +41,22 @@ describe('historial diario', () => {
   it('cada día por separado, y los sentidos cuentan juntos', () => {
     recordAnswer('en-es', 'the', { clean: true, ms: 1000 }, NOW)
     recordAnswer('es-en', 'the', { clean: true, ms: 1000 }, NOW + 24 * 3_600_000)
-    expect(todayStats(getProgress(), NOW).answers).toBe(1)
-    expect(todayStats(getProgress(), NOW + 24 * 3_600_000)).toMatchObject({ answers: 1, fresh: 1 })
+    expect(todayStats(getProgress(), NOW)).toMatchObject({ answers: 1, fresh: 1 })
+    // Practicar en otra habilidad una palabra ya conocida no es una palabra nueva.
+    expect(todayStats(getProgress(), NOW + 24 * 3_600_000)).toMatchObject({ answers: 1, fresh: 0 })
+  })
+
+  it('el cupo de nuevas cuenta palabras, no habilidades, y se puede ampliar solo por hoy', () => {
+    for (const id of ['the', 'of', 'and']) recordAnswer('en-es', id, { clean: true, ms: 1000 }, NOW)
+    recordAnswer('listen', 'the', { clean: true, ms: 1000 }, NOW)
+    expect(newWordsLeft(getProgress(), 10, NOW)).toBe(7)
+    expect(newWordsLeft(getProgress(), 0, NOW)).toBeNull()
+    addExtraNew(EXTRA_NEW_STEP, NOW)
+    expect(newWordsLeft(getProgress(), 10, NOW)).toBe(7 + EXTRA_NEW_STEP)
+    // Al día siguiente, el cupo vuelve al de los ajustes.
+    expect(newWordsLeft(getProgress(), 10, NOW + 24 * 3_600_000)).toBe(10)
+    expect(isNewWord(getProgress(), 'the')).toBe(false)
+    expect(isNewWord(getProgress(), 'water')).toBe(true)
   })
 
   it('sin experiencia guardada (progreso anterior a la Fase 19), se calcula del historial', () => {

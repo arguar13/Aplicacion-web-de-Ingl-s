@@ -21,7 +21,10 @@ export interface DayStats {
   answers: number
   /** Acertadas a la primera. */
   clean: number
-  /** Palabras nuevas vistas por primera vez. */
+  /**
+   * Palabras nuevas: vistas por primera vez en cualquier habilidad. Practicar en otra habilidad una
+   * palabra ya conocida no cuenta (no gasta el cupo diario de nuevas).
+   */
   fresh: number
   /** Tiempo de estudio aproximado (ms): suma de lo que tardó cada respuesta, con tope. */
   ms: number
@@ -50,6 +53,8 @@ export interface ProgressData {
   xp: number
   /** Misiones del día cumplidas (Fase 19): el día y sus ids, para premiar cada una una sola vez. */
   missions: { day: string; done: string[] }
+  /** Palabras nuevas de más que se pidieron hoy, sobre el límite diario de los ajustes. */
+  extraNew: { day: string; count: number }
 }
 
 /** Una respuesta cuenta como mucho esto en el tiempo de estudio: una pausa no infla el total. */
@@ -78,6 +83,7 @@ export const EMPTY_PROGRESS: ProgressData = {
   lastDeckId: null,
   xp: 0,
   missions: { day: '', done: [] },
+  extraNew: { day: '', count: 0 },
 }
 const EMPTY = EMPTY_PROGRESS
 
@@ -128,7 +134,14 @@ export function parseProgress(raw: Record<string, unknown>): ProgressData {
     // Campos añadidos en la Fase 19. Sin XP guardada, se calcula de lo ya practicado.
     xp: isInteger(raw.xp, 0) ? raw.xp : xpFromHistory(history),
     missions: parseMissions(raw.missions),
+    // Campo añadido con el entrenador secuencial.
+    extraNew: parseExtraNew(raw.extraNew),
   }
+}
+
+function parseExtraNew(raw: unknown): ProgressData['extraNew'] {
+  if (!isRecord(raw) || !isDayKey(raw.day) || !isInteger(raw.count, 0)) return { day: '', count: 0 }
+  return { day: raw.day, count: raw.count }
 }
 
 function parseMissions(raw: unknown): ProgressData['missions'] {
@@ -167,6 +180,10 @@ export const getProgress = () => store.get()
 export const subscribeProgress = store.subscribe
 
 export const cardKey = (track: Track, id: string) => `${track}:${id}`
+
+/** ¿La palabra es nueva de verdad, sin tarjeta en ninguna habilidad? */
+export const isNewWord = (progress: ProgressData, id: string) =>
+  TRACKS.every((track) => progress.cards[cardKey(track, id)] === undefined)
 
 /** Función de consulta de tarjetas para un sentido concreto, lista para el planificador. */
 export function cardLookup(progress: ProgressData, track: Track) {
@@ -251,6 +268,7 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
   const data = store.get()
   const key = cardKey(track, id)
   const previous = data.cards[key]
+  const newWord = isNewWord(data, id)
   const card = review(previous, gradeAnswer({ ...answer, isNew: !previous }), now, RETENTION[getSettings().intensity])
   appendEvent({
     t: now,
@@ -274,12 +292,12 @@ export function recordAnswer(track: Track, id: string, answer: Answer, now = Dat
     [today]: {
       answers: stats.answers + 1,
       clean: stats.clean + (answer.clean ? 1 : 0),
-      fresh: stats.fresh + (previous ? 0 : 1),
+      fresh: stats.fresh + (newWord ? 1 : 0),
       ms: stats.ms + Math.min(Math.max(answer.ms, 0), MAX_ANSWER_MS),
       mastered: countMastered(cards),
     },
   }
-  const xp = data.xp + xpForAnswer({ clean: answer.clean, fresh: !previous })
+  const xp = data.xp + xpForAnswer({ clean: answer.clean, fresh: newWord })
   store.set({ ...data, cards, days, freezes, history: trimHistory(history), xp })
   return card
 }
@@ -325,6 +343,28 @@ function trimHistory(history: Record<string, DayStats>): Record<string, DayStats
 
 /** Lo estudiado hoy (o el día de `now`). */
 export const todayStats = (progress: ProgressData, now = Date.now()) => progress.history[dayKey(now)] ?? EMPTY_DAY
+
+/** Palabras nuevas que se pueden pedir de más en un toque, cuando se acaba el cupo del día. */
+export const EXTRA_NEW_STEP = 10
+
+/**
+ * Palabras nuevas que quedan hoy: el límite de los ajustes más lo pedido de más hoy, menos las ya
+ * vistas. `null` sin límite (`newPerDay` = 0).
+ */
+export function newWordsLeft(progress: ProgressData, newPerDay: number, now = Date.now()): number | null {
+  if (newPerDay === 0) return null
+  const today = dayKey(now)
+  const extra = progress.extraNew.day === today ? progress.extraNew.count : 0
+  return Math.max(0, newPerDay + extra - todayStats(progress, now).fresh)
+}
+
+/** Amplía el cupo de palabras nuevas de hoy (sin tocar el límite de los ajustes, que vuelve mañana). */
+export function addExtraNew(count = EXTRA_NEW_STEP, now = Date.now()) {
+  const data = store.get()
+  const today = dayKey(now)
+  const current = data.extraNew.day === today ? data.extraNew.count : 0
+  store.set({ ...data, extraNew: { day: today, count: current + count } })
+}
 
 /** Suma práctica al día sin tocar las tarjetas (Relámpago). */
 export function recordPractice(practice: { answers: number; clean: number; ms: number }, now = Date.now()) {
@@ -453,6 +493,12 @@ export function mergeProgress(current: ProgressData, incoming: ProgressData): Pr
     // Como el historial: el máximo, no la suma (una copia restaurada sobre su propio origen contaría doble).
     xp: Math.max(current.xp, incoming.xp),
     missions: mergeMissions(current.missions, incoming.missions),
+    extraNew:
+      current.extraNew.day === incoming.extraNew.day
+        ? { day: current.extraNew.day, count: Math.max(current.extraNew.count, incoming.extraNew.count) }
+        : current.extraNew.day > incoming.extraNew.day
+          ? current.extraNew
+          : incoming.extraNew,
   }
 }
 

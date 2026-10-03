@@ -49,6 +49,13 @@ export type Exercise =
   | { type: 'order'; es: string; words: string[]; explanation?: string }
   /** Traducir la frase al inglés; vale cualquiera de las respuestas. */
   | { type: 'translate'; es: string; answers: string[]; explanation?: string }
+  /**
+   * Transformación con palabra clave (como en los exámenes de Cambridge): se completa la segunda
+   * frase (con un hueco ___) para que signifique lo mismo que la primera, usando la palabra clave.
+   */
+  | { type: 'transform'; original: string; keyword: string; prompt: string; answers: string[]; explanation?: string }
+  /** Encontrar el error: la frase va en partes y una de ellas está mal; al corregir se muestra cómo va. */
+  | { type: 'spot'; parts: string[]; answer: number; correction: string; explanation?: string }
 
 export type ExerciseType = Exercise['type']
 
@@ -122,6 +129,29 @@ export function parseExercise(raw: unknown): Exercise | null {
     case 'translate':
       if (!isString(raw.es) || !isStringList(raw.answers)) return null
       return { type: 'translate', es: raw.es, answers: raw.answers, ...explanation }
+    case 'transform': {
+      const { original, keyword, prompt, answers } = raw
+      if (!isString(original) || !isString(keyword) || !isString(prompt) || !isStringList(answers)) return null
+      if (prompt.split('___').length !== 2) return null
+      // La palabra clave tiene que estar en cada respuesta válida: es la regla del ejercicio.
+      const key = keyword.toLowerCase()
+      if (
+        !answers.every((answer) =>
+          answer
+            .toLowerCase()
+            .split(/[\s,.;:!?]+/)
+            .includes(key),
+        )
+      )
+        return null
+      return { type: 'transform', original, keyword: keyword.toUpperCase(), prompt, answers, ...explanation }
+    }
+    case 'spot': {
+      const { parts, answer, correction } = raw
+      if (!isStringList(parts) || parts.length < 3 || !isInteger(answer, 0, parts.length - 1)) return null
+      if (!isString(correction) || correction.trim() === parts[answer].trim()) return null
+      return { type: 'spot', parts, answer, correction, ...explanation }
+    }
     default:
       return null
   }

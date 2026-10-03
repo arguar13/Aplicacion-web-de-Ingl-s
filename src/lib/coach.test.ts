@@ -1,12 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import {
   assessLearner,
+  coachFrontier,
   coachOverview,
-  FAST_JUMP,
+  LEARN_AHEAD_MS,
   type Learner,
   LADDER,
   pickCoach,
+  REVIEWS_BETWEEN_NEW,
   RUNG_STABILITY,
+  topBy,
   WORKING_SET,
 } from './coach'
 import { ALL_WORDS } from './decks'
@@ -75,12 +78,52 @@ describe('entrenador: qué toca en cada ronda', () => {
     expect(pick.reason).toBe('practice')
   })
 
-  it('al acelerar, la palabra nueva viene de más adelante en la lista (más difícil)', () => {
-    const progress = withCards({ [key('en-es', 40)]: card(20, NOW + 10 * DAY) })
-    // La palabra vista ya podría subir de escalón: un rng alto elige la nueva en la alternancia.
-    const pick = pickCoach(progress, createSession(), NOW, FAST, { allowNew: true }, () => 0.99)
-    expect(pick.reason).toBe('new')
-    expect(rank(pick.word.id)).toBeGreaterThanOrEqual(40 + FAST_JUMP)
+  it('sin cupo, adelanta lo que se está aprendiendo y vence pronto, no lo ya dominado', () => {
+    const cards: Record<string, CardState> = {}
+    // Cientos de palabras dominadas y el aprendizaje lleno, con una que vence en unos minutos.
+    for (let i = 100; i < 600; i++) cards[key('en-es', i)] = card(40, NOW + 30 * DAY)
+    for (let i = 0; i < WORKING_SET.normal; i++) cards[key('en-es', i)] = card(0.2, NOW + DAY, 'learning')
+    cards[key('en-es', 3)] = card(0.2, NOW + LEARN_AHEAD_MS / 2, 'learning')
+    const pick = pickCoach(withCards(cards), createSession(), NOW, NORMAL, { allowNew: true }, first)
+    expect(pick).toMatchObject({ word: ALL_WORDS[3], reason: 'learning' })
+  })
+
+  it('en la práctica libre no vuelve a lo dominado mientras haya algo por afianzar', () => {
+    const cards: Record<string, CardState> = {}
+    // Quinientas dominadas en las cuatro habilidades (ni repasos ni escalones por subir) y una frágil.
+    for (let i = 0; i < 500; i++) for (const track of LADDER) cards[key(track, i)] = card(40, NOW + 30 * DAY)
+    cards[key('en-es', 700)] = card(2, NOW + 2 * DAY)
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const pick = pickCoach(withCards(cards), createSession(), NOW, NORMAL, { allowNew: false }, Math.random)
+      expect(pick).toMatchObject({ word: ALL_WORDS[700], reason: 'practice' })
+    }
+  })
+
+  it('con una pila de repasos, cada pocos entra una palabra nueva: la sesión siempre avanza', () => {
+    const cards: Record<string, CardState> = {}
+    for (let i = 0; i < 300; i++) cards[key('en-es', i)] = card(10, NOW - DAY)
+    const session = createSession()
+    const reasons: string[] = []
+    for (let round = 0; round < 12; round++) {
+      const pick = pickCoach(withCards(cards), session, NOW, NORMAL, { allowNew: true }, first)
+      reasons.push(pick.reason)
+      const introduced = pick.reason === 'new' || pick.reason === 'skill'
+      advanceSession(session, cardKey(pick.track, pick.word.id), true, introduced)
+    }
+    // La sesión abre con repasos, y lo nuevo (palabras o habilidades) entra cada pocos.
+    expect(reasons.slice(0, REVIEWS_BETWEEN_NEW.normal)).toEqual(Array(REVIEWS_BETWEEN_NEW.normal).fill('review'))
+    const fresh = reasons.filter((reason) => reason === 'new' || reason === 'skill').length
+    expect(fresh).toBeGreaterThanOrEqual(Math.floor(12 / (REVIEWS_BETWEEN_NEW.normal + 1)))
+    expect(reasons.filter((reason) => reason === 'review').length).toBeGreaterThan(fresh)
+  })
+
+  it('el recorrido es secuencial también al acelerar: la nueva es la siguiente de la lista', () => {
+    const cards: Record<string, CardState> = {}
+    for (let i = 0; i < 40; i++) cards[key('en-es', i)] = card(2, NOW + 10 * DAY)
+    // Una palabra suelta de mucho más adelante (p. ej. practicada en un nivel alto) no hace saltar.
+    cards[key('en-es', 3000)] = card(20, NOW + 10 * DAY)
+    const pick = pickCoach(withCards(cards), createSession(), NOW, FAST, { allowNew: true }, () => 0.99)
+    expect(pick).toMatchObject({ word: ALL_WORDS[40], reason: 'new' })
   })
 
   it('empieza las nuevas en el nivel que recomendó la prueba, y luego vuelve a las que faltan', () => {
@@ -166,7 +209,7 @@ function simulate(knowsUpTo: number, rounds: number): { furthest: number; relear
       { clean, ms: clean ? 900 : 6000, trusted: learner.pace === 'fast' && pick.reason === 'new' },
       now,
     )
-    advanceSession(session, cardKey(pick.track, pick.word.id), clean)
+    advanceSession(session, cardKey(pick.track, pick.word.id), clean, pick.reason === 'new' || pick.reason === 'skill')
     now += 8000
   }
   const seen = Object.keys(getProgress().cards).map((k) => rank(k.slice(k.indexOf(':') + 1)))
@@ -196,6 +239,23 @@ describe('entrenador: se adapta a cada estudiante (simulación)', () => {
     },
     SIMULATION_TIMEOUT,
   )
+})
+
+describe('recorrido secuencial', () => {
+  it('dice por qué palabra va y cuántas se vieron, desde el nivel de partida', () => {
+    const progress = withCards({ [key('en-es', 0)]: card(2, NOW), [key('en-es', 1)]: card(2, NOW) })
+    expect(coachFrontier(progress)).toEqual({ rank: 2, seen: 2 })
+    expect(coachFrontier(progress, 1000)).toEqual({ rank: 1000, seen: 2 })
+    expect(coachFrontier(EMPTY_PROGRESS)).toEqual({ rank: 0, seen: 0 })
+  })
+})
+
+describe('los más urgentes sin ordenar todo', () => {
+  it('devuelve los k de mayor puntuación, en orden', () => {
+    expect(topBy([5, 1, 9, 3, 7, 9], (n) => n, 3)).toEqual([9, 9, 7])
+    expect(topBy([2, 1], (n) => -n, 3)).toEqual([1, 2])
+    expect(topBy([], (n: number) => n, 2)).toEqual([])
+  })
 })
 
 describe('resumen del entrenador', () => {

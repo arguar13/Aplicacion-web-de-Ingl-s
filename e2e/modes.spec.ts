@@ -19,14 +19,22 @@ async function useMode(page: Page, mode: string) {
   await page.reload()
 }
 
-test('el selector de modo cambia cómo se practica y se recuerda', async ({ page }) => {
+test('tocar un modo empieza a practicar al instante, y el inicio ofrece continuar', async ({ page }) => {
   await page.goto('./')
-  const picker = page.getByRole('group', { name: 'Cómo practicar' })
-  await picker.getByText('Escribir', { exact: true }).click()
-  await expect(picker.getByRole('radio', { name: /Escribir/ })).toBeChecked()
-  await page.reload()
-  await expect(page.getByRole('radio', { name: /Escribir/ })).toBeChecked()
+  await page.getByRole('button', { name: 'Escribir: practicar nivel 1' }).click()
+  await expect(page).toHaveURL(/#\/nivel\/1$/)
+  await expect(page.getByLabel('La palabra en inglés')).toBeVisible()
+  await page.goto('./')
+  // El modo queda como el último usado, y la práctica, lista para seguir.
+  await expect(page.getByRole('button', { name: 'Escribir: practicar nivel 1' })).toContainText('Último')
+  const resume = page.getByRole('region', { name: 'Continúa donde lo dejaste' })
+  await expect(resume).toContainText('Práctica · escribir')
+  await expect(resume).toContainText('Nivel 1 · Esenciales')
   await expectNoHorizontalScroll(page)
+  await expectAccessible(page)
+  await resume.getByRole('button', { name: /Nivel 1 · Esenciales/ }).click()
+  await expect(page).toHaveURL(/#\/nivel\/1$/)
+  await expect(page.getByLabel('La palabra en inglés')).toBeVisible()
 })
 
 test('escuchar: suena la palabra sin mostrarla y se elige su traducción', async ({ page, browserName }) => {

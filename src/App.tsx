@@ -86,6 +86,18 @@ function openDeck(deck: Deck) {
   go({ name: 'deck', deck })
 }
 
+/** Empezar a practicar al instante: con el modo elegido y en el mazo indicado. */
+function practice(deck: Deck, mode: Mode) {
+  updateSettings({ mode })
+  openDeck(deck)
+}
+
+/** Del nivel recorrido al siguiente, sin dejar la partida anterior en el historial. */
+function continueWith(deck: Deck) {
+  setLastDeck(deck.id)
+  navigate({ screen: { name: 'deck', deck }, panel: null }, { replace: true })
+}
+
 const openSmart = (kind: SmartDeckKind) => go({ name: 'smart', kind })
 const openCourse = () => go({ name: 'course' })
 const openLevel = (level: CourseLevelId) => go({ name: 'courseLevel', level })
@@ -117,6 +129,7 @@ function Home() {
       onStartCoach={startCoach}
       onStartFocus={() => go({ name: 'focus' })}
       onPick={openDeck}
+      onPractice={practice}
       onOpenSmart={openSmart}
       onOpenBlitz={() => go({ name: 'blitz' })}
       onOpenTopics={() => go({ name: 'topics' })}
@@ -145,6 +158,7 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
           mode={mode}
           onExit={exitToHome}
           onOpenSettings={openSettings}
+          onNextDeck={continueWith}
         />
       )
     case 'smart':

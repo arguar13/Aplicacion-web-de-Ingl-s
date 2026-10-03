@@ -38,6 +38,10 @@
             {
               "en": "They're tired.",
               "es": "Están cansados."
+            },
+            {
+              "en": "You're my best friend.",
+              "es": "Eres mi mejor amigo."
             }
           ],
           "table": {
@@ -81,6 +85,10 @@
             {
               "en": "Is she your sister? No, she's my cousin.",
               "es": "¿Es tu hermana? No, es mi prima."
+            },
+            {
+              "en": "Are they from Colombia? Yes, they are.",
+              "es": "¿Son de Colombia? Sí."
             }
           ],
           "tip": "En inglés el sujeto nunca se omite: «Soy médico» es I am a doctor, no «Am a doctor»."
@@ -103,6 +111,113 @@
             {
               "en": "It's five o'clock.",
               "es": "Son las cinco."
+            },
+            {
+              "en": "It's very hot today.",
+              "es": "Hoy hace mucho calor."
+            }
+          ]
+        },
+        {
+          "heading": "Errores típicos: «tener» que en inglés es to be",
+          "body": [
+            "En español usamos «tener» para la edad, el hambre, la sed, el frío o el miedo; en inglés todo eso va con to be: I am 30 (years old), I'm hungry, I'm cold, I'm afraid. Decir «I have 30 years» es el error más típico del nivel: el inglés no «tiene» años, los «es».",
+            "Otro error frecuente es omitir el sujeto o el verbo, porque en español el verbo ya dice quién es («Es mi hermano»). En inglés cada frase necesita sujeto y verbo: He is my brother, no «Is my brother»; My brother is a doctor, no «My brother a doctor»."
+          ],
+          "examples": [
+            {
+              "en": "I'm thirty years old.",
+              "es": "Tengo treinta años."
+            },
+            {
+              "en": "Are you hungry? No, I'm not.",
+              "es": "¿Tienes hambre? No."
+            },
+            {
+              "en": "She's always right.",
+              "es": "Ella siempre tiene razón."
+            },
+            {
+              "en": "The children are cold.",
+              "es": "Los niños tienen frío."
+            }
+          ],
+          "table": {
+            "headers": ["Español (con tener)", "Inglés (con to be)"],
+            "rows": [
+              ["tengo 20 años", "I'm 20 (years old)"],
+              ["tengo hambre", "I'm hungry"],
+              ["tengo sed", "I'm thirsty"],
+              ["tengo frío / calor", "I'm cold / hot"],
+              ["tengo miedo", "I'm afraid / scared"],
+              ["tengo sueño", "I'm sleepy"],
+              ["tengo razón", "I'm right"]
+            ]
+          },
+          "tip": "Si en español dices «tengo» + años, hambre, sed, frío, calor, miedo, sueño o razón, en inglés casi siempre es I'm."
+        },
+        {
+          "heading": "Ser y estar en un solo verbo, y cómo suena de verdad",
+          "body": [
+            "El inglés no distingue entre «ser» y «estar»: She is a doctor (es médica) y She is at the hospital (está en el hospital) usan el mismo is. El contexto aclara el significado; a veces lo que cambia es el adjetivo: The film is boring (la película es aburrida) frente a I'm bored (estoy aburrido).",
+            "Al hablar, las contracciones son lo normal. Para la negación hay dos formas contraídas igual de correctas: he isn't o he's not, you aren't o you're not. Con I solo existe I'm not (no se dice «I amn't»). Las formas sin contraer (I am, she is not) suenan más formales o enfáticas, y son las habituales por escrito en textos formales.",
+            "En las respuestas cortas afirmativas no se contrae: Yes, I am (nunca «Yes, I'm»). En las negativas sí: No, she isn't / No, she's not."
+          ],
+          "examples": [
+            {
+              "en": "She's a nurse. She's at work now.",
+              "es": "Es enfermera. Ahora está en el trabajo."
+            },
+            {
+              "en": "They're not at home; they're at the park.",
+              "es": "No están en casa; están en el parque."
+            },
+            {
+              "en": "Is he your boss? Yes, he is.",
+              "es": "¿Es tu jefe? Sí."
+            },
+            {
+              "en": "The film is boring, so we're bored.",
+              "es": "La película es aburrida, así que estamos aburridos."
+            }
+          ],
+          "table": {
+            "headers": ["Afirmación", "Negación (forma 1)", "Negación (forma 2)"],
+            "rows": [
+              ["I'm", "I'm not", "—"],
+              ["you're", "you aren't", "you're not"],
+              ["he's / she's / it's", "he isn't / she isn't / it isn't", "he's not / she's not / it's not"],
+              ["we're / they're", "we aren't / they aren't", "we're not / they're not"]
+            ]
+          },
+          "tip": "Yes, I am. / Yes, she is.: en las respuestas cortas afirmativas el verbo va siempre completo."
+        },
+        {
+          "heading": "Preguntas útiles con to be",
+          "body": [
+            "Con palabras interrogativas el orden es: palabra interrogativa + to be + sujeto: What's your name? Where are you from? How old is she? Who is that man? How are you?",
+            "La preposición de Where… from? va al final, no delante como en español: Where are you from? (¿De dónde eres?), no «From where are you?». Para preguntar por la edad se usa How old…?, nunca «How many years…?»."
+          ],
+          "examples": [
+            {
+              "en": "What's your name? My name's Lucía.",
+              "es": "¿Cómo te llamas? Me llamo Lucía."
+            },
+            {
+              "en": "Where are you from? I'm from Peru.",
+              "es": "¿De dónde eres? Soy de Perú."
+            },
+            {
+              "en": "How old is your son? He's seven.",
+              "es": "¿Cuántos años tiene tu hijo? Tiene siete."
+            },
+            {
+              "en": "How are you? I'm fine, thanks.",
+              "es": "¿Cómo estás? Bien, gracias."
+            },
+            {
+              "en": "Who is that woman?",
+              "es": "¿Quién es esa mujer?"
             }
           ]
         }
@@ -158,6 +273,95 @@
           "es": "Mi madre es profesora.",
           "answers": ["My mother is a teacher.", "My mum is a teacher.", "My mom is a teacher."],
           "explanation": "Profesión en singular: a teacher."
+        },
+        {
+          "type": "choice",
+          "prompt": "How old ___ your brother?",
+          "options": ["has", "does", "are", "is"],
+          "answer": 3,
+          "explanation": "La edad se pregunta con to be (How old is…?), no con have. Your brother = he → is."
+        },
+        {
+          "type": "choice",
+          "prompt": "I ___ hungry. Can we eat now?",
+          "options": ["have", "is", "are", "am"],
+          "answer": 3,
+          "explanation": "«Tener hambre» en inglés es to be hungry; con I, am."
+        },
+        {
+          "type": "choice",
+          "prompt": "Where ___ you from?",
+          "options": ["is", "do", "are", "am"],
+          "answer": 2,
+          "explanation": "Where are you from? lleva to be (are con you), no do."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ you from Argentina? Yes, I am.",
+          "answers": ["Are"],
+          "explanation": "La respuesta Yes, I am muestra que la pregunta es con to be: Are you…?"
+        },
+        {
+          "type": "fill",
+          "prompt": "Tom and I ___ (be) in the same class.",
+          "answers": ["are"],
+          "explanation": "Tom and I equivale a we, así que el verbo es are."
+        },
+        {
+          "type": "order",
+          "es": "¿De dónde es tu profesora?",
+          "words": ["Where", "is", "your", "teacher", "from?"],
+          "explanation": "Palabra interrogativa + is + sujeto, y from al final."
+        },
+        {
+          "type": "translate",
+          "es": "Tengo veinte años.",
+          "answers": [
+            "I'm twenty.",
+            "I am twenty.",
+            "I'm twenty years old.",
+            "I am twenty years old.",
+            "I'm 20.",
+            "I am 20.",
+            "I'm 20 years old.",
+            "I am 20 years old."
+          ],
+          "explanation": "La edad va con to be: I'm twenty (years old), nunca «I have twenty years»."
+        },
+        {
+          "type": "translate",
+          "es": "Ellos no son de aquí.",
+          "answers": ["They aren't from here.", "They're not from here.", "They are not from here."],
+          "explanation": "Negación de to be: are not, contraído aren't o they're not."
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "have", "25 years", "old."],
+          "answer": 1,
+          "correction": "am",
+          "explanation": "La edad se expresa con to be: I am 25 years old. «Tener años» es una interferencia del español."
+        },
+        {
+          "type": "spot",
+          "parts": ["Is", "cold today,", "so take", "a jacket."],
+          "answer": 0,
+          "correction": "It's",
+          "explanation": "El clima necesita el sujeto it: It's cold. En inglés el sujeto no se omite."
+        },
+        {
+          "type": "spot",
+          "parts": ["Are you a student?", "Yes,", "I'm."],
+          "answer": 2,
+          "correction": "I am.",
+          "explanation": "En las respuestas cortas afirmativas no se contrae: Yes, I am."
+        },
+        {
+          "type": "transform",
+          "original": "I'm from Mexico.",
+          "keyword": "MEXICAN",
+          "prompt": "I ___.",
+          "answers": ["am Mexican", "'m Mexican"],
+          "explanation": "Ser de un país = to be + nacionalidad: I'm from Mexico → I am Mexican. Las nacionalidades llevan mayúscula."
         }
       ]
     },
@@ -192,6 +396,10 @@
             {
               "en": "I need a new phone.",
               "es": "Necesito un teléfono nuevo."
+            },
+            {
+              "en": "Is there an ATM near here?",
+              "es": "¿Hay un cajero automático cerca de aquí?"
             }
           ]
         },
@@ -213,6 +421,10 @@
             {
               "en": "I love music.",
               "es": "Me encanta la música (en general: sin the)."
+            },
+            {
+              "en": "Can you close the door, please?",
+              "es": "¿Puedes cerrar la puerta, por favor?"
             }
           ],
           "tip": "Profesiones en singular llevan a/an: She's a nurse. En español decimos «es enfermera», sin artículo."
@@ -235,6 +447,10 @@
             {
               "en": "There are many cities.",
               "es": "Hay muchas ciudades."
+            },
+            {
+              "en": "These boxes are very heavy.",
+              "es": "Estas cajas pesan mucho."
             }
           ],
           "table": {
@@ -248,6 +464,121 @@
               ["mouse", "mice"]
             ]
           }
+        },
+        {
+          "heading": "Errores típicos: el artículo que sobra y el que falta",
+          "body": [
+            "En español usamos el artículo para hablar en general («Me gusta la música», «Los perros son fieles»); en inglés, no: I like music, Dogs are loyal. Si pones the, se entiende algo concreto: I like the music (esta música en particular).",
+            "Al revés, en inglés no se puede quitar a/an delante de una profesión o de un sustantivo contable en singular: She's a lawyer, I have a car. Tampoco se pone a con incontables como water, money, information, advice o bread: se dice some water, some information.",
+            "Con las partes del cuerpo y la ropa, el inglés usa el posesivo donde el español pone el artículo: I wash my hands (me lavo las manos), She's washing her hair."
+          ],
+          "examples": [
+            {
+              "en": "Cats are independent.",
+              "es": "Los gatos son independientes."
+            },
+            {
+              "en": "My father is a taxi driver.",
+              "es": "Mi papá es taxista."
+            },
+            {
+              "en": "Can I have some water, please?",
+              "es": "¿Me das agua, por favor?"
+            },
+            {
+              "en": "She's washing her hair.",
+              "es": "Se está lavando el pelo."
+            },
+            {
+              "en": "Life is beautiful.",
+              "es": "La vida es bella."
+            }
+          ],
+          "table": {
+            "headers": ["Español", "Inglés", "Por qué"],
+            "rows": [
+              ["Me gusta el café.", "I like coffee.", "en general: sin the"],
+              ["Es médico.", "He's a doctor.", "profesión: con a"],
+              ["Me lavo las manos.", "I wash my hands.", "partes del cuerpo: posesivo"],
+              ["Necesito información.", "I need some information.", "incontable: sin a"]
+            ]
+          },
+          "tip": "Antes de poner the, pregúntate: ¿hablo de algo concreto que los dos conocemos? Si hablas en general, no lo pongas."
+        },
+        {
+          "heading": "A o an: manda el sonido, no la letra",
+          "body": [
+            "La regla de a/an depende de cómo suena la palabra, no de cómo se escribe. Por eso se dice an hour y an honest man (la h no suena), pero a university, a European city y a one-way ticket (empiezan con sonido «yu» o «wu», que cuentan como consonante).",
+            "Con las siglas pasa lo mismo: an MP3 player (la M se pronuncia «em», con vocal), pero a USB cable («yu»). En la conversación, a suena débil, casi como una «e» breve, y the delante de vocal suele sonar «di»: the apple, the orange."
+          ],
+          "examples": [
+            {
+              "en": "We waited for an hour.",
+              "es": "Esperamos una hora."
+            },
+            {
+              "en": "It's a European country.",
+              "es": "Es un país europeo."
+            },
+            {
+              "en": "I need a USB cable.",
+              "es": "Necesito un cable USB."
+            },
+            {
+              "en": "He's an old friend.",
+              "es": "Es un viejo amigo."
+            }
+          ],
+          "table": {
+            "headers": ["a (sonido de consonante)", "an (sonido de vocal)"],
+            "rows": [
+              ["a uniform", "an umbrella"],
+              ["a house", "an hour"],
+              ["a one-euro coin", "an orange"],
+              ["a USB cable", "an MP3 player"]
+            ]
+          }
+        },
+        {
+          "heading": "Plurales con trampa",
+          "body": [
+            "Muchas palabras terminadas en -f o -fe cambian a -ves: knife → knives, wife → wives, leaf → leaves, half → halves. Las terminadas en vocal + y solo añaden -s: day → days, boy → boys, key → keys. Varias terminadas en -o añaden -es: tomato → tomatoes, potato → potatoes.",
+            "Algunas palabras son iguales en singular y en plural: sheep, fish. Otras solo existen en plural: jeans, trousers, glasses, scissors (My jeans are new). People ya es plural: People are friendly here (no «people is»). Y los incontables (water, money, information, homework) no tienen plural: no se dice «informations» ni «homeworks».",
+            "La -s del plural se pronuncia de tres maneras: /s/ en books, /z/ en dogs e /iz/ en boxes o buses; esta última añade una sílaba."
+          ],
+          "examples": [
+            {
+              "en": "Put the knives in the drawer.",
+              "es": "Pon los cuchillos en el cajón."
+            },
+            {
+              "en": "There are ten sheep in the field.",
+              "es": "Hay diez ovejas en el campo."
+            },
+            {
+              "en": "My new jeans are blue.",
+              "es": "Mis jeans nuevos son azules."
+            },
+            {
+              "en": "People are very friendly here.",
+              "es": "La gente es muy amable aquí."
+            },
+            {
+              "en": "We have a lot of homework today.",
+              "es": "Hoy tenemos mucha tarea."
+            }
+          ],
+          "table": {
+            "headers": ["Terminación", "Regla", "Ejemplo"],
+            "rows": [
+              ["-f / -fe", "→ -ves", "knife → knives"],
+              ["vocal + y", "+ s", "day → days"],
+              ["consonante + y", "→ -ies", "baby → babies"],
+              ["-o (muchas)", "+ es", "tomato → tomatoes"],
+              ["sin cambio", "igual", "sheep → sheep"]
+            ]
+          },
+          "tip": "People ya es plural: People are nice, no «people is». Una sola persona es a person."
         }
       ],
       "exercises": [
@@ -279,13 +610,13 @@
         },
         {
           "type": "order",
-          "es": "El coche es rojo.",
+          "es": "El auto es rojo.",
           "words": ["The", "car", "is", "red."]
         },
         {
           "type": "translate",
           "es": "Tengo tres hermanas.",
-          "answers": ["I have three sisters."],
+          "answers": ["I have three sisters.", "I've got three sisters.", "I have got three sisters."],
           "explanation": "Plural regular: sister → sisters, sin artículo."
         },
         {
@@ -300,6 +631,84 @@
           "prompt": "She works at ___ university. (a / an)",
           "answers": ["a"],
           "explanation": "University empieza con sonido «yu»: a."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ hour is sixty minutes.",
+          "options": ["The", "A", "—", "An"],
+          "answer": 3,
+          "explanation": "La h de hour no suena: empieza con sonido de vocal, así que va an."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ are my favourite animals.",
+          "options": ["A dogs", "The dogs", "Dogs"],
+          "answer": 2,
+          "explanation": "Para hablar en general se usa el plural sin artículo: Dogs are…"
+        },
+        {
+          "type": "choice",
+          "prompt": "There are three ___ on the table.",
+          "options": ["knifes", "knife", "knives"],
+          "answer": 2,
+          "explanation": "Knife termina en -fe: el plural es knives."
+        },
+        {
+          "type": "fill",
+          "prompt": "We saw a lot of ___ (sheep, plural) on the farm.",
+          "answers": ["sheep"],
+          "explanation": "Sheep es igual en singular y en plural."
+        },
+        {
+          "type": "fill",
+          "prompt": "She's ___ honest person. (a / an)",
+          "answers": ["an"],
+          "explanation": "La h de honest no suena: sonido de vocal → an."
+        },
+        {
+          "type": "fill",
+          "prompt": "The ___ (baby, plural) are sleeping.",
+          "answers": ["babies"],
+          "explanation": "Consonante + y → -ies: baby → babies."
+        },
+        {
+          "type": "order",
+          "es": "Mi hermano es ingeniero.",
+          "words": ["My", "brother", "is", "an", "engineer."],
+          "explanation": "Profesión en singular con an (engineer empieza por vocal)."
+        },
+        {
+          "type": "translate",
+          "es": "Me gusta el chocolate.",
+          "answers": ["I like chocolate."],
+          "explanation": "En general, sin the: I like chocolate."
+        },
+        {
+          "type": "translate",
+          "es": "Ella es enfermera.",
+          "answers": ["She is a nurse.", "She's a nurse."],
+          "explanation": "Las profesiones en singular llevan a/an, aunque en español no haya artículo."
+        },
+        {
+          "type": "spot",
+          "parts": ["My sister", "is", "nurse", "in a big hospital."],
+          "answer": 2,
+          "correction": "a nurse",
+          "explanation": "Profesión en singular: a nurse. En español decimos «es enfermera», sin artículo, y de ahí el error."
+        },
+        {
+          "type": "spot",
+          "parts": ["The", "childrens", "are playing", "in the garden."],
+          "answer": 1,
+          "correction": "children",
+          "explanation": "Children ya es plural (de child): no lleva -s."
+        },
+        {
+          "type": "spot",
+          "parts": ["I love", "the Italian food,", "especially", "pizza."],
+          "answer": 1,
+          "correction": "Italian food,",
+          "explanation": "Hablando en general no se usa the: I love Italian food."
         }
       ]
     },
@@ -330,6 +739,10 @@
             {
               "en": "My sister studies English.",
               "es": "Mi hermana estudia inglés."
+            },
+            {
+              "en": "The museum opens at ten.",
+              "es": "El museo abre a las diez."
             }
           ],
           "table": {
@@ -358,6 +771,10 @@
             {
               "en": "They have a big house.",
               "es": "Tienen una casa grande."
+            },
+            {
+              "en": "My dad has breakfast at seven.",
+              "es": "Mi papá desayuna a las siete."
             }
           ]
         },
@@ -387,9 +804,107 @@
             {
               "en": "He often travels for work.",
               "es": "Él viaja a menudo por trabajo."
+            },
+            {
+              "en": "We sometimes go to the cinema on Fridays.",
+              "es": "A veces vamos al cine los viernes."
             }
           ],
           "tip": "La -s de la tercera persona es el error más común en A1: she like → she likes."
+        },
+        {
+          "heading": "Para qué sirve el presente simple",
+          "body": [
+            "Además de rutinas, el presente simple expresa verdades generales y datos fijos (Water boils at 100 degrees), gustos y estados (I like jazz, She knows my brother) y horarios oficiales: The train leaves at 8:15.",
+            "En español usamos el presente para casi todo, también para lo que pasa en este momento («¿Qué haces?»). En inglés el presente simple no sirve para eso: lo que está pasando ahora va en presente continuo, que verás en otra lección."
+          ],
+          "examples": [
+            {
+              "en": "Water boils at 100 degrees.",
+              "es": "El agua hierve a 100 grados."
+            },
+            {
+              "en": "The bus leaves at 7:40.",
+              "es": "El autobús sale a las 7:40."
+            },
+            {
+              "en": "She speaks four languages.",
+              "es": "Ella habla cuatro idiomas."
+            },
+            {
+              "en": "My cousin lives in Canada.",
+              "es": "Mi primo vive en Canadá."
+            }
+          ]
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes",
+          "body": [
+            "La -s de tercera persona se olvida porque en español la tercera persona no tiene una marca parecida. Truco: si puedes poner he, she o it delante (o un sustantivo singular: my mother, the shop, Peter), el verbo lleva -s: My mother works. The shop opens at 9.",
+            "Otro error es añadir -s donde no va (My parents lives ✗) o mezclar to be con otro verbo (He is work here ✗ → He works here). Y cuidado con el adverbio de frecuencia: en español decimos «Juego siempre al tenis», pero en inglés va delante del verbo: I always play tennis.",
+            "Para la frecuencia también se usan expresiones como once a week (una vez por semana), twice a month (dos veces al mes) o three times a year, que van al final de la frase."
+          ],
+          "examples": [
+            {
+              "en": "My mother teaches maths.",
+              "es": "Mi mamá enseña matemáticas."
+            },
+            {
+              "en": "I go to the gym twice a week.",
+              "es": "Voy al gimnasio dos veces por semana."
+            },
+            {
+              "en": "Our children never watch TV in the morning.",
+              "es": "Nuestros hijos nunca ven la tele por la mañana."
+            },
+            {
+              "en": "This café closes at midnight.",
+              "es": "Este café cierra a medianoche."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto ✗", "Correcto ✓"],
+            "rows": [
+              ["She work in a bank.", "She works in a bank."],
+              ["My parents lives in Quito.", "My parents live in Quito."],
+              ["I play always tennis.", "I always play tennis."],
+              ["He is work here.", "He works here."]
+            ]
+          },
+          "tip": "Is work, is live, are play: no mezcles to be con otro verbo en presente simple. Se dice He works, no «He is work»."
+        },
+        {
+          "heading": "Cómo suena la -s: /s/, /z/ e /iz/",
+          "body": [
+            "La -s de la tercera persona se pronuncia igual que la del plural: /s/ después de sonidos sordos como p, t, k, f (works, stops, laughs), /z/ después de vocales y sonidos sonoros (lives, plays, goes) e /iz/ después de s, z, sh, ch, x y ge, que añade una sílaba (watches, washes, fixes, uses).",
+            "Dos formas cambian de vocal al añadir la terminación: does suena «das» y says suena «sez». No las pronuncies como se escriben."
+          ],
+          "examples": [
+            {
+              "en": "He fixes cars in his garage.",
+              "es": "Él arregla autos en su taller."
+            },
+            {
+              "en": "She washes the dishes after dinner.",
+              "es": "Ella lava los platos después de cenar."
+            },
+            {
+              "en": "He says hello to everyone.",
+              "es": "Él saluda a todo el mundo."
+            },
+            {
+              "en": "Ana watches a series every night.",
+              "es": "Ana ve una serie todas las noches."
+            }
+          ],
+          "table": {
+            "headers": ["Sonido", "Cuándo", "Ejemplos"],
+            "rows": [
+              ["/s/", "tras p, t, k, f", "works, stops, likes"],
+              ["/z/", "tras vocal y sonidos sonoros", "plays, lives, goes"],
+              ["/iz/", "tras s, sh, ch, x, ge", "watches, washes, fixes"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -442,6 +957,102 @@
           "es": "Ella se levanta a las seis.",
           "answers": ["She gets up at six.", "She gets up at six o'clock."],
           "explanation": "Get up + s de tercera persona."
+        },
+        {
+          "type": "choice",
+          "prompt": "Water ___ at 100 degrees.",
+          "options": ["boil", "boiling", "is boil", "boils"],
+          "answer": 3,
+          "explanation": "Verdad general en presente simple; water = it → boils."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ her homework after dinner.",
+          "options": ["does", "do", "doing", "is do"],
+          "answer": 0,
+          "explanation": "Do es irregular en tercera persona: she does."
+        },
+        {
+          "type": "choice",
+          "prompt": "The train ___ at 6:15 every morning.",
+          "options": ["leave", "leaves", "is leave"],
+          "answer": 1,
+          "explanation": "Horario fijo: presente simple, con -s porque the train = it."
+        },
+        {
+          "type": "fill",
+          "prompt": "My father ___ (fix) cars in a garage.",
+          "answers": ["fixes"],
+          "explanation": "Tras -x se añade -es: fixes."
+        },
+        {
+          "type": "fill",
+          "prompt": "The baby ___ (cry) a lot at night.",
+          "answers": ["cries"],
+          "explanation": "Consonante + y → -ies: cry → cries."
+        },
+        {
+          "type": "fill",
+          "prompt": "Paul ___ (watch) the news every evening.",
+          "answers": ["watches"],
+          "explanation": "Tras -ch se añade -es: watches."
+        },
+        {
+          "type": "order",
+          "es": "Nunca tomo café por la noche.",
+          "words": ["I", "never", "drink", "coffee", "at", "night."],
+          "explanation": "El adverbio de frecuencia va delante del verbo principal."
+        },
+        {
+          "type": "order",
+          "es": "Ella va al gimnasio dos veces por semana.",
+          "words": ["She", "goes", "to", "the", "gym", "twice", "a", "week."],
+          "explanation": "Twice a week va al final; go → goes en tercera persona."
+        },
+        {
+          "type": "translate",
+          "es": "Mi hermano juega al fútbol los sábados.",
+          "answers": [
+            "My brother plays football on Saturdays.",
+            "My brother plays soccer on Saturdays.",
+            "On Saturdays my brother plays football.",
+            "On Saturdays, my brother plays football.",
+            "On Saturdays my brother plays soccer.",
+            "On Saturdays, my brother plays soccer."
+          ],
+          "explanation": "My brother = he → plays. Los sábados (como hábito) = on Saturdays."
+        },
+        {
+          "type": "translate",
+          "es": "Ella siempre llega tarde.",
+          "answers": [
+            "She's always late.",
+            "She is always late.",
+            "She always arrives late.",
+            "She always comes late."
+          ],
+          "explanation": "Always va después de to be (She's always late) y antes de los demás verbos (She always arrives late)."
+        },
+        {
+          "type": "spot",
+          "parts": ["My mother", "work", "in a hospital", "near our house."],
+          "answer": 1,
+          "correction": "works",
+          "explanation": "My mother = she: el verbo lleva -s."
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "play always", "tennis", "on Sundays."],
+          "answer": 1,
+          "correction": "always play",
+          "explanation": "El adverbio de frecuencia va delante del verbo principal: I always play."
+        },
+        {
+          "type": "spot",
+          "parts": ["I always go", "to the gym", "in the evening,", "but my sister", "go", "in the morning."],
+          "answer": 4,
+          "correction": "goes",
+          "explanation": "My sister = she → goes. Aunque la primera parte esté con I, cada sujeto lleva su forma."
         }
       ]
     },
@@ -466,7 +1077,11 @@
             },
             {
               "en": "We don't have a car.",
-              "es": "No tenemos coche."
+              "es": "No tenemos auto."
+            },
+            {
+              "en": "My brother doesn't eat meat.",
+              "es": "Mi hermano no come carne."
             }
           ],
           "tip": "Cuando aparece doesn't, la -s ya está en el auxiliar: he doesn't play, nunca «he doesn't plays»."
@@ -497,6 +1112,10 @@
             {
               "en": "Do we need tickets?",
               "es": "¿Necesitamos entradas?"
+            },
+            {
+              "en": "Does it rain a lot here? Yes, it does.",
+              "es": "¿Llueve mucho aquí? Sí."
             }
           ]
         },
@@ -518,6 +1137,10 @@
             {
               "en": "How often do you go to the gym?",
               "es": "¿Con qué frecuencia vas al gimnasio?"
+            },
+            {
+              "en": "Why do you want to learn English?",
+              "es": "¿Por qué quieres aprender inglés?"
             }
           ],
           "table": {
@@ -529,6 +1152,100 @@
               ["who", "quién"],
               ["why", "por qué"],
               ["how", "cómo"]
+            ]
+          }
+        },
+        {
+          "heading": "Errores típicos: el auxiliar que falta o que sobra",
+          "body": [
+            "En español una pregunta es la misma frase con otra entonación: «¿Tú hablas inglés?». En inglés eso no basta: hace falta do o does delante del sujeto. «You speak English?» solo se oye en charla muy informal, para mostrar sorpresa; la pregunta normal es Do you speak English?",
+            "Tres errores frecuentes: negar solo con no (I no like ✗ → I don't like), dejar la -s en el verbo después de does o doesn't (Does she works? ✗ → Does she work?) y usar do con to be (Do you are tired? ✗ → Are you tired?). To be y can no necesitan do."
+          ],
+          "examples": [
+            {
+              "en": "I don't understand.",
+              "es": "No entiendo."
+            },
+            {
+              "en": "Does your father drive?",
+              "es": "¿Tu papá maneja?"
+            },
+            {
+              "en": "Are you tired? Yes, a little.",
+              "es": "¿Estás cansado? Sí, un poco."
+            },
+            {
+              "en": "Where do your grandparents live?",
+              "es": "¿Dónde viven tus abuelos?"
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto ✗", "Correcto ✓"],
+            "rows": [
+              ["I no like coffee.", "I don't like coffee."],
+              ["She doesn't works.", "She doesn't work."],
+              ["Does he speaks French?", "Does he speak French?"],
+              ["Do you are ready?", "Are you ready?"],
+              ["Where you live?", "Where do you live?"]
+            ]
+          },
+          "tip": "Si la frase lleva am, is, are o can, no uses do: Are you…?, Can she…? Con los demás verbos, sí: Do you…?, Does she…?"
+        },
+        {
+          "heading": "Who y what como sujeto, y preguntas con preposición",
+          "body": [
+            "Cuando who o what son el sujeto (preguntan quién o qué hace la acción), no se usa do y el verbo lleva -s: Who lives here? What happens next? Compáralo con una pregunta de objeto: Who do you live with? (¿Con quién vives?).",
+            "Las preposiciones suelen ir al final de la pregunta, no al principio como en español: Who do you work with? (¿Con quién trabajas?), What are you looking at? (¿Qué miras?), What music do you listen to? Decir «With who do you work?» suena muy raro."
+          ],
+          "examples": [
+            {
+              "en": "Who wants a coffee?",
+              "es": "¿Quién quiere un café?"
+            },
+            {
+              "en": "Who do you live with?",
+              "es": "¿Con quién vives?"
+            },
+            {
+              "en": "What music do you listen to?",
+              "es": "¿Qué música escuchas?"
+            },
+            {
+              "en": "Who works in that office?",
+              "es": "¿Quién trabaja en esa oficina?"
+            }
+          ]
+        },
+        {
+          "heading": "Respuestas cortas y preguntas de todos los días",
+          "body": [
+            "Responder solo Yes o No puede sonar seco. Lo natural es la respuesta corta con el auxiliar: Do you like it? Yes, I do. Does he smoke? No, he doesn't. No se repite el verbo principal: «Yes, I like» es incorrecto.",
+            "Preguntas muy útiles con do: What do you do? (¿A qué te dedicas?), How do you spell that? (¿Cómo se escribe?), What does this word mean? (¿Qué significa esta palabra?). En el inglés hablado, Do you suena casi «d'you» y does she, «dəz-shi»."
+          ],
+          "examples": [
+            {
+              "en": "Do you like spicy food? No, I don't.",
+              "es": "¿Te gusta la comida picante? No."
+            },
+            {
+              "en": "What do you do? I'm a nurse.",
+              "es": "¿A qué te dedicas? Soy enfermera."
+            },
+            {
+              "en": "How do you spell your surname?",
+              "es": "¿Cómo se escribe tu apellido?"
+            },
+            {
+              "en": "What does 'busy' mean?",
+              "es": "¿Qué significa «busy»?"
+            }
+          ],
+          "table": {
+            "headers": ["Pregunta", "Sí", "No"],
+            "rows": [
+              ["Do you…?", "Yes, I do.", "No, I don't."],
+              ["Does she…?", "Yes, she does.", "No, she doesn't."],
+              ["Do they…?", "Yes, they do.", "No, they don't."]
             ]
           }
         }
@@ -569,8 +1286,14 @@
         {
           "type": "translate",
           "es": "No tengo tiempo.",
-          "answers": ["I don't have time.", "I do not have time."],
-          "explanation": "Have se niega con don't en inglés americano."
+          "answers": [
+            "I don't have time.",
+            "I do not have time.",
+            "I haven't got time.",
+            "I have not got time.",
+            "I have no time."
+          ],
+          "explanation": "Have como verbo normal se niega con don't + have. En británico también se dice I haven't got time."
         },
         {
           "type": "choice",
@@ -583,6 +1306,94 @@
           "type": "translate",
           "es": "¿Hablas español?",
           "answers": ["Do you speak Spanish?"]
+        },
+        {
+          "type": "choice",
+          "prompt": "What ___ your brother do? He's a mechanic.",
+          "options": ["is", "do", "does"],
+          "answer": 2,
+          "explanation": "What does he do? pregunta por la profesión; your brother = he → does."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ you tired after work?",
+          "options": ["Do", "Does", "Are", "Is"],
+          "answer": 2,
+          "explanation": "Tired va con to be: Are you tired? No se usa do con to be."
+        },
+        {
+          "type": "choice",
+          "prompt": "Do you like tennis? Yes, ___.",
+          "options": ["I like", "I am", "I does", "I do"],
+          "answer": 3,
+          "explanation": "La respuesta corta repite el auxiliar de la pregunta: Yes, I do."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ your sister live near here?",
+          "answers": ["Does"],
+          "explanation": "Your sister = she: la pregunta empieza con Does."
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (not / watch) TV in the morning.",
+          "answers": ["don't watch", "do not watch"],
+          "explanation": "We niega con don't + verbo en forma base."
+        },
+        {
+          "type": "order",
+          "es": "¿Con quién vives?",
+          "words": ["Who", "do", "you", "live", "with?"],
+          "explanation": "La preposición (with) va al final de la pregunta."
+        },
+        {
+          "type": "order",
+          "es": "Mi papá no toma café.",
+          "words": ["My", "dad", "doesn't", "drink", "coffee."],
+          "explanation": "Doesn't + forma base: drink, sin -s."
+        },
+        {
+          "type": "translate",
+          "es": "¿A qué se dedica tu mamá?",
+          "answers": [
+            "What does your mother do?",
+            "What does your mom do?",
+            "What does your mum do?",
+            "What's your mother's job?",
+            "What is your mother's job?",
+            "What's your mom's job?",
+            "What is your mom's job?",
+            "What's your mum's job?",
+            "What is your mum's job?"
+          ],
+          "explanation": "What does she do? pregunta por el trabajo; también vale What's her job?"
+        },
+        {
+          "type": "translate",
+          "es": "Ellos no viven en Lima.",
+          "answers": ["They don't live in Lima.", "They do not live in Lima."],
+          "explanation": "They niega con don't; el verbo queda en forma base."
+        },
+        {
+          "type": "spot",
+          "parts": ["Does", "your brother", "speaks", "English?"],
+          "answer": 2,
+          "correction": "speak",
+          "explanation": "Con does, la -s ya está en el auxiliar: Does he speak…?"
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "no like", "horror films."],
+          "answer": 1,
+          "correction": "don't like",
+          "explanation": "En inglés no se niega con no delante del verbo: I don't like."
+        },
+        {
+          "type": "spot",
+          "parts": ["Does", "they", "work", "at the weekend?"],
+          "answer": 0,
+          "correction": "Do",
+          "explanation": "They pregunta con Do; does solo va con he, she e it."
         }
       ]
     },
@@ -613,6 +1424,10 @@
             {
               "en": "There aren't any eggs.",
               "es": "No hay huevos."
+            },
+            {
+              "en": "Are there any good restaurants in your town?",
+              "es": "¿Hay buenos restaurantes en tu ciudad?"
             }
           ]
         },
@@ -633,6 +1448,10 @@
             {
               "en": "She's at the station.",
               "es": "Ella está en la estación."
+            },
+            {
+              "en": "I'm at home tonight.",
+              "es": "Esta noche estoy en casa."
             }
           ],
           "table": {
@@ -670,8 +1489,111 @@
             {
               "en": "Is there a bus stop near here?",
               "es": "¿Hay una parada de autobús cerca de aquí?"
+            },
+            {
+              "en": "There's a big tree behind our house.",
+              "es": "Hay un árbol grande detrás de nuestra casa."
             }
           ]
+        },
+        {
+          "heading": "Hay frente a está: there is o it is",
+          "body": [
+            "There is / there are presenta algo nuevo y dice que existe en un lugar: There's a bank near here (hay un banco). Para decir dónde está algo que ya conocemos se usa el sujeto + to be: The bank is next to the hotel (el banco está al lado del hotel). Y para describir algo que ya mencionamos, it: There's a café on the corner. It's very nice.",
+            "El error típico de los hispanohablantes es traducir «hay» por it has o it is: «In my city it has a big park» ✗. Lo correcto es There is a big park in my city. En pasado, «había / hubo» es there was (singular) y there were (plural)."
+          ],
+          "examples": [
+            {
+              "en": "There's a new café on my street. It's very small.",
+              "es": "Hay un café nuevo en mi calle. Es muy pequeño."
+            },
+            {
+              "en": "Where's the bathroom? It's upstairs.",
+              "es": "¿Dónde está el baño? Está arriba."
+            },
+            {
+              "en": "There was a problem with the car.",
+              "es": "Hubo un problema con el auto."
+            },
+            {
+              "en": "There were a lot of people at the concert.",
+              "es": "Había mucha gente en el concierto."
+            }
+          ],
+          "table": {
+            "headers": ["Quiero decir…", "En inglés"],
+            "rows": [
+              ["Hay un parque.", "There's a park."],
+              ["El parque está cerca.", "The park is near here."],
+              ["Hay dos parques.", "There are two parks."],
+              ["Había un parque.", "There was a park."]
+            ]
+          },
+          "tip": "«Hay» nunca es it has ni it is: hay = there is / there are."
+        },
+        {
+          "heading": "Some, any, no y a lot of",
+          "body": [
+            "Some (algo de, unos) va en frases afirmativas y en ofrecimientos o peticiones: There's some cheese. Would you like some tea? Any va en negativas y preguntas: Is there any milk? There aren't any chairs.",
+            "There's no + sustantivo equivale a there isn't any: There's no sugar = There isn't any sugar. No se combina con not: «There isn't no sugar» es una doble negación incorrecta en inglés estándar (en español sí decimos «no hay nada»). Para cantidades grandes se usa a lot of: There are a lot of trees.",
+            "Con una lista, there is concuerda con el primer sustantivo: There's a table and two chairs. En la conversación mucha gente dice there's también con plural (there's two chairs), pero en un examen escribe there are."
+          ],
+          "examples": [
+            {
+              "en": "There's some bread in the kitchen.",
+              "es": "Hay pan en la cocina."
+            },
+            {
+              "en": "Is there any sugar? No, there's no sugar.",
+              "es": "¿Hay azúcar? No, no hay azúcar."
+            },
+            {
+              "en": "There are a lot of shops in the centre.",
+              "es": "Hay muchas tiendas en el centro."
+            },
+            {
+              "en": "There's a sofa and two armchairs in the living room.",
+              "es": "Hay un sofá y dos sillones en la sala."
+            }
+          ],
+          "table": {
+            "headers": ["Tipo de frase", "Contables (plural)", "Incontables"],
+            "rows": [
+              ["afirmativa", "There are some eggs.", "There's some milk."],
+              ["negativa", "There aren't any eggs.", "There isn't any milk."],
+              ["pregunta", "Are there any eggs?", "Is there any milk?"]
+            ]
+          }
+        },
+        {
+          "heading": "Errores típicos con in, on y at",
+          "body": [
+            "El español usa «en» para casi todo: en la mesa, en la caja, en la estación. El inglés distingue: on the table (encima), in the box (dentro), at the station (en ese punto). Pregúntate si es una superficie, un interior o un punto en el mapa.",
+            "Expresiones fijas que conviene memorizar: in bed, in the car, in a taxi, pero on the bus, on the train, on the plane; on the left / on the right; at the top / at the bottom. Con arrive se usa at para un lugar concreto (arrive at the airport) e in para una ciudad o un país (arrive in Madrid), nunca «arrive to»."
+          ],
+          "examples": [
+            {
+              "en": "She's on the bus now.",
+              "es": "Ahora está en el autobús."
+            },
+            {
+              "en": "The children are in bed.",
+              "es": "Los niños están en la cama."
+            },
+            {
+              "en": "The bathroom is on the left.",
+              "es": "El baño está a la izquierda."
+            },
+            {
+              "en": "We arrived in London at night.",
+              "es": "Llegamos a Londres de noche."
+            },
+            {
+              "en": "Wait for me at the entrance.",
+              "es": "Espérame en la entrada."
+            }
+          ],
+          "tip": "On the bus, on the train, on the plane; pero in the car y in a taxi."
         }
       ],
       "exercises": [
@@ -723,6 +1645,93 @@
           "type": "translate",
           "es": "Hay dos sillas en la cocina.",
           "answers": ["There are two chairs in the kitchen."]
+        },
+        {
+          "type": "choice",
+          "prompt": "___ a big park near my house. It's very beautiful.",
+          "options": ["It has", "It's", "There's", "Has"],
+          "answer": 2,
+          "explanation": "«Hay» se dice there is (there's), nunca it has ni it is."
+        },
+        {
+          "type": "choice",
+          "prompt": "There ___ a table and four chairs in the kitchen.",
+          "options": ["is", "are", "be"],
+          "answer": 0,
+          "explanation": "En una lista, there is concuerda con el primer sustantivo: a table (singular)."
+        },
+        {
+          "type": "choice",
+          "prompt": "She's ___ the bus right now.",
+          "options": ["in", "at", "by", "on"],
+          "answer": 3,
+          "explanation": "Con los transportes públicos se usa on: on the bus, on the train."
+        },
+        {
+          "type": "fill",
+          "prompt": "There isn't ___ cheese in the fridge. (some / any)",
+          "answers": ["any"],
+          "explanation": "En frases negativas se usa any."
+        },
+        {
+          "type": "fill",
+          "prompt": "There ___ (be, pasado) a lot of people at the party last night.",
+          "answers": ["were"],
+          "explanation": "Pasado con plural (a lot of people): there were."
+        },
+        {
+          "type": "order",
+          "es": "¿Hay un cajero automático cerca de aquí?",
+          "words": ["Is", "there", "an", "ATM", "near", "here?"],
+          "explanation": "Pregunta: Is there…? ATM se pronuncia «ei-ti-em», con vocal: an."
+        },
+        {
+          "type": "translate",
+          "es": "Hay un gato debajo de la mesa.",
+          "answers": ["There is a cat under the table.", "There's a cat under the table."],
+          "explanation": "Hay + singular = there is; debajo de = under."
+        },
+        {
+          "type": "translate",
+          "es": "El banco está enfrente del parque.",
+          "answers": [
+            "The bank is opposite the park.",
+            "The bank's opposite the park.",
+            "The bank is across from the park.",
+            "The bank's across from the park.",
+            "The bank is in front of the park.",
+            "The bank's in front of the park."
+          ],
+          "explanation": "Para decir dónde está algo concreto: sujeto + is. Enfrente de = opposite (británico) o across from (americano)."
+        },
+        {
+          "type": "spot",
+          "parts": ["In my town", "it has", "a very old", "church."],
+          "answer": 1,
+          "correction": "there is",
+          "explanation": "«Hay» es there is, no it has: In my town there is a very old church."
+        },
+        {
+          "type": "spot",
+          "parts": ["There", "are", "a big supermarket", "near my house."],
+          "answer": 1,
+          "correction": "is",
+          "explanation": "A big supermarket es singular: there is."
+        },
+        {
+          "type": "spot",
+          "parts": ["My keys", "are", "in", "the table."],
+          "answer": 2,
+          "correction": "on",
+          "explanation": "Sobre una superficie se usa on: on the table."
+        },
+        {
+          "type": "transform",
+          "original": "Our house has three bedrooms.",
+          "keyword": "THERE",
+          "prompt": "___ three bedrooms in our house.",
+          "answers": ["There are"],
+          "explanation": "Tener (una casa) tres dormitorios = hay tres dormitorios: there are + plural."
         }
       ]
     },
@@ -744,11 +1753,11 @@
             },
             {
               "en": "She can't drive.",
-              "es": "Ella no sabe conducir."
+              "es": "Ella no sabe manejar."
             },
             {
               "en": "We can meet tomorrow.",
-              "es": "Podemos quedar mañana."
+              "es": "Podemos vernos mañana."
             },
             {
               "en": "Can your brother play chess?",
@@ -757,6 +1766,10 @@
             {
               "en": "I can't hear you.",
               "es": "No te oigo."
+            },
+            {
+              "en": "My grandmother can't use a computer.",
+              "es": "Mi abuela no sabe usar una computadora."
             }
           ],
           "tip": "Nunca se añade -s ni to: she can sings y she can to sing son errores."
@@ -779,12 +1792,16 @@
             {
               "en": "Could you repeat that?",
               "es": "¿Podría repetirlo?"
+            },
+            {
+              "en": "Can you speak more slowly, please?",
+              "es": "¿Puedes hablar más despacio, por favor?"
             }
           ]
         },
         {
           "heading": "Permiso",
-          "body": ["Can también pide o da permiso: Can I sit here? You can't park here (no se puede aparcar aquí)."],
+          "body": ["Can también pide o da permiso: Can I sit here? You can't park here (aquí no se puede estacionar)."],
           "examples": [
             {
               "en": "Can I open the window?",
@@ -793,8 +1810,106 @@
             {
               "en": "You can't smoke here.",
               "es": "Aquí no se puede fumar."
+            },
+            {
+              "en": "Can we go now? Yes, you can.",
+              "es": "¿Podemos irnos ya? Sí."
+            },
+            {
+              "en": "You can use my phone.",
+              "es": "Puedes usar mi teléfono."
             }
           ]
+        },
+        {
+          "heading": "Errores típicos con can",
+          "body": [
+            "Can es un verbo modal: no lleva -s, no usa do para preguntar ni para negar y va seguido del verbo sin to. Por eso son errores She cans swim, Do you can help me? y I don't can come. Lo correcto es She can swim, Can you help me? e I can't come.",
+            "En español distinguimos «saber» y «poder» (sé nadar / puedo nadar); en inglés los dos son can: I can swim. Pero «saber» en el sentido de conocer un dato no es can sino know: I know the answer. Y con los sentidos el inglés usa can donde el español no pone nada: I can see the sea (veo el mar), Can you hear me? (¿me oyes?)."
+          ],
+          "examples": [
+            {
+              "en": "I can see the mountains from my window.",
+              "es": "Veo las montañas desde mi ventana."
+            },
+            {
+              "en": "Can you hear the music?",
+              "es": "¿Oyes la música?"
+            },
+            {
+              "en": "I know his phone number.",
+              "es": "Sé su número de teléfono."
+            },
+            {
+              "en": "He can't come to the meeting.",
+              "es": "Él no puede venir a la reunión."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto ✗", "Correcto ✓"],
+            "rows": [
+              ["She cans dance.", "She can dance."],
+              ["He can to drive.", "He can drive."],
+              ["Do you can come?", "Can you come?"],
+              ["I don't can swim.", "I can't swim."],
+              ["She can sings.", "She can sing."]
+            ]
+          }
+        },
+        {
+          "heading": "Cómo suena: can frente a can't",
+          "body": [
+            "En la frase afirmativa, can casi no se oye: I can swim suena «ai kən suím», con una vocal muy débil, y el acento cae en el verbo. En la negativa, can't se pronuncia fuerte: I CAN'T swim. Como la t final apenas suena, muchas veces la diferencia entre sí y no está en ese acento.",
+            "En inglés británico can't suena «kaant», con a larga; en americano, «kænt». En las respuestas cortas, can sí suena completo: Yes, I can."
+          ],
+          "examples": [
+            {
+              "en": "I can cook, but I can't bake cakes.",
+              "es": "Sé cocinar, pero no sé hacer pasteles."
+            },
+            {
+              "en": "Can you ski? Yes, I can.",
+              "es": "¿Sabes esquiar? Sí."
+            },
+            {
+              "en": "Sorry, I can't talk now.",
+              "es": "Perdón, ahora no puedo hablar."
+            }
+          ],
+          "tip": "Si dudas al escuchar, fíjate en el acento: si el verbo es la palabra más fuerte, suele ser can; si can't suena con fuerza, es negación."
+        },
+        {
+          "heading": "Pedir y ofrecer: can, could y may",
+          "body": [
+            "Para pedir algo: Can I…? (normal), Could I…? (más amable) y May I…? (formal). Para pedir que otra persona haga algo: Can you…? y Could you…? Se responde Sure!, Of course, Yes, no problem o Sorry, I can't.",
+            "Para ofrecer ayuda se dice Can I help you? (lo típico en las tiendas) o, en británico, Shall I…? Con please la petición suena más educada; sin please, Can you…? puede sonar brusco."
+          ],
+          "examples": [
+            {
+              "en": "Could I have the menu, please? Of course.",
+              "es": "¿Me podría traer el menú, por favor? Claro."
+            },
+            {
+              "en": "May I come in?",
+              "es": "¿Puedo pasar?"
+            },
+            {
+              "en": "Could you close the door, please? Sure.",
+              "es": "¿Podrías cerrar la puerta, por favor? Claro."
+            },
+            {
+              "en": "Can I help you? Yes, I'm looking for a jacket.",
+              "es": "¿Te puedo ayudar? Sí, busco una chaqueta."
+            }
+          ],
+          "table": {
+            "headers": ["Situación", "Normal", "Más amable / formal"],
+            "rows": [
+              ["pedir algo", "Can I have…?", "Could I have…? / May I have…?"],
+              ["pedir un favor", "Can you…?", "Could you…, please?"],
+              ["pedir permiso", "Can I…?", "May I…?"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -844,6 +1959,93 @@
           "type": "translate",
           "es": "¿Puedo sentarme aquí?",
           "answers": ["Can I sit here?", "May I sit here?", "Could I sit here?"]
+        },
+        {
+          "type": "choice",
+          "prompt": "My little brother is three. He ___ read yet.",
+          "options": ["doesn't can", "can", "isn't", "can't"],
+          "answer": 3,
+          "explanation": "Can se niega con can't, sin do."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ I use your pen, please? Sure.",
+          "options": ["Do", "Am", "May"],
+          "answer": 2,
+          "explanation": "Para pedir permiso con educación: May I…? (o Can I…?)."
+        },
+        {
+          "type": "choice",
+          "prompt": "Which sentence is correct?",
+          "options": ["She can dance.", "She cans dance.", "She can to dance.", "She can dances."],
+          "answer": 0,
+          "explanation": "Can no lleva -s, ni to, y el verbo que sigue va en forma base."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ you hear me? The line is very bad.",
+          "answers": ["Can", "Could"],
+          "explanation": "Con los sentidos se usa can: Can you hear me?"
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (can, negación) see the stage from here.",
+          "answers": ["can't", "cannot", "can not"],
+          "explanation": "Negación de can: can't (cannot)."
+        },
+        {
+          "type": "order",
+          "es": "¿Sabes tocar la guitarra?",
+          "words": ["Can", "you", "play", "the", "guitar?"],
+          "explanation": "Can va delante del sujeto; los instrumentos llevan the."
+        },
+        {
+          "type": "translate",
+          "es": "Mi hermana sabe hablar francés.",
+          "answers": ["My sister can speak French.", "My sister speaks French."],
+          "explanation": "«Saber hacer algo» = can + verbo."
+        },
+        {
+          "type": "translate",
+          "es": "¿Podrías abrir la ventana, por favor?",
+          "answers": [
+            "Could you open the window, please?",
+            "Could you open the window please?",
+            "Could you please open the window?",
+            "Can you open the window, please?",
+            "Can you open the window please?",
+            "Can you please open the window?"
+          ],
+          "explanation": "Pedir un favor con educación: Could you…, please?"
+        },
+        {
+          "type": "spot",
+          "parts": ["My brother", "cans", "play", "the piano."],
+          "answer": 1,
+          "correction": "can",
+          "explanation": "Can es igual para todas las personas: nunca lleva -s."
+        },
+        {
+          "type": "spot",
+          "parts": ["Do you can", "help me", "with my homework?"],
+          "answer": 0,
+          "correction": "Can you",
+          "explanation": "Can no usa do: para preguntar, se pone delante del sujeto."
+        },
+        {
+          "type": "spot",
+          "parts": ["I can", "speak English,", "but I can't", "to write it", "very well."],
+          "answer": 3,
+          "correction": "write it",
+          "explanation": "Después de can y can't el verbo va sin to."
+        },
+        {
+          "type": "transform",
+          "original": "My sister is a good swimmer.",
+          "keyword": "SWIM",
+          "prompt": "My sister ___ well.",
+          "answers": ["can swim"],
+          "explanation": "Ser buen nadador = saber nadar bien: can + swim."
         }
       ]
     },
@@ -882,6 +2084,10 @@
             {
               "en": "The kids are doing their homework.",
               "es": "Los niños están haciendo la tarea."
+            },
+            {
+              "en": "We're staying with my parents this month.",
+              "es": "Este mes nos quedamos con mis papás."
             }
           ],
           "table": {
@@ -912,6 +2118,10 @@
             {
               "en": "What are you doing?",
               "es": "¿Qué estás haciendo?"
+            },
+            {
+              "en": "She isn't sleeping; she's reading.",
+              "es": "No está durmiendo; está leyendo."
             }
           ]
         },
@@ -933,9 +2143,109 @@
             {
               "en": "I know the answer.",
               "es": "Sé la respuesta."
+            },
+            {
+              "en": "He usually walks to work, but this week he's driving.",
+              "es": "Normalmente va al trabajo caminando, pero esta semana va en auto."
             }
           ],
           "tip": "Now, right now, at the moment y today suelen pedir presente continuo."
+        },
+        {
+          "heading": "Errores típicos de hispanohablantes",
+          "body": [
+            "El error más común es olvidar to be: «I working» o «She cooking» ✗. El presente continuo siempre tiene dos piezas: am / is / are + verbo en -ing (I'm working, She's cooking).",
+            "El segundo es usar el presente simple para lo que pasa ahora, porque en español «¿Qué haces?» sirve para los dos casos. En inglés, What do you do? pregunta por tu trabajo; What are you doing? por lo que haces en este momento.",
+            "Y al revés: los verbos de estado (like, love, hate, want, need, know, understand, remember, believe) no suelen ir en -ing aunque hablemos de ahora: I need help now, no «I'm needing help»."
+          ],
+          "examples": [
+            {
+              "en": "What are you doing? I'm looking for my keys.",
+              "es": "¿Qué haces? Estoy buscando mis llaves."
+            },
+            {
+              "en": "I need a new laptop.",
+              "es": "Necesito una computadora portátil nueva."
+            },
+            {
+              "en": "Do you remember her name?",
+              "es": "¿Te acuerdas de su nombre?"
+            },
+            {
+              "en": "Look! The bus is coming.",
+              "es": "¡Mira! Ya viene el autobús."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto ✗", "Correcto ✓"],
+            "rows": [
+              ["I working now.", "I'm working now."],
+              ["Look! It rains.", "Look! It's raining."],
+              ["I'm wanting a coffee.", "I want a coffee."],
+              ["She is studing.", "She is studying."]
+            ]
+          }
+        },
+        {
+          "heading": "Ortografía del -ing paso a paso",
+          "body": [
+            "Regla general: verbo + -ing (play → playing, read → reading). Si termina en -e muda, se quita la e (make → making, come → coming), pero no en be ni see (being, seeing). Si termina en -ie, cambia a -y (lie → lying, die → dying).",
+            "Se dobla la consonante final cuando el verbo termina en consonante + vocal + consonante y el acento cae en esa última sílaba: run → running, swim → swimming, stop → stopping, begin → beginning. No se dobla w, x ni y (snow → snowing, fix → fixing), ni cuando el acento no cae al final: visit → visiting, listen → listening."
+          ],
+          "examples": [
+            {
+              "en": "The children are swimming in the lake.",
+              "es": "Los niños están nadando en el lago."
+            },
+            {
+              "en": "Why are you lying on the floor?",
+              "es": "¿Por qué estás acostado en el piso?"
+            },
+            {
+              "en": "I'm making a cake for Ana.",
+              "es": "Estoy haciendo un pastel para Ana."
+            },
+            {
+              "en": "It's getting dark.",
+              "es": "Está oscureciendo."
+            }
+          ],
+          "table": {
+            "headers": ["Regla", "Ejemplos"],
+            "rows": [
+              ["+ -ing", "play → playing, eat → eating"],
+              ["-e muda: se quita", "make → making, dance → dancing"],
+              ["-ie → -ying", "lie → lying, die → dying"],
+              ["consonante doble", "swim → swimming, get → getting"],
+              ["sin doblar", "visit → visiting, snow → snowing"]
+            ]
+          }
+        },
+        {
+          "heading": "Planes ya decididos con el presente continuo",
+          "body": [
+            "El presente continuo también sirve para planes del futuro cercano que ya están organizados (con fecha, hora o entradas compradas): I'm meeting Tom tomorrow. We're flying to Cancún on Friday. Casi siempre lleva una expresión de tiempo futuro: tonight, tomorrow, next week, on Saturday.",
+            "En español pasa algo parecido con el presente («Mañana ceno con Tom»), pero en inglés no se usa el presente simple para esto: «Tomorrow I meet Tom» ✗. La pregunta típica para hablar de planes es What are you doing this weekend?"
+          ],
+          "examples": [
+            {
+              "en": "What are you doing this weekend?",
+              "es": "¿Qué vas a hacer este fin de semana?"
+            },
+            {
+              "en": "I'm having dinner with my parents tonight.",
+              "es": "Esta noche ceno con mis papás."
+            },
+            {
+              "en": "We're flying to Cancún on Friday.",
+              "es": "Volamos a Cancún el viernes."
+            },
+            {
+              "en": "She isn't coming to the party tomorrow.",
+              "es": "Ella no viene a la fiesta mañana."
+            }
+          ],
+          "tip": "Sin expresión de tiempo, I'm meeting Tom se entiende como «ahora mismo»: añade tomorrow, tonight u on Monday para hablar del futuro."
         }
       ],
       "exercises": [
@@ -985,6 +2295,103 @@
           "type": "translate",
           "es": "Están esperando el autobús.",
           "answers": ["They are waiting for the bus.", "They're waiting for the bus."]
+        },
+        {
+          "type": "choice",
+          "prompt": "Be quiet! The children ___.",
+          "options": ["sleep", "sleeps", "are sleeping", "is sleep"],
+          "answer": 2,
+          "explanation": "Be quiet! indica que ocurre ahora: are + sleeping."
+        },
+        {
+          "type": "choice",
+          "prompt": "What ___ this weekend? I'm visiting my grandparents.",
+          "options": ["are you doing", "do you do", "you are doing"],
+          "answer": 0,
+          "explanation": "Planes decididos: presente continuo, con el orden de pregunta are + you + -ing."
+        },
+        {
+          "type": "choice",
+          "prompt": "She ___ the answer to this question.",
+          "options": ["is knowing", "know", "knowing", "knows"],
+          "answer": 3,
+          "explanation": "Know es un verbo de estado: no va en continuo. She → knows."
+        },
+        {
+          "type": "fill",
+          "prompt": "We ___ (swim) in the sea right now.",
+          "answers": ["are swimming", "'re swimming"],
+          "explanation": "Swim dobla la m: swimming."
+        },
+        {
+          "type": "fill",
+          "prompt": "He ___ (not / listen) to me at the moment.",
+          "answers": ["isn't listening", "is not listening"],
+          "explanation": "Negación: is not (isn't) + listening; listen no dobla la n porque el acento va al principio."
+        },
+        {
+          "type": "fill",
+          "prompt": "I'm ___ (make) a sandwich. Do you want one?",
+          "answers": ["making"],
+          "explanation": "Make pierde la e muda: making."
+        },
+        {
+          "type": "order",
+          "es": "¿Por qué estás llorando?",
+          "words": ["Why", "are", "you", "crying?"],
+          "explanation": "Palabra interrogativa + are + sujeto + -ing."
+        },
+        {
+          "type": "translate",
+          "es": "Ella está hablando por teléfono.",
+          "answers": [
+            "She is talking on the phone.",
+            "She's talking on the phone.",
+            "She is speaking on the phone.",
+            "She's speaking on the phone."
+          ],
+          "explanation": "Por teléfono = on the phone."
+        },
+        {
+          "type": "translate",
+          "es": "Mañana voy al dentista.",
+          "answers": [
+            "I'm going to the dentist tomorrow.",
+            "I am going to the dentist tomorrow.",
+            "Tomorrow I'm going to the dentist.",
+            "Tomorrow I am going to the dentist.",
+            "I'm going to the dentist's tomorrow.",
+            "I am going to the dentist's tomorrow."
+          ],
+          "explanation": "Un plan decidido para mañana: presente continuo (I'm going…), no presente simple."
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "working", "in the garden", "right now."],
+          "answer": 1,
+          "correction": "am working",
+          "explanation": "El presente continuo necesita to be: I am (I'm) working."
+        },
+        {
+          "type": "spot",
+          "parts": ["Right now", "my friends", "are swiming", "in the pool."],
+          "answer": 2,
+          "correction": "are swimming",
+          "explanation": "Swim termina en vocal + consonante con acento: se dobla la m."
+        },
+        {
+          "type": "spot",
+          "parts": ["Sorry,", "I can't talk.", "I have", "dinner", "right now."],
+          "answer": 2,
+          "correction": "I'm having",
+          "explanation": "Right now pide presente continuo. Have dinner es una acción, así que sí admite -ing."
+        },
+        {
+          "type": "spot",
+          "parts": ["I'm not understanding", "this exercise.", "Can you help me?"],
+          "answer": 0,
+          "correction": "I don't understand",
+          "explanation": "Understand es un verbo de estado: no se usa en continuo."
         }
       ]
     },
@@ -1014,6 +2421,10 @@
             {
               "en": "We weren't tired.",
               "es": "No estábamos cansados."
+            },
+            {
+              "en": "Where were you last night?",
+              "es": "¿Dónde estabas anoche?"
             }
           ]
         },
@@ -1035,6 +2446,10 @@
             {
               "en": "We stopped at a café.",
               "es": "Paramos en un café."
+            },
+            {
+              "en": "We watched a film and played cards.",
+              "es": "Vimos una película y jugamos a las cartas."
             }
           ],
           "table": {
@@ -1078,9 +2493,123 @@
             {
               "en": "She didn't come to class.",
               "es": "Ella no vino a clase."
+            },
+            {
+              "en": "I bought this jacket last month.",
+              "es": "Compré esta chaqueta el mes pasado."
             }
           ],
           "tip": "Con did el verbo vuelve a la forma base: Did you went? es un error; lo correcto es Did you go?"
+        },
+        {
+          "heading": "Más verbos irregulares frecuentes",
+          "body": [
+            "No hay regla para los irregulares: hay que aprenderlos de memoria, empezando por los más usados. La buena noticia es que el pasado es igual para todas las personas (I went, she went, they went) y que con did se vuelve a la forma base.",
+            "Agruparlos ayuda a recordarlos: algunos cambian la vocal (drink → drank, swim → swam, begin → began), otros terminan en -ought o -aught (buy → bought, think → thought, bring → brought, teach → taught) y unos pocos no cambian (put → put, cut → cut, cost → cost)."
+          ],
+          "examples": [
+            {
+              "en": "She wrote a letter to her grandmother.",
+              "es": "Ella le escribió una carta a su abuela."
+            },
+            {
+              "en": "I met my best friend at school.",
+              "es": "Conocí a mi mejor amiga en la escuela."
+            },
+            {
+              "en": "They left at midnight.",
+              "es": "Se fueron a medianoche."
+            },
+            {
+              "en": "We thought it was a good idea.",
+              "es": "Pensamos que era una buena idea."
+            },
+            {
+              "en": "Our holiday cost a lot of money last year.",
+              "es": "Nuestras vacaciones costaron mucho dinero el año pasado."
+            }
+          ],
+          "table": {
+            "headers": ["Verbo", "Pasado", "Significado"],
+            "rows": [
+              ["buy", "bought", "comprar"],
+              ["think", "thought", "pensar"],
+              ["bring", "brought", "traer"],
+              ["drink", "drank", "beber"],
+              ["write", "wrote", "escribir"],
+              ["leave", "left", "irse, salir"],
+              ["meet", "met", "conocer, encontrarse con"],
+              ["find", "found", "encontrar"],
+              ["give", "gave", "dar"],
+              ["speak", "spoke", "hablar"],
+              ["put", "put", "poner"]
+            ]
+          }
+        },
+        {
+          "heading": "Errores típicos: did, was y la pronunciación de -ed",
+          "body": [
+            "Los hispanohablantes suelen marcar el pasado dos veces: Did you saw…? ✗, I didn't went ✗. El pasado ya está en did; el verbo principal va en forma base: Did you see…?, I didn't go. Tampoco se usa did con was / were: Were you tired? (no «Did you were tired?»).",
+            "Otro error es pronunciar siempre la -ed como una sílaba. Solo suena /id/ después de t o d (wanted, needed, visited). Después de sonidos sordos suena /t/ (worked, stopped, watched) y en los demás casos /d/ (played, lived, called). Así, worked tiene una sola sílaba: «workt».",
+            "Ojo con «nacer»: en inglés es to be born, siempre con was / were: I was born in 1995 (nací en 1995), no «I born»."
+          ],
+          "examples": [
+            {
+              "en": "Did you call your mother? No, I didn't.",
+              "es": "¿Llamaste a tu mamá? No."
+            },
+            {
+              "en": "Were you at work yesterday?",
+              "es": "¿Estuviste en el trabajo ayer?"
+            },
+            {
+              "en": "I was born in Bogotá.",
+              "es": "Nací en Bogotá."
+            },
+            {
+              "en": "We visited my aunt and uncle.",
+              "es": "Visitamos a mis tíos."
+            }
+          ],
+          "table": {
+            "headers": ["Sonido de -ed", "Cuándo", "Ejemplos"],
+            "rows": [
+              ["/id/", "tras t o d", "wanted, needed, visited"],
+              ["/t/", "tras p, k, f, s, sh, ch", "stopped, worked, watched"],
+              ["/d/", "en los demás casos", "played, lived, opened"]
+            ]
+          },
+          "tip": "Did + verbo base: Did you go?, She didn't buy. Si ves did, el otro verbo no lleva -ed ni forma irregular."
+        },
+        {
+          "heading": "Contar una historia: expresiones de tiempo",
+          "body": [
+            "Ago va detrás del período: two days ago (hace dos días), a long time ago. Last va sin the: last night, last Monday, last year. Yesterday se combina con partes del día (yesterday morning, yesterday afternoon), pero se dice last night, no «yesterday night».",
+            "Para ordenar los hechos usa first, then, after that y finally: First we had lunch, then we went to the museum. Las preguntas con palabra interrogativa siguen el orden de siempre: What did you do? Where did you go? Y con to be, sin did: How was your trip?"
+          ],
+          "examples": [
+            {
+              "en": "I saw her three weeks ago.",
+              "es": "La vi hace tres semanas."
+            },
+            {
+              "en": "First we had breakfast, then we went to the beach.",
+              "es": "Primero desayunamos y luego fuimos a la playa."
+            },
+            {
+              "en": "How was your weekend? It was great!",
+              "es": "¿Qué tal tu fin de semana? ¡Estuvo genial!"
+            },
+            {
+              "en": "Yesterday afternoon it rained a lot.",
+              "es": "Ayer por la tarde llovió mucho."
+            },
+            {
+              "en": "Where did you go on holiday?",
+              "es": "¿Adónde fuiste de vacaciones?"
+            }
+          ],
+          "tip": "Last night, no «yesterday night»; three days ago, no «ago three days»."
         }
       ],
       "exercises": [
@@ -1131,18 +2660,103 @@
           "type": "fill",
           "prompt": "___ you at the party? (pasado de to be)",
           "answers": ["Were"]
+        },
+        {
+          "type": "choice",
+          "prompt": "Where ___ you yesterday afternoon?",
+          "options": ["did", "was", "were", "are"],
+          "answer": 2,
+          "explanation": "Sin otro verbo, la pregunta es con to be en pasado: you → were."
+        },
+        {
+          "type": "choice",
+          "prompt": "I saw that film three weeks ___.",
+          "options": ["ago", "before", "last"],
+          "answer": 0,
+          "explanation": "«Hace tres semanas» = three weeks ago; ago va detrás del período."
+        },
+        {
+          "type": "choice",
+          "prompt": "Did she ___ the bus to work?",
+          "options": ["took", "takes", "taking", "take"],
+          "answer": 3,
+          "explanation": "Después de did, el verbo va en forma base."
+        },
+        {
+          "type": "fill",
+          "prompt": "They ___ (buy) a new car last month.",
+          "answers": ["bought"],
+          "explanation": "Buy es irregular: bought."
+        },
+        {
+          "type": "fill",
+          "prompt": "I ___ (be) born in 2001.",
+          "answers": ["was"],
+          "explanation": "«Nacer» es to be born: I was born."
+        },
+        {
+          "type": "fill",
+          "prompt": "Where ___ you go on holiday last year?",
+          "answers": ["did"],
+          "explanation": "Pregunta en pasado con un verbo normal (go): did."
+        },
+        {
+          "type": "order",
+          "es": "¿A qué hora llegaste a casa?",
+          "words": ["What", "time", "did", "you", "get", "home?"],
+          "explanation": "What time + did + sujeto + verbo base."
+        },
+        {
+          "type": "translate",
+          "es": "Nos conocimos hace dos años.",
+          "answers": ["We met two years ago."],
+          "explanation": "Meet → met; hace dos años = two years ago."
+        },
+        {
+          "type": "translate",
+          "es": "Ella no fue a la fiesta.",
+          "answers": ["She didn't go to the party.", "She did not go to the party."],
+          "explanation": "Didn't + forma base: go, no went."
+        },
+        {
+          "type": "spot",
+          "parts": ["Did", "you", "saw", "the match", "last night?"],
+          "answer": 2,
+          "correction": "see",
+          "explanation": "Con did el verbo va en forma base: Did you see…?"
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "didn't went", "to school", "yesterday", "because I was ill."],
+          "answer": 1,
+          "correction": "didn't go",
+          "explanation": "El pasado ya está en didn't: el verbo queda en forma base."
+        },
+        {
+          "type": "spot",
+          "parts": ["We", "visited", "my grandparents", "ago two weeks."],
+          "answer": 3,
+          "correction": "two weeks ago.",
+          "explanation": "Ago va detrás del período: two weeks ago."
+        },
+        {
+          "type": "spot",
+          "parts": ["Yesterday night", "we", "watched", "a very good film."],
+          "answer": 0,
+          "correction": "Last night",
+          "explanation": "«Anoche» es last night; yesterday solo va con morning, afternoon y evening."
         }
       ]
     },
     {
       "id": "posesivos-y-genitivo",
       "title": "Posesivos y el genitivo 's",
-      "summary": "Mi, tu, su… y «el coche de Ana» con apóstrofo.",
+      "summary": "Mi, tu, su… y «el auto de Ana» con apóstrofo.",
       "sections": [
         {
           "heading": "Adjetivos posesivos",
           "body": [
-            "Van delante del sustantivo y no cambian con el número: my (mi, mis), your (tu, su de usted), his (de él), her (de ella), its (de una cosa), our (nuestro), their (de ellos). Ojo: his/her dependen de quién posee, no de la cosa: her car (el coche de ella), his sister (la hermana de él)."
+            "Van delante del sustantivo y no cambian con el número: my (mi, mis), your (tu, su de usted), his (de él), her (de ella), its (de una cosa), our (nuestro), their (de ellos). Ojo: his/her dependen de quién posee, no de la cosa: her car (el auto de ella), his sister (la hermana de él)."
           ],
           "examples": [
             {
@@ -1160,6 +2774,10 @@
             {
               "en": "Our teacher is from Ireland.",
               "es": "Nuestra profesora es de Irlanda."
+            },
+            {
+              "en": "Their children go to my school.",
+              "es": "Sus hijos van a mi escuela."
             }
           ],
           "table": {
@@ -1192,6 +2810,10 @@
             {
               "en": "Our house is small; theirs is big.",
               "es": "Nuestra casa es pequeña; la suya es grande."
+            },
+            {
+              "en": "Is this coat yours or mine?",
+              "es": "¿Este abrigo es tuyo o mío?"
             }
           ],
           "tip": "Its (su, de una cosa) no lleva apóstrofo; it's es it is. Your (tu) frente a you're (tú eres)."
@@ -1199,7 +2821,7 @@
         {
           "heading": "El genitivo 's",
           "body": [
-            "Para decir de quién es algo se añade 's al poseedor: Ana's car (el coche de Ana), my parents' house (plural que termina en s: solo apóstrofo), the children's room (plural irregular: 's). Con cosas se prefiere of: the door of the car."
+            "Para decir de quién es algo se añade 's al poseedor: Ana's car (el auto de Ana), my parents' house (plural que termina en s: solo apóstrofo), the children's room (plural irregular: 's). Con cosas se prefiere of: the door of the car."
           ],
           "examples": [
             {
@@ -1217,8 +2839,111 @@
             {
               "en": "What's the name of this street?",
               "es": "¿Cómo se llama esta calle?"
+            },
+            {
+              "en": "We're going to Marta's party on Saturday.",
+              "es": "El sábado vamos a la fiesta de Marta."
             }
           ]
+        },
+        {
+          "heading": "Errores típicos: su de él, su de ella, su de ellos",
+          "body": [
+            "En español «su» sirve para él, ella, ellos, usted y ustedes, y concuerda con la cosa (su libro, sus libros). En inglés el posesivo cambia según quién posee y nunca según la cosa: John and his mother (Juan y su madre), Maria and her father (María y su padre), the students and their teacher. Error típico: «Maria loves his father» ✗ → Maria loves her father.",
+            "Los posesivos no tienen plural: my books, our friends (nunca «mys books»). Y el inglés usa posesivo con partes del cuerpo y ropa donde el español usa el artículo: She broke her arm (se rompió el brazo), Put on your coat (ponte el abrigo)."
+          ],
+          "examples": [
+            {
+              "en": "Maria lives with her father.",
+              "es": "María vive con su papá."
+            },
+            {
+              "en": "My grandfather and his dog go for a walk every day.",
+              "es": "Mi abuelo y su perro salen a pasear todos los días."
+            },
+            {
+              "en": "Take off your shoes, please.",
+              "es": "Quítate los zapatos, por favor."
+            },
+            {
+              "en": "The students love their teacher.",
+              "es": "Los estudiantes adoran a su profesor."
+            }
+          ],
+          "table": {
+            "headers": ["Español", "Inglés", "Por qué"],
+            "rows": [
+              ["Ana y su hermano", "Ana and her brother", "poseedora: ella"],
+              ["Luis y su hermana", "Luis and his sister", "poseedor: él"],
+              ["los niños y sus juguetes", "the children and their toys", "poseedores: ellos"],
+              ["Lávate las manos.", "Wash your hands.", "parte del cuerpo: posesivo"]
+            ]
+          }
+        },
+        {
+          "heading": "Más sobre el genitivo: 's, s' y of",
+          "body": [
+            "La 's se usa sobre todo con personas y animales: my friend's car, the dog's bed. Si el poseedor es un plural terminado en -s, solo se añade el apóstrofo: my parents' car, the girls' room. Si dos personas comparten la misma cosa, la 's va en la última: Tom and Ana's house.",
+            "Con cosas y lugares se prefiere of: the end of the film, the centre of the city, the name of the hotel. A menudo se omite el sustantivo cuando se entiende: at my aunt's (en casa de mi tía), at the doctor's (en el consultorio del médico).",
+            "Cuidado: 's puede ser posesivo (Peter's book), la contracción de is (Peter's tired = Peter is tired) o la de has (Peter's got a car). El contexto lo aclara."
+          ],
+          "examples": [
+            {
+              "en": "Tom and Ana's house is very modern.",
+              "es": "La casa de Tom y Ana es muy moderna."
+            },
+            {
+              "en": "The girls' bedroom is upstairs.",
+              "es": "El cuarto de las niñas está arriba."
+            },
+            {
+              "en": "I'm at my aunt's.",
+              "es": "Estoy en casa de mi tía."
+            },
+            {
+              "en": "The end of the film is sad.",
+              "es": "El final de la película es triste."
+            },
+            {
+              "en": "My brother's tired today.",
+              "es": "Mi hermano está cansado hoy."
+            }
+          ],
+          "table": {
+            "headers": ["Poseedor", "Forma", "Ejemplo"],
+            "rows": [
+              ["singular", "+ 's", "my sister's room"],
+              ["plural en -s", "+ '", "my sisters' room"],
+              ["plural irregular", "+ 's", "the children's toys"],
+              ["cosa o lugar", "the … of …", "the door of the house"]
+            ]
+          }
+        },
+        {
+          "heading": "Whose y los pronombres posesivos en la conversación",
+          "body": [
+            "Whose pregunta por el dueño y puede ir con el sustantivo o sin él: Whose bag is this? / Whose is this bag? Se responde con un pronombre posesivo o con 's: It's mine. It's Laura's. No confundas whose con who's (= who is): Who's that? (¿Quién es ese?). Suenan igual.",
+            "Los pronombres posesivos evitan repetir el sustantivo: Your phone is new; mine is old. Nunca llevan artículo ni sustantivo detrás («the mine» ✗, «mine book» ✗) y nunca llevan apóstrofo: yours, hers, ours, theirs (no «your's»)."
+          ],
+          "examples": [
+            {
+              "en": "Whose shoes are these? They're Pedro's.",
+              "es": "¿De quién son estos zapatos? Son de Pedro."
+            },
+            {
+              "en": "Who's that man? He's my neighbour.",
+              "es": "¿Quién es ese hombre? Es mi vecino."
+            },
+            {
+              "en": "My phone is old, but yours is new.",
+              "es": "Mi teléfono es viejo, pero el tuyo es nuevo."
+            },
+            {
+              "en": "These seats are ours.",
+              "es": "Estos asientos son nuestros."
+            }
+          ],
+          "tip": "Whose = de quién; who's = who is. Yours, hers, ours y theirs nunca llevan apóstrofo."
         }
       ],
       "exercises": [
@@ -1260,12 +2985,92 @@
         {
           "type": "translate",
           "es": "Esa es la casa de mis padres.",
-          "answers": ["That's my parents' house.", "That is my parents' house.", "That's my parents's house."]
+          "answers": ["That's my parents' house.", "That is my parents' house."]
         },
         {
           "type": "translate",
           "es": "¿De quién es este bolso?",
           "answers": ["Whose bag is this?", "Whose is this bag?"]
+        },
+        {
+          "type": "choice",
+          "prompt": "Carlos lives with ___ grandmother.",
+          "options": ["her", "their", "his", "its"],
+          "answer": 2,
+          "explanation": "El poseedor es Carlos (él): his, aunque la abuela sea mujer."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ that boy? He's my cousin.",
+          "options": ["Whose", "Who", "Who's"],
+          "answer": 2,
+          "explanation": "Who's = who is: ¿Quién es ese chico? Whose pregunta de quién es algo."
+        },
+        {
+          "type": "choice",
+          "prompt": "This isn't my umbrella. Mine is black. Is it ___?",
+          "options": ["yours", "your", "your's", "you"],
+          "answer": 0,
+          "explanation": "Sin sustantivo detrás se usa el pronombre posesivo yours, sin apóstrofo."
+        },
+        {
+          "type": "fill",
+          "prompt": "The ___ (girls, genitivo) bedroom is very big.",
+          "answers": ["girls'"],
+          "explanation": "Plural terminado en -s: solo se añade el apóstrofo (girls')."
+        },
+        {
+          "type": "fill",
+          "prompt": "Is this pen ___? (de ella, pronombre posesivo)",
+          "answers": ["hers"],
+          "explanation": "Pronombre posesivo de she: hers, sin apóstrofo."
+        },
+        {
+          "type": "order",
+          "es": "La casa de mis abuelos es muy antigua.",
+          "words": ["My", "grandparents'", "house", "is", "very", "old."],
+          "explanation": "Grandparents termina en -s: el genitivo es solo el apóstrofo."
+        },
+        {
+          "type": "translate",
+          "es": "Ana y su hermano viven en Quito.",
+          "answers": ["Ana and her brother live in Quito."],
+          "explanation": "El posesivo depende de Ana (ella): her brother."
+        },
+        {
+          "type": "translate",
+          "es": "Estos libros son míos.",
+          "answers": ["These books are mine."],
+          "explanation": "Sin sustantivo detrás: mine."
+        },
+        {
+          "type": "spot",
+          "parts": ["Maria", "loves", "his", "father", "very much."],
+          "answer": 2,
+          "correction": "her",
+          "explanation": "El posesivo concuerda con el poseedor (Maria, ella): her father."
+        },
+        {
+          "type": "spot",
+          "parts": ["Is", "this", "your's", "or mine?"],
+          "answer": 2,
+          "correction": "yours",
+          "explanation": "Los pronombres posesivos no llevan apóstrofo: yours."
+        },
+        {
+          "type": "spot",
+          "parts": ["The", "childrens'", "toys", "are everywhere."],
+          "answer": 1,
+          "correction": "children's",
+          "explanation": "Children es un plural irregular que no termina en -s: se añade 's."
+        },
+        {
+          "type": "transform",
+          "original": "This is Ana's car.",
+          "keyword": "HERS",
+          "prompt": "This car ___.",
+          "answers": ["is hers"],
+          "explanation": "El auto de Ana = el suyo (de ella): is hers."
         }
       ]
     },
@@ -1295,10 +3100,14 @@
             {
               "en": "Who are those people?",
               "es": "¿Quiénes son esas personas?"
+            },
+            {
+              "en": "Is that your car over there?",
+              "es": "¿Ese de allá es tu auto?"
             }
           ],
           "table": {
-            "headers": ["", "Cerca", "Lejos"],
+            "headers": ["Número", "Cerca", "Lejos"],
             "rows": [
               ["singular", "this", "that"],
               ["plural", "these", "those"]
@@ -1326,6 +3135,10 @@
             {
               "en": "We haven't got much time.",
               "es": "No tenemos mucho tiempo."
+            },
+            {
+              "en": "Has your brother got a girlfriend? No, he hasn't.",
+              "es": "¿Tu hermano tiene novia? No."
             }
           ],
           "tip": "Have got solo existe en presente: en pasado se usa had (I had a car)."
@@ -1347,8 +3160,109 @@
             {
               "en": "They've got a beautiful garden.",
               "es": "Tienen un jardín precioso."
+            },
+            {
+              "en": "She's got curly hair and brown eyes.",
+              "es": "Ella tiene el pelo rizado y los ojos cafés."
             }
           ]
+        },
+        {
+          "heading": "This y that en la conversación",
+          "body": [
+            "This y that no solo señalan objetos. Al presentar a alguien se usa this: This is my friend Ana. Al teléfono, para decir quién habla: Hello, this is Mark (Hola, habla Mark). Con el tiempo, this es el de ahora (this morning, this week) y that, uno lejano (that day, en una historia).",
+            "That también se refiere a lo que alguien acaba de decir: That's a good idea! That's right. That's OK. Y para no repetir el sustantivo se usa one: I don't like this shirt. I prefer that one."
+          ],
+          "examples": [
+            {
+              "en": "Hello, this is Mark. Can I speak to Julia?",
+              "es": "Hola, habla Mark. ¿Puedo hablar con Julia?"
+            },
+            {
+              "en": "That's a great idea!",
+              "es": "¡Es una gran idea!"
+            },
+            {
+              "en": "I don't like this shirt. I prefer that one.",
+              "es": "No me gusta esta camisa. Prefiero aquella."
+            },
+            {
+              "en": "What are you doing this evening?",
+              "es": "¿Qué haces esta noche?"
+            }
+          ],
+          "tip": "Al presentar a dos personas: This is Ana and this is Carlos, o These are my friends, Ana and Carlos."
+        },
+        {
+          "heading": "Have got frente a have: preguntas y negaciones",
+          "body": [
+            "Have got y have significan lo mismo para posesiones, familia, aspecto y enfermedades, pero se construyen distinto. Have got funciona como to be: el auxiliar es have y se invierte o se niega directamente (Have you got…?, I haven't got). Have como verbo normal usa do: Do you have…?, I don't have.",
+            "No mezcles los dos sistemas: «Do you have got…?» ✗, «I don't have got» ✗. Y have got no sirve para acciones: have breakfast, have a shower o have a good time siempre van con have (I have breakfast at 8, nunca «I've got breakfast»).",
+            "En las respuestas cortas se usa solo have: Have you got a car? Yes, I have (no «Yes, I've got»)."
+          ],
+          "examples": [
+            {
+              "en": "Do you have any brothers or sisters?",
+              "es": "¿Tienes hermanos?"
+            },
+            {
+              "en": "She doesn't have a car.",
+              "es": "Ella no tiene auto."
+            },
+            {
+              "en": "Have they got a dog? No, they haven't.",
+              "es": "¿Tienen perro? No."
+            },
+            {
+              "en": "We usually have lunch at two.",
+              "es": "Normalmente almorzamos a las dos."
+            }
+          ],
+          "table": {
+            "headers": ["Forma", "Con have got", "Con have"],
+            "rows": [
+              ["afirmativa", "I've got a car.", "I have a car."],
+              ["negativa", "She hasn't got a car.", "She doesn't have a car."],
+              ["pregunta", "Have you got a car?", "Do you have a car?"],
+              ["respuesta corta", "Yes, I have.", "Yes, I do."]
+            ]
+          },
+          "tip": "Have got: solo para tener (posesión, familia, aspecto) y solo en presente. Para acciones (have lunch, have a shower) usa siempre have."
+        },
+        {
+          "heading": "Errores típicos al describir",
+          "body": [
+            "Los adjetivos en inglés no tienen plural ni género y van delante del sustantivo: a big house, two big houses (no «bigs houses»), an old man y an old woman. En español el adjetivo suele ir detrás: «una casa grande».",
+            "Con these y those el sustantivo y el verbo van en plural: These shoes are expensive (no «This shoes»). Algunas cosas son plurales en inglés aunque en español puedan no serlo: these jeans, those glasses (esos lentes), my trousers.",
+            "Para describir el pelo se usa have got con hair en singular, sin artículo y con el adjetivo delante: She's got long hair (no «long hairs» ni «the hair long»)."
+          ],
+          "examples": [
+            {
+              "en": "These glasses are new.",
+              "es": "Estos lentes son nuevos."
+            },
+            {
+              "en": "They live in a small white house.",
+              "es": "Viven en una casa blanca pequeña."
+            },
+            {
+              "en": "My cousins have got red hair.",
+              "es": "Mis primos son pelirrojos."
+            },
+            {
+              "en": "Those boots are very expensive.",
+              "es": "Esas botas son muy caras."
+            }
+          ],
+          "table": {
+            "headers": ["Incorrecto ✗", "Correcto ✓"],
+            "rows": [
+              ["They are bigs houses.", "They are big houses."],
+              ["This shoes are new.", "These shoes are new."],
+              ["She has the hair long.", "She's got long hair."],
+              ["He has 30 years.", "He's 30."]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1401,6 +3315,100 @@
             "My grandpa is 90 years old."
           ],
           "explanation": "La edad se dice con to be."
+        },
+        {
+          "type": "choice",
+          "prompt": "Hello, ___ is Laura. Can I speak to Mr Brown, please?",
+          "options": ["those", "that", "this"],
+          "answer": 2,
+          "explanation": "Al teléfono, para decir quién habla: This is Laura."
+        },
+        {
+          "type": "choice",
+          "prompt": "___ you got a pen I can use?",
+          "options": ["Do", "Have", "Has", "Are"],
+          "answer": 1,
+          "explanation": "Have got pregunta invirtiendo have: Have you got…?"
+        },
+        {
+          "type": "choice",
+          "prompt": "I don't like this jacket. I prefer that ___.",
+          "options": ["one", "it", "ones"],
+          "answer": 0,
+          "explanation": "One sustituye a un sustantivo singular ya mencionado: that one."
+        },
+        {
+          "type": "choice",
+          "prompt": "Do you have a bike? Yes, I ___.",
+          "options": ["have got", "got", "does", "do"],
+          "answer": 3,
+          "explanation": "La pregunta es con do (Do you have…?), así que la respuesta corta es Yes, I do."
+        },
+        {
+          "type": "fill",
+          "prompt": "My sister ___ got any children. (have got, negación)",
+          "answers": ["hasn't", "has not"],
+          "explanation": "My sister = she: hasn't got."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ shoes are very comfortable. (estos)",
+          "answers": ["These"],
+          "explanation": "Plural y cerca: these."
+        },
+        {
+          "type": "order",
+          "es": "¿Tu casa tiene jardín?",
+          "words": ["Has", "your", "house", "got", "a", "garden?"],
+          "explanation": "Pregunta con have got: Has + sujeto + got."
+        },
+        {
+          "type": "translate",
+          "es": "Ella tiene el pelo largo y rubio.",
+          "answers": [
+            "She has long blonde hair.",
+            "She's got long blonde hair.",
+            "She has got long blonde hair.",
+            "She has long blond hair.",
+            "She's got long blond hair.",
+            "She has got long blond hair."
+          ],
+          "explanation": "Hair en singular, sin artículo, con los adjetivos delante (largo antes que el color)."
+        },
+        {
+          "type": "translate",
+          "es": "Esos zapatos son muy caros.",
+          "answers": ["Those shoes are very expensive."],
+          "explanation": "Plural y lejos: those."
+        },
+        {
+          "type": "spot",
+          "parts": ["My brother", "has got", "blue eyes", "and", "long hairs."],
+          "answer": 4,
+          "correction": "long hair.",
+          "explanation": "Hair (el pelo de la cabeza) es incontable: va en singular."
+        },
+        {
+          "type": "spot",
+          "parts": ["This", "shoes", "are", "too small", "for me."],
+          "answer": 0,
+          "correction": "These",
+          "explanation": "Shoes es plural: these (cerca) o those (lejos)."
+        },
+        {
+          "type": "spot",
+          "parts": ["Do", "you have got", "a car?"],
+          "answer": 1,
+          "correction": "you have",
+          "explanation": "No se mezcla do con have got: Do you have a car? o Have you got a car?"
+        },
+        {
+          "type": "transform",
+          "original": "My brother has a big dog.",
+          "keyword": "GOT",
+          "prompt": "My brother ___ a big dog.",
+          "answers": ["has got", "'s got"],
+          "explanation": "Have y have got significan lo mismo: he has = he has got (he's got)."
         }
       ]
     },
@@ -1430,6 +3438,10 @@
             {
               "en": "Listen and repeat.",
               "es": "Escucha y repite."
+            },
+            {
+              "en": "Don't worry, everything is fine.",
+              "es": "No te preocupes, todo está bien."
             }
           ]
         },
@@ -1454,6 +3466,10 @@
             {
               "en": "How about going for a walk?",
               "es": "¿Qué tal si damos un paseo?"
+            },
+            {
+              "en": "Shall we start?",
+              "es": "¿Empezamos?"
             }
           ]
         },
@@ -1478,6 +3494,10 @@
             {
               "en": "What would you like for dessert?",
               "es": "¿Qué quiere de postre?"
+            },
+            {
+              "en": "Would you like a glass of orange juice? Yes, please.",
+              "es": "¿Quieres un vaso de jugo de naranja? Sí, por favor."
             }
           ],
           "table": {
@@ -1490,6 +3510,103 @@
             ]
           },
           "tip": "I'd like es I would like; no confundir con I like (me gusta): I'd like a coffee (quiero un café) frente a I like coffee (me gusta el café)."
+        },
+        {
+          "heading": "El imperativo en la vida real",
+          "body": [
+            "El imperativo aparece en instrucciones (Press the green button. Turn right at the lights.), avisos (Be careful! Mind the step.), recetas (Add the eggs and mix.) y consejos (Drink more water.). Para que suene amable se añade please al principio o al final, o se convierte en pregunta: Can you close the door, please?",
+            "Es igual para una persona que para varias, y no lleva sujeto: Come in! sirve para todos. Con adjetivos se usa be: Be quiet, Be careful, y en negativa Don't be: Don't be late."
+          ],
+          "examples": [
+            {
+              "en": "Press the green button to start.",
+              "es": "Presiona el botón verde para empezar."
+            },
+            {
+              "en": "Be careful! The floor is wet.",
+              "es": "¡Cuidado! El piso está mojado."
+            },
+            {
+              "en": "Add the sugar and mix well.",
+              "es": "Agrega el azúcar y mezcla bien."
+            },
+            {
+              "en": "Come in and sit down, please.",
+              "es": "Pasa y siéntate, por favor."
+            },
+            {
+              "en": "Don't be nervous.",
+              "es": "No te pongas nervioso."
+            }
+          ],
+          "tip": "Don't be + adjetivo: Don't be late, Don't be shy. Nunca «Don't late» ni «No be late»."
+        },
+        {
+          "heading": "Errores típicos: like, would like y want",
+          "body": [
+            "I like (me gusta) habla de gustos en general; I'd like (me gustaría, quisiera) pide u ofrece algo concreto ahora. Por eso a un mesero no le dices «I like a coffee» ✗ sino I'd like a coffee, please. Igual en las preguntas: Do you like tea? (¿te gusta el té?) frente a Would you like some tea? (¿quieres té?).",
+            "Would like + verbo lleva to: I'd like to go (no «I'd like go»). I want es correcto, pero al pedir puede sonar brusco; I'd like… o Can I have…? son más educados. Para responder a una oferta: Yes, please / No, thank you; un simple «Yes» o «No» suena seco.",
+            "Let's va con el verbo en forma base, sin to: Let's go (no «Let's to go» ni «Let's going»). En cambio, How about lleva -ing: How about going to the beach?"
+          ],
+          "examples": [
+            {
+              "en": "Do you like chocolate? Yes, I love it.",
+              "es": "¿Te gusta el chocolate? Sí, me encanta."
+            },
+            {
+              "en": "Would you like some chocolate? No, thank you.",
+              "es": "¿Quieres chocolate? No, gracias."
+            },
+            {
+              "en": "I'd like to visit Japan one day.",
+              "es": "Me gustaría visitar Japón algún día."
+            },
+            {
+              "en": "Can I have a bottle of water, please?",
+              "es": "¿Me da una botella de agua, por favor?"
+            }
+          ],
+          "table": {
+            "headers": ["Pregunta", "Significa", "Respuesta típica"],
+            "rows": [
+              ["Do you like coffee?", "¿Te gusta el café?", "Yes, I do. / No, I don't."],
+              ["Would you like a coffee?", "¿Quieres un café?", "Yes, please. / No, thank you."],
+              ["What would you like?", "¿Qué te gustaría?", "I'd like…"]
+            ]
+          }
+        },
+        {
+          "heading": "Responder a propuestas e invitaciones",
+          "body": [
+            "Para aceptar una propuesta con Let's… o Why don't we…? se dice Good idea!, Great!, Sure u OK, let's do that. Para rechazar con educación: I'm sorry, I can't o I'd love to, but I'm busy.",
+            "A Would you like to…? se responde sin repetir el verbo, con to al final: Would you like to come? I'd love to (me encantaría). Shall I…? ofrece ayuda: Shall I open the window? Yes, please."
+          ],
+          "examples": [
+            {
+              "en": "Let's go to the beach! Good idea!",
+              "es": "¡Vamos a la playa! ¡Buena idea!"
+            },
+            {
+              "en": "Would you like to come to my party? I'd love to!",
+              "es": "¿Te gustaría venir a mi fiesta? ¡Me encantaría!"
+            },
+            {
+              "en": "Why don't we eat out tonight? Sorry, I can't.",
+              "es": "¿Por qué no cenamos fuera esta noche? Lo siento, no puedo."
+            },
+            {
+              "en": "Shall I carry your bag? Yes, please.",
+              "es": "¿Te llevo la bolsa? Sí, por favor."
+            }
+          ],
+          "table": {
+            "headers": ["Proponer", "Aceptar", "Rechazar"],
+            "rows": [
+              ["Let's go out.", "Good idea!", "I'm sorry, I can't."],
+              ["Would you like to come?", "I'd love to.", "I'd love to, but I'm busy."],
+              ["Shall I help you?", "Yes, please.", "No, thanks. I'm fine."]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1531,12 +3648,112 @@
         {
           "type": "translate",
           "es": "Quisiera reservar una mesa.",
-          "answers": ["I'd like to book a table.", "I would like to book a table.", "I'd like to reserve a table."]
+          "answers": [
+            "I'd like to book a table.",
+            "I would like to book a table.",
+            "I'd like to reserve a table.",
+            "I would like to reserve a table."
+          ]
         },
         {
           "type": "translate",
           "es": "Vamos al cine.",
           "answers": ["Let's go to the cinema.", "Let's go to the movies."]
+        },
+        {
+          "type": "choice",
+          "prompt": "Would you like some cake? ___",
+          "options": ["Yes, I like.", "Yes, I do.", "Yes, please.", "Yes, I would like."],
+          "answer": 2,
+          "explanation": "A un ofrecimiento con Would you like…? se responde Yes, please."
+        },
+        {
+          "type": "choice",
+          "prompt": "I'd like ___ a table for two, please.",
+          "options": ["to book", "book", "booking"],
+          "answer": 0,
+          "explanation": "Would like + to + verbo."
+        },
+        {
+          "type": "choice",
+          "prompt": "How about ___ a film tonight?",
+          "options": ["watch", "to watch", "watched", "watching"],
+          "answer": 3,
+          "explanation": "How about va seguido de -ing."
+        },
+        {
+          "type": "fill",
+          "prompt": "___ careful! The road is very busy.",
+          "answers": ["Be"],
+          "explanation": "Imperativo de to be: Be careful!"
+        },
+        {
+          "type": "fill",
+          "prompt": "Let's ___ (not / take) the bus. It's too slow.",
+          "answers": ["not take"],
+          "explanation": "Propuesta negativa: Let's not + verbo base."
+        },
+        {
+          "type": "order",
+          "es": "¿Te gustaría venir a cenar?",
+          "words": ["Would", "you", "like", "to", "come", "for", "dinner?"],
+          "explanation": "Would you like + to + verbo para invitar."
+        },
+        {
+          "type": "translate",
+          "es": "No llegues tarde.",
+          "answers": ["Don't be late.", "Do not be late."],
+          "explanation": "Llegar tarde = be late; prohibición: Don't be late."
+        },
+        {
+          "type": "translate",
+          "es": "¿Quieres un té?",
+          "answers": [
+            "Would you like a tea?",
+            "Would you like some tea?",
+            "Would you like a cup of tea?",
+            "Do you want a tea?",
+            "Do you want some tea?",
+            "Do you want a cup of tea?"
+          ],
+          "explanation": "Para ofrecer, lo más cortés es Would you like…?"
+        },
+        {
+          "type": "spot",
+          "parts": ["I", "would like", "go", "to the beach", "this weekend."],
+          "answer": 2,
+          "correction": "to go",
+          "explanation": "Would like + to + verbo: I would like to go."
+        },
+        {
+          "type": "spot",
+          "parts": ["Let's", "to go", "to the park", "after lunch."],
+          "answer": 1,
+          "correction": "go",
+          "explanation": "Let's va con el verbo en forma base, sin to."
+        },
+        {
+          "type": "spot",
+          "parts": ["No", "touch", "the paintings,", "please."],
+          "answer": 0,
+          "correction": "Don't",
+          "explanation": "La prohibición se forma con Don't + verbo, no con no."
+        },
+        {
+          "type": "transform",
+          "original": "I want a coffee, please.",
+          "keyword": "LIKE",
+          "prompt": "I ___ a coffee, please.",
+          "answers": ["would like", "'d like"],
+          "explanation": "I want → I would like (I'd like): la forma educada de pedir."
+        },
+        {
+          "type": "transform",
+          "original": "Why don't we go to the park?",
+          "keyword": "LET'S",
+          "prompt": "___ to the park.",
+          "answers": ["Let's go"],
+          "explanation": "Why don't we…? y Let's… proponen lo mismo: Let's + verbo base."
         }
       ]
     },
@@ -1565,7 +3782,11 @@
             },
             {
               "en": "Let's meet at 8 p.m.",
-              "es": "Quedemos a las ocho de la tarde."
+              "es": "Nos vemos a las ocho de la noche."
+            },
+            {
+              "en": "What time is it? It's twenty to eleven.",
+              "es": "¿Qué hora es? Son veinte para las once."
             }
           ],
           "table": {
@@ -1597,6 +3818,10 @@
             {
               "en": "What's the date today? It's the 14th.",
               "es": "¿Qué fecha es hoy? Es 14."
+            },
+            {
+              "en": "Today is Wednesday, the third of May.",
+              "es": "Hoy es miércoles, tres de mayo."
             }
           ]
         },
@@ -1621,6 +3846,10 @@
             {
               "en": "They go skiing in winter.",
               "es": "Van a esquiar en invierno."
+            },
+            {
+              "en": "I usually study in the evening.",
+              "es": "Normalmente estudio por la noche."
             }
           ],
           "table": {
@@ -1632,6 +3861,120 @@
             ]
           },
           "tip": "At night pero in the morning / afternoon / evening."
+        },
+        {
+          "heading": "Errores típicos con la hora y las fechas",
+          "body": [
+            "En español decimos «son las tres», en plural; en inglés siempre es It's: It's three o'clock (no «They are three»). Para preguntar la hora se dice What time is it? o, de forma más cortés, Do you have the time? Cuidado: Do you have time? (sin the) significa «¿tienes tiempo?».",
+            "Los días, los meses y los idiomas llevan mayúscula en inglés: Monday, April, Spanish. Las fechas usan números ordinales: first (1st), second (2nd), third (3rd), fourth (4th)… En británico se escribe 5 May y se dice «the fifth of May»; en americano, May 5 y se dice «May fifth». Por eso 03/04 es el 3 de abril en el Reino Unido y el 4 de marzo en Estados Unidos."
+          ],
+          "examples": [
+            {
+              "en": "Excuse me, do you have the time? Yes, it's ten past two.",
+              "es": "Disculpa, ¿tienes hora? Sí, son las dos y diez."
+            },
+            {
+              "en": "Today is the twenty-first of June.",
+              "es": "Hoy es veintiuno de junio."
+            },
+            {
+              "en": "Her birthday is on May 3rd.",
+              "es": "Su cumpleaños es el 3 de mayo."
+            },
+            {
+              "en": "I don't have time to cook today.",
+              "es": "Hoy no tengo tiempo para cocinar."
+            }
+          ],
+          "table": {
+            "headers": ["Número", "Ordinal", "Se escribe"],
+            "rows": [
+              ["1", "first", "1st"],
+              ["2", "second", "2nd"],
+              ["3", "third", "3rd"],
+              ["5", "fifth", "5th"],
+              ["12", "twelfth", "12th"],
+              ["20", "twentieth", "20th"],
+              ["21", "twenty-first", "21st"],
+              ["31", "thirty-first", "31st"]
+            ]
+          },
+          "tip": "Son las cinco = It's five o'clock, nunca «They are five». O'clock solo se usa con las horas en punto."
+        },
+        {
+          "heading": "Cuándo no se usa preposición, y más expresiones",
+          "body": [
+            "Delante de this, next, last, every, tomorrow, yesterday y today no se pone preposición: See you next Monday, We met last year, She works every day (no «on next Monday» ni «in last year»).",
+            "Expresiones útiles: on time (puntual), early (temprano), late (tarde); in the morning, pero on Monday morning (con un día concreto se usa on); at the weekend (británico) u on the weekend (americano); at Christmas (en Navidad), pero on Christmas Day (el día de Navidad).",
+            "Para un horario se usa from… to… o until: I work from nine to five. The shop is open until 8 p.m."
+          ],
+          "examples": [
+            {
+              "en": "See you next Friday!",
+              "es": "¡Nos vemos el próximo viernes!"
+            },
+            {
+              "en": "I go running every morning.",
+              "es": "Salgo a correr todas las mañanas."
+            },
+            {
+              "en": "We have a meeting on Monday morning.",
+              "es": "Tenemos una reunión el lunes por la mañana."
+            },
+            {
+              "en": "The bank is open from nine to three.",
+              "es": "El banco abre de nueve a tres."
+            },
+            {
+              "en": "Please be on time.",
+              "es": "Por favor, sé puntual."
+            }
+          ],
+          "table": {
+            "headers": ["Con preposición", "Sin preposición"],
+            "rows": [
+              ["on Monday", "next Monday"],
+              ["in the morning", "this morning"],
+              ["in 2020", "last year"],
+              ["at the weekend", "every weekend"]
+            ]
+          }
+        },
+        {
+          "heading": "Cómo se dicen los años y la hora digital",
+          "body": [
+            "Los años se dicen normalmente de dos en dos cifras: 1998 = nineteen ninety-eight, 1850 = eighteen fifty. Del 2000 al 2009 se dice two thousand (and) five; desde 2010, lo más común es twenty ten, twenty twenty-five.",
+            "Al leer la hora digital, los minutos del 01 al 09 se dicen con «oh»: 7:05 = seven oh five. En los horarios de trenes y aeropuertos se usa a veces el reloj de 24 horas, pero al hablar se prefiere el de 12 con a.m. / p.m. o in the morning / in the evening. Las 12 del día son noon o midday, y las 12 de la noche, midnight."
+          ],
+          "examples": [
+            {
+              "en": "I was born in nineteen ninety-five.",
+              "es": "Nací en 1995."
+            },
+            {
+              "en": "My son was born in two thousand and eight.",
+              "es": "Mi hijo nació en 2008."
+            },
+            {
+              "en": "The flight leaves at seven oh five.",
+              "es": "El vuelo sale a las 7:05."
+            },
+            {
+              "en": "We have lunch at noon.",
+              "es": "Almorzamos al mediodía."
+            }
+          ],
+          "table": {
+            "headers": ["Escrito", "Se dice"],
+            "rows": [
+              ["1990", "nineteen ninety"],
+              ["2008", "two thousand and eight"],
+              ["2025", "twenty twenty-five"],
+              ["7:05", "seven oh five"],
+              ["12:00 (día)", "noon / midday"],
+              ["00:00", "midnight"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1679,6 +4022,101 @@
           "type": "translate",
           "es": "Trabajo por la mañana.",
           "answers": ["I work in the morning.", "I work in the mornings."]
+        },
+        {
+          "type": "choice",
+          "prompt": "See you ___ Friday!",
+          "options": ["in next", "on next", "next", "at next"],
+          "answer": 2,
+          "explanation": "Con next no se usa preposición: next Friday."
+        },
+        {
+          "type": "choice",
+          "prompt": "We have a meeting ___ Monday morning.",
+          "options": ["at", "in", "for", "on"],
+          "answer": 3,
+          "explanation": "Con un día concreto, aunque lleve morning, se usa on."
+        },
+        {
+          "type": "choice",
+          "prompt": "It's 2:20. It's ___.",
+          "options": ["twenty past two", "twenty to two", "two past twenty"],
+          "answer": 0,
+          "explanation": "Hasta la media se usa past: twenty past two."
+        },
+        {
+          "type": "choice",
+          "prompt": "What's the date today? It's ___.",
+          "options": ["the twelve of May", "twelve of the May", "the twelve May", "the twelfth of May"],
+          "answer": 3,
+          "explanation": "Las fechas se dicen con ordinales: the twelfth of May."
+        },
+        {
+          "type": "fill",
+          "prompt": "The shop is open ___ nine to six.",
+          "answers": ["from"],
+          "explanation": "Un horario: from… to…"
+        },
+        {
+          "type": "fill",
+          "prompt": "My birthday is on the ___ (22) of August.",
+          "answers": ["twenty-second", "twenty second", "22nd"],
+          "explanation": "Ordinal de 22: twenty-second."
+        },
+        {
+          "type": "order",
+          "es": "¿A qué hora empieza la clase?",
+          "words": ["What", "time", "does", "the", "class", "start?"],
+          "explanation": "What time + does + sujeto + verbo base."
+        },
+        {
+          "type": "translate",
+          "es": "Son las cinco y cuarto.",
+          "answers": [
+            "It's a quarter past five.",
+            "It is a quarter past five.",
+            "It's quarter past five.",
+            "It is quarter past five.",
+            "It's five fifteen.",
+            "It is five fifteen."
+          ],
+          "explanation": "Y cuarto = a quarter past; en digital, five fifteen."
+        },
+        {
+          "type": "translate",
+          "es": "Nací el 3 de mayo.",
+          "answers": [
+            "I was born on the third of May.",
+            "I was born on the 3rd of May.",
+            "I was born on 3 May.",
+            "I was born on 3rd May.",
+            "I was born on May 3rd.",
+            "I was born on May 3.",
+            "I was born on May third.",
+            "I was born on May the third."
+          ],
+          "explanation": "Nacer = to be born; las fechas van con on."
+        },
+        {
+          "type": "spot",
+          "parts": ["They are", "five o'clock,", "so the bank", "is closed."],
+          "answer": 0,
+          "correction": "It's",
+          "explanation": "La hora siempre se dice con It's, aunque en español sea «son las cinco»."
+        },
+        {
+          "type": "spot",
+          "parts": ["My", "English classes", "are", "in", "Tuesdays."],
+          "answer": 3,
+          "correction": "on",
+          "explanation": "Los días de la semana van con on."
+        },
+        {
+          "type": "spot",
+          "parts": ["The film", "starts", "in", "nine o'clock", "tonight."],
+          "answer": 2,
+          "correction": "at",
+          "explanation": "Las horas van con at: at nine o'clock."
         }
       ]
     },
@@ -1704,6 +4142,14 @@
             {
               "en": "Two coffees and a sandwich: $9.50.",
               "es": "Dos cafés y un sándwich: 9,50 $."
+            },
+            {
+              "en": "No parking from 8 a.m. to 6 p.m.",
+              "es": "Prohibido estacionar de 8 a 18 h."
+            },
+            {
+              "en": "Sale! All shoes half price this week.",
+              "es": "¡Ofertas! Todos los zapatos a mitad de precio esta semana."
             }
           ]
         },
@@ -1724,6 +4170,10 @@
             {
               "en": "My phone number is 555 0199.",
               "es": "Mi número es 555 0199."
+            },
+            {
+              "en": "The meeting is on Thursday, not Tuesday.",
+              "es": "La reunión es el jueves, no el martes."
             }
           ]
         },
@@ -1740,8 +4190,77 @@
             {
               "en": "How much is the ticket? It's six euros.",
               "es": "¿Cuánto cuesta la entrada? Seis euros."
+            },
+            {
+              "en": "What time does the museum close? At half past five.",
+              "es": "¿A qué hora cierra el museo? A las cinco y media."
+            },
+            {
+              "en": "Who is the email from? It's from Marta.",
+              "es": "¿De quién es el correo? Es de Marta."
             }
           ]
+        },
+        {
+          "heading": "Trampas típicas de las preguntas",
+          "body": [
+            "En los exámenes oficiales, las opciones incorrectas suelen aparecer también en el texto. Por ejemplo, en «The film starts at seven, not at six» se oyen las dos horas, pero solo una es la respuesta. Fíjate en las palabras que cambian un dato: not, but, actually (en realidad), instead (en lugar de), change.",
+            "Otra trampa es buscar la palabra exacta. Si el texto dice I'm hungry, la opción correcta puede ser He wants something to eat, aunque no repita ninguna palabra. Busca el significado, no las palabras iguales."
+          ],
+          "examples": [
+            {
+              "en": "The class is usually at four, but today it's at five.",
+              "es": "La clase suele ser a las cuatro, pero hoy es a las cinco."
+            },
+            {
+              "en": "I wanted the red one, but I bought the blue one.",
+              "es": "Quería la roja, pero compré la azul."
+            },
+            {
+              "en": "Actually, the party is on Sunday.",
+              "es": "En realidad, la fiesta es el domingo."
+            },
+            {
+              "en": "We can't go by train, so we're taking the bus.",
+              "es": "No podemos ir en tren, así que vamos en autobús."
+            }
+          ],
+          "tip": "Si una opción repite muchas palabras del texto, desconfía: comprueba que el dato sea exactamente el mismo."
+        },
+        {
+          "heading": "Números, precios y deletreo",
+          "body": [
+            "En muchos audios hay que reconocer un número, un precio o un nombre deletreado. Repasa el alfabeto en inglés: las letras que más se confunden son A («ei»), E («i»), I («ai»), G («yi») y J («yei»). Los precios se dicen así: £4.50 = four pounds fifty, $12.99 = twelve ninety-nine.",
+            "Los números de teléfono se dicen cifra a cifra; el 0 suele decirse «oh» y, en británico, dos cifras iguales seguidas se dicen con double: 0447 = oh double four seven. Las decenas y los números del 13 al 19 se confunden: thirTEEN lleva el acento al final y THIRty, al principio."
+          ],
+          "examples": [
+            {
+              "en": "My surname is Grant: G-R-A-N-T.",
+              "es": "Mi apellido es Grant: G-R-A-N-T."
+            },
+            {
+              "en": "It's four pounds fifty, please.",
+              "es": "Son cuatro libras con cincuenta, por favor."
+            },
+            {
+              "en": "The bus number is fourteen, not forty.",
+              "es": "El autobús es el catorce, no el cuarenta."
+            },
+            {
+              "en": "Call me on oh seven seven double three.",
+              "es": "Llámame al 07733."
+            }
+          ],
+          "table": {
+            "headers": ["Escrito", "Se dice"],
+            "rows": [
+              ["£4.50", "four pounds fifty"],
+              ["$12.99", "twelve ninety-nine"],
+              ["€30", "thirty euros"],
+              ["0447", "oh double four seven"],
+              ["13 / 30", "thirTEEN / THIRty"]
+            ]
+          }
         }
       ],
       "exercises": [
@@ -1839,7 +4358,7 @@
           "text": "Good morning. A ticket to Brighton, please. Single or return? Return, please, coming back this evening. That's twelve pounds fifty. The next train leaves at ten past nine from platform three. Thank you very much.",
           "questions": [
             {
-              "prompt": "What kind of ticket does the woman buy?",
+              "prompt": "What kind of ticket does the customer buy?",
               "options": ["A single", "A return", "A monthly pass"],
               "answer": 1
             },
@@ -1920,6 +4439,117 @@
               "answer": 0
             }
           ]
+        },
+        {
+          "type": "reading",
+          "title": "A message from the language school",
+          "text": "Dear students, this is a reminder about next week. On Monday there are no classes because it's a holiday. On Tuesday, classes start at 10 a.m. instead of 9 a.m., because the teachers have a meeting. On Friday afternoon there's a party in the school café from 4 to 6. Please bring some food from your country if you can! Drinks are free. Write your name on the list at reception before Thursday. Thank you, Mrs Clarke, Director",
+          "questions": [
+            {
+              "prompt": "Why are there no classes on Monday?",
+              "options": ["There's a party", "The teachers have a meeting", "It's a holiday"],
+              "answer": 2
+            },
+            {
+              "prompt": "What time do classes start on Tuesday?",
+              "options": ["At 10 a.m.", "At 9 a.m.", "At 4 p.m."],
+              "answer": 0
+            },
+            {
+              "prompt": "What can students bring to the party?",
+              "options": ["Drinks", "Food from their country", "Some money"],
+              "answer": 1
+            },
+            {
+              "prompt": "What must students do before Thursday?",
+              "options": ["Write their name on a list", "Pay for the drinks", "Talk to their teacher"],
+              "answer": 0
+            }
+          ],
+          "explanation": "Fíjate en instead of: las clases del martes empiezan a las 10, no a las 9."
+        },
+        {
+          "type": "reading",
+          "title": "Emma's weekend",
+          "text": "Hi Jess, how are you? I had a great weekend! On Saturday morning I went to the market with my sister. We bought fruit, cheese and some flowers for my mum, because it was her birthday. In the afternoon we cooked a big lunch for the whole family, and my grandparents came too. On Sunday it rained all day, so I stayed at home, watched two films and finished my book. What did you do? Write soon! Love, Emma",
+          "questions": [
+            {
+              "prompt": "Why did Emma buy flowers?",
+              "options": ["For her grandparents", "For her sister", "For her mother's birthday"],
+              "answer": 2
+            },
+            {
+              "prompt": "Who had lunch with Emma on Saturday?",
+              "options": ["Only her sister", "Her family and her grandparents", "Her friends from school"],
+              "answer": 1
+            },
+            {
+              "prompt": "Why did Emma stay at home on Sunday?",
+              "options": ["Because of the weather", "Because she was ill", "Because she had to work"],
+              "answer": 0
+            },
+            {
+              "prompt": "What did Emma do on Sunday?",
+              "options": ["She went to the market", "She cooked lunch", "She watched films and read"],
+              "answer": 2
+            }
+          ],
+          "explanation": "It rained all day = el tiempo era malo: la respuesta no repite las palabras del texto."
+        },
+        {
+          "type": "listening",
+          "title": "A message from the dentist",
+          "text": "Hello, this is a message for Mr Peter Walsh from Green Street Dental Clinic. Your appointment is on Wednesday the fourteenth at half past three. Please arrive ten minutes early, and don't forget to bring your ID card. If you can't come, please call us on oh one six one, four nine six, two two eight zero. We're open from Monday to Friday, from eight in the morning to six in the evening. Thank you and goodbye.",
+          "questions": [
+            {
+              "prompt": "When is Mr Walsh's appointment?",
+              "options": [
+                "Thursday at half past three",
+                "Wednesday at a quarter past three",
+                "Wednesday at half past three"
+              ],
+              "answer": 2
+            },
+            {
+              "prompt": "What does he need to bring?",
+              "options": ["His ID card", "Some money", "A letter from his doctor"],
+              "answer": 0
+            },
+            {
+              "prompt": "When is the clinic closed?",
+              "options": ["On Mondays", "At the weekend", "In the morning"],
+              "answer": 1
+            },
+            {
+              "prompt": "What time should he arrive?",
+              "options": ["At twenty past three", "At half past three", "At twenty to four"],
+              "answer": 0
+            }
+          ],
+          "explanation": "La cita es a las 3:30 y debe llegar diez minutos antes: a las 3:20 (twenty past three)."
+        },
+        {
+          "type": "listening",
+          "title": "Planning a picnic",
+          "text": "Lisa: Hi, Mark! Are you free on Saturday? Mark: Yes, I think so. Why? Lisa: Let's have a picnic in the park with Tom and Anna. Mark: Good idea! What time? Lisa: How about twelve o'clock? Mark: Hmm, I play tennis until twelve. Can we meet at one? Lisa: OK, one o'clock is fine. Can you bring some drinks? I'm making sandwiches. Mark: Sure. And what if it rains? Lisa: Then we can go to my house and watch a film.",
+          "questions": [
+            {
+              "prompt": "Why can't Mark meet at twelve?",
+              "options": ["He has to work", "He plays tennis until then", "He's having lunch with Tom"],
+              "answer": 1
+            },
+            {
+              "prompt": "What is Mark going to bring?",
+              "options": ["Sandwiches", "A film", "Some drinks"],
+              "answer": 2
+            },
+            {
+              "prompt": "What is the plan if the weather is bad?",
+              "options": ["Watch a film at Lisa's house", "Go to the cinema", "Have the picnic on Sunday"],
+              "answer": 0
+            }
+          ],
+          "explanation": "Twelve se oye, pero Mark propone one o'clock y Lisa acepta."
         }
       ]
     }
@@ -2005,7 +4635,12 @@
     {
       "type": "translate",
       "es": "No vi la película.",
-      "answers": ["I didn't see the film.", "I did not see the film.", "I didn't see the movie."]
+      "answers": [
+        "I didn't see the film.",
+        "I did not see the film.",
+        "I didn't see the movie.",
+        "I did not see the movie."
+      ]
     },
     {
       "type": "choice",
@@ -2084,6 +4719,267 @@
           "answer": 0
         }
       ]
+    },
+    {
+      "type": "choice",
+      "prompt": "___ your sister a nurse? No, she's a teacher.",
+      "options": ["Is", "Does", "Are", "Has"],
+      "answer": 0,
+      "explanation": "Profesión con to be; your sister = she → Is."
+    },
+    {
+      "type": "choice",
+      "prompt": "My grandmother ___ 85 years old.",
+      "options": ["has", "have", "is", "does"],
+      "answer": 2,
+      "explanation": "La edad se dice con to be: she is 85 years old."
+    },
+    {
+      "type": "choice",
+      "prompt": "My appointment is in ___ hour.",
+      "options": ["a", "—", "an", "the"],
+      "answer": 2,
+      "explanation": "La h de hour no suena: an hour."
+    },
+    {
+      "type": "choice",
+      "prompt": "There are two ___ in the photo: my mother and my aunt.",
+      "options": ["womans", "women", "woman", "womens"],
+      "answer": 1,
+      "explanation": "Woman tiene plural irregular: women."
+    },
+    {
+      "type": "choice",
+      "prompt": "I don't like fish, so I ___ eat it.",
+      "options": ["always", "often", "never", "usually"],
+      "answer": 2,
+      "explanation": "Si no te gusta, nunca lo comes: never."
+    },
+    {
+      "type": "choice",
+      "prompt": "Who ___ in that big house?",
+      "options": ["does live", "live", "do live", "lives"],
+      "answer": 3,
+      "explanation": "Who es el sujeto: no se usa do y el verbo lleva -s."
+    },
+    {
+      "type": "choice",
+      "prompt": "Please be quiet. I ___ to the news.",
+      "options": ["listen", "listens", "listening", "am listening"],
+      "answer": 3,
+      "explanation": "Be quiet indica que ocurre ahora: presente continuo."
+    },
+    {
+      "type": "choice",
+      "prompt": "We ___ at home last weekend because it was very cold.",
+      "options": ["stayed", "stay", "staying", "were stay"],
+      "answer": 0,
+      "explanation": "Last weekend pide pasado simple: stayed."
+    },
+    {
+      "type": "choice",
+      "prompt": "The children are playing with ___ toys.",
+      "options": ["there", "they're", "their", "them"],
+      "answer": 2,
+      "explanation": "Posesivo de they: their. There (allí) y they're (they are) suenan igual."
+    },
+    {
+      "type": "choice",
+      "prompt": "My English class finishes at 6:45. It finishes at ___.",
+      "options": ["a quarter past six", "a quarter to six", "half past six", "a quarter to seven"],
+      "answer": 3,
+      "explanation": "6:45 = faltan quince minutos para las siete: a quarter to seven."
+    },
+    {
+      "type": "choice",
+      "prompt": "Would you like to come to the cinema with us? ___",
+      "options": ["Yes, I'd love to.", "Yes, I like.", "Yes, I'd love.", "Yes, I do."],
+      "answer": 0,
+      "explanation": "A Would you like to…? se responde I'd love to, con to al final."
+    },
+    {
+      "type": "fill",
+      "prompt": "There ___ (be, pasado) a big storm last night.",
+      "answers": ["was"],
+      "explanation": "Pasado de there is con singular: there was."
+    },
+    {
+      "type": "fill",
+      "prompt": "Look at the dog! It ___ (run) after the ball.",
+      "answers": ["is running", "'s running"],
+      "explanation": "Ahora mismo: is + running (run dobla la n)."
+    },
+    {
+      "type": "fill",
+      "prompt": "My ___ (wife, genitivo) parents live in Chile.",
+      "answers": ["wife's"],
+      "explanation": "Poseedor en singular: wife + 's."
+    },
+    {
+      "type": "fill",
+      "prompt": "Are ___ your keys on the table over there? (plural, lejos)",
+      "answers": ["those"],
+      "explanation": "Plural y lejos: those."
+    },
+    {
+      "type": "order",
+      "es": "Mi hermano no sabe nadar.",
+      "words": ["My", "brother", "can't", "swim."],
+      "explanation": "Can't + verbo base, sin to."
+    },
+    {
+      "type": "order",
+      "es": "¿Dónde pasaste tus vacaciones?",
+      "words": ["Where", "did", "you", "spend", "your", "holidays?"],
+      "explanation": "Where + did + sujeto + verbo base."
+    },
+    {
+      "type": "translate",
+      "es": "Tenemos dos hijos.",
+      "answers": [
+        "We have two children.",
+        "We've got two children.",
+        "We have got two children.",
+        "We have two kids.",
+        "We've got two kids.",
+        "We have got two kids.",
+        "We have two sons.",
+        "We've got two sons.",
+        "We have got two sons."
+      ],
+      "explanation": "Tener = have o have got; hijos = children (o sons, si son varones)."
+    },
+    {
+      "type": "translate",
+      "es": "No abras la puerta.",
+      "answers": ["Don't open the door.", "Do not open the door."],
+      "explanation": "Prohibición: Don't + verbo base."
+    },
+    {
+      "type": "translate",
+      "es": "Ella trabaja de lunes a viernes.",
+      "answers": [
+        "She works from Monday to Friday.",
+        "She works Monday to Friday.",
+        "She works from Monday until Friday.",
+        "She works from Monday till Friday.",
+        "She works Monday through Friday."
+      ],
+      "explanation": "De… a… = from… to…; she → works."
+    },
+    {
+      "type": "spot",
+      "parts": ["In the evening,", "my father", "don't", "drink", "coffee."],
+      "answer": 2,
+      "correction": "doesn't",
+      "explanation": "My father = he: la negación es doesn't."
+    },
+    {
+      "type": "spot",
+      "parts": ["My little sister", "has seven years", "and goes", "to school."],
+      "answer": 1,
+      "correction": "is seven years old",
+      "explanation": "La edad va con to be: she is seven (years old)."
+    },
+    {
+      "type": "spot",
+      "parts": ["At the concert", "tonight", "there", "is", "many people."],
+      "answer": 3,
+      "correction": "are",
+      "explanation": "Many people es plural: there are."
+    },
+    {
+      "type": "spot",
+      "parts": ["What", "did", "she", "bought", "at the market?"],
+      "answer": 3,
+      "correction": "buy",
+      "explanation": "Con did, el verbo va en forma base: What did she buy?"
+    },
+    {
+      "type": "spot",
+      "parts": ["After work,", "we", "can to", "meet", "at the café."],
+      "answer": 2,
+      "correction": "can",
+      "explanation": "Can va seguido del verbo sin to."
+    },
+    {
+      "type": "spot",
+      "parts": ["The money", "isn't", "the most important thing", "in life."],
+      "answer": 0,
+      "correction": "Money",
+      "explanation": "Hablando en general no se usa the: Money isn't the most important thing."
+    },
+    {
+      "type": "transform",
+      "original": "Lucía is Spanish.",
+      "keyword": "FROM",
+      "prompt": "Lucía ___ Spain.",
+      "answers": ["is from", "'s from"],
+      "explanation": "Nacionalidad = ser de un país: to be from + país."
+    },
+    {
+      "type": "transform",
+      "original": "Do you have a pen?",
+      "keyword": "GOT",
+      "prompt": "___ a pen?",
+      "answers": ["Have you got"],
+      "explanation": "Do you have…? = Have you got…? (sin do)."
+    },
+    {
+      "type": "reading",
+      "title": "A new job",
+      "text": "Hi Sam, I've got great news: I have a new job! I'm working at a hotel in the city centre now. I start at seven in the morning, so I get up very early, at half past five. I don't like that, but I finish at three and I'm free in the afternoon. My boss is very nice and the other receptionists are friendly. The only problem is the bus: it's always full and sometimes it's late. Next month I want to buy a bike. Are you free on Saturday? Let's have lunch together and I can tell you more. Love, Kate",
+      "questions": [
+        {
+          "prompt": "What is Kate's new job?",
+          "options": ["She's a cook", "She's a bus driver", "She's a receptionist"],
+          "answer": 2
+        },
+        {
+          "prompt": "How does Kate feel about getting up early?",
+          "options": ["She doesn't like it", "She loves it", "It's easy for her"],
+          "answer": 0
+        },
+        {
+          "prompt": "Why does Kate want to buy a bike?",
+          "options": ["To do more exercise", "Because the bus is often full and late", "Because her boss has one"],
+          "answer": 1
+        },
+        {
+          "prompt": "Why is Kate writing to Sam?",
+          "options": ["To tell him about her new job", "To ask him for a bike", "To say she is unhappy at work"],
+          "answer": 0
+        }
+      ],
+      "explanation": "El texto no dice «I'm a receptionist», pero lo deduces de the other receptionists."
+    },
+    {
+      "type": "listening",
+      "title": "At the tourist office",
+      "text": "Mr Hill: Good morning. Can I help you? Mrs Lopez: Yes, please. We're here for two days and we'd like to visit the castle. Is it open today? Mr Hill: Yes, it's open every day except Monday, from ten to five. Mrs Lopez: Great. How can we get there? Mr Hill: You can walk. It's about twenty minutes. Or you can take the number twelve bus from the stop opposite this office. Mrs Lopez: How much are the tickets? Mr Hill: Eight pounds for adults and four pounds for children. Mrs Lopez: So that's for my husband, me and our two children. Mr Hill: That's twenty-four pounds. And there's a nice café inside the castle. Mrs Lopez: Perfect, thank you!",
+      "questions": [
+        {
+          "prompt": "Which day is the castle closed?",
+          "options": ["Monday", "Sunday", "Saturday"],
+          "answer": 0
+        },
+        {
+          "prompt": "Where is the bus stop?",
+          "options": ["Next to the castle", "Opposite the tourist office", "Behind the café"],
+          "answer": 1
+        },
+        {
+          "prompt": "How much does the family pay for the tickets?",
+          "options": ["Sixteen pounds", "Twenty pounds", "Twenty-four pounds"],
+          "answer": 2
+        },
+        {
+          "prompt": "What do we know about Mrs Lopez?",
+          "options": ["She is on holiday with her family", "She lives near the castle", "She works in the castle café"],
+          "answer": 0
+        }
+      ],
+      "explanation": "Dos adultos (8 + 8) y dos niños (4 + 4) suman 24 libras; «We're here for two days» indica que está de visita."
     }
   ]
 }
