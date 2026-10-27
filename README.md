@@ -209,8 +209,8 @@ nuevo. La sincronización automática está propuesta en
 [docs/SINCRONIZACION.md](docs/SINCRONIZACION.md), pendiente de decisión.
 
 Es una PWA: se instala en Android, iPhone y escritorio y funciona sin conexión desde la primera
-visita. Cada pronunciación se guarda al sonar y desde Ajustes se pueden descargar todas
-(unos 45 MB). Cada pantalla tiene su dirección (`#/sesion`, `#/nivel/3`, `#/tema/comida`,
+visita. Cada pronunciación se guarda al sonar y desde Ajustes se pueden descargar todas, con las
+frases grabadas del curso y de los textos (unos 80 MB). Cada pantalla tiene su dirección (`#/sesion`, `#/nivel/3`, `#/tema/comida`,
 `?panel=ajustes`…): el botón atrás recorre la app en vez de cerrarla.
 
 ## Desarrollo
