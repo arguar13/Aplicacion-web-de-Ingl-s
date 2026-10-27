@@ -1,4 +1,5 @@
-"""Genera public/audio/course/<hash>.mp3 para cada frase del curso (src/data/course/*.json).
+"""Genera public/audio/course/<hash>.mp3 para cada frase del curso (src/data/course/*.json) y de
+los textos para escuchar y leer en voz alta (src/data/texts.json).
 
 Misma voz neuronal que las palabras (en-US-AvaNeural, vía edge-tts) y misma compresión que
 scripts/generate_audio.py (recorte de silencio, 32 kbps mono). Cada frase se identifica por un hash
@@ -13,8 +14,9 @@ calcula src/lib/courseAudio.ts: así la app sabe, sin ninguna lista, si una fras
 
 Frases que se graban: los ejemplos de cada sección, las frases correctas de los ejercicios de
 ordenar y traducir, los huecos completados de los de completar, los enunciados completados de los
-de elegir (si llevan hueco) y los textos y audios de los ejercicios de comprensión. Necesita red
-hacia el servicio de voz (speech.platform.bing.com).
+de elegir (si llevan hueco), los textos y audios de los ejercicios de comprensión y cada frase de
+los textos de la biblioteca (la app los lee frase a frase). Necesita red hacia el servicio de voz
+(speech.platform.bing.com).
 """
 
 import asyncio
@@ -30,6 +32,7 @@ from generate_audio import MIN_BYTES, PARTIAL, RETRIES, VOICE, compress  # noqa:
 
 ROOT = Path(__file__).resolve().parent.parent
 COURSE = ROOT / "src" / "data" / "course"
+TEXTS = ROOT / "src" / "data" / "texts.json"
 AUDIO = ROOT / "public" / "audio" / "course"
 CONCURRENCY = 4
 SEED_A = 2166136261
@@ -84,6 +87,10 @@ def course_sentences() -> dict[str, str]:
         for exercise in level.get("exam", []):
             for sentence in exercise_sentences(exercise):
                 sentences[audio_id(sentence)] = normalize(sentence)
+    for text in json.loads(TEXTS.read_text(encoding="utf-8")).get("texts", []):
+        for paragraph in text.get("paragraphs", []):
+            for sentence in paragraph:
+                sentences[audio_id(sentence["en"])] = normalize(sentence["en"])
     return sentences
 
 
@@ -125,7 +132,7 @@ async def main() -> None:
         print(f"Borradas {len(stale)} grabaciones de frases que ya no existen")
         return
     if "--list" in sys.argv:
-        print(f"{len(sentences)} frases en el curso, {len(pending)} sin grabar")
+        print(f"{len(sentences)} frases del curso y los textos, {len(pending)} sin grabar")
         return
     print(f"{len(pending)} frases por generar con {VOICE} (de {len(sentences)})", flush=True)
     semaphore = asyncio.Semaphore(CONCURRENCY)

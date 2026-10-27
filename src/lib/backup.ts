@@ -16,6 +16,14 @@ import { dayKey, getProgress, mergeProgress, PROGRESS_SCHEMA, type ProgressData,
 import { isMastered } from './scheduler'
 import { getSettings, replaceSettings, SETTINGS_SCHEMA, type Settings } from './settings'
 import { readVersioned } from './store'
+import { getPlan, parsePlan, savePlan, type StudyPlan } from './studyPlan'
+import {
+  getTextProgress,
+  mergeTextProgress,
+  parseTextProgress,
+  replaceTextProgress,
+  type TextProgress,
+} from './textProgress'
 import { isRecord } from './validate'
 
 /** Identificador del formato (del nombre anterior de la app): no cambiar, lo llevan las copias. */
@@ -34,12 +42,16 @@ export interface Backup {
   achievements: Unlocks | null
   /** Progreso del curso (desde la Fase 20; `null` en las copias anteriores). */
   course: CourseProgress | null
+  /** Textos escuchados y leídos en voz alta (desde la 2.6; `null` en las copias anteriores). */
+  texts: TextProgress | null
+  /** Plan de estudio elegido (desde la 2.6; `null` si no hay o la copia es anterior). */
+  plan: StudyPlan | null
 }
 
 export type ParsedBackup = { ok: true; backup: Backup } | { ok: false; error: string }
 
 export function serializeBackup(
-  { progress, settings, events, achievements, course }: Omit<Backup, 'exportedAt'>,
+  { progress, settings, events, achievements, course, texts, plan }: Omit<Backup, 'exportedAt'>,
   now = Date.now(),
 ): string {
   return JSON.stringify(
@@ -53,6 +65,8 @@ export function serializeBackup(
       // Campo añadido sin cambiar de versión: las versiones anteriores de la app lo ignoran.
       ...(achievements ? { achievements } : {}),
       ...(course ? { course } : {}),
+      ...(texts ? { texts } : {}),
+      ...(plan ? { plan } : {}),
     },
     null,
     1,
@@ -68,6 +82,8 @@ export const currentBackup = (now = Date.now()): string =>
       events: getEvents(),
       achievements: getUnlocks(),
       course: getCourseProgress(),
+      texts: getTextProgress(),
+      plan: getPlan(),
     },
     now,
   )
@@ -102,6 +118,8 @@ export function parseBackup(text: string): ParsedBackup {
       events: parseEvents(data.events),
       achievements: 'achievements' in data ? parseUnlocks(data.achievements) : null,
       course: 'course' in data ? parseCourseProgress(data.course) : null,
+      texts: 'texts' in data ? parseTextProgress(data.texts) : null,
+      plan: 'plan' in data ? parsePlan(data.plan) : null,
     },
   }
 }
@@ -125,11 +143,16 @@ export function restoreBackup(backup: Backup, mode: RestoreMode) {
   if (mode === 'merge') {
     if (backup.achievements) replaceUnlocks(mergeUnlocks(getUnlocks(), backup.achievements))
     if (backup.course) replaceCourseProgress(mergeCourseProgress(getCourseProgress(), backup.course))
+    if (backup.texts) replaceTextProgress(mergeTextProgress(getTextProgress(), backup.texts))
+    // El plan es una elección: el de este dispositivo manda; si no hay, se toma el de la copia.
+    if (backup.plan && !getPlan()) savePlan(backup.plan)
     replaceProgress(mergeProgress(getProgress(), backup.progress))
     replaceEvents(mergeEvents(getEvents(), backup.events))
   } else {
     replaceUnlocks(backup.achievements)
     replaceCourseProgress(backup.course ?? { lessons: {}, exams: {}, quizzes: {} })
+    replaceTextProgress(backup.texts ?? { listened: {}, spoken: {} })
+    savePlan(backup.plan)
     replaceSettings(backup.settings)
     replaceProgress(backup.progress)
     replaceEvents(backup.events)

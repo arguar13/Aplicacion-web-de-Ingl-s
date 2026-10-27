@@ -7,6 +7,8 @@ import { ALL_DECK, type Deck, LEVELS } from '@/lib/decks'
 import { formatCount, plural } from '@/lib/format'
 import { useProgress } from '@/lib/progress'
 import type { CourseLevelId } from '@/lib/courseMeta'
+import type { TextMode } from '@/lib/routes'
+import type { TopicId } from '@/lib/topicMeta'
 import { useSettings } from '@/lib/settings'
 import { dueToday, forecast, hardWords, type SmartDeckKind } from '@/lib/smartDecks'
 import { type Mode, trackOf } from '@/lib/types'
@@ -23,6 +25,8 @@ import { Kbd } from './ui/Kbd'
 
 /** «Practica por tu cuenta» y los niveles, al final de la página: llegan un instante después. */
 const PracticeSection = lazy(() => import('./PracticeSection').then((module) => ({ default: module.PracticeSection })))
+/** «Tu plan»: el plan de estudio con las tareas de hoy, o la invitación a crearlo. */
+const PlanCard = lazy(() => import('./plan/PlanCard').then((module) => ({ default: module.PlanCard })))
 /** «Continúa donde lo dejaste»: lo último del curso y de la práctica, a un toque. */
 const ResumeSection = lazy(() => import('./ResumeSection').then((module) => ({ default: module.ResumeSection })))
 /** El curso trae su cargador y su progreso: fuera del paquete inicial, llega un instante después. */
@@ -61,6 +65,10 @@ interface Props {
   onOpenSettings: () => void
   onOpenShortcuts: () => void
   onOpenWord: (id: string) => void
+  onOpenTexts: (mode: TextMode) => void
+  onOpenText: (mode: TextMode, id: string) => void
+  onOpenPlan: () => void
+  onOpenTopic: (topic: TopicId) => void
 }
 
 export function DeckPicker({
@@ -80,6 +88,10 @@ export function DeckPicker({
   onOpenSettings,
   onOpenShortcuts,
   onOpenWord,
+  onOpenTexts,
+  onOpenText,
+  onOpenPlan,
+  onOpenTopic,
 }: Props) {
   const progress = useProgress()
   const { mode } = useSettings()
@@ -109,6 +121,13 @@ export function DeckPicker({
         wide
         action={
           <span className="-mr-2 flex items-center">
+            {/* En escritorio, las secciones principales a la vista; en el móvil están en el propio inicio. */}
+            <nav aria-label="Secciones" className="mr-3 hidden items-center gap-1 lg:flex">
+              <NavLink onClick={onOpenPlan}>Mi plan</NavLink>
+              <NavLink onClick={onOpenCourse}>Curso</NavLink>
+              <NavLink onClick={() => onOpenTexts('listen')}>Escuchar</NavLink>
+              <NavLink onClick={() => onOpenTexts('read')}>Hablar</NavLink>
+            </nav>
             <IconButton label="Diccionario" onClick={onOpenDictionary}>
               <BookIcon />
             </IconButton>
@@ -137,6 +156,20 @@ export function DeckPicker({
             </div>
           </div>
           <TodayCard now={now} mastered={total.mastered} />
+        </div>
+
+        <div className="mt-4">
+          <Suspense fallback={<CardPlaceholder className="min-h-44" />}>
+            <PlanCard
+              now={now}
+              onOpenPlan={onOpenPlan}
+              onStartCoach={onStartCoach}
+              onOpenTopic={onOpenTopic}
+              onOpenLesson={onOpenLesson}
+              onOpenExam={onOpenExam}
+              onOpenText={onOpenText}
+            />
+          </Suspense>
         </div>
 
         <div className="mt-4 grid grid-cols-1 gap-4 empty:hidden lg:grid-cols-2 lg:[&>:only-child]:col-span-2">
@@ -258,7 +291,13 @@ export function DeckPicker({
         </div>
 
         <Suspense fallback={<div className="mt-14 min-h-[60rem] sm:mt-16" aria-hidden />}>
-          <PracticeSection mode={mode} lastDeckId={progress.lastDeckId} onPractice={onPractice} onPick={onPick} />
+          <PracticeSection
+            mode={mode}
+            lastDeckId={progress.lastDeckId}
+            onPractice={onPractice}
+            onPick={onPick}
+            onOpenTexts={onOpenTexts}
+          />
         </Suspense>
 
         {/* Solo con teclado tiene sentido; en una pantalla táctil no se muestra. */}
@@ -270,6 +309,19 @@ export function DeckPicker({
         </div>
       </main>
     </>
+  )
+}
+
+/** Enlace de la navegación principal de la cabecera. */
+function NavLink({ onClick, children }: { onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="h-9 cursor-pointer rounded-full px-3.5 text-sm font-semibold text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
+    >
+      {children}
+    </button>
   )
 }
 

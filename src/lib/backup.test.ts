@@ -6,6 +6,8 @@ import { getEvents, replaceEvents, type StudyEvent } from './events'
 import { EMPTY_PROGRESS, getProgress, mergeProgress, type ProgressData, replaceProgress } from './progress'
 import { fromLeitner } from './scheduler'
 import { getSettings, parseSettings, replaceSettings } from './settings'
+import { getPlan, savePlan, type StudyPlan } from './studyPlan'
+import { getTextProgress, resetTextProgress, type TextProgress } from './textProgress'
 
 const NOW = new Date(2026, 8, 27, 10).getTime()
 /** Tarjeta equivalente a una caja Leitner (misma semántica que en la versión 1). */
@@ -36,6 +38,12 @@ const COURSE: CourseProgress = {
   exams: { a1: { best: 0.9, at: NOW - 1_800_000 } },
   quizzes: { a1: { best: 0.8, at: NOW - 900_000 } },
 }
+/** Un texto escuchado y otro leído en voz alta, y un plan en curso. */
+const TEXTS: TextProgress = {
+  listened: { 'a1-my-family': { times: 2, at: NOW - 600_000 } },
+  spoken: { 'a1-my-day': { best: 0.85, at: NOW - 300_000, last: NOW - 300_000 } },
+}
+const PLAN: StudyPlan = { program: 'travel', from: 'a1', to: 'b1', minutes: 20, days: 5, startedAt: NOW - 86_400_000 }
 const BACKUP: Backup = {
   exportedAt: NOW,
   progress: PROGRESS,
@@ -43,9 +51,32 @@ const BACKUP: Backup = {
   events: EVENTS,
   achievements: UNLOCKS,
   course: COURSE,
+  texts: TEXTS,
+  plan: PLAN,
 }
 
 describe('copias de seguridad', () => {
+  it('los textos y el plan viajan en la copia; las anteriores no los traen', () => {
+    resetTextProgress()
+    savePlan(null)
+    const old = serializeBackup({ ...BACKUP, texts: null, plan: null }, NOW)
+    expect(old).not.toContain('"texts"')
+    expect(old).not.toContain('"plan"')
+    const parsed = parseBackup(old)
+    expect(parsed.ok && [parsed.backup.texts, parsed.backup.plan]).toEqual([null, null])
+    restoreBackup(BACKUP, 'merge')
+    expect(getTextProgress()).toEqual(TEXTS)
+    expect(getPlan()).toEqual(PLAN)
+    // Al combinar, el plan de este dispositivo manda.
+    const mine: StudyPlan = { ...PLAN, program: 'work', from: 'a2', to: 'b2' }
+    savePlan(mine)
+    restoreBackup(BACKUP, 'merge')
+    expect(getPlan()).toEqual(mine)
+    restoreBackup({ ...BACKUP, texts: null, plan: null }, 'replace')
+    expect(getTextProgress()).toEqual({ listened: {}, spoken: {} })
+    expect(getPlan()).toBeNull()
+  })
+
   it('el progreso del curso viaja en la copia; las copias anteriores lo traen vacío', () => {
     resetCourseProgress()
     const old = serializeBackup({ ...BACKUP, course: null }, NOW)

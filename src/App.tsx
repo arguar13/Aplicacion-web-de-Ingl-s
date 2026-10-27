@@ -20,10 +20,11 @@ import { welcomePrerendered } from '@/lib/prerender'
 import { dayKey, noonOf, setLastDeck, settleStreak, useProgress } from '@/lib/progress'
 import { pruneStaleAudio } from '@/lib/pwa'
 import { getRoute, goBack, navigate, useRoute } from '@/lib/router'
-import { formatHash, HOME, type Screen, titleOf } from '@/lib/routes'
+import { formatHash, HOME, type Screen, type TextMode, titleOf } from '@/lib/routes'
 import { updateSettings, useSettings } from '@/lib/settings'
 import type { CourseLevelId } from '@/lib/courseMeta'
 import type { SmartDeckKind } from '@/lib/smartDecks'
+import type { TopicId } from '@/lib/topicMeta'
 import type { Mode } from '@/lib/types'
 
 /*
@@ -59,6 +60,13 @@ const ExamScreen = lazy(() =>
 const QuizScreen = lazy(() =>
   import('@/components/course/CourseScreens').then((module) => ({ default: module.QuizScreen })),
 )
+const TextLibraryScreen = lazy(() =>
+  import('@/components/texts/TextScreens').then((module) => ({ default: module.TextLibraryScreen })),
+)
+const TextScreen = lazy(() =>
+  import('@/components/texts/TextScreens').then((module) => ({ default: module.TextScreen })),
+)
+const PlanScreen = lazy(() => import('@/components/plan/PlanScreen').then((module) => ({ default: module.PlanScreen })))
 const DictionaryScreen = lazy(() =>
   import('@/components/DictionaryScreen').then((module) => ({ default: module.DictionaryScreen })),
 )
@@ -108,6 +116,14 @@ const openQuiz = (level: CourseLevelId | null) => go({ name: 'quiz', level })
 const backToCourse = () => goBack({ screen: { name: 'course' }, panel: null })
 const backToLevel = (level: CourseLevelId) => goBack({ screen: { name: 'courseLevel', level }, panel: null })
 const startCoach = () => go({ name: 'coach' })
+const openTexts = (mode: TextMode) => go({ name: 'texts', mode })
+const openText = (mode: TextMode, text: string) => go({ name: 'text', mode, text })
+/** Entre textos (o de escuchar a leer el mismo), sin apilar cada uno en el historial. */
+const switchText = (mode: TextMode, text: string) =>
+  navigate({ screen: { name: 'text', mode, text }, panel: null }, { replace: true })
+const backToTexts = (mode: TextMode) => goBack({ screen: { name: 'texts', mode }, panel: null })
+const openPlan = () => go({ name: 'plan' })
+const openTopic = (topic: TopicId) => go({ name: 'topic', topic })
 /** Duración del modo concentración. */
 const FOCUS_MINUTES = 5
 
@@ -142,6 +158,10 @@ function Home() {
       onOpenDictionary={() => go({ name: 'dictionary' })}
       onOpenSettings={openSettings}
       onOpenShortcuts={openShortcuts}
+      onOpenTexts={openTexts}
+      onOpenText={openText}
+      onOpenPlan={openPlan}
+      onOpenTopic={openTopic}
     />
   )
 }
@@ -213,6 +233,36 @@ function ScreenView({ screen, mode }: { screen: Screen; mode: Mode }) {
       )
     case 'exam':
       return <ExamScreen key={screen.level} level={screen.level} onExit={() => backToLevel(screen.level)} />
+    case 'texts':
+      return (
+        <TextLibraryScreen
+          mode={screen.mode}
+          onExit={exitToHome}
+          onOpenText={openText}
+          onSwitchMode={(next) => navigate({ screen: { name: 'texts', mode: next }, panel: null }, { replace: true })}
+        />
+      )
+    case 'text':
+      return (
+        <TextScreen
+          key={`${screen.mode}/${screen.text}`}
+          mode={screen.mode}
+          id={screen.text}
+          onExit={() => backToTexts(screen.mode)}
+          onOpenText={switchText}
+        />
+      )
+    case 'plan':
+      return (
+        <PlanScreen
+          onExit={exitToHome}
+          onStartCoach={startCoach}
+          onOpenLesson={openLesson}
+          onOpenExam={openExam}
+          onOpenText={openText}
+          onOpenTopic={openTopic}
+        />
+      )
     case 'quiz': {
       const { level } = screen
       return (

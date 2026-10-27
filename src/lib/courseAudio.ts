@@ -73,3 +73,10 @@ export function useRecordedSentence(text: string): string | null {
 /** Ids de todas las grabaciones del curso publicadas (para descargarlas sin conexión). */
 export const recordedCourseIds = (all: Readonly<Record<string, string>>) =>
   Object.keys(all).filter((id) => id.startsWith('course/'))
+
+/** Id de la grabación de una frase si existe; null si no (espera al mapa de versiones, si hace falta). */
+export async function recordedIdOf(text: string): Promise<string | null> {
+  const all = await loadAudioVersions()
+  const id = courseAudioId(text)
+  return id in all ? id : null
+}

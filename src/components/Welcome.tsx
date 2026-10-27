@@ -5,7 +5,7 @@
  */
 import { type ChangeEvent, type ReactNode, useRef, useState } from 'react'
 import { playEffect, playPronunciation } from '@/lib/audio'
-import { type Backup, readBackupFile } from '@/lib/backup'
+import type { Backup } from '@/lib/backup'
 import { cn } from '@/lib/cn'
 import { Brand } from './Header'
 import {
@@ -365,6 +365,8 @@ function RestoreLink({ onBackup, inert = false }: { onBackup: (backup: Backup) =
     const file = event.target.files?.[0]
     event.target.value = ''
     if (!file) return
+    // Leer y validar una copia arrastra media app (progreso, curso, logros): solo al elegir el archivo.
+    const { readBackupFile } = await import('@/lib/backup')
     const parsed = await readBackupFile(file)
     if (parsed.ok) onBackup(parsed.backup)
     else setError(parsed.error)

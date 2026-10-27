@@ -24,6 +24,7 @@ const SIMPLE_SCREENS = {
   blitz: { path: '/relampago', title: 'Relámpago' },
   stats: { path: '/estadisticas', title: 'Tu progreso' },
   dictionary: { path: '/diccionario', title: 'Diccionario' },
+  plan: { path: '/plan', title: 'Tu plan de estudio' },
 } as const
 type SimpleScreen = keyof typeof SIMPLE_SCREENS
 const SIMPLE_NAMES = Object.keys(SIMPLE_SCREENS).filter((name): name is SimpleScreen => name in SIMPLE_SCREENS)
@@ -38,7 +39,18 @@ export type Screen =
   | { name: 'exam'; level: CourseLevelId }
   /** Quiz de un nivel, o el mixto de todos (`level: null`). */
   | { name: 'quiz'; level: CourseLevelId | null }
+  /** Biblioteca de textos, para escuchar o para leer en voz alta. */
+  | { name: 'texts'; mode: TextMode }
+  | { name: 'text'; mode: TextMode; text: string }
   | { name: SimpleScreen }
+
+/** Con un texto se entrena el oído (escuchar) o la pronunciación (leerlo en voz alta). */
+export type TextMode = 'listen' | 'read'
+const TEXT_MODES: Record<TextMode, { path: string; title: string }> = {
+  listen: { path: '/escuchar', title: 'Entrena el oído' },
+  read: { path: '/leer-en-voz-alta', title: 'Lee en voz alta' },
+}
+const TEXT_MODE_NAMES: readonly TextMode[] = ['listen', 'read']
 
 export interface Route {
   screen: Screen
@@ -79,6 +91,12 @@ function parseScreen(path: string): Screen | null {
   if (simple) return { name: simple }
   const smart = SMART_KINDS.find((kind) => SMART[kind].path === path)
   if (smart) return { name: 'smart', kind: smart }
+  for (const mode of TEXT_MODE_NAMES) {
+    const base = TEXT_MODES[mode].path
+    if (path === base) return { name: 'texts', mode }
+    const text = path.startsWith(`${base}/`) ? path.slice(base.length + 1) : null
+    if (text !== null) return /^[a-z0-9-]+$/.test(text) ? { name: 'text', mode, text } : null
+  }
   const topic = /^\/tema\/([a-z]+)$/.exec(path)?.[1]
   if (topic) return isTopicId(topic) ? { name: 'topic', topic } : null
   if (path === '/curso/quiz') return { name: 'quiz', level: null }
@@ -121,6 +139,10 @@ function screenPath(screen: Screen): string {
       return `/curso/${screen.level}/examen`
     case 'quiz':
       return screen.level === null ? '/curso/quiz' : `/curso/${screen.level}/quiz`
+    case 'texts':
+      return TEXT_MODES[screen.mode].path
+    case 'text':
+      return `${TEXT_MODES[screen.mode].path}/${screen.text}`
     case 'coach':
     case 'course':
     case 'focus':
@@ -128,6 +150,7 @@ function screenPath(screen: Screen): string {
     case 'blitz':
     case 'stats':
     case 'dictionary':
+    case 'plan':
       return SIMPLE_SCREENS[screen.name].path
   }
 }
@@ -163,6 +186,9 @@ export function titleOf(route: Route): string {
       return `Examen ${courseLevelInfo(screen.level).name} — OpenSpeak`
     case 'quiz':
       return screen.level === null ? 'Quiz mixto — OpenSpeak' : `Quiz ${courseLevelInfo(screen.level).name} — OpenSpeak`
+    case 'texts':
+    case 'text':
+      return `${TEXT_MODES[screen.mode].title} — OpenSpeak`
     case 'coach':
     case 'course':
     case 'focus':
@@ -170,6 +196,7 @@ export function titleOf(route: Route): string {
     case 'blitz':
     case 'stats':
     case 'dictionary':
+    case 'plan':
       return `${SIMPLE_SCREENS[screen.name].title} — OpenSpeak`
   }
 }

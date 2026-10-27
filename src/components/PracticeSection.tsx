@@ -3,9 +3,12 @@ import { useDeckSummaries } from '@/hooks/useDeckSummaries'
 import { cn } from '@/lib/cn'
 import { ALL_DECK, type Deck, LEVELS, samplePreview } from '@/lib/decks'
 import type { DeckSummary } from '@/lib/scheduler'
+import type { TextMode } from '@/lib/routes'
+import { SPOKEN_PASS, useTextProgress } from '@/lib/textProgress'
+import { TEXT_COUNT } from '@/lib/texts'
 import { type Mode, type Track, trackOf } from '@/lib/types'
 import { cardBase, shortcutOf } from './homeCards'
-import { ArrowRightIcon, ShuffleIcon } from './icons'
+import { ArrowRightIcon, HeadphonesIcon, MicIcon, ShuffleIcon } from './icons'
 import { MODE_INFO, MODE_ORDER } from './modeInfo'
 import { ProgressBar } from './ProgressBar'
 import { Badge } from './ui/Badge'
@@ -41,12 +44,14 @@ export function PracticeSection({
   lastDeckId,
   onPractice,
   onPick,
+  onOpenTexts,
 }: {
   /** El último modo usado: con él se abren los niveles de la lista. */
   mode: Mode
   lastDeckId: string | null
   onPractice: (deck: Deck, mode: Mode) => void
   onPick: (deck: Deck) => void
+  onOpenTexts: (mode: TextMode) => void
 }) {
   // Cada habilidad lleva su progreso: el nivel en curso de «escuchar» no tiene por qué ser el de «traducir».
   const summaries: Record<Track, SummaryOf> = {
@@ -96,6 +101,7 @@ export function PracticeSection({
             )
           })}
         </ul>
+        <TextPractice onOpenTexts={onOpenTexts} />
       </section>
 
       <div className="mt-12 mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -130,6 +136,92 @@ export function PracticeSection({
         </div>
       )}
     </>
+  )
+}
+
+/**
+ * Oído y pronunciación con textos completos: escucharlos con voz nativa (con su traducción a un
+ * toque) o leerlos en voz alta con el micrófono como corrector.
+ */
+function TextPractice({ onOpenTexts }: { onOpenTexts: (mode: TextMode) => void }) {
+  const progress = useTextProgress()
+  const listened = Object.keys(progress.listened).length
+  const spoken = Object.values(progress.spoken).filter((entry) => entry.best >= SPOKEN_PASS).length
+  return (
+    <div className="mt-8">
+      <h3 className="text-[11px] font-semibold tracking-[0.2em] text-muted uppercase">Oído y pronunciación</h3>
+      <ul className="mt-3 grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2">
+        <li>
+          <TextTile
+            Icon={HeadphonesIcon}
+            title="Entrena el oído"
+            description="Escucha textos completos con voz nativa, frase a frase, y descubre su traducción al español cuando quieras."
+            stat={`${listened} de ${TEXT_COUNT} textos escuchados`}
+            ratio={listened / TEXT_COUNT}
+            onOpen={() => onOpenTexts('listen')}
+          />
+        </li>
+        <li>
+          <TextTile
+            Icon={MicIcon}
+            title="Lee en voz alta"
+            description="Lee un texto entero con tu voz: el micrófono te escucha y marca cada palabra que pronuncias bien."
+            stat={`${spoken} de ${TEXT_COUNT} textos superados`}
+            ratio={spoken / TEXT_COUNT}
+            onOpen={() => onOpenTexts('read')}
+          />
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+function TextTile({
+  Icon,
+  title,
+  description,
+  stat,
+  ratio,
+  onOpen,
+}: {
+  Icon: typeof HeadphonesIcon
+  title: string
+  description: string
+  stat: string
+  ratio: number
+  onOpen: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={cn(
+        cardBase,
+        'flex h-full items-start gap-4 border-line bg-surface p-5 shadow-card hover:border-accent/40 hover:shadow-key-hover sm:p-6',
+      )}
+    >
+      <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand text-accent-ink shadow-glow transition-transform group-hover:-rotate-6">
+        <Icon width={22} height={22} />
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col self-stretch">
+        <span className="flex items-center justify-between gap-2">
+          <span className="text-[17px] font-semibold">{title}</span>
+          <Badge tone="accent-soft" caps>
+            A1–C2
+          </Badge>
+        </span>
+        <span className="mt-1 block text-sm leading-snug text-muted">{description}</span>
+        <span className="mt-auto block pt-4">
+          <span className="block h-1.5 overflow-hidden rounded-full bg-line">
+            <span className="block h-full rounded-full bg-brand" style={{ width: `${ratio * 100}%` }} />
+          </span>
+          <span className="mt-1.5 flex items-center justify-between text-[11px] text-muted tabular-nums">
+            {stat}
+            <ArrowRightIcon width={16} height={16} className="transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </span>
+      </span>
+    </button>
   )
 }
 

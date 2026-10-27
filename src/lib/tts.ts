@@ -51,6 +51,29 @@ export function speakEnglish(text: string, { slow = false } = {}): boolean {
   return true
 }
 
+let speakToken = 0
+
+/**
+ * Lee el texto y espera a que termine: true si se leyó entero, false si se cortó o no hay voz en
+ * inglés. Para los textos sin grabación.
+ */
+export function speakToEnd(text: string, { slow = false } = {}): Promise<boolean> {
+  const voice = bestEnglishVoice()
+  if (!voice) return Promise.resolve(false)
+  const token = ++speakToken
+  window.speechSynthesis.cancel()
+  return new Promise((resolve) => {
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.voice = voice
+    utterance.lang = voice.lang
+    utterance.rate = slow ? 0.7 : 0.95
+    utterance.addEventListener('end', () => resolve(token === speakToken))
+    utterance.addEventListener('error', () => resolve(false))
+    window.speechSynthesis.speak(utterance)
+  })
+}
+
 export function stopSpeaking() {
+  speakToken++
   if (canSpeak()) window.speechSynthesis.cancel()
 }

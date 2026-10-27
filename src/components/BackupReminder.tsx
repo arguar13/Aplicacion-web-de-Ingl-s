@@ -1,10 +1,16 @@
+import { lazy, Suspense } from 'react'
 import { useNow } from '@/hooks/useNow'
 import { useProgress } from '@/lib/progress'
 import { needsBackupReminder, snoozeBackupReminder, storageAtRisk, useSafekeeping } from '@/lib/safekeeping'
-import { saveBackup } from './BackupSection'
 import { CloseIcon, ShieldIcon } from './icons'
 import { Button } from './ui/Button'
 import { IconButton } from './ui/IconButton'
+
+/**
+ * El botón trae consigo las copias de seguridad (progreso, curso, textos, plan…): llega aparte, así
+ * el inicio no carga todo eso. Mientras tanto, un botón igual pero inactivo ocupa su lugar.
+ */
+const SaveBackupButton = lazy(() => import('./BackupSection').then((module) => ({ default: module.SaveBackupButton })))
 
 /**
  * Aviso en el inicio para Safari sin instalar, donde el progreso se borra tras 7 días sin visitas:
@@ -45,9 +51,15 @@ export function BackupReminder({ onOpenSettings }: { onOpenSettings: () => void 
           </button>
           .
         </p>
-        <Button variant="primary" size="sm" onClick={saveBackup} className="mt-3">
-          Guardar copia
-        </Button>
+        <Suspense
+          fallback={
+            <Button variant="primary" size="sm" disabled className="mt-3">
+              Guardar copia
+            </Button>
+          }
+        >
+          <SaveBackupButton className="mt-3" />
+        </Suspense>
       </div>
       <IconButton
         label="Recordármelo más tarde"

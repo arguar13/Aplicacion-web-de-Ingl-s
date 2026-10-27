@@ -11,7 +11,7 @@ declare global {
 }
 
 /** Así lo escribe la app (sin separador de miles en español hasta 9999). */
-const TOTAL = `${words.length} palabras`
+const TOTAL = `${words.length.toLocaleString('es')} palabras`
 
 test('el diccionario busca en los dos idiomas y abre la ficha de cada palabra', async ({ page }) => {
   await page.goto('./')
@@ -74,7 +74,7 @@ test('la lista filtrada se exporta como CSV con cabecera, detalles y estado', as
   expect(lines[1]).toMatch(/^water,agua,sustantivo,\/.+\/,.+water.+,.+,nueva,$/)
 })
 
-test('la frase de ejemplo se puede oír con la voz del navegador cuando hay una voz en inglés', async ({ page }) => {
+test('la frase de ejemplo sin grabación se oye con la voz del navegador si hay una voz en inglés', async ({ page }) => {
   // Síntesis de voz simulada con una voz en inglés: lo dicho queda en window.spokenText.
   await page.addInitScript(() => {
     const voices = [{ name: 'Samantha', lang: 'en-US', default: true, localService: true, voiceURI: 'Samantha' }]
@@ -95,8 +95,9 @@ test('la frase de ejemplo se puede oír con la voz del navegador cuando hay una 
     }
     Object.assign(window, { SpeechSynthesisUtterance: FakeUtterance })
   })
-  await page.goto('./#/diccionario?palabra=water')
-  const sheet = page.getByRole('dialog', { name: 'water' })
+  // La de «tree» no está en el curso, así que no tiene grabación (la de «water» sí, y suena grabada).
+  await page.goto('./#/diccionario?palabra=tree')
+  const sheet = page.getByRole('dialog', { name: 'tree' })
   const example = (await sheet.locator('blockquote').textContent())?.trim() ?? ''
   await sheet.getByRole('button', { name: 'Escuchar la frase' }).click()
   await expect.poll(() => page.evaluate(() => window.spokenText)).toBe(example)

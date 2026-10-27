@@ -58,3 +58,56 @@ export function listenFor(target: string): { result: Promise<ListenResult>; canc
   recognition.start()
   return { result, cancel: () => recognition.abort() }
 }
+
+export interface DictationHandlers {
+  /** Todo lo oído hasta ahora (lo definitivo y lo provisional), cada vez que cambia. */
+  onTranscript: (transcript: string) => void
+  /** Se dejó de escuchar: por `stop()`, por un silencio largo o por un error. */
+  onEnd: (error: 'no-speech' | 'denied' | 'failed' | null) => void
+}
+
+/**
+ * Escucha de forma continua (para leer una frase larga en voz alta) y va contando lo que oye, con
+ * los resultados provisionales: así se puede marcar cada palabra en cuanto se dice. `stop()` deja de
+ * escuchar entregando lo pendiente; `cancel()` corta sin más avisos.
+ */
+export function startDictation({ onTranscript, onEnd }: DictationHandlers): { stop: () => void; cancel: () => void } {
+  const Recognition = recognitionClass()
+  if (!Recognition) {
+    queueMicrotask(() => onEnd('failed'))
+    return { stop: () => undefined, cancel: () => undefined }
+  }
+  const recognition = new Recognition()
+  recognition.lang = 'en-US'
+  recognition.continuous = true
+  recognition.interimResults = true
+  recognition.maxAlternatives = 1
+  let cancelled = false
+  let heardSomething = false
+  let failure: 'no-speech' | 'denied' | 'failed' | null = null
+  recognition.addEventListener('result', (event) => {
+    if (cancelled) return
+    const transcript = Array.from(event.results, (result) => result[0]?.transcript ?? '')
+      .join(' ')
+      .trim()
+    heardSomething ||= transcript.length > 0
+    onTranscript(transcript)
+  })
+  recognition.addEventListener('error', (event) => {
+    if (event.error === 'aborted') return
+    const denied = event.error === 'not-allowed' || event.error === 'service-not-allowed'
+    failure = denied ? 'denied' : event.error === 'no-speech' ? 'no-speech' : 'failed'
+  })
+  recognition.addEventListener('end', () => {
+    if (cancelled) return
+    onEnd(failure ?? (heardSomething ? null : 'no-speech'))
+  })
+  recognition.start()
+  return {
+    stop: () => recognition.stop(),
+    cancel: () => {
+      cancelled = true
+      recognition.abort()
+    },
+  }
+}

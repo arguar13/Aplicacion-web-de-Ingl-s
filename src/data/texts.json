@@ -1,0 +1,1640 @@
+{
+  "texts": [
+    {
+      "id": "a1-my-family",
+      "level": "a1",
+      "title": "My Family",
+      "titleEs": "Mi familia",
+      "topic": "Vida diaria",
+      "paragraphs": [
+        [
+          {
+            "en": "My name is Lucy, and I am twelve years old.",
+            "es": "Me llamo Lucy y tengo doce años."
+          },
+          {
+            "en": "I live in a small house with my family.",
+            "es": "Vivo en una casa pequeña con mi familia."
+          },
+          {
+            "en": "My mother is a nurse, and my father is a teacher.",
+            "es": "Mi madre es enfermera y mi padre es profesor."
+          }
+        ],
+        [
+          {
+            "en": "I have one brother and one sister.",
+            "es": "Tengo un hermano y una hermana."
+          },
+          {
+            "en": "My brother is ten, and my sister is six.",
+            "es": "Mi hermano tiene diez años y mi hermana tiene seis."
+          },
+          {
+            "en": "We also have a dog. His name is Max.",
+            "es": "También tenemos un perro. Se llama Max."
+          },
+          {
+            "en": "Max is big and brown, and he loves the park.",
+            "es": "Max es grande y café, y le encanta el parque."
+          },
+          {
+            "en": "I love my family very much.",
+            "es": "Quiero mucho a mi familia."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a1-my-day",
+      "level": "a1",
+      "title": "A Normal Day",
+      "titleEs": "Un día normal",
+      "topic": "Vida diaria",
+      "paragraphs": [
+        [
+          {
+            "en": "I get up at seven o'clock every morning.",
+            "es": "Me levanto a las siete todas las mañanas."
+          },
+          {
+            "en": "I take a shower and get dressed.",
+            "es": "Me baño y me visto."
+          },
+          {
+            "en": "For breakfast, I have toast and a cup of coffee.",
+            "es": "De desayuno, como pan tostado y una taza de café."
+          },
+          {
+            "en": "I go to work by bus.",
+            "es": "Voy al trabajo en autobús."
+          }
+        ],
+        [
+          {
+            "en": "I work in an office from nine to five.",
+            "es": "Trabajo en una oficina de nueve a cinco."
+          },
+          {
+            "en": "At one o'clock, I have lunch with my friends.",
+            "es": "A la una, almuerzo con mis amigos."
+          },
+          {
+            "en": "In the evening, I cook dinner and watch TV.",
+            "es": "En la noche, preparo la cena y veo la televisión."
+          },
+          {
+            "en": "I go to bed at eleven.",
+            "es": "Me acuesto a las once."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a1-at-the-cafe",
+      "level": "a1",
+      "title": "At the Café",
+      "titleEs": "En la cafetería",
+      "topic": "Viajes",
+      "paragraphs": [
+        [
+          {
+            "en": "Good morning! What would you like?",
+            "es": "¡Buenos días! ¿Qué le gustaría?"
+          },
+          {
+            "en": "I'd like a coffee with milk, please.",
+            "es": "Quisiera un café con leche, por favor."
+          },
+          {
+            "en": "Small or large?",
+            "es": "¿Chico o grande?"
+          },
+          {
+            "en": "Large, please. And a chocolate cake.",
+            "es": "Grande, por favor. Y un pastel de chocolate."
+          }
+        ],
+        [
+          {
+            "en": "Do you want to eat here or take it away?",
+            "es": "¿Quiere comer aquí o para llevar?"
+          },
+          {
+            "en": "I want to eat here.",
+            "es": "Quiero comer aquí."
+          },
+          {
+            "en": "That's six dollars and fifty cents.",
+            "es": "Son seis dólares con cincuenta centavos."
+          },
+          {
+            "en": "Here you are. Thank you very much!",
+            "es": "Aquí tiene. ¡Muchas gracias!"
+          },
+          {
+            "en": "You're welcome. Have a nice day!",
+            "es": "De nada. ¡Que tenga un buen día!"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a1-my-city",
+      "level": "a1",
+      "title": "My City",
+      "titleEs": "Mi ciudad",
+      "topic": "Lugares",
+      "paragraphs": [
+        [
+          {
+            "en": "I live in a big city near the sea.",
+            "es": "Vivo en una ciudad grande cerca del mar."
+          },
+          {
+            "en": "There are many shops, restaurants and parks.",
+            "es": "Hay muchas tiendas, restaurantes y parques."
+          },
+          {
+            "en": "My favorite place is the old market.",
+            "es": "Mi lugar favorito es el mercado antiguo."
+          },
+          {
+            "en": "You can buy fruit, fish and flowers there.",
+            "es": "Ahí puedes comprar fruta, pescado y flores."
+          }
+        ],
+        [
+          {
+            "en": "The city is very beautiful in summer.",
+            "es": "La ciudad es muy bonita en verano."
+          },
+          {
+            "en": "The weather is hot and sunny.",
+            "es": "El clima es caluroso y soleado."
+          },
+          {
+            "en": "People go to the beach on the weekend.",
+            "es": "La gente va a la playa el fin de semana."
+          },
+          {
+            "en": "In winter, it is cold and it rains a lot.",
+            "es": "En invierno hace frío y llueve mucho."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a1-my-friend",
+      "level": "a1",
+      "title": "My Best Friend",
+      "titleEs": "Mi mejor amigo",
+      "topic": "Personas",
+      "paragraphs": [
+        [
+          {
+            "en": "My best friend is called Daniel.",
+            "es": "Mi mejor amigo se llama Daniel."
+          },
+          {
+            "en": "He is from Mexico, but he lives in Canada now.",
+            "es": "Es de México, pero ahora vive en Canadá."
+          },
+          {
+            "en": "He is tall and he has short black hair.",
+            "es": "Es alto y tiene el pelo negro y corto."
+          },
+          {
+            "en": "Daniel is very funny and kind.",
+            "es": "Daniel es muy gracioso y amable."
+          }
+        ],
+        [
+          {
+            "en": "He likes music and he plays the guitar.",
+            "es": "Le gusta la música y toca la guitarra."
+          },
+          {
+            "en": "On Saturdays, we play soccer together.",
+            "es": "Los sábados jugamos fútbol juntos."
+          },
+          {
+            "en": "We talk on the phone every week.",
+            "es": "Hablamos por teléfono todas las semanas."
+          },
+          {
+            "en": "I am very happy to have a friend like him.",
+            "es": "Estoy muy feliz de tener un amigo como él."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a1-shopping",
+      "level": "a1",
+      "title": "Going Shopping",
+      "titleEs": "De compras",
+      "topic": "Vida diaria",
+      "paragraphs": [
+        [
+          {
+            "en": "Today I need to buy food for the week.",
+            "es": "Hoy necesito comprar comida para la semana."
+          },
+          {
+            "en": "I go to the supermarket near my house.",
+            "es": "Voy al supermercado cerca de mi casa."
+          },
+          {
+            "en": "I buy bread, eggs, rice and some vegetables.",
+            "es": "Compro pan, huevos, arroz y algunas verduras."
+          },
+          {
+            "en": "The apples are very cheap today.",
+            "es": "Las manzanas están muy baratas hoy."
+          }
+        ],
+        [
+          {
+            "en": "I also need a new shirt for work.",
+            "es": "También necesito una camisa nueva para el trabajo."
+          },
+          {
+            "en": "In the clothes shop, I try on a blue shirt.",
+            "es": "En la tienda de ropa, me pruebo una camisa azul."
+          },
+          {
+            "en": "It is perfect, and it is not expensive.",
+            "es": "Es perfecta y no es cara."
+          },
+          {
+            "en": "I pay by card and walk home.",
+            "es": "Pago con tarjeta y regreso a casa caminando."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-last-weekend",
+      "level": "a2",
+      "title": "Last Weekend",
+      "titleEs": "El fin de semana pasado",
+      "topic": "Vida diaria",
+      "paragraphs": [
+        [
+          {
+            "en": "Last weekend was very busy, but I had a great time.",
+            "es": "El fin de semana pasado estuve muy ocupado, pero me la pasé genial."
+          },
+          {
+            "en": "On Saturday morning, I visited my grandparents in the country.",
+            "es": "El sábado en la mañana visité a mis abuelos en el campo."
+          },
+          {
+            "en": "My grandmother made a delicious lunch, and we ate in the garden.",
+            "es": "Mi abuela preparó un almuerzo delicioso y comimos en el jardín."
+          },
+          {
+            "en": "After lunch, my grandfather showed me his new vegetable garden.",
+            "es": "Después del almuerzo, mi abuelo me mostró su nuevo huerto."
+          }
+        ],
+        [
+          {
+            "en": "In the evening, I went back to the city by train.",
+            "es": "En la noche regresé a la ciudad en tren."
+          },
+          {
+            "en": "On Sunday, I met some friends and we went to the cinema.",
+            "es": "El domingo me vi con unos amigos y fuimos al cine."
+          },
+          {
+            "en": "The film was funny, but it was a bit too long.",
+            "es": "La película era graciosa, pero un poco larga."
+          },
+          {
+            "en": "Then we had pizza at a small Italian restaurant.",
+            "es": "Luego comimos pizza en un pequeño restaurante italiano."
+          },
+          {
+            "en": "I got home late, but I was very happy.",
+            "es": "Llegué tarde a casa, pero estaba muy contento."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-a-trip-to-london",
+      "level": "a2",
+      "title": "A Trip to London",
+      "titleEs": "Un viaje a Londres",
+      "topic": "Viajes",
+      "paragraphs": [
+        [
+          {
+            "en": "Last year, my sister and I traveled to London for a week.",
+            "es": "El año pasado, mi hermana y yo viajamos a Londres por una semana."
+          },
+          {
+            "en": "We stayed in a small hotel near the river.",
+            "es": "Nos quedamos en un hotel pequeño cerca del río."
+          },
+          {
+            "en": "On the first day, we took a bus tour around the city.",
+            "es": "El primer día hicimos un recorrido en autobús por la ciudad."
+          },
+          {
+            "en": "We saw Big Ben, the Tower of London and Buckingham Palace.",
+            "es": "Vimos el Big Ben, la Torre de Londres y el Palacio de Buckingham."
+          }
+        ],
+        [
+          {
+            "en": "The weather was cloudy, and it rained almost every afternoon.",
+            "es": "El clima estaba nublado y llovió casi todas las tardes."
+          },
+          {
+            "en": "So we spent a lot of time in museums, which are free in London.",
+            "es": "Así que pasamos mucho tiempo en museos, que en Londres son gratis."
+          },
+          {
+            "en": "My favorite was the Natural History Museum.",
+            "es": "Mi favorito fue el Museo de Historia Natural."
+          },
+          {
+            "en": "The food was better than I expected, especially the Indian restaurants.",
+            "es": "La comida fue mejor de lo que esperaba, sobre todo los restaurantes indios."
+          },
+          {
+            "en": "I would love to go back one day.",
+            "es": "Me encantaría volver algún día."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-healthy-habits",
+      "level": "a2",
+      "title": "Healthy Habits",
+      "titleEs": "Hábitos saludables",
+      "topic": "Salud",
+      "paragraphs": [
+        [
+          {
+            "en": "A few months ago, I decided to change my habits.",
+            "es": "Hace unos meses, decidí cambiar mis hábitos."
+          },
+          {
+            "en": "I used to eat fast food almost every day, and I never did exercise.",
+            "es": "Antes comía comida rápida casi todos los días y nunca hacía ejercicio."
+          },
+          {
+            "en": "I often felt tired, and I didn't sleep well.",
+            "es": "A menudo me sentía cansado y no dormía bien."
+          }
+        ],
+        [
+          {
+            "en": "Now I cook at home and I eat more fruit and vegetables.",
+            "es": "Ahora cocino en casa y como más fruta y verduras."
+          },
+          {
+            "en": "I walk to work instead of taking the car.",
+            "es": "Camino al trabajo en lugar de ir en carro."
+          },
+          {
+            "en": "Three times a week, I go swimming after work.",
+            "es": "Tres veces por semana voy a nadar después del trabajo."
+          },
+          {
+            "en": "I also try to go to bed before eleven.",
+            "es": "También intento acostarme antes de las once."
+          },
+          {
+            "en": "I feel much better now, and I have more energy.",
+            "es": "Ahora me siento mucho mejor y tengo más energía."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-a-job-interview",
+      "level": "a2",
+      "title": "A Job Interview",
+      "titleEs": "Una entrevista de trabajo",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "Good afternoon. Please sit down.",
+            "es": "Buenas tardes. Siéntese, por favor."
+          },
+          {
+            "en": "Thank you. It's nice to meet you.",
+            "es": "Gracias. Mucho gusto."
+          },
+          {
+            "en": "So, tell me about yourself.",
+            "es": "Bueno, cuénteme sobre usted."
+          },
+          {
+            "en": "I studied tourism, and I have worked in a hotel for three years.",
+            "es": "Estudié turismo y he trabajado en un hotel durante tres años."
+          }
+        ],
+        [
+          {
+            "en": "Why do you want to work for our company?",
+            "es": "¿Por qué quiere trabajar en nuestra empresa?"
+          },
+          {
+            "en": "Because I enjoy working with people, and your company has a great reputation.",
+            "es": "Porque me gusta trabajar con gente y su empresa tiene una gran reputación."
+          },
+          {
+            "en": "Can you speak any other languages?",
+            "es": "¿Habla algún otro idioma?"
+          },
+          {
+            "en": "Yes, I speak Spanish and English, and I'm learning French.",
+            "es": "Sí, hablo español e inglés, y estoy aprendiendo francés."
+          },
+          {
+            "en": "Great. We will call you next week.",
+            "es": "Excelente. Lo llamaremos la próxima semana."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-weekend-plans",
+      "level": "a2",
+      "title": "Plans for the Weekend",
+      "titleEs": "Planes para el fin de semana",
+      "topic": "Vida diaria",
+      "paragraphs": [
+        [
+          {
+            "en": "What are you going to do this weekend?",
+            "es": "¿Qué vas a hacer este fin de semana?"
+          },
+          {
+            "en": "I'm going to go camping in the mountains with my cousins.",
+            "es": "Voy a ir a acampar a las montañas con mis primos."
+          },
+          {
+            "en": "That sounds fun! Is the weather going to be good?",
+            "es": "¡Suena divertido! ¿Va a hacer buen tiempo?"
+          },
+          {
+            "en": "The forecast says it will be sunny on Saturday, but it might rain on Sunday.",
+            "es": "El pronóstico dice que el sábado estará soleado, pero el domingo podría llover."
+          }
+        ],
+        [
+          {
+            "en": "What are you going to take?",
+            "es": "¿Qué vas a llevar?"
+          },
+          {
+            "en": "A tent, warm clothes and lots of food.",
+            "es": "Una tienda de campaña, ropa abrigadora y mucha comida."
+          },
+          {
+            "en": "I'm also going to take my camera, because the views are amazing.",
+            "es": "También voy a llevar mi cámara, porque las vistas son increíbles."
+          },
+          {
+            "en": "Have a great time, and send me some photos!",
+            "es": "¡Que te diviertas, y mándame algunas fotos!"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "a2-a-new-neighbor",
+      "level": "a2",
+      "title": "A New Neighbor",
+      "titleEs": "Una vecina nueva",
+      "topic": "Personas",
+      "paragraphs": [
+        [
+          {
+            "en": "A new neighbor moved into the apartment next to mine last month.",
+            "es": "El mes pasado, una vecina nueva se mudó al departamento de al lado."
+          },
+          {
+            "en": "Her name is Anna, and she comes from Poland.",
+            "es": "Se llama Anna y es de Polonia."
+          },
+          {
+            "en": "She works as a doctor at the hospital in the city center.",
+            "es": "Trabaja como médica en el hospital del centro de la ciudad."
+          }
+        ],
+        [
+          {
+            "en": "At first, she didn't know anybody in the building.",
+            "es": "Al principio no conocía a nadie en el edificio."
+          },
+          {
+            "en": "One evening, I invited her for dinner, and we talked for hours.",
+            "es": "Una noche la invité a cenar y platicamos durante horas."
+          },
+          {
+            "en": "She told me about her country and taught me some Polish words.",
+            "es": "Me habló de su país y me enseñó algunas palabras en polaco."
+          },
+          {
+            "en": "Now we often go running together in the park.",
+            "es": "Ahora salimos a correr juntas al parque a menudo."
+          },
+          {
+            "en": "I'm glad she is my neighbor.",
+            "es": "Me alegra que sea mi vecina."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-working-from-home",
+      "level": "b1",
+      "title": "Working from Home",
+      "titleEs": "Trabajar desde casa",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "Since the company changed its rules, I have been working from home three days a week.",
+            "es": "Desde que la empresa cambió sus reglas, trabajo desde casa tres días a la semana."
+          },
+          {
+            "en": "At first, I thought it would be perfect, because I wouldn't have to travel for an hour every morning.",
+            "es": "Al principio pensé que sería perfecto, porque no tendría que viajar una hora cada mañana."
+          },
+          {
+            "en": "However, it was harder than I had imagined.",
+            "es": "Sin embargo, fue más difícil de lo que me había imaginado."
+          },
+          {
+            "en": "I found it difficult to concentrate, and I often worked until late at night.",
+            "es": "Me costaba concentrarme y a menudo trabajaba hasta tarde en la noche."
+          }
+        ],
+        [
+          {
+            "en": "So I decided to organize my day better.",
+            "es": "Así que decidí organizar mejor mi día."
+          },
+          {
+            "en": "Now I start at the same time every day, and I take a short break every two hours.",
+            "es": "Ahora empiezo a la misma hora todos los días y tomo un descanso corto cada dos horas."
+          },
+          {
+            "en": "I also turned the small spare room into an office, so I don't work on the sofa anymore.",
+            "es": "También convertí el cuartito libre en una oficina, así que ya no trabajo en el sofá."
+          },
+          {
+            "en": "If I had known this before, I would have saved a lot of stress.",
+            "es": "Si lo hubiera sabido antes, me habría ahorrado mucho estrés."
+          },
+          {
+            "en": "Now I enjoy the balance between home and the office.",
+            "es": "Ahora disfruto del equilibrio entre la casa y la oficina."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-learning-a-language",
+      "level": "b1",
+      "title": "How I Learned English",
+      "titleEs": "Cómo aprendí inglés",
+      "topic": "Aprendizaje",
+      "paragraphs": [
+        [
+          {
+            "en": "When I started learning English, I could only say a few words.",
+            "es": "Cuando empecé a aprender inglés, solo sabía decir unas cuantas palabras."
+          },
+          {
+            "en": "I was very shy, and I was afraid of making mistakes.",
+            "es": "Era muy tímido y tenía miedo de equivocarme."
+          },
+          {
+            "en": "My teacher told me that mistakes are a natural part of learning.",
+            "es": "Mi profesora me dijo que los errores son una parte natural del aprendizaje."
+          }
+        ],
+        [
+          {
+            "en": "I began watching series in English with subtitles.",
+            "es": "Empecé a ver series en inglés con subtítulos."
+          },
+          {
+            "en": "After a few months, I could understand much more without reading them.",
+            "es": "Después de unos meses, podía entender mucho más sin leerlos."
+          },
+          {
+            "en": "I also learned ten new words every day, and I reviewed the old ones regularly.",
+            "es": "También aprendía diez palabras nuevas cada día y repasaba las anteriores con regularidad."
+          },
+          {
+            "en": "The most important step was speaking with real people.",
+            "es": "El paso más importante fue hablar con personas reales."
+          },
+          {
+            "en": "I joined a conversation group that met every Thursday in a café.",
+            "es": "Me uní a un grupo de conversación que se reunía todos los jueves en un café."
+          },
+          {
+            "en": "Today, I use English at work, and I even dream in English sometimes.",
+            "es": "Hoy uso el inglés en el trabajo e incluso a veces sueño en inglés."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-the-lost-wallet",
+      "level": "b1",
+      "title": "The Lost Wallet",
+      "titleEs": "La cartera perdida",
+      "topic": "Historias",
+      "paragraphs": [
+        [
+          {
+            "en": "Last Friday, I was walking home when I noticed a wallet on the ground.",
+            "es": "El viernes pasado iba caminando a casa cuando vi una cartera en el suelo."
+          },
+          {
+            "en": "It had some money, two credit cards and an identity card inside.",
+            "es": "Tenía algo de dinero, dos tarjetas de crédito y una identificación adentro."
+          },
+          {
+            "en": "I looked around, but there was nobody nearby.",
+            "es": "Miré a mi alrededor, pero no había nadie cerca."
+          }
+        ],
+        [
+          {
+            "en": "I thought about taking it to the police station, but it was already closed.",
+            "es": "Pensé en llevarla a la estación de policía, pero ya estaba cerrada."
+          },
+          {
+            "en": "Then I found a business card with a phone number on it.",
+            "es": "Luego encontré una tarjeta de presentación con un número de teléfono."
+          },
+          {
+            "en": "I called the number, and an old man answered.",
+            "es": "Llamé al número y contestó un señor mayor."
+          },
+          {
+            "en": "He had been looking for his wallet all afternoon and he was very worried.",
+            "es": "Había estado buscando su cartera toda la tarde y estaba muy preocupado."
+          },
+          {
+            "en": "We met the next morning, and he was so grateful that he invited me for breakfast.",
+            "es": "Nos vimos a la mañana siguiente, y estaba tan agradecido que me invitó a desayunar."
+          },
+          {
+            "en": "Sometimes a small action can make someone's day.",
+            "es": "A veces una pequeña acción puede alegrarle el día a alguien."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-social-media",
+      "level": "b1",
+      "title": "Social Media and Us",
+      "titleEs": "Las redes sociales y nosotros",
+      "topic": "Sociedad",
+      "paragraphs": [
+        [
+          {
+            "en": "Social media has changed the way we communicate with each other.",
+            "es": "Las redes sociales han cambiado la forma en que nos comunicamos."
+          },
+          {
+            "en": "Thanks to it, we can stay in touch with friends who live on the other side of the world.",
+            "es": "Gracias a ellas, podemos seguir en contacto con amigos que viven al otro lado del mundo."
+          },
+          {
+            "en": "We can also share news and ideas in just a few seconds.",
+            "es": "También podemos compartir noticias e ideas en solo unos segundos."
+          }
+        ],
+        [
+          {
+            "en": "However, many experts believe that we spend too much time looking at our phones.",
+            "es": "Sin embargo, muchos expertos creen que pasamos demasiado tiempo mirando el teléfono."
+          },
+          {
+            "en": "Some studies suggest that it can make people feel lonely or anxious.",
+            "es": "Algunos estudios sugieren que puede hacer que la gente se sienta sola o ansiosa."
+          },
+          {
+            "en": "It is easy to compare our lives with the perfect photos that others post.",
+            "es": "Es fácil comparar nuestra vida con las fotos perfectas que publican los demás."
+          },
+          {
+            "en": "That is why some people decide to take a break from social media for a few weeks.",
+            "es": "Por eso algunas personas deciden alejarse de las redes sociales por unas semanas."
+          },
+          {
+            "en": "The key, as with most things, is to find a healthy balance.",
+            "es": "La clave, como en casi todo, es encontrar un equilibrio sano."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-lost-in-the-mountains",
+      "level": "b1",
+      "title": "Lost in the Mountains",
+      "titleEs": "Perdidos en la montaña",
+      "topic": "Historias",
+      "paragraphs": [
+        [
+          {
+            "en": "Two years ago, my friend Carlos and I decided to climb a mountain near our town.",
+            "es": "Hace dos años, mi amigo Carlos y yo decidimos subir una montaña cerca de nuestro pueblo."
+          },
+          {
+            "en": "We had checked the weather, and the forecast was good.",
+            "es": "Habíamos revisado el clima y el pronóstico era bueno."
+          },
+          {
+            "en": "But after three hours of walking, thick clouds suddenly covered the path.",
+            "es": "Pero después de tres horas de caminata, unas nubes espesas cubrieron de repente el sendero."
+          },
+          {
+            "en": "We couldn't see more than a few meters in front of us.",
+            "es": "No podíamos ver más que unos metros delante de nosotros."
+          }
+        ],
+        [
+          {
+            "en": "We were starting to panic when we heard a dog barking.",
+            "es": "Estábamos empezando a entrar en pánico cuando oímos ladrar a un perro."
+          },
+          {
+            "en": "A farmer who lived on the mountain had heard our voices.",
+            "es": "Un granjero que vivía en la montaña había oído nuestras voces."
+          },
+          {
+            "en": "He guided us to his house and gave us hot tea until the clouds disappeared.",
+            "es": "Nos llevó a su casa y nos dio té caliente hasta que las nubes desaparecieron."
+          },
+          {
+            "en": "Since then, we never go hiking without a map, a phone and warm clothes.",
+            "es": "Desde entonces, nunca salimos de excursión sin un mapa, un teléfono y ropa abrigadora."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b1-customer-service",
+      "level": "b1",
+      "title": "Calling Customer Service",
+      "titleEs": "Llamar a atención al cliente",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "Good morning, you are speaking with Laura. How can I help you?",
+            "es": "Buenos días, habla Laura. ¿En qué puedo ayudarle?"
+          },
+          {
+            "en": "Hello. I bought a washing machine from your website two weeks ago, but it still hasn't arrived.",
+            "es": "Hola. Compré una lavadora en su sitio web hace dos semanas, pero todavía no ha llegado."
+          },
+          {
+            "en": "I'm sorry to hear that. Could you give me your order number, please?",
+            "es": "Lamento escuchar eso. ¿Me podría dar su número de pedido, por favor?"
+          },
+          {
+            "en": "Of course. It's four, seven, two, nine, one.",
+            "es": "Claro. Es cuatro, siete, dos, nueve, uno."
+          }
+        ],
+        [
+          {
+            "en": "Thank you. I can see that there was a problem with the delivery company.",
+            "es": "Gracias. Veo que hubo un problema con la empresa de envíos."
+          },
+          {
+            "en": "The machine will be delivered tomorrow between nine and twelve.",
+            "es": "La lavadora se entregará mañana entre las nueve y las doce."
+          },
+          {
+            "en": "Will I be at home then? I'm afraid I work in the mornings.",
+            "es": "¿Estaré en casa a esa hora? Me temo que trabajo en las mañanas."
+          },
+          {
+            "en": "No problem. We can deliver it on Saturday if you prefer.",
+            "es": "No hay problema. Podemos entregarla el sábado si lo prefiere."
+          },
+          {
+            "en": "Saturday would be perfect. Thank you for your help.",
+            "es": "El sábado sería perfecto. Gracias por su ayuda."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-the-four-day-week",
+      "level": "b2",
+      "title": "The Four-Day Week",
+      "titleEs": "La semana de cuatro días",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "In recent years, a growing number of companies have experimented with a four-day working week.",
+            "es": "En los últimos años, cada vez más empresas han experimentado con la semana laboral de cuatro días."
+          },
+          {
+            "en": "The idea is simple: employees work fewer hours but keep the same salary.",
+            "es": "La idea es sencilla: los empleados trabajan menos horas pero conservan el mismo salario."
+          },
+          {
+            "en": "Supporters argue that rested workers are more productive and less likely to get sick.",
+            "es": "Sus defensores sostienen que los trabajadores descansados son más productivos y se enferman menos."
+          }
+        ],
+        [
+          {
+            "en": "The results of several trials have been surprisingly positive.",
+            "es": "Los resultados de varias pruebas han sido sorprendentemente positivos."
+          },
+          {
+            "en": "Most companies reported that productivity stayed the same or even improved.",
+            "es": "La mayoría de las empresas informó que la productividad se mantuvo igual o incluso mejoró."
+          },
+          {
+            "en": "Employees, meanwhile, said they felt less stressed and had more time for their families.",
+            "es": "Los empleados, por su parte, dijeron sentirse menos estresados y tener más tiempo para su familia."
+          },
+          {
+            "en": "Nevertheless, critics point out that the model does not suit every industry.",
+            "es": "No obstante, los críticos señalan que el modelo no se adapta a todos los sectores."
+          },
+          {
+            "en": "Hospitals, schools and shops, for instance, cannot simply close one day a week.",
+            "es": "Los hospitales, las escuelas y las tiendas, por ejemplo, no pueden simplemente cerrar un día a la semana."
+          },
+          {
+            "en": "Whether it becomes the norm or not, the debate has made many people rethink the role of work in their lives.",
+            "es": "Se convierta o no en la norma, el debate ha hecho que mucha gente replantee el papel del trabajo en su vida."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-sleep",
+      "level": "b2",
+      "title": "Why We Need Sleep",
+      "titleEs": "Por qué necesitamos dormir",
+      "topic": "Ciencia",
+      "paragraphs": [
+        [
+          {
+            "en": "We spend roughly a third of our lives asleep, yet scientists are still discovering why.",
+            "es": "Pasamos aproximadamente un tercio de nuestra vida dormidos, y aun así los científicos siguen descubriendo por qué."
+          },
+          {
+            "en": "For a long time, sleep was seen as a passive state in which the body simply rested.",
+            "es": "Durante mucho tiempo, se consideró el sueño como un estado pasivo en el que el cuerpo simplemente descansaba."
+          },
+          {
+            "en": "We now know that the brain is remarkably active during the night.",
+            "es": "Ahora sabemos que el cerebro está notablemente activo durante la noche."
+          }
+        ],
+        [
+          {
+            "en": "While we sleep, the brain organizes the information we have collected during the day.",
+            "es": "Mientras dormimos, el cerebro organiza la información que hemos recogido durante el día."
+          },
+          {
+            "en": "This is why a good night's sleep helps us remember what we have learned.",
+            "es": "Por eso una buena noche de sueño nos ayuda a recordar lo que hemos aprendido."
+          },
+          {
+            "en": "Sleep also allows the brain to remove waste products that build up while we are awake.",
+            "es": "El sueño también permite al cerebro eliminar desechos que se acumulan mientras estamos despiertos."
+          },
+          {
+            "en": "People who regularly sleep less than six hours are more likely to suffer from heart disease and depression.",
+            "es": "Las personas que duermen habitualmente menos de seis horas tienen más probabilidades de sufrir enfermedades cardíacas y depresión."
+          },
+          {
+            "en": "Experts recommend keeping a regular schedule and avoiding screens for an hour before bed.",
+            "es": "Los expertos recomiendan mantener un horario regular y evitar las pantallas una hora antes de acostarse."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-a-difficult-decision",
+      "level": "b2",
+      "title": "A Difficult Decision",
+      "titleEs": "Una decisión difícil",
+      "topic": "Historias",
+      "paragraphs": [
+        [
+          {
+            "en": "When I was offered a job in another country, I didn't know what to do.",
+            "es": "Cuando me ofrecieron un trabajo en otro país, no sabía qué hacer."
+          },
+          {
+            "en": "It was the kind of opportunity I had been waiting for since I finished university.",
+            "es": "Era el tipo de oportunidad que había estado esperando desde que terminé la universidad."
+          },
+          {
+            "en": "On the other hand, it meant leaving my family, my friends and everything I knew.",
+            "es": "Por otro lado, significaba dejar a mi familia, a mis amigos y todo lo que conocía."
+          }
+        ],
+        [
+          {
+            "en": "My parents encouraged me to accept it, even though I could tell they were sad.",
+            "es": "Mis padres me animaron a aceptarlo, aunque se notaba que estaban tristes."
+          },
+          {
+            "en": "I spent several sleepless nights making lists of advantages and disadvantages.",
+            "es": "Pasé varias noches sin dormir haciendo listas de ventajas y desventajas."
+          },
+          {
+            "en": "In the end, I realized that I would always regret it if I didn't at least try.",
+            "es": "Al final, me di cuenta de que siempre me arrepentiría si al menos no lo intentaba."
+          },
+          {
+            "en": "The first months were tough, and I missed home more than I had expected.",
+            "es": "Los primeros meses fueron duros y extrañé mi casa más de lo que esperaba."
+          },
+          {
+            "en": "Looking back, though, it was the best decision I have ever made.",
+            "es": "Sin embargo, en retrospectiva, fue la mejor decisión que he tomado."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-fast-fashion",
+      "level": "b2",
+      "title": "The Cost of Fast Fashion",
+      "titleEs": "El costo de la moda rápida",
+      "topic": "Sociedad",
+      "paragraphs": [
+        [
+          {
+            "en": "Clothes have never been cheaper, but that low price comes at a cost.",
+            "es": "La ropa nunca había sido tan barata, pero ese precio bajo tiene un costo."
+          },
+          {
+            "en": "The fashion industry is responsible for a significant share of global pollution.",
+            "es": "La industria de la moda es responsable de una parte importante de la contaminación mundial."
+          },
+          {
+            "en": "Producing a single pair of jeans can require thousands of liters of water.",
+            "es": "Producir un solo par de jeans puede requerir miles de litros de agua."
+          }
+        ],
+        [
+          {
+            "en": "Moreover, many garments are worn only a few times before being thrown away.",
+            "es": "Además, muchas prendas se usan solo unas cuantas veces antes de tirarse."
+          },
+          {
+            "en": "Most of them end up in landfills, where they can take decades to break down.",
+            "es": "La mayoría termina en rellenos sanitarios, donde pueden tardar décadas en descomponerse."
+          },
+          {
+            "en": "There are also serious concerns about the working conditions in some factories.",
+            "es": "También hay serias preocupaciones por las condiciones laborales en algunas fábricas."
+          },
+          {
+            "en": "As consumers become more aware of these problems, second-hand shops are growing in popularity.",
+            "es": "A medida que los consumidores toman conciencia de estos problemas, las tiendas de segunda mano ganan popularidad."
+          },
+          {
+            "en": "Buying less, choosing better quality and repairing what we already own can make a real difference.",
+            "es": "Comprar menos, elegir mejor calidad y reparar lo que ya tenemos puede marcar una verdadera diferencia."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-starting-a-business",
+      "level": "b2",
+      "title": "Starting a Business",
+      "titleEs": "Emprender un negocio",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "Three years ago, Marta quit her job at a bank to open a small bakery.",
+            "es": "Hace tres años, Marta dejó su trabajo en un banco para abrir una pequeña panadería."
+          },
+          {
+            "en": "Everyone told her it was a risky move, especially since she had no experience in the food industry.",
+            "es": "Todos le dijeron que era una decisión arriesgada, sobre todo porque no tenía experiencia en el sector de la alimentación."
+          },
+          {
+            "en": "She spent months taking courses and testing recipes in her own kitchen.",
+            "es": "Pasó meses tomando cursos y probando recetas en su propia cocina."
+          }
+        ],
+        [
+          {
+            "en": "The first year was exhausting: she worked twelve hours a day and barely made a profit.",
+            "es": "El primer año fue agotador: trabajaba doce horas al día y apenas obtenía ganancias."
+          },
+          {
+            "en": "Things changed when a local blogger wrote a review praising her sourdough bread.",
+            "es": "Las cosas cambiaron cuando un bloguero local escribió una reseña elogiando su pan de masa madre."
+          },
+          {
+            "en": "Within weeks, there was a queue outside the shop every Saturday morning.",
+            "es": "En pocas semanas, había fila afuera de la tienda todos los sábados por la mañana."
+          },
+          {
+            "en": "Today she employs six people and is planning to open a second shop.",
+            "es": "Hoy da empleo a seis personas y planea abrir una segunda tienda."
+          },
+          {
+            "en": "Her advice to anyone thinking of starting a business is to be patient and never stop learning.",
+            "es": "Su consejo para quien piense emprender un negocio es tener paciencia y nunca dejar de aprender."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "b2-artificial-intelligence",
+      "level": "b2",
+      "title": "Living with Artificial Intelligence",
+      "titleEs": "Vivir con la inteligencia artificial",
+      "topic": "Tecnología",
+      "paragraphs": [
+        [
+          {
+            "en": "Artificial intelligence is no longer something we only see in science fiction films.",
+            "es": "La inteligencia artificial ya no es algo que solo vemos en las películas de ciencia ficción."
+          },
+          {
+            "en": "It recommends the series we watch, translates our messages and helps doctors detect diseases.",
+            "es": "Recomienda las series que vemos, traduce nuestros mensajes y ayuda a los médicos a detectar enfermedades."
+          },
+          {
+            "en": "Many people find these tools incredibly useful in their daily lives.",
+            "es": "Mucha gente encuentra estas herramientas increíblemente útiles en su vida diaria."
+          }
+        ],
+        [
+          {
+            "en": "At the same time, the rapid development of this technology raises important questions.",
+            "es": "Al mismo tiempo, el rápido desarrollo de esta tecnología plantea preguntas importantes."
+          },
+          {
+            "en": "Some worry that machines will replace workers in many professions.",
+            "es": "A algunos les preocupa que las máquinas reemplacen a los trabajadores en muchas profesiones."
+          },
+          {
+            "en": "Others are concerned about privacy and about who controls the data these systems use.",
+            "es": "A otros les preocupa la privacidad y quién controla los datos que usan estos sistemas."
+          },
+          {
+            "en": "Most experts agree that the challenge is not to stop progress but to guide it responsibly.",
+            "es": "La mayoría de los expertos coincide en que el reto no es frenar el progreso, sino guiarlo con responsabilidad."
+          },
+          {
+            "en": "Learning how these tools work is probably the best way to make sure they work for us.",
+            "es": "Aprender cómo funcionan estas herramientas es probablemente la mejor manera de asegurarnos de que trabajen para nosotros."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-the-attention-economy",
+      "level": "c1",
+      "title": "The Attention Economy",
+      "titleEs": "La economía de la atención",
+      "topic": "Tecnología",
+      "paragraphs": [
+        [
+          {
+            "en": "Every time we unlock our phones, dozens of companies are competing for the same scarce resource: our attention.",
+            "es": "Cada vez que desbloqueamos el teléfono, decenas de empresas compiten por el mismo recurso escaso: nuestra atención."
+          },
+          {
+            "en": "Apps are deliberately designed to keep us scrolling, rewarding us with a steady stream of notifications and likes.",
+            "es": "Las aplicaciones están diseñadas deliberadamente para que sigamos deslizando, y nos premian con un flujo constante de notificaciones y «me gusta»."
+          },
+          {
+            "en": "This business model, often referred to as the attention economy, turns our time into a product that can be sold to advertisers.",
+            "es": "Este modelo de negocio, al que se suele llamar economía de la atención, convierte nuestro tiempo en un producto que se vende a los anunciantes."
+          }
+        ],
+        [
+          {
+            "en": "The consequences are not merely a matter of wasted hours.",
+            "es": "Las consecuencias no se reducen a horas perdidas."
+          },
+          {
+            "en": "Researchers have linked constant interruptions to a decline in our ability to concentrate on demanding tasks.",
+            "es": "Los investigadores han relacionado las interrupciones constantes con una menor capacidad para concentrarnos en tareas exigentes."
+          },
+          {
+            "en": "Deep reading, in particular, seems to suffer when we grow accustomed to skimming short pieces of content.",
+            "es": "La lectura profunda, en particular, parece resentirse cuando nos acostumbramos a hojear contenidos breves."
+          },
+          {
+            "en": "Some designers who helped build these platforms now openly regret the techniques they developed.",
+            "es": "Algunos diseñadores que ayudaron a construir estas plataformas hoy lamentan abiertamente las técnicas que desarrollaron."
+          },
+          {
+            "en": "Reclaiming our attention may well be one of the defining challenges of the coming decade.",
+            "es": "Recuperar nuestra atención bien podría ser uno de los grandes retos de la próxima década."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-urban-gardens",
+      "level": "c1",
+      "title": "Gardens on the Rooftops",
+      "titleEs": "Huertos en las azoteas",
+      "topic": "Medio ambiente",
+      "paragraphs": [
+        [
+          {
+            "en": "Not long ago, the idea of growing vegetables in the middle of a city would have seemed absurd.",
+            "es": "No hace mucho, la idea de cultivar verduras en medio de una ciudad habría parecido absurda."
+          },
+          {
+            "en": "Today, rooftop gardens are flourishing in cities as different as New York, Mexico City and Singapore.",
+            "es": "Hoy, los huertos en azoteas florecen en ciudades tan distintas como Nueva York, Ciudad de México y Singapur."
+          },
+          {
+            "en": "Their advocates claim that they bring a whole range of benefits that go far beyond fresh lettuce.",
+            "es": "Sus defensores aseguran que aportan toda una serie de beneficios que van mucho más allá de la lechuga fresca."
+          }
+        ],
+        [
+          {
+            "en": "Plants absorb rainwater, which reduces the risk of flooding, and they help keep buildings cool in summer.",
+            "es": "Las plantas absorben el agua de lluvia, lo que reduce el riesgo de inundaciones, y ayudan a mantener frescos los edificios en verano."
+          },
+          {
+            "en": "They also provide a habitat for bees and birds that would otherwise struggle to survive in an urban environment.",
+            "es": "También ofrecen un hábitat a abejas y aves que de otro modo tendrían dificultades para sobrevivir en un entorno urbano."
+          },
+          {
+            "en": "Perhaps most importantly, community gardens bring neighbors together who might never have spoken to each other.",
+            "es": "Quizá lo más importante es que los huertos comunitarios reúnen a vecinos que tal vez nunca se habrían hablado."
+          },
+          {
+            "en": "Critics point out, however, that such projects can only ever produce a tiny fraction of the food a city consumes.",
+            "es": "Los críticos señalan, sin embargo, que estos proyectos solo pueden producir una mínima parte de los alimentos que consume una ciudad."
+          },
+          {
+            "en": "Even so, few would deny that they are transforming the way city dwellers relate to nature.",
+            "es": "Aun así, pocos negarían que están transformando la manera en que los habitantes de las ciudades se relacionan con la naturaleza."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-the-art-of-negotiation",
+      "level": "c1",
+      "title": "The Art of Negotiation",
+      "titleEs": "El arte de negociar",
+      "topic": "Trabajo",
+      "paragraphs": [
+        [
+          {
+            "en": "Contrary to popular belief, successful negotiators are rarely the ones who shout the loudest.",
+            "es": "Contrario a lo que se suele creer, los negociadores exitosos rara vez son los que gritan más fuerte."
+          },
+          {
+            "en": "What sets them apart is their ability to understand what the other side really wants.",
+            "es": "Lo que los distingue es su capacidad para entender lo que la otra parte realmente quiere."
+          },
+          {
+            "en": "Before entering a negotiation, they do their homework thoroughly and consider every possible outcome.",
+            "es": "Antes de entrar en una negociación, se preparan a fondo y consideran todos los resultados posibles."
+          }
+        ],
+        [
+          {
+            "en": "One of the most valuable concepts is knowing your best alternative if no agreement is reached.",
+            "es": "Uno de los conceptos más valiosos es conocer tu mejor alternativa si no se llega a un acuerdo."
+          },
+          {
+            "en": "Had you not thought about it in advance, you might accept a deal that is worse than walking away.",
+            "es": "Si no lo hubieras pensado de antemano, podrías aceptar un trato peor que retirarte."
+          },
+          {
+            "en": "Skilled negotiators also listen far more than they speak, asking open questions and paraphrasing what they hear.",
+            "es": "Los negociadores hábiles también escuchan mucho más de lo que hablan: hacen preguntas abiertas y parafrasean lo que oyen."
+          },
+          {
+            "en": "Rather than treating the process as a battle, they look for solutions from which both parties can benefit.",
+            "es": "En lugar de tratar el proceso como una batalla, buscan soluciones de las que ambas partes puedan beneficiarse."
+          },
+          {
+            "en": "It is this mindset, more than any clever trick, that leads to lasting agreements.",
+            "es": "Es esta mentalidad, más que cualquier truco ingenioso, lo que conduce a acuerdos duraderos."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-how-reliable-is-memory",
+      "level": "c1",
+      "title": "How Reliable Is Memory?",
+      "titleEs": "¿Qué tan fiable es la memoria?",
+      "topic": "Ciencia",
+      "paragraphs": [
+        [
+          {
+            "en": "We tend to think of memory as a kind of video recording that we can replay whenever we wish.",
+            "es": "Solemos pensar en la memoria como una especie de grabación de video que podemos volver a ver cuando queramos."
+          },
+          {
+            "en": "In reality, every time we recall an event, we reconstruct it, and in doing so we may alter it slightly.",
+            "es": "En realidad, cada vez que recordamos un suceso lo reconstruimos, y al hacerlo podemos alterarlo ligeramente."
+          },
+          {
+            "en": "Psychologists have shown that it is surprisingly easy to implant false memories in people's minds.",
+            "es": "Los psicólogos han demostrado que es sorprendentemente fácil implantar recuerdos falsos en la mente de las personas."
+          }
+        ],
+        [
+          {
+            "en": "In one famous study, participants were convinced that they had once been lost in a shopping mall as children.",
+            "es": "En un estudio famoso, se convenció a los participantes de que de niños se habían perdido una vez en un centro comercial."
+          },
+          {
+            "en": "Many of them went on to describe the experience in vivid detail, even though it had never happened.",
+            "es": "Muchos llegaron a describir la experiencia con detalles vívidos, aunque nunca había ocurrido."
+          },
+          {
+            "en": "Such findings have serious implications for the justice system, which has long relied on eyewitness testimony.",
+            "es": "Estos hallazgos tienen consecuencias graves para el sistema judicial, que durante mucho tiempo se ha apoyado en el testimonio de testigos presenciales."
+          },
+          {
+            "en": "None of this means that our memories are worthless; it simply means they are more fragile than we assume.",
+            "es": "Nada de esto significa que nuestros recuerdos no valgan nada; simplemente son más frágiles de lo que suponemos."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-slow-travel",
+      "level": "c1",
+      "title": "The Case for Slow Travel",
+      "titleEs": "En defensa del viaje lento",
+      "topic": "Viajes",
+      "paragraphs": [
+        [
+          {
+            "en": "For many of us, a holiday has become a race to see as many famous sights as possible in the shortest time.",
+            "es": "Para muchos, las vacaciones se han convertido en una carrera por ver tantos lugares famosos como sea posible en el menor tiempo."
+          },
+          {
+            "en": "We rush from one monument to the next, taking photos we will rarely look at again.",
+            "es": "Corremos de un monumento a otro y tomamos fotos que rara vez volveremos a mirar."
+          },
+          {
+            "en": "Slow travel proposes the opposite approach: staying longer in fewer places.",
+            "es": "El viaje lento propone el enfoque contrario: quedarse más tiempo en menos lugares."
+          }
+        ],
+        [
+          {
+            "en": "Instead of hotels, slow travelers often rent apartments in residential neighborhoods and shop at local markets.",
+            "es": "En lugar de hoteles, los viajeros lentos suelen rentar departamentos en barrios residenciales y comprar en mercados locales."
+          },
+          {
+            "en": "They travel by train or bus whenever they can, treating the journey as part of the experience rather than a nuisance.",
+            "es": "Viajan en tren o en autobús siempre que pueden y tratan el trayecto como parte de la experiencia, no como una molestia."
+          },
+          {
+            "en": "Not only does this reduce their environmental impact, but it also allows them to form genuine connections with local people.",
+            "es": "Esto no solo reduce su impacto ambiental, sino que también les permite crear vínculos genuinos con la gente del lugar."
+          },
+          {
+            "en": "Admittedly, not everyone can afford to take several weeks off work.",
+            "es": "Hay que reconocer que no todo el mundo puede permitirse tomar varias semanas libres."
+          },
+          {
+            "en": "Yet even on a short trip, choosing depth over breadth can make the experience far more rewarding.",
+            "es": "Aun así, incluso en un viaje corto, elegir la profundidad sobre la cantidad puede hacer la experiencia mucho más gratificante."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c1-bilingual-brain",
+      "level": "c1",
+      "title": "The Bilingual Brain",
+      "titleEs": "El cerebro bilingüe",
+      "topic": "Aprendizaje",
+      "paragraphs": [
+        [
+          {
+            "en": "For much of the twentieth century, raising children with two languages was thought to confuse them.",
+            "es": "Durante buena parte del siglo veinte, se pensaba que criar a los niños con dos idiomas los confundía."
+          },
+          {
+            "en": "Parents were often advised to stick to a single language at home to avoid delaying their development.",
+            "es": "A menudo se aconsejaba a los padres limitarse a un solo idioma en casa para no retrasar su desarrollo."
+          },
+          {
+            "en": "Research carried out over the past few decades has largely overturned that view.",
+            "es": "Las investigaciones realizadas en las últimas décadas han echado por tierra en gran medida esa idea."
+          }
+        ],
+        [
+          {
+            "en": "Bilingual people constantly switch between languages, suppressing one while they use the other.",
+            "es": "Las personas bilingües alternan constantemente entre idiomas y suprimen uno mientras usan el otro."
+          },
+          {
+            "en": "This mental juggling appears to strengthen skills such as attention, planning and problem solving.",
+            "es": "Este malabarismo mental parece reforzar habilidades como la atención, la planificación y la resolución de problemas."
+          },
+          {
+            "en": "Some studies even suggest that speaking two languages may delay the symptoms of dementia by several years.",
+            "es": "Algunos estudios incluso sugieren que hablar dos idiomas podría retrasar varios años los síntomas de la demencia."
+          },
+          {
+            "en": "Crucially, these benefits are not limited to those who learned both languages as children.",
+            "es": "Lo fundamental es que estos beneficios no se limitan a quienes aprendieron ambos idiomas de niños."
+          },
+          {
+            "en": "It is never too late to start, and every new word you learn is a small investment in your brain.",
+            "es": "Nunca es tarde para empezar, y cada palabra nueva que aprendes es una pequeña inversión en tu cerebro."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-the-paradox-of-choice",
+      "level": "c2",
+      "title": "The Paradox of Choice",
+      "titleEs": "La paradoja de la elección",
+      "topic": "Sociedad",
+      "paragraphs": [
+        [
+          {
+            "en": "It is widely assumed that the more options we have, the freer and happier we will be.",
+            "es": "Se da por sentado que cuantas más opciones tengamos, más libres y felices seremos."
+          },
+          {
+            "en": "Yet anyone who has stood paralyzed in front of a supermarket shelf stocked with forty varieties of jam may beg to differ.",
+            "es": "Sin embargo, cualquiera que se haya quedado paralizado frente a un estante del supermercado con cuarenta variedades de mermelada podría opinar lo contrario."
+          },
+          {
+            "en": "Psychologists have coined the term \"the paradox of choice\" to describe this seemingly counterintuitive phenomenon.",
+            "es": "Los psicólogos acuñaron el término «la paradoja de la elección» para describir este fenómeno aparentemente contraintuitivo."
+          }
+        ],
+        [
+          {
+            "en": "Beyond a certain point, an abundance of alternatives does not liberate us so much as burden us.",
+            "es": "A partir de cierto punto, la abundancia de alternativas no tanto nos libera como nos agobia."
+          },
+          {
+            "en": "The effort required to weigh every option can be exhausting, and the decision, once made, is often tinged with regret.",
+            "es": "El esfuerzo de sopesar cada opción puede ser agotador, y la decisión, una vez tomada, suele estar teñida de arrepentimiento."
+          },
+          {
+            "en": "We cannot help wondering whether one of the alternatives we rejected might have suited us better.",
+            "es": "No podemos evitar preguntarnos si alguna de las alternativas que descartamos nos habría convenido más."
+          },
+          {
+            "en": "Paradoxically, people who settle for an option that is merely good enough tend to be more content than those who insist on the very best.",
+            "es": "Paradójicamente, quienes se conforman con una opción simplemente suficiente suelen estar más satisfechos que quienes se empeñan en lo mejor."
+          },
+          {
+            "en": "Far from being a sign of laziness, knowing when to stop searching may well be a form of wisdom.",
+            "es": "Lejos de ser una señal de pereza, saber cuándo dejar de buscar bien podría ser una forma de sabiduría."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-translation",
+      "level": "c2",
+      "title": "Lost in Translation",
+      "titleEs": "Lo que se pierde al traducir",
+      "topic": "Cultura",
+      "paragraphs": [
+        [
+          {
+            "en": "Translation is often described as the art of failure, since no rendering can ever fully capture the original.",
+            "es": "A menudo se describe la traducción como el arte del fracaso, ya que ninguna versión puede captar por completo el original."
+          },
+          {
+            "en": "Every language carves up reality in its own way, and some words resist being carried across at all.",
+            "es": "Cada idioma divide la realidad a su manera, y algunas palabras se resisten por completo a ser trasladadas."
+          },
+          {
+            "en": "Puns, rhymes and cultural references pose particularly thorny problems, as their effect hinges on the sound or history of the words themselves.",
+            "es": "Los juegos de palabras, las rimas y las referencias culturales plantean problemas especialmente espinosos, pues su efecto depende del sonido o la historia de las propias palabras."
+          }
+        ],
+        [
+          {
+            "en": "A literal translation may be faithful to the letter of a text while betraying its spirit entirely.",
+            "es": "Una traducción literal puede ser fiel a la letra de un texto y traicionar por completo su espíritu."
+          },
+          {
+            "en": "Conversely, a translator who takes too many liberties risks substituting their own voice for the author's.",
+            "es": "A la inversa, un traductor que se toma demasiadas libertades corre el riesgo de sustituir la voz del autor por la suya."
+          },
+          {
+            "en": "The best translators navigate between these extremes, making countless small decisions that most readers will never notice.",
+            "es": "Los mejores traductores navegan entre estos extremos y toman innumerables pequeñas decisiones que la mayoría de los lectores nunca notará."
+          },
+          {
+            "en": "Were it not for their invisible labor, much of the world's literature would remain inaccessible to the vast majority of us.",
+            "es": "De no ser por su trabajo invisible, gran parte de la literatura mundial seguiría siendo inaccesible para la gran mayoría de nosotros."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-the-history-of-coffee",
+      "level": "c2",
+      "title": "A Brief History of Coffee",
+      "titleEs": "Breve historia del café",
+      "topic": "Cultura",
+      "paragraphs": [
+        [
+          {
+            "en": "Legend has it that coffee was discovered by an Ethiopian goatherd who noticed his animals behaving with unusual vigor after eating certain red berries.",
+            "es": "Cuenta la leyenda que el café lo descubrió un pastor de cabras etíope que notó que sus animales se comportaban con un vigor inusual tras comer ciertas bayas rojas."
+          },
+          {
+            "en": "Whether or not the story is true, by the fifteenth century coffee was being cultivated in Yemen and drunk throughout the Arab world.",
+            "es": "Sea o no cierta la historia, en el siglo quince el café ya se cultivaba en Yemen y se bebía en todo el mundo árabe."
+          }
+        ],
+        [
+          {
+            "en": "When it reached Europe a century later, it was initially met with suspicion, and some clergymen denounced it as the drink of the devil.",
+            "es": "Cuando llegó a Europa un siglo después, al principio se recibió con recelo, y algunos clérigos lo denunciaron como la bebida del diablo."
+          },
+          {
+            "en": "Coffeehouses nonetheless proliferated, becoming lively hubs where merchants, writers and politicians gathered to debate the issues of the day.",
+            "es": "Aun así, los cafés proliferaron y se convirtieron en animados centros donde comerciantes, escritores y políticos se reunían a debatir los temas del momento."
+          },
+          {
+            "en": "So much business was conducted in them that several famous institutions, including an insurance market in London, trace their origins to a coffeehouse.",
+            "es": "Tantos negocios se cerraban en ellos que varias instituciones famosas, entre ellas un mercado de seguros de Londres, tienen su origen en un café."
+          },
+          {
+            "en": "Today coffee is among the most widely traded commodities on earth, and its cultivation sustains the livelihoods of millions of farmers.",
+            "es": "Hoy el café es una de las materias primas más comercializadas del planeta, y su cultivo sostiene el sustento de millones de agricultores."
+          },
+          {
+            "en": "Little did that goatherd know what he had set in motion.",
+            "es": "Poco imaginaba aquel pastor lo que había puesto en marcha."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-in-praise-of-boredom",
+      "level": "c2",
+      "title": "In Praise of Boredom",
+      "titleEs": "Elogio del aburrimiento",
+      "topic": "Sociedad",
+      "paragraphs": [
+        [
+          {
+            "en": "Boredom has acquired a rather poor reputation, and with a smartphone in every pocket, it has become almost extinct.",
+            "es": "El aburrimiento ha adquirido una reputación bastante mala y, con un teléfono inteligente en cada bolsillo, casi se ha extinguido."
+          },
+          {
+            "en": "The moment we find ourselves waiting in a queue or sitting on a train, we instinctively reach for a screen.",
+            "es": "En cuanto nos encontramos esperando en una fila o sentados en un tren, buscamos instintivamente una pantalla."
+          },
+          {
+            "en": "And yet a growing body of research suggests that we may be depriving ourselves of something valuable.",
+            "es": "Y, sin embargo, cada vez más investigaciones sugieren que podríamos estar privándonos de algo valioso."
+          }
+        ],
+        [
+          {
+            "en": "When the mind is left to wander, it does not simply switch off; rather, it begins to make unexpected connections.",
+            "es": "Cuando se deja divagar a la mente, no se apaga sin más; al contrario, empieza a establecer conexiones inesperadas."
+          },
+          {
+            "en": "In experiments, participants who had first performed a tedious task subsequently came up with more creative ideas than those who had not.",
+            "es": "En los experimentos, los participantes que primero realizaron una tarea tediosa propusieron después ideas más creativas que quienes no lo hicieron."
+          },
+          {
+            "en": "It is perhaps no coincidence that so many writers and scientists report having their best insights in the shower or on long walks.",
+            "es": "Quizá no sea casualidad que tantos escritores y científicos digan tener sus mejores ideas en la ducha o durante largas caminatas."
+          },
+          {
+            "en": "Rather than fleeing from boredom at all costs, we might do well to make a little room for it in our lives.",
+            "es": "En lugar de huir del aburrimiento a toda costa, haríamos bien en hacerle un pequeño espacio en nuestra vida."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-who-is-the-city-for",
+      "level": "c2",
+      "title": "Who Is the City For?",
+      "titleEs": "¿Para quién es la ciudad?",
+      "topic": "Sociedad",
+      "paragraphs": [
+        [
+          {
+            "en": "Few phenomena have reshaped the character of urban neighborhoods as profoundly as gentrification.",
+            "es": "Pocos fenómenos han transformado tan profundamente el carácter de los barrios urbanos como la gentrificación."
+          },
+          {
+            "en": "The pattern is by now familiar: artists and young professionals, drawn by low rents, move into a run-down district.",
+            "es": "El patrón ya es conocido: artistas y jóvenes profesionales, atraídos por rentas bajas, se mudan a un barrio deteriorado."
+          },
+          {
+            "en": "Cafés and galleries follow, property values soar, and the very residents who gave the area its character are gradually priced out.",
+            "es": "Después llegan cafés y galerías, el valor de las propiedades se dispara y los mismos vecinos que le dieron carácter a la zona acaban expulsados por los precios."
+          }
+        ],
+        [
+          {
+            "en": "Proponents argue that investment brings safer streets, better services and much-needed jobs.",
+            "es": "Sus defensores sostienen que la inversión trae calles más seguras, mejores servicios y empleos muy necesarios."
+          },
+          {
+            "en": "Detractors counter that these benefits are seldom enjoyed by those who lived there beforehand.",
+            "es": "Sus detractores replican que esos beneficios rara vez los disfrutan quienes vivían ahí antes."
+          },
+          {
+            "en": "The question, ultimately, is not whether cities should change, for change is inevitable, but who gets to decide how.",
+            "es": "La cuestión, en última instancia, no es si las ciudades deben cambiar, pues el cambio es inevitable, sino quién decide cómo."
+          },
+          {
+            "en": "Measures such as rent control and public housing are hotly contested, yet some form of intervention seems indispensable if cities are to remain places where people of all backgrounds can live.",
+            "es": "Medidas como el control de rentas y la vivienda pública son muy debatidas, pero alguna forma de intervención parece indispensable si las ciudades han de seguir siendo lugares donde pueda vivir gente de todos los orígenes."
+          }
+        ]
+      ]
+    },
+    {
+      "id": "c2-science-and-uncertainty",
+      "level": "c2",
+      "title": "Science and Uncertainty",
+      "titleEs": "La ciencia y la incertidumbre",
+      "topic": "Ciencia",
+      "paragraphs": [
+        [
+          {
+            "en": "It is a common misconception that science deals in certainties, delivering final answers that are beyond dispute.",
+            "es": "Es un error común pensar que la ciencia trata con certezas y entrega respuestas definitivas e indiscutibles."
+          },
+          {
+            "en": "In truth, scientific knowledge is provisional by its very nature, always open to revision in the light of new evidence.",
+            "es": "En realidad, el conocimiento científico es provisional por su propia naturaleza y siempre está abierto a revisión a la luz de nuevas pruebas."
+          },
+          {
+            "en": "Far from being a weakness, this willingness to be proven wrong is precisely what makes the scientific method so powerful.",
+            "es": "Lejos de ser una debilidad, esta disposición a que se demuestre que está equivocada es precisamente lo que hace tan poderoso al método científico."
+          }
+        ],
+        [
+          {
+            "en": "A hypothesis earns its credibility not by being confirmed once, but by surviving repeated attempts to refute it.",
+            "es": "Una hipótesis gana credibilidad no por confirmarse una vez, sino por resistir repetidos intentos de refutarla."
+          },
+          {
+            "en": "Problems arise when this nuance is lost in translation between laboratories and the public.",
+            "es": "Los problemas surgen cuando este matiz se pierde en el camino entre los laboratorios y el público."
+          },
+          {
+            "en": "A single preliminary study is all too often reported as a definitive breakthrough, only to be contradicted months later.",
+            "es": "Con demasiada frecuencia se presenta un solo estudio preliminar como un avance definitivo, para que meses después lo contradigan."
+          },
+          {
+            "en": "Such reversals can erode public trust, even though they are a sign that the system is working exactly as it should.",
+            "es": "Estos vaivenes pueden erosionar la confianza del público, aunque son señal de que el sistema funciona exactamente como debe."
+          },
+          {
+            "en": "Learning to live with uncertainty, then, may be one of the most important lessons science has to teach us.",
+            "es": "Aprender a vivir con la incertidumbre, entonces, podría ser una de las lecciones más importantes que la ciencia tiene para enseñarnos."
+          }
+        ]
+      ]
+    }
+  ]
+}

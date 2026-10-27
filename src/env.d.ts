@@ -41,16 +41,26 @@ declare module 'virtual:audio-versions' {
   export default versions
 }
 
+/** Índice del curso: id y título de cada lección, por nivel. Ver vite/course-index.ts. */
+declare module 'virtual:course-index' {
+  const index: Readonly<Record<'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2', ReadonlyArray<{ id: string; title: string }>>>
+  export default index
+}
+
 /** Reconocimiento de voz (Web Speech API): lo mínimo que usa src/lib/speech.ts. */
 interface TeclaSpeechRecognition {
   lang: string
   maxAlternatives: number
   interimResults: boolean
+  /** Sigue escuchando tras una pausa (para leer una frase larga). */
+  continuous: boolean
   start(): void
+  /** Deja de escuchar y entrega lo oído hasta ahora. */
+  stop(): void
   abort(): void
   addEventListener(
     type: 'result',
-    listener: (event: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void,
+    listener: (event: { results: ArrayLike<ArrayLike<{ transcript: string }> & { isFinal: boolean }> }) => void,
   ): void
   addEventListener(type: 'error', listener: (event: { error: string }) => void): void
   addEventListener(type: 'end', listener: () => void): void

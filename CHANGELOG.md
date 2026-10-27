@@ -5,14 +5,35 @@ Todos los cambios importantes de OpenSpeak (antes Tecla). El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
-## 2.6.0 · Sin publicar
+## 2.6.0 · 2026-10-26 · Planes de estudio, oído y pronunciación
 
 ### Añadido
+
+- **Planes de estudio personalizados** (#/plan): seis programas (inglés completo, viajar, trabajo,
+  certificación, hablar con fluidez y desde cero), del nivel de partida al de llegada y con el
+  tiempo que tienes. El plan reparte el curso en semanas, ajusta la meta diaria y propone cada día
+  tareas concretas (vocabulario o una colección del programa, la lección que toca, un texto para
+  escuchar y otro para leer en voz alta), con la semana en curso, los días practicados y si vas al
+  día. Se ve en el inicio y viaja en la copia de seguridad.
+- **Entrena el oído:** 36 textos de A1 a C2 que suenan enteros, frase a frase, con voz neuronal.
+  Primero solo con el oído; el texto y su traducción al español, a un toque.
+- **Lee en voz alta:** el mismo texto, leído con tu voz: el micrófono marca en verde cada palabra
+  que se entiende y al final da la nota de pronunciación y las palabras para practicar.
+- **Audio grabado del curso:** las 3401 frases del curso (ejemplos, respuestas y pasajes de
+  escucha) y las de los textos suenan con la voz neuronal, no con la del navegador.
+- Navegación principal en la cabecera del inicio en escritorio: Mi plan, Curso, Escuchar y Hablar.
 
 - **10 000 palabras** (antes 8461): 1539 nuevas, de la más usada a la menos usada, con traducción
   revisada al español neutro, categoría, IPA, frase de ejemplo traducida y pronunciación con la
   misma voz neuronal. Son 20 niveles de 500 (antes 17): Virtuoso, Sabio, Excelencia y Leyenda.
   Las colecciones temáticas crecen con ellas.
+
+### Rendimiento
+
+- El JS inicial baja de 124,7 a 117,6 KB con todo lo nuevo: la ficha de palabra se carga al abrirla,
+  la copia de la bienvenida al elegir el archivo y el botón «Guardar copia» del aviso del inicio
+  llega aparte (antes arrastraban al arranque las copias de seguridad completas). El plan usa un
+  índice del curso generado en el build en vez de descargar los seis niveles.
 
 ### Corregido
 

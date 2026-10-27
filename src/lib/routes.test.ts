@@ -49,6 +49,19 @@ describe('rutas', () => {
       expect(parseHash(hash)).toEqual(HOME)
   })
 
+  it('reconoce los textos para escuchar y leer en voz alta, y el plan', () => {
+    expect(parseHash('#/escuchar').screen).toEqual({ name: 'texts', mode: 'listen' })
+    expect(parseHash('#/leer-en-voz-alta').screen).toEqual({ name: 'texts', mode: 'read' })
+    expect(parseHash('#/escuchar/a1-my-family').screen).toEqual({ name: 'text', mode: 'listen', text: 'a1-my-family' })
+    expect(parseHash('#/leer-en-voz-alta/b2-sleep').screen).toEqual({ name: 'text', mode: 'read', text: 'b2-sleep' })
+    expect(parseHash('#/escuchar/Mal Id')).toEqual(HOME)
+    expect(parseHash('#/plan').screen).toEqual({ name: 'plan' })
+    expect(titleOf({ screen: { name: 'text', mode: 'read', text: 'b2-sleep' }, panel: null })).toBe(
+      'Lee en voz alta — OpenSpeak',
+    )
+    expect(titleOf({ screen: { name: 'plan' }, panel: null })).toBe('Tu plan de estudio — OpenSpeak')
+  })
+
   it('formatear y volver a leer da la misma ruta', () => {
     const routes: Route[] = [
       HOME,
@@ -62,6 +75,9 @@ describe('rutas', () => {
       { screen: { name: 'dictionary' }, panel: null },
       { screen: { name: 'dictionary' }, panel: { word: 'water' } },
       { screen: { name: 'deck', deck: LEVELS[0] }, panel: { word: 'the' } },
+      { screen: { name: 'texts', mode: 'listen' }, panel: null },
+      { screen: { name: 'text', mode: 'read', text: 'c1-slow-travel' }, panel: 'settings' },
+      { screen: { name: 'plan' }, panel: null },
     ]
     for (const route of routes) expect(parseHash(formatHash(route))).toEqual(route)
   })

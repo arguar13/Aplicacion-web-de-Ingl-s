@@ -20,6 +20,15 @@ export function saveBackup() {
   markBackupSaved(now)
 }
 
+/** «Guardar copia» del aviso del inicio: descarga la copia en el mismo toque (Safari lo exige). */
+export function SaveBackupButton({ className }: { className?: string }) {
+  return (
+    <Button variant="primary" size="sm" onClick={saveBackup} className={className}>
+      Guardar copia
+    </Button>
+  )
+}
+
 /**
  * Envía la copia con la hoja de compartir del sistema (a otro dispositivo, a la nube, a un chat).
  * Si el sistema no pudo compartirla, se descarga: la copia nunca se queda sin hacer.

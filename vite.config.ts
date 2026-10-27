@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
 import { audioVersions } from './vite/audio-versions.ts'
+import { courseIndex } from './vite/course-index.ts'
 import { siteMeta } from './vite/site-meta.ts'
 import { startupPreload } from './vite/startup-preload.ts'
 import { vocabularyAsset } from './vite/vocabulary.ts'
@@ -35,6 +36,7 @@ export default defineConfig({
     siteMeta(),
     startupPreload(),
     vocabularyAsset(fileURLToPath(new URL('./src/data/words.json', import.meta.url))),
+    courseIndex(fileURLToPath(new URL('./src/data/course', import.meta.url))),
     VitePWA({
       // El usuario decide cuándo actualizar: recargar a mitad de una sesión sería molesto.
       registerType: 'prompt',

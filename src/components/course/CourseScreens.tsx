@@ -30,43 +30,15 @@ import { correctAnswer, scoreOf, SKILL_LABEL, skillBreakdown, type SkillScore, t
 import { feedback } from '@/lib/feedback'
 import { formatCount, plural } from '@/lib/format'
 import { Confetti } from '../Confetti'
-import { Header } from '../Header'
-import { ArrowLeftIcon, ArrowRightIcon, BoltIcon, CheckCircleIcon, GraduationIcon } from '../icons'
+import { ArrowRightIcon, BoltIcon, CheckCircleIcon, GraduationIcon } from '../icons'
 import { SpeakExampleButton } from '../SpeakExampleButton'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { Kbd } from '../ui/Kbd'
+import { PageShell } from '../ui/PageShell'
 import { Surface } from '../ui/Surface'
 import { clearRun, type CourseRun, getResume, runOf, type RunTarget, saveRun, useResume } from '@/lib/resume'
 import { ExerciseRunner, validStart } from './ExerciseRunner'
-
-function BackLink({ label, onClick }: { label: string; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="-ml-2 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
-    >
-      <ArrowLeftIcon width={16} height={16} />
-      {label}
-    </button>
-  )
-}
-
-function Shell({ back, children }: { back: { label: string; onClick: () => void }; children: ReactNode }) {
-  useKeyDown((event) => {
-    if (event.key === 'Escape') back.onClick()
-  })
-  return (
-    <>
-      <Header />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 pt-6 pb-14 sm:px-6">
-        <BackLink label={back.label} onClick={back.onClick} />
-        {children}
-      </main>
-    </>
-  )
-}
 
 /** Mientras llega el contenido de un nivel, o si no se pudo cargar. */
 function Pending({ state, level }: { state: Exclude<LevelState, { status: 'ready' }>; level: CourseLevelId }) {
@@ -105,7 +77,7 @@ interface CourseProps {
 export function CourseScreen({ onExit, onOpenLevel, onOpenMixedQuiz }: CourseProps) {
   const progress = useCourseProgress()
   return (
-    <Shell back={{ label: 'Inicio', onClick: onExit }}>
+    <PageShell back={{ label: 'Inicio', onClick: onExit }}>
       <h1 className="mt-4 font-display text-5xl leading-none">Curso de inglés</h1>
       <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-muted">
         De A1 a C2, nivel por nivel: cada lección explica un tema con ejemplos y lo practica con ejercicios. Al final de
@@ -128,7 +100,7 @@ export function CourseScreen({ onExit, onOpenLevel, onOpenMixedQuiz }: CoursePro
         best={progress.quizzes.mixto ?? null}
         onOpen={onOpenMixedQuiz}
       />
-    </Shell>
+    </PageShell>
   )
 }
 
@@ -250,7 +222,7 @@ export function LevelScreen({ level, onExit, onOpenLesson, onOpenExam, onOpenQui
   const state = useCourseLevel(level)
   const progress = useCourseProgress()
   return (
-    <Shell back={{ label: 'Curso', onClick: onExit }}>
+    <PageShell back={{ label: 'Curso', onClick: onExit }}>
       <p className="mt-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Nivel {info.name}</p>
       <h1 className="mt-1 font-display text-5xl leading-none">{info.title}</h1>
       {state.status !== 'ready' ? (
@@ -264,7 +236,7 @@ export function LevelScreen({ level, onExit, onOpenLesson, onOpenExam, onOpenQui
           onOpenQuiz={onOpenQuiz}
         />
       )}
-    </Shell>
+    </PageShell>
   )
 }
 
@@ -418,16 +390,16 @@ export function LessonScreen({ level, lesson: lessonId, onExit, onOpenLesson, on
   const back = { label: `Nivel ${info.name}`, onClick: onExit }
   if (state.status !== 'ready') {
     return (
-      <Shell back={back}>
+      <PageShell back={back}>
         <Pending state={state} level={level} />
-      </Shell>
+      </PageShell>
     )
   }
   const index = state.level.lessons.findIndex((lesson) => lesson.id === lessonId)
   const lesson = state.level.lessons[index]
   if (!lesson) {
     return (
-      <Shell back={back}>
+      <PageShell back={back}>
         <Surface className="mt-6 px-6 py-8 text-center">
           <h1 className="font-display text-3xl">Esta lección no existe</h1>
           <p className="mt-2 text-[15px] text-muted">Quizá el enlace está mal escrito.</p>
@@ -435,12 +407,12 @@ export function LessonScreen({ level, lesson: lessonId, onExit, onOpenLesson, on
             Ver el nivel {info.name}
           </Button>
         </Surface>
-      </Shell>
+      </PageShell>
     )
   }
   const next = state.level.lessons[index + 1]
   return (
-    <Shell back={back}>
+    <PageShell back={back}>
       <LessonView
         key={lesson.id}
         level={level}
@@ -451,7 +423,7 @@ export function LessonScreen({ level, lesson: lessonId, onExit, onOpenLesson, on
         nextLabel={next ? `Siguiente: ${next.title}` : `Examen del nivel ${info.name}`}
         onExit={onExit}
       />
-    </Shell>
+    </PageShell>
   )
 }
 
@@ -814,9 +786,9 @@ export function ExamScreen({ level, onExit }: ExamProps) {
   const back = { label: `Nivel ${info.name}`, onClick: onExit }
   if (state.status !== 'ready') {
     return (
-      <Shell back={back}>
+      <PageShell back={back}>
         <Pending state={state} level={level} />
-      </Shell>
+      </PageShell>
     )
   }
   const exam = state.level.exam
@@ -844,7 +816,7 @@ export function ExamScreen({ level, onExit }: ExamProps) {
   }
 
   return (
-    <Shell back={back}>
+    <PageShell back={back}>
       <p className="mt-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">Nivel {info.name}</p>
       <h1 className="mt-1 font-display text-4xl leading-tight sm:text-5xl">Examen del nivel</h1>
 
@@ -929,7 +901,7 @@ export function ExamScreen({ level, onExit }: ExamProps) {
           onExit={onExit}
         />
       )}
-    </Shell>
+    </PageShell>
   )
 }
 
@@ -1091,9 +1063,9 @@ export function QuizScreen({ level, onExit }: QuizProps) {
   const pending = needed.find((state): state is Exclude<LevelState, { status: 'ready' }> => state.status !== 'ready')
   if (pending) {
     return (
-      <Shell back={back}>
+      <PageShell back={back}>
         <Pending state={pending} level={level ?? 'a1'} />
-      </Shell>
+      </PageShell>
     )
   }
   const ready = needed.flatMap((state) => (state.status === 'ready' ? [state.level] : []))
@@ -1133,7 +1105,7 @@ export function QuizScreen({ level, onExit }: QuizProps) {
   }
 
   return (
-    <Shell back={back}>
+    <PageShell back={back}>
       <p className="mt-4 text-[11px] font-medium tracking-[0.2em] text-muted uppercase">
         {level ? `Nivel ${courseLevelInfo(level).name}` : 'Todos los niveles'}
       </p>
@@ -1210,6 +1182,6 @@ export function QuizScreen({ level, onExit }: QuizProps) {
           onExit={onExit}
         />
       )}
-    </Shell>
+    </PageShell>
   )
 }

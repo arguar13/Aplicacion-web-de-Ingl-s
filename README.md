@@ -5,10 +5,11 @@
 > depende de ellos.
 
 Aprende inglés con una idea simple: aparece una palabra, suena su pronunciación y pulsas su
-traducción. 10 000 palabras, de las más usadas a las más
-difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un **curso
-de gramática de A1 a C2** con 74 lecciones, comprensión lectora y auditiva, exámenes y quizzes. Gratis, sin cuentas, sin anuncios y
-sin conexión.
+traducción. 10 000 palabras, de las más usadas a las más difíciles, con repaso espaciado
+inteligente, siete modos de práctica, misiones diarias, un **curso de gramática de A1 a C2** con 74
+lecciones, comprensión lectora y auditiva, exámenes y quizzes, **planes de estudio
+personalizados** y 36 textos para **entrenar el oído** y **leer en voz alta** con tu voz. Gratis, sin
+cuentas, sin anuncios y sin conexión.
 
 ## La sesión inteligente
 
@@ -43,6 +44,46 @@ La **prueba de nivel** de la bienvenida es adaptativa: prueba los niveles 1, 2, 
 entre el último superado y el primero fallado. Nadie contesta más de unas 20 palabras, y la sesión
 inteligente empieza en el nivel recomendado. El **modo concentración** es una sesión de 5 minutos con
 cuenta atrás.
+
+## Tu plan de estudio
+
+**Tu plan** (#/plan): eliges un programa —inglés completo, viajar con confianza, inglés para el
+trabajo, preparar una certificación (B1 Preliminary, B2 First, C1 Advanced), hablar con fluidez o
+desde cero—, el nivel de partida y el de llegada, y cuántos minutos al día y días por semana tienes.
+Con eso el plan:
+
+- reparte las lecciones y exámenes del curso en semanas según el tiempo de curso del programa (con
+  un 10 % de holgura para no dejar fuera una lección por dos minutos) y dice cuándo terminarías;
+- ajusta la meta diaria y las palabras nuevas al tiempo de vocabulario;
+- propone cada día unas pocas tareas concretas: el vocabulario (la sesión inteligente o, en días
+  alternos, una colección del programa: transporte y lugares al viajar, dinero y comunicación en el
+  trabajo…), la lección que toca y un texto de tu nivel para escuchar o leer en voz alta, en
+  rotación según el tiempo;
+- dice en qué semana vas, cuántos días practicaste esta semana y si vas al día, adelantado o
+  atrasado (con una semana de margen).
+
+Todo sale de lo que ya se guarda (curso, textos, práctica del día): en `tecla:plan` solo vive la
+configuración elegida (ver `src/lib/studyPlan.ts`), y viaja en la copia de seguridad. El inicio
+muestra el plan con las tareas de hoy, o la invitación a crearlo.
+
+## Escucha y habla con textos
+
+Una biblioteca de 36 textos graduados (seis por nivel, de A1 a C2: vida diaria, viajes, trabajo,
+ciencia, sociedad, cultura…), frase a frase y con su traducción al español, en
+`src/data/texts.json`. Cada frase tiene grabación con la voz neuronal (o, si falta, la voz del
+navegador). Se usan de dos maneras, como tarjetas de «Practica por tu cuenta»:
+
+- **Entrena el oído** (#/escuchar): el texto suena entero, frase a frase, y la frase en curso se
+  resalta. Empieza sin el texto a la vista (solo con el oído); el texto y la **traducción al
+  español** aparecen a un toque. Se puede escuchar despacio, saltar de frase o tocar una para
+  oírla desde ahí (atajos: espacio, ← →, V, T y L). Escucharlo entero suma experiencia.
+- **Lee en voz alta** (#/leer-en-voz-alta): lees cada frase con tu voz y el reconocimiento de voz
+  del navegador la escucha; cada palabra se pone en verde al entenderse, y al terminar las que
+  faltaron se subrayan. Se compara alineando lo oído con la frase (subsecuencia común más larga,
+  con la tolerancia de un error de tecleo y los números escritos con cifras), así una palabra de más
+  no desplaza a las demás (`src/lib/readAloud.ts`). Al final, la nota de pronunciación, las palabras
+  para practicar (con su audio) y, desde el 80 %, el texto queda superado. Donde el navegador no
+  reconoce la voz (Firefox), propone escucharlo.
 
 ## Más formas de practicar
 
@@ -127,7 +168,7 @@ vive en `src/data/course/<nivel>.json`, se carga al abrir el nivel y un test com
 ejercicio se resuelve con su propia respuesta. El progreso del curso viaja en la copia de seguridad.
 
 **Audio grabado del curso:** `python scripts/generate_course_audio.py` graba cada frase del curso
-(ejemplos, respuestas y pasajes de escucha) con la misma voz neuronal que las palabras, en
+(ejemplos, respuestas y pasajes de escucha) y de los textos con la misma voz neuronal que las palabras, en
 `public/audio/course/<hash>.mp3`. El hash sale del texto, calculado igual en el script y en la app,
 así cada frase sabe si tiene grabación sin ninguna lista; si no la tiene, se lee con la voz del
 navegador. Necesita red hacia `speech.platform.bing.com`.
@@ -341,7 +382,15 @@ src/lib/courseQuiz.ts     Quizzes del curso: preguntas al azar por nivel y quiz 
 src/lib/courseAudio.ts    Audio grabado de las frases del curso: id por hash del texto, igual que el script
 src/components/course/    Pantallas del curso: niveles, nivel, lección, examen, quiz y el corredor de ejercicios
 src/components/ResumeSection.tsx «Continúa donde lo dejaste» en el inicio
-src/components/PracticeSection.tsx «Practica por tu cuenta»: un modo, un toque; y todos los niveles
+src/components/PracticeSection.tsx «Practica por tu cuenta»: un modo, un toque; los textos; y todos los niveles
+src/data/texts.json       Textos para escuchar y leer en voz alta: seis por nivel, frase a frase con su traducción
+src/lib/texts.ts          Biblioteca de textos: validación, carga diferida y duración
+src/lib/textProgress.ts   Textos escuchados y mejor nota en voz alta (tecla:texts), con experiencia
+src/lib/readAloud.ts      Leer en voz alta: alinear lo oído con la frase, palabra por palabra
+src/lib/studyPlan.ts      Planes de estudio: programas, reparto en semanas, ritmo y tareas de cada día (tecla:plan)
+src/components/texts/     Biblioteca, «Escucha el texto» y «Léelo en voz alta»
+src/components/plan/      Tarjeta del plan en el inicio, asistente y panel del plan
+vite/course-index.ts      Plugin de Vite: índice del curso (id y título de cada lección) sin cargar los niveles
 scripts/generate_course_audio.py Graba las frases del curso en public/audio/course/ (ver «El curso»)
 src/lib/events.ts         Historial de respuestas (últimas 5000)
 src/lib/stats.ts          Cálculos de las estadísticas

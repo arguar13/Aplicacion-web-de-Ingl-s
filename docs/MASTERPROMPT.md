@@ -811,3 +811,26 @@ commit`); un resumen de Playwright se lee entero, no solo la última línea.
   del curso a medias. No toca las claves ni el formato de copia existentes.
 - Pendiente: grabar el audio del curso (las frases nuevas se leen con la voz del navegador); el JS
   inicial queda en 124,7 de 125 KB, sin margen para otra cosa en el paquete inicial.
+
+### Versión 2.6.0 · 26-10-2026 · Planes, oído y pronunciación (fuera de las fases)
+
+- Pedido del dueño: 10 000 palabras exactas, planes de estudio personalizados, dos tarjetas en
+  «Practica por tu cuenta» (escuchar un texto entero con su traducción y leerlo en voz alta con la
+  voz real) y una app más profesional y organizada. Detalle en el CHANGELOG.
+- Vocabulario: 1539 palabras de 5 lotes nuevos (13–17), las candidatas ya descartadas en lotes
+  anteriores se excluyen; el lote 17 se corta justo al llegar a 10 000. Bug de raíz encontrado:
+  `merge_translations.py` reescribía ejemplos y categorías solo de lo nuevo (borraba las 4483 de la
+  Fase 15); ahora es idempotente y el validador aplica las reglas del test de datos.
+- Textos: `texts.ts` (carga diferida como el curso), `textProgress.ts` (`tecla:texts`, en la copia
+  como campo nuevo sin cambiar el formato), `readAloud.ts` (alineación LCS con tolerancia de
+  tecleo y números a palabras) y `startDictation` en `speech.ts` (reconocimiento continuo con
+  resultados parciales). `playToEnd` y `speakToEnd` esperan al final de cada frase (ojo: un
+  `<audio>` dispara `pause` justo antes de `ended`).
+- Plan: `studyPlan.ts` puro y probado (programas, semanas con holgura del 10 %, ritmo, rotación de
+  tareas); la UI lo combina con lo ya guardado (`usePlanOverview`). `vite/course-index.ts` da los
+  títulos de las lecciones sin cargar los niveles (220 KB cada uno), con test de paridad.
+- Presupuesto: vocabulario 100 KB y detalles 560 KB (crecen con las palabras, no con el código). El
+  JS inicial baja a 117,6 KB: `BackupReminder` importaba de forma estática todo el módulo de copias.
+- Audio: edge-tts funciona desde este equipo: se grabaron las 1539 palabras y las frases del curso y
+  de los textos (`generate_course_audio.py` ahora incluye `texts.json`).
+- e2e nuevos: textos (con un reconocimiento de voz simulado que lee cada frase) y plan.

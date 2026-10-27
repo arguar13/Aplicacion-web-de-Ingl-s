@@ -111,6 +111,55 @@ export async function playPronunciation(id: string, { slow = false }: PlayOption
   current = source
 }
 
+/**
+ * Reproduce una grabación y espera a que termine: true si sonó entera, false si se cortó (otra
+ * reproducción, `stopPlayback()`) o no se pudo cargar. Para leer un texto frase a frase.
+ */
+export async function playToEnd(id: string, { slow = false }: PlayOptions = {}): Promise<boolean> {
+  const token = ++playToken
+  stopCurrent()
+  if (slow || !AudioContextClass) {
+    const url = await audioUrl(id)
+    if (token !== playToken) return false
+    const element = new Audio(url)
+    element.preservesPitch = true
+    element.playbackRate = slow ? SLOW_RATE : 1
+    currentElement = element
+    return new Promise((resolve) => {
+      element.addEventListener('ended', () => resolve(token === playToken), { once: true })
+      // Al terminar, el navegador dispara «pause» justo antes de «ended»: solo es un corte si no terminó.
+      element.addEventListener('pause', () => resolve(element.ended && token === playToken), { once: true })
+      element.addEventListener('error', () => resolve(false), { once: true })
+      element.play().catch(() => resolve(false))
+    })
+  }
+  const ctx = getContext(AudioContextClass)
+  const buffer = await load(id, AudioContextClass)
+  if (!buffer || token !== playToken) return false
+  if (ctx.state === 'suspended') await ctx.resume()
+  const source = ctx.createBufferSource()
+  source.buffer = buffer
+  source.connect(ctx.destination)
+  current = source
+  return new Promise((resolve) => {
+    source.addEventListener(
+      'ended',
+      () => {
+        if (current === source) current = null
+        resolve(token === playToken)
+      },
+      { once: true },
+    )
+    source.start()
+  })
+}
+
+/** Corta lo que esté sonando (y lo que estaba por sonar). */
+export function stopPlayback() {
+  playToken++
+  stopCurrent()
+}
+
 /** Corta lo que esté sonando, venga de Web Audio o de un elemento <audio>. */
 function stopCurrent() {
   current?.stop()
