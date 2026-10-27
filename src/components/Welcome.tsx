@@ -22,7 +22,7 @@ import { Button } from './ui/Button'
 import { Surface } from './ui/Surface'
 
 /** Lo que trae la app, en cifras (un test comprueba que coincidan con los datos). */
-export const SHOWCASE = { words: 8461, levels: 6, lessons: 74, topics: 19 } as const
+export const SHOWCASE = { words: 10000, levels: 6, lessons: 74, topics: 19 } as const
 
 interface WelcomeProps {
   onStart: () => void

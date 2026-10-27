@@ -13,12 +13,15 @@ const BUDGET = {
   /** JS que el inicio necesita antes de pintarse (entrada + modulepreload). */
   initialJs: 125 * KB,
   initialCss: 14 * KB,
-  /** El vocabulario (JSON aparte, precargado en paralelo con la app). */
-  vocabulary: 90 * KB,
+  /**
+   * El vocabulario (JSON aparte, precargado en paralelo con la app). 93 KB con 10 000 palabras ya
+   * en columnas (ver vite/vocabulary.ts): crece con cada palabra, no con el código.
+   */
+  vocabulary: 100 * KB,
   /** Cada pantalla que se carga al abrirla. */
   lazyChunk: 30 * KB,
-  /** IPA, formas y ejemplos de todas las palabras: se cargan en segundo plano al empezar a jugar. */
-  details: 450 * KB,
+  /** IPA, formas y ejemplos de todas las palabras: se cargan en segundo plano al empezar a jugar (516 KB con 10 000). */
+  details: 560 * KB,
 }
 /** Datos que se cargan aparte, en segundo plano: no son pantallas ni frenan el arranque. */
 const DATA_CHUNKS = [/^_virtual_audio-versions-/]

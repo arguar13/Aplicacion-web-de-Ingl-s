@@ -58,7 +58,7 @@ export function PracticeSection({
   const summaryOf = summaries[trackOf(mode)]
   const total = summaryOf(ALL_DECK)
   const current = currentLevel(summaryOf, lastDeckId)
-  // Los primeros niveles y el que se está practicando; el resto, a un toque (son 17).
+  // Los primeros niveles y el que se está practicando; el resto, a un toque (son 20).
   const [showAllLevels, setShowAllLevels] = useState(false)
   const levelsId = useId()
   const visibleLevels = showAllLevels
@@ -234,7 +234,7 @@ function LevelCard({
       )}
     >
       <span className="flex w-full items-start gap-3.5 pr-8">
-        {/* La ficha crece con el número: los niveles 10 a 17 tienen dos cifras. */}
+        {/* La ficha crece con el número: los niveles 10 a 20 tienen dos cifras. */}
         <span
           aria-hidden
           className="grid h-12 min-w-12 shrink-0 place-items-center rounded-2xl bg-accent-soft px-2 font-display text-2xl text-accent tabular-nums transition-colors group-hover:bg-brand group-hover:text-accent-ink"

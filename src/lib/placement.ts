@@ -1,8 +1,8 @@
 /**
  * Prueba de nivel del primer uso: unas pocas palabras por nivel probado, y una búsqueda adaptativa
  * del primer nivel que no se supera. Prueba los niveles 1, 2, 4, 8, 16… hasta el primer fallo y
- * luego afina a medio camino entre el último superado y el primero fallado. Con 17 niveles son
- * como mucho 7 niveles probados (unas 20 palabras), no los 17 uno tras otro; y quien empieza de
+ * luego afina a medio camino entre el último superado y el primero fallado. Con 20 niveles son
+ * como mucho 7 niveles probados (unas 20 palabras), no los 20 uno tras otro; y quien empieza de
  * cero termina en 3 palabras. Las palabras acertadas se marcan como sabidas: no hace falta que el
  * repaso espaciado las presente como nuevas.
  */

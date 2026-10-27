@@ -103,6 +103,12 @@ IPA_OVERRIDES = {
     "reboot": "/ˈriˌbut/", "fandom": "/ˈfændəm/", "webcam": "/ˈwɛbˌkæm/", "spectral": "/ˈspɛktrəl/",
     "homepage": "/ˈhoʊmˌpeɪdʒ/", "relegation": "/ˌrɛləˈɡeɪʃən/", "mindfulness": "/ˈmaɪndfəlnəs/",
     "batsman": "/ˈbætsmən/", "playable": "/ˈpleɪəbəl/", "iteration": "/ˌɪtəˈreɪʃən/",
+    "metadata": "/ˈmɛtəˌdeɪtə/", "webpage": "/ˈwɛbˌpeɪdʒ/", "hipster": "/ˈhɪpstɚ/", "insanely": "/ɪnˈseɪnli/",
+    "positivity": "/ˌpɑzəˈtɪvəti/", "skincare": "/ˈskɪnˌkɛr/", "takeaway": "/ˈteɪkəˌweɪ/",
+    "lordship": "/ˈlɔrdʃɪp/", "postgraduate": "/ˌpoʊstˈɡrædʒuət/", "aggregation": "/ˌæɡrəˈɡeɪʃən/",
+    "smoothie": "/ˈsmuði/", "fluorescence": "/flʊˈrɛsəns/", "offside": "/ˌɔfˈsaɪd/", "firmware": "/ˈfɝmˌwɛr/",
+    "untitled": "/ʌnˈtaɪtəld/", "deflection": "/dɪˈflɛkʃən/", "apostolic": "/ˌæpəˈstɑlɪk/",
+    "caliphate": "/ˈkæləˌfeɪt/", "kink": "/kɪŋk/", "symmetric": "/sɪˈmɛtrɪk/", "newbie": "/ˈnubi/",
 }
 
 

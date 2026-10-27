@@ -66,7 +66,7 @@ const listeners = new Set<() => void>()
 
 /**
  * Empieza a cargar los detalles (una sola vez) y avisa a quien los espera. Van como JSON aparte y
- * no como módulo JavaScript: con 8000 palabras pesan más de 1 MB, y el navegador lee un JSON mucho
+ * no como módulo JavaScript: con 10 000 palabras pesan más de 1 MB, y el navegador lee un JSON mucho
  * más rápido que el mismo contenido escrito como código. Si falla la red, se reintenta en la
  * próxima petición en vez de quedar sin detalles para siempre.
  */

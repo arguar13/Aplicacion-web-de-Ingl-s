@@ -41,6 +41,9 @@ const LEVEL_INFO: Array<[name: string, description: string]> = [
   ['Refinado', 'Precisión y elegancia al hablar y al escribir.'],
   ['Maestría', 'Vocabulario de hablante culto.'],
   ['Élite', 'Lo que pocos estudiantes llegan a dominar.'],
+  ['Virtuoso', 'Lo que solo usan los lectores más asiduos.'],
+  ['Sabio', 'Ensayos, ciencia y alta literatura.'],
+  ['Excelencia', 'Los matices de un hablante nativo culto.'],
   ['Leyenda', 'El remate: lo menos frecuente de la lista.'],
 ]
 

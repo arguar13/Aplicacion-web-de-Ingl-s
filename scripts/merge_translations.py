@@ -38,12 +38,15 @@ def main() -> None:
     for path in sorted(BATCHES.glob("batch-*.json")):
         for entry in json.loads(path.read_text(encoding="utf-8")):
             wid = entry["id"]
-            if "skip" in entry or wid in DROP or wid in known:
+            if "skip" in entry or wid in DROP or wid in reviewed:
                 continue
-            known.add(wid)
-            added.append({"id": wid, "en": wid, "es": entry["es"].strip(), "pos": entry["pos"]})
+            # Los ejemplos y la categoría se reescriben de todos los lotes, no solo de lo nuevo: así
+            # volver a ejecutar el script (con lotes nuevos o sin ellos) no borra los anteriores.
             examples.append({"id": wid, "en": entry["example_en"].strip(), "es": entry["example_es"].strip()})
             reviewed[wid] = entry["pos"]
+            if wid not in known:
+                known.add(wid)
+                added.append({"id": wid, "en": wid, "es": entry["es"].strip(), "pos": entry["pos"]})
 
     lines = ",\n".join(json.dumps(w, ensure_ascii=False) for w in words + added)
     WORDS.write_text(f"[\n{lines}\n]\n", encoding="utf-8", newline="\n")

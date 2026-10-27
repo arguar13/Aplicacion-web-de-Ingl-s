@@ -68,7 +68,7 @@ p { margin-top: 26px; font-size: 26px; line-height: 1.4; color: #5d6070; max-wid
 <div>
   <div class="brand"><span class="logo">${logo('og')}</span><span>Open<span class="speak">Speak</span></span></div>
   <h1>Habla inglés<br>con <span>confianza</span>.</h1>
-  <p>8461 palabras con voz nativa, un curso de A1 a C2 y repaso inteligente. Gratis.</p>
+  <p>10.000 palabras con voz nativa, un curso de A1 a C2 y repaso inteligente. Gratis.</p>
 </div>
 <div class="card">
   <div class="eyebrow">Pruébalo ahora</div>

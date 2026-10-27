@@ -5,6 +5,23 @@ Todos los cambios importantes de OpenSpeak (antes Tecla). El formato sigue
 [versionado semántico](https://semver.org/lang/es/): una versión menor por fase del
 [masterprompt](docs/MASTERPROMPT.md) y 1.0.0 en el lanzamiento.
 
+## 2.6.0 · Sin publicar
+
+### Añadido
+
+- **10 000 palabras** (antes 8461): 1539 nuevas, de la más usada a la menos usada, con traducción
+  revisada al español neutro, categoría, IPA, frase de ejemplo traducida y pronunciación con la
+  misma voz neuronal. Son 20 niveles de 500 (antes 17): Virtuoso, Sabio, Excelencia y Leyenda.
+  Las colecciones temáticas crecen con ellas.
+
+### Corregido
+
+- `scripts/merge_translations.py` reescribía los ejemplos y las categorías revisadas solo de las
+  palabras nuevas: al ampliar el vocabulario por segunda vez, las 4483 de la ampliación anterior se
+  quedaban sin frase de ejemplo. Ahora los toma de todos los lotes y se puede volver a ejecutar.
+- El validador de lotes comprueba también la longitud y la puntuación del ejemplo (las mismas reglas
+  que el test de datos).
+
 ## 2.5.0 · 2026-10-02 · Un entrenador que avanza y un curso que se retoma
 
 ### Corregido

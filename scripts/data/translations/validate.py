@@ -23,6 +23,11 @@ for e in out:
         errors.append(f"{e['id']}: pos inválida {e.get('pos')}")
     if not re.search(rf"(?<![A-Za-z]){re.escape(e['id'])}(?![A-Za-z])", e.get("example_en", ""), re.I):
         errors.append(f"{e['id']}: el ejemplo no contiene la palabra exacta")
+    # Las mismas reglas que comprueba src/lib/details.test.ts: de 3 a 12 palabras y bien puntuado.
+    if not 3 <= len(e.get("example_en", "").split()) <= 12:
+        errors.append(f"{e['id']}: el ejemplo debe tener de 3 a 12 palabras")
+    if not re.match(r"^[A-Z¿¡\"'0-9]", e.get("example_en", "")) or not re.search(r"[.?!][\"']?$", e.get("example_en", "")):
+        errors.append(f"{e['id']}: el ejemplo empieza con mayúscula y termina con . ? o !")
     if e.get("es", "") != e.get("es", "").strip() or e.get("es", "")[:1].isupper():
         errors.append(f"{e['id']}: la traducción va en minúscula y sin espacios sobrantes")
 print(f"lote {n}: {len(out)} entradas, {sum('skip' in e for e in out)} descartadas, {len(errors)} errores")

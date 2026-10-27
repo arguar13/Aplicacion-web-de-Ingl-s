@@ -5,7 +5,7 @@
 > depende de ellos.
 
 Aprende inglés con una idea simple: aparece una palabra, suena su pronunciación y pulsas su
-traducción. Más de 8000 palabras (8461), de las más usadas a las más
+traducción. 10 000 palabras, de las más usadas a las más
 difíciles, con repaso espaciado inteligente, siete modos de práctica, misiones diarias y un **curso
 de gramática de A1 a C2** con 74 lecciones, comprensión lectora y auditiva, exámenes y quizzes. Gratis, sin cuentas, sin anuncios y
 sin conexión.
@@ -51,7 +51,7 @@ cuenta atrás.
   modo), a un toque.
 - **Por tu cuenta:** cada modo empieza al tocarlo, en el nivel por el que vas en esa habilidad (el
   último elegido mientras le quede algo; si no, el siguiente con palabras por ver). Al ver todas
-  las palabras de un nivel, la partida propone seguir con el siguiente. Son 17 niveles de 500
+  las palabras de un nivel, la partida propone seguir con el siguiente. Son 20 niveles de 500
   palabras y siete modos: **traducir**, **inverso**,
   **escuchar** (solo el audio), **escribir** (un error de tecleo es «¡casi!», con la corrección
   letra por letra y una **pista** que destapa letras de una en una), **completar** (la frase de
@@ -169,7 +169,7 @@ nuevo. La sincronización automática está propuesta en
 
 Es una PWA: se instala en Android, iPhone y escritorio y funciona sin conexión desde la primera
 visita. Cada pronunciación se guarda al sonar y desde Ajustes se pueden descargar todas
-(unos 38 MB). Cada pantalla tiene su dirección (`#/sesion`, `#/nivel/3`, `#/tema/comida`,
+(unos 45 MB). Cada pantalla tiene su dirección (`#/sesion`, `#/nivel/3`, `#/tema/comida`,
 `?panel=ajustes`…): el botón atrás recorre la app en vez de cerrarla.
 
 ## Desarrollo

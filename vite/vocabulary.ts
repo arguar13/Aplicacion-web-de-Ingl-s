@@ -2,7 +2,7 @@
  * Plugin de Vite: el vocabulario que descarga la app, en formato compacto.
  *
  * src/data/words.json es la fuente (legible, la editan los scripts y la leen los tests). La app no
- * lo descarga tal cual: con 8000 palabras, las claves repetidas y el id igual a la palabra inglesa
+ * lo descarga tal cual: con 10 000 palabras, las claves repetidas y el id igual a la palabra inglesa
  * son un tercio del peso. Aquí se reescribe por columnas —todas las palabras inglesas, todas las
  * traducciones y las categorías como dígitos, más los pocos ids distintos de su palabra— y se
  * publica como `assets/words-<hash>.json`. src/lib/vocabulary.ts lo decodifica y valida.
